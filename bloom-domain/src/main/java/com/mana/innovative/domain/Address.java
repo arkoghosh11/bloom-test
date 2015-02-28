@@ -38,8 +38,9 @@ public class Address {
     @Column( name = "zipcode" )
     private int zipCode;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "location_id", nullable = true, unique = true)
+    //    @OneToOne(cascade = {CascadeType.ALL})
+//    @JoinColumn(name = "location_id", nullable = true, unique = true)
+    @Transient
     private Location location;
 
     @OneToOne( cascade = { CascadeType.ALL}, mappedBy = "address")

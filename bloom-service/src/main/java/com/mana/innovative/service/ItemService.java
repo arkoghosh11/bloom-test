@@ -4,7 +4,7 @@ import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dao.ItemDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
-import com.mana.innovative.domain.payload.ItemsPayload;
+import com.mana.innovative.dto.payload.ItemsPayload;
 import com.mana.innovative.exception.response.Error;
 import com.mana.innovative.exception.response.ErrorContainer;
 import com.mana.innovative.service.builder.ItemResponseBuilder;
@@ -27,10 +27,9 @@ import javax.ws.rs.core.Response;
 public class ItemService {
 
 
+    private static final Logger logger = Logger.getLogger(ItemService.class);
     @Resource (name = "itemDAO")
     ItemDAO itemDAO;
-
-    private static final Logger logger = Logger.getLogger(ItemService.class);
 
     @Transactional (propagation = Propagation.REQUIRED, readOnly = true, isolation = Isolation.DEFAULT)
     public Response getItem (long itemId, boolean isError) {

@@ -1,6 +1,6 @@
 package com.mana.innovative.service.container;
 
-import com.mana.innovative.domain.payload.ItemsPayload;
+import com.mana.innovative.dto.payload.ItemsPayload;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;

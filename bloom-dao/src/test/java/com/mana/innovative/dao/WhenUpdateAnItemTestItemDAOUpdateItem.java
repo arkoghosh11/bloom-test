@@ -3,6 +3,7 @@ package com.mana.innovative.dao;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
+import com.mana.innovative.domain.Shop;
 import junit.framework.Assert;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -45,9 +46,13 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
     private ItemDAO itemDAO;
 
     @Resource
+    private ShopDAO shopDAO;
+
+    @Resource
     private SessionFactory sessionFactory;
 
     private Item dummyItem;
+    private long id = TestConstants.ONE;
 
 
     /**
@@ -58,7 +63,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
 
 
         dummyItem = new Item();
-        dummyItem.setItemId(TestConstants.ONE);
+        dummyItem.setItemId(id);
 //        dummyItem.setItemName(TestConstants.TEST_VALUE);
 //        dummyItem.setItemPriceCurrency(TestConstants.TEST_PRICE_CURRENCY);
         dummyItem.setItemType(TestConstants.UPDATED_TEST_VALUE);
@@ -83,6 +88,13 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
 //        dummyItem.setItemPrice(TestConstants.UPDATED_ITEM_PRICE);
         dummyItem.setItemName(TestConstants.UPDATED_TEST_VALUE);
         dummyItem.setItemPriceCurrency(TestConstants.UPDATED_TEST_VALUE);
+
+        DAOResponse<Shop> shopDAOResponse = shopDAO.getShopByShopId(id, TestConstants.IS_ERROR);
+        Assert.assertNotNull(shopDAOResponse);
+        Assert.assertNotNull(shopDAOResponse.getResults());
+        Assert.assertFalse(shopDAOResponse.getResults().isEmpty());
+
+        dummyItem.setShopItem(shopDAOResponse.getResults().get(TestConstants.ZERO));
 
         DAOResponse<Item> itemDAOResponse = itemDAO.updateItem(dummyItem, TestConstants.IS_ERROR);
 
@@ -114,7 +126,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
 
         Session session = sessionFactory.openSession();
         Query query = session.createQuery(" from Item where itemId=:item_id");
-        query.setLong("item_id", TestConstants.ONE);
+        query.setLong("item_id", id);
         List<Item> items = query.list();
         if (items.isEmpty()) {
             Assert.assertTrue(" List is not Empty, Hib created a dummy Row ", items.isEmpty());

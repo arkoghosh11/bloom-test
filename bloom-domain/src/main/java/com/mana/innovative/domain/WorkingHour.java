@@ -25,10 +25,10 @@ public class WorkingHour {
     private String day;
     @Column(name ="open_time_of_day", columnDefinition = "TIME")
     @Temporal(TemporalType.TIME)
-    private String startTime;
+    private Date startTime;
     @Column(name ="close_time_of_day", columnDefinition = "TIME")
     @Temporal(TemporalType.TIME)
-    private String endTime;
+    private Date endTime;
     @Column(name = "closed")
     private boolean isOffline;
     @Column(name = "holiday")
@@ -64,19 +64,19 @@ public class WorkingHour {
         this.day = day;
     }
 
-    public String getStartTime () {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime ( final String startTime ) {
+    public void setStartTime(final Date startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime () {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime ( final String endTime ) {
+    public void setEndTime(final Date endTime) {
         this.endTime = endTime;
     }
 

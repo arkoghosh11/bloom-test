@@ -3,7 +3,7 @@ package com.mana.innovative.rest;/**
  * This is a class for .. todo 
  */
 
-import com.mana.innovative.domain.payload.ItemsPayload;
+import com.mana.innovative.dto.payload.ItemsPayload;
 import com.mana.innovative.service.container.ItemResponseContainer;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.test.framework.AppDescriptor;

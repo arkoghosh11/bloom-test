@@ -34,9 +34,9 @@ import java.util.List;
 @RunWith (value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration (locations = "/dbConfig-test.xml")
 @TransactionConfiguration (transactionManager = "transactionManager", defaultRollback = true)
-public class WhenItemDAOTestItsGetMethods {
+public class WhenItemDAOTestItemDAOGetMethods {
 
-    private static final Logger logger = LoggerFactory.getLogger(WhenItemDAOTestItsGetMethods.class);
+    private static final Logger logger = LoggerFactory.getLogger(WhenItemDAOTestItemDAOGetMethods.class);
 
     private Item defaultItem;
 
@@ -80,18 +80,6 @@ public class WhenItemDAOTestItsGetMethods {
 
         Assert.assertNotNull(itemDAO);
     }
-
-//    @Test
-//    @Rollback(value = true)
-//    @Transactional
-//    public void testItemDAOCreate() {
-//
-//        Item item = itemDAO.getItemByItemId(dummyItem.getItemId());
-//        if (item == null) {
-//            boolean success = itemDAO.createItem(dummyItem);
-//            Assert.assertTrue(success);
-//        }
-//    }
 
     @Test
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)

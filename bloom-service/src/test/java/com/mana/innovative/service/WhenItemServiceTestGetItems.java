@@ -1,6 +1,6 @@
 package com.mana.innovative.service;
 
-import com.mana.innovative.domain.payload.ItemsPayload;
+import com.mana.innovative.dto.payload.ItemsPayload;
 import com.mana.innovative.service.container.ItemResponseContainer;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -15,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
-
-;
 
 /**
  * Created by alex1 on 1/23/2015.

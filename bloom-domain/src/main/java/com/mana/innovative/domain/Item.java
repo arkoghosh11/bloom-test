@@ -17,7 +17,7 @@ public class Item {
 //    @GeneratedValue (generator = "gen")
 //    @GenericGenerator (name = "gen", strategy = "foreign", parameters = { @Parameter (name = "property", value =
 //            "item") })
-    private int itemId;
+    private long itemId;
     @Column(name = "item_price")
     private double itemPrice;
     @Column(name = "quantity")
@@ -50,8 +50,8 @@ public class Item {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date updatedDate;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.DETACH})
-    @JoinColumn(name = "shop_id", updatable = true, referencedColumnName = "shop_id")
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "shop_id", updatable = true)
     private Shop shopItem;
 
     /**
@@ -59,7 +59,7 @@ public class Item {
      *
      * @return the item id
      */
-    public int getItemId() {
+    public long getItemId() {
 
         return itemId;
     }
@@ -69,7 +69,7 @@ public class Item {
      *
      * @param itemId the item id
      */
-    public void setItemId(int itemId) {
+    public void setItemId(long itemId) {
 
         this.itemId = itemId;
     }

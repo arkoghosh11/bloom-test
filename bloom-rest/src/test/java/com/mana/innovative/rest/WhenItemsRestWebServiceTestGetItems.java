@@ -1,7 +1,7 @@
 package com.mana.innovative.rest;
 
 import com.mana.innovative.domain.Item;
-import com.mana.innovative.domain.payload.ItemsPayload;
+import com.mana.innovative.dto.payload.ItemsPayload;
 import com.mana.innovative.service.container.ItemResponseContainer;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;

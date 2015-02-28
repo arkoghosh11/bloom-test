@@ -25,12 +25,12 @@ public class Shop {
     @Column(name = "shop_web_link")
     private String shopWebLink;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "shopAddress")
-    @JoinColumn( name = "address_id", nullable = false )
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", nullable = false)
     private Address address;
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "shopWorkingHour")
     private List<WorkingHour> workingHours;
-    @OneToMany(targetEntity = Item.class, cascade = CascadeType.ALL,mappedBy = "shopItem")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shopItem")
     private List<Item> items;
 
     @Column(name = "created_date", columnDefinition = "DATETIME")
@@ -45,7 +45,7 @@ public class Shop {
      *
      * @return the shop id
      */
-    public long getShopId () {
+    public long getShopId() {
         return shopId;
     }
 
@@ -54,7 +54,7 @@ public class Shop {
      *
      * @param shop_id the shop _ id
      */
-    public void setShopId ( long shop_id ) {
+    public void setShopId(long shop_id) {
         this.shopId = shop_id;
     }
 
@@ -63,7 +63,7 @@ public class Shop {
      *
      * @return the shop own id
      */
-    public long getShopOwnId () {
+    public long getShopOwnId() {
         return shopOwnId;
     }
 
@@ -72,7 +72,7 @@ public class Shop {
      *
      * @param shop_own_id the shop _ own _ id
      */
-    public void setShopOwnId ( long shop_own_id ) {
+    public void setShopOwnId(long shop_own_id) {
         this.shopOwnId = shop_own_id;
     }
 
@@ -81,7 +81,7 @@ public class Shop {
      *
      * @return the shop name
      */
-    public String getShopName () {
+    public String getShopName() {
         return shopName;
     }
 
@@ -90,7 +90,7 @@ public class Shop {
      *
      * @param shop_name the shop _ name
      */
-    public void setShopName ( String shop_name ) {
+    public void setShopName(String shop_name) {
         this.shopName = shop_name;
     }
 
@@ -209,12 +209,12 @@ public class Shop {
 
         Shop shop = (Shop) o;
 
-        if ( shopId != shop.shopId ) return false;
-        if ( shopOwnId != shop.shopOwnId ) return false;
+        if (shopId != shop.shopId) return false;
+        if (shopOwnId != shop.shopOwnId) return false;
         if (!address.equals(shop.address)) return false;
         if (!items.equals(shop.items)) return false;
         if (!shopWebLink.equals(shop.shopWebLink)) return false;
-        if (!shopName.equals(shop.shopName )) return false;
+        if (!shopName.equals(shop.shopName)) return false;
         if (!workingHours.equals(shop.workingHours)) return false;
         if (createdDate != null && shop.getCreatedDate() != null ? createdDate.getTime() != shop.getCreatedDate()
                 .getTime() : createdDate == null)
@@ -233,7 +233,7 @@ public class Shop {
      * be a concise but informative representation that is easy for a
      * person to read.
      *
-     * @return  {@link String}a string representation of the object.
+     * @return {@link String}a string representation of the object.
      */
     @Override
     public String toString() {

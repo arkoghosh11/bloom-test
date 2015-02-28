@@ -5,6 +5,7 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
+import com.mana.innovative.domain.Shop;
 import junit.framework.Assert;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -37,6 +38,9 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
 
     @Resource
     private ItemDAO itemDAO;
+
+    @Resource
+    private ShopDAO shopDAO;
 
     @Resource
     private SessionFactory sessionFactory;
@@ -83,10 +87,19 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
     public void testItemDAOCreate () {
 
         DAOResponse<Item> itemDAOResponse;
+        DAOResponse<Shop> shopDAOResponse;
         itemDAOResponse = itemDAO.getItemByItemId(dummyItem.getItemId(), TestConstants.IS_ERROR);
-        Assert.assertTrue(itemDAOResponse.getResults().isEmpty());
 
+        Assert.assertTrue(itemDAOResponse.getResults().isEmpty());
+        shopDAOResponse = shopDAO.getShopByShopId(TestConstants.ZERO, TestConstants.IS_ERROR);
+
+        Assert.assertFalse(shopDAOResponse.getResults().isEmpty());
+        Shop shop = shopDAOResponse.getResults().get(TestConstants.ZERO);
+        Assert.assertNotNull(shop);
+        dummyItem.setShopItem(shop)
+        ;
         itemDAOResponse = itemDAO.createItem(dummyItem, TestConstants.IS_ERROR);
+
 
         Assert.assertTrue(itemDAOResponse.isCreate());
         Assert.assertTrue(itemDAOResponse.isRequestSuccess());

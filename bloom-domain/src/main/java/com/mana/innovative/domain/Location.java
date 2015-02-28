@@ -21,7 +21,8 @@ public class Location {
     @Column(name = "longitude")
     private double longitude;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "location")
+    //    @OneToOne(cascade = CascadeType.ALL, mappedBy =
+    @Transient
     private Address address;
 
     @Column(name = "created_date", columnDefinition = "DATETIME")
