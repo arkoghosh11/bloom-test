@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <context:component-scan base-package="com.mana.innovative.dao,com.mana.innovative.domain"/>
+    <context:property-placeholder location="classpath*:propertyFilesLocation.properties"/>
+
+    <!-- for direct prop file values "${propertyKey}" use double quotes as req-->
+    <!-- for spring property class object "${beanId['propertyKey']} use double quotes as req spring SpEL exp evaluation"-->
+    <bean id="properties" class="${spring_property_class}">
+        <property name="propagateToSystemProperties" value="true"/>
+        <property name="locations">
+            <list>
+                <value>${database}</value>
+                <value>${hibernate}</value>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="#{properties['jdbc_url']}"/>
+        <property name="username" value="#{properties['username']}"/>
+        <property name="password" value="#{properties['password']}"/>
+        <property name="driverClassName" value="#{properties['jdbc_driver']}"/>
+    </bean>
+
+    <bean id="annotatedSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+
+        <property name="packagesToScan">
+            <list value-type="java.lang.String">
+                <value>com.mana.innovative.domain</value>
+            </list>
+        </property>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">#{properties['hibernate.dialect']}</prop>
+                <prop key="hibernate.c3p0.min_size">#{properties['hibernate.c3p0.min_size']}</prop>
+                <prop key="hibernate.c3p0.max_size">#{properties['hibernate.c3p0.max_size']}</prop>
+                <prop key="hibernate.c3p0.timeout">#{properties['hibernate.c3p0.timeout']}</prop>
+                <prop key="hibernate.c3p0.max_statements">#{properties['hibernate.c3p0.max_statements']}</prop>
+                <prop key="hibernate.c3p0.idle_test_period">#{properties['hibernate.c3p0.idle_test_period']}</prop>
+
+                <!-- Show and print nice SQL on stdout -->
+                <prop key="show_sql">#{properties['hibernate.show_sql']}</prop>
+                <prop key="format_sql">#{properties['hibernate.format_sql']}</prop>
+                <prop key="use_sql_comments">#{properties['hibernate.use_sql_comments']}</prop>
+                <prop key="hbm2ddl.auto">#{properties['hibernate.hbm2ddl.auto']}</prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <bean id="transactionManager" class="${transaction_manager}">
+        <property name="sessionFactory" ref="annotatedSessionFactory"/>
+        <property name="nestedTransactionAllowed" value="true"/>
+        <property name="dataSource" ref="dataSource"/>
+
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"	id="WebApp_ID" version="3.0">
+    <display-name>Bloom</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+
+    <!--<listener> -->
+    <!--<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class> -->
+    <!--</listener> -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath*:/db_config.xml
+            classpath*:/service_config.xml
+            classpath*:web_config.xml
+        </param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>location</param-name>
+        <param-value>login_credentials</param-value>
+    </context-param>
+
+    <!--<filter>-->
+        <!--<filter-name>Login Filter</filter-name>-->
+        <!--<filter-class>com.mana.innovative.rest.filter.LoginFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>Login Filter</filter-name>-->
+        <!--<servlet-name>Jersey REST Service</servlet-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+        <!--<dispatcher>REQUEST</dispatcher>-->
+    <!--</filter-mapping>-->
+
+
+
+    <!-- @Note Rest Web Services -->
+    <servlet>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
+        <init-param>
+            <!--<description>Tabs,Users</description>-->
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.mana.innovative.rest;</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <!--@Note listener classes by Spring to instantiate Spring Application Context -->
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <!-- @Note SOAP Web Services -->
+    <!--<servlet>-->
+    <!--<servlet-name>WSSpring</servlet-name>-->
+    <!--<servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>WSSpring</servlet-name>-->
+    <!--<url-pattern>/hello</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+</web-app>
