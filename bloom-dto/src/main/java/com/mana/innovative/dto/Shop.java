@@ -3,78 +3,157 @@ package com.mana.innovative.dto;/**
  * This is a class for .. todo 
  */
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Bloom on 2/27/2015 : 2:15 PM
- * todo This class is for ...
+ * The type Shop.
  */
 @XmlRootElement(name = "shop",namespace = "http://localhost:8080/bloom-test/rest/shops")
 public class Shop {
 
-    private long shop_id;
-    private long shop_own_id;
-    private String shop_name;
+    @XmlElement(name = "shop_id", nillable = false)
+    private long shopId;
+    @XmlElement(name = "shop_own_id", nillable = false)
+    private long shopOwnId;
+    @XmlElement(name = "shop_name", nillable = false)
+    private String shopName;
+    @XmlElement(name = "shop_web_link")
     private String shopWebLink;
 
+    @XmlElement(name = "address", nillable = false)
     private Address address;
+    @XmlElementWrapper(name = "working_hours")
+    @XmlElement(name = "working_hour", nillable = true)
     private List<WorkingHour> workingHours;
+    @XmlElementWrapper(name = "items")
+    @XmlElement(name = "item", nillable = true)
     private List<Item> items;
 
-    public long getShop_id() {
-        return shop_id;
+    /**
+     * Gets shop id.
+     *
+     * @return the shop id
+     */
+    public long getShopId() {
+        return shopId;
     }
 
-    public void setShop_id(long shop_id) {
-        this.shop_id = shop_id;
+    /**
+     * Sets shop id.
+     *
+     * @param shopId the shop id
+     */
+    public void setShopId(long shopId) {
+        this.shopId = shopId;
     }
 
-    public long getShop_own_id() {
-        return shop_own_id;
+    /**
+     * Gets shop own id.
+     *
+     * @return the shop own id
+     */
+    public long getShopOwnId() {
+        return shopOwnId;
     }
 
-    public void setShop_own_id(long shop_own_id) {
-        this.shop_own_id = shop_own_id;
+    /**
+     * Sets shop own id.
+     *
+     * @param shopOwnId the shop own id
+     */
+    public void setShopOwnId(long shopOwnId) {
+        this.shopOwnId = shopOwnId;
     }
 
-    public String getShop_name() {
-        return shop_name;
+    /**
+     * Gets shop name.
+     *
+     * @return the shop name
+     */
+    public String getShopName() {
+        return shopName;
     }
 
-    public void setShop_name(String shop_name) {
-        this.shop_name = shop_name;
+    /**
+     * Sets shop name.
+     *
+     * @param shopName the shop name
+     */
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
     }
 
+    /**
+     * Gets shop web link.
+     *
+     * @return the shop web link
+     */
     public String getShopWebLink() {
         return shopWebLink;
     }
 
+    /**
+     * Sets shop web link.
+     *
+     * @param shopWebLink the shop web link
+     */
     public void setShopWebLink(String shopWebLink) {
         this.shopWebLink = shopWebLink;
     }
 
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
     public Address getAddress() {
         return address;
     }
 
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
     public void setAddress(Address address) {
         this.address = address;
     }
 
+    /**
+     * Gets working hours.
+     *
+     * @return the working hours
+     */
     public List<WorkingHour> getWorkingHours() {
         return workingHours;
     }
 
+    /**
+     * Sets working hours.
+     *
+     * @param workingHours the working hours
+     */
     public void setWorkingHours(List<WorkingHour> workingHours) {
         this.workingHours = workingHours;
     }
 
+    /**
+     * Gets items.
+     *
+     * @return the items
+     */
     public List<Item> getItems() {
         return items;
     }
 
+    /**
+     * Sets items.
+     *
+     * @param items the items
+     */
     public void setItems(List<Item> items) {
         this.items = items;
     }
@@ -86,12 +165,12 @@ public class Shop {
 
         Shop shop = (Shop) o;
 
-        if (shop_id != shop.shop_id) return false;
-        if (shop_own_id != shop.shop_own_id) return false;
+        if (shopId != shop.shopId) return false;
+        if (shopOwnId != shop.shopOwnId) return false;
         if (address != null ? !address.equals(shop.address) : shop.address != null) return false;
         if (items != null ? !items.equals(shop.items) : shop.items != null) return false;
         if (shopWebLink != null ? !shopWebLink.equals(shop.shopWebLink) : shop.shopWebLink != null) return false;
-        if (shop_name != null ? !shop_name.equals(shop.shop_name) : shop.shop_name != null) return false;
+        if (shopName != null ? !shopName.equals(shop.shopName) : shop.shopName != null) return false;
         if (workingHours != null ? !workingHours.equals(shop.workingHours) : shop.workingHours != null) return false;
 
         return true;
@@ -110,9 +189,9 @@ public class Shop {
     @Override
     public String toString() {
         return "Shop{" +
-                "shop_id=" + shop_id +
-                ", shop_own_id=" + shop_own_id +
-                ", shop_name='" + shop_name + '\'' +
+                "shopId=" + shopId +
+                ", shopOwnId=" + shopOwnId +
+                ", shopName='" + shopName + '\'' +
                 ", shopWebLink='" + shopWebLink + '\'' +
                 ", address=" + address +
                 ", workingHours=" + workingHours +

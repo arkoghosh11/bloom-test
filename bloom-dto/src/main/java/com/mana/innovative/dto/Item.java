@@ -167,6 +167,15 @@ public class Item {
         return true;
     }
 
+    /**
+     * Returns a string representation of the object. In general, the
+     * {@code toString} method returns a string that
+     * "textually represents" this object. The result should
+     * be a concise but informative representation that is easy for a
+     * person to read.
+     *
+     * @return {@link String}a string representation of the object.
+     */
     @Override
     public String toString() {
         return "Item{" +

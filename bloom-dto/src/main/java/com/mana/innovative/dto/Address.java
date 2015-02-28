@@ -31,15 +31,13 @@ public class Address {
 
     private Location location;
 
-    private Shop shopAddress;
-
 
     /**
      * Gets address id.
      *
      * @return the address id
      */
-    @XmlElement(name = "addressId")
+    @XmlElement(name = "addressId", nillable = false)
     public String getAddressId() {
         return addressId;
     }
@@ -184,5 +182,47 @@ public class Address {
      */
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address)) return false;
+
+        Address address = (Address) o;
+
+        if (zipCode != address.zipCode) return false;
+        if (!address1.equals(address.address1)) return false;
+        if (!address2.equals(address.address2)) return false;
+        if (!addressId.equals(address.addressId)) return false;
+        if (!city.equals(address.city)) return false;
+        if (!district.equals(address.district)) return false;
+        if (!state.equals(address.state)) return false;
+        if (location != null ? !location.equals(address.location) : address.location != null) return false;
+
+        return true;
+    }
+
+    /**
+     * Returns a string representation of the object. In general, the
+     * {@code toString} method returns a string that
+     * "textually represents" this object. The result should
+     * be a concise but informative representation that is easy for a
+     * person to read.
+     *
+     * @return {@link String}a string representation of the object.
+     */
+    @Override
+    public String toString() {
+        return "Address{" +
+                "addressId='" + addressId + '\'' +
+                ", address1='" + address1 + '\'' +
+                ", address2='" + address2 + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", district='" + district + '\'' +
+                ", zipCode=" + zipCode +
+                ", location=" + location +
+                '}';
     }
 }
