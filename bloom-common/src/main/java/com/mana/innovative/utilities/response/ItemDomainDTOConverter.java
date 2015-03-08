@@ -194,7 +194,7 @@ public class ItemDomainDTOConverter {
 //            item.setShopItem();
         if ( flag ) {
             logger.error( stringBuilder.toString( ) );
-            throw new IllegalArgumentValueException( );
+            throw new IllegalArgumentValueException( stringBuilder.toString( ) );
         }
         logger.info( stringBuilder.toString( ) );
         return itemDomain;

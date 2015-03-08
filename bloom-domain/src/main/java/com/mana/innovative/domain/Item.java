@@ -43,7 +43,7 @@ public class Item {
     @Column( name = "bought_date", columnDefinition = "DATETIME" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date boughtDate;
-    @Column( name = "created_date", columnDefinition = "DATETIME" )
+    @Column( name = "created_date", columnDefinition = "DATETIME", updatable = false )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
     @Column( name = "updated_date", columnDefinition = "DATETIME" )
