@@ -1,7 +1,7 @@
 package com.mana.innovative.dao;
 
 import com.mana.innovative.domain.Item;
-import com.mana.innovative.exception.IllegalItemSearchListSizeException;
+import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.*;
 import com.mana.innovative.logic.ItemSearchOption;
 import com.mana.innovative.logic.QueryUtil;
@@ -272,7 +272,7 @@ public class BasicDAO {
         List<String> keys = new ArrayList<String>();
         for (Map<String, String> searchCondition : searchConditions) {
             if (searchCondition.size() != com.mana.innovative.constants.DAOConstants.ONE) {
-                throw new IllegalItemSearchListSizeException("Map Size must be ONE (1)");
+                throw new IllegalSearchListSizeException("Map Size must be ONE (1)");
             }
             for (Map.Entry<String, String> entry : searchCondition.entrySet()) {
                 keys.add(entry.getKey());

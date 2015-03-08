@@ -3,7 +3,7 @@ package com.mana.innovative.dao;
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Shop;
-import com.mana.innovative.exception.IllegalItemSearchListSizeException;
+import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -43,7 +42,10 @@ public class ShopDAO extends BasicDAO {
         List<Shop> shops = null;
         DAOResponse<Shop> shopDAOResponse = new DAOResponse<>();
         ErrorContainer errorContainer = null;
-        log.info("**Inside itemDAO.getShops()***");
+        if ( isError ) {
+            errorContainer = new ErrorContainer( );
+        }
+        log.info( "**Inside shopDAO.getShops()***" );
         try {
             this.openDBTransaction();
             Query query = session.createQuery(" from Shop where shopId" + " = :shop_id");
@@ -51,7 +53,7 @@ public class ShopDAO extends BasicDAO {
 //            transaction.commit();
             shops = query.list();
             if (!shops.isEmpty() && shops.size() > DAOConstants.ONE) {
-                throw new IllegalItemSearchListSizeException(" Shop Size exceeded maximum value " +
+                throw new IllegalSearchListSizeException( " Shop Size exceeded maximum value " +
                         "of " + DAOConstants.ONE);
             }
         } catch (Exception exception) {
@@ -59,7 +61,7 @@ public class ShopDAO extends BasicDAO {
             if (exception instanceof HibernateException) {
                 this.handleExceptions((HibernateException) exception);
             }
-            log.error("Error occurred while trying to fetch data from items table for shopDAO" + ".getItems()",
+            log.error( "Error occurred while trying to fetch data from shops table for shopDAO" + ".getShops()",
                     exception);
             if (isError) {
                 String location = this.getClass().getCanonicalName() + "#getShopByShopId()";
@@ -86,6 +88,9 @@ public class ShopDAO extends BasicDAO {
         List<Shop> shops = null;
         DAOResponse<Shop> shopDAOResponse = new DAOResponse<>();
         ErrorContainer errorContainer = null;
+        if ( isError ) {
+            errorContainer = new ErrorContainer( );
+        }
         log.info("**Inside shopDAO.getShops()***");
         try {
             this.openDBTransaction();

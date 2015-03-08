@@ -7,51 +7,51 @@ import java.util.Date;
  * The type Item.
  */
 @Entity
-@Table(name = "items")
+@Table( name = "items" )
 public class Item {
 
     /* */
     @Id
-    @Column(name = "item_id", unique = true, updatable = false, nullable = false)
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column( name = "item_id", unique = true, updatable = false, nullable = false )
+    @GeneratedValue( strategy = GenerationType.TABLE )
 //    @GeneratedValue (generator = "gen")
 //    @GenericGenerator (name = "gen", strategy = "foreign", parameters = { @Parameter (name = "property", value =
 //            "item") })
     private long itemId;
-    @Column(name = "item_price")
+    @Column( name = "item_price" )
     private double itemPrice;
-    @Column(name = "quantity")
+    @Column( name = "quantity" )
     private double quantity;
-    @Column(name = "weight")
+    @Column( name = "weight" )
     private double weight;
 
-    @Column(name = "item_price_currency")
+    @Column( name = "item_price_currency" )
     private String itemPriceCurrency;
-    @Column(name = "item_name")
+    @Column( name = "item_name" )
     private String itemName;
-    @Column(name = "item_type")
+    @Column( name = "item_type" )
     private String itemType;
-    @Column(name = "item_sub_type")
+    @Column( name = "item_sub_type" )
     private String itemSubType;
-    @Column(name = "bought_from")
+    @Column( name = "bought_from" )
     private String boughtFrom;
-    @Column(name = "quantity_type")
+    @Column( name = "quantity_type" )
     private String quantityType;
-    @Column(name = "weighted_unit")
+    @Column( name = "weighted_unit" )
     private String weightedUnit;
 
-    @Column(name = "bought_date", columnDefinition = "DATETIME")
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column( name = "bought_date", columnDefinition = "DATETIME" )
+    @Temporal( value = TemporalType.TIMESTAMP )
     private Date boughtDate;
-    @Column(name = "created_date", columnDefinition = "DATETIME")
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column( name = "created_date", columnDefinition = "DATETIME" )
+    @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
-    @Column(name = "updated_date", columnDefinition = "DATETIME")
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column( name = "updated_date", columnDefinition = "DATETIME" )
+    @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
-    @JoinColumn(name = "shop_id", updatable = true)
+    @ManyToOne( cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH } )
+    @JoinColumn( name = "shop_id", updatable = true )
     private Shop shopItem;
 
     /**
@@ -59,7 +59,7 @@ public class Item {
      *
      * @return the item id
      */
-    public long getItemId() {
+    public long getItemId( ) {
 
         return itemId;
     }
@@ -69,7 +69,7 @@ public class Item {
      *
      * @param itemId the item id
      */
-    public void setItemId(long itemId) {
+    public void setItemId( long itemId ) {
 
         this.itemId = itemId;
     }
@@ -79,7 +79,7 @@ public class Item {
      *
      * @return the item price
      */
-    public double getItemPrice() {
+    public double getItemPrice( ) {
 
         return itemPrice;
     }
@@ -89,7 +89,7 @@ public class Item {
      *
      * @param itemPrice the item price
      */
-    public void setItemPrice(double itemPrice) {
+    public void setItemPrice( double itemPrice ) {
 
         this.itemPrice = itemPrice;
     }
@@ -99,7 +99,7 @@ public class Item {
      *
      * @return the item price currency
      */
-    public String getItemPriceCurrency() {
+    public String getItemPriceCurrency( ) {
 
         return itemPriceCurrency;
     }
@@ -109,7 +109,7 @@ public class Item {
      *
      * @param itemPriceCurrency the item price currency
      */
-    public void setItemPriceCurrency(String itemPriceCurrency) {
+    public void setItemPriceCurrency( String itemPriceCurrency ) {
 
         this.itemPriceCurrency = itemPriceCurrency;
     }
@@ -119,7 +119,7 @@ public class Item {
      *
      * @return the item name
      */
-    public String getItemName() {
+    public String getItemName( ) {
 
         return itemName;
     }
@@ -129,7 +129,7 @@ public class Item {
      *
      * @param itemName the item name
      */
-    public void setItemName(String itemName) {
+    public void setItemName( String itemName ) {
 
         this.itemName = itemName;
     }
@@ -139,7 +139,7 @@ public class Item {
      *
      * @return the item type
      */
-    public String getItemType() {
+    public String getItemType( ) {
 
         return itemType;
     }
@@ -149,7 +149,7 @@ public class Item {
      *
      * @param itemType the item type
      */
-    public void setItemType(String itemType) {
+    public void setItemType( String itemType ) {
 
         this.itemType = itemType;
     }
@@ -159,7 +159,7 @@ public class Item {
      *
      * @return the item sub type
      */
-    public String getItemSubType() {
+    public String getItemSubType( ) {
         return itemSubType;
     }
 
@@ -168,7 +168,7 @@ public class Item {
      *
      * @param itemSubType the item sub type
      */
-    public void setItemSubType(String itemSubType) {
+    public void setItemSubType( String itemSubType ) {
         this.itemSubType = itemSubType;
     }
 
@@ -177,7 +177,7 @@ public class Item {
      *
      * @return the bought from
      */
-    public String getBoughtFrom() {
+    public String getBoughtFrom( ) {
         return boughtFrom;
     }
 
@@ -186,7 +186,7 @@ public class Item {
      *
      * @param boughtFrom the bought from
      */
-    public void setBoughtFrom(String boughtFrom) {
+    public void setBoughtFrom( String boughtFrom ) {
         this.boughtFrom = boughtFrom;
     }
 
@@ -195,7 +195,7 @@ public class Item {
      *
      * @return the bought date
      */
-    public Date getBoughtDate() {
+    public Date getBoughtDate( ) {
         return boughtDate;
     }
 
@@ -204,7 +204,7 @@ public class Item {
      *
      * @param boughtDate the bought date
      */
-    public void setBoughtDate(final Date boughtDate) {
+    public void setBoughtDate( final Date boughtDate ) {
         this.boughtDate = boughtDate;
     }
 
@@ -213,7 +213,7 @@ public class Item {
      *
      * @return the quantity
      */
-    public double getQuantity() {
+    public double getQuantity( ) {
         return quantity;
     }
 
@@ -222,7 +222,7 @@ public class Item {
      *
      * @param quantity the quantity
      */
-    public void setQuantity(final double quantity) {
+    public void setQuantity( final double quantity ) {
         this.quantity = quantity;
     }
 
@@ -231,7 +231,7 @@ public class Item {
      *
      * @return the quantity type
      */
-    public String getQuantityType() {
+    public String getQuantityType( ) {
         return quantityType;
     }
 
@@ -240,7 +240,7 @@ public class Item {
      *
      * @param quantityType the quantity type
      */
-    public void setQuantityType(String quantityType) {
+    public void setQuantityType( String quantityType ) {
         this.quantityType = quantityType;
     }
 
@@ -249,7 +249,7 @@ public class Item {
      *
      * @return the weight
      */
-    public double getWeight() {
+    public double getWeight( ) {
         return weight;
     }
 
@@ -258,7 +258,7 @@ public class Item {
      *
      * @param weight the weight
      */
-    public void setWeight(final double weight) {
+    public void setWeight( final double weight ) {
         this.weight = weight;
     }
 
@@ -268,7 +268,7 @@ public class Item {
      *
      * @return the weighted unit
      */
-    public String getWeightedUnit() {
+    public String getWeightedUnit( ) {
         return weightedUnit;
     }
 
@@ -277,7 +277,7 @@ public class Item {
      *
      * @param weightedUnit the weighted unit
      */
-    public void setWeightedUnit(final String weightedUnit) {
+    public void setWeightedUnit( final String weightedUnit ) {
         this.weightedUnit = weightedUnit;
     }
 
@@ -286,7 +286,7 @@ public class Item {
      *
      * @return the created date
      */
-    public Date getCreatedDate() {
+    public Date getCreatedDate( ) {
 
         return createdDate;
     }
@@ -296,9 +296,9 @@ public class Item {
      *
      * @param createdDate the created date
      */
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate( Date createdDate ) {
 
-        this.createdDate = createdDate != null ? createdDate : new Date();
+        this.createdDate = createdDate != null ? createdDate : new Date( );
     }
 
     /**
@@ -306,7 +306,7 @@ public class Item {
      *
      * @return the updated date
      */
-    public Date getUpdatedDate() {
+    public Date getUpdatedDate( ) {
 
         return updatedDate;
     }
@@ -316,7 +316,7 @@ public class Item {
      *
      * @param updatedDate the updated date
      */
-    public void setUpdatedDate(final Date updatedDate) {
+    public void setUpdatedDate( final Date updatedDate ) {
 
         this.updatedDate = updatedDate;
     }
@@ -327,7 +327,7 @@ public class Item {
      *
      * @return the shop item
      */
-    public Shop getShopItem() {
+    public Shop getShopItem( ) {
         return shopItem;
     }
 
@@ -336,7 +336,7 @@ public class Item {
      *
      * @param shopItem the shop item
      */
-    public void setShopItem(Shop shopItem) {
+    public void setShopItem( Shop shopItem ) {
         this.shopItem = shopItem;
     }
 
@@ -360,8 +360,10 @@ public class Item {
         if ( itemType != null ? !itemType.equals( item.itemType ) : item.itemType != null ) return false;
         if ( quantityType != null ? !quantityType.equals( item.quantityType ) : item.quantityType != null )
             return false;
-        if ( shopItem != null ? !shopItem.equals( item.shopItem ) : item.shopItem != null ) return false;
-        if ( weightedUnit != null ? !weightedUnit.equals( item.weightedUnit ) : item.weightedUnit != null )
+        if ( shopItem != null && item.getShopItem( ) != null ) {
+            if ( !shopItem.equals( item.shopItem ) ) return false;
+        }
+        if ( weightedUnit != null ? !weightedUnit.equalsIgnoreCase( item.weightedUnit ) : item.weightedUnit != null )
             return false;
         if ( createdDate != null ? !createdDate.equals( item.createdDate ) : item.createdDate != null ) return true;
         if ( updatedDate != null ? !updatedDate.equals( item.updatedDate ) : item.updatedDate != null ) return true;
@@ -370,16 +372,14 @@ public class Item {
     }
 
     /**
-     * Returns a string representation of the object. In general, the
-     * {@code toString} method returns a string that
-     * "textually represents" this object. The result should
-     * be a concise but informative representation that is easy for a
-     * person to read.
+     * Returns a string representation of the object. In general, the {@code toString} method returns a string that
+     * "textually represents" this object. The result should be a concise but informative representation that is easy
+     * for a person to read.
      *
-     * @return  {@link String}a string representation of the object.
+     * @return {@link String}a string representation of the object.
      */
     @Override
-    public String toString() {
+    public String toString( ) {
         return "Item{" +
                 "itemId=" + itemId +
                 ", itemPrice=" + itemPrice +

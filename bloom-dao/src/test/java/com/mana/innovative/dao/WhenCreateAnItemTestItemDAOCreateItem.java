@@ -27,12 +27,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by alex1 on 1/28/2015.
- * This is a domain class
+ * Created by alex1 on 1/28/2015. This is a domain class
  */
-@RunWith (value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration (locations = { "/dbConfig-test.xml" })
-@TransactionConfiguration (/* transactionManager = "transactionManager", */  defaultRollback = true)
+@RunWith( value = SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "/dbConfig-test.xml" } )
+@TransactionConfiguration(/* transactionManager = "transactionManager", */  defaultRollback = true )
 @Transactional
 public class WhenCreateAnItemTestItemDAOCreateItem {
 
@@ -49,132 +48,128 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
 
 
     /**
-     * This method is to initialize Objects and configuration files
-     * before testing test method
+     * This method is to initialize Objects and configuration files before testing test method
      */
     @Before
-    public void setUp () throws Exception {
+    public void setUp( ) throws Exception {
 
 
-        dummyItem = new Item();
-        dummyItem.setItemId(TestConstants.MINUS_ONE);
-        dummyItem.setItemName(TestConstants.TEST_VALUE);
-        dummyItem.setItemPriceCurrency(TestConstants.TEST_PRICE_CURRENCY);
-        dummyItem.setItemType(TestConstants.TEST_VALUE);
-        dummyItem.setItemSubType(TestConstants.TEST_ITEM_TYPE);
-        dummyItem.setBoughtFrom(TestConstants.TEST_BROUGHT_FROM);
+        dummyItem = new Item( );
+        dummyItem.setItemId( TestConstants.MINUS_ONE );
+        dummyItem.setItemName( TestConstants.TEST_VALUE );
+        dummyItem.setItemPriceCurrency( TestConstants.TEST_PRICE_CURRENCY );
+        dummyItem.setItemType( TestConstants.TEST_VALUE );
+        dummyItem.setItemSubType( TestConstants.TEST_ITEM_TYPE );
+        dummyItem.setBoughtFrom( TestConstants.TEST_BROUGHT_FROM );
 
-        dummyItem.setItemPrice(TestConstants.THREE);
-        dummyItem.setWeight(TestConstants.TEST_WEIGHT);
-        dummyItem.setQuantity(TestConstants.TEST_QUANTITY);
+        dummyItem.setItemPrice( TestConstants.THREE );
+        dummyItem.setWeight( TestConstants.TEST_WEIGHT );
+        dummyItem.setQuantity( TestConstants.TEST_QUANTITY );
 
-        dummyItem.setQuantityType(QuantityType.UNIT.toString());
-        dummyItem.setWeightedUnit(WeightedUnit.POUND.toString());
+        dummyItem.setQuantityType( QuantityType.UNIT.toString( ) );
+        dummyItem.setWeightedUnit( WeightedUnit.POUND.toString( ) );
 
-        dummyItem.setCreatedDate(new Date());
-        dummyItem.setBoughtDate(new Date());
+        dummyItem.setCreatedDate( new Date( ) );
+        dummyItem.setBoughtDate( new Date( ) );
     }
 
     @Test
-    public void testItemDAONotNull () {
+    public void testItemDAONotNull( ) {
 
-        Assert.assertNotNull(itemDAO);
+        Assert.assertNotNull( itemDAO );
     }
 
     @Test
-    @Rollback (value = true)
-    @Transactional (propagation = Propagation.REQUIRED)
-    public void testItemDAOCreate () {
+    @Rollback( value = true )
+    @Transactional( propagation = Propagation.REQUIRED )
+    public void testItemDAOCreate( ) {
 
-        DAOResponse<Item> itemDAOResponse;
-        DAOResponse<Shop> shopDAOResponse;
-        itemDAOResponse = itemDAO.getItemByItemId(dummyItem.getItemId(), TestConstants.IS_ERROR);
+        DAOResponse< Item > itemDAOResponse;
+        DAOResponse< Shop > shopDAOResponse;
+        itemDAOResponse = itemDAO.getItemByItemId( dummyItem.getItemId( ), TestConstants.IS_ERROR );
 
-        Assert.assertTrue(itemDAOResponse.getResults().isEmpty());
-        shopDAOResponse = shopDAO.getShopByShopId(TestConstants.ZERO, TestConstants.IS_ERROR);
+        Assert.assertTrue( itemDAOResponse.getResults( ).isEmpty( ) );
+        shopDAOResponse = shopDAO.getShopByShopId( TestConstants.ZERO, TestConstants.IS_ERROR );
 
-        Assert.assertFalse(shopDAOResponse.getResults().isEmpty());
-        Shop shop = shopDAOResponse.getResults().get(TestConstants.ZERO);
-        Assert.assertNotNull(shop);
-        dummyItem.setShopItem(shop)
-        ;
-        itemDAOResponse = itemDAO.createItem(dummyItem, TestConstants.IS_ERROR);
+        Assert.assertFalse( shopDAOResponse.getResults( ).isEmpty( ) );
+        Shop shop = shopDAOResponse.getResults( ).get( TestConstants.ZERO );
+        Assert.assertNotNull( shop );
+        dummyItem.setShopItem( shop );
+        itemDAOResponse = itemDAO.createItem( dummyItem, TestConstants.IS_ERROR );
 
 
-        Assert.assertTrue(itemDAOResponse.isCreate());
-        Assert.assertTrue(itemDAOResponse.isRequestSuccess());
-        Assert.assertFalse(itemDAOResponse.isUpdate());
-        Assert.assertFalse(itemDAOResponse.isDelete());
-        Assert.assertNotNull(itemDAOResponse.getResults());
-        Assert.assertNotNull(itemDAOResponse.getResults().get(TestConstants.ZERO));
-        Assert.assertNull(itemDAOResponse.getErrorContainer());
-        Assert.assertEquals("Value of Count is not One", TestConstants.ONE, itemDAOResponse
-                .getCount());
-
-    }
-
-    @Test
-    @Rollback (value = true)
-    @Transactional (propagation = Propagation.REQUIRED)
-    public void testItemDAOCreateThrowsException () {
-
-        DAOResponse<Item> itemDAOResponse;
-        dummyItem = new Item();
-
-        itemDAOResponse = itemDAO.createItem(dummyItem, TestConstants.IS_ERROR);
-
-        Assert.assertTrue(itemDAOResponse.isCreate());
-        Assert.assertFalse(itemDAOResponse.isRequestSuccess());
-        Assert.assertFalse(itemDAOResponse.isUpdate());
-        Assert.assertFalse(itemDAOResponse.isDelete());
-        Assert.assertNotNull(itemDAOResponse.getResults());
-        Assert.assertTrue("Size Of List is not Zero", itemDAOResponse.getResults().isEmpty());
-        Assert.assertNull(itemDAOResponse.getErrorContainer());
-        Assert.assertEquals("Value of Count is not Zero", TestConstants.ZERO, itemDAOResponse
-                .getCount());
+        Assert.assertTrue( itemDAOResponse.isCreate( ) );
+        Assert.assertTrue( itemDAOResponse.isRequestSuccess( ) );
+        Assert.assertFalse( itemDAOResponse.isUpdate( ) );
+        Assert.assertFalse( itemDAOResponse.isDelete( ) );
+        Assert.assertNotNull( itemDAOResponse.getResults( ) );
+        Assert.assertNotNull( itemDAOResponse.getResults( ).get( TestConstants.ZERO ) );
+        Assert.assertNull( itemDAOResponse.getErrorContainer( ) );
+        Assert.assertEquals( "Value of Count is not One", TestConstants.ONE, itemDAOResponse
+                .getCount( ) );
 
     }
 
     @Test
-    @Rollback (value = true)
-    @Transactional (propagation = Propagation.REQUIRED)
-    public void testItemDAOCreateThrowsExceptionNErrorContainer () {
+    @Rollback( value = true )
+    @Transactional( propagation = Propagation.REQUIRED )
+    public void testItemDAOCreateThrowsException( ) {
 
-        DAOResponse<Item> itemDAOResponse;
-        dummyItem = new Item();
+        DAOResponse< Item > itemDAOResponse;
+        dummyItem = new Item( );
 
-        itemDAOResponse = itemDAO.createItem(dummyItem, TestConstants.IS_ERROR_TRUE);
+        itemDAOResponse = itemDAO.createItem( dummyItem, TestConstants.IS_ERROR );
 
-        Assert.assertTrue(itemDAOResponse.isCreate());
-        Assert.assertFalse(itemDAOResponse.isRequestSuccess());
-        Assert.assertFalse(itemDAOResponse.isUpdate());
-        Assert.assertFalse(itemDAOResponse.isDelete());
-        Assert.assertNotNull(itemDAOResponse.getResults());
-        Assert.assertTrue(itemDAOResponse.getResults().isEmpty());
-        Assert.assertNotNull(itemDAOResponse.getErrorContainer());
-        Assert.assertEquals("Value of Count is not Zero", TestConstants.ZERO, itemDAOResponse
-                .getCount());
+        Assert.assertTrue( itemDAOResponse.isCreate( ) );
+        Assert.assertFalse( itemDAOResponse.isRequestSuccess( ) );
+        Assert.assertFalse( itemDAOResponse.isUpdate( ) );
+        Assert.assertFalse( itemDAOResponse.isDelete( ) );
+        Assert.assertNotNull( itemDAOResponse.getResults( ) );
+        Assert.assertTrue( "Size Of List is not Zero", itemDAOResponse.getResults( ).isEmpty( ) );
+        Assert.assertNull( itemDAOResponse.getErrorContainer( ) );
+        Assert.assertEquals( "Value of Count is not Zero", TestConstants.ZERO, itemDAOResponse
+                .getCount( ) );
 
     }
 
+    @Test
+    @Rollback( value = true )
+    @Transactional( propagation = Propagation.REQUIRED )
+    public void testItemDAOCreateThrowsExceptionNErrorContainer( ) {
+
+        DAOResponse< Item > itemDAOResponse;
+        dummyItem = new Item( );
+
+        itemDAOResponse = itemDAO.createItem( dummyItem, TestConstants.IS_ERROR_TRUE );
+
+        Assert.assertTrue( itemDAOResponse.isCreate( ) );
+        Assert.assertFalse( itemDAOResponse.isRequestSuccess( ) );
+        Assert.assertFalse( itemDAOResponse.isUpdate( ) );
+        Assert.assertFalse( itemDAOResponse.isDelete( ) );
+        Assert.assertNotNull( itemDAOResponse.getResults( ) );
+        Assert.assertTrue( itemDAOResponse.getResults( ).isEmpty( ) );
+        Assert.assertNotNull( itemDAOResponse.getErrorContainer( ) );
+        Assert.assertEquals( "Value of Count is not Zero", TestConstants.ZERO, itemDAOResponse
+                .getCount( ) );
+
+    }
 
 
     /**
-     * This method is to release objects and shut down OR close any connections after Test is
-     * completed
-     * before testing test method
+     * This method is to release objects and shut down OR close any connections after Test is completed before testing
+     * test method
      */
     @After
     @AfterTransaction
-    public void tearDown () throws Exception {
+    public void tearDown( ) throws Exception {
 
-        Session session = sessionFactory.openSession();
-        Query query = session.createQuery(" from Item where itemId=:item_id");
-        query.setLong("item_id", TestConstants.MINUS_ONE);
+        Session session = sessionFactory.openSession( );
+        Query query = session.createQuery( " from Item where itemId=:item_id" );
+        query.setLong( "item_id", TestConstants.MINUS_ONE );
 
-        List<Item> items = query.list();
+        List< Item > items = query.list( );
 //        if(items.isEmpty()) {
-        Assert.assertTrue(" List is not Empty, Hib created a dummy Row ", items.isEmpty());
+        Assert.assertTrue( " List is not Empty, Hib created a dummy Row ", items.isEmpty( ) );
 //        }
 //        } else if(items.size() == TestConstants.ONE) {
 //            Item item =items.get(TestConstants.ZERO);

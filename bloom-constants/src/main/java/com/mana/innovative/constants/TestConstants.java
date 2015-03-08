@@ -50,10 +50,10 @@ public class TestConstants {
     public static final long TEST_ID = ONE;
     public static final String TEST_TIME_FORMAT = "HH:mm";
     public static final String TEST_BOUGHT_DATE = "2015-01-23 17:22:12.000";
-    private static final boolean TEST_FALSE = false;
-    public static final boolean TEST_IS_HOLIDAY = TEST_FALSE;
-    public static final boolean TEST_IS_WEEKEND = TEST_FALSE;
-    public static final boolean TEST_IS_CLOSED = TEST_FALSE;
+    public static final boolean TEST_TRUE = true;
+    public static final boolean TEST_IS_HOLIDAY = TEST_TRUE;
+    public static final boolean TEST_IS_WEEKEND = TEST_TRUE;
+    public static final boolean TEST_IS_CLOSED = TEST_TRUE;
     // todo is to import these values from a properties file
     public static String setUpMethodLoggerMsg = "Initializing tests...";
     public static String tearDownMethodLoggerMsg = ".... Preparing to shutdown test";

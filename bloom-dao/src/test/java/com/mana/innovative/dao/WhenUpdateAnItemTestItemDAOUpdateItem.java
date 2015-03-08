@@ -5,6 +5,7 @@ import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
 import com.mana.innovative.domain.Shop;
 import junit.framework.Assert;
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,6 +42,7 @@ import java.util.List;
 @Transactional
 public class WhenUpdateAnItemTestItemDAOUpdateItem {
 
+    private static final Logger logger = Logger.getLogger( WhenUpdateAnItemTestItemDAOUpdateItem.class );
 
     @Resource
     private ItemDAO itemDAO;
@@ -61,7 +63,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
     @Before
     public void setUp() throws Exception {
 
-
+        logger.debug( TestConstants.setUpMethodLoggerMsg );
         dummyItem = new Item();
         dummyItem.setItemId(id);
 //        dummyItem.setItemName(TestConstants.TEST_VALUE);
@@ -106,13 +108,12 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
         dummyItem = itemDAOResponse.getResults().get(TestConstants.ZERO);
 //        dummyItem = itemDAO.getItemByItemId(dummyItem.getItemId(), TestConstants.IS_ERROR).getResults().get
 //                (TestConstants.ZERO);
-        System.out.println(dummyItem);
 
         Assert.assertNotNull(dummyItem);
-        Assert.assertEquals("Values are not equal", TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemName());
-        Assert.assertEquals("Values are not equal", TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemPriceCurrency());
-        Assert.assertEquals("Values are not equal", TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemType());
-        Assert.assertEquals("Values are not equal", 2.0, dummyItem.getItemPrice());
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemName( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemPriceCurrency( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemType( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, 2.0, dummyItem.getItemPrice( ) );
     }
 
 
@@ -129,7 +130,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
         query.setLong("item_id", id);
         List<Item> items = query.list();
         if (items.isEmpty()) {
-            Assert.assertTrue(" List is not Empty, Hib created a dummy Row ", items.isEmpty());
+            Assert.assertTrue( TestConstants.falseMessage + ", Hib created a dummy Row ", items.isEmpty( ) );
         } else if (items.size() == TestConstants.ONE) {
             Item item = items.get(TestConstants.ZERO);
             Assert.assertNotNull(item);
@@ -138,6 +139,6 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
         } else {
             Assert.fail(" Unique result expected but got duplicate data");
         }
-
+        logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 }

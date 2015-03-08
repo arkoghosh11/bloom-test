@@ -10,16 +10,16 @@ import com.mana.innovative.constants.DAOConstants;
  *         Time: 3:42 PM
  * @since: jdk 1.7
  */
-public class IllegalItemSearchListSizeException extends RuntimeException {
+public class IllegalSearchListSizeException extends RuntimeException {
 
     private String message = "Size of Search String keywords cannot be Greater than "
             + DAOConstants.THREE + " OR Less " + "Than " + DAOConstants.ONE;
 
-    public IllegalItemSearchListSizeException () {
+    public IllegalSearchListSizeException( ) {
        super();
     }
 
-    public IllegalItemSearchListSizeException ( String message ) {
+    public IllegalSearchListSizeException( String message ) {
 
         super( message );
         this.message = message + this.message;

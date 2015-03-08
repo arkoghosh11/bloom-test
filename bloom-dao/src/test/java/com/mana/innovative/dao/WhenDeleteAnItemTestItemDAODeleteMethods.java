@@ -28,7 +28,8 @@ import java.util.List;
 
 /**
  * Created by alex1 on 1/28/2015.
- * This class is for testing given {@link ItemDAO#updateItem(Item)}
+ * This class is for testing given {@link ItemDAO#deleteItem(Item)} &
+ *   {@link ItemDAO#deleteItemByItemId(int)}
  * <p/>
  * Please uncomment the following lines to enable Spring Integration Test
  * the 2nd line requires location on Context Config Files for beans and properties extra, the 1st one is to enble Spring for the Class
@@ -67,7 +68,7 @@ public class WhenDeleteAnItemTestItemDAODeleteMethods {
             DAOResponse<Item> itemDAOResponse = itemDAO.getItemByItemId(TestConstants.ZERO, TestConstants.IS_ERROR);
 
             List<Item> items = itemDAOResponse.getResults();
-            Assert.assertFalse("Item List is Empty", items.isEmpty());
+            Assert.assertFalse( TestConstants.trueMessage, items.isEmpty( ) );
 
             dummyItem = items.get(TestConstants.ZERO);
         } catch (Exception e) {
@@ -82,18 +83,15 @@ public class WhenDeleteAnItemTestItemDAODeleteMethods {
     }
 
     /**
-     * todo This method is to test the behavior of ...
+     * This method is to test deletion of an item
      */
     @Test
     @Rollback (value = true)
     @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT)
     public void testItemDAODelete () throws Exception {
 
-//        this.itemDAOCreate();
-
         boolean deleteItem = itemDAO.deleteItem(dummyItem);
         Assert.assertTrue(deleteItem);
-
     }
 
 

@@ -1,7 +1,7 @@
 package com.mana.innovative.logic;
 
 import com.mana.innovative.constants.DAOConstants;
-import com.mana.innovative.exception.IllegalItemSearchListSizeException;
+import com.mana.innovative.exception.IllegalSearchListSizeException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class ItemSearchOption {
     public void setSearchConditions ( final List<Map<String, String>> searchConditions ) {
 
         if ( searchConditions.size() > MAX || searchConditions.size() < MIN ) {
-            throw new IllegalItemSearchListSizeException( " Size invalid" );
+            throw new IllegalSearchListSizeException( " Size invalid" );
         }
         this.searchConditions = searchConditions;
     }
@@ -75,7 +75,7 @@ public class ItemSearchOption {
 
     public void setSearchConditionParams ( final List<Map<String, Object>> searchConditionParams ) {
         if ( searchConditionParams.size() > MAX || searchConditionParams.size() < MIN ) {
-            throw new IllegalItemSearchListSizeException( " Size invalid" );
+            throw new IllegalSearchListSizeException( " Size invalid" );
         }
         this.searchConditionParams = searchConditionParams;
     }
@@ -87,7 +87,7 @@ public class ItemSearchOption {
     public void setSearchOrderWithParams ( final List<Map<String, String>> searchOrderWithParams ) {
 
         if ( searchOrderWithParams.size() > MAX || searchOrderWithParams.size() < MIN ) {
-            throw new IllegalItemSearchListSizeException( " Size invalid" );
+            throw new IllegalSearchListSizeException( " Size invalid" );
         }
         this.searchOrderWithParams = searchOrderWithParams;
     }
@@ -99,7 +99,7 @@ public class ItemSearchOption {
     public void setSearchMatchTypeParams ( final List<Map<String, Object>> searchMatchTypeParams ) {
 
         if ( searchMatchTypeParams.size() > MAX || searchMatchTypeParams.size() < MIN ) {
-            throw new IllegalItemSearchListSizeException( " Size invalid" );
+            throw new IllegalSearchListSizeException( " Size invalid" );
         }
         this.searchMatchTypeParams = searchMatchTypeParams;
     }

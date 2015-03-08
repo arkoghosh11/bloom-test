@@ -4,25 +4,19 @@ import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
 import com.mana.innovative.exception.IllegalArgumentValueException;
-import com.mana.innovative.exception.IllegalItemSearchListSizeException;
-import com.mana.innovative.exception.response.Error;
+import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
-import com.mana.innovative.logic.ItemSearchOption;
-import com.mana.innovative.logic.QueryUtil;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
-import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by alex1 on 1/20/2015. This is a domain class
@@ -120,20 +114,32 @@ public class ItemDAO extends BasicDAO {
             this.openDBTransaction();
 //            Item dbItem = (Item) session.get(Item.class, item.getItemId());
             Query query = session.createQuery(" from Item where itemId=:itemId");
-            query.setParameter("itemId",item.getItemId());
+            query.setParameter( "itemId", item.getItemId( ) );
             items = query.list();
-            if(items.size() != DAOConstants.ONE) {
-                throw new IllegalItemSearchListSizeException("Item List Size is different to expected Size");
+            if ( items.size( ) != DAOConstants.ONE ) {
+                throw new IllegalSearchListSizeException( "Item List Size is different to expected Size" );
             }
             Item dbItem = items.get(DAOConstants.ZERO);
 
             this.closeDBTransaction();
-            dbItem.setItemPrice(item.getItemPrice() != 0 && item.getItemPrice() > 0 ? item.getItemPrice() : dbItem
+            dbItem.setItemPrice( item.getItemPrice( ) != DAOConstants.ZERO && item.getItemPrice( ) > DAOConstants.ZERO ? item.getItemPrice( ) : dbItem
                     .getItemPrice());
             dbItem.setItemPriceCurrency(item.getItemPriceCurrency() != null ? item.getItemPriceCurrency() : dbItem
                     .getItemPriceCurrency());
             dbItem.setItemName(item.getItemName() != null ? item.getItemName() : dbItem.getItemName());
             dbItem.setItemType(item.getItemType() != null ? item.getItemType() : dbItem.getItemType());
+            dbItem.setItemSubType( dbItem.getItemSubType( ) );
+
+            dbItem.setQuantityType( item.getQuantityType( ) != null ? item.getQuantityType( ) : dbItem.getQuantityType( ) );
+            dbItem.setQuantity( item.getQuantity( ) > DAOConstants.ZERO ? item.getQuantity( ) : dbItem.getQuantity( ) );
+
+            dbItem.setWeightedUnit( item.getWeightedUnit( ) != null ? item.getWeightedUnit( ) : dbItem.getWeightedUnit( ) );
+            dbItem.setWeight( item.getWeight( ) > DAOConstants.ZERO ? item.getWeight( ) : dbItem.getWeight( ) );
+
+            dbItem.setBoughtFrom( item.getBoughtFrom( ) != null ? item.getBoughtFrom( ) : dbItem.getBoughtFrom( ) );
+            dbItem.setBoughtDate( item.getBoughtDate( ) != null ? item.getBoughtDate( ) : dbItem.getBoughtDate( ) );
+
+
 
             this.openDBTransaction();
             session.update(dbItem);
@@ -203,13 +209,15 @@ public class ItemDAO extends BasicDAO {
     }
 
 
-
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS, isolation = Isolation.READ_UNCOMMITTED)
     public DAOResponse<Item> getItemByItemId(long itemId, boolean isError) {
 
         List<Item> items = null;
         DAOResponse<Item> itemDAOResponse = new DAOResponse<>();
         ErrorContainer errorContainer = null;
+        if ( isError ) {
+            errorContainer = new ErrorContainer( );
+        }
         log.info("**Inside itemDAO.getItems()***");
         try {
             this.openDBTransaction();
@@ -218,7 +226,7 @@ public class ItemDAO extends BasicDAO {
 //            transaction.commit();
             items = query.list();
             if (!items.isEmpty() && items.size() > DAOConstants.ONE) {
-                throw new IllegalItemSearchListSizeException(" Item Size exceeded maximum value " +
+                throw new IllegalSearchListSizeException( " Item Size exceeded maximum value " +
                         "of " + DAOConstants.ONE);
             }
         } catch (Exception exception) {
@@ -235,7 +243,7 @@ public class ItemDAO extends BasicDAO {
         } finally {
             this.closeDBTransaction();
         }
-        itemDAOResponse.setCount(items == null ? 0 : items.size());
+        itemDAOResponse.setCount( items == null ? DAOConstants.ZERO : items.size( ) );
         itemDAOResponse.setResults(items);
         itemDAOResponse.setErrorContainer(errorContainer);
         return itemDAOResponse;
@@ -253,6 +261,9 @@ public class ItemDAO extends BasicDAO {
         List<Item> items = null;
         DAOResponse<Item> itemDAOResponse = new DAOResponse<>();
         ErrorContainer errorContainer = null;
+        if ( isError ) {
+            errorContainer = new ErrorContainer( );
+        }
         log.info("**Inside itemDAO.getItems()***");
         try {
             this.openDBTransaction();
@@ -269,7 +280,7 @@ public class ItemDAO extends BasicDAO {
         } finally {
             this.closeDBTransaction();
         }
-        itemDAOResponse.setCount(items == null ? 0 : items.size());
+        itemDAOResponse.setCount( items == null ? DAOConstants.ZERO : items.size( ) );
         itemDAOResponse.setResults(items);
         itemDAOResponse.setErrorContainer(errorContainer);
         return itemDAOResponse;
