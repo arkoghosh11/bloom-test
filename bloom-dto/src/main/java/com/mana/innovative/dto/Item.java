@@ -265,24 +265,28 @@ public class Item {
 
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Item)) return false;
+    public boolean equals( final Object o ) {
 
-        Item item = (Item) o;
+        if ( this == o ) return true;
+        if ( !( o instanceof Item ) ) return false;
 
-        if (itemId != item.itemId) return false;
-        if (Double.compare(item.itemPrice, itemPrice) != 0) return false;
-        if (Double.compare(item.quantity, quantity) != 0) return false;
-        if (Double.compare(item.weight, weight) != 0) return false;
-        if (!boughtDate.equals(item.boughtDate)) return false;
-        if (!boughtFrom.equals(item.boughtFrom)) return false;
-        if (!itemName.equals(item.itemName)) return false;
-        if (!itemPriceCurrency.equals(item.itemPriceCurrency)) return false;
-        if (!itemSubType.equals(item.itemSubType)) return false;
-        if (!itemType.equals(item.itemType)) return false;
-        if (!quantityType.equals(item.quantityType)) return false;
-        if (!weightedUnit.equals(item.weightedUnit)) return false;
+        final Item item = ( Item ) o;
+
+        if ( itemId != item.itemId ) return false;
+        if ( Double.compare( item.itemPrice, itemPrice ) != 0 ) return false;
+        if ( Double.compare( item.quantity, quantity ) != 0 ) return false;
+        if ( Double.compare( item.weight, weight ) != 0 ) return false;
+        if ( boughtDate != null ? !boughtDate.equals( item.boughtDate ) : item.boughtDate != null ) return false;
+        if ( boughtFrom != null ? !boughtFrom.equals( item.boughtFrom ) : item.boughtFrom != null ) return false;
+        if ( itemName != null ? !itemName.equals( item.itemName ) : item.itemName != null ) return false;
+        if ( itemPriceCurrency != null ? !itemPriceCurrency.equals( item.itemPriceCurrency ) : item.itemPriceCurrency != null )
+            return false;
+        if ( itemSubType != null ? !itemSubType.equals( item.itemSubType ) : item.itemSubType != null ) return false;
+        if ( itemType != null ? !itemType.equals( item.itemType ) : item.itemType != null ) return false;
+        if ( quantityType != null ? !quantityType.equals( item.quantityType ) : item.quantityType != null )
+            return false;
+        if ( weightedUnit != null ? !weightedUnit.equals( item.weightedUnit ) : item.weightedUnit != null )
+            return false;
 
         return true;
     }
@@ -313,33 +317,4 @@ public class Item {
                 ", boughtDate=" + boughtDate +
                 '}';
     }
-
-/**
- *  Note
- *  Don't need to override if need to override use the following lines uncommented. The generated Code adheres to JDK
- *  hashcode overriding from Object super Class
- */
-//@Override
-//public int hashCode() {
-//    int result;
-//    long temp;
-//    result = itemId;
-//    temp = Double.doubleToLongBits(itemPrice);
-//    result = 31 * result + (int) (temp ^ (temp >>> 32));
-//    result = 31 * result + itemPriceCurrency.hashCode();
-//    result = 31 * result + itemName.hashCode();
-//    result = 31 * result + itemType.hashCode();
-//    result = 31 * result + itemSubType.hashCode();
-//    result = 31 * result + boughtFrom.hashCode();
-//    result = 31 * result + boughtDate.hashCode();
-//    temp = Double.doubleToLongBits(quantity);
-//    result = 31 * result + (int) (temp ^ (temp >>> 32));
-//    result = 31 * result + quantityType.hashCode();
-//    temp = Double.doubleToLongBits(weight);
-//    result = 31 * result + (int) (temp ^ (temp >>> 32));
-//    result = 31 * result + weightedUnit.hashCode();
-//    result = 31 * result + createdDate.hashCode();
-//    result = 31 * result + (updatedDate != null ? updatedDate.hashCode() : 0);
-//    return result;
-//}
 }

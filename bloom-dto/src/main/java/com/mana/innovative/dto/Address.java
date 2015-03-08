@@ -8,6 +8,7 @@ package com.mana.innovative.dto;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * The type Address.
@@ -15,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "address")
 public class Address {
 
-    private String addressId;
+    private long addressId;
 
     private String address1;
 
@@ -29,7 +30,7 @@ public class Address {
 
     private int zipCode;
 
-    private Location location;
+//    private Location location;
 
 
     /**
@@ -38,7 +39,7 @@ public class Address {
      * @return the address id
      */
     @XmlElement(name = "addressId", nillable = false)
-    public String getAddressId() {
+    public long getAddressId( ) {
         return addressId;
     }
 
@@ -47,7 +48,7 @@ public class Address {
      *
      * @param addressId the address id
      */
-    public void setAddressId(final String addressId) {
+    public void setAddressId( final long addressId ) {
         this.addressId = addressId;
     }
 
@@ -170,19 +171,20 @@ public class Address {
      *
      * @return the location
      */
-    @XmlElement(name = "location")
-    public Location getLocation() {
-        return location;
-    }
-
-    /**
-     * Sets location.
-     *
-     * @param location the location
-     */
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+//    @XmlElement(name = "location")
+//    @XmlTransient
+//    public Location getLocation() {
+//        return location;
+//    }
+//
+//    /**
+//     * Sets location.
+//     *
+//     * @param location the location
+//     */
+//    public void setLocation(Location location) {
+//        this.location = location;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -194,11 +196,11 @@ public class Address {
         if (zipCode != address.zipCode) return false;
         if (!address1.equals(address.address1)) return false;
         if (!address2.equals(address.address2)) return false;
-        if (!addressId.equals(address.addressId)) return false;
+        if ( addressId != address.addressId ) return false;
         if (!city.equals(address.city)) return false;
         if (!district.equals(address.district)) return false;
         if (!state.equals(address.state)) return false;
-        if (location != null ? !location.equals(address.location) : address.location != null) return false;
+//        if (location != null ? !location.equals(address.location) : address.location != null) return true;
 
         return true;
     }
@@ -222,7 +224,7 @@ public class Address {
                 ", state='" + state + '\'' +
                 ", district='" + district + '\'' +
                 ", zipCode=" + zipCode +
-                ", location=" + location +
+//                ", location=" + location +
                 '}';
     }
 }

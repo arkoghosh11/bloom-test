@@ -38,10 +38,10 @@ public class Address {
     @Column( name = "zipcode" )
     private int zipCode;
 
-    //    @OneToOne(cascade = {CascadeType.ALL})
+//    @OneToOne(cascade = {CascadeType.ALL})
 //    @JoinColumn(name = "location_id", nullable = true, unique = true)
-    @Transient
-    private Location location;
+//    @Transient
+//    private Location location;
 
     @OneToOne( cascade = { CascadeType.ALL}, mappedBy = "address")
     private Shop shopAddress;
@@ -180,23 +180,23 @@ public class Address {
         this.zipCode = zipCode;
     }
 
-    /**
-     * Gets location.
-     *
-     * @return the location
-     */
-    public Location getLocation() {
-        return location;
-    }
-
-    /**
-     * Sets location.
-     *
-     * @param location the location
-     */
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+//    /**
+//     * Gets location.
+//     *
+//     * @return the location
+//     */
+//    public Location getLocation() {
+//        return location;
+//    }
+//
+//    /**
+//     * Sets location.
+//     *
+//     * @param location the location
+//     */
+//    public void setLocation(Location location) {
+//        this.location = location;
+//    }
 
 
     /**
@@ -270,8 +270,8 @@ public class Address {
         if (!city.equals(address.city)) return false;
         if (createdDate != null ? !createdDate.equals(address.createdDate) : address.createdDate != null) return false;
         if (!district.equals(address.district)) return false;
-        if (!location.equals(address.location)) return false;
-        if (!shopAddress.equals( address.shopAddress)) return false;
+//        if (!location.equals(address.location)) return false;
+        if ( shopAddress != null && !shopAddress.equals( address.shopAddress ) ) return false;
         if (!state.equals(address.state)) return false;
 
         if (createdDate != null && address.getCreatedDate() != null ? createdDate.getTime() != address.getCreatedDate()
@@ -302,7 +302,7 @@ public class Address {
                 ", state='" + state + '\'' +
                 ", district='" + district + '\'' +
                 ", zipCode=" + zipCode +
-                ", location=" + location +
+//                ", location=" + location +
                 ", shopAddress=" + shopAddress +
                 ", createdDate=" + createdDate +
                 ", updatedDate=" + updatedDate +
