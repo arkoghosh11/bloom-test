@@ -6,8 +6,7 @@ package com.mana.innovative.utilities.response;/**
 import javax.ws.rs.core.Response;
 
 /**
- * Created by Bloom on 1/29/2015 : 9:30 PM
- * todo This class is for ...
+ * The type Response utility.
  */
 public class ResponseUtility {
 
@@ -67,5 +66,17 @@ public class ResponseUtility {
 
     }
 
+    /**
+     * This method is for returns a Response object with a proper message for an Forbidden Access for a WebService
+     *
+     * @param optionalMsg {@link String} An optional Message to override default Message for HTTP Response Header
+     *
+     * @return {@link Response} Response Object for Jersey Response
+     */
+    public static Response forbiddenRequest( String optionalMsg ) {
+        optionalMsg = optionalMsg != null ? optionalMsg : "You do not have access to this method " +
+                "Insufficient Access";
+        return Response.status(Response.Status.BAD_REQUEST).entity(optionalMsg).build();
 
+    }
 }

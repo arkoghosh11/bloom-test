@@ -1,6 +1,7 @@
 package com.mana.innovative.dao;
 
 import com.mana.innovative.constants.TestConstants;
+import com.mana.innovative.dao.impl.ItemDAOImpl;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
 import com.mana.innovative.domain.Shop;
@@ -26,10 +27,10 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * This class is for testing given {@link ItemDAO#updateItem(Item, boolean)}
+ * This class is for testing given {@link ItemDAOImpl#updateItem(Item, boolean)}
  * <p/>
  * Please uncomment the following lines to enable Spring Integration Test the 2nd line requires location on Context
- * Config Files for beans and properties extra, the 1st one is to enble Spring for the Class
+ * Config Files for beans and properties extra, the 1st one is to enable Spring for the Class
  *
  * @ RunWith(value = SpringJUnit4ClassRunner.class | MockitoWithJunitRunner.Class)
  * @ ContextConfiguration(location {"loc1"."loc2"})
@@ -45,7 +46,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
     private static final Logger logger = Logger.getLogger( WhenUpdateAnItemTestItemDAOUpdateItem.class );
 
     @Resource
-    private ItemDAO itemDAO;
+    private ItemDAO itemDAOImpl;
 
     @Resource
     private ShopDAO shopDAO;
@@ -76,7 +77,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
     @Test
     public void testItemDAONotNull() {
 
-        Assert.assertNotNull(itemDAO);
+        Assert.assertNotNull( itemDAOImpl );
     }
 
     /**
@@ -98,7 +99,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
 
         dummyItem.setShopItem(shopDAOResponse.getResults().get(TestConstants.ZERO));
 
-        DAOResponse<Item> itemDAOResponse = itemDAO.updateItem(dummyItem, TestConstants.IS_ERROR);
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.updateItem( dummyItem, TestConstants.IS_ERROR );
 
         Assert.assertTrue(itemDAOResponse.isRequestSuccess());
         Assert.assertTrue(itemDAOResponse.isUpdate());

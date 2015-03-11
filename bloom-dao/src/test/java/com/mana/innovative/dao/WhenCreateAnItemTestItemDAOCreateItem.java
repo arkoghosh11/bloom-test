@@ -36,7 +36,7 @@ import java.util.List;
 public class WhenCreateAnItemTestItemDAOCreateItem {
 
     @Resource
-    private ItemDAO itemDAO;
+    private ItemDAO itemDAOImpl;
 
     @Resource
     private ShopDAO shopDAO;
@@ -76,7 +76,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
     @Test
     public void testItemDAONotNull( ) {
 
-        Assert.assertNotNull( itemDAO );
+        Assert.assertNotNull( itemDAOImpl );
     }
 
     @Test
@@ -86,7 +86,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
 
         DAOResponse< Item > itemDAOResponse;
         DAOResponse< Shop > shopDAOResponse;
-        itemDAOResponse = itemDAO.getItemByItemId( dummyItem.getItemId( ), TestConstants.IS_ERROR );
+        itemDAOResponse = itemDAOImpl.getItemByItemId( dummyItem.getItemId( ), TestConstants.IS_ERROR );
 
         Assert.assertTrue( itemDAOResponse.getResults( ).isEmpty( ) );
         shopDAOResponse = shopDAO.getShopByShopId( TestConstants.ZERO, TestConstants.IS_ERROR );
@@ -95,7 +95,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         Shop shop = shopDAOResponse.getResults( ).get( TestConstants.ZERO );
         Assert.assertNotNull( shop );
         dummyItem.setShopItem( shop );
-        itemDAOResponse = itemDAO.createItem( dummyItem, TestConstants.IS_ERROR );
+        itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR );
 
 
         Assert.assertTrue( itemDAOResponse.isCreate( ) );
@@ -118,7 +118,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         DAOResponse< Item > itemDAOResponse;
         dummyItem = new Item( );
 
-        itemDAOResponse = itemDAO.createItem( dummyItem, TestConstants.IS_ERROR );
+        itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR );
 
         Assert.assertTrue( itemDAOResponse.isCreate( ) );
         Assert.assertFalse( itemDAOResponse.isRequestSuccess( ) );
@@ -140,7 +140,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         DAOResponse< Item > itemDAOResponse;
         dummyItem = new Item( );
 
-        itemDAOResponse = itemDAO.createItem( dummyItem, TestConstants.IS_ERROR_TRUE );
+        itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR_TRUE );
 
         Assert.assertTrue( itemDAOResponse.isCreate( ) );
         Assert.assertFalse( itemDAOResponse.isRequestSuccess( ) );
