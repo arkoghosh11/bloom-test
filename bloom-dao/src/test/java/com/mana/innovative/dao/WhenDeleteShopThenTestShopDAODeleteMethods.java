@@ -34,9 +34,9 @@ import java.util.List;
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
 @TransactionConfiguration( defaultRollback = true )
 @Transactional
-public class WhenDeleteAShopTestDeleteMethods {
+public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
-    private static final Logger logger = Logger.getLogger( WhenDeleteAShopTestDeleteMethods.class );
+    private static final Logger logger = Logger.getLogger( WhenDeleteShopThenTestShopDAODeleteMethods.class );
 
     @Resource
     private ShopDAO shopDAOImpl;

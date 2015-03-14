@@ -108,15 +108,13 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 
         DAOResponse< Item > itemDAOResponse = new DAOResponse<>( );
         itemDAOResponse.setDelete( true );
-        itemDAOResponse.setCount( DAOConstants.ZERO );
         ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
             Query query = session.createQuery( "delete from Item where itemId=:itemId" );
             query.setParameter( "itemId", itemId );
-            int count = query.executeUpdate( );
-            itemDAOResponse.setCount( count );
+            itemDAOResponse.setCount( query.executeUpdate( ) );
             itemDAOResponse.setRequestSuccess( true );
 //            transaction.commit();
         } catch ( Exception exception ) {

@@ -1,18 +1,8 @@
 package com.mana.innovative.dao;
 
-import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.WorkingHour;
-import com.mana.innovative.exception.IllegalSearchListSizeException;
-import com.mana.innovative.exception.response.ErrorContainer;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,4 +28,25 @@ public interface WorkingHourDAO {
      * @return the working hours
      */
     DAOResponse< WorkingHour > getWorkingHours( boolean isError );
+
+    /**
+     * Delete working hour by working hr ids.
+     *
+     * @param workingHourId the working hour id
+     * @param isError       the is error
+     *
+     * @return the dAO response
+     */
+    DAOResponse< WorkingHour > deleteWorkingHourByWorkingHrId( long workingHourId, boolean
+            isError );
+
+    /**
+     * Delete working hours by working hr ids.
+     *
+     * @param workingHourIds the working hour ids
+     * @param isError        the is error
+     *
+     * @return the dAO response
+     */
+    DAOResponse< WorkingHour > deleteWorkingHoursByWorkingHrIds( List< Long > workingHourIds, boolean isError );
 }

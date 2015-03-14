@@ -92,7 +92,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
 
         try {
             this.openDBTransaction( );
-            address = ( List< Address > ) session.createQuery( " from Address" ).list( );
+            address = session.createQuery( " from Address" ).list( );
 //            transaction.commit();
         } catch ( HibernateException exception ) {
             this.handleExceptions( exception );
@@ -110,6 +110,90 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
         logger.debug( "Finishing " + location );
 
         return addressDAOResponse;
+    }
+
+    /**
+     * Delete working hour by working hr ids.
+     *
+     * @param addressId the working hour id
+     * @param isError   the is error
+     *
+     * @return the dAO response
+     */
+    @Override
+    public DAOResponse< Address > deleteAddressByAddressId( final long addressId, final boolean
+            isError ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteAddressByAddressId()";
+        logger.debug( "Starting " + location );
+
+        DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
+        addressDAOResponse.setDelete( true );
+        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+
+        try {
+            this.openDBTransaction( );
+            Query query = session.createQuery( " delete from Address where addressId=:addressId" );
+            query.setParameter( "addressId", addressId );
+            addressDAOResponse.setCount( query.executeUpdate( ) );
+            addressDAOResponse.setRequestSuccess( true );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                this.handleExceptions( ( HibernateException ) exception );
+            }
+            log.error( "Failed to delete address", exception );
+            if ( isError ) {
+                errorContainer = this.fillErrorContainer( location, exception );
+            }
+        } finally {
+            this.closeDBTransaction( );
+        }
+        addressDAOResponse.setResults( null );
+        addressDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+        return null;
+    }
+
+    /**
+     * Delete working hours by working hr ids.
+     *
+     * @param addressIds the working hour ids
+     * @param isError    the is error
+     *
+     * @return the dAO response
+     */
+    @Override
+    public DAOResponse< Address > deleteAddressesByAddressIds( List< Long > addressIds, boolean isError ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteAddressesByAddressIds()";
+        logger.debug( "Starting " + location );
+        DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
+        addressDAOResponse.setDelete( true );
+        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+
+        try {
+            this.openDBTransaction( );
+            Query query = session.createQuery( " delete from Address where addressId in (:addressIds)" );
+            query.setParameterList( "addressIds", addressIds );
+            addressDAOResponse.setCount( query.executeUpdate( ) );
+            addressDAOResponse.setRequestSuccess( true );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                this.handleExceptions( ( HibernateException ) exception );
+            }
+            log.error( "Failed to delete address with given ids " + location, exception );
+            if ( isError ) {
+                errorContainer = this.fillErrorContainer( location, exception );
+            }
+            addressDAOResponse.setRequestSuccess( false );
+        } finally {
+            this.closeDBTransaction( );
+        }
+        addressDAOResponse.setResults( null );
+        addressDAOResponse.setErrorContainer( errorContainer );
+        logger.debug( "Finishing " + location );
+        return null;
     }
 
 }
