@@ -1,7 +1,6 @@
 package com.mana.innovative.dao;
 
 import com.mana.innovative.constants.TestConstants;
-import com.mana.innovative.dao.impl.ItemDAOImpl;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
 import com.mana.innovative.domain.Shop;
@@ -27,118 +26,174 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * This class is for testing given {@link ItemDAOImpl#updateItem(Item, boolean)}
- * <p/>
- * Please uncomment the following lines to enable Spring Integration Test the 2nd line requires location on Context
- * Config Files for beans and properties extra, the 1st one is to enable Spring for the Class
- *
- * @ RunWith(value = SpringJUnit4ClassRunner.class | MockitoWithJunitRunner.Class)
- * @ ContextConfiguration(location {"loc1"."loc2"})
- * @ TransactionConfiguration   <--- Only If required
- * @ Transactional              <--- Only If required
+ * The type When update an item test item dAO update item.
  */
-@RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/dbConfig-test.xml"})
+@RunWith( value = SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "/dbConfig-test.xml" } )
 @TransactionConfiguration
 @Transactional
 public class WhenUpdateAnItemTestItemDAOUpdateItem {
 
     private static final Logger logger = Logger.getLogger( WhenUpdateAnItemTestItemDAOUpdateItem.class );
+    private final long id = TestConstants.ONE;
 
     @Resource
     private ItemDAO itemDAOImpl;
-
     @Resource
-    private ShopDAO shopDAO;
-
+    private ShopDAO shopDAOImpl;
     @Resource
     private SessionFactory sessionFactory;
-
     private Item dummyItem;
-    private long id = TestConstants.ONE;
-
 
     /**
-     * This method is to initialize Objects and configuration files before testing test method
+     * Sets up.
+     *
+     * @throws Exception the exception
      */
     @Before
-    public void setUp() throws Exception {
+    public void setUp( ) throws Exception {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
-        dummyItem = new Item();
-        dummyItem.setItemId(id);
+        dummyItem = new Item( );
+        dummyItem.setItemId( id );
 //        dummyItem.setItemName(TestConstants.TEST_VALUE);
 //        dummyItem.setItemPriceCurrency(TestConstants.TEST_PRICE_CURRENCY);
-        dummyItem.setItemType(TestConstants.UPDATED_TEST_VALUE);
+        dummyItem.setItemType( TestConstants.UPDATED_TEST_VALUE );
 //        dummyItem.setItemPrice(TestConstants.THREE);
 
     }
 
+    /**
+     * Test item dAO not null.
+     */
     @Test
-    public void testItemDAONotNull() {
+    public void testItemDAONotNull( ) {
 
         Assert.assertNotNull( itemDAOImpl );
     }
 
     /**
-     * todo This method is to test the behavior of ...
+     * Test item dAO update with error disabled.
+     *
+     * @throws Exception the exception
      */
     @Test
-    @Rollback(value = true)
-    @Transactional(propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED)
-    public void testItemDAOUpdate() throws Exception {
+    @Rollback( value = true )
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
+    public void testItemDAOUpdateWithErrorDisabled( ) throws Exception {
 
+        logger.debug( "Starting test for ItemDAOUpdateWithErrorDisabled" );
 //        dummyItem.setItemPrice(TestConstants.UPDATED_ITEM_PRICE);
-        dummyItem.setItemName(TestConstants.UPDATED_TEST_VALUE);
-        dummyItem.setItemPriceCurrency(TestConstants.UPDATED_TEST_VALUE);
+        dummyItem.setItemName( TestConstants.UPDATED_TEST_VALUE );
+        dummyItem.setItemPriceCurrency( TestConstants.UPDATED_TEST_VALUE );
 
-        DAOResponse<Shop> shopDAOResponse = shopDAO.getShopByShopId(id, TestConstants.IS_ERROR);
-        Assert.assertNotNull(shopDAOResponse);
-        Assert.assertNotNull(shopDAOResponse.getResults());
-        Assert.assertFalse(shopDAOResponse.getResults().isEmpty());
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( id, TestConstants.IS_ERROR );
+        // check ErrorContainer
+        Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
+        // check shopDAOResponse
+        Assert.assertNotNull( shopDAOResponse );
+        Assert.assertNotNull( shopDAOResponse.getResults( ) );
+        Assert.assertFalse( shopDAOResponse.getResults( ).isEmpty( ) );
 
-        dummyItem.setShopItem(shopDAOResponse.getResults().get(TestConstants.ZERO));
+        dummyItem.setShopItem( shopDAOResponse.getResults( ).get( TestConstants.ZERO ) );
 
         DAOResponse< Item > itemDAOResponse = itemDAOImpl.updateItem( dummyItem, TestConstants.IS_ERROR );
+        // check ErrorContainer
+        Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
 
-        Assert.assertTrue(itemDAOResponse.isRequestSuccess());
-        Assert.assertTrue(itemDAOResponse.isUpdate());
-        Assert.assertFalse(itemDAOResponse.isCreate());
-        Assert.assertFalse(itemDAOResponse.isDelete());
+        // check itemDAOResponse
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isRequestSuccess( ) );
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isUpdate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isCreate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isDelete( ) );
 
-        dummyItem = itemDAOResponse.getResults().get(TestConstants.ZERO);
-//        dummyItem = itemDAO.getItemByItemId(dummyItem.getItemId(), TestConstants.IS_ERROR).getResults().get
-//                (TestConstants.ZERO);
+        dummyItem = itemDAOResponse.getResults( ).get( TestConstants.ZERO );
 
-        Assert.assertNotNull(dummyItem);
+        // check dummyItem's updated values
+        Assert.assertNotNull( dummyItem );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemName( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemPriceCurrency( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemType( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, 2.0, dummyItem.getItemPrice( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, ( double ) TestConstants.TWO, dummyItem.getItemPrice( ) );
+
+        logger.debug( "Finishing test for ItemDAOUpdateWithErrorDisabled" );
     }
 
+    /**
+     * Test item dAO update with error enabled.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    public void testItemDAOUpdateWithErrorEnabled( ) throws Exception {
+
+        logger.debug( "Starting test for ItemDAOUpdateWithErrorEnabled" );
+
+        dummyItem.setItemName( TestConstants.UPDATED_TEST_VALUE );
+        dummyItem.setItemPriceCurrency( TestConstants.UPDATED_TEST_VALUE );
+
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( id, TestConstants.IS_ERROR_TRUE );
+        // check ErrorContainer
+        Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getErrorContainer( ) );
+        Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ).getCurrentError( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getErrorContainer( ).getErrors( ) );
+        Assert.assertTrue( shopDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+
+        // check shopDAOResponse
+        Assert.assertNotNull( shopDAOResponse );
+        Assert.assertNotNull( shopDAOResponse.getResults( ) );
+        Assert.assertFalse( shopDAOResponse.getResults( ).isEmpty( ) );
+
+        dummyItem.setShopItem( shopDAOResponse.getResults( ).get( TestConstants.ZERO ) );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.updateItem( dummyItem, TestConstants.IS_ERROR_TRUE );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
+
+        // check ErrorContainer
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
+        Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ).getCurrentError( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ).getErrors( ) );
+        Assert.assertTrue( itemDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+
+        // check itemDAOResponse
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isRequestSuccess( ) );
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isUpdate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isCreate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isDelete( ) );
+
+        dummyItem = itemDAOResponse.getResults( ).get( TestConstants.ZERO );
+
+        // check dummyItem's updated values
+        Assert.assertNotNull( dummyItem );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemName( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemPriceCurrency( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemType( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, ( double ) TestConstants.TWO, dummyItem.getItemPrice( ) );
+
+        logger.debug( "Finishing test for ItemDAOUpdateWithErrorEnabled" );
+    }
 
     /**
-     * This method is to release objects and shut down OR close any connections after Test is completed before testing
-     * test method
+     * Tear down.
+     *
+     * @throws Exception the exception
      */
     @After
     @AfterTransaction
-    public void tearDown() throws Exception {
+    public void tearDown( ) throws Exception {
 
-        Session session = sessionFactory.openSession();
-        Query query = session.createQuery(" from Item where itemId=:item_id");
-        query.setLong("item_id", id);
-        List<Item> items = query.list();
-        if (items.isEmpty()) {
+        Session session = sessionFactory.openSession( );
+        Query query = session.createQuery( " from Item where itemId=:item_id" );
+        query.setLong( "item_id", id );
+        List< Item > items = query.list( );
+        if ( items.isEmpty( ) ) {
             Assert.assertTrue( TestConstants.falseMessage + ", Hib created a dummy Row ", items.isEmpty( ) );
-        } else if (items.size() == TestConstants.ONE) {
-            Item item = items.get(TestConstants.ZERO);
-            Assert.assertNotNull(item);
-            Assert.assertEquals(" Data modified by Hibernate", TestConstants.TEST_PRICE_CURRENCY, item
-                    .getItemPriceCurrency());
+        } else if ( items.size( ) == TestConstants.ONE ) {
+            Item item = items.get( TestConstants.ZERO );
+            Assert.assertNotNull( item );
+            Assert.assertEquals( " Data modified by Hibernate", TestConstants.TEST_PRICE_CURRENCY, item
+                    .getItemPriceCurrency( ) );
         } else {
-            Assert.fail(" Unique result expected but got duplicate data");
+            Assert.fail( " Unique result expected but got duplicate data" );
         }
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }

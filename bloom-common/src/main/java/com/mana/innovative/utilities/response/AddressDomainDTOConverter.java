@@ -52,7 +52,7 @@ public class AddressDomainDTOConverter {
         if ( !StringUtils.isEmpty( addressDomain.getState( ) ) ) {
             addressDTO.setState( addressDomain.getState( ) );
         }
-        if ( addressDomain.getZipCode( ) > ZERO ) {
+        if ( addressDomain.getZipCode( ) != null ) {
             addressDTO.setZipCode( addressDomain.getZipCode( ) );
         }
 
@@ -126,7 +126,7 @@ public class AddressDomainDTOConverter {
             flag = true;
             stringBuilder.append( "state," );
         }
-        if ( addressDTO.getZipCode( ) > ZERO ) {
+        if ( addressDTO.getZipCode( ) != null && addressDTO.getZipCode( ) > ZERO ) {
             addressDomain.setZipCode( addressDTO.getZipCode( ) );
         } else {
             flag = true;
@@ -137,7 +137,7 @@ public class AddressDomainDTOConverter {
             logger.error( stringBuilder );
             throw new IllegalArgumentValueException( );
         }
-        logger.info( stringBuilder.toString( ) );
+        logger.debug( stringBuilder.toString( ) );
         return addressDomain;
     }
 

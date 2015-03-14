@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class WorkingHour {
 
     @XmlElement( name = "working_hour_id" )
-    private long workingHourId;
+    private Long workingHourId;
 
     @XmlElement( name = "day", defaultValue = "Monday" )
     private String day;
@@ -25,18 +25,18 @@ public class WorkingHour {
     private String endTime;
 
     @XmlElement( name = "is_closed", defaultValue = "false" )
-    private boolean isOffline;
+    private Boolean isOffline;
     @XmlElement( name = "is_holiday", defaultValue = "false" )
-    private boolean isHoliday;
+    private Boolean isHoliday;
     @XmlElement( name = "is_weekend", defaultValue = "false" )
-    private boolean isWeekend;
+    private Boolean isWeekend;
 
     /**
      * Gets working hour id.
      *
      * @return the working hour id
      */
-    public long getWorkingHourId( ) {
+    public Long getWorkingHourId( ) {
         return workingHourId;
     }
 
@@ -45,7 +45,7 @@ public class WorkingHour {
      *
      * @param workingHourId the working hour id
      */
-    public void setWorkingHourId( long workingHourId ) {
+    public void setWorkingHourId( Long workingHourId ) {
         this.workingHourId = workingHourId;
     }
 
@@ -108,7 +108,7 @@ public class WorkingHour {
      *
      * @return the boolean
      */
-    public boolean isOffline( ) {
+    public Boolean isOffline( ) {
         return isOffline;
     }
 
@@ -117,7 +117,7 @@ public class WorkingHour {
      *
      * @param isOffline the is offline
      */
-    public void setOffline( boolean isOffline ) {
+    public void setOffline( Boolean isOffline ) {
         this.isOffline = isOffline;
     }
 
@@ -126,7 +126,7 @@ public class WorkingHour {
      *
      * @return the boolean
      */
-    public boolean isHoliday( ) {
+    public Boolean isHoliday( ) {
         return isHoliday;
     }
 
@@ -135,7 +135,7 @@ public class WorkingHour {
      *
      * @param isHoliday the is holiday
      */
-    public void setHoliday( boolean isHoliday ) {
+    public void setHoliday( Boolean isHoliday ) {
         this.isHoliday = isHoliday;
     }
 
@@ -144,7 +144,7 @@ public class WorkingHour {
      *
      * @return the boolean
      */
-    public boolean isWeekend( ) {
+    public Boolean isWeekend( ) {
         return isWeekend;
     }
 
@@ -153,8 +153,13 @@ public class WorkingHour {
      *
      * @param isWeekend the is weekend
      */
-    public void setWeekend( boolean isWeekend ) {
+    public void setWeekend( Boolean isWeekend ) {
         this.isWeekend = isWeekend;
+    }
+
+    @Override
+    public int hashCode( ) {
+        return 0;
     }
 
     @Override
@@ -167,17 +172,12 @@ public class WorkingHour {
         if ( isHoliday != that.isHoliday ) return false;
         if ( isOffline != that.isOffline ) return false;
         if ( isWeekend != that.isWeekend ) return false;
-        if ( workingHourId != that.workingHourId ) return false;
+        if ( Long.compare( workingHourId, that.workingHourId ) != 0 ) return false;
         if ( !day.equals( that.day ) ) return false;
         if ( !endTime.equals( that.endTime ) ) return false;
         if ( !startTime.equals( that.startTime ) ) return false;
 
         return true;
-    }
-
-    @Override
-    public int hashCode( ) {
-        return 0;
     }
 
     /**

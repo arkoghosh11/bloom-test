@@ -17,15 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * This class is a test class for testing class todo...
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
-//@TransactionConfiguration // If required
-//@Transaction   // If required
+@TransactionConfiguration // If required
+@Transactional   // If required
 public class WhenGetAddressThenTestAddressDAOGetMethods {
 
     private static final Logger logger = Logger.getLogger( WhenGetAddressThenTestAddressDAOGetMethods.class );
@@ -87,7 +85,7 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_DISTRICT, address.getDistrict( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_STATE, address.getState( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_CITY, address.getCity( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_ZIPCODE, address.getZipCode( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_ZIPCODE, address.getZipCode( ).intValue( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST, address.getAddress1( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST, address.getAddress2( ) );
         Assert.assertNotNull( TestConstants.nullMessage, address.getShopAddress( ) );
@@ -158,7 +156,7 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_DISTRICT, address.getDistrict( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_STATE, address.getState( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_CITY, address.getCity( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_ZIPCODE, address.getZipCode( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_ZIPCODE, address.getZipCode( ).intValue( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST, address.getAddress1( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST, address.getAddress2( ) );
         Assert.assertNotNull( TestConstants.nullMessage, address.getShopAddress( ) );

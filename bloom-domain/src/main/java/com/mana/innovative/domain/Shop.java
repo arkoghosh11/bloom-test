@@ -11,33 +11,33 @@ import java.util.List;
  * The type Shop.
  */
 @Entity
-@Table(name = "shops")
+@Table( name = "shops" )
 public class Shop {
 
     @Id
-    @Column(name = "shop_id")
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column( name = "shop_id" )
+    @GeneratedValue( strategy = GenerationType.TABLE )
     private long shopId;
-    @Column(name = "shop_main_id", unique = true, nullable = false)
-    private long shopOwnId;
-    @Column(name = "shop_name")
+    @Column( name = "shop_main_id", unique = true, nullable = false )
+    private Long shopOwnId;
+    @Column( name = "shop_name" )
     private String shopName;
-    @Column(name = "shop_web_link")
+    @Column( name = "shop_web_link" )
     private String shopWebLink;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", nullable = false)
+    @OneToOne( cascade = CascadeType.ALL )
+    @JoinColumn( name = "address_id", nullable = false )
     private Address address;
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "shopWorkingHour")
-    private List<WorkingHour> workingHours;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shopItem")
-    private List<Item> items;
+    @OneToMany( orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "shopWorkingHour" )
+    private List< WorkingHour > workingHours;
+    @OneToMany( orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "shopItem" )
+    private List< Item > items;
 
-    @Column(name = "created_date", columnDefinition = "DATETIME")
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column( name = "created_date", columnDefinition = "DATETIME" )
+    @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
-    @Column(name = "updated_date", columnDefinition = "DATETIME")
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column( name = "updated_date", columnDefinition = "DATETIME" )
+    @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
     /**
@@ -45,7 +45,7 @@ public class Shop {
      *
      * @return the shop id
      */
-    public long getShopId() {
+    public long getShopId( ) {
         return shopId;
     }
 
@@ -54,7 +54,7 @@ public class Shop {
      *
      * @param shop_id the shop _ id
      */
-    public void setShopId(long shop_id) {
+    public void setShopId( long shop_id ) {
         this.shopId = shop_id;
     }
 
@@ -63,17 +63,17 @@ public class Shop {
      *
      * @return the shop own id
      */
-    public long getShopOwnId() {
+    public Long getShopOwnId( ) {
         return shopOwnId;
     }
 
     /**
      * Sets shop own id.
      *
-     * @param shop_own_id the shop _ own _ id
+     * @param shopOwnId the shopOwnId
      */
-    public void setShopOwnId(long shop_own_id) {
-        this.shopOwnId = shop_own_id;
+    public void setShopOwnId( Long shopOwnId ) {
+        this.shopOwnId = shopOwnId;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Shop {
      *
      * @return the shop name
      */
-    public String getShopName() {
+    public String getShopName( ) {
         return shopName;
     }
 
@@ -90,7 +90,7 @@ public class Shop {
      *
      * @param shop_name the shop _ name
      */
-    public void setShopName(String shop_name) {
+    public void setShopName( String shop_name ) {
         this.shopName = shop_name;
     }
 
@@ -99,7 +99,7 @@ public class Shop {
      *
      * @return the shop web link
      */
-    public String getShopWebLink() {
+    public String getShopWebLink( ) {
         return shopWebLink;
     }
 
@@ -108,7 +108,7 @@ public class Shop {
      *
      * @param shopWebLink the shop web link
      */
-    public void setShopWebLink(String shopWebLink) {
+    public void setShopWebLink( String shopWebLink ) {
         this.shopWebLink = shopWebLink;
     }
 
@@ -117,7 +117,7 @@ public class Shop {
      *
      * @return the address
      */
-    public Address getAddress() {
+    public Address getAddress( ) {
         return address;
     }
 
@@ -126,7 +126,7 @@ public class Shop {
      *
      * @param address the address
      */
-    public void setAddress(Address address) {
+    public void setAddress( Address address ) {
         this.address = address;
     }
 
@@ -135,7 +135,7 @@ public class Shop {
      *
      * @return the working hours
      */
-    public List<WorkingHour> getWorkingHours() {
+    public List< WorkingHour > getWorkingHours( ) {
         return workingHours;
     }
 
@@ -144,7 +144,7 @@ public class Shop {
      *
      * @param workingHours the working hours
      */
-    public void setWorkingHours(List<WorkingHour> workingHours) {
+    public void setWorkingHours( List< WorkingHour > workingHours ) {
         this.workingHours = workingHours;
     }
 
@@ -153,7 +153,7 @@ public class Shop {
      *
      * @return the items
      */
-    public List<Item> getItems() {
+    public List< Item > getItems( ) {
         return items;
     }
 
@@ -162,7 +162,7 @@ public class Shop {
      *
      * @param items the items
      */
-    public void setItems(List<Item> items) {
+    public void setItems( List< Item > items ) {
         this.items = items;
     }
 
@@ -171,7 +171,7 @@ public class Shop {
      *
      * @return the created date
      */
-    public Date getCreatedDate() {
+    public Date getCreatedDate( ) {
         return createdDate;
     }
 
@@ -180,7 +180,7 @@ public class Shop {
      *
      * @param createdDate the created date
      */
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate( Date createdDate ) {
         this.createdDate = createdDate;
     }
 
@@ -189,7 +189,7 @@ public class Shop {
      *
      * @return the updated date
      */
-    public Date getUpdatedDate() {
+    public Date getUpdatedDate( ) {
         return updatedDate;
     }
 
@@ -198,45 +198,43 @@ public class Shop {
      *
      * @param updatedDate the updated date
      */
-    public void setUpdatedDate(Date updatedDate) {
+    public void setUpdatedDate( Date updatedDate ) {
         this.updatedDate = updatedDate;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Shop)) return false;
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Shop ) ) return false;
 
-        Shop shop = (Shop) o;
+        Shop shop = ( Shop ) o;
 
-        if (shopId != shop.shopId) return false;
-        if (shopOwnId != shop.shopOwnId) return false;
-        if (!address.equals(shop.address)) return false;
-        if (!items.equals(shop.items)) return false;
-        if (!shopWebLink.equals(shop.shopWebLink)) return false;
-        if (!shopName.equals(shop.shopName)) return false;
-        if (!workingHours.equals(shop.workingHours)) return false;
-        if (createdDate != null && shop.getCreatedDate() != null ? createdDate.getTime() != shop.getCreatedDate()
-                .getTime() : createdDate == null)
+        if ( this.getShopId( ) != shop.getShopId( ) ) return false;
+        if ( Long.compare( shopOwnId, shop.getShopOwnId( ) ) != 0 ) return false;
+        if ( !address.equals( shop.getAddress( ) ) ) return false;
+        if ( !items.equals( shop.getItems( ) ) ) return false;
+        if ( !shopWebLink.equals( shop.getShopWebLink( ) ) ) return false;
+        if ( !shopName.equals( shop.getShopName( ) ) ) return false;
+        if ( !workingHours.equals( shop.getWorkingHours( ) ) ) return false;
+        if ( createdDate != null && shop.getCreatedDate( ) != null ? createdDate.getTime( ) != shop.getCreatedDate( )
+                .getTime( ) : createdDate == null )
             return true;
-        if (updatedDate != null && shop.getUpdatedDate() != null ? updatedDate.getTime() != shop.getUpdatedDate()
-                .getTime() : updatedDate == null)
+        if ( updatedDate != null && shop.getUpdatedDate( ) != null ? updatedDate.getTime( ) != shop.getUpdatedDate( )
+                .getTime( ) : updatedDate == null )
             return true;
 
         return true;
     }
 
     /**
-     * Returns a string representation of the object. In general, the
-     * {@code toString} method returns a string that
-     * "textually represents" this object. The result should
-     * be a concise but informative representation that is easy for a
-     * person to read.
+     * Returns a string representation of the object. In general, the {@code toString} method returns a string that
+     * "textually represents" this object. The result should be a concise but informative representation that is easy
+     * for a person to read.
      *
      * @return {@link String}a string representation of the object.
      */
     @Override
-    public String toString() {
+    public String toString( ) {
         return "Shop{" +
                 "shop_id=" + shopId +
                 ", shop_own_id=" + shopOwnId +

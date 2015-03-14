@@ -19,7 +19,7 @@ public class ShopDomainDTOConverter {
 
     private static final Logger logger = Logger.getLogger( ShopDomainDTOConverter.class );
     private static final int ZERO = DAOConstants.ZERO;
-    private static final int ONE = DAOConstants.ONE;
+//    private static final int ONE = DAOConstants.ONE;
 
     /**
      * Gets converted shop dTO from shop domain.
@@ -47,7 +47,7 @@ public class ShopDomainDTOConverter {
         if ( !StringUtils.isEmpty( shopDomain.getShopName( ) ) ) {
             shopDTO.setShopName( shopDomain.getShopName( ) );
         }
-        if ( shopDomain.getShopOwnId( ) > ONE )
+        if ( shopDomain.getShopOwnId( ) != null )
             shopDTO.setShopOwnId( shopDomain.getShopOwnId( ) );
         if ( !StringUtils.isEmpty( shopDomain.getShopWebLink( ) ) ) {
             shopDTO.setShopWebLink( shopDomain.getShopWebLink( ) );
@@ -107,7 +107,7 @@ public class ShopDomainDTOConverter {
         }
         boolean flag = false;
         StringBuilder stringBuilder = new StringBuilder( " Value must not be null for " );
-        if ( shopDTO.getShopOwnId( ) > ZERO ) {
+        if ( shopDTO.getShopOwnId( ) != null && shopDTO.getShopOwnId( ) > ZERO ) {
             shopDomain.setShopOwnId( shopDTO.getShopOwnId( ) );
         } else {
             flag = true;

@@ -43,7 +43,7 @@ public class ItemDomainDTOConverter {
         if ( !StringUtils.isEmpty( itemDomain.getItemName( ) ) ) {
             itemDTO.setItemName( itemDomain.getItemName( ) );
         }
-        if ( itemDomain.getItemPrice( ) > ZERO ) {
+        if ( itemDomain.getItemPrice( ) != null ) {
             itemDTO.setItemPrice( itemDomain.getItemPrice( ) );
         }
         if ( !StringUtils.isEmpty( itemDomain.getItemPriceCurrency( ) ) ) {
@@ -65,14 +65,14 @@ public class ItemDomainDTOConverter {
             itemDTO.setBoughtFrom( itemDomain.getBoughtFrom( ) );
         }
 
-        if ( itemDomain.getQuantity( ) > ZERO ) {
+        if ( itemDomain.getQuantity( ) != null ) {
             itemDTO.setQuantity( itemDomain.getQuantity( ) );
         }
         if ( !StringUtils.isEmpty( itemDomain.getQuantityType( ) ) ) {
             itemDTO.setQuantityType( itemDomain.getQuantityType( ) );
         }
 
-        if ( itemDomain.getWeight( ) > ZERO ) {
+        if ( itemDomain.getWeight( ) != null ) {
             itemDTO.setWeight( itemDomain.getWeight( ) );
         }
         if ( !StringUtils.isEmpty( itemDomain.getWeightedUnit( ) ) ) {
@@ -130,7 +130,7 @@ public class ItemDomainDTOConverter {
             flag = true;
             stringBuilder.append( " ItemName," );
         }
-        if ( itemDTO.getItemPrice( ) > ZERO ) {
+        if ( itemDTO.getItemPrice( ) != null && itemDTO.getItemPrice( ) > ZERO ) {
             itemDomain.setItemPrice( itemDTO.getItemPrice( ) );
         } else {
             flag = true;
@@ -167,7 +167,7 @@ public class ItemDomainDTOConverter {
             stringBuilder.append( " BoughtFrom," );
         }
 
-        if ( itemDTO.getQuantity( ) > ZERO ) {
+        if ( itemDTO.getQuantity( ) != null && itemDTO.getQuantity( ) > ZERO ) {
             itemDomain.setQuantity( itemDTO.getQuantity( ) );
         } else {
             flag = true;
@@ -179,7 +179,7 @@ public class ItemDomainDTOConverter {
             flag = true;
             stringBuilder.append( " QuantityType," );
         }
-        if ( itemDTO.getWeight( ) > ZERO ) {
+        if ( itemDTO.getWeight( ) != null && itemDTO.getWeight( ) > ZERO ) {
             itemDomain.setWeight( itemDTO.getWeight( ) );
         } else {
             flag = true;

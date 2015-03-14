@@ -2,6 +2,7 @@ package com.mana.innovative.service;
 
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
+import com.mana.innovative.service.impl.ItemsServiceImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +26,7 @@ import javax.ws.rs.core.Response;
 public class WhenItemsServiceTestSpringTransactional {
 
     @Mock
-    private ItemsService itemsService;
+    private ItemsServiceImpl itemsServiceImpl;
 
     /**
      * This method is to initialize Objects and configuration files
@@ -35,7 +36,7 @@ public class WhenItemsServiceTestSpringTransactional {
     public void setUp () throws Exception {
 
         DAOResponse<Item> itemDAOResponse = Mockito.mock(DAOResponse.class);
-        Mockito.when(itemsService.getItems(Mockito.anyBoolean())).thenReturn(Response.ok().entity
+        Mockito.when( itemsServiceImpl.getItems( Mockito.anyBoolean( ) ) ).thenReturn( Response.ok( ).entity
                 (itemDAOResponse).build());
     }
 

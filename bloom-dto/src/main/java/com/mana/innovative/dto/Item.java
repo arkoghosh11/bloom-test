@@ -7,13 +7,13 @@ import java.util.Date;
 /**
  * The type Item.
  */
-@XmlRootElement(name = "item", namespace = "http://localhost:8080/bloom-test/rest/items")
+@XmlRootElement( name = "item", namespace = "http://localhost:8080/bloom-test/rest/items" )
 public class Item {
 
-    private long itemId;
-    private double itemPrice;
-    private double quantity;
-    private double weight;
+    private Long itemId;
+    private Double itemPrice;
+    private Double quantity;
+    private Double weight;
 
     private String itemPriceCurrency;
     private String itemName;
@@ -30,8 +30,8 @@ public class Item {
      *
      * @return the item id
      */
-    @XmlElement(name = "item_id", nillable = false)
-    public long getItemId() {
+    @XmlElement( name = "item_id", nillable = false )
+    public Long getItemId( ) {
 
         return itemId;
     }
@@ -41,7 +41,7 @@ public class Item {
      *
      * @param itemId the item id
      */
-    public void setItemId(long itemId) {
+    public void setItemId( Long itemId ) {
 
         this.itemId = itemId;
     }
@@ -51,8 +51,8 @@ public class Item {
      *
      * @return the item price
      */
-    @XmlElement(name = "item_price", defaultValue = "0.00", nillable = false)
-    public double getItemPrice() {
+    @XmlElement( name = "item_price", defaultValue = "0.00", nillable = false )
+    public Double getItemPrice( ) {
 
         return itemPrice;
     }
@@ -62,7 +62,7 @@ public class Item {
      *
      * @param itemPrice the item price
      */
-    public void setItemPrice(double itemPrice) {
+    public void setItemPrice( Double itemPrice ) {
 
         this.itemPrice = itemPrice;
     }
@@ -72,8 +72,8 @@ public class Item {
      *
      * @return the item price currency
      */
-    @XmlElement(name = "item_price_currency", defaultValue = "Dollar", nillable = false)
-    public String getItemPriceCurrency() {
+    @XmlElement( name = "item_price_currency", defaultValue = "Dollar", nillable = false )
+    public String getItemPriceCurrency( ) {
 
         return itemPriceCurrency;
     }
@@ -83,7 +83,7 @@ public class Item {
      *
      * @param itemPriceCurrency the item price currency
      */
-    public void setItemPriceCurrency(String itemPriceCurrency) {
+    public void setItemPriceCurrency( String itemPriceCurrency ) {
 
         this.itemPriceCurrency = itemPriceCurrency;
     }
@@ -93,8 +93,8 @@ public class Item {
      *
      * @return the item name
      */
-    @XmlElement(name = "item_name", defaultValue = "Unknown", nillable = false)
-    public String getItemName() {
+    @XmlElement( name = "item_name", defaultValue = "Unknown", nillable = false )
+    public String getItemName( ) {
 
         return itemName;
     }
@@ -104,7 +104,7 @@ public class Item {
      *
      * @param itemName the item name
      */
-    public void setItemName(String itemName) {
+    public void setItemName( String itemName ) {
 
         this.itemName = itemName;
     }
@@ -114,8 +114,8 @@ public class Item {
      *
      * @return the item type
      */
-    @XmlElement(name = "item_type", defaultValue = "Food", nillable = false)
-    public String getItemType() {
+    @XmlElement( name = "item_type", defaultValue = "Food", nillable = false )
+    public String getItemType( ) {
 
         return itemType;
     }
@@ -125,7 +125,7 @@ public class Item {
      *
      * @param itemType the item type
      */
-    public void setItemType(String itemType) {
+    public void setItemType( String itemType ) {
 
         this.itemType = itemType;
     }
@@ -135,8 +135,8 @@ public class Item {
      *
      * @return the item sub type
      */
-    @XmlElement(name = "item_sub_type", defaultValue = "None", nillable = false)
-    public String getItemSubType() {
+    @XmlElement( name = "item_sub_type", defaultValue = "None", nillable = false )
+    public String getItemSubType( ) {
         return itemSubType;
     }
 
@@ -145,7 +145,7 @@ public class Item {
      *
      * @param itemSubType the item sub type
      */
-    public void setItemSubType(String itemSubType) {
+    public void setItemSubType( String itemSubType ) {
         this.itemSubType = itemSubType;
     }
 
@@ -154,8 +154,8 @@ public class Item {
      *
      * @return the bought from
      */
-    @XmlElement(name = "bought_from", defaultValue = "SomeStore", nillable = false)
-    public String getBoughtFrom() {
+    @XmlElement( name = "bought_from", defaultValue = "SomeStore", nillable = false )
+    public String getBoughtFrom( ) {
         return boughtFrom;
     }
 
@@ -164,7 +164,7 @@ public class Item {
      *
      * @param boughtFrom the bought from
      */
-    public void setBoughtFrom(String boughtFrom) {
+    public void setBoughtFrom( String boughtFrom ) {
         this.boughtFrom = boughtFrom;
     }
 
@@ -173,8 +173,8 @@ public class Item {
      *
      * @return the bought date
      */
-    @XmlElement(name = "bought_date", nillable = false)
-    public Date getBoughtDate() {
+    @XmlElement( name = "bought_date", nillable = false )
+    public Date getBoughtDate( ) {
         return boughtDate;
     }
 
@@ -183,7 +183,7 @@ public class Item {
      *
      * @param boughtDate the bought date
      */
-    public void setBoughtDate(final Date boughtDate) {
+    public void setBoughtDate( final Date boughtDate ) {
         this.boughtDate = boughtDate;
     }
 
@@ -192,8 +192,8 @@ public class Item {
      *
      * @return the quantity
      */
-    @XmlElement(name = "quantity", defaultValue = "0", nillable = false)
-    public double getQuantity() {
+    @XmlElement( name = "quantity", defaultValue = "0", nillable = false )
+    public Double getQuantity( ) {
         return quantity;
     }
 
@@ -202,7 +202,7 @@ public class Item {
      *
      * @param quantity the quantity
      */
-    public void setQuantity(final double quantity) {
+    public void setQuantity( final Double quantity ) {
         this.quantity = quantity;
     }
 
@@ -211,8 +211,8 @@ public class Item {
      *
      * @return the quantity type
      */
-    @XmlElement(name = "quantity_type", defaultValue = "units", nillable = false)
-    public String getQuantityType() {
+    @XmlElement( name = "quantity_type", defaultValue = "units", nillable = false )
+    public String getQuantityType( ) {
         return quantityType;
     }
 
@@ -221,7 +221,7 @@ public class Item {
      *
      * @param quantityType the quantity type
      */
-    public void setQuantityType(String quantityType) {
+    public void setQuantityType( String quantityType ) {
         this.quantityType = quantityType;
     }
 
@@ -230,8 +230,8 @@ public class Item {
      *
      * @return the weight
      */
-    @XmlElement(name = "weight", defaultValue = "0", nillable = false)
-    public double getWeight() {
+    @XmlElement( name = "weight", defaultValue = "0", nillable = false )
+    public Double getWeight( ) {
         return weight;
     }
 
@@ -240,7 +240,7 @@ public class Item {
      *
      * @param weight the weight
      */
-    public void setWeight(final double weight) {
+    public void setWeight( final Double weight ) {
         this.weight = weight;
     }
 
@@ -249,8 +249,8 @@ public class Item {
      *
      * @return the weighted unit
      */
-    @XmlElement(name = "weighted_unit", defaultValue = "ounces", nillable = false)
-    public String getWeightedUnit() {
+    @XmlElement( name = "weighted_unit", defaultValue = "ounces", nillable = false )
+    public String getWeightedUnit( ) {
         return weightedUnit;
     }
 
@@ -259,7 +259,7 @@ public class Item {
      *
      * @param weightedUnit the weighted unit
      */
-    public void setWeightedUnit(final String weightedUnit) {
+    public void setWeightedUnit( final String weightedUnit ) {
         this.weightedUnit = weightedUnit;
     }
 
@@ -272,7 +272,7 @@ public class Item {
 
         final Item item = ( Item ) o;
 
-        if ( itemId != item.itemId ) return false;
+        if ( Long.compare( itemId, item.itemId ) != 0 ) return false;
         if ( Double.compare( item.itemPrice, itemPrice ) != 0 ) return false;
         if ( Double.compare( item.quantity, quantity ) != 0 ) return false;
         if ( Double.compare( item.weight, weight ) != 0 ) return false;
@@ -292,16 +292,14 @@ public class Item {
     }
 
     /**
-     * Returns a string representation of the object. In general, the
-     * {@code toString} method returns a string that
-     * "textually represents" this object. The result should
-     * be a concise but informative representation that is easy for a
-     * person to read.
+     * Returns a string representation of the object. In general, the {@code toString} method returns a string that
+     * "textually represents" this object. The result should be a concise but informative representation that is easy
+     * for a person to read.
      *
      * @return {@link String}a string representation of the object.
      */
     @Override
-    public String toString() {
+    public String toString( ) {
         return "Item{" +
                 "itemId=" + itemId +
                 ", itemPrice=" + itemPrice +

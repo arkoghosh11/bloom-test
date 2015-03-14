@@ -8,15 +8,14 @@ package com.mana.innovative.dto;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * The type Address.
  */
-@XmlRootElement(name = "address")
+@XmlRootElement( name = "address" )
 public class Address {
 
-    private long addressId;
+    private Long addressId;
 
     private String address1;
 
@@ -28,7 +27,7 @@ public class Address {
 
     private String district;
 
-    private int zipCode;
+    private Integer zipCode;
 
 //    private Location location;
 
@@ -38,8 +37,8 @@ public class Address {
      *
      * @return the address id
      */
-    @XmlElement(name = "addressId", nillable = false)
-    public long getAddressId( ) {
+    @XmlElement( name = "addressId", nillable = false )
+    public Long getAddressId( ) {
         return addressId;
     }
 
@@ -48,7 +47,7 @@ public class Address {
      *
      * @param addressId the address id
      */
-    public void setAddressId( final long addressId ) {
+    public void setAddressId( final Long addressId ) {
         this.addressId = addressId;
     }
 
@@ -57,7 +56,7 @@ public class Address {
      *
      * @return the address 1
      */
-    public String getAddress1() {
+    public String getAddress1( ) {
         return address1;
     }
 
@@ -66,8 +65,8 @@ public class Address {
      *
      * @param address1 the address 1
      */
-    @XmlElement(name = "address1")
-    public void setAddress1(String address1) {
+    @XmlElement( name = "address1" )
+    public void setAddress1( String address1 ) {
         this.address1 = address1;
     }
 
@@ -76,7 +75,7 @@ public class Address {
      *
      * @return the address 2
      */
-    public String getAddress2() {
+    public String getAddress2( ) {
         return address2;
     }
 
@@ -85,8 +84,8 @@ public class Address {
      *
      * @param address2 the address 2
      */
-    @XmlElement(name = "address2")
-    public void setAddress2(String address2) {
+    @XmlElement( name = "address2" )
+    public void setAddress2( String address2 ) {
         this.address2 = address2;
     }
 
@@ -95,7 +94,7 @@ public class Address {
      *
      * @return the city
      */
-    public String getCity() {
+    public String getCity( ) {
         return city;
     }
 
@@ -104,8 +103,8 @@ public class Address {
      *
      * @param city the city
      */
-    @XmlElement(name = "city")
-    public void setCity(String city) {
+    @XmlElement( name = "city" )
+    public void setCity( String city ) {
         this.city = city;
     }
 
@@ -114,7 +113,7 @@ public class Address {
      *
      * @return the state
      */
-    public String getState() {
+    public String getState( ) {
         return state;
     }
 
@@ -123,8 +122,8 @@ public class Address {
      *
      * @param state the state
      */
-    @XmlElement(name = "state")
-    public void setState(String state) {
+    @XmlElement( name = "state" )
+    public void setState( String state ) {
         this.state = state;
     }
 
@@ -133,7 +132,7 @@ public class Address {
      *
      * @return the district
      */
-    public String getDistrict() {
+    public String getDistrict( ) {
         return district;
     }
 
@@ -142,8 +141,8 @@ public class Address {
      *
      * @param district the district
      */
-    @XmlElement(name = "district")
-    public void setDistrict(String district) {
+    @XmlElement( name = "district" )
+    public void setDistrict( String district ) {
         this.district = district;
     }
 
@@ -152,7 +151,7 @@ public class Address {
      *
      * @return the zip code
      */
-    public int getZipCode() {
+    public Integer getZipCode( ) {
         return zipCode;
     }
 
@@ -161,8 +160,8 @@ public class Address {
      *
      * @param zipCode the zip code
      */
-    @XmlElement(name = "zipCode")
-    public void setZipCode(int zipCode) {
+    @XmlElement( name = "zipCode" )
+    public void setZipCode( Integer zipCode ) {
         this.zipCode = zipCode;
     }
 
@@ -185,37 +184,34 @@ public class Address {
 //    public void setLocation(Location location) {
 //        this.location = location;
 //    }
-
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Address)) return false;
+    public boolean equals( Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Address ) ) return false;
 
-        Address address = (Address) o;
+        Address address = ( Address ) o;
 
-        if (zipCode != address.zipCode) return false;
-        if (!address1.equals(address.address1)) return false;
-        if (!address2.equals(address.address2)) return false;
-        if ( addressId != address.addressId ) return false;
-        if (!city.equals(address.city)) return false;
-        if (!district.equals(address.district)) return false;
-        if (!state.equals(address.state)) return false;
+        if ( Integer.compare( zipCode, address.zipCode ) != 0 ) return false;
+        if ( !address1.equals( address.address1 ) ) return false;
+        if ( !address2.equals( address.address2 ) ) return false;
+        if ( Long.compare( addressId, address.addressId ) != 0 ) return false;
+        if ( !city.equals( address.city ) ) return false;
+        if ( !district.equals( address.district ) ) return false;
+        if ( !state.equals( address.state ) ) return false;
 //        if (location != null ? !location.equals(address.location) : address.location != null) return true;
 
         return true;
     }
 
     /**
-     * Returns a string representation of the object. In general, the
-     * {@code toString} method returns a string that
-     * "textually represents" this object. The result should
-     * be a concise but informative representation that is easy for a
-     * person to read.
+     * Returns a string representation of the object. In general, the {@code toString} method returns a string that
+     * "textually represents" this object. The result should be a concise but informative representation that is easy
+     * for a person to read.
      *
      * @return {@link String}a string representation of the object.
      */
     @Override
-    public String toString() {
+    public String toString( ) {
         return "Address{" +
                 "addressId='" + addressId + '\'' +
                 ", address1='" + address1 + '\'' +

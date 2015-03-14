@@ -5,21 +5,18 @@ package com.mana.innovative.rest;/**
 
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.exception.response.ErrorContainer;
-import com.mana.innovative.service.ItemService;
+import com.mana.innovative.service.impl.ItemServiceImpl;
 import com.mana.innovative.utilities.response.ResponseUtility;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -31,13 +28,12 @@ import javax.ws.rs.core.Response;
 @Path ("/{item : (?i)item}")//@Path ("/{items : (?i)items}")
 public class ItemRestWebService {
 
-    @Resource (name = "itemService")
-    ItemService itemService;
+    private static final Logger logger = Logger.getLogger( ItemRestWebService.class );
 
 //    @Resource // todo login service
 //    private LoginService loginService;
-
-    private static final Logger logger = Logger.getLogger(ItemRestWebService.class);
+@Resource( name = "itemServiceImpl" )
+ItemServiceImpl itemServiceImpl;
 
 //    ItemsService() {
 //    logger.setLevel(Level.DEBUG);
@@ -56,7 +52,7 @@ public class ItemRestWebService {
         Response response;
         ErrorContainer errorContainer = null;
         try {
-             response = itemService.getItem(itemId, isError);
+            response = itemServiceImpl.getItemByItemId( itemId, isError );
         } catch (Exception e) {
 
             response = ResponseUtility.internalServerErrorMsg(null);

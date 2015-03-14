@@ -5,9 +5,10 @@ package com.mana.innovative.domain;
  * This Class Address.java is for
  * Created at Aug 28, 2012 4:07:51 PM
  */
+
+import javax.annotation.Generated;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * The type Address.
@@ -18,6 +19,7 @@ public class Address {
 
     @Id
     @Column( name = "address_id", nullable = false )
+    @GeneratedValue( strategy = GenerationType.TABLE )
     private long addressId;
 
     @Column( name = "address1" )
@@ -36,21 +38,21 @@ public class Address {
     private String district;
 
     @Column( name = "zipcode" )
-    private int zipCode;
+    private Integer zipCode;
 
 //    @OneToOne(cascade = {CascadeType.ALL})
 //    @JoinColumn(name = "location_id", nullable = true, unique = true)
 //    @Transient
 //    private Location location;
 
-    @OneToOne( cascade = { CascadeType.ALL}, mappedBy = "address")
+    @OneToOne( cascade = { CascadeType.ALL }, mappedBy = "address" )
     private Shop shopAddress;
 
-    @Column(name = "created_date", columnDefinition = "DATETIME")
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column( name = "created_date", columnDefinition = "DATETIME" )
+    @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
-    @Column(name = "updated_date", columnDefinition = "DATETIME")
-    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column( name = "updated_date", columnDefinition = "DATETIME" )
+    @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
 
@@ -59,7 +61,7 @@ public class Address {
      *
      * @return the address id
      */
-    public long getAddressId () {
+    public long getAddressId( ) {
         return addressId;
     }
 
@@ -68,7 +70,7 @@ public class Address {
      *
      * @param addressId the address id
      */
-    public void setAddressId ( final long addressId ) {
+    public void setAddressId( final long addressId ) {
         this.addressId = addressId;
     }
 
@@ -77,7 +79,7 @@ public class Address {
      *
      * @return the address 1
      */
-    public String getAddress1 () {
+    public String getAddress1( ) {
         return address1;
     }
 
@@ -86,7 +88,7 @@ public class Address {
      *
      * @param address1 the address 1
      */
-    public void setAddress1 ( String address1 ) {
+    public void setAddress1( String address1 ) {
         this.address1 = address1;
     }
 
@@ -95,7 +97,7 @@ public class Address {
      *
      * @return the address 2
      */
-    public String getAddress2 () {
+    public String getAddress2( ) {
         return address2;
     }
 
@@ -104,7 +106,7 @@ public class Address {
      *
      * @param address2 the address 2
      */
-    public void setAddress2 ( String address2 ) {
+    public void setAddress2( String address2 ) {
         this.address2 = address2;
     }
 
@@ -113,7 +115,7 @@ public class Address {
      *
      * @return the city
      */
-    public String getCity () {
+    public String getCity( ) {
         return city;
     }
 
@@ -122,7 +124,7 @@ public class Address {
      *
      * @param city the city
      */
-    public void setCity ( String city ) {
+    public void setCity( String city ) {
         this.city = city;
     }
 
@@ -131,7 +133,7 @@ public class Address {
      *
      * @return the state
      */
-    public String getState () {
+    public String getState( ) {
         return state;
     }
 
@@ -140,7 +142,7 @@ public class Address {
      *
      * @param state the state
      */
-    public void setState ( String state ) {
+    public void setState( String state ) {
         this.state = state;
     }
 
@@ -149,7 +151,7 @@ public class Address {
      *
      * @return the district
      */
-    public String getDistrict () {
+    public String getDistrict( ) {
         return district;
     }
 
@@ -158,7 +160,7 @@ public class Address {
      *
      * @param district the district
      */
-    public void setDistrict ( String district ) {
+    public void setDistrict( String district ) {
         this.district = district;
     }
 
@@ -167,7 +169,7 @@ public class Address {
      *
      * @return the zip code
      */
-    public int getZipCode () {
+    public Integer getZipCode( ) {
         return zipCode;
     }
 
@@ -176,7 +178,7 @@ public class Address {
      *
      * @param zipCode the zip code
      */
-    public void setZipCode ( int zipCode ) {
+    public void setZipCode( Integer zipCode ) {
         this.zipCode = zipCode;
     }
 
@@ -204,7 +206,7 @@ public class Address {
      *
      * @return the shop address
      */
-    public Shop getShopAddress() {
+    public Shop getShopAddress( ) {
         return shopAddress;
     }
 
@@ -213,7 +215,7 @@ public class Address {
      *
      * @param shopAddress the shop address
      */
-    public void setShopAddress(final Shop shopAddress) {
+    public void setShopAddress( final Shop shopAddress ) {
         this.shopAddress = shopAddress;
     }
 
@@ -222,7 +224,7 @@ public class Address {
      *
      * @return the created date
      */
-    public Date getCreatedDate() {
+    public Date getCreatedDate( ) {
         return createdDate;
     }
 
@@ -231,7 +233,7 @@ public class Address {
      *
      * @param createdDate the created date
      */
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate( Date createdDate ) {
         this.createdDate = createdDate;
     }
 
@@ -241,7 +243,7 @@ public class Address {
      *
      * @return the updated date
      */
-    public Date getUpdatedDate() {
+    public Date getUpdatedDate( ) {
         return updatedDate;
     }
 
@@ -250,50 +252,45 @@ public class Address {
      *
      * @param updatedDate the updated date
      */
-    public void setUpdatedDate(Date updatedDate) {
+    public void setUpdatedDate( Date updatedDate ) {
         this.updatedDate = updatedDate;
     }
 
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals( Object o ) {
 
-        if (this == o) return true;
-        if (!(o instanceof Address)) return false;
+        if ( this == o ) return true;
+        if ( !( o instanceof Address ) ) return false;
 
-        Address address = (Address) o;
+        Address address = ( Address ) o;
 
-        if (addressId != address.addressId) return false;
-        if (zipCode != address.zipCode) return false;
-        if (!address1.equals(address.address1)) return false;
-        if (!address2.equals(address.address2)) return false;
-        if (!city.equals(address.city)) return false;
-        if (createdDate != null ? !createdDate.equals(address.createdDate) : address.createdDate != null) return false;
-        if (!district.equals(address.district)) return false;
+        if ( addressId != address.getAddressId( ) ) return false;
+        if ( Integer.compare( zipCode, address.getZipCode( ) ) != 0 ) return false;
+        if ( !address1.equals( address.getAddress1( ) ) ) return false;
+        if ( !address2.equals( address.getAddress2( ) ) ) return false;
+        if ( !city.equals( address.city ) ) return false;
+        if ( !district.equals( address.getDistrict( ) ) ) return false;
 //        if (!location.equals(address.location)) return false;
-        if ( shopAddress != null && !shopAddress.equals( address.shopAddress ) ) return false;
-        if (!state.equals(address.state)) return false;
-
-        if (createdDate != null && address.getCreatedDate() != null ? createdDate.getTime() != address.getCreatedDate()
-                .getTime() : createdDate == null)
+        if ( !state.equals( address.getState( ) ) ) return false;
+        if ( createdDate != null && address.getCreatedDate( ) != null ? createdDate.getTime( ) != address.getCreatedDate( )
+                .getTime( ) : createdDate == null )
             return true;
-        if (updatedDate != null && address.getUpdatedDate() != null ? updatedDate.getTime() != address.getUpdatedDate()
-                .getTime() : updatedDate == null)
+        if ( updatedDate != null && address.getUpdatedDate( ) != null ? updatedDate.getTime( ) != address.getUpdatedDate( )
+                .getTime( ) : updatedDate == null )
             return true;
         return true;
     }
 
     /**
-     * Returns a string representation of the object. In general, the
-     * {@code toString} method returns a string that
-     * "textually represents" this object. The result should
-     * be a concise but informative representation that is easy for a
-     * person to read.
+     * Returns a string representation of the object. In general, the {@code toString} method returns a string that
+     * "textually represents" this object. The result should be a concise but informative representation that is easy
+     * for a person to read.
      *
-     * @return  {@link String}a string representation of the object.
+     * @return {@link String}a string representation of the object.
      */
     @Override
-    public String toString() {
+    public String toString( ) {
         return "Address{" +
                 "addressId='" + addressId + '\'' +
                 ", address1='" + address1 + '\'' +

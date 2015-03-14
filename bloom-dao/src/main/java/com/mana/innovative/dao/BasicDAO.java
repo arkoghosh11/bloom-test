@@ -1,8 +1,13 @@
 package com.mana.innovative.dao;
 
+import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.domain.Address;
 import com.mana.innovative.domain.Item;
+import com.mana.innovative.domain.Shop;
+import com.mana.innovative.domain.WorkingHour;
+import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
-import com.mana.innovative.exception.response.*;
+import com.mana.innovative.exception.response.ErrorContainer;
 import com.mana.innovative.logic.ItemSearchOption;
 import com.mana.innovative.logic.QueryUtil;
 import org.apache.log4j.Logger;
@@ -15,6 +20,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -25,14 +31,13 @@ import java.util.Map;
  * The type Basic dAO.
  */
 @Repository
-@Transactional(propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT)
 public class BasicDAO {
 
 
     /**
      * The constant log.
      */
-    protected static final Logger log = Logger.getLogger(BasicDAO.class);
+    protected static final Logger log = Logger.getLogger( BasicDAO.class );
 
     /**
      * The Query util.
@@ -56,33 +61,35 @@ public class BasicDAO {
     /**
      * Open dB transaction.
      */
-    protected void openDBTransaction() {
+    protected void openDBTransaction( ) {
 
-        log.info(" Trying to open Hibernate DB Transaction ");
+        log.debug( " Trying to open Hibernate DB Transaction " );
         try {
-            if (sessionFactory == null) {
-                log.error("Session Factory inject is Null", new NullPointerException("Session " + "Factory is Null"));
-                return;
+            if ( sessionFactory == null ) {
+                NullPointerException exception = new NullPointerException( "Session " + "Factory is Null" );
+                log.error( "Session Factory inject is Null", exception );
+                throw exception;
             }
-            session = sessionFactory.getCurrentSession();
+            session = sessionFactory.getCurrentSession( );
 //            Note Hib transaction vs spring Transaction
 //            transaction = session.beginTransaction();
-        } catch (NullPointerException e) {
-            log.error(" Not current Session for Session Factory either Transaction Manager Config" +
-                    " bug or no DB " + "Connection ", e);
+        } catch ( Exception e ) {
+            log.error( "Current Session error from Session Factory, either Transaction Manager Config issue " +
+                    "or no DB Connection ", e );
         }
-        log.info("Hibernate DB Transaction Opened");
+        log.debug( "Hibernate DB Transaction Opened" );
     }
 
     /**
      * Close dB transaction.
      */
-    protected void closeDBTransaction() {
+    protected void closeDBTransaction( ) {
 
-        if (session != null) {
-            session.flush();
+        log.debug( "Trying to Flush Hibernate Transaction" );
+        if ( session != null ) {
+            session.flush( );
         }
-        log.info("Flushed Hibernate DB Transaction");
+        log.debug( "Flushed Hibernate DB Transaction" );
     }
 
     /**
@@ -90,11 +97,11 @@ public class BasicDAO {
      *
      * @param exception the exception
      */
-    protected void handleExceptions(HibernateException exception) {
+    protected void handleExceptions( HibernateException exception ) {
 //        if (transaction != null) {
 //            transaction.rollback();
 //        }
-        log.info("Hibernate Exception occurred with \nmessage: " + exception.getMessage(), exception);
+        log.error( "Hibernate Exception occurred with \nmessage: " + exception.getMessage( ), exception );
     }
 
     /**
@@ -102,13 +109,14 @@ public class BasicDAO {
      *
      * @param location  the location
      * @param exception the exception
+     *
      * @return the error container
      */
-    protected ErrorContainer fillErrorContainer(String location, Exception exception) {
+    protected ErrorContainer fillErrorContainer( String location, Exception exception ) {
 
-        log.info("**** Recording Error Container Object");
-        ErrorContainer errorContainer = new ErrorContainer();
-        errorContainer.addError(new com.mana.innovative.exception.response.Error(location, exception));
+        log.debug( "**** Recording Error Container Object" );
+        ErrorContainer errorContainer = new ErrorContainer( );
+        errorContainer.addError( new com.mana.innovative.exception.response.Error( location, exception ) );
         return errorContainer;
     }
 
@@ -121,25 +129,26 @@ public class BasicDAO {
      * @param itemSearchOption the item search option
      * @param maxResults       the max results
      * @param startLimit       the start limit
+     *
      * @return the item by search params
      */
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
-    public List getItemBySearchParams(ItemSearchOption itemSearchOption, int maxResults, int startLimit) {
+    @Transactional( readOnly = true, propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED )
+    public List getItemBySearchParams( ItemSearchOption itemSearchOption, int maxResults, int startLimit ) {
 
         List itemList = null;
         try {
-            this.openDBTransaction();
+            this.openDBTransaction( );
 
-            DetachedCriteria detachedCriteria = this.getDetachedCriteriaBySearchParams(itemSearchOption);
+            DetachedCriteria detachedCriteria = this.getDetachedCriteriaBySearchParams( itemSearchOption );
 
-            itemList = detachedCriteria.getExecutableCriteria(session).list();
+            itemList = detachedCriteria.getExecutableCriteria( session ).list( );
 //            transaction.commit();
-        } catch (HibernateException exception) {
-            this.handleExceptions(exception);
+        } catch ( HibernateException exception ) {
+            this.handleExceptions( exception );
         } finally {
-            this.closeDBTransaction();
+            this.closeDBTransaction( );
         }
-        return (((itemList != null) && (itemList.size() > com.mana.innovative.constants.DAOConstants.ZERO))) ?
+        return ( ( ( itemList != null ) && ( itemList.size( ) > com.mana.innovative.constants.DAOConstants.ZERO ) ) ) ?
                 itemList : null;
     }
 
@@ -149,31 +158,32 @@ public class BasicDAO {
      * This method is to create a detached criteria
      *
      * @param itemSearchOption {@link com.mana.innovative.logic.ItemSearchOption}
+     *
      * @return {@link org.hibernate.criterion.DetachedCriteria} A detached criteria object
      */
-    private DetachedCriteria getDetachedCriteriaBySearchParams(ItemSearchOption itemSearchOption) {
+    private DetachedCriteria getDetachedCriteriaBySearchParams( ItemSearchOption itemSearchOption ) {
 
-        List<Map<String, Object>> searchConditionParams = itemSearchOption.getSearchConditionParams();
-        List<Map<String, String>> searchOrderWithParams = itemSearchOption.getSearchOrderWithParams();
-        List<Map<String, Object>> searchMatchTypeParams = itemSearchOption.getSearchMatchTypeParams();
+        List< Map< String, Object > > searchConditionParams = itemSearchOption.getSearchConditionParams( );
+        List< Map< String, String > > searchOrderWithParams = itemSearchOption.getSearchOrderWithParams( );
+        List< Map< String, Object > > searchMatchTypeParams = itemSearchOption.getSearchMatchTypeParams( );
 
-        List<Map<String, String>> searchConditions = itemSearchOption.getSearchConditions();
-        List<Map<String, String>> searchMatchType = itemSearchOption.getSearchMatchType();
-        List<String> keys;
-        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Item.class);
+        List< Map< String, String > > searchConditions = itemSearchOption.getSearchConditions( );
+        List< Map< String, String > > searchMatchType = itemSearchOption.getSearchMatchType( );
+        List< String > keys;
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass( Item.class );
 
-        if (searchMatchType.isEmpty()) {
-            keys = this.getKeysForSearch(searchConditions);
-            detachedCriteria = this.addConditionParams(detachedCriteria, searchConditionParams, searchConditions, keys);
+        if ( searchMatchType.isEmpty( ) ) {
+            keys = this.getKeysForSearch( searchConditions );
+            detachedCriteria = this.addConditionParams( detachedCriteria, searchConditionParams, searchConditions, keys );
         }
-        if (!searchOrderWithParams.isEmpty()) {
-            keys = this.getKeysForSearch(searchOrderWithParams);
-            detachedCriteria = this.addOrderParams(detachedCriteria, searchOrderWithParams, keys);
+        if ( !searchOrderWithParams.isEmpty( ) ) {
+            keys = this.getKeysForSearch( searchOrderWithParams );
+            detachedCriteria = this.addOrderParams( detachedCriteria, searchOrderWithParams, keys );
         }
-        if (!searchMatchType.isEmpty()) {
-            keys = this.getKeysForSearch(searchMatchType);
-            detachedCriteria = this.addMatchTypeParams(detachedCriteria, searchMatchTypeParams, searchMatchType,
-                    searchConditions, keys);
+        if ( !searchMatchType.isEmpty( ) ) {
+            keys = this.getKeysForSearch( searchMatchType );
+            detachedCriteria = this.addMatchTypeParams( detachedCriteria, searchMatchTypeParams, searchMatchType,
+                    searchConditions, keys );
         }
         return detachedCriteria;
     }
@@ -185,19 +195,20 @@ public class BasicDAO {
      * @param searchConditionParams the search condition params
      * @param searchConditions      the search conditions
      * @param keys                  the keys
+     *
      * @return the detached criteria
      */
-    public DetachedCriteria addConditionParams(DetachedCriteria detachedCriteria, List<Map<String, Object>>
-            searchConditionParams, List<Map<String, String>> searchConditions, List<String> keys) {
+    public DetachedCriteria addConditionParams( DetachedCriteria detachedCriteria, List< Map< String, Object > >
+            searchConditionParams, List< Map< String, String > > searchConditions, List< String > keys ) {
 
-        for (int i = 0; i < searchConditions.size() && searchConditionParams.size() == searchConditions.size(); i++) {
+        for ( int i = 0; i < searchConditions.size( ) && searchConditionParams.size( ) == searchConditions.size( ); i++ ) {
 
             // get condition value from Map with key
-            String condition = searchConditions.get(i).get(keys.get(i));
+            String condition = searchConditions.get( i ).get( keys.get( i ) );
             // get value of class property from map to query the DB
-            Object value = searchConditionParams.get(i).get(keys.get(i));
+            Object value = searchConditionParams.get( i ).get( keys.get( i ) );
             // add SQL restrictions
-            detachedCriteria.add(queryUtil.getAddedRestriction(keys.get(i), value, condition));
+            detachedCriteria.add( queryUtil.getAddedRestriction( keys.get( i ), value, condition ) );
         }
         return detachedCriteria;
     }
@@ -210,15 +221,16 @@ public class BasicDAO {
      * @param detachedCriteria {@link DetachedCriteria}
      * @param searchOrders     {@link List<Map<String></>></>}
      * @param keys             {@link List<String></>}
+     *
      * @return {@link DetachedCriteria} return the detached criteria with the added params and keys for searching
      */
-    private DetachedCriteria addOrderParams(DetachedCriteria detachedCriteria, List<Map<String, String>>
-            searchOrders, List<String> keys) {
+    private DetachedCriteria addOrderParams( DetachedCriteria detachedCriteria, List< Map< String, String > >
+            searchOrders, List< String > keys ) {
 
-        for (int i = 0; i < searchOrders.size(); i++) {
-            String ordering = searchOrders.get(i).get(keys.get(i));
-            if (ordering != null) {
-                detachedCriteria.addOrder(queryUtil.getCreatedOrder(keys.get(i), ordering));
+        for ( int i = 0; i < searchOrders.size( ); i++ ) {
+            String ordering = searchOrders.get( i ).get( keys.get( i ) );
+            if ( ordering != null ) {
+                detachedCriteria.addOrder( queryUtil.getCreatedOrder( keys.get( i ), ordering ) );
             }
         }
         return detachedCriteria;
@@ -232,30 +244,31 @@ public class BasicDAO {
      * @param searchMatchTypes the search match types
      * @param searchConditions the search conditions
      * @param keys             the keys
+     *
      * @return the detached criteria
      */
-    public DetachedCriteria addMatchTypeParams(DetachedCriteria detachedCriteria, List<Map<String, Object>>
-            searchParams, List<Map<String, String>> searchMatchTypes, List<Map<String, String>> searchConditions,
-                                               List<String> keys) {
+    public DetachedCriteria addMatchTypeParams( DetachedCriteria detachedCriteria, List< Map< String, Object > >
+            searchParams, List< Map< String, String > > searchMatchTypes, List< Map< String, String > > searchConditions,
+                                                List< String > keys ) {
 
-        System.out.println(searchParams + "\n" + searchParams.size() + " params " + searchParams.isEmpty() + " " +
-                "matchType " + "" + searchMatchTypes.isEmpty() + " conditions " +
-                searchConditions.isEmpty() + " keys" +
-                " " + keys.isEmpty());
-        if (searchParams.isEmpty() || searchConditions.isEmpty() || searchMatchTypes.isEmpty() ||
-                keys.isEmpty()) {
-            throw new NullPointerException("One of the Lists in parameters is Empty");
+        System.out.println( searchParams + "\n" + searchParams.size( ) + " params " + searchParams.isEmpty( ) + " " +
+                "matchType " + "" + searchMatchTypes.isEmpty( ) + " conditions " +
+                searchConditions.isEmpty( ) + " keys" +
+                " " + keys.isEmpty( ) );
+        if ( searchParams.isEmpty( ) || searchConditions.isEmpty( ) || searchMatchTypes.isEmpty( ) ||
+                keys.isEmpty( ) ) {
+            throw new NullPointerException( "One of the Lists in parameters is Empty" );
         }
-        for (int i = 0; i < searchMatchTypes.size(); i++) {
+        for ( int i = 0; i < searchMatchTypes.size( ); i++ ) {
 
             // get condition value from Map with key
-            String operator = searchConditions.get(i).get(keys.get(i));
+            String operator = searchConditions.get( i ).get( keys.get( i ) );
             // get value of class property from map to query the DB
-            Object value = searchParams.get(i).get(keys.get(i));
+            Object value = searchParams.get( i ).get( keys.get( i ) );
 
-            String matchType = searchMatchTypes.get(i).get(keys.get(i));
+            String matchType = searchMatchTypes.get( i ).get( keys.get( i ) );
 
-            detachedCriteria.add(queryUtil.getAddedRestriction(keys.get(i), value, operator, matchType));
+            detachedCriteria.add( queryUtil.getAddedRestriction( keys.get( i ), value, operator, matchType ) );
         }
         return detachedCriteria;
     }
@@ -265,20 +278,160 @@ public class BasicDAO {
      *
      * @param searchConditions {@link java.util.List<java.util.Map>} A list of type Map of type {@link java.util
      *                         .Map<String></>}
+     *
      * @return {@link java.util.List<String>} A list of type String
      */
-    private List<String> getKeysForSearch(final List<Map<String, String>> searchConditions) {
+    private List< String > getKeysForSearch( final List< Map< String, String > > searchConditions ) {
 
-        List<String> keys = new ArrayList<String>();
-        for (Map<String, String> searchCondition : searchConditions) {
-            if (searchCondition.size() != com.mana.innovative.constants.DAOConstants.ONE) {
-                throw new IllegalSearchListSizeException("Map Size must be ONE (1)");
+        List< String > keys = new ArrayList< String >( );
+        for ( Map< String, String > searchCondition : searchConditions ) {
+            if ( searchCondition.size( ) != com.mana.innovative.constants.DAOConstants.ONE ) {
+                throw new IllegalSearchListSizeException( "Map Size must be ONE (1)" );
             }
-            for (Map.Entry<String, String> entry : searchCondition.entrySet()) {
-                keys.add(entry.getKey());
+            for ( Map.Entry< String, String > entry : searchCondition.entrySet( ) ) {
+                keys.add( entry.getKey( ) );
             }
         }
         return keys;
+    }
+
+
+    /**
+     * Update shop values.
+     *
+     * @param shop   the shop
+     * @param dbShop the db shop
+     */
+    protected void updateShopValues( final Shop shop, final Shop dbShop ) {
+
+        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopValues()" );
+        dbShop.setShopName( !StringUtils.isEmpty( shop.getShopName( ) ) ? shop.getShopName( ) : dbShop.getShopName( ) );
+        dbShop.setShopOwnId( shop.getShopOwnId( ) != null && shop.getShopOwnId( ) > DAOConstants.ZERO ? shop.getShopOwnId(
+        ) : dbShop.getShopOwnId( ) );
+        dbShop.setShopWebLink( !StringUtils.isEmpty( shop.getShopWebLink( ) ) ? shop.getShopWebLink( ) :
+                dbShop.getShopWebLink( ) );
+        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopValues()" );
+
+    }
+
+    /**
+     * Update shop items.
+     *
+     * @param items   the items
+     * @param dbItems the db items
+     */
+    protected void updateShopItems( final List< Item > items, final List< Item > dbItems ) {
+
+        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItems()" );
+        for ( int i = 0; i < dbItems.size( ) && dbItems.size( ) == items.size( ); i++ ) {
+            Item dbItem = dbItems.get( i ), item = items.get( i );
+            this.updateShopItem( item, dbItem );
+        }
+        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItems()" );
+    }
+
+    /**
+     * Update shop item.
+     *
+     * @param item   the item
+     * @param dbItem the db item
+     */
+    protected void updateShopItem( final Item item, final Item dbItem ) {
+
+        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItem()" );
+
+        if ( dbItem.getItemId( ) != item.getItemId( ) ) {
+            throw new IllegalArgumentValueException( "Item Id cannot be updated or overridden, dbItem " + dbItem
+                    .getItemId( ) + ", itemId " + item.getItemId( ) );
+        }
+        dbItem.setItemPrice( item.getItemPrice( ) != null && item.getItemPrice( ) > DAOConstants.ZERO ? item
+                .getItemPrice( ) : dbItem.getItemPrice( ) );
+        dbItem.setItemPriceCurrency( item.getItemPriceCurrency( ) != null ? item.getItemPriceCurrency( ) : dbItem
+                .getItemPriceCurrency( ) );
+
+        dbItem.setItemName( item.getItemName( ) != null ? item.getItemName( ) : dbItem.getItemName( ) );
+        dbItem.setItemType( item.getItemType( ) != null ? item.getItemType( ) : dbItem.getItemType( ) );
+        dbItem.setItemSubType( dbItem.getItemSubType( ) );
+
+        dbItem.setQuantityType( item.getQuantityType( ) != null ? item.getQuantityType( ) : dbItem.getQuantityType( ) );
+        dbItem.setQuantity( item.getQuantity( ) != null && item.getQuantity( ) > DAOConstants.ZERO ? item.getQuantity(
+        ) : dbItem.getQuantity( ) );
+
+        dbItem.setWeight( item.getWeight( ) != null && item.getWeight( ) > DAOConstants.ZERO ? item.getWeight( ) : dbItem
+                .getWeight( ) );
+        dbItem.setWeightedUnit( item.getWeightedUnit( ) != null ? item.getWeightedUnit( ) : dbItem.getWeightedUnit( ) );
+
+        dbItem.setBoughtFrom( item.getBoughtFrom( ) != null ? item.getBoughtFrom( ) : dbItem.getBoughtFrom( ) );
+        dbItem.setBoughtDate( item.getBoughtDate( ) != null ? item.getBoughtDate( ) : dbItem.getBoughtDate( ) );
+
+        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItem()" );
+    }
+
+
+    /**
+     * Update shop working hours.
+     *
+     * @param workingHours   the working hours
+     * @param dbWorkingHours the db working hours
+     */
+    protected void updateShopWorkingHours( final List< WorkingHour > workingHours, final List< WorkingHour > dbWorkingHours ) {
+
+        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHours()" );
+
+        for ( int i = 0; i < dbWorkingHours.size( ) && workingHours.size( ) == workingHours.size( ); i++ ) {
+            WorkingHour dbWorkingHour = dbWorkingHours.get( i ), workingHour = workingHours.get( i );
+            this.updateShopWorkingHour( workingHour, dbWorkingHour );
+        }
+        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHours()" );
+    }
+
+    /**
+     * Update shop working hour.
+     *
+     * @param workingHour   the working hour
+     * @param dbWorkingHour the db working hour
+     */
+    protected void updateShopWorkingHour( final WorkingHour workingHour, final WorkingHour dbWorkingHour ) {
+
+        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHour()" );
+        if ( dbWorkingHour.getWorkingHourId( ) != workingHour.getWorkingHourId( ) ) {
+            throw new IllegalArgumentValueException( "WorkingHour Id cannot be updated or overridden, dbWorkingHour "
+                    + dbWorkingHour.getWorkingHourId( ) + ", workingHourId " + workingHour.getWorkingHourId( ) );
+        }
+
+        dbWorkingHour.setDay( !StringUtils.isEmpty( workingHour.getDay( ) ) ? workingHour.getDay( ) : dbWorkingHour.getDay( ) );
+        dbWorkingHour.setStartTime( workingHour.getStartTime( ) != null ? workingHour.getStartTime( ) : dbWorkingHour.getStartTime( ) );
+        dbWorkingHour.setEndTime( workingHour.getEndTime( ) != null ? workingHour.getEndTime( ) : dbWorkingHour.getEndTime( ) );
+        dbWorkingHour.setOffline( workingHour.isOffline( ) != null ? workingHour.isOffline( ) : dbWorkingHour.isOffline( ) );
+        dbWorkingHour.setWeekend( workingHour.isWeekend( ) != null ? workingHour.isWeekend( ) : dbWorkingHour.isWeekend( ) );
+        dbWorkingHour.setHoliday( workingHour.isHoliday( ) != null ? workingHour.isHoliday( ) : dbWorkingHour.isHoliday( ) );
+        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHour()" );
+    }
+
+    /**
+     * Update shop address.
+     *
+     * @param address   the address
+     * @param dbAddress the db address
+     */
+    protected void updateShopAddress( final Address address, final Address dbAddress ) {
+
+        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopAddress()" );
+        if ( dbAddress.getAddressId( ) != address.getAddressId( ) ) {
+            throw new IllegalArgumentValueException( "Address Id cannot be updated or overridden, dbAddress "
+                    + dbAddress.getAddressId( ) + ", addressId " + address.getAddressId( ) );
+        }
+
+        dbAddress.setAddress1( !StringUtils.isEmpty( address.getAddress1( ) ) ? address.getAddress1( ) : dbAddress.getAddress1( ) );
+        dbAddress.setAddress2( !StringUtils.isEmpty( address.getAddress2( ) ) ? address.getAddress2( ) : dbAddress
+                .getAddress2( ) );
+        dbAddress.setDistrict( !StringUtils.isEmpty( address.getDistrict( ) ) ? address.getDistrict( ) : dbAddress.getDistrict(
+        ) );
+        dbAddress.setCity( !StringUtils.isEmpty( address.getCity( ) ) ? address.getCity( ) : dbAddress.getCity( ) );
+        dbAddress.setState( !StringUtils.isEmpty( address.getState( ) ) ? address.getState( ) : dbAddress.getState( ) );
+        dbAddress.setZipCode( address.getZipCode( ) != null && address.getZipCode( ) > DAOConstants.ZERO ? address
+                .getZipCode( ) : dbAddress.getZipCode( ) );
+        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopAddress()" );
     }
 
     /**
@@ -286,7 +439,7 @@ public class BasicDAO {
      *
      * @return the session factory
      */
-    public SessionFactory getSessionFactory() {
+    public SessionFactory getSessionFactory( ) {
         return sessionFactory;
     }
 
@@ -295,8 +448,46 @@ public class BasicDAO {
      *
      * @param sessionFactory the session factory
      */
-    public void setSessionFactory(SessionFactory sessionFactory) {
+    public void setSessionFactory( SessionFactory sessionFactory ) {
         this.sessionFactory = sessionFactory;
     }
 
 }
+
+/*
+DELIMITER $$
+
+USE `bloom`$$
+
+DROP TRIGGER -- !50032
+ IF EXISTS  `trigger_date_insert_shops`$$
+
+        CREATE
+     --   !50017 DEFINER = 'root'@'localhost'
+        TRIGGER `trigger_date_insert_shops` BEFORE INSERT ON `shops`
+        FOR EACH ROW BEGIN
+        SET NEW.created_date = NOW();
+        SET NEW.updated_date = NOW();
+        END;
+        $$
+
+        DELIMITER ;
+*/
+/*
+DELIMITER $$
+
+USE `bloom`$$
+
+DROP TRIGGER -- !50032 IF EXISTS
+ `trigger_update_date_modify_shops`$$
+
+        CREATE
+    -- !50017 DEFINER = 'root'@'localhost'
+        TRIGGER `trigger_update_date_modify_shops` BEFORE UPDATE ON `shops`
+        FOR EACH ROW BEGIN
+        SET NEW.updated_date = NOW();
+        END;
+        $$
+
+        DELIMITER ;
+ */

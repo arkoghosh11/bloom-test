@@ -19,11 +19,11 @@ public class Item {
 //            "item") })
     private long itemId;
     @Column( name = "item_price" )
-    private double itemPrice;
+    private Double itemPrice;
     @Column( name = "quantity" )
-    private double quantity;
+    private Double quantity;
     @Column( name = "weight" )
-    private double weight;
+    private Double weight;
 
     @Column( name = "item_price_currency" )
     private String itemPriceCurrency;
@@ -79,7 +79,7 @@ public class Item {
      *
      * @return the item price
      */
-    public double getItemPrice( ) {
+    public Double getItemPrice( ) {
 
         return itemPrice;
     }
@@ -89,7 +89,7 @@ public class Item {
      *
      * @param itemPrice the item price
      */
-    public void setItemPrice( double itemPrice ) {
+    public void setItemPrice( Double itemPrice ) {
 
         this.itemPrice = itemPrice;
     }
@@ -213,7 +213,7 @@ public class Item {
      *
      * @return the quantity
      */
-    public double getQuantity( ) {
+    public Double getQuantity( ) {
         return quantity;
     }
 
@@ -222,7 +222,7 @@ public class Item {
      *
      * @param quantity the quantity
      */
-    public void setQuantity( final double quantity ) {
+    public void setQuantity( final Double quantity ) {
         this.quantity = quantity;
     }
 
@@ -249,7 +249,7 @@ public class Item {
      *
      * @return the weight
      */
-    public double getWeight( ) {
+    public Double getWeight( ) {
         return weight;
     }
 
@@ -258,7 +258,7 @@ public class Item {
      *
      * @param weight the weight
      */
-    public void setWeight( final double weight ) {
+    public void setWeight( final Double weight ) {
         this.weight = weight;
     }
 
@@ -347,26 +347,31 @@ public class Item {
 
         final Item item = ( Item ) o;
 
-        if ( itemId != item.itemId ) return false;
-        if ( Double.compare( item.itemPrice, itemPrice ) != 0 ) return false;
-        if ( Double.compare( item.quantity, quantity ) != 0 ) return false;
-        if ( Double.compare( item.weight, weight ) != 0 ) return false;
-        if ( boughtDate != null ? !boughtDate.equals( item.boughtDate ) : item.boughtDate != null ) return false;
-        if ( boughtFrom != null ? !boughtFrom.equals( item.boughtFrom ) : item.boughtFrom != null ) return false;
-        if ( itemName != null ? !itemName.equals( item.itemName ) : item.itemName != null ) return false;
-        if ( itemPriceCurrency != null ? !itemPriceCurrency.equals( item.itemPriceCurrency ) : item.itemPriceCurrency != null )
+        if ( itemId != item.getItemId( ) ) return false;
+        if ( Double.compare( itemPrice, item.getItemPrice( ) ) != 0 ) return false;
+        if ( Double.compare( quantity, item.getQuantity( ) ) != 0 ) return false;
+        if ( Double.compare( weight, item.getWeight( ) ) != 0 ) return false;
+        if ( boughtDate != null ? !boughtDate.equals( item.getBoughtDate( ) ) : item.getBoughtDate( ) != null )
             return false;
-        if ( itemSubType != null ? !itemSubType.equals( item.itemSubType ) : item.itemSubType != null ) return false;
-        if ( itemType != null ? !itemType.equals( item.itemType ) : item.itemType != null ) return false;
-        if ( quantityType != null ? !quantityType.equals( item.quantityType ) : item.quantityType != null )
+        if ( boughtFrom != null ? !boughtFrom.equals( item.getBoughtFrom( ) ) : item.getBoughtFrom( ) != null )
             return false;
-        if ( shopItem != null && item.getShopItem( ) != null ) {
-            if ( !shopItem.equals( item.shopItem ) ) return false;
-        }
-        if ( weightedUnit != null ? !weightedUnit.equalsIgnoreCase( item.weightedUnit ) : item.weightedUnit != null )
+        if ( itemName != null ? !itemName.equals( item.getItemName( ) ) : item.getItemName( ) != null ) return false;
+        if ( itemPriceCurrency != null ? !itemPriceCurrency.equals( item.getItemPriceCurrency( ) ) : item.getItemPriceCurrency( ) != null )
             return false;
-        if ( createdDate != null ? !createdDate.equals( item.createdDate ) : item.createdDate != null ) return true;
-        if ( updatedDate != null ? !updatedDate.equals( item.updatedDate ) : item.updatedDate != null ) return true;
+        if ( itemSubType != null ? !itemSubType.equals( item.getItemSubType( ) ) : item.getItemSubType( ) != null )
+            return false;
+        if ( itemType != null ? !itemType.equals( item.getItemType( ) ) : item.getItemType( ) != null ) return false;
+        if ( quantityType != null ? !quantityType.equals( item.getQuantityType( ) ) : item.getQuantityType( ) != null )
+            return false;
+//        if ( shopItem != null && item.getShopItem( ) != null ) {
+//            if ( !shopItem.equals( item.shopItem ) ) return false;
+//        }
+        if ( weightedUnit != null ? !weightedUnit.equalsIgnoreCase( item.getWeightedUnit( ) ) : item.getWeightedUnit( ) != null )
+            return false;
+        if ( createdDate != null ? !createdDate.equals( item.getCreatedDate( ) ) : item.getCreatedDate( ) != null )
+            return true;
+        if ( updatedDate != null ? !updatedDate.equals( item.getUpdatedDate( ) ) : item.getUpdatedDate( ) != null )
+            return true;
 
         return true;
     }

@@ -11,33 +11,33 @@ import java.util.List;
 /**
  * The type Shop.
  */
-@XmlRootElement(name = "shop",namespace = "http://localhost:8080/bloom-test/rest/shops")
+@XmlRootElement( name = "shop", namespace = "http://localhost:8080/bloom-test/rest/shops" )
 public class Shop {
 
-    @XmlElement(name = "shop_id", nillable = false)
-    private long shopId;
-    @XmlElement(name = "shop_own_id", nillable = false)
-    private long shopOwnId;
-    @XmlElement(name = "shop_name", nillable = false)
+    @XmlElement( name = "shop_id", nillable = false )
+    private Long shopId;
+    @XmlElement( name = "shop_own_id", nillable = false )
+    private Long shopOwnId;
+    @XmlElement( name = "shop_name", nillable = false )
     private String shopName;
-    @XmlElement(name = "shop_web_link")
+    @XmlElement( name = "shop_web_link" )
     private String shopWebLink;
 
-    @XmlElement(name = "address", nillable = false)
+    @XmlElement( name = "address", nillable = false )
     private Address address;
-    @XmlElementWrapper(name = "working_hours")
-    @XmlElement(name = "working_hour", nillable = true)
-    private List<WorkingHour> workingHours;
-    @XmlElementWrapper(name = "items")
-    @XmlElement(name = "item", nillable = true)
-    private List<Item> items;
+    @XmlElementWrapper( name = "working_hours" )
+    @XmlElement( name = "working_hour", nillable = true )
+    private List< WorkingHour > workingHours;
+    @XmlElementWrapper( name = "items" )
+    @XmlElement( name = "item", nillable = true )
+    private List< Item > items;
 
     /**
      * Gets shop id.
      *
      * @return the shop id
      */
-    public long getShopId() {
+    public Long getShopId( ) {
         return shopId;
     }
 
@@ -46,7 +46,7 @@ public class Shop {
      *
      * @param shopId the shop id
      */
-    public void setShopId(long shopId) {
+    public void setShopId( Long shopId ) {
         this.shopId = shopId;
     }
 
@@ -55,7 +55,7 @@ public class Shop {
      *
      * @return the shop own id
      */
-    public long getShopOwnId() {
+    public Long getShopOwnId( ) {
         return shopOwnId;
     }
 
@@ -64,7 +64,7 @@ public class Shop {
      *
      * @param shopOwnId the shop own id
      */
-    public void setShopOwnId(long shopOwnId) {
+    public void setShopOwnId( Long shopOwnId ) {
         this.shopOwnId = shopOwnId;
     }
 
@@ -73,7 +73,7 @@ public class Shop {
      *
      * @return the shop name
      */
-    public String getShopName() {
+    public String getShopName( ) {
         return shopName;
     }
 
@@ -82,7 +82,7 @@ public class Shop {
      *
      * @param shopName the shop name
      */
-    public void setShopName(String shopName) {
+    public void setShopName( String shopName ) {
         this.shopName = shopName;
     }
 
@@ -91,7 +91,7 @@ public class Shop {
      *
      * @return the shop web link
      */
-    public String getShopWebLink() {
+    public String getShopWebLink( ) {
         return shopWebLink;
     }
 
@@ -100,7 +100,7 @@ public class Shop {
      *
      * @param shopWebLink the shop web link
      */
-    public void setShopWebLink(String shopWebLink) {
+    public void setShopWebLink( String shopWebLink ) {
         this.shopWebLink = shopWebLink;
     }
 
@@ -109,7 +109,7 @@ public class Shop {
      *
      * @return the address
      */
-    public Address getAddress() {
+    public Address getAddress( ) {
         return address;
     }
 
@@ -118,7 +118,7 @@ public class Shop {
      *
      * @param address the address
      */
-    public void setAddress(Address address) {
+    public void setAddress( Address address ) {
         this.address = address;
     }
 
@@ -127,7 +127,7 @@ public class Shop {
      *
      * @return the working hours
      */
-    public List<WorkingHour> getWorkingHours() {
+    public List< WorkingHour > getWorkingHours( ) {
         return workingHours;
     }
 
@@ -136,7 +136,7 @@ public class Shop {
      *
      * @param workingHours the working hours
      */
-    public void setWorkingHours(List<WorkingHour> workingHours) {
+    public void setWorkingHours( List< WorkingHour > workingHours ) {
         this.workingHours = workingHours;
     }
 
@@ -145,7 +145,7 @@ public class Shop {
      *
      * @return the items
      */
-    public List<Item> getItems() {
+    public List< Item > getItems( ) {
         return items;
     }
 
@@ -154,40 +154,38 @@ public class Shop {
      *
      * @param items the items
      */
-    public void setItems(List<Item> items) {
+    public void setItems( List< Item > items ) {
         this.items = items;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Shop)) return false;
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Shop ) ) return false;
 
-        Shop shop = (Shop) o;
+        Shop shop = ( Shop ) o;
 
-        if (shopId != shop.shopId) return false;
-        if (shopOwnId != shop.shopOwnId) return false;
-        if (address != null ? !address.equals(shop.address) : shop.address != null) return false;
-        if (items != null ? !items.equals(shop.items) : shop.items != null) return false;
-        if (shopWebLink != null ? !shopWebLink.equals(shop.shopWebLink) : shop.shopWebLink != null) return false;
-        if (shopName != null ? !shopName.equals(shop.shopName) : shop.shopName != null) return false;
-        if (workingHours != null ? !workingHours.equals(shop.workingHours) : shop.workingHours != null) return false;
+        if ( address != null ? !address.equals( shop.address ) : shop.address != null ) return false;
+        if ( items != null ? !items.equals( shop.items ) : shop.items != null ) return false;
+        if ( shopId != null ? !shopId.equals( shop.shopId ) : shop.shopId != null ) return false;
+        if ( shopName != null ? !shopName.equals( shop.shopName ) : shop.shopName != null ) return false;
+        if ( shopOwnId != null ? !shopOwnId.equals( shop.shopOwnId ) : shop.shopOwnId != null ) return false;
+        if ( shopWebLink != null ? !shopWebLink.equals( shop.shopWebLink ) : shop.shopWebLink != null ) return false;
+        if ( workingHours != null ? !workingHours.equals( shop.workingHours ) : shop.workingHours != null )
+            return false;
 
         return true;
     }
 
-
     /**
-     * Returns a string representation of the object. In general, the
-     * {@code toString} method returns a string that
-     * "textually represents" this object. The result should
-     * be a concise but informative representation that is easy for a
-     * person to read.
+     * Returns a string representation of the object. In general, the {@code toString} method returns a string that
+     * "textually represents" this object. The result should be a concise but informative representation that is easy
+     * for a person to read.
      *
-     * @return  {@link String}a string representation of the object.
+     * @return {@link String}a string representation of the object.
      */
     @Override
-    public String toString() {
+    public String toString( ) {
         return "Shop{" +
                 "shopId=" + shopId +
                 ", shopOwnId=" + shopOwnId +

@@ -45,7 +45,7 @@ public class TestDummyDomainObjectGenerator {
         // Address
         shop.setAddress( getTestAddressDomainObject( new Address( ) ) );
         // Item
-        List< Item > items = new ArrayList< Item >( );
+        List< Item > items = new ArrayList<>( );
         items.add( getTestItemDomainObject( new Item( ) ) );
         shop.setItems( items );
 
@@ -94,7 +94,7 @@ public class TestDummyDomainObjectGenerator {
         item.setItemSubType( TestConstants.TEST_ITEM_TYPE );
         item.setBoughtFrom( TestConstants.TEST_BROUGHT_FROM );
 
-        item.setItemPrice( TestConstants.THREE );
+        item.setItemPrice( ( double ) TestConstants.THREE );
         item.setWeight( TestConstants.TEST_WEIGHT );
         item.setQuantity( TestConstants.TEST_QUANTITY );
 

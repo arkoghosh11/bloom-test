@@ -36,7 +36,7 @@ public class WhenGetShopThenTestShopDAOGetMethods {
      * The Shop dAO.
      */
     @Resource
-    private ShopDAO shopDAO;
+    private ShopDAO shopDAOImpl;
 
     /**
      * Sets up.
@@ -70,8 +70,8 @@ public class WhenGetShopThenTestShopDAOGetMethods {
     @Transactional( readOnly = true )
     public void testGetShopByShopIdWithErrorEnabled( ) throws Exception {
 
-        logger.debug( "Starting testGetShopByShopIdWithErrorEnabled" );
-        DAOResponse< Shop > shopDAOResponse = shopDAO.getShopByShopId( shopId, TestConstants.IS_ERROR_TRUE );
+        logger.debug( "Starting test for GetShopByShopIdWithErrorEnabled" );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( shopId, TestConstants.IS_ERROR_TRUE );
 
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // test Error Container
@@ -93,7 +93,7 @@ public class WhenGetShopThenTestShopDAOGetMethods {
         Shop shop = shops.get( TestConstants.ZERO );
         Assert.assertNotNull( TestConstants.nullMessage, shop );
         Assert.assertEquals( TestConstants.notEqualsMessage, shopId, shop.getShopId( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_OWN_ID, shop.getShopOwnId( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_OWN_ID, shop.getShopOwnId( ).longValue( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_NAME, shop.getShopName( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_WEB_LINK, shop.getShopWebLink( ) );
         // Test Address linked with Shop
@@ -105,7 +105,7 @@ public class WhenGetShopThenTestShopDAOGetMethods {
         Assert.assertNotNull( TestConstants.nullMessage, shop.getWorkingHours( ) );
         Assert.assertFalse( TestConstants.trueMessage, shop.getWorkingHours( ).isEmpty( ) );
 
-        logger.debug( "Finishing testGetShopByShopIdWithErrorEnabled" );
+        logger.debug( "Finishing test for GetShopByShopIdWithErrorEnabled" );
     }
 
     /**
@@ -117,8 +117,8 @@ public class WhenGetShopThenTestShopDAOGetMethods {
     @Transactional( readOnly = true )
     public void testGetShopsWithErrorEnabled( ) throws Exception {
 
-        logger.debug( "Starting testGetShopsWithErrorEnabled" );
-        DAOResponse< Shop > shopDAOResponse = shopDAO.getShops( TestConstants.IS_ERROR_TRUE );
+        logger.debug( "Starting test for GetShopsWithErrorEnabled" );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShops( TestConstants.IS_ERROR_TRUE );
 
         // test DAO Response errorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
@@ -136,7 +136,7 @@ public class WhenGetShopThenTestShopDAOGetMethods {
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getResults( ).get( TestConstants.ZERO ) );
 
 
-        logger.debug( "Finishing testGetShopsWithErrorEnabled" );
+        logger.debug( "Finishing test for GetShopsWithErrorEnabled" );
     }
 
     /**
@@ -148,9 +148,9 @@ public class WhenGetShopThenTestShopDAOGetMethods {
     @Transactional( readOnly = true )
     public void testGetShopByShopIdWithErrorDisabled( ) throws Exception {
 
-        logger.debug( "Starting testGetShopByShopIdWithErrorDisabled" );
+        logger.debug( "Starting test for GetShopByShopIdWithErrorDisabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAO.getShopByShopId( shopId, TestConstants.IS_ERROR );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( shopId, TestConstants.IS_ERROR );
         // test errorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -168,7 +168,7 @@ public class WhenGetShopThenTestShopDAOGetMethods {
         Shop shop = shops.get( TestConstants.ZERO );
         Assert.assertNotNull( TestConstants.nullMessage, shop );
         Assert.assertEquals( TestConstants.notEqualsMessage, shopId, shop.getShopId( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_OWN_ID, shop.getShopOwnId( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_OWN_ID, shop.getShopOwnId( ).longValue( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_NAME, shop.getShopName( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_WEB_LINK, shop.getShopWebLink( ) );
         // Test Address linked with Shop
@@ -180,7 +180,7 @@ public class WhenGetShopThenTestShopDAOGetMethods {
         Assert.assertNotNull( TestConstants.nullMessage, shop.getWorkingHours( ) );
         Assert.assertFalse( TestConstants.trueMessage, shop.getWorkingHours( ).isEmpty( ) );
 
-        logger.debug( "Finishing testGetShopByShopIdWithErrorDisabled" );
+        logger.debug( "Finishing test for GetShopByShopIdWithErrorDisabled" );
     }
 
     /**
@@ -192,8 +192,8 @@ public class WhenGetShopThenTestShopDAOGetMethods {
     @Transactional( readOnly = true )
     public void testGetShopsWithErrorDisabled( ) throws Exception {
 
-        logger.debug( "Starting testGetShopsWithErrorDisabled" );
-        DAOResponse< Shop > shopDAOResponse = shopDAO.getShops( TestConstants.IS_ERROR );
+        logger.debug( "Starting test for GetShopsWithErrorDisabled" );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShops( TestConstants.IS_ERROR );
 
         // test errorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
@@ -205,6 +205,6 @@ public class WhenGetShopThenTestShopDAOGetMethods {
         Assert.assertFalse( shopDAOResponse.getResults( ).isEmpty( ) );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getResults( ).get( TestConstants.ZERO ) );
 
-        logger.debug( "Finishing testGetShopsWithErrorDisabled" );
+        logger.debug( "Finishing test for GetShopsWithErrorDisabled" );
     }
 }

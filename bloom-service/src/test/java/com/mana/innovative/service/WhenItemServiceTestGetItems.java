@@ -2,6 +2,7 @@ package com.mana.innovative.service;
 
 import com.mana.innovative.dto.payload.ItemsPayload;
 import com.mana.innovative.service.container.ItemResponseContainer;
+import com.mana.innovative.service.impl.ItemsServiceImpl;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
@@ -29,7 +30,7 @@ public class WhenItemServiceTestGetItems {
     public static final Logger logger = Logger.getLogger(WhenItemServiceTestGetItems.class);
 
     @Resource
-    private ItemsService itemsService;
+    private ItemsServiceImpl itemsServiceImpl;
 
     @Before
     public void setUp () {
@@ -43,7 +44,7 @@ public class WhenItemServiceTestGetItems {
 
         logger.info("Testing ItemService GetItems method");
 
-        Response response = itemsService.getItems(false);
+        Response response = itemsServiceImpl.getItems( false );
 
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getEntity());

@@ -64,7 +64,7 @@ public class WhenDeleteAnItemTestItemDAODeleteMethods {
     @BeforeTransaction
     public void setUp( ) throws Exception {
 
-
+        logger.debug( TestConstants.setUpMethodLoggerMsg );
         try {
             DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItemByItemId( TestConstants.ZERO, TestConstants.IS_ERROR );
 

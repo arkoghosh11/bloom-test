@@ -88,7 +88,7 @@ public class TestDummyDTOObjectGenerator {
         dummyItem.setItemSubType( TestConstants.TEST_ITEM_TYPE );
         dummyItem.setBoughtFrom( TestConstants.TEST_BROUGHT_FROM );
 
-        dummyItem.setItemPrice( TestConstants.THREE );
+        dummyItem.setItemPrice( ( double ) TestConstants.THREE );
         dummyItem.setWeight( TestConstants.TEST_WEIGHT );
         dummyItem.setQuantity( TestConstants.TEST_QUANTITY );
 
@@ -136,7 +136,7 @@ public class TestDummyDTOObjectGenerator {
      * @return the test shop DTO ZERO ID object
      */
     public static Shop getTestShopDTOZEROIDObject( final Shop shop ) {
-        shop.setShopId( TestConstants.ZERO );
+        shop.setShopId( ( long ) TestConstants.ZERO );
         getTestAddressDTOZEROIDObject( shop.getAddress( ) );
         getTestItemDTOZEROIDObject( shop.getItems( ).get( TestConstants.ZERO ) );
         getTestWorkingHourDTOZEROIDObject( shop.getWorkingHours( ).get( TestConstants.ZERO ) );
@@ -151,7 +151,7 @@ public class TestDummyDTOObjectGenerator {
      * @return the test address DTO ZERO ID object
      */
     public static Address getTestAddressDTOZEROIDObject( final Address address ) {
-        address.setAddressId( TestConstants.ZERO );
+        address.setAddressId( ( long ) TestConstants.ZERO );
         return address;
     }
 
@@ -164,7 +164,7 @@ public class TestDummyDTOObjectGenerator {
      */
     public static Item getTestItemDTOZEROIDObject( final Item item ) {
 
-        item.setItemId( TestConstants.ZERO );
+        item.setItemId( ( long ) TestConstants.ZERO );
         return item;
     }
 
@@ -177,7 +177,7 @@ public class TestDummyDTOObjectGenerator {
      */
     public static WorkingHour getTestWorkingHourDTOZEROIDObject( final WorkingHour workingHour ) {
 
-        workingHour.setWorkingHourId( TestConstants.ZERO );
+        workingHour.setWorkingHourId( ( long ) TestConstants.ZERO );
         return workingHour;
     }
 }

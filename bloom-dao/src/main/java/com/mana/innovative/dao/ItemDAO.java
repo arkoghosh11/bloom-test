@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
  * The interface Item dao.
  */
 @Repository
-@Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public interface ItemDAO {
 
     /**
@@ -22,7 +21,6 @@ public interface ItemDAO {
      *
      * @return the dAO response
      */
-    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Item > deleteAllItems( final boolean deleteAllItems, final boolean isError );
 
     /**
@@ -32,7 +30,6 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the dAO response
      */
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Item > deleteItemByItemId( long itemId, boolean isError );
 
     /**
@@ -42,7 +39,6 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the dAO response
      */
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Item > deleteItem( Item item, boolean isError );
 
     /* IMP UPDATE Functions */
@@ -54,7 +50,6 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the dAO response
      */
-    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Item > updateItem( Item item, boolean isError );
 
     /* IMP CREATE Functions */
@@ -66,7 +61,6 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the dAO response
      */
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE )
     public DAOResponse< Item > createItem( Item item, Boolean isError );
 
     /**
@@ -76,7 +70,6 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the item by item id
      */
-    @Transactional( readOnly = true, propagation = Propagation.SUPPORTS, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Item > getItemByItemId( long itemId, boolean isError );
 
     /**
@@ -85,6 +78,5 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the items
      */
-    @Transactional( readOnly = true, propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED )
     public DAOResponse< Item > getItems( boolean isError );
 }

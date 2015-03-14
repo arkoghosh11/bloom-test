@@ -1,14 +1,11 @@
-package com.mana.innovative.domain;/**
- * Created by Rono on 2/27/2015.
- * This is a class for .. todo 
- */
+package com.mana.innovative.domain;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
- * Created by Bloom on 2/27/2015 : 2:47 PM todo This class is for ...
+ * The type Working hour.
  */
 @XmlRootElement
 @Entity
@@ -17,7 +14,7 @@ public class WorkingHour {
 
     @Id
     @Column( name = "working_hour_id" )
-    @GeneratedValue
+    @GeneratedValue( strategy = GenerationType.TABLE )
     private long workingHourId;
 
     @Column( name = "day_of_week" )
@@ -29,11 +26,11 @@ public class WorkingHour {
     @Temporal( TemporalType.TIME )
     private Date endTime;
     @Column( name = "is_closed" )
-    private boolean isOffline;
+    private Boolean isOffline;
     @Column( name = "is_holiday" )
-    private boolean isHoliday;
+    private Boolean isHoliday;
     @Column( name = "is_weekend" )
-    private boolean isWeekend;
+    private Boolean isWeekend;
 
     @Column( name = "created_date", columnDefinition = "DATETIME" )
     @Temporal( value = TemporalType.TIMESTAMP )
@@ -41,7 +38,6 @@ public class WorkingHour {
     @Column( name = "updated_date", columnDefinition = "DATETIME" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
-
 
     @ManyToOne( cascade = CascadeType.ALL )
     @JoinColumn( name = "shop_id" )
@@ -79,27 +75,27 @@ public class WorkingHour {
         this.endTime = endTime;
     }
 
-    public boolean isOffline( ) {
+    public Boolean isOffline( ) {
         return isOffline;
     }
 
-    public void setOffline( final boolean isOffline ) {
+    public void setOffline( final Boolean isOffline ) {
         this.isOffline = isOffline;
     }
 
-    public boolean isHoliday( ) {
+    public Boolean isHoliday( ) {
         return isHoliday;
     }
 
-    public void setHoliday( final boolean isHoliday ) {
+    public void setHoliday( final Boolean isHoliday ) {
         this.isHoliday = isHoliday;
     }
 
-    public boolean isWeekend( ) {
+    public Boolean isWeekend( ) {
         return isWeekend;
     }
 
-    public void setWeekend( final boolean isWeekend ) {
+    public void setWeekend( final Boolean isWeekend ) {
         this.isWeekend = isWeekend;
     }
 
@@ -132,22 +128,25 @@ public class WorkingHour {
         if ( this == o ) return true;
         if ( !( o instanceof WorkingHour ) ) return false;
 
-        final WorkingHour workingHour = ( WorkingHour ) o;
+        WorkingHour workingHour = ( WorkingHour ) o;
 
-        if ( workingHourId != workingHour.workingHourId ) return false;
-        if ( isHoliday != workingHour.isHoliday ) return false;
-        if ( isOffline != workingHour.isOffline ) return false;
-        if ( isWeekend != workingHour.isWeekend ) return false;
-        if ( day != null && !day.equals( workingHour.day ) ) return false;
-        if ( endTime != null && !endTime.equals( workingHour.endTime ) ) return false;
-        if ( startTime != null && !startTime.equals( workingHour.startTime ) ) return false;
-        if ( shopWorkingHour != null && !shopWorkingHour.equals( workingHour.shopWorkingHour ) ) return false;
-        if ( createdDate != null && workingHour.getCreatedDate( ) != null ? createdDate.getTime( ) != workingHour.getCreatedDate( )
-                .getTime( ) : createdDate == null )
-            return true;
-        if ( updatedDate != null && workingHour.getUpdatedDate( ) != null ? updatedDate.getTime( ) != workingHour.getUpdatedDate( )
-                .getTime( ) : updatedDate == null )
-            return true;
+        if ( workingHourId != workingHour.getWorkingHourId( ) ) return false;
+        if ( day != null ? !day.equals( workingHour.day ) : workingHour.day != null ) return false;
+        if ( startTime != null ? !startTime.equals( workingHour.getStartTime( ) ) : workingHour.getStartTime( ) != null
+                ) return false;
+        if ( endTime != null ? !endTime.equals( workingHour.getEndTime( ) ) : workingHour.getEndTime( ) != null )
+            return false;
+        if ( isHoliday != null ? !isHoliday.equals( workingHour.isHoliday( ) ) : workingHour.isHoliday( ) != null )
+            return false;
+        if ( isOffline != null ? !isOffline.equals( workingHour.isOffline( ) ) : workingHour.isOffline( ) != null )
+            return false;
+        if ( isWeekend != null ? !isWeekend.equals( workingHour.isWeekend( ) ) : workingHour.isWeekend( ) != null )
+            return false;
+        if ( createdDate != null ? !createdDate.equals( workingHour.getCreatedDate( ) ) :
+                workingHour.getCreatedDate( ) != null ) return true;
+        if ( updatedDate != null ? !updatedDate.equals( workingHour.getUpdatedDate( ) ) :
+                workingHour.getUpdatedDate( ) != null ) return true;
+
         return true;
     }
 

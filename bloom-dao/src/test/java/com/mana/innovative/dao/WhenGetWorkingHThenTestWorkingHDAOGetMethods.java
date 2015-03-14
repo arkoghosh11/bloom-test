@@ -79,9 +79,9 @@ public class WhenGetWorkingHThenTestWorkingHDAOGetMethods {
         String endTimeString = WorkingHourDomainDTOConverter.toStringTimeFromDate( workingHour.getEndTime( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_END_TIME, endTimeString );
 
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_HOLIDAY, workingHour.isHoliday( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_CLOSED, workingHour.isOffline( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_WEEKEND, workingHour.isWeekend( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_HOLIDAY, workingHour.isHoliday( ).booleanValue( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_CLOSED, workingHour.isOffline( ).booleanValue( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_WEEKEND, workingHour.isWeekend( ).booleanValue( ) );
 
         Assert.assertNotNull( TestConstants.notEqualsMessage, workingHour.getShopWorkingHour( ) );
 
@@ -125,9 +125,9 @@ public class WhenGetWorkingHThenTestWorkingHDAOGetMethods {
         String endTimeString = WorkingHourDomainDTOConverter.toStringTimeFromDate( workingHour.getEndTime( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_END_TIME, endTimeString );
 
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_HOLIDAY, workingHour.isHoliday( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_CLOSED, workingHour.isOffline( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_WEEKEND, workingHour.isWeekend( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_HOLIDAY, workingHour.isHoliday( ).booleanValue( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_CLOSED, workingHour.isOffline( ).booleanValue( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TEST_IS_WEEKEND, workingHour.isWeekend( ).booleanValue( ) );
 
         Assert.assertNotNull( TestConstants.notEqualsMessage, workingHour.getShopWorkingHour( ) );
 

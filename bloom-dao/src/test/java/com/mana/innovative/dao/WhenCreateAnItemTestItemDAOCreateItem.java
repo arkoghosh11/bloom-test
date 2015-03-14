@@ -7,6 +7,7 @@ import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
 import com.mana.innovative.domain.Shop;
 import junit.framework.Assert;
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,11 +36,13 @@ import java.util.List;
 @Transactional
 public class WhenCreateAnItemTestItemDAOCreateItem {
 
+    private static final Logger logger = Logger.getLogger( WhenCreateAnItemTestItemDAOCreateItem.class );
+
     @Resource
     private ItemDAO itemDAOImpl;
 
     @Resource
-    private ShopDAO shopDAO;
+    private ShopDAO shopDAOImpl;
 
     @Resource
     private SessionFactory sessionFactory;
@@ -53,6 +56,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
     @Before
     public void setUp( ) throws Exception {
 
+        logger.debug( TestConstants.setUpMethodLoggerMsg );
 
         dummyItem = new Item( );
         dummyItem.setItemId( TestConstants.MINUS_ONE );
@@ -62,7 +66,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         dummyItem.setItemSubType( TestConstants.TEST_ITEM_TYPE );
         dummyItem.setBoughtFrom( TestConstants.TEST_BROUGHT_FROM );
 
-        dummyItem.setItemPrice( TestConstants.THREE );
+        dummyItem.setItemPrice( ( double ) TestConstants.THREE );
         dummyItem.setWeight( TestConstants.TEST_WEIGHT );
         dummyItem.setQuantity( TestConstants.TEST_QUANTITY );
 
@@ -82,21 +86,21 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRED )
-    public void testItemDAOCreate( ) {
+    public void testItemDAOCreateWithoutException( ) {
 
+        logger.debug( "Starting test for ItemDAOCreateWithoutException" );
         DAOResponse< Item > itemDAOResponse;
         DAOResponse< Shop > shopDAOResponse;
         itemDAOResponse = itemDAOImpl.getItemByItemId( dummyItem.getItemId( ), TestConstants.IS_ERROR );
 
         Assert.assertTrue( itemDAOResponse.getResults( ).isEmpty( ) );
-        shopDAOResponse = shopDAO.getShopByShopId( TestConstants.ZERO, TestConstants.IS_ERROR );
+        shopDAOResponse = shopDAOImpl.getShopByShopId( TestConstants.ZERO, TestConstants.IS_ERROR );
 
         Assert.assertFalse( shopDAOResponse.getResults( ).isEmpty( ) );
         Shop shop = shopDAOResponse.getResults( ).get( TestConstants.ZERO );
         Assert.assertNotNull( shop );
         dummyItem.setShopItem( shop );
         itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR );
-
 
         Assert.assertTrue( itemDAOResponse.isCreate( ) );
         Assert.assertTrue( itemDAOResponse.isRequestSuccess( ) );
@@ -105,8 +109,8 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         Assert.assertNotNull( itemDAOResponse.getResults( ) );
         Assert.assertNotNull( itemDAOResponse.getResults( ).get( TestConstants.ZERO ) );
         Assert.assertNull( itemDAOResponse.getErrorContainer( ) );
-        Assert.assertEquals( "Value of Count is not One", TestConstants.ONE, itemDAOResponse
-                .getCount( ) );
+        Assert.assertEquals( "Value of Count is not One", TestConstants.ONE, itemDAOResponse.getCount( ) );
+        logger.debug( "Finishing test for ItemDAOCreateWithoutException" );
 
     }
 
@@ -114,6 +118,8 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRED )
     public void testItemDAOCreateThrowsException( ) {
+
+        logger.debug( "Starting test for ItemDAOCreateThrowsException" );
 
         DAOResponse< Item > itemDAOResponse;
         dummyItem = new Item( );
@@ -127,8 +133,9 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         Assert.assertNotNull( itemDAOResponse.getResults( ) );
         Assert.assertTrue( "Size Of List is not Zero", itemDAOResponse.getResults( ).isEmpty( ) );
         Assert.assertNull( itemDAOResponse.getErrorContainer( ) );
-        Assert.assertEquals( "Value of Count is not Zero", TestConstants.ZERO, itemDAOResponse
-                .getCount( ) );
+        Assert.assertEquals( "Value of Count is not Zero", TestConstants.ZERO, itemDAOResponse.getCount( ) );
+
+        logger.debug( "Finishing test for ItemDAOCreateThrowsException" );
 
     }
 
@@ -137,6 +144,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
     @Transactional( propagation = Propagation.REQUIRED )
     public void testItemDAOCreateThrowsExceptionNErrorContainer( ) {
 
+        logger.debug( "Starting test for ItemDAOCreateThrowsExceptionNErrorContainer" );
         DAOResponse< Item > itemDAOResponse;
         dummyItem = new Item( );
 
@@ -149,9 +157,9 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         Assert.assertNotNull( itemDAOResponse.getResults( ) );
         Assert.assertTrue( itemDAOResponse.getResults( ).isEmpty( ) );
         Assert.assertNotNull( itemDAOResponse.getErrorContainer( ) );
-        Assert.assertEquals( "Value of Count is not Zero", TestConstants.ZERO, itemDAOResponse
-                .getCount( ) );
+        Assert.assertEquals( "Value of Count is not Zero", TestConstants.ZERO, itemDAOResponse.getCount( ) );
 
+        logger.debug( "Finishing test for ItemDAOCreateThrowsExceptionNErrorContainer" );
     }
 
 
@@ -168,15 +176,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         query.setLong( "item_id", TestConstants.MINUS_ONE );
 
         List< Item > items = query.list( );
-//        if(items.isEmpty()) {
         Assert.assertTrue( " List is not Empty, Hib created a dummy Row ", items.isEmpty( ) );
-//        }
-//        } else if(items.size() == TestConstants.ONE) {
-//            Item item =items.get(TestConstants.ZERO);
-//            Assert.assertNotNull(item);
-//            Assert.assertEquals(" Data modified by Hibernate", 2.0,item.getItemPrice());
-//        } else {
-//            Assert.fail(" Unique result expected but got duplicate data");
-//        }
+        logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 }
