@@ -2,7 +2,6 @@ package com.mana.innovative.service.impl;
 
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dao.ItemDAO;
-import com.mana.innovative.dao.impl.ItemDAOImpl;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.dto.Item;
 import com.mana.innovative.dto.payload.ItemsPayload;
@@ -33,7 +32,7 @@ public class ItemServiceImpl implements ItemService {
      * The Item dAO.
      */
     @Resource( name = "itemDAOImpl" )
-    ItemDAO itemDAOImpl;
+    private ItemDAO itemDAOImpl;
 
     /**
      * Gets item.

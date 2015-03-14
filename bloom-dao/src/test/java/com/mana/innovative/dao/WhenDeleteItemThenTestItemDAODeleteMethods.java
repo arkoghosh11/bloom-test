@@ -42,11 +42,11 @@ import java.util.List;
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
-@TransactionConfiguration
+@TransactionConfiguration( defaultRollback = true )
 @Transactional
-public class WhenDeleteAnItemTestItemDAODeleteMethods {
+public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
-    private static final Logger logger = Logger.getLogger( WhenDeleteAnItemTestItemDAODeleteMethods.class );
+    private static final Logger logger = Logger.getLogger( WhenDeleteItemThenTestItemDAODeleteMethods.class );
 
     @Resource
     private ItemDAO itemDAOImpl;

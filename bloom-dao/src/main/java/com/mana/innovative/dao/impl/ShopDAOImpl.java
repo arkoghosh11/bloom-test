@@ -240,7 +240,6 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         shopDAOResponse.setDelete( true );
         ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
-        List< Shop > shops = null;
 
         try {
             this.openDBTransaction( );
@@ -259,7 +258,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
         } finally {
             this.closeDBTransaction( );
         }
-        shopDAOResponse.setResults( shops );
+        shopDAOResponse.setResults( null );
         shopDAOResponse.setErrorContainer( errorContainer );
         log.debug( "Finishing " + location );
         return shopDAOResponse;

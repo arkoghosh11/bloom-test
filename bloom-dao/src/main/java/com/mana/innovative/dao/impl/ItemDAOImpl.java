@@ -108,15 +108,13 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 
         DAOResponse< Item > itemDAOResponse = new DAOResponse<>( );
         itemDAOResponse.setDelete( true );
-        itemDAOResponse.setCount( DAOConstants.ZERO );
         ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
             Query query = session.createQuery( "delete from Item where itemId=:itemId" );
             query.setParameter( "itemId", itemId );
-            int count = query.executeUpdate( );
-            itemDAOResponse.setCount( count );
+            itemDAOResponse.setCount( query.executeUpdate( ) );
             itemDAOResponse.setRequestSuccess( true );
 //            transaction.commit();
         } catch ( Exception exception ) {
@@ -287,7 +285,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     }
 
 
-    @Transactional( readOnly = true, propagation = Propagation.SUPPORTS, isolation = Isolation.READ_UNCOMMITTED )
+    @Transactional( readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Item > getItemByItemId( long itemId, boolean isError ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getItemByItemId()";
@@ -332,7 +330,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
      *
      * @return List<Item></> Return a list of {@link com.mana.innovative.domain.Item}
      */
-    @Transactional( readOnly = true, propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED )
+    @Transactional( readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
     public DAOResponse< Item > getItems( boolean isError ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getItems()";

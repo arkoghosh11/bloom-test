@@ -3,15 +3,15 @@ package com.mana.innovative.rest;/**
  * This is a class for .. todo 
  */
 
-import com.sun.jersey.api.client.GenericType;
+import com.mana.innovative.constants.TestConstants;
 import com.sun.jersey.spi.spring.container.servlet.SpringServlet;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
+import org.apache.log4j.Logger;
+import org.junit.After;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
-
-import javax.ws.rs.core.Response;
 
 /**
  * Created by Bloom on 2/26/2015 : 9:00 PM
@@ -19,9 +19,11 @@ import javax.ws.rs.core.Response;
  */
 public class RestTest extends JerseyTest {
 
+    private static final Logger logger = Logger.getLogger( RestTest.class );
     @Override
     protected AppDescriptor configure() {
 
+        logger.debug( "Configuring and returning AppDescriptor for GrizzlyTestContainer" );
 //      IMP the param value in Builder must be the package for rest web service classes
         return new WebAppDescriptor.Builder("com.mana.innovative.rest")
 //              IMP context path must be a logical name and not /
@@ -43,5 +45,16 @@ public class RestTest extends JerseyTest {
 //              Note request listener class , using spring's
                 .requestListenerClass(RequestContextListener.class)
                 .build();
+    }
+
+    @Override
+    @After
+    public void tearDown( ) {
+        try {
+            super.tearDown( );
+        } catch ( Exception exception ) {
+            logger.error( "An exception occurred while trying to close the jersey Grizzly Servlet Container" );
+        }
+        logger.info( TestConstants.tearDownMethodLoggerMsg );
     }
 }

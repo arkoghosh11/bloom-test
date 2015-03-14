@@ -109,4 +109,89 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
         logger.debug( "Finishing " + location );
         return workingHourDAOResponse;
     }
+
+    /**
+     * Delete working hour by working hr ids.
+     *
+     * @param workingHourId the working hour id
+     * @param isError       the is error
+     *
+     * @return the dAO response
+     */
+    @Override
+    public DAOResponse< WorkingHour > deleteWorkingHourByWorkingHrId( final long workingHourId, final boolean
+            isError ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteWorkingHourByWorkingHrId()";
+        logger.debug( "Starting " + location );
+
+        DAOResponse< WorkingHour > workingHourDAOResponse = new DAOResponse<>( );
+        workingHourDAOResponse.setDelete( true );
+        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+
+        try {
+            this.openDBTransaction( );
+            Query query = session.createQuery( " delete from WorkingHour where workingHourId=:workingHourId" );
+            query.setParameter( "workingHourId", workingHourId );
+            workingHourDAOResponse.setCount( query.executeUpdate( ) );
+            workingHourDAOResponse.setRequestSuccess( true );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                this.handleExceptions( ( HibernateException ) exception );
+            }
+            log.error( "Failed to delete workingHour", exception );
+            if ( isError ) {
+                errorContainer = this.fillErrorContainer( location, exception );
+            }
+        } finally {
+            this.closeDBTransaction( );
+        }
+        workingHourDAOResponse.setResults( null );
+        workingHourDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+        return null;
+    }
+
+    /**
+     * Delete working hours by working hr ids.
+     *
+     * @param workingHourIds the working hour ids
+     * @param isError        the is error
+     *
+     * @return the dAO response
+     */
+    @Override
+    public DAOResponse< WorkingHour > deleteWorkingHoursByWorkingHrIds( List< Long > workingHourIds, boolean isError ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteWorkingHoursByWorkingHrIds()";
+        logger.debug( "Starting " + location );
+        DAOResponse< WorkingHour > workingHourDAOResponse = new DAOResponse<>( );
+        workingHourDAOResponse.setDelete( true );
+        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+
+        try {
+            this.openDBTransaction( );
+            Query query = session.createQuery( " delete from WorkingHour where workingHourId in (:workingHourIds)" );
+            query.setParameterList( "workingHourIds", workingHourIds );
+            workingHourDAOResponse.setCount( query.executeUpdate( ) );
+            workingHourDAOResponse.setRequestSuccess( true );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                this.handleExceptions( ( HibernateException ) exception );
+            }
+            log.error( "Failed to delete workingHours with given ids " + location, exception );
+            if ( isError ) {
+                errorContainer = this.fillErrorContainer( location, exception );
+            }
+            workingHourDAOResponse.setRequestSuccess( false );
+        } finally {
+            this.closeDBTransaction( );
+        }
+        workingHourDAOResponse.setResults( null );
+        workingHourDAOResponse.setErrorContainer( errorContainer );
+        logger.debug( "Finishing " + location );
+        return null;
+    }
+
 }
