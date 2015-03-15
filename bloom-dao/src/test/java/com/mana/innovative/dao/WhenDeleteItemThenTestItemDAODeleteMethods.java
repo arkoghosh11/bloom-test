@@ -2,11 +2,9 @@ package com.mana.innovative.dao;
 
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.TestConstants;
-import com.mana.innovative.dao.impl.ItemDAOImpl;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
 import junit.framework.Assert;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -26,19 +24,16 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by alex1 on 1/28/2015. This class is for testing given {@link ItemDAOImpl#deleteItem(Item, boolean)} & {@link
- * ItemDAOImpl#deleteItemByItemId(long, boolean)}
+ * The type When delete item then test item dAO delete methods. </p> Created by bloom on 1/28/2015. This class is for
+ * testing given {@link ItemDAO#deleteItemsByItemIds(List, boolean)} & {@link ItemDAO#deleteItemByItemId(long, boolean)}
+ * &{@link ItemDAO#deleteAllItems(boolean, boolean)}
  * <p/>
  * Please uncomment the following lines to enable Spring Integration Test the 2nd line requires location on Context
  * Config Files for beans and properties extra, the 1st one is to enable Spring for the Class
- *
- * @ RunWith(value = SpringJUnit4ClassRunner.class | MockitoWithJunitRunner.Class)
- * @ ContextConfiguration(location {"loc1"."loc2"})
- * @ TransactionConfiguration   <--- Only If required
- * @ Transactional              <--- Only If required
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
@@ -54,33 +49,39 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
     @Resource
     private SessionFactory sessionFactory;
 
-    private Item dummyItem;
+    private Long itemId;
+    private List< Long > itemIds;
 
 
     /**
      * This method is to initialize Objects and configuration files before testing test method
+     *
+     * @throws Exception
      */
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
-        try {
-            DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItemByItemId( TestConstants.ZERO, TestConstants.IS_ERROR );
-
-            List< Item > items = itemDAOResponse.getResults( );
-            Assert.assertFalse( TestConstants.trueMessage, items.isEmpty( ) );
-            dummyItem = items.get( TestConstants.ZERO );
-        } catch ( Exception e ) {
-            logger.log( Level.ERROR, "Exception occurred in test initializer while try to fetch the deleting record from DB", e );
-        }
+        itemId = TestConstants.TEST_ID;
+        itemIds = new ArrayList<>( );
+        itemIds.add( ( long ) TestConstants.ZERO );
+        itemIds.add( TestConstants.TEST_ID );
     }
 
+    /**
+     * Test item dAO not null.
+     */
     @Test
     public void testItemDAONotNull( ) {
         Assert.assertNotNull( itemDAOImpl );
     }
 
+    /**
+     * Test delete all items with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -106,6 +107,11 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
         logger.debug( "Finishing test for DeleteAllItemsWithErrorEnabled" );
     }
 
+    /**
+     * Test delete all items with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -127,6 +133,11 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
         logger.debug( "Finishing test for DeleteAllItemsWithErrorDisabled" );
     }
 
+    /**
+     * Test delete all items with delete all true with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -151,6 +162,11 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
         logger.debug( "Finishing test for DeleteAllItemsWithDeleteAllTrueWithErrorEnabled" );
     }
 
+    /**
+     * Test delete all items with delete all true error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -173,6 +189,11 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
     }
 
 
+    /**
+     * Test delete item by item id with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
@@ -180,7 +201,7 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteItemByItemIdWithErrorEnabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemByItemId( TestConstants.ZERO, TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemByItemId( itemId, TestConstants.IS_ERROR_TRUE );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
@@ -197,6 +218,11 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
         logger.debug( "Finishing test for DeleteItemByItemIdWithErrorEnabled" );
     }
 
+    /**
+     * Test delete item by item id with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
@@ -204,7 +230,7 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteItemByItemIdWithErrorDisabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemByItemId( TestConstants.ZERO, TestConstants.IS_ERROR );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemByItemId( itemId, TestConstants.IS_ERROR );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
 
@@ -218,15 +244,17 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
     }
 
     /**
-     * This method is to test deletion of an item
+     * Test delete item with error disabled.
+     *
+     * @throws Exception the exception
      */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
-    public void testDeleteItemWithErrorDisabled( ) throws Exception {
+    public void testDeleteItemsByItemIdsWithErrorDisabled( ) throws Exception {
 
-        logger.debug( "Starting test for DeleteItemWithErrorDisabled" );
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItem( dummyItem, TestConstants.IS_ERROR );
+        logger.debug( "Starting test for DeleteItemsByItemIdsWithErrorDisabled" );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemsByItemIds( itemIds, TestConstants.IS_ERROR );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
 
         // check ErrorContainer
@@ -234,16 +262,45 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
         // check DAOResponse
         Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isDelete( ) );
         Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isRequestSuccess( ) );
-        Assert.assertEquals( TestConstants.falseMessage, TestConstants.ONE, itemDAOResponse.getCount( ) );
+        Assert.assertEquals( TestConstants.falseMessage, itemIds.size( ), itemDAOResponse.getCount( ) );
         Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getResults( ) );
 
-        logger.debug( "Starting test for DeleteItemWithErrorDisabled" );
+        logger.debug( "Starting test for DeleteItemsByItemIdsWithErrorDisabled" );
     }
 
-
     /**
-     * This method is to release objects and shut down OR close any connections after Test is completed before testing
-     * test method
+     * Test delete item with error enabled.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    @Rollback( value = true )
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
+    public void testDeleteItemsByItemIdsWithErrorEnabled( ) throws Exception {
+
+        logger.debug( "Starting test for DeleteItemsByItemIdsWithErrorEnabled" );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemsByItemIds( itemIds, TestConstants.IS_ERROR_TRUE );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
+
+        // check ErrorContainer
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
+        Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ).getCurrentError( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ).getErrors( ) );
+        Assert.assertTrue( itemDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+
+        // check DAOResponse
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isDelete( ) );
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isRequestSuccess( ) );
+        Assert.assertEquals( TestConstants.falseMessage, itemIds.size( ), itemDAOResponse.getCount( ) );
+        Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getResults( ) );
+
+        logger.debug( "Starting test for DeleteItemsByItemIdsWithErrorEnabled" );
+    }
+    /**
+     * Tear down. This method is to release objects and shut down OR close any connections after Test is completed
+     * before testing test method
+     *
+     * @throws Exception the exception
      */
     @After
     @AfterTransaction

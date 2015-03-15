@@ -33,4 +33,14 @@ public interface AddressDAO {
             isError );
 
     DAOResponse< Address > deleteAddressesByAddressIds( List< Long > addressIds, boolean isError );
+
+    /**
+     * Delete all address.
+     *
+     * @param deleteAllItems the is delete all
+     * @param isError        the is error true
+     *
+     * @return the dAO response
+     */
+    DAOResponse< Address > deleteAllAddress( boolean deleteAllItems, boolean isError );
 }

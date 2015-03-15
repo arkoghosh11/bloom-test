@@ -4,6 +4,7 @@ package com.mana.innovative.rest;/**
  */
 
 import com.mana.innovative.constants.TestConstants;
+import com.mana.innovative.rest.filter.LoginFilter;
 import com.sun.jersey.spi.spring.container.servlet.SpringServlet;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
@@ -14,12 +15,17 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
 
 /**
- * Created by Bloom on 2/26/2015 : 9:00 PM
- * todo This class is for ...
+ * The type Rest test.
  */
 public class RestTest extends JerseyTest {
 
     private static final Logger logger = Logger.getLogger( RestTest.class );
+
+    /**
+     * Configure app descriptor. Added Custom contextPAth, rest class packages and context param Added
+     *
+     * @return the app descriptor
+     */
     @Override
     protected AppDescriptor configure() {
 
@@ -37,9 +43,9 @@ public class RestTest extends JerseyTest {
 //                        " file:./src/main/resources/web_config.xml")
 //              IMP Resource and Provider classes for spring-jersey servlet
                 .initParam("com.sun.jersey.config.property.packages", "com.mana.innovative.rest;org.codehaus.jackson.jaxrs")
-//                .contextParam("contextClass", "com.kohls.openapi.v1.common.test.MockableContext")
+                .addFilter( LoginFilter.class, "loginFilter" )
 //              NOTE Servlet class to be used servlets can be chained with filter
-                .servletClass(SpringServlet.class)
+                .servletClass( SpringServlet.class )
 //              Note context listener class , using spring's
                 .contextListenerClass(ContextLoaderListener.class)
 //              Note request listener class , using spring's
@@ -47,6 +53,9 @@ public class RestTest extends JerseyTest {
                 .build();
     }
 
+    /**
+     * Tear down.
+     */
     @Override
     @After
     public void tearDown( ) {

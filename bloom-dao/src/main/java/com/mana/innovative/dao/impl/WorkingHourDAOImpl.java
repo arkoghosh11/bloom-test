@@ -59,7 +59,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Error occurred while trying to fetch data from items table " + location, exception );
+            logger.error( "Error occurred while trying to fetch data from workingHours table " + location, exception );
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
@@ -119,6 +119,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
      * @return the dAO response
      */
     @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< WorkingHour > deleteWorkingHourByWorkingHrId( final long workingHourId, final boolean
             isError ) {
 
@@ -150,7 +151,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
         workingHourDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
-        return null;
+        return workingHourDAOResponse;
     }
 
     /**
@@ -162,6 +163,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
      * @return the dAO response
      */
     @Override
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< WorkingHour > deleteWorkingHoursByWorkingHrIds( List< Long > workingHourIds, boolean isError ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deleteWorkingHoursByWorkingHrIds()";
@@ -191,7 +193,54 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
         workingHourDAOResponse.setResults( null );
         workingHourDAOResponse.setErrorContainer( errorContainer );
         logger.debug( "Finishing " + location );
-        return null;
+        return workingHourDAOResponse;
     }
 
+    /**
+     * Delete all working hours.
+     *
+     * @param deleteAllWorkingHrs the delete all working hrs
+     * @param isError             the is error
+     *
+     * @return the dAO response
+     */
+    @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< WorkingHour > deleteAllWorkingHours( final boolean deleteAllWorkingHrs, final boolean isError ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteAllWorkingHours()";
+        log.debug( "Starting " + location );
+        DAOResponse< WorkingHour > workingHourDAOResponse = new DAOResponse<>( );
+        workingHourDAOResponse.setDelete( true );
+        workingHourDAOResponse.setCount( DAOConstants.ZERO );
+        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+
+        if ( deleteAllWorkingHrs ) {
+            try {
+                this.openDBTransaction( );
+                // Note: Will delete all WorkingHour class rows stored in DB will not delete anything from shop class
+                // Note: and it should not as a shop may or may not have any workingHours so shop class will still persist
+                Query query = session.createQuery( "delete from WorkingHour" );
+                int count = query.executeUpdate( );
+                workingHourDAOResponse.setCount( count );
+                workingHourDAOResponse.setRequestSuccess( true );
+//            transaction.commit();
+            } catch ( Exception exception ) {
+                if ( exception instanceof HibernateException ) {
+                    this.handleExceptions( ( HibernateException ) exception );
+                }
+                log.error( "Error occurred while trying to clear workingHours table " + location, exception );
+                if ( isError ) {
+                    errorContainer = this.fillErrorContainer( location, exception );
+                }
+                workingHourDAOResponse.setRequestSuccess( false );
+            } finally {
+                this.closeDBTransaction( );
+            }
+        }
+        workingHourDAOResponse.setResults( null );
+        workingHourDAOResponse.setErrorContainer( errorContainer );
+        log.debug( "Finishing " + location );
+        return workingHourDAOResponse;
+    }
 }

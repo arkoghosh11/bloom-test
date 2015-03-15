@@ -3,9 +3,8 @@ package com.mana.innovative.dao;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Item;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * The interface Item dao.
@@ -33,13 +32,13 @@ public interface ItemDAO {
     public DAOResponse< Item > deleteItemByItemId( long itemId, boolean isError );
 
     /**
-     * Delete item.
+     * Delete items by item ids.
      *
-     * @param item the item
+     * @param itemIds the item ids
      * @param isError the is error
      * @return the dAO response
      */
-    public DAOResponse< Item > deleteItem( Item item, boolean isError );
+    public DAOResponse< Item > deleteItemsByItemIds( List< Long > itemIds, boolean isError );
 
     /* IMP UPDATE Functions */
 

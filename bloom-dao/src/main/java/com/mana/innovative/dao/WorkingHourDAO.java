@@ -19,7 +19,7 @@ public interface WorkingHourDAO {
      * @param isError the is error
      * @return the working hour by working hour id
      */
-    DAOResponse< WorkingHour > getWorkingHourByWorkingHourId( long workingHourId, boolean isError );
+    public DAOResponse< WorkingHour > getWorkingHourByWorkingHourId( long workingHourId, boolean isError );
 
     /**
      * Gets working hours.
@@ -27,7 +27,7 @@ public interface WorkingHourDAO {
      * @param isError the is error
      * @return the working hours
      */
-    DAOResponse< WorkingHour > getWorkingHours( boolean isError );
+    public DAOResponse< WorkingHour > getWorkingHours( boolean isError );
 
     /**
      * Delete working hour by working hr ids.
@@ -37,7 +37,7 @@ public interface WorkingHourDAO {
      *
      * @return the dAO response
      */
-    DAOResponse< WorkingHour > deleteWorkingHourByWorkingHrId( long workingHourId, boolean
+    public DAOResponse< WorkingHour > deleteWorkingHourByWorkingHrId( long workingHourId, boolean
             isError );
 
     /**
@@ -48,5 +48,15 @@ public interface WorkingHourDAO {
      *
      * @return the dAO response
      */
-    DAOResponse< WorkingHour > deleteWorkingHoursByWorkingHrIds( List< Long > workingHourIds, boolean isError );
+    public DAOResponse< WorkingHour > deleteWorkingHoursByWorkingHrIds( List< Long > workingHourIds, boolean isError );
+
+    /**
+     * Delete all working hours.
+     *
+     * @param deleteAllWorkingHrs the delete all working hrs
+     * @param isError             the is error
+     *
+     * @return the dAO response
+     */
+    public DAOResponse< WorkingHour > deleteAllWorkingHours( boolean deleteAllWorkingHrs, boolean isError );
 }

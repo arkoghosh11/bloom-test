@@ -13,7 +13,6 @@ import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -136,16 +135,17 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     }
 
     /**
-     * This method is to delete an item by Item itself
+     * Delete items by item ids.
      *
-     * @param item {@link Item}
+     * @param itemIds the item ids
+     * @param isError the is error
      *
-     * @return {@link Boolean} Returns a boolean value to indicate a successful deletion
+     * @return the dAO response
      */
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< Item > deleteItem( Item item, boolean isError ) {
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
+    public DAOResponse< Item > deleteItemsByItemIds( List< Long > itemIds, boolean isError ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#" + "deleteItem()";
+        String location = this.getClass( ).getCanonicalName( ) + "#" + "deleteItemsByItemIds()";
         log.debug( "Starting " + location );
         DAOResponse< Item > itemDAOResponse = new DAOResponse<>( );
         itemDAOResponse.setDelete( true );
@@ -154,17 +154,16 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 
         try {
             this.openDBTransaction( );
-            List items = session.createCriteria( Item.class )
-                    .add( Restrictions.eq( "itemId", item.getItemId( ) ) ).list( );
-            session.delete( items.get( DAOConstants.ZERO ) );
+            Query query = session.createQuery( "DELETE from Item where itemId in(:itemIds)" );
+            query.setParameterList( "itemIds", itemIds );
+            itemDAOResponse.setCount( query.executeUpdate( ) );
             itemDAOResponse.setRequestSuccess( true );
-            itemDAOResponse.setCount( items.size( ) );
 //            transaction.commit();
         } catch ( Exception exception ) {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            log.error( "Error occurred while trying to delete an item " + location, exception );
+            log.error( "Error occurred while trying to delete items " + location, exception );
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }

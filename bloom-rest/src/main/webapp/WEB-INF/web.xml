@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-	         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"	id="WebApp_ID" version="3.0">
+	         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
     <display-name>Bloom</display-name>
 
     <welcome-file-list>
@@ -21,23 +21,22 @@
             classpath*:web_config.xml
         </param-value>
     </context-param>
-
+    <!--location for login credentials-->
     <context-param>
         <param-name>location</param-name>
         <param-value>login_credentials</param-value>
     </context-param>
 
-    <!--<filter>-->
-        <!--<filter-name>Login Filter</filter-name>-->
-        <!--<filter-class>com.mana.innovative.rest.filter.LoginFilter</filter-class>-->
-    <!--</filter>-->
-    <!--<filter-mapping>-->
-        <!--<filter-name>Login Filter</filter-name>-->
-        <!--<servlet-name>Jersey REST Service</servlet-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
-        <!--<dispatcher>REQUEST</dispatcher>-->
-    <!--</filter-mapping>-->
-
+    <filter>
+        <filter-name>Login Filter</filter-name>
+        <filter-class>com.mana.innovative.rest.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Login Filter</filter-name>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
 
 
     <!-- @Note Rest Web Services -->
@@ -66,7 +65,8 @@
     </listener>
     <listener>
         <listener-class>
-            org.springframework.web.context.request.RequestContextListener</listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
     </listener>
 
     <!-- @Note SOAP Web Services -->

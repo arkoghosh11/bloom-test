@@ -56,11 +56,10 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
                         "of " + DAOConstants.ONE );
             }
         } catch ( Exception exception ) {
-            exception.printStackTrace( );
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Error occurred while trying to fetch data from items table for " + location, exception );
+            logger.error( "Error occurred while trying to fetch data from address table for " + location, exception );
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
@@ -121,6 +120,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
      * @return the dAO response
      */
     @Override
+    @Transactional( propagation = Propagation.REQUIRED )
     public DAOResponse< Address > deleteAddressByAddressId( final long addressId, final boolean
             isError ) {
 
@@ -152,7 +152,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
         addressDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
-        return null;
+        return addressDAOResponse;
     }
 
     /**
@@ -164,6 +164,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
      * @return the dAO response
      */
     @Override
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Address > deleteAddressesByAddressIds( List< Long > addressIds, boolean isError ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deleteAddressesByAddressIds()";
@@ -193,7 +194,55 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
         addressDAOResponse.setResults( null );
         addressDAOResponse.setErrorContainer( errorContainer );
         logger.debug( "Finishing " + location );
-        return null;
+        return addressDAOResponse;
+    }
+
+    /**
+     * Delete all address.
+     *
+     * @param deleteAllAddresses the is delete all
+     * @param isError            the is error true
+     *
+     * @return the dAO response
+     */
+    @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< Address > deleteAllAddress( final boolean deleteAllAddresses, final boolean isError ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteAllAddresses()";
+        log.debug( "Starting " + location );
+        DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
+        addressDAOResponse.setDelete( true );
+        addressDAOResponse.setCount( DAOConstants.ZERO );
+        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+
+        if ( deleteAllAddresses ) {
+            try {
+                this.openDBTransaction( );
+                // Note: Will delete all Address class rows stored in DB also will delete anything from shop class
+                // Note: and they are one-to-one mapped which means if no address then no shop can exist there
+                Query query = session.createQuery( "delete from Address" );
+                int count = query.executeUpdate( );
+                addressDAOResponse.setCount( count );
+                addressDAOResponse.setRequestSuccess( true );
+//            transaction.commit();
+            } catch ( Exception exception ) {
+                if ( exception instanceof HibernateException ) {
+                    this.handleExceptions( ( HibernateException ) exception );
+                }
+                log.error( "Error occurred while trying to clear address table " + location, exception );
+                if ( isError ) {
+                    errorContainer = this.fillErrorContainer( location, exception );
+                }
+                addressDAOResponse.setRequestSuccess( false );
+            } finally {
+                this.closeDBTransaction( );
+            }
+        }
+        addressDAOResponse.setResults( null );
+        addressDAOResponse.setErrorContainer( errorContainer );
+        log.debug( "Finishing " + location );
+        return addressDAOResponse;
     }
 
 }
