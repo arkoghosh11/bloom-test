@@ -36,7 +36,7 @@ CREATE TABLE `address` (
   UNIQUE KEY `FK_address_locations_location_id` (`location_id`)
 )
   ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 1409027
   DEFAULT CHARSET = latin1;
 
 /*Data for the table `address` */
@@ -216,7 +216,7 @@ CREATE TABLE `hibernate_sequences` (
 /*Data for the table `hibernate_sequences` */
 
 INSERT INTO `hibernate_sequences` (`sequence_name`, `sequence_next_hi_value`)
-VALUES ('items', 34), ('shops', 35), ('address', 25), ('working_hours', 34);
+VALUES ('items', 55), ('shops', 54), ('address', 44), ('working_hours', 53);
 
 /*Table structure for table `items` */
 
@@ -241,11 +241,11 @@ CREATE TABLE `items` (
   PRIMARY KEY (`item_id`),
   KEY `FK_items_shops_shop_id` (`shop_id`),
   CONSTRAINT `FK_items_shops_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`shop_id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE CASCADE
 )
   ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 1769477
   DEFAULT CHARSET = latin1;
 
 /*Data for the table `items` */
@@ -253,7 +253,7 @@ CREATE TABLE `items` (
 INSERT INTO `items` (`item_id`, `item_name`, `item_price`, `item_type`, `item_price_currency`, `quantity`, `weight`, `bought_from`, `quantity_type`, `item_sub_type`, `weighted_unit`, `bought_date`, `created_date`, `updated_date`, `shop_id`)
 VALUES
   (0, 'default_name', 0, 'default_type', 'Dollar', 0, 0, 'default', 'unit', 'default_type', 'kg', '2015-02-25 01:00:00',
-   '2015-01-29 04:45:31', '2015-02-26 10:51:04', 0),
+   '2015-01-29 04:45:31', '2015-03-14 15:04:20', 0),
   (1, 'test', 2, 'test_type', 'Rupee', 1, 1, 'test', 'unit', 'test', 'pound', '2015-02-25 01:00:00',
    '2015-01-29 04:50:08', '2015-02-28 01:13:49', 1);
 
@@ -383,7 +383,7 @@ CREATE TABLE `shops` (
     ON UPDATE CASCADE
 )
   ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 1736707
   DEFAULT CHARSET = latin1;
 
 /*Data for the table `shops` */
@@ -451,10 +451,11 @@ CREATE TABLE `working_hours` (
   PRIMARY KEY (`working_hour_id`),
   KEY `FK_working_hours_shops_shop_id` (`shop_id`),
   CONSTRAINT `FK_working_hours_shops_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`shop_id`)
+    ON DELETE CASCADE
     ON UPDATE CASCADE
 )
   ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 1703938
   DEFAULT CHARSET = latin1;
 
 /*Data for the table `working_hours` */
