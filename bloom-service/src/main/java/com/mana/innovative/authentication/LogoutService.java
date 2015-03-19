@@ -1,19 +1,20 @@
-package com.mana.innovative.authentication;/**
- * Created by alex1 on 1/29/2015.
- * This is a class for .. todo 
- */
-
+package com.mana.innovative.authentication;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by Bloom on 1/29/2015 : 11:10 PM
- * todo This class is for ...
+ * The type Logout service.
+ * todo complete log out service
  */
 @Service
 public class LogoutService {
 
+    /**
+     * Do log out.
+     *
+     * @param httpSession the http session
+     */
     public void doLogOut (HttpSession httpSession) {
 
         if(httpSession != null){

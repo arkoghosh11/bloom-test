@@ -4,6 +4,7 @@ import com.mana.innovative.dto.Item;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * The interface Item service.
@@ -42,14 +43,13 @@ public interface ItemService {
     public Response updateItem( Item itemDTO, boolean isError );
 
     /**
-     * Delete item.
+     * Delete items by item ids.
      *
-     * @param itemDTO the item dTO
+     * @param itemIds the item ids
      * @param isError the is error
-     *
      * @return the response
      */
-    public Response deleteItem( Item itemDTO, boolean isError );
+    public Response deleteItemsByItemIds( List< Long > itemIds, boolean isError );
 
     /**
      * Delete item by item id.

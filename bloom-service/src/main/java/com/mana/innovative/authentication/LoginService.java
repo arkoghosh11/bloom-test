@@ -16,8 +16,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Created by Bloom on 1/29/2015 : 11:10 PM
- * todo This class is for ...
+ * The type Login service.
  */
 @Service
 public class LoginService {
@@ -27,6 +26,14 @@ public class LoginService {
     @Value (value = "${loginVariable}")
     private String loginParameterNameForSession;
 
+    /**
+     * Do login.
+     *
+     * @param httpRequest the http request
+     * @param httpSession the http session
+     *
+     * @return the boolean
+     */
     public boolean doLogin (HttpServletRequest httpRequest, HttpSession httpSession) {
 
         if (loginParameterNameForSession == null) {
@@ -46,7 +53,9 @@ public class LoginService {
             logger.error("Failed to read or load Properties from system located file at " + envLocation, e);
             return false;
         }
-
+        // todo need to make these keys load from properties file
+        // IMP by loading from properties file we can make it simple
+        // IMP and more secured as the file can be removed from location
         String user = httpRequest.getParameter("user_name");
         String password = httpRequest.getParameter("password");
         String appKeyValue = httpRequest.getParameter("app_key");
@@ -83,6 +92,12 @@ public class LoginService {
         return true;
     }
 
+    /**
+     * Check login.
+     *
+     * @param httpRequest the http request
+     * @return the boolean
+     */
     public boolean checkLogin (final HttpServletRequest httpRequest) {
 
         final HttpSession httpSession = httpRequest.getSession();

@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * The type Item service impl.
@@ -28,6 +29,7 @@ public class ItemServiceImpl implements ItemService {
 
 
     private static final Logger logger = Logger.getLogger( ItemServiceImpl.class );
+    private final int ONE = 1;
     /**
      * The Item dAO.
      */
@@ -54,13 +56,13 @@ public class ItemServiceImpl implements ItemService {
         try {
             itemDAOResponse = itemDAOImpl.getItemByItemId( itemId, isError );
 
-        } catch ( Exception e ) {
-            if ( e instanceof HibernateException ) {
-                logger.error( "Hibernate Exception occurred while trying fetch data from DB " + location, e );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                logger.error( "Hibernate Exception occurred while trying fetch data from DB " + location, exception );
             } else
-                logger.error( "Exception occurred in" + location, e );
+                logger.error( "Exception occurred in" + location, exception );
 
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
             response = Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
             return response;
         }
@@ -69,8 +71,8 @@ public class ItemServiceImpl implements ItemService {
             response = Response.status( Response.Status.OK ).entity( itemResponseContainer ).build( );
             return response;
 
-        } catch ( Exception e ) {
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+        } catch ( Exception exception ) {
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
             response = Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
             return response;
         } finally {
@@ -97,19 +99,19 @@ public class ItemServiceImpl implements ItemService {
         com.mana.innovative.domain.Item itemDomain = new com.mana.innovative.domain.Item( );
         try {
             itemDomain = ItemDomainDTOConverter.getConvertedDomainFromDTO( itemDomain, itemDTO );
-        } catch ( IllegalArgumentValueException | NullPointerException e ) {
-            logger.error( "Exception occurred while trying to convert object", e );
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+        } catch ( IllegalArgumentValueException | NullPointerException exception ) {
+            logger.error( "Exception occurred while trying to convert object", exception );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
             return Response.status( Response.Status.BAD_REQUEST ).entity( itemResponseContainer ).build( );
         }
         try {
             itemDAOResponse = itemDAOImpl.createItem( itemDomain, isError );
-        } catch ( Exception e ) {
-            if ( e instanceof HibernateException ) {
-                logger.error( "Hibernate Exception occurred while trying to send data to DB " + location, e );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                logger.error( "Hibernate Exception occurred while trying to send data to DB " + location, exception );
             } else
-                logger.error( "Exception occurred in" + location, e );
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+                logger.error( "Exception occurred in" + location, exception );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
             response = Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
             return response;
         }
@@ -118,10 +120,10 @@ public class ItemServiceImpl implements ItemService {
             response = Response.status( Response.Status.OK ).entity( itemResponseContainer ).build( );
             return response;
 
-        } catch ( Exception e ) {
+        } catch ( Exception exception ) {
 
-            logger.error( "Exception occurred " + location, e );
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+            logger.error( "Exception occurred " + location, exception );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
             response = Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
             return response;
 
@@ -145,7 +147,7 @@ public class ItemServiceImpl implements ItemService {
         com.mana.innovative.domain.Item itemDomain = new com.mana.innovative.domain.Item( );
         String location = this.getClass( ).getCanonicalName( ) + "#updateItem";
         ItemResponseContainer< ItemsPayload > itemResponseContainer;
-        if ( itemDTO.getItemId( ) < 1 ) {
+        if ( itemDTO.getItemId( ) < ONE ) {
             itemResponseContainer = ItemResponseBuilder.buildError( location, isError,
                     new IllegalArgumentValueException( ", ItemId is Required for " +
                             "Updating an Item" ) );
@@ -154,25 +156,25 @@ public class ItemServiceImpl implements ItemService {
         itemDomain.setItemId( itemDTO.getItemId( ) );
         try {
             itemDomain = ItemDomainDTOConverter.getConvertedDomainFromDTO( itemDomain, itemDTO );
-        } catch ( IllegalArgumentValueException | NullPointerException e ) {
-            logger.error( "Exception occurred while trying to convert object", e );
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+        } catch ( IllegalArgumentValueException | NullPointerException exception ) {
+            logger.error( "Exception occurred while trying to convert object", exception );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
             return Response.status( Response.Status.BAD_REQUEST ).entity( itemResponseContainer ).build( );
-        } catch ( Exception e ) {
-            logger.error( "Exception occurred in " + location, e );
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+        } catch ( Exception exception ) {
+            logger.error( "Exception occurred in " + location, exception );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
             return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
         }
         DAOResponse< com.mana.innovative.domain.Item > itemDAOResponse;
         try {
             itemDAOResponse = itemDAOImpl.updateItem( itemDomain, isError );
-        } catch ( Exception e ) {
-            if ( e instanceof HibernateException ) {
-                logger.error( "Hibernate Exception occurred while trying to send data to DB " + location, e );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                logger.error( "Hibernate Exception occurred while trying to send data to DB " + location, exception );
             } else
-                logger.error( "Exception occurred in" + location, e );
+                logger.error( "Exception occurred in" + location, exception );
 
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
             return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
         }
         itemResponseContainer = ItemResponseBuilder.build( itemDAOResponse, isError );
@@ -182,53 +184,40 @@ public class ItemServiceImpl implements ItemService {
     }
 
     /**
-     * This method is to Delete an item with its instance required from client.
+     * Delete items by item ids.
      *
-     * @param itemDTO the item
+     * @param itemIds the item ids
      * @param isError the is error
      *
      * @return the response
      */
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public Response deleteItem( Item itemDTO, boolean isError ) {
+    public Response deleteItemsByItemIds( List< Long > itemIds, boolean isError ) {
 
-        logger.debug( "Initiating deleteItem for incoming item, itemDAO injected successfully" );
+        logger.debug( "Initiating deleteItemsByItemIds for incoming itemIds, itemDAO injected successfully" );
 
-        com.mana.innovative.domain.Item itemDomain = new com.mana.innovative.domain.Item( );
-
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteITem";
-        ItemResponseContainer< ItemsPayload > itemResponseContainer = null;
-        if ( itemDTO.getItemId( ) < 1 ) {
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteItemsByItemIds";
+        ItemResponseContainer< ItemsPayload > itemResponseContainer;
+        if ( itemIds.isEmpty( ) ) {
             itemResponseContainer = ItemResponseBuilder.buildError( location, isError
-                    , new IllegalArgumentValueException(
-                    ", ItemId is required for deleting an Item" ) );
+                    , new IllegalArgumentValueException( ", ItemIds are required for deleting Items" ) );
             return Response.status( Response.Status.BAD_REQUEST ).entity( itemResponseContainer ).build( );
         }
-        itemDomain.setItemId( itemDTO.getItemId( ) );
-        try {
-            itemDomain = ItemDomainDTOConverter.getConvertedDomainFromDTO( itemDomain, itemDTO );
-        } catch ( IllegalArgumentValueException | NullPointerException e ) {
-            logger.error( "Exception occurred while trying to convert object", e );
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
-            return Response.status( Response.Status.BAD_REQUEST ).entity( itemResponseContainer ).build( );
-        } catch ( Exception e ) {
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
-            return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
-        }
+
         DAOResponse< com.mana.innovative.domain.Item > itemDAOResponse;
         try {
-            itemDAOResponse = itemDAOImpl.deleteItem( itemDomain, isError );
-        } catch ( Exception e ) {
-            if ( e instanceof HibernateException ) {
-                logger.error( "Hibernate Exception occurred while trying to send data to DB " + location, e );
+            itemDAOResponse = itemDAOImpl.deleteItemsByItemIds( itemIds, isError );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                logger.error( "Hibernate Exception occurred while trying to send data to DB " + location, exception );
             } else
-                logger.error( "Exception occurred in" + location, e );
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+                logger.error( "Exception occurred in" + location, exception );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
             return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
         }
         itemResponseContainer = ItemResponseBuilder.build( itemDAOResponse, isError );
 
-        logger.debug( " Response for deleteItem generated successfully from Service Level" );
+        logger.debug( " Response for deleteItemsByItemIds generated successfully from Service Level" );
         return Response.ok( ).entity( itemResponseContainer ).build( );
     }
 
@@ -247,7 +236,7 @@ public class ItemServiceImpl implements ItemService {
         String location = this.getClass( ).getCanonicalName( ) + "#deleteITem";
         ItemResponseContainer< ItemsPayload > itemResponseContainer;
 
-        if ( itemId < 1 ) {
+        if ( itemId < ONE ) {
             itemResponseContainer = ItemResponseBuilder.buildError( location, isError,
                     new IllegalArgumentValueException( ", ItemId is required for deleting an Item" ) );
             return Response.status( Response.Status.BAD_REQUEST ).entity( itemResponseContainer ).build( );
@@ -255,13 +244,13 @@ public class ItemServiceImpl implements ItemService {
         DAOResponse< com.mana.innovative.domain.Item > itemDAOResponse;
         try {
             itemDAOResponse = itemDAOImpl.deleteItemByItemId( itemId, isError );
-        } catch ( Exception e ) {
-            if ( e instanceof HibernateException ) {
-                logger.error( "Hibernate Exception occurred while trying to send data to DB " + location, e );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                logger.error( "Hibernate Exception occurred while trying to send data to DB " + location, exception );
             } else
-                logger.error( "Exception occurred in" + location, e );
+                logger.error( "Exception occurred in" + location, exception );
 
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
             return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
         }
         itemResponseContainer = ItemResponseBuilder.build( itemDAOResponse, isError );

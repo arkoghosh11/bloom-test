@@ -12,4 +12,5 @@ public class ServiceConstants {
     public static final int HALF_HOUR = (30* 60);
     public static final boolean TRUE = true;
     public static final String HASH = "#";
+    public static final String FALSE = "false";
 }
