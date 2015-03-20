@@ -2,10 +2,13 @@ package com.mana.innovative.dto;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
 
 /**
  * The type Location.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @XmlRootElement(name = "location")
 public class Location {

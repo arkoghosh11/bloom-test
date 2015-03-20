@@ -1,8 +1,11 @@
 package com.mana.innovative.constants;
 
 /**
- * Created by alex1 on 1/28/2015.
- * This is a domain class
+ * The type Test constants.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class TestConstants {
 

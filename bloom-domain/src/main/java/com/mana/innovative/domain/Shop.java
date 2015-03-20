@@ -1,14 +1,26 @@
-package com.mana.innovative.domain;/**
- * Created by Rono on 2/27/2015.
- * This is a class for .. todo 
- */
+package com.mana.innovative.domain;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
 
 /**
  * The type Shop.
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Entity
 @Table( name = "shops" )

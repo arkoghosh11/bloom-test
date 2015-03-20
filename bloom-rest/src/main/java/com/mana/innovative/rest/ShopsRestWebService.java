@@ -1,7 +1,7 @@
 package com.mana.innovative.rest;
 
 import com.mana.innovative.constants.DAOConstants;
-import com.mana.innovative.service.ItemsService;
+import com.mana.innovative.service.ShopsService;
 import com.mana.innovative.utilities.response.ResponseUtility;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -17,52 +17,51 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * The type Items rest web service.
+ * The type Shops rest web service.
  *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Component
-@Path( "/{items : (?i)items}" ) //@Path( "/{tabs : (?i)tabs}" )
-public class ItemsRestWebService {
+@Path( "/{shops : (?i)shops}" )
+public class ShopsRestWebService {
 
-    private static final Logger logger = Logger.getLogger( ItemsRestWebService.class );
-    /* Constructor injection */
+    private static final Logger logger = Logger.getLogger( ShopsRestWebService.class );
 
     /**
-     * The Items service impl.
+     * The Shops service impl.
      */
-    @Resource( name = "itemsServiceImpl" )
-    ItemsService itemsServiceImpl;
+    @Resource( name = "shopsServiceImpl" )
+    ShopsService shopsServiceImpl;
 
     /**
-     * Gets items.
+     * Gets shops.
      *
      * @param isError the is error
      *
-     * @return the items
+     * @return the shops
      */
     @GET
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response getItems( @QueryParam( value = "is_error" ) @DefaultValue( value = DAOConstants.FALSE ) boolean
+    public Response getShops( @QueryParam( value = "is_error" ) @DefaultValue( value = DAOConstants.FALSE ) boolean
                                       isError ) {
 
 //        boolean isAuthenticated = loginService.verifyLogin(httpSession);
 //        if (!isAuthenticated) return ResponseUtility.unauthorizedAccess();
 
         try {
-            return itemsServiceImpl.getItems( isError );
+            return shopsServiceImpl.getShops( isError );
         } catch ( Exception e ) {
-            logger.error( " Failed to retrieve Items" + e );
+            logger.error( " Failed to retrieve Shops" + e );
             return ResponseUtility.internalServerErrorMsg( null );
         } finally {
-            logger.debug( "Response for Item Rest Service Completed " );
+            logger.debug( "Response for Shop Rest Service Completed " );
         }
     }
 
     /**
-     * Delete items.
+     * Delete shops.
      *
      * @param isError     the is error
      * @param isDeleteAll the is delete all
@@ -71,16 +70,17 @@ public class ItemsRestWebService {
      */
     @DELETE
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response deleteItems( @QueryParam( value = "is_error" ) @DefaultValue( value = DAOConstants.FALSE ) boolean
+    public Response deleteShops( @QueryParam( value = "is_error" ) @DefaultValue( value = DAOConstants.FALSE ) boolean
                                          isError, @QueryParam( value = "is_delete_all" ) boolean isDeleteAll ) {
         //return ResponseUtility.forbiddenRequest( null );
         try {
-            return itemsServiceImpl.deleteAllItems( isError, isDeleteAll );
+            return null;// todo shopsServiceImpl.deleteAllShops( isError, isDeleteAll );
         } catch ( Exception e ) {
-            logger.error( " Failed to delete All Items" + e );
+            logger.error( " Failed to delete All Shops" + e );
             return ResponseUtility.internalServerErrorMsg( null );
         } finally {
-            logger.debug( "Response for Items Rest Service Completed " );
+            logger.debug( "Response for Shops Rest Service Completed " );
         }
     }
+
 }

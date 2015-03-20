@@ -1,15 +1,14 @@
 package com.mana.innovative.dto;
 
-/**
- * Created by Rono on 2/27/2015.
- * This is a class for .. todo 
- */
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * The type Working hour.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @XmlRootElement( name = "working_hour" )
 public class WorkingHour {

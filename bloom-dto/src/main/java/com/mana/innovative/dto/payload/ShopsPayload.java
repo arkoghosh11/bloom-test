@@ -1,7 +1,4 @@
-package com.mana.innovative.dto.payload;/**
- * Created by Rono on 2/27/2015.
- * This is a class for .. todo 
- */
+package com.mana.innovative.dto.payload;
 
 import com.mana.innovative.dto.Item;
 import com.mana.innovative.dto.Shop;
@@ -11,8 +8,11 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.List;
 
 /**
- * Created by Bloom on 2/27/2015 : 5:58 PM
- * todo This class is for ...
+ * The type Shops payload.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class ShopsPayload {
 

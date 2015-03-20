@@ -15,7 +15,9 @@ import java.util.Map;
  * is match applied to to a specified column with whichever match the user desires like a user may enter a few letter
  * and do Anywhere or a word and to exact. possible matchTypes are Exact, Anywhere, Start, End
  *
- * @author Bloom Date: 10/2/12 Time: 3:35 PM
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright Date: 10/2/12 Time: 3:35 PM
  * @since: jdk 1.7
  */
 public class ItemSearchOption {

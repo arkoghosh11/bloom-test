@@ -8,6 +8,10 @@ import java.util.List;
 
 /**
  * The interface Shop dAO.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Repository
 public interface ShopDAO {

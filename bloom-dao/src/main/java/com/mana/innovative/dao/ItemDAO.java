@@ -7,7 +7,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * The interface Item dao.
+ * The interface Item dAO.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Repository
 public interface ItemDAO {

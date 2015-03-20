@@ -29,6 +29,10 @@ import java.util.Map;
 
 /**
  * The type Basic dAO.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Repository
 public class BasicDAO {

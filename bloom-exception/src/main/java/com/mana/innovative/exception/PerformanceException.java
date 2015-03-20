@@ -6,19 +6,22 @@
 package com.mana.innovative.exception;
 
 /**
- * @author Bloom
+ * The type Performance exception.
  *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class PerformanceException extends Exception {
 
-	/**
-     * 
+    /**
+     *
      */
     private static final long serialVersionUID = 1L;
-    
-    public String toString() {
-    	
-		return "Performance Exception Raised";
+
+    public String toString( ) {
+
+        return "Performance Exception Raised";
     }
-	
+
 }

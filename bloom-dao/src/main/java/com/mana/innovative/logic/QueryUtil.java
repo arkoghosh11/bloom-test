@@ -11,17 +11,14 @@ import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
- *
- * @author Bloom
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  *         Date: 10/2/12
  *         Time: 9:58 AM
  * @since: jdk 1.7
  */
 public class QueryUtil {
-
-    public final String START_VALUE = "start";
-    public final String END_VALUE = "end";
-    public final String EXACT_VALUE = "exact";
 
     private static final String EQ = "eq";
     private static final String NE = "ne";
@@ -31,6 +28,9 @@ public class QueryUtil {
     private static final String LT = "lt";
     private static final String LIKE = "like";
     private static final String I_LIKE = "ilike";
+    public final String START_VALUE = "start";
+    public final String END_VALUE = "end";
+    public final String EXACT_VALUE = "exact";
 
     public Criteria addBetweenRestriction ( Criteria criteria, String property, String minValue, String maxValue ) {
         return criteria.add( Restrictions.between( property, minValue, maxValue ) );

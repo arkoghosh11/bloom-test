@@ -9,23 +9,28 @@ import java.util.List;
 
 /**
  * The type DAO response.
- * @param <T>  the type parameter
+ *
+ * @param <T> the type parameter
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
-public class DAOResponse<T> {
+public class DAOResponse < T > {
 
     private boolean isUpdate;
     private boolean isCreate;
     private boolean isDelete;
     private boolean requestSuccess;
 
-    private int            count;
-    private int            totalLimit;
-    @DefaultValue (value = DAOConstants.STRING_ZERO)
+    private int count;
+    private int totalLimit;
+    @DefaultValue( value = DAOConstants.STRING_ZERO )
     private int startLimit;
-    @DefaultValue (value = DAOConstants.DEFAULT_STRING_PAGE_LIMIT)
+    @DefaultValue( value = DAOConstants.DEFAULT_STRING_PAGE_LIMIT )
     private int offset;
 
-    private List<T> results;
+    private List< T > results;
 
     private ErrorContainer errorContainer;
 
@@ -34,19 +39,19 @@ public class DAOResponse<T> {
      * Sets error.
      *
      * @param location the location
-     * @param e the e
+     * @param e        the e
      */
-    public void setError (final String location, final Exception e) {
+    public void setError( final String location, final Exception e ) {
 
-        if (this.errorContainer == null) {
-            errorContainer = new ErrorContainer();
+        if ( this.errorContainer == null ) {
+            errorContainer = new ErrorContainer( );
         }
-        Error error = new Error();
-        error.setErrorData(e);
-        error.setErrorLocation(location);
-        error.setErrorType(e.getClass().getCanonicalName());
-        error.setErrorMessage(e.getMessage());
-        errorContainer.addError(new Error());
+        Error error = new Error( );
+        error.setErrorData( e );
+        error.setErrorLocation( location );
+        error.setErrorType( e.getClass( ).getCanonicalName( ) );
+        error.setErrorMessage( e.getMessage( ) );
+        errorContainer.addError( new Error( ) );
     }
 
     /**
@@ -54,7 +59,7 @@ public class DAOResponse<T> {
      *
      * @return the boolean
      */
-    public boolean isUpdate () {
+    public boolean isUpdate( ) {
 
         return isUpdate;
     }
@@ -64,7 +69,7 @@ public class DAOResponse<T> {
      *
      * @param isUpdate the is update
      */
-    public void setUpdate (final boolean isUpdate) {
+    public void setUpdate( final boolean isUpdate ) {
 
         this.isUpdate = isUpdate;
     }
@@ -74,7 +79,7 @@ public class DAOResponse<T> {
      *
      * @return the boolean
      */
-    public boolean isCreate () {
+    public boolean isCreate( ) {
 
         return isCreate;
     }
@@ -84,7 +89,7 @@ public class DAOResponse<T> {
      *
      * @param isCreate the is create
      */
-    public void setCreate (final boolean isCreate) {
+    public void setCreate( final boolean isCreate ) {
 
         this.isCreate = isCreate;
     }
@@ -94,7 +99,7 @@ public class DAOResponse<T> {
      *
      * @return the boolean
      */
-    public boolean isDelete () {
+    public boolean isDelete( ) {
 
         return isDelete;
     }
@@ -104,7 +109,7 @@ public class DAOResponse<T> {
      *
      * @param isDelete the is delete
      */
-    public void setDelete (final boolean isDelete) {
+    public void setDelete( final boolean isDelete ) {
 
         this.isDelete = isDelete;
     }
@@ -114,7 +119,7 @@ public class DAOResponse<T> {
      *
      * @return the boolean
      */
-    public boolean isRequestSuccess () {
+    public boolean isRequestSuccess( ) {
 
         return requestSuccess;
     }
@@ -124,7 +129,7 @@ public class DAOResponse<T> {
      *
      * @param requestSuccess the request success
      */
-    public void setRequestSuccess (final boolean requestSuccess) {
+    public void setRequestSuccess( final boolean requestSuccess ) {
 
         this.requestSuccess = requestSuccess;
     }
@@ -134,7 +139,7 @@ public class DAOResponse<T> {
      *
      * @return the count
      */
-    public int getCount () {
+    public int getCount( ) {
 
         return count;
     }
@@ -144,7 +149,7 @@ public class DAOResponse<T> {
      *
      * @param count the count
      */
-    public void setCount (final int count) {
+    public void setCount( final int count ) {
 
         this.count = count;
     }
@@ -154,7 +159,7 @@ public class DAOResponse<T> {
      *
      * @return the total limit
      */
-    public int getTotalLimit () {
+    public int getTotalLimit( ) {
 
         return totalLimit;
     }
@@ -164,7 +169,7 @@ public class DAOResponse<T> {
      *
      * @param totalLimit the total limit
      */
-    public void setTotalLimit (final int totalLimit) {
+    public void setTotalLimit( final int totalLimit ) {
 
         this.totalLimit = totalLimit;
     }
@@ -174,7 +179,7 @@ public class DAOResponse<T> {
      *
      * @return the start limit
      */
-    public int getStartLimit () {
+    public int getStartLimit( ) {
 
         return startLimit;
     }
@@ -184,7 +189,7 @@ public class DAOResponse<T> {
      *
      * @param startLimit the start limit
      */
-    public void setStartLimit (final int startLimit) {
+    public void setStartLimit( final int startLimit ) {
 
         this.startLimit = startLimit;
     }
@@ -194,7 +199,7 @@ public class DAOResponse<T> {
      *
      * @return the offset
      */
-    public int getOffset () {
+    public int getOffset( ) {
 
         return offset;
     }
@@ -204,7 +209,7 @@ public class DAOResponse<T> {
      *
      * @param offset the offset
      */
-    public void setOffset (final int offset) {
+    public void setOffset( final int offset ) {
 
         this.offset = offset;
     }
@@ -214,7 +219,7 @@ public class DAOResponse<T> {
      *
      * @return the results
      */
-    public List<T> getResults () {
+    public List< T > getResults( ) {
 
         return results;
     }
@@ -224,7 +229,7 @@ public class DAOResponse<T> {
      *
      * @param results the results
      */
-    public void setResults (final List<T> results) {
+    public void setResults( final List< T > results ) {
 
         this.results = results;
     }
@@ -234,7 +239,7 @@ public class DAOResponse<T> {
      *
      * @return the error container
      */
-    public ErrorContainer getErrorContainer () {
+    public ErrorContainer getErrorContainer( ) {
 
         return errorContainer;
     }
@@ -244,7 +249,7 @@ public class DAOResponse<T> {
      *
      * @param errorContainer the error container
      */
-    public void setErrorContainer (final ErrorContainer errorContainer) {
+    public void setErrorContainer( final ErrorContainer errorContainer ) {
 
         this.errorContainer = errorContainer;
     }

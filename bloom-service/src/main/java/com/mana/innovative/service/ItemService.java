@@ -8,6 +8,10 @@ import java.util.List;
 
 /**
  * The interface Item service.
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Service
 public interface ItemService {
@@ -47,6 +51,7 @@ public interface ItemService {
      *
      * @param itemIds the item ids
      * @param isError the is error
+     *
      * @return the response
      */
     public Response deleteItemsByItemIds( List< Long > itemIds, boolean isError );

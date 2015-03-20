@@ -14,6 +14,10 @@ import java.util.List;
 
 /**
  * The type Shop domain dTO converter.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class ShopDomainDTOConverter {
 

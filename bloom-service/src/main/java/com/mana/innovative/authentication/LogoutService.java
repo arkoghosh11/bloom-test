@@ -6,6 +6,9 @@ import javax.servlet.http.HttpSession;
 /**
  * The type Logout service.
  * todo complete log out service
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Service
 public class LogoutService {

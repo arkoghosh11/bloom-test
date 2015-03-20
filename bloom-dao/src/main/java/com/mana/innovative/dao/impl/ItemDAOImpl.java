@@ -22,7 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by alex1 on 1/20/2015. This is a domain class
+ * The type Item dAO impl.
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Repository( value = "itemDAOImpl" )
 /**
@@ -356,11 +360,21 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
         return itemDAOResponse;
     }
 
+    /**
+     * Gets session factory.
+     *
+     * @return the session factory
+     */
     public SessionFactory getSessionFactory( ) {
 
         return sessionFactory;
     }
 
+    /**
+     * Sets session factory.
+     *
+     * @param sessionFactory the session factory
+     */
     public void setSessionFactory( SessionFactory sessionFactory ) {
 
         this.sessionFactory = sessionFactory;

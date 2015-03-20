@@ -1,28 +1,31 @@
 package com.mana.innovative.exception;
 
 /**
- * Created by alex1 on 1/28/2015.
- * This is a domain class
+ * The type Item size exceeded exception.
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class ItemSizeExceededException extends Exception {
 
     private String message = "ItemSizeExceededException occurred ";
 
-    public ItemSizeExceededException () {
-        super();
+    public ItemSizeExceededException( ) {
+        super( );
     }
 
-    public ItemSizeExceededException ( String message ) {
+    public ItemSizeExceededException( String message ) {
 
         super( message );
         this.message = message + this.message;
     }
 
-    public String getError() {
+    public String getError( ) {
         return message;
     }
 
-    public String toString () {
+    public String toString( ) {
         return message;
     }
 }

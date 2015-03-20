@@ -7,6 +7,10 @@ import javax.ws.rs.core.Response;
 
 /**
  * The type Response utility.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class ResponseUtility {
 

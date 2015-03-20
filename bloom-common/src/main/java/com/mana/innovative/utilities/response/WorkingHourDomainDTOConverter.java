@@ -14,7 +14,11 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
- * Created by Bloom/Rono on 3/5/2015. This class is for .. ToDo
+ * The type Working hour domain dTO converter.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class WorkingHourDomainDTOConverter {
 

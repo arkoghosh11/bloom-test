@@ -7,8 +7,11 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.List;
 
 /**
- * Created by alex1 on 1/23/2015.
- * This is a domain class
+ * The type Items payload.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class ItemsPayload {
 

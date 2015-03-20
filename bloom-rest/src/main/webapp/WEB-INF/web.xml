@@ -24,9 +24,19 @@
     <!--location for login credentials-->
     <context-param>
         <param-name>location</param-name>
-        <param-value>login_credentials</param-value>
+        <param-value>loginService</param-value>
     </context-param>
+    <!--@Note listener classes by Spring to instantiate Spring Application Context -->
 
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+    <!--@Note Filter class for Authentication -->
     <filter>
         <filter-name>Login Filter</filter-name>
         <filter-class>com.mana.innovative.rest.filter.LoginFilter</filter-class>
@@ -38,6 +48,7 @@
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
+    <!--@Note Interceptor class for Authentication -->
 
     <!-- @Note Rest Web Services -->
     <servlet>
@@ -58,16 +69,6 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-    <!--@Note listener classes by Spring to instantiate Spring Application Context -->
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>
-            org.springframework.web.context.request.RequestContextListener
-        </listener-class>
-    </listener>
 
     <!-- @Note SOAP Web Services -->
     <!--<servlet>-->

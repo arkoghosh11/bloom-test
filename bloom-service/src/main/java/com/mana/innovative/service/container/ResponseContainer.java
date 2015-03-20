@@ -5,8 +5,11 @@ import com.mana.innovative.exception.response.ErrorContainer;
 import javax.xml.bind.annotation.XmlElement;
 
 /**
- * Created by alex1 on 1/23/2015.
- * This is a domain class
+ * The type Response container.
+ * @param <T>  the type parameter
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class ResponseContainer<T> {
 

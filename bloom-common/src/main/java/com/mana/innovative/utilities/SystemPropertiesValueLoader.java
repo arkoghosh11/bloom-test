@@ -1,15 +1,15 @@
-package com.mana.innovative.utilities;/**
- * Created by Rono on 2/18/2015.
- * This is a class for .. todo 
- */
+package com.mana.innovative.utilities;
 
 import org.springframework.core.env.SystemEnvironmentPropertySource;
 
 import java.util.Map;
 
 /**
- * Created by Bloom on 2/18/2015 : 10:16 PM
- * todo This class is for ...
+ * The type System properties value loader.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class SystemPropertiesValueLoader extends SystemEnvironmentPropertySource {
 

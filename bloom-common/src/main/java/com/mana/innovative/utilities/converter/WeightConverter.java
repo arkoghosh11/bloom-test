@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * The type Weight converter.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Component
 public final class WeightConverter {

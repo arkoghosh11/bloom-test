@@ -2,11 +2,10 @@ package com.mana.innovative.rest;
 
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.ServiceConstants;
-import com.mana.innovative.dto.Item;
-import com.mana.innovative.service.ItemService;
+import com.mana.innovative.dto.Shop;
+import com.mana.innovative.service.ShopService;
 import com.mana.innovative.utilities.response.ResponseUtility;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
@@ -24,33 +23,42 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-
 /**
- * The type Item rest web service.
+ * The type Shop rest web service.
  *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@Component
-@Path( "/{item : (?i)item}" )//@Path ("/{items : (?i)items}")
-public class ItemRestWebService {
+@Path( "/{shop : (?i)shop}" )
+public class ShopRestWebService {
 
-    private static final Logger logger = Logger.getLogger( ItemRestWebService.class );
+    private static final Logger logger = Logger.getLogger( ShopRestWebService.class );
 
-    //    @Resource // todo login service
+    /**
+     * The Shop service impl.
+     */
+//    @Resource // todo login service
 //    private LoginService loginService;
-    @Resource( name = "itemServiceImpl" )
-    ItemService itemServiceImpl;
+    @Resource( name = "shopServiceImpl" )
+    ShopService shopServiceImpl;
 
-//    ItemsService() {
+//    ShopsService() {
 //    logger.setLevel(Level.DEBUG);
 //    }
 
+    /**
+     * Gets shops.
+     *
+     * @param shopId  the shop id
+     * @param isError the is error
+     *
+     * @return the shops
+     */
     @GET
-    @Path( "/{item_id}" )
+    @Path( "/{shop_id}" )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response getItems( @PathParam( value = "item_id" ) long itemId, @QueryParam( value = "is_error" )
+    public Response getShops( @PathParam( value = "shop_id" ) long shopId, @QueryParam( value = "is_error" )
     @DefaultValue( value = ServiceConstants.FALSE ) boolean isError ) {
 
 
@@ -59,47 +67,79 @@ public class ItemRestWebService {
 //        }
         Response response;
         try {
-            response = itemServiceImpl.getItemByItemId( itemId, isError );
+            response = shopServiceImpl.getShopByShopId( shopId, isError );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );
-            logger.error( "Exception occurred in ItemsService.getItems() Method", exception );
+            logger.error( "Exception occurred in ShopsService.getShops() Method", exception );
         } finally {
-            logger.debug( " Response for getItemsByItemId sent Successfully " );
+            logger.debug( " Response for getShopsByShopId sent Successfully " );
         }
         return response;
     }
 
+    /**
+     * Create an shop.
+     *
+     * @param shopDTO the shop dTO
+     * @param isError the is error
+     *
+     * @return the response
+     */
     @POST
     @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response createAnItem( @NotNull Item itemDTO, @QueryParam( value = "is_error" )
+    public Response createAnShop( @NotNull Shop shopDTO, @QueryParam( value = "is_error" )
     @DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
         return null;
     }
 
+    /**
+     * Update an shop.
+     *
+     * @param shopId  the shop id
+     * @param isError the is error
+     *
+     * @return the response
+     */
     @PUT
-    @Path( "/{item_id}" )
+    @Path( "/{shop_id}" )
     @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response updateAnItem( @PathParam( "item_id" ) Long itemId, @QueryParam( value = "is_error" )
+    public Response updateAnShop( @PathParam( "shop_id" ) Long shopId, @QueryParam( value = "is_error" )
     @DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
         return null;
     }
 
+    /**
+     * Delete an shop.
+     *
+     * @param shopId  the shop id
+     * @param isError the is error
+     *
+     * @return the response
+     */
     @DELETE
-    @Path( "/{item_id}" )
+    @Path( "/{shop_id}" )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response deleteAnItem( @PathParam( "item_id" ) Long itemId, @QueryParam( value = "is_error" )
+    public Response deleteAnShop( @PathParam( "shop_id" ) Long shopId, @QueryParam( value = "is_error" )
     @DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
         return null;
     }
 
+    /**
+     * Delete shops by shop ids.
+     *
+     * @param shopIds the shop ids
+     * @param isError the is error
+     *
+     * @return the response
+     */
     @DELETE
     @Path( "/ids" )
     @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response deleteItemsByItemIds( List< Long > itemIds, @QueryParam( value = "is_error" )
+    public Response deleteShopsByShopIds( List< Long > shopIds, @QueryParam( value = "is_error" )
     @DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
         return null;
     }

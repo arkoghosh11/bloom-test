@@ -22,6 +22,10 @@ import java.util.List;
 
 /**
  * The type Shop dAO impl.
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Repository
 @Transactional( propagation = Propagation.MANDATORY )
@@ -127,7 +131,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      * @return the dAO response
      */
     @Override
-//    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Shop > createShop( final Shop shop, boolean isError ) {
 
         if ( shop == null ) {
@@ -173,7 +177,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      * @return the dAO response
      */
     @Override
-    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Shop > updateShop( final Shop shop, boolean isError ) {
 
         if ( shop == null ) {
@@ -226,7 +230,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
     }
 
     @Override
-    //@Transactional( propagation = Propagation.REQUIRES_NEW )
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Shop > deleteShopByShopId( final long shopId, final boolean isError ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteShopByShopId()";
@@ -259,7 +263,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
     }
 
     @Override
-    //@Transactional( propagation = Propagation.REQUIRES_NEW )
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Shop > deleteShopsByShopIds( final List< Long > shopIds, final boolean isError ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteShopsByShopIds()";
@@ -294,7 +298,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
     }
 
     @Override
-    //@Transactional( propagation = Propagation.REQUIRES_NEW )
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Shop > deleteAllShops( final boolean deleteAllShops, final boolean isError ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteShopsByShopIds()";

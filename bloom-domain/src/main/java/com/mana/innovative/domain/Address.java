@@ -1,11 +1,5 @@
 package com.mana.innovative.domain;
 
-/**
- * @author Bloom
- * This Class Address.java is for
- * Created at Aug 28, 2012 4:07:51 PM
- */
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +14,10 @@ import java.util.Date;
 
 /**
  * The type Address.
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Entity
 @Table( name = "address" )

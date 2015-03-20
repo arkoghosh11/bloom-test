@@ -19,14 +19,34 @@ import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
 
 
+/**
+ * The type Items service impl.
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
+ */
 @Service
 public class ItemsServiceImpl implements ItemsService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( ItemsServiceImpl.class );
 
+    /**
+     * The Item dAO impl.
+     */
     @Resource( name = "itemDAOImpl" )
     private ItemDAO itemDAOImpl;
 
+    /**
+     * Gets items.
+     *
+     * @param isError the is error
+     *
+     * @return the items
+     */
     @Transactional( propagation = Propagation.REQUIRED, readOnly = true )
     public Response getItems( boolean isError ) {
 
@@ -60,6 +80,14 @@ public class ItemsServiceImpl implements ItemsService {
         }
     }
 
+    /**
+     * Delete all items.
+     *
+     * @param isError        the is error
+     * @param deleteAllItems the delete all items
+     *
+     * @return the response
+     */
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
     public Response deleteAllItems( boolean isError, boolean deleteAllItems ) {
 

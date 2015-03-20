@@ -9,8 +9,11 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Created by alex1 on 1/21/2015.
- * This is a domain class
+ * The type System properties factory bean.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class SystemPropertiesFactoryBean extends PropertiesFactoryBean {
 

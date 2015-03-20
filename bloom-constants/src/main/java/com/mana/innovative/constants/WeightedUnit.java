@@ -1,8 +1,10 @@
 package com.mana.innovative.constants;
 
 /**
- * Created by Rono on 2/26/2015.
- * This is a class for .. todo
+ * The enum Weighted unit.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public enum WeightedUnit {
 

@@ -17,6 +17,10 @@ import java.util.List;
 
 /**
  * The type Item response builder.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class ItemResponseBuilder {
 

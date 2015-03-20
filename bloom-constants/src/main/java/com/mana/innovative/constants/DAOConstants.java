@@ -2,6 +2,10 @@ package com.mana.innovative.constants;
 
 /**
  * The type DAO constants.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public final class DAOConstants {
 

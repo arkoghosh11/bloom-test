@@ -6,6 +6,10 @@ import javax.ws.rs.core.Response;
 
 /**
  * The interface Items service.
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Service
 public interface ItemsService {

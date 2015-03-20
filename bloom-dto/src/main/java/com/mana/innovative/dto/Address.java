@@ -1,16 +1,14 @@
 package com.mana.innovative.dto;
 
-/**
- * @author Bloom
- * This Class Address.java is for
- * Created at Aug 28, 2012 4:07:51 PM
- */
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * The type Address.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @XmlRootElement( name = "address" )
 public class Address {

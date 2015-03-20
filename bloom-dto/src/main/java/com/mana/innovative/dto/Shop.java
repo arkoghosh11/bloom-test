@@ -1,7 +1,4 @@
-package com.mana.innovative.dto;/**
- * Created by Rono on 2/27/2015.
- * This is a class for .. todo 
- */
+package com.mana.innovative.dto;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -10,6 +7,10 @@ import java.util.List;
 
 /**
  * The type Shop.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @XmlRootElement( name = "shop", namespace = "http://localhost:8080/bloom-test/rest/shops" )
 public class Shop {

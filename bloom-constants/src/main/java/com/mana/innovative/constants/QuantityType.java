@@ -1,8 +1,10 @@
 package com.mana.innovative.constants;
 
 /**
- * Created by Rono on 2/25/2015.
- * This is a class for .. todo
+ * The enum Quantity type.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public enum QuantityType {
 
@@ -10,7 +12,7 @@ public enum QuantityType {
     DOZEN(12),
     SCORE(20);
 
-    private int value;
+    private final int value;
 
     QuantityType(int value) {
         this.value = value;

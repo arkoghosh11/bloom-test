@@ -9,19 +9,23 @@ import java.util.List;
 
 /**
  * The type Error container.
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
-@XmlRootElement (name = "error_container")
+@XmlRootElement( name = "error_container" )
 public class ErrorContainer {
 
     private Error currentError;
-    private List<Error> errors;
+    private List< Error > errors;
 
     /**
      * Instantiates a new Error container.
      */
-    public ErrorContainer () {
+    public ErrorContainer( ) {
 
-        this.instantiateErrors();
+        this.instantiateErrors( );
     }
 
     /**
@@ -29,14 +33,14 @@ public class ErrorContainer {
      *
      * @param currentError the current error
      */
-    public ErrorContainer (final Error currentError) {
+    public ErrorContainer( final Error currentError ) {
 
-        this.instantiateErrors();
-        this.setCurrentError(currentError);
+        this.instantiateErrors( );
+        this.setCurrentError( currentError );
     }
 
-    private void instantiateErrors () {
-        errors = new ArrayList<>();
+    private void instantiateErrors( ) {
+        errors = new ArrayList<>( );
     }
 
     /**
@@ -44,7 +48,7 @@ public class ErrorContainer {
      *
      * @return the current error
      */
-    public Error getCurrentError () {
+    public Error getCurrentError( ) {
         return currentError;
     }
 
@@ -54,9 +58,9 @@ public class ErrorContainer {
      * @param currentError the current error
      */
     @XmlTransient
-    public void setCurrentError (final Error currentError) {
+    public void setCurrentError( final Error currentError ) {
         this.currentError = currentError;
-        this.addError(currentError);
+        this.addError( currentError );
     }
 
     /**
@@ -64,7 +68,7 @@ public class ErrorContainer {
      *
      * @return the errors
      */
-    public List<Error> getErrors () {
+    public List< Error > getErrors( ) {
         return errors;
     }
 
@@ -73,19 +77,19 @@ public class ErrorContainer {
      *
      * @param errors the errors
      */
-    @XmlElementWrapper (name = "errors")
+    @XmlElementWrapper( name = "errors" )
     @XmlElement
-    public void setErrors (final List<Error> errors) {
+    public void setErrors( final List< Error > errors ) {
         this.errors = errors;
     }
 
     /**
-     * This method is for adding a new currentError to the errors list object.
-     * To set the current currentError object use setCurrentError
+     * This method is for adding a new currentError to the errors list object. To set the current currentError object
+     * use setCurrentError
      *
      * @param error the error
      */
-    public void addError (final Error error) {
-        this.errors.add(error);
+    public void addError( final Error error ) {
+        this.errors.add( error );
     }
 }

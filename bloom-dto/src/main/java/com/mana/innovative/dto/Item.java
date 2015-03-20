@@ -6,6 +6,10 @@ import java.util.Date;
 
 /**
  * The type Item.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @XmlRootElement( name = "item", namespace = "http://localhost:8080/bloom-test/rest/items" )
 public class Item {
