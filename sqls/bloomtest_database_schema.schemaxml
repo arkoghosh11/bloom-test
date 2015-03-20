@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">bloom</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="working_hours" view="colnames">
+<left>142</left>
+<top>488</top>
+<width>177</width>
+<height>289</height>
+<sql_create_table>CREATE TABLE `working_hours` (
+  `working_hour_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `day_of_week` varchar(10) NOT NULL DEFAULT 'Monday',
+  `open_time_of_day` time NOT NULL DEFAULT '07:00:00',
+  `close_time_of_day` time NOT NULL DEFAULT '20:00:00',
+  `is_closed` tinyint(2) NOT NULL DEFAULT '0',
+  `is_holiday` tinyint(2) NOT NULL DEFAULT '0',
+  `is_weekend` tinyint(2) NOT NULL DEFAULT '0',
+  `shop_id` bigint(20) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`working_hour_id`),
+  KEY `FK_working_hours_shops_shop_id` (`shop_id`),
+  CONSTRAINT `FK_working_hours_shops_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`shop_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1703938 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="shops" view="colnames">
+<left>576</left>
+<top>270</top>
+<width>149</width>
+<height>229</height>
+<sql_create_table>CREATE TABLE `shops` (
+  `shop_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `shop_main_id` bigint(20) NOT NULL,
+  `shop_name` varchar(100) NOT NULL,
+  `shop_web_link` varchar(100) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `address_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`shop_id`),
+  UNIQUE KEY `FK_shops_address_address_id` (`address_id`),
+  CONSTRAINT `FK_shops_address_address_id` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1736707 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="items" view="colnames">
+<left>155</left>
+<top>76</top>
+<width>188</width>
+<height>367</height>
+<sql_create_table>CREATE TABLE `items` (
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `item_name` varchar(80) NOT NULL DEFAULT 'default',
+  `item_price` double NOT NULL DEFAULT '0',
+  `item_type` varchar(100) NOT NULL DEFAULT 'food',
+  `item_price_currency` varchar(50) NOT NULL DEFAULT 'dollar',
+  `quantity` double NOT NULL DEFAULT '0',
+  `weight` double NOT NULL DEFAULT '0',
+  `bought_from` varchar(100) DEFAULT 'Unknown',
+  `quantity_type` varchar(50) NOT NULL DEFAULT 'unit',
+  `item_sub_type` varchar(255) DEFAULT 'N/A',
+  `weighted_unit` varchar(255) NOT NULL DEFAULT 'kg',
+  `bought_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `shop_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`item_id`),
+  KEY `FK_items_shops_shop_id` (`shop_id`),
+  CONSTRAINT `FK_items_shops_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`shop_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1769477 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="address" view="colnames">
+<left>874</left>
+<top>389</top>
+<width>146</width>
+<height>289</height>
+<sql_create_table>CREATE TABLE `address` (
+  `address_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `address1` varchar(200) NOT NULL DEFAULT 'Default',
+  `address2` varchar(200) NOT NULL DEFAULT 'Default',
+  `city` varchar(100) NOT NULL DEFAULT 'Default',
+  `district` varchar(100) NOT NULL DEFAULT 'Default',
+  `state` varchar(100) NOT NULL DEFAULT 'Default',
+  `zipcode` int(11) NOT NULL DEFAULT '0',
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `location_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`address_id`),
+  UNIQUE KEY `FK_address_locations_location_id` (`location_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1409027 DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
