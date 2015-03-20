@@ -4,7 +4,6 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.impl.ShopDAOImpl;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Shop;
-import com.mana.innovative.domain.Shop;
 import junit.framework.Assert;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
@@ -14,40 +13,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
-import java.util.List;
-
-
-import com.mana.innovative.constants.TestConstants;
-import com.mana.innovative.dao.impl.ShopDAOImpl;
-import com.mana.innovative.dao.response.DAOResponse;
-import com.mana.innovative.domain.Shop;
-import com.mana.innovative.domain.Shop;
-import junit.framework.Assert;
-import org.apache.log4j.Logger;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.AfterTransaction;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
