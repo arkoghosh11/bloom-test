@@ -6,8 +6,16 @@ package com.mana.innovative.domain;
  * Created at Aug 28, 2012 4:07:51 PM
  */
 
-import javax.annotation.Generated;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 /**
@@ -45,7 +53,7 @@ public class Address {
 //    @Transient
 //    private Location location;
 
-    @OneToOne( cascade = { CascadeType.ALL }, mappedBy = "address" )
+    @OneToOne( orphanRemoval = true, cascade = { CascadeType.ALL }, mappedBy = "address" )
     private Shop shopAddress;
 
     @Column( name = "created_date", columnDefinition = "DATETIME" )

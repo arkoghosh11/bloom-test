@@ -59,4 +59,14 @@ public interface WorkingHourDAO {
      * @return the dAO response
      */
     public DAOResponse< WorkingHour > deleteAllWorkingHours( boolean deleteAllWorkingHrs, boolean isError );
+
+    /**
+     * Create dAO response.
+     *
+     * @param workingHour the working hour
+     * @param isError     the is error
+     *
+     * @return the dAO response
+     */
+    public DAOResponse< WorkingHour > createWorkingHour( WorkingHour workingHour, boolean isError );
 }

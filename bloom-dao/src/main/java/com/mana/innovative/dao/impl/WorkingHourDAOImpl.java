@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,6 +52,8 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
             query.setLong( "workingHour_id", workingHourId );
 //            transaction.commit();
             workingHours = query.list( );
+            this.closeDBTransaction( );
+
             if ( !workingHours.isEmpty( ) && workingHours.size( ) > DAOConstants.ONE ) {
                 throw new IllegalSearchListSizeException( " WorkingHour Size exceeded maximum value " +
                         "of " + DAOConstants.ONE );
@@ -63,9 +66,8 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
-        } finally {
-            this.closeDBTransaction( );
         }
+
         workingHourDAOResponse.setCount( workingHours == null ? DAOConstants.ZERO : workingHours.size( ) );
         workingHourDAOResponse.setResults( workingHours );
         workingHourDAOResponse.setErrorContainer( errorContainer );
@@ -91,7 +93,8 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
         try {
             this.openDBTransaction( );
             workingHours = ( List< WorkingHour > ) session.createQuery( " from WorkingHour" ).list( );
-//            transaction.commit();
+            this.closeDBTransaction( );
+
         } catch ( HibernateException exception ) {
             this.handleExceptions( exception );
             logger.error( "Error occurred while trying to fetch data from workingHours table for " + location,
@@ -99,9 +102,8 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
-        } finally {
-            this.closeDBTransaction( );
         }
+
         workingHourDAOResponse.setCount( workingHours == null ? DAOConstants.ZERO : workingHours.size( ) );
         workingHourDAOResponse.setResults( workingHours );
         workingHourDAOResponse.setErrorContainer( errorContainer );
@@ -135,7 +137,9 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
             Query query = session.createQuery( " delete from WorkingHour where workingHourId=:workingHourId" );
             query.setParameter( "workingHourId", workingHourId );
             workingHourDAOResponse.setCount( query.executeUpdate( ) );
+            this.closeDBTransaction( );
             workingHourDAOResponse.setRequestSuccess( true );
+
         } catch ( Exception exception ) {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
@@ -144,9 +148,8 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
-        } finally {
-            this.closeDBTransaction( );
         }
+
         workingHourDAOResponse.setResults( null );
         workingHourDAOResponse.setErrorContainer( errorContainer );
 
@@ -177,7 +180,9 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
             Query query = session.createQuery( " delete from WorkingHour where workingHourId in (:workingHourIds)" );
             query.setParameterList( "workingHourIds", workingHourIds );
             workingHourDAOResponse.setCount( query.executeUpdate( ) );
+            this.closeDBTransaction( );
             workingHourDAOResponse.setRequestSuccess( true );
+
         } catch ( Exception exception ) {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
@@ -187,9 +192,8 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
             workingHourDAOResponse.setRequestSuccess( false );
-        } finally {
-            this.closeDBTransaction( );
         }
+
         workingHourDAOResponse.setResults( null );
         workingHourDAOResponse.setErrorContainer( errorContainer );
         logger.debug( "Finishing " + location );
@@ -221,10 +225,10 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
                 // Note: Will delete all WorkingHour class rows stored in DB will not delete anything from shop class
                 // Note: and it should not as a shop may or may not have any workingHours so shop class will still persist
                 Query query = session.createQuery( "delete from WorkingHour" );
-                int count = query.executeUpdate( );
-                workingHourDAOResponse.setCount( count );
+                workingHourDAOResponse.setCount( query.executeUpdate( ) );
+                this.closeDBTransaction( );
                 workingHourDAOResponse.setRequestSuccess( true );
-//            transaction.commit();
+
             } catch ( Exception exception ) {
                 if ( exception instanceof HibernateException ) {
                     this.handleExceptions( ( HibernateException ) exception );
@@ -234,11 +238,54 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
                     errorContainer = this.fillErrorContainer( location, exception );
                 }
                 workingHourDAOResponse.setRequestSuccess( false );
-            } finally {
-                this.closeDBTransaction( );
             }
         }
         workingHourDAOResponse.setResults( null );
+        workingHourDAOResponse.setErrorContainer( errorContainer );
+        log.debug( "Finishing " + location );
+        return workingHourDAOResponse;
+    }
+
+    /**
+     * Create dAO response.
+     *
+     * @param workingHour the working hour
+     * @param isError     the is error
+     *
+     * @return the dAO response
+     */
+    @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< WorkingHour > createWorkingHour( final WorkingHour workingHour, final boolean isError ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "createWorkingHour()";
+        log.debug( "Starting " + location );
+        List< WorkingHour > workingHours = new ArrayList<>( );
+        DAOResponse< WorkingHour > workingHourDAOResponse = new DAOResponse<>( );
+        workingHourDAOResponse.setCreate( true );
+        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+
+        try {
+            this.openDBTransaction( );
+            session.save( workingHour );
+            this.closeDBTransaction( );
+
+            workingHourDAOResponse.setCount( DAOConstants.ONE );
+            workingHourDAOResponse.setRequestSuccess( true );
+            workingHours.add( workingHour );
+
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                this.handleExceptions( ( HibernateException ) exception );
+            }
+            log.error( "Error occurred while trying to create an workingHour " + location, exception );
+            if ( isError ) {
+                errorContainer = this.fillErrorContainer( location, exception );
+            }
+            workingHourDAOResponse.setRequestSuccess( Boolean.FALSE );
+            workingHourDAOResponse.setCount( DAOConstants.ZERO );
+        }
+        workingHourDAOResponse.setResults( workingHours );
         workingHourDAOResponse.setErrorContainer( errorContainer );
         log.debug( "Finishing " + location );
         return workingHourDAOResponse;

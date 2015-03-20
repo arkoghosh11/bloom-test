@@ -132,7 +132,7 @@ public class BasicDAO {
      *
      * @return the item by search params
      */
-    @Transactional( readOnly = true, propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED )
+    @Transactional( readOnly = true, propagation = Propagation.NESTED, isolation = Isolation.READ_COMMITTED )
     public List getItemBySearchParams( ItemSearchOption itemSearchOption, int maxResults, int startLimit ) {
 
         List itemList = null;
@@ -142,11 +142,12 @@ public class BasicDAO {
             DetachedCriteria detachedCriteria = this.getDetachedCriteriaBySearchParams( itemSearchOption );
 
             itemList = detachedCriteria.getExecutableCriteria( session ).list( );
+
+            this.closeDBTransaction( );
 //            transaction.commit();
         } catch ( HibernateException exception ) {
             this.handleExceptions( exception );
-        } finally {
-            this.closeDBTransaction( );
+            log.error( "Exception occurred while trying to search " + itemSearchOption.toString( ) );
         }
         return ( ( ( itemList != null ) && ( itemList.size( ) > com.mana.innovative.constants.DAOConstants.ZERO ) ) ) ?
                 itemList : null;
@@ -201,7 +202,9 @@ public class BasicDAO {
     public DetachedCriteria addConditionParams( DetachedCriteria detachedCriteria, List< Map< String, Object > >
             searchConditionParams, List< Map< String, String > > searchConditions, List< String > keys ) {
 
-        for ( int i = 0; i < searchConditions.size( ) && searchConditionParams.size( ) == searchConditions.size( ); i++ ) {
+        for ( int i = DAOConstants.ZERO; i < searchConditions.size( ) && searchConditionParams.size( ) ==
+                searchConditions.size( );
+              i++ ) {
 
             // get condition value from Map with key
             String condition = searchConditions.get( i ).get( keys.get( i ) );
@@ -227,7 +230,7 @@ public class BasicDAO {
     private DetachedCriteria addOrderParams( DetachedCriteria detachedCriteria, List< Map< String, String > >
             searchOrders, List< String > keys ) {
 
-        for ( int i = 0; i < searchOrders.size( ); i++ ) {
+        for ( int i = DAOConstants.ZERO; i < searchOrders.size( ); i++ ) {
             String ordering = searchOrders.get( i ).get( keys.get( i ) );
             if ( ordering != null ) {
                 detachedCriteria.addOrder( queryUtil.getCreatedOrder( keys.get( i ), ordering ) );
@@ -259,7 +262,7 @@ public class BasicDAO {
                 keys.isEmpty( ) ) {
             throw new NullPointerException( "One of the Lists in parameters is Empty" );
         }
-        for ( int i = 0; i < searchMatchTypes.size( ); i++ ) {
+        for ( int i = DAOConstants.ZERO; i < searchMatchTypes.size( ); i++ ) {
 
             // get condition value from Map with key
             String operator = searchConditions.get( i ).get( keys.get( i ) );
@@ -323,7 +326,7 @@ public class BasicDAO {
     protected void updateShopItems( final List< Item > items, final List< Item > dbItems ) {
 
         log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItems()" );
-        for ( int i = 0; i < dbItems.size( ) && dbItems.size( ) == items.size( ); i++ ) {
+        for ( int i = DAOConstants.ZERO; i < dbItems.size( ) && dbItems.size( ) == items.size( ); i++ ) {
             Item dbItem = dbItems.get( i ), item = items.get( i );
             this.updateShopItem( item, dbItem );
         }
@@ -378,7 +381,7 @@ public class BasicDAO {
 
         log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHours()" );
 
-        for ( int i = 0; i < dbWorkingHours.size( ) && workingHours.size( ) == workingHours.size( ); i++ ) {
+        for ( int i = DAOConstants.ZERO; i < dbWorkingHours.size( ) && workingHours.size( ) == workingHours.size( ); i++ ) {
             WorkingHour dbWorkingHour = dbWorkingHours.get( i ), workingHour = workingHours.get( i );
             this.updateShopWorkingHour( workingHour, dbWorkingHour );
         }
@@ -454,7 +457,7 @@ public class BasicDAO {
 
 }
 
-/*
+/* // IMP
 DELIMITER $$
 
 USE `bloom`$$

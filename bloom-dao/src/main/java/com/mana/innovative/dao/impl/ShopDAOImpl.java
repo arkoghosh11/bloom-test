@@ -58,6 +58,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
             query.setLong( "shop_id", shopId );
 //            transaction.commit();
             shops = query.list( );
+            this.closeDBTransaction( );
             if ( !shops.isEmpty( ) && shops.size( ) > DAOConstants.ONE ) {
                 throw new IllegalSearchListSizeException( " Shop Size exceeded maximum value of " + DAOConstants.ONE );
             }
@@ -69,8 +70,6 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
-        } finally {
-            this.closeDBTransaction( );
         }
         shopDAOResponse.setCount( shops == null ? DAOConstants.ZERO : shops.size( ) );
         shopDAOResponse.setResults( shops );
@@ -111,8 +110,6 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
-        } finally {
-            this.closeDBTransaction( );
         }
         shopDAOResponse.setCount( shops == null ? DAOConstants.ZERO : shops.size( ) );
         shopDAOResponse.setResults( shops );
@@ -147,19 +144,18 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
             // Note need to use saveOrUpdate here since Shop, or other stuff of shop object might have been reused
             session.save( shop );
             shopDAOResponse.setCount( DAOConstants.ONE );
-
             shops.add( shop );
+            this.closeDBTransaction( );
             shopDAOResponse.setRequestSuccess( true );
         } catch ( Exception exception ) {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
+            shopDAOResponse.setRequestSuccess( Boolean.FALSE );
             log.error( "Failed to create shop", exception );
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
-        } finally {
-            this.closeDBTransaction( );
         }
         shopDAOResponse.setResults( shops );
         shopDAOResponse.setErrorContainer( errorContainer );
@@ -207,6 +203,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
             this.closeDBTransaction( );
             this.openDBTransaction( );
             session.update( shop );
+            this.closeDBTransaction( );
             shopDAOResponse.setCount( DAOConstants.ONE );
             shops = new ArrayList<>( );
             shops.add( shop );
@@ -220,8 +217,6 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
-        } finally {
-            this.closeDBTransaction( );
         }
 
         shopDAOResponse.setResults( shops );
@@ -246,6 +241,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
             Query query = session.createQuery( " delete from Shop where shopId=:shopId" );
             query.setParameter( "shopId", shopId );
             shopDAOResponse.setCount( query.executeUpdate( ) );
+            this.closeDBTransaction( );
             shopDAOResponse.setRequestSuccess( true );
         } catch ( Exception exception ) {
             if ( exception instanceof HibernateException ) {
@@ -255,8 +251,6 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
-        } finally {
-            this.closeDBTransaction( );
         }
         shopDAOResponse.setResults( null );
         shopDAOResponse.setErrorContainer( errorContainer );
@@ -280,6 +274,8 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
             Query query = session.createQuery( " delete from Shop where shopId in (:shopIds)" );
             query.setParameterList( "shopIds", shopIds );
             shopDAOResponse.setCount( query.executeUpdate( ) );
+
+            this.closeDBTransaction( );
             shopDAOResponse.setRequestSuccess( true );
         } catch ( Exception exception ) {
             if ( exception instanceof HibernateException ) {
@@ -290,8 +286,6 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
             shopDAOResponse.setRequestSuccess( false );
-        } finally {
-            this.closeDBTransaction( );
         }
         shopDAOResponse.setResults( null );
         shopDAOResponse.setErrorContainer( errorContainer );
@@ -318,6 +312,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
                 // Note: working hours
                 Query query = session.createQuery( "delete from Shop" );
                 shopDAOResponse.setCount( query.executeUpdate( ) );
+                this.closeDBTransaction( );
                 shopDAOResponse.setRequestSuccess( true );
 //            transaction.commit();
             } catch ( Exception exception ) {
@@ -329,8 +324,6 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
                     errorContainer = this.fillErrorContainer( location, exception );
                 }
                 shopDAOResponse.setRequestSuccess( false );
-            } finally {
-                this.closeDBTransaction( );
             }
         }
         shopDAOResponse.setResults( null );

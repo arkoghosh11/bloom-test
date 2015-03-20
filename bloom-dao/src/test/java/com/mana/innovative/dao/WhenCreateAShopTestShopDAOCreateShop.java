@@ -139,10 +139,14 @@ public class WhenCreateAShopTestShopDAOCreateShop {
             logger.error( "Failed to test createShop() ", e );
             Assert.fail( "Create Shop with new dummy item, working Hour and address failed" );
         }
+        // Test shopDAOResponse
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         Assert.assertTrue( TestConstants.falseMessage, shopDAOResponse.isCreate( ) );
         Assert.assertTrue( TestConstants.falseMessage, shopDAOResponse.isRequestSuccess( ) );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getResults( ) );
+
+        // Test ErrorContainer
+        Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
 
         // test shop
         List< Shop > shops = shopDAOResponse.getResults( );
@@ -224,10 +228,14 @@ public class WhenCreateAShopTestShopDAOCreateShop {
             logger.error( "Failed to test createShop() ", exception );
             Assert.fail( "Create Shop with new dummy working Hour and address failed" );
         }
+        // Test shopDAOResponse
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         Assert.assertTrue( TestConstants.falseMessage, shopDAOResponse.isCreate( ) );
         Assert.assertTrue( TestConstants.falseMessage, shopDAOResponse.isRequestSuccess( ) );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getResults( ) );
+
+        // Test ErrorContainer
+        Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
 
         // test shop
         List< Shop > shops = shopDAOResponse.getResults( );
@@ -295,10 +303,14 @@ public class WhenCreateAShopTestShopDAOCreateShop {
             logger.error( "Failed to test createShop() ", exception );
             Assert.assertTrue( TestConstants.falseMessage, exception instanceof HibernateException );
         }
+        // Test shopDAOResponse
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
-        Assert.assertFalse( TestConstants.trueMessage, shopDAOResponse.isCreate( ) );
+        Assert.assertTrue( TestConstants.falseMessage, shopDAOResponse.isCreate( ) );
         Assert.assertFalse( TestConstants.trueMessage, shopDAOResponse.isRequestSuccess( ) );
-        Assert.assertNull( TestConstants.nullMessage, shopDAOResponse.getResults( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getResults( ) );
+
+        // Test ErrorContainer
+        Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
 
         logger.debug( "Finishing test for CreateShopWithoutAnyAddress" );
     }
@@ -332,10 +344,14 @@ public class WhenCreateAShopTestShopDAOCreateShop {
             logger.error( "Failed to test createShop() ", e );
             Assert.fail( "Create Shop with new dummy item and working Hour failed" );
         }
+        // Test shopDAOResponse
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         Assert.assertTrue( TestConstants.falseMessage, shopDAOResponse.isCreate( ) );
         Assert.assertTrue( TestConstants.falseMessage, shopDAOResponse.isRequestSuccess( ) );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getResults( ) );
+
+        // Test ErrorContainer
+        Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
 
         // test shop
         List< Shop > shops = shopDAOResponse.getResults( );

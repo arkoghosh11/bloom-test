@@ -74,7 +74,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
                 int count = query.executeUpdate( );
                 itemDAOResponse.setCount( count );
                 itemDAOResponse.setRequestSuccess( true );
-//            transaction.commit();
+                this.closeDBTransaction( );
             } catch ( Exception exception ) {
                 if ( exception instanceof HibernateException ) {
                     this.handleExceptions( ( HibernateException ) exception );
@@ -84,10 +84,9 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
                     errorContainer = this.fillErrorContainer( location, exception );
                 }
                 itemDAOResponse.setRequestSuccess( false );
-            } finally {
-                this.closeDBTransaction( );
             }
         }
+
         itemDAOResponse.setResults( null );
         itemDAOResponse.setErrorContainer( errorContainer );
         log.debug( "Finishing " + location );
@@ -114,8 +113,9 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
             Query query = session.createQuery( "delete from Item where itemId=:itemId" );
             query.setParameter( "itemId", itemId );
             itemDAOResponse.setCount( query.executeUpdate( ) );
+            this.closeDBTransaction( );
             itemDAOResponse.setRequestSuccess( true );
-//            transaction.commit();
+
         } catch ( Exception exception ) {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
@@ -125,9 +125,8 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
             itemDAOResponse.setRequestSuccess( false );
-        } finally {
-            this.closeDBTransaction( );
         }
+
         itemDAOResponse.setResults( null );
         itemDAOResponse.setErrorContainer( errorContainer );
         log.debug( "Finishing " + location );
@@ -158,7 +157,8 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
             query.setParameterList( "itemIds", itemIds );
             itemDAOResponse.setCount( query.executeUpdate( ) );
             itemDAOResponse.setRequestSuccess( true );
-//            transaction.commit();
+            this.closeDBTransaction( );
+
         } catch ( Exception exception ) {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
@@ -168,9 +168,8 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
             itemDAOResponse.setRequestSuccess( false );
-        } finally {
-            this.closeDBTransaction( );
         }
+
         itemDAOResponse.setResults( null );
         itemDAOResponse.setErrorContainer( errorContainer );
         log.debug( "Finishing " + location );
@@ -300,6 +299,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
             query.setLong( "item_id", itemId );
 //            transaction.commit();
             items = query.list( );
+            this.closeDBTransaction( );
             if ( !items.isEmpty( ) && items.size( ) > DAOConstants.ONE ) {
                 throw new IllegalSearchListSizeException( " Item Size exceeded maximum value " +
                         "of " + DAOConstants.ONE );
@@ -312,8 +312,6 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
-        } finally {
-            this.closeDBTransaction( );
         }
         itemDAOResponse.setCount( items == null ? DAOConstants.ZERO : items.size( ) );
         itemDAOResponse.setResults( items );
@@ -342,15 +340,13 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
         try {
             this.openDBTransaction( );
             items = ( List< Item > ) session.createQuery( " from Item" ).list( );
-//            transaction.commit();
+            this.closeDBTransaction( );
         } catch ( HibernateException exception ) {
             this.handleExceptions( exception );
             log.error( "Error occurred while trying to fetch data from items table " + location, exception );
             if ( isError ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
-        } finally {
-            this.closeDBTransaction( );
         }
         itemDAOResponse.setCount( items == null ? DAOConstants.ZERO : items.size( ) );
         itemDAOResponse.setResults( items );

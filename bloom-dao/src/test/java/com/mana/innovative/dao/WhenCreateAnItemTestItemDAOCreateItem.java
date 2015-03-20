@@ -93,22 +93,28 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         DAOResponse< Shop > shopDAOResponse;
         itemDAOResponse = itemDAOImpl.getItemByItemId( dummyItem.getItemId( ), TestConstants.IS_ERROR );
 
-        Assert.assertTrue( itemDAOResponse.getResults( ).isEmpty( ) );
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.getResults( ).isEmpty( ) );
         shopDAOResponse = shopDAOImpl.getShopByShopId( TestConstants.ZERO, TestConstants.IS_ERROR );
 
-        Assert.assertFalse( shopDAOResponse.getResults( ).isEmpty( ) );
+        Assert.assertFalse( TestConstants.trueMessage, shopDAOResponse.getResults( ).isEmpty( ) );
         Shop shop = shopDAOResponse.getResults( ).get( TestConstants.ZERO );
         Assert.assertNotNull( shop );
         dummyItem.setShopItem( shop );
         itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR );
 
-        Assert.assertTrue( itemDAOResponse.isCreate( ) );
-        Assert.assertTrue( itemDAOResponse.isRequestSuccess( ) );
-        Assert.assertFalse( itemDAOResponse.isUpdate( ) );
-        Assert.assertFalse( itemDAOResponse.isDelete( ) );
-        Assert.assertNotNull( itemDAOResponse.getResults( ) );
-        Assert.assertNotNull( itemDAOResponse.getResults( ).get( TestConstants.ZERO ) );
-        Assert.assertNull( itemDAOResponse.getErrorContainer( ) );
+        //Test itemDAOResponse
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
+
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isCreate( ) );
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isRequestSuccess( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isUpdate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isDelete( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ).get( TestConstants.ZERO ) );
+
+        // Test ErrorContainer
+        Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
+
         Assert.assertEquals( "Value of Count is not One", TestConstants.ONE, itemDAOResponse.getCount( ) );
         logger.debug( "Finishing test for ItemDAOCreateWithoutException" );
 
@@ -126,13 +132,15 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
 
         itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR );
 
-        Assert.assertTrue( itemDAOResponse.isCreate( ) );
-        Assert.assertFalse( itemDAOResponse.isRequestSuccess( ) );
-        Assert.assertFalse( itemDAOResponse.isUpdate( ) );
-        Assert.assertFalse( itemDAOResponse.isDelete( ) );
-        Assert.assertNotNull( itemDAOResponse.getResults( ) );
-        Assert.assertTrue( "Size Of List is not Zero", itemDAOResponse.getResults( ).isEmpty( ) );
-        Assert.assertNull( itemDAOResponse.getErrorContainer( ) );
+        //Test WorkingHourDAOResponse
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isCreate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isRequestSuccess( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isUpdate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isDelete( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ) );
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.getResults( ).isEmpty( ) );
+        // Test ErrorContainer
+        Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
         Assert.assertEquals( "Value of Count is not Zero", TestConstants.ZERO, itemDAOResponse.getCount( ) );
 
         logger.debug( "Finishing test for ItemDAOCreateThrowsException" );
@@ -150,13 +158,21 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
 
         itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR_TRUE );
 
-        Assert.assertTrue( itemDAOResponse.isCreate( ) );
-        Assert.assertFalse( itemDAOResponse.isRequestSuccess( ) );
-        Assert.assertFalse( itemDAOResponse.isUpdate( ) );
-        Assert.assertFalse( itemDAOResponse.isDelete( ) );
-        Assert.assertNotNull( itemDAOResponse.getResults( ) );
-        Assert.assertTrue( itemDAOResponse.getResults( ).isEmpty( ) );
-        Assert.assertNotNull( itemDAOResponse.getErrorContainer( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
+        // Test Error Container
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
+        Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ).getCurrentError( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ).getErrors( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.getErrorContainer( ).getErrors( )
+                .isEmpty( ) );
+
+        //Test WorkingHourDAOResponse
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isCreate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isRequestSuccess( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isUpdate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isDelete( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ) );
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.getResults( ).isEmpty( ) );
         Assert.assertEquals( "Value of Count is not Zero", TestConstants.ZERO, itemDAOResponse.getCount( ) );
 
         logger.debug( "Finishing test for ItemDAOCreateThrowsExceptionNErrorContainer" );
