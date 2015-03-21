@@ -52,9 +52,8 @@ public class ShopsRestWebService {
 
         try {
             return shopsServiceImpl.getShops( isError );
-        } catch ( Exception e ) {
-            e.printStackTrace( );
-            logger.error( " Failed to retrieve Shops" + e );
+        } catch ( Exception exception ) {
+            logger.error( " Failed to retrieve Shops" + exception );
             return ResponseUtility.internalServerErrorMsg( null );
         } finally {
             logger.debug( "Response for Shop Rest Service Completed " );
@@ -75,9 +74,9 @@ public class ShopsRestWebService {
                                          isError, @QueryParam( value = "is_delete_all" ) boolean isDeleteAll ) {
         //return ResponseUtility.forbiddenRequest( null );
         try {
-            return null;// todo shopsServiceImpl.deleteAllShops( isError, isDeleteAll );
-        } catch ( Exception e ) {
-            logger.error( " Failed to delete All Shops" + e );
+            return shopsServiceImpl.deleteAllShops( isError, isDeleteAll );
+        } catch ( Exception exception ) {
+            logger.error( " Failed to delete All Shops" + exception );
             return ResponseUtility.internalServerErrorMsg( null );
         } finally {
             logger.debug( "Response for Shops Rest Service Completed " );

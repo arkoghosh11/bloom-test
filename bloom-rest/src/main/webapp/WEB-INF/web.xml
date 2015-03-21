@@ -37,18 +37,18 @@
         </listener-class>
     </listener>
     <!--@Note Filter class for Authentication -->
-    <!--<filter>-->
-    <!--<filter-name>Login Filter</filter-name>-->
-    <!--<filter-class>com.mana.innovative.rest.filter.LoginFilter</filter-class>-->
-    <!--</filter>-->
-    <!--<filter-mapping>-->
-    <!--<filter-name>Login Filter</filter-name>-->
-    <!--<servlet-name>Jersey REST Service</servlet-name>-->
-    <!--<url-pattern>/rest/*</url-pattern>-->
-    <!--<dispatcher>REQUEST</dispatcher>-->
-    <!--</filter-mapping>-->
+    <filter>
+        <filter-name>Login Filter</filter-name>
+        <filter-class>com.mana.innovative.rest.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Login Filter</filter-name>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
 
-    <!--@Note Interceptor class for Authentication -->
+    <!--@Note Interceptor class for Authentication todo implement it -->
 
     <!-- @Note Rest Web Services -->
     <servlet>

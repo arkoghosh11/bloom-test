@@ -1,5 +1,6 @@
 package com.mana.innovative.rest;
 
+import com.mana.innovative.authentication.LoginService;
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dto.Shop;
@@ -9,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,6 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -37,17 +40,17 @@ public class ShopRestWebService {
 
     private static final Logger logger = Logger.getLogger( ShopRestWebService.class );
 
+
+    @Resource // todo login service
+    private LoginService loginService;
     /**
      * The Shop service impl.
      */
-//    @Resource // todo login service
-//    private LoginService loginService;
     @Resource( name = "shopServiceImpl" )
     private ShopService shopServiceImpl;
 
-//    ShopsService() {
-//    logger.setLevel(Level.DEBUG);
-//    }
+    @Context
+    private HttpServletRequest httpServletRequest;
 
     /**
      * Gets shops.
@@ -60,22 +63,22 @@ public class ShopRestWebService {
     @GET
     @Path( "/{shop_id}" )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response getShops( @PathParam( value = "shop_id" ) long shopId, @QueryParam( value = "is_error" )
+    public Response getShop( @PathParam( value = "shop_id" ) long shopId, @QueryParam( value = "is_error" )
     @DefaultValue( value = ServiceConstants.FALSE ) boolean isError ) {
 
-
-//        if(!loginService.checkLogin(httpServletRequest)) {
-//            ResponseUtility.unauthorizedAccess(null);
-//        }
+        // IMP verify access for this method
+        if ( !loginService.checkLogin( httpServletRequest ) ) {
+            return ResponseUtility.unauthorizedAccess( null );
+        }
         Response response;
         try {
             response = shopServiceImpl.getShopByShopId( shopId, isError );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );
-            logger.error( "Exception occurred in ShopsService.getShops() Method", exception );
+            logger.error( "Exception occurred in ShopsService.getShopByShopId() Method", exception );
         } finally {
-            logger.debug( " Response for getShopsByShopId sent Successfully " );
+            logger.debug( " Response for getShop sent Successfully " );
         }
         return response;
     }
@@ -91,9 +94,21 @@ public class ShopRestWebService {
     @POST
     @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response createAnShop( @NotNull Shop shopDTO, @QueryParam( value = "is_error" )
+    public Response createAShop( @NotNull Shop shopDTO, @QueryParam( value = "is_error" )
     @DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
-        return null;
+
+        Response response;
+
+        try {
+            response = shopServiceImpl.createShop( shopDTO, isError );
+        } catch ( Exception exception ) {
+
+            response = ResponseUtility.internalServerErrorMsg( null );
+            logger.error( "Exception occurred in ShopService.createShop() Method", exception );
+        } finally {
+            logger.debug( " Response for createAShop sent Successfully " );
+        }
+        return response;
     }
 
     /**
@@ -108,9 +123,24 @@ public class ShopRestWebService {
     @Path( "/{shop_id}" )
     @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response updateAnShop( @PathParam( "shop_id" ) Long shopId, @QueryParam( value = "is_error" )
+    public Response updateAShop( @PathParam( "shop_id" ) Long shopId, Shop shopDTO, @QueryParam( value = "is_error" )
     @DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
-        return null;
+
+        Response response;
+        // check the shop ID for validity
+        if ( shopId < 1 ) {
+            return ResponseUtility.badRequest( "shop id is less than 0" );
+        }
+        try {
+            response = shopServiceImpl.updateShop( shopDTO, isError );
+        } catch ( Exception exception ) {
+
+            response = ResponseUtility.internalServerErrorMsg( null );
+            logger.error( "Exception occurred in ShopService.updateShop() Method", exception );
+        } finally {
+            logger.debug( " Response for updateAShop sent Successfully " );
+        }
+        return response;
     }
 
     /**
@@ -124,9 +154,24 @@ public class ShopRestWebService {
     @DELETE
     @Path( "/{shop_id}" )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response deleteAnShop( @PathParam( "shop_id" ) Long shopId, @QueryParam( value = "is_error" )
+    public Response deleteAShop( @PathParam( "shop_id" ) Long shopId, @QueryParam( value = "is_error" )
     @DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
-        return null;
+
+        Response response;
+        // check the shop ID for validity
+        if ( shopId < 1 ) {
+            return ResponseUtility.badRequest( "shop id is less than 0" );
+        }
+        try {
+            response = shopServiceImpl.deleteShopByShopId( shopId, isError );
+        } catch ( Exception exception ) {
+
+            response = ResponseUtility.internalServerErrorMsg( null );
+            logger.error( "Exception occurred in ShopService.deleteShopByShopId() Method", exception );
+        } finally {
+            logger.debug( " Response for deleteShop sent Successfully " );
+        }
+        return response;
     }
 
     /**
@@ -141,9 +186,21 @@ public class ShopRestWebService {
     @Path( "/ids" )
     @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response deleteShopsByShopIds( List< Long > shopIds, @QueryParam( value = "is_error" )
+    public Response deleteMultipleShops( List< Long > shopIds, @QueryParam( value = "is_error" )
     @DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
-        return null;
+
+        Response response;
+
+        try {
+            response = shopServiceImpl.deleteShopsByShopIds( shopIds, isError );
+        } catch ( Exception exception ) {
+
+            response = ResponseUtility.internalServerErrorMsg( null );
+            logger.error( "Exception occurred in ShopService.deleteShopsByShopIds() Method", exception );
+        } finally {
+            logger.debug( " Response for deleteMultipleShops sent Successfully " );
+        }
+        return response;
     }
 
 }
