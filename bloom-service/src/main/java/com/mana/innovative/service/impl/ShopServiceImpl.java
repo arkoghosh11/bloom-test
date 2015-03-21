@@ -51,10 +51,17 @@ public class ShopServiceImpl implements ShopService {
 
         logger.debug( "Initiating getShopByShopId for shop_id = " + shopId + " , shopDAO injected successfully" );
 
+
         DAOResponse< com.mana.innovative.domain.Shop > shopDAOResponse;
         Response response;
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getShopByShopId()";
         ShopResponseContainer< ShopsPayload > shopResponseContainer;
+        if ( shopId < 0 ) {
+            IllegalArgumentValueException exception = new IllegalArgumentValueException( "Value is less than 0" );
+            shopResponseContainer = ShopResponseBuilder.buildError( location, isError, exception );
+            return Response.status( Response.Status.BAD_REQUEST ).entity( shopResponseContainer ).build( );
+        }
+
         try {
             shopDAOResponse = shopDAOImpl.getShopByShopId( shopId, isError );
 
@@ -153,8 +160,7 @@ public class ShopServiceImpl implements ShopService {
         ShopResponseContainer< ShopsPayload > shopResponseContainer;
         if ( shopDTO.getShopId( ) < ONE ) {
             shopResponseContainer = ShopResponseBuilder.buildError( location, isError,
-                    new IllegalArgumentValueException( ", ShopId is Required for " +
-                            "Updating an Shop" ) );
+                    new IllegalArgumentValueException( ", ShopId is Required for Updating an Shop" ) );
             return Response.status( Response.Status.BAD_REQUEST ).entity( shopResponseContainer ).build( );
         }
         shopDomain.setShopId( shopDTO.getShopId( ) );

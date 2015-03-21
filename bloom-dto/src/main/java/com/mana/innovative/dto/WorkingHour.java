@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * The type Working hour.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -13,21 +13,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement( name = "working_hour" )
 public class WorkingHour {
 
-    @XmlElement( name = "working_hour_id" )
+
     private Long workingHourId;
 
-    @XmlElement( name = "day", defaultValue = "Monday" )
     private String day;
-    @XmlElement( name = "start_time" )
     private String startTime;
-    @XmlElement( name = "end_time" )
     private String endTime;
 
-    @XmlElement( name = "is_closed", defaultValue = "false" )
     private Boolean isOffline;
-    @XmlElement( name = "is_holiday", defaultValue = "false" )
     private Boolean isHoliday;
-    @XmlElement( name = "is_weekend", defaultValue = "false" )
     private Boolean isWeekend;
 
     /**
@@ -35,6 +29,7 @@ public class WorkingHour {
      *
      * @return the working hour id
      */
+    @XmlElement( name = "working_hour_id" )
     public Long getWorkingHourId( ) {
         return workingHourId;
     }
@@ -53,6 +48,7 @@ public class WorkingHour {
      *
      * @return the day
      */
+    @XmlElement( name = "day", defaultValue = "Monday" )
     public String getDay( ) {
         return day;
     }
@@ -71,6 +67,7 @@ public class WorkingHour {
      *
      * @return the start time
      */
+    @XmlElement( name = "start_time" )
     public String getStartTime( ) {
         return startTime;
     }
@@ -89,6 +86,7 @@ public class WorkingHour {
      *
      * @return the end time
      */
+    @XmlElement( name = "end_time" )
     public String getEndTime( ) {
         return endTime;
     }
@@ -107,6 +105,7 @@ public class WorkingHour {
      *
      * @return the boolean
      */
+    @XmlElement( name = "is_closed", defaultValue = "false" )
     public Boolean isOffline( ) {
         return isOffline;
     }
@@ -125,6 +124,7 @@ public class WorkingHour {
      *
      * @return the boolean
      */
+    @XmlElement( name = "is_holiday", defaultValue = "false" )
     public Boolean isHoliday( ) {
         return isHoliday;
     }
@@ -143,6 +143,7 @@ public class WorkingHour {
      *
      * @return the boolean
      */
+    @XmlElement( name = "is_weekend", defaultValue = "false" )
     public Boolean isWeekend( ) {
         return isWeekend;
     }
@@ -154,11 +155,6 @@ public class WorkingHour {
      */
     public void setWeekend( Boolean isWeekend ) {
         this.isWeekend = isWeekend;
-    }
-
-    @Override
-    public int hashCode( ) {
-        return 0;
     }
 
     @Override

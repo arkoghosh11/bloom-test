@@ -38,7 +38,7 @@ public class AddressDomainDTOConverter {
         }
         Address addressDTO = new Address( );
 
-        if ( addressDomain.getAddressId( ) > ZERO ) {
+        if ( addressDomain.getAddressId( ) >= ZERO ) {
             addressDTO.setAddressId( addressDomain.getAddressId( ) );
         }
         if ( !StringUtils.isEmpty( addressDomain.getAddress1( ) ) ) {

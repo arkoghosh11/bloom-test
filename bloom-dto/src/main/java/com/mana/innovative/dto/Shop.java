@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * The type Shop.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -15,22 +15,14 @@ import java.util.List;
 @XmlRootElement( name = "shop", namespace = "http://localhost:8080/bloom-test/rest/shops" )
 public class Shop {
 
-    @XmlElement( name = "shop_id", nillable = false )
+
     private Long shopId;
-    @XmlElement( name = "shop_own_id", nillable = false )
     private Long shopOwnId;
-    @XmlElement( name = "shop_name", nillable = false )
     private String shopName;
-    @XmlElement( name = "shop_web_link" )
     private String shopWebLink;
 
-    @XmlElement( name = "address", nillable = false )
     private Address address;
-    @XmlElementWrapper( name = "working_hours" )
-    @XmlElement( name = "working_hour", nillable = true )
     private List< WorkingHour > workingHours;
-    @XmlElementWrapper( name = "items" )
-    @XmlElement( name = "item", nillable = true )
     private List< Item > items;
 
     /**
@@ -38,6 +30,7 @@ public class Shop {
      *
      * @return the shop id
      */
+    @XmlElement( name = "shop_id", nillable = false )
     public Long getShopId( ) {
         return shopId;
     }
@@ -56,6 +49,7 @@ public class Shop {
      *
      * @return the shop own id
      */
+    @XmlElement( name = "shop_own_id", nillable = false )
     public Long getShopOwnId( ) {
         return shopOwnId;
     }
@@ -74,6 +68,7 @@ public class Shop {
      *
      * @return the shop name
      */
+    @XmlElement( name = "shop_name", nillable = false )
     public String getShopName( ) {
         return shopName;
     }
@@ -92,6 +87,7 @@ public class Shop {
      *
      * @return the shop web link
      */
+    @XmlElement( name = "shop_web_link" )
     public String getShopWebLink( ) {
         return shopWebLink;
     }
@@ -110,6 +106,7 @@ public class Shop {
      *
      * @return the address
      */
+    @XmlElement( name = "address", nillable = false )
     public Address getAddress( ) {
         return address;
     }
@@ -128,6 +125,8 @@ public class Shop {
      *
      * @return the working hours
      */
+    @XmlElementWrapper( name = "working_hours" )
+    @XmlElement( name = "working_hour", nillable = true )
     public List< WorkingHour > getWorkingHours( ) {
         return workingHours;
     }
@@ -146,6 +145,8 @@ public class Shop {
      *
      * @return the items
      */
+    @XmlElementWrapper( name = "items" )
+    @XmlElement( name = "item", nillable = true )
     public List< Item > getItems( ) {
         return items;
     }

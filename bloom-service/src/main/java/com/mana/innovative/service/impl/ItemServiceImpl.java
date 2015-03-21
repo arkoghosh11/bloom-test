@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * The type Item service impl.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -57,6 +57,11 @@ public class ItemServiceImpl implements ItemService {
         Response response;
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getItemByItemId()";
         ItemResponseContainer< ItemsPayload > itemResponseContainer;
+        if ( itemId < 0 ) {
+            IllegalArgumentValueException exception = new IllegalArgumentValueException( "Value is less than 0" );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, exception );
+            return Response.status( Response.Status.BAD_REQUEST ).entity( itemResponseContainer ).build( );
+        }
         try {
             itemDAOResponse = itemDAOImpl.getItemByItemId( itemId, isError );
 

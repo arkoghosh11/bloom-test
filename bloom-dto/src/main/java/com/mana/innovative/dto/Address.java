@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * The type Address.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -54,6 +54,7 @@ public class Address {
      *
      * @return the address 1
      */
+    @XmlElement( name = "address1" )
     public String getAddress1( ) {
         return address1;
     }
@@ -63,7 +64,6 @@ public class Address {
      *
      * @param address1 the address 1
      */
-    @XmlElement( name = "address1" )
     public void setAddress1( String address1 ) {
         this.address1 = address1;
     }
@@ -73,6 +73,7 @@ public class Address {
      *
      * @return the address 2
      */
+    @XmlElement( name = "address2" )
     public String getAddress2( ) {
         return address2;
     }
@@ -82,7 +83,6 @@ public class Address {
      *
      * @param address2 the address 2
      */
-    @XmlElement( name = "address2" )
     public void setAddress2( String address2 ) {
         this.address2 = address2;
     }
@@ -92,6 +92,7 @@ public class Address {
      *
      * @return the city
      */
+    @XmlElement( name = "city" )
     public String getCity( ) {
         return city;
     }
@@ -101,7 +102,6 @@ public class Address {
      *
      * @param city the city
      */
-    @XmlElement( name = "city" )
     public void setCity( String city ) {
         this.city = city;
     }
@@ -111,6 +111,7 @@ public class Address {
      *
      * @return the state
      */
+    @XmlElement( name = "state" )
     public String getState( ) {
         return state;
     }
@@ -120,7 +121,6 @@ public class Address {
      *
      * @param state the state
      */
-    @XmlElement( name = "state" )
     public void setState( String state ) {
         this.state = state;
     }
@@ -130,6 +130,7 @@ public class Address {
      *
      * @return the district
      */
+    @XmlElement( name = "district" )
     public String getDistrict( ) {
         return district;
     }
@@ -139,7 +140,6 @@ public class Address {
      *
      * @param district the district
      */
-    @XmlElement( name = "district" )
     public void setDistrict( String district ) {
         this.district = district;
     }
@@ -149,6 +149,7 @@ public class Address {
      *
      * @return the zip code
      */
+    @XmlElement( name = "zipCode" )
     public Integer getZipCode( ) {
         return zipCode;
     }
@@ -158,7 +159,6 @@ public class Address {
      *
      * @param zipCode the zip code
      */
-    @XmlElement( name = "zipCode" )
     public void setZipCode( Integer zipCode ) {
         this.zipCode = zipCode;
     }

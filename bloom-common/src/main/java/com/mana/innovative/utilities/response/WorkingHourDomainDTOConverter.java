@@ -45,7 +45,7 @@ public class WorkingHourDomainDTOConverter {
         }
         WorkingHour workingHourDTO = new WorkingHour( );
 
-        if ( workingHourDomain.getWorkingHourId( ) > ZERO ) {
+        if ( workingHourDomain.getWorkingHourId( ) >= ZERO ) {
             workingHourDTO.setWorkingHourId( workingHourDomain.getWorkingHourId( ) );
         }
         if ( !StringUtils.isEmpty( workingHourDomain.getDay( ) ) ) {

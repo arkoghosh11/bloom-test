@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * The type Shop domain dTO converter.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -45,9 +45,10 @@ public class ShopDomainDTOConverter {
             logger.warn( "Creating shopDTO for conversion as was null " );
         }
 
-        if ( shopDomain.getShopId( ) > ZERO ) {
+        if ( shopDomain.getShopId( ) >= ZERO ) {
             shopDTO.setShopId( shopDomain.getShopId( ) );
         }
+
         if ( !StringUtils.isEmpty( shopDomain.getShopName( ) ) ) {
             shopDTO.setShopName( shopDomain.getShopName( ) );
         }

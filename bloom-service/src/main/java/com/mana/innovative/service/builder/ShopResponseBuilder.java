@@ -109,6 +109,7 @@ public class ShopResponseBuilder {
             errorContainer.addError( error );
             shopResponseContainer.setErrorContainer( errorContainer );
         }
+        shopResponseContainer.setIsError( true );
         shopResponseContainer.setCount( DAOConstants.ZERO );
         logger.debug( "Ending building of Shop Response" );
         return shopResponseContainer;

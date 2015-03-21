@@ -106,6 +106,7 @@ public class ItemResponseBuilder {
             errorContainer.addError( error );
             itemResponseContainer.setErrorContainer( errorContainer );
         }
+        itemResponseContainer.setIsError( true );
         itemResponseContainer.setCount( DAOConstants.ZERO );
         logger.debug( "Ending building of Item Response" );
         return itemResponseContainer;

@@ -1,5 +1,9 @@
 package com.mana.innovative.exception.response;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * The type Error.
  *
@@ -7,6 +11,7 @@ package com.mana.innovative.exception.response;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
+@XmlRootElement( name = "error" )
 public class Error {
 
     private String errorType;
@@ -49,6 +54,7 @@ public class Error {
      *
      * @return the error type
      */
+    @XmlElement( name = "error_type" )
     public String getErrorType( ) {
         return errorType;
     }
@@ -67,6 +73,7 @@ public class Error {
      *
      * @return the error location
      */
+    @XmlElement( name = "error_location" )
     public String getErrorLocation( ) {
         return errorLocation;
     }
@@ -85,6 +92,7 @@ public class Error {
      *
      * @return the error message
      */
+    @XmlElement( name = "error_message" )
     public String getErrorMessage( ) {
         return errorMessage;
     }
@@ -103,6 +111,7 @@ public class Error {
      *
      * @return the error data
      */
+    @XmlTransient
     public Object getErrorData( ) {
         return errorData;
     }

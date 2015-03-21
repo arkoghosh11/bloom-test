@@ -33,7 +33,7 @@ public class ShopsRestWebService {
      * The Shops service impl.
      */
     @Resource( name = "shopsServiceImpl" )
-    ShopsService shopsServiceImpl;
+    private ShopsService shopsServiceImpl;
 
     /**
      * Gets shops.
@@ -53,6 +53,7 @@ public class ShopsRestWebService {
         try {
             return shopsServiceImpl.getShops( isError );
         } catch ( Exception e ) {
+            e.printStackTrace( );
             logger.error( " Failed to retrieve Shops" + e );
             return ResponseUtility.internalServerErrorMsg( null );
         } finally {

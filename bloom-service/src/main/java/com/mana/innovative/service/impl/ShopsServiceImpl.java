@@ -21,6 +21,10 @@ import javax.ws.rs.core.Response;
 
 /**
  * The type Shops service impl.
+
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Service
 public class ShopsServiceImpl implements ShopsService {

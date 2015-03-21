@@ -41,7 +41,7 @@ public class ItemDomainDTOConverter {
             itemDTO = new Item( );
             logger.warn( " Creating itemDTO, received null object" );
         }
-        if ( itemDomain.getItemId( ) > ZERO ) {
+        if ( itemDomain.getItemId( ) >= ZERO ) {
             itemDTO.setItemId( itemDomain.getItemId( ) );
         }
         if ( !StringUtils.isEmpty( itemDomain.getItemName( ) ) ) {

@@ -6,6 +6,7 @@ import com.mana.innovative.dto.Shop;
 import com.mana.innovative.service.ShopService;
 import com.mana.innovative.utilities.response.ResponseUtility;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
@@ -30,6 +31,7 @@ import java.util.List;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
+@Component
 @Path( "/{shop : (?i)shop}" )
 public class ShopRestWebService {
 
@@ -41,7 +43,7 @@ public class ShopRestWebService {
 //    @Resource // todo login service
 //    private LoginService loginService;
     @Resource( name = "shopServiceImpl" )
-    ShopService shopServiceImpl;
+    private ShopService shopServiceImpl;
 
 //    ShopsService() {
 //    logger.setLevel(Level.DEBUG);
