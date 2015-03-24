@@ -24,7 +24,7 @@ public interface ShopDAO {
      *
      * @return the shop by shop id
      */
-    public DAOResponse< Shop > getShopByShopId( long shopId, boolean isError );
+    DAOResponse< Shop > getShopByShopId( long shopId, boolean isError );
 
     /**
      * Gets shops.
@@ -33,7 +33,7 @@ public interface ShopDAO {
      *
      * @return the shops
      */
-    public DAOResponse< Shop > getShops( boolean isError );
+    DAOResponse< Shop > getShops( boolean isError );
 
     /**
      * Create shop.
@@ -43,7 +43,7 @@ public interface ShopDAO {
      *
      * @return the dAO response
      */
-    public DAOResponse< Shop > createShop( Shop shop, boolean isError );
+    DAOResponse< Shop > createShop( Shop shop, boolean isError );
 
     /**
      * Update shop.

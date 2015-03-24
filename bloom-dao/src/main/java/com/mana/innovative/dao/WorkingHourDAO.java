@@ -73,4 +73,15 @@ public interface WorkingHourDAO {
      * @return the dAO response
      */
     public DAOResponse< WorkingHour > createWorkingHour( WorkingHour workingHour, boolean isError );
+
+
+    /**
+     * Update working hour.
+     *
+     * @param workingHour the working hour
+     * @param isError     the is error
+     *
+     * @return the dAO response
+     */
+    DAOResponse< WorkingHour > updateWorkingHour( WorkingHour workingHour, boolean isError );
 }

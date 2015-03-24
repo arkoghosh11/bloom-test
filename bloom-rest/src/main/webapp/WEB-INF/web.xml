@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
+-->
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
@@ -71,6 +76,7 @@
     </session-config>
 
     <!-- @Note SOAP Web Services -->
+    <!-- IMP for the moment not implementing soap, but for future simple Soap Configuration below-->
     <!--<servlet>-->
     <!--<servlet-name>WSSpring</servlet-name>-->
     <!--<servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>-->

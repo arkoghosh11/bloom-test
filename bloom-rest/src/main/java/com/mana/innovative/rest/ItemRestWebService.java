@@ -43,10 +43,10 @@ public class ItemRestWebService {
      * The constant logger.
      */
     private static final Logger logger = Logger.getLogger( ItemRestWebService.class );
+
     /**
      * The Item service impl.
      */
-
     @Resource( name = "itemServiceImpl" )
     ItemService itemServiceImpl;
     @Resource // todo login service

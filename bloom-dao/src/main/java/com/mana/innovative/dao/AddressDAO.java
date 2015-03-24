@@ -23,7 +23,7 @@ public interface AddressDAO {
      * @param isError the is error
      * @return the address by address id
      */
-    public DAOResponse< Address > getAddressByAddressId( long addressId, boolean isError );
+    DAOResponse< Address > getAddressByAddressId( long addressId, boolean isError );
 
     /**
      * Gets address.
@@ -31,7 +31,7 @@ public interface AddressDAO {
      * @param isError the is error
      * @return the address
      */
-    public DAOResponse< Address > getAddress( boolean isError );
+    DAOResponse< Address > getAddress( boolean isError );
 
     /**
      * Delete address by address id.
@@ -41,7 +41,7 @@ public interface AddressDAO {
      *
      * @return the dAO response
      */
-    public DAOResponse< Address > deleteAddressByAddressId( long addressId, boolean
+    DAOResponse< Address > deleteAddressByAddressId( long addressId, boolean
             isError );
 
     /**
@@ -52,7 +52,7 @@ public interface AddressDAO {
      *
      * @return the dAO response
      */
-    public DAOResponse< Address > deleteAddressesByAddressIds( List< Long > addressIds, boolean isError );
+    DAOResponse< Address > deleteAddressesByAddressIds( List< Long > addressIds, boolean isError );
 
     /**
      * Delete all address.
@@ -61,7 +61,7 @@ public interface AddressDAO {
      * @param isError the is error
      * @return the dAO response
      */
-    public DAOResponse< Address > deleteAllAddress( boolean deleteAllItems, boolean isError );
+    DAOResponse< Address > deleteAllAddress( boolean deleteAllItems, boolean isError );
 
     /**
      * Create address.
@@ -70,6 +70,16 @@ public interface AddressDAO {
      * @param isError the is error
      * @return the dAO response
      */
-    public DAOResponse< Address > createAddress( Address address, boolean isError);
+    DAOResponse< Address > createAddress( Address address, boolean isError );
 
+
+    /**
+     * Update address.
+     *
+     * @param address the address
+     * @param isError the is error
+     *
+     * @return the dAO response
+     */
+    DAOResponse< Address > updateAddress( Address address, boolean isError );
 }

@@ -5,6 +5,7 @@ import com.mana.innovative.dao.BasicDAO;
 import com.mana.innovative.dao.WorkingHourDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.WorkingHour;
+import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
 import org.apache.log4j.Logger;
@@ -20,7 +21,7 @@ import java.util.List;
 
 /**
  * The type Working hour dAO impl.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -226,8 +227,8 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
         if ( deleteAllWorkingHrs ) {
             try {
                 this.openDBTransaction( );
-                // Note: Will delete all WorkingHour class rows stored in DB will not delete anything from shop class
-                // Note: and it should not as a shop may or may not have any workingHours so shop class will still persist
+                // Note: Will delete all WorkingHour class rows stored in DB will not delete anything from workingHour class
+                // Note: and it should not as a workingHour may or may not have any workingHours so workingHour class will still persist
                 Query query = session.createQuery( "delete from WorkingHour" );
                 workingHourDAOResponse.setCount( query.executeUpdate( ) );
                 this.closeDBTransaction( );
@@ -289,6 +290,64 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
             workingHourDAOResponse.setRequestSuccess( Boolean.FALSE );
             workingHourDAOResponse.setCount( DAOConstants.ZERO );
         }
+        workingHourDAOResponse.setResults( workingHours );
+        workingHourDAOResponse.setErrorContainer( errorContainer );
+        log.debug( "Finishing " + location );
+        return workingHourDAOResponse;
+    }
+
+    /**
+     * Update workingHour.
+     *
+     * @param workingHour the workingHour
+     * @param isError     the is error
+     *
+     * @return the dAO response
+     */
+    @Override
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
+    public DAOResponse< WorkingHour > updateWorkingHour( final WorkingHour workingHour, boolean isError ) {
+
+        if ( workingHour == null ) {
+            throw new NullPointerException( "Update object WorkingHour is null" );
+        }
+        String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateWorkingHour()";
+        log.debug( "Starting " + location );
+
+        DAOResponse< WorkingHour > workingHourDAOResponse = new DAOResponse<>( );
+        workingHourDAOResponse.setUpdate( true );
+        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        List< WorkingHour > workingHours = null;
+
+        try {
+            this.openDBTransaction( );
+            Query query = session.createQuery( " from WorkingHour where workingHourId=:workingHourId" );
+            query.setParameter( "workingHourId", workingHour.getWorkingHourId( ) );
+            workingHours = query.list( );
+            if ( workingHours.size( ) != DAOConstants.ONE ) {
+                throw new IllegalArgumentValueException( "WorkingHour List Size is different to expected Size" );
+            }
+            WorkingHour dbWorkingHour = workingHours.get( DAOConstants.ZERO );
+            this.updateShopWorkingHour( workingHour, dbWorkingHour );
+            this.closeDBTransaction( );
+            this.openDBTransaction( );
+            session.update( workingHour );
+            this.closeDBTransaction( );
+            workingHourDAOResponse.setCount( DAOConstants.ONE );
+            workingHours = new ArrayList<>( );
+            workingHours.add( workingHour );
+            workingHourDAOResponse.setCount( DAOConstants.ONE );
+            workingHourDAOResponse.setRequestSuccess( true );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                this.handleExceptions( ( HibernateException ) exception );
+            }
+            log.error( "Failed to update workingHour", exception );
+            if ( isError ) {
+                errorContainer = this.fillErrorContainer( location, exception );
+            }
+        }
+
         workingHourDAOResponse.setResults( workingHours );
         workingHourDAOResponse.setErrorContainer( errorContainer );
         log.debug( "Finishing " + location );

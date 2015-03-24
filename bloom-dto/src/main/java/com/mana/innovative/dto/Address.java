@@ -35,7 +35,7 @@ public class Address {
      *
      * @return the address id
      */
-    @XmlElement( name = "addressId", nillable = false )
+    @XmlElement( name = "address_id", nillable = false )
     public Long getAddressId( ) {
         return addressId;
     }

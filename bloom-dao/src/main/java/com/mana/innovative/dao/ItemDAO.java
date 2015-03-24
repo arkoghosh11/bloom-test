@@ -24,7 +24,7 @@ public interface ItemDAO {
      *
      * @return the dAO response
      */
-    public DAOResponse< Item > deleteAllItems( final boolean deleteAllItems, final boolean isError );
+    DAOResponse< Item > deleteAllItems( final boolean deleteAllItems, final boolean isError );
 
     /**
      * Delete item by item id.
@@ -33,7 +33,7 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the dAO response
      */
-    public DAOResponse< Item > deleteItemByItemId( long itemId, boolean isError );
+    DAOResponse< Item > deleteItemByItemId( long itemId, boolean isError );
 
     /**
      * Delete items by item ids.
@@ -42,7 +42,7 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the dAO response
      */
-    public DAOResponse< Item > deleteItemsByItemIds( List< Long > itemIds, boolean isError );
+    DAOResponse< Item > deleteItemsByItemIds( List< Long > itemIds, boolean isError );
 
     /* IMP UPDATE Functions */
 
@@ -53,7 +53,7 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the dAO response
      */
-    public DAOResponse< Item > updateItem( Item item, boolean isError );
+    DAOResponse< Item > updateItem( Item item, boolean isError );
 
     /* IMP CREATE Functions */
 
@@ -64,7 +64,7 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the dAO response
      */
-    public DAOResponse< Item > createItem( Item item, Boolean isError );
+    DAOResponse< Item > createItem( Item item, Boolean isError );
 
     /**
      * Gets item by item id.
@@ -73,7 +73,7 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the item by item id
      */
-    public DAOResponse< Item > getItemByItemId( long itemId, boolean isError );
+    DAOResponse< Item > getItemByItemId( long itemId, boolean isError );
 
     /**
      * Gets items.
@@ -81,5 +81,5 @@ public interface ItemDAO {
      * @param isError the is error
      * @return the items
      */
-    public DAOResponse< Item > getItems( boolean isError );
+    DAOResponse< Item > getItems( boolean isError );
 }

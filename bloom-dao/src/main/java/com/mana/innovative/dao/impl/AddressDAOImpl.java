@@ -5,6 +5,7 @@ import com.mana.innovative.dao.AddressDAO;
 import com.mana.innovative.dao.BasicDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.Address;
+import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
 import org.apache.log4j.Logger;
@@ -20,9 +21,9 @@ import java.util.List;
 
 /**
  * The type Address dAO impl.
-
+ *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @email arkoghosh@hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Repository
@@ -285,6 +286,64 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
         addressDAOResponse.setResults( addresses );
         addressDAOResponse.setErrorContainer( errorContainer );
 
+        log.debug( "Finishing " + location );
+        return addressDAOResponse;
+    }
+
+    /**
+     * Update address.
+     *
+     * @param address the address
+     * @param isError the is error
+     *
+     * @return the dAO response
+     */
+    @Override
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
+    public DAOResponse< Address > updateAddress( final Address address, boolean isError ) {
+
+        if ( address == null ) {
+            throw new NullPointerException( "Update object Address is null" );
+        }
+        String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateAddress()";
+        log.debug( "Starting " + location );
+
+        DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
+        addressDAOResponse.setUpdate( true );
+        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        List< Address > addresses = null;
+
+        try {
+            this.openDBTransaction( );
+            Query query = session.createQuery( " from Address where addressId=:addressId" );
+            query.setParameter( "addressId", address.getAddressId( ) );
+            addresses = query.list( );
+            if ( addresses.size( ) != DAOConstants.ONE ) {
+                throw new IllegalArgumentValueException( "Address List Size is different to expected Size" );
+            }
+            Address dbAddress = addresses.get( DAOConstants.ZERO );
+            this.updateShopAddress( address, dbAddress );
+            this.closeDBTransaction( );
+            this.openDBTransaction( );
+            session.update( address );
+            this.closeDBTransaction( );
+            addressDAOResponse.setCount( DAOConstants.ONE );
+            addresses = new ArrayList<>( );
+            addresses.add( address );
+            addressDAOResponse.setCount( DAOConstants.ONE );
+            addressDAOResponse.setRequestSuccess( true );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                this.handleExceptions( ( HibernateException ) exception );
+            }
+            log.error( "Failed to update address", exception );
+            if ( isError ) {
+                errorContainer = this.fillErrorContainer( location, exception );
+            }
+        }
+
+        addressDAOResponse.setResults( addresses );
+        addressDAOResponse.setErrorContainer( errorContainer );
         log.debug( "Finishing " + location );
         return addressDAOResponse;
     }
