@@ -28,7 +28,7 @@
         <module>bloom-common</module>
         <module>bloom-domain</module>
         <module>bloom-dao</module>
-        <module>bloom-email-service</module>
+        <!--<module>bloom-email-service</module>-->
         <module>bloom-rest</module>
         <!--<module>bloom-aop</module>-->
         <module>bloom-service</module>

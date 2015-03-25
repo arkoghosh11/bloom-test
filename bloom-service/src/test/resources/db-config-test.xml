@@ -19,8 +19,8 @@
         <property name="propagateToSystemProperties" value="true"/>
         <property name="locations">
             <list>
-                <value>${database}</value>
-                <value>${hibernate}</value>
+                <value>${database2}</value>
+                <value>${hibernate2}</value>
             </list>
         </property>
 
