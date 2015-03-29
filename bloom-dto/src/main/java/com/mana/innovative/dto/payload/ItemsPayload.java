@@ -4,6 +4,8 @@ import com.mana.innovative.dto.Item;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
 /**
@@ -13,6 +15,8 @@ import java.util.List;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
+@XmlSeeAlso( { Item.class } )
+@XmlRootElement( name = "items_payload" )
 public class ItemsPayload {
 
     private List<Item> items;

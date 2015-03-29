@@ -1,4 +1,4 @@
-package com.mana.innovative.utilities.converter;
+package com.mana.innovative.dto.adapter;
 
 import org.apache.log4j.Logger;
 

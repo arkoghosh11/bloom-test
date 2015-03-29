@@ -1,6 +1,7 @@
 package com.mana.innovative.utilities.converter;
 
 import com.mana.innovative.constants.TestConstants;
+import com.mana.innovative.dto.adapter.DateFormatAdapter;
 import junit.framework.Assert;
 import org.apache.log4j.Logger;
 import org.junit.After;

@@ -1,7 +1,10 @@
 package com.mana.innovative.dto;
 
+import com.mana.innovative.dto.adapter.DateFormatAdapter;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 
 /**
@@ -178,6 +181,7 @@ public class Item {
      * @return the bought date
      */
     @XmlElement( name = "bought_date", nillable = false )
+    @XmlJavaTypeAdapter( value = DateFormatAdapter.class )
     public Date getBoughtDate( ) {
         return boughtDate;
     }
@@ -289,10 +293,8 @@ public class Item {
         if ( itemType != null ? !itemType.equals( item.itemType ) : item.itemType != null ) return false;
         if ( quantityType != null ? !quantityType.equals( item.quantityType ) : item.quantityType != null )
             return false;
-        if ( weightedUnit != null ? !weightedUnit.equals( item.weightedUnit ) : item.weightedUnit != null )
-            return false;
+        return !( weightedUnit != null ? !weightedUnit.equals( item.weightedUnit ) : item.weightedUnit != null );
 
-        return true;
     }
 
     /**

@@ -23,7 +23,10 @@
         <param-value>
             classpath*:/db_config.xml
             classpath*:/service_config.xml
-            classpath*:web_config.xml
+            classpath*:/web_config.xml
+            <!--classpath*:/email-config.xml-->
+            classpath*:/scheduler-config.xml
+
         </param-value>
     </context-param>
     <!--location for login credentials-->

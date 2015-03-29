@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -64,6 +64,11 @@
         <dependency>
             <groupId>com.mana.innovative</groupId>
             <artifactId>bloom-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mana.innovative</groupId>
+            <artifactId>bloom-non-client-service</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!--<dependency>-->
@@ -179,6 +184,7 @@
             <artifactId>spring-context</artifactId>
             <version>3.2.1.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -186,6 +192,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>1.8.6</version>
+        </dependency>
     </dependencies>
 
 
