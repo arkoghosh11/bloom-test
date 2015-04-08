@@ -24,7 +24,7 @@ public class LoginService {
 
     private static final Logger logger = Logger.getLogger( LoginService.class );
 
-    @Value( value = "${loginVariable}" )
+    @Value( value = "${bloom-service.loginVariable}" )
     private String loginParameterNameForSession;
 
     /**

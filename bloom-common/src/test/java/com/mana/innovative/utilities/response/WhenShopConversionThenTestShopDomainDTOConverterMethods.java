@@ -1,7 +1,7 @@
 package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.TestConstants;
-import com.mana.innovative.dto.Shop;
+import com.mana.innovative.dto.client.Shop;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.utilities.TestDummyDTOObjectGenerator;
 import com.mana.innovative.utilities.TestDummyDomainObjectGenerator;
@@ -23,16 +23,16 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
             .class );
 
     private Shop shopDTO, shopDTO2;
-    private com.mana.innovative.domain.Shop shopDomain, shopDomain2;
+    private com.mana.innovative.domain.client.Shop shopDomain, shopDomain2;
 
     @Before
     public void setUp( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
 
-        shopDomain = new com.mana.innovative.domain.Shop( );
+        shopDomain = new com.mana.innovative.domain.client.Shop( );
         shopDTO = new Shop( );
 
-        shopDomain2 = new com.mana.innovative.domain.Shop( );
+        shopDomain2 = new com.mana.innovative.domain.client.Shop( );
         shopDTO2 = new Shop( );
 
         // Set Values for tempValues
@@ -70,7 +70,7 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         logger.debug( "Starting  testGetConvertedListDTOFromDomain" );
 
         List< Shop > shopDTOList;
-        List< com.mana.innovative.domain.Shop > shopDomainList = new ArrayList<>( );
+        List< com.mana.innovative.domain.client.Shop > shopDomainList = new ArrayList<>( );
         shopDomainList.add( shopDomain );
 
         if ( shopDomain.getShopId( ) != TestConstants.TEST_ID ) {
@@ -105,7 +105,7 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         logger.debug( "Starting  testGetConvertedListDomainFromDTO" );
 
         List< Shop > shopDTOList = new ArrayList<>( );
-        List< com.mana.innovative.domain.Shop > shopDomainList;
+        List< com.mana.innovative.domain.client.Shop > shopDomainList;
         shopDTOList.add( shopDTO );
         TestDummyDomainObjectGenerator.getTestShopDomainZEROIDObject( shopDomain );
 

@@ -1,7 +1,7 @@
 package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.TestConstants;
-import com.mana.innovative.dto.Item;
+import com.mana.innovative.dto.client.Item;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.utilities.TestDummyDTOObjectGenerator;
 import com.mana.innovative.utilities.TestDummyDomainObjectGenerator;
@@ -25,7 +25,7 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
     private static final Logger logger = Logger.getLogger( WhenItemConversionThenTestItemConverterDomainDTOMethods.class );
 
     private Item itemDTO, itemDTO2;
-    private com.mana.innovative.domain.Item itemDomain, itemDomain2;
+    private com.mana.innovative.domain.client.Item itemDomain, itemDomain2;
 
     /**
      * Sets up.
@@ -37,12 +37,12 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
 
-        itemDomain2 = new com.mana.innovative.domain.Item( );
+        itemDomain2 = new com.mana.innovative.domain.client.Item( );
         itemDTO2 = new Item( );
 
         // Set Values for tempValues
         itemDTO = TestDummyDTOObjectGenerator.getTestItemDTOObject( new Item( ) );
-        itemDomain = TestDummyDomainObjectGenerator.getTestItemDomainObject( new com.mana.innovative.domain.Item( ) );
+        itemDomain = TestDummyDomainObjectGenerator.getTestItemDomainObject( new com.mana.innovative.domain.client.Item( ) );
     }
 
     /**
@@ -87,7 +87,7 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
         logger.debug( "Starting  GetConvertedListDTOFromDomain" );
 
         List< Item > itemDTOList;
-        List< com.mana.innovative.domain.Item > itemDomainList = new ArrayList<>( );
+        List< com.mana.innovative.domain.client.Item > itemDomainList = new ArrayList<>( );
         itemDomainList.add( itemDomain );
         if ( itemDomain.getItemId( ) != TestConstants.TEST_ID ) {
             TestDummyDomainObjectGenerator.getTestItemDomainZEROIDObject( itemDomain );
@@ -131,7 +131,7 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
         logger.debug( "Starting  GetConvertedListDomainFromDTO" );
 
         List< Item > itemDTOList = new ArrayList<>( );
-        List< com.mana.innovative.domain.Item > itemDomainList;
+        List< com.mana.innovative.domain.client.Item > itemDomainList;
         itemDTOList.add( itemDTO );
         TestDummyDomainObjectGenerator.getTestItemDomainZEROIDObject( itemDomain );
 

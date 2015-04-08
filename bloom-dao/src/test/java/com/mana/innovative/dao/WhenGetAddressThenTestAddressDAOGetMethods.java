@@ -1,8 +1,9 @@
 package com.mana.innovative.dao;
 
 import com.mana.innovative.constants.TestConstants;
+import com.mana.innovative.dao.common.AddressDAO;
 import com.mana.innovative.dao.response.DAOResponse;
-import com.mana.innovative.domain.Address;
+import com.mana.innovative.domain.common.Address;
 import junit.framework.Assert;
 import org.apache.log4j.Logger;
 import org.junit.After;

@@ -1,21 +1,22 @@
 package com.mana.innovative.dao;
 
 import com.mana.innovative.constants.DAOConstants;
-import com.mana.innovative.domain.Address;
-import com.mana.innovative.domain.Item;
-import com.mana.innovative.domain.Shop;
-import com.mana.innovative.domain.WorkingHour;
+import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.domain.client.Shop;
+import com.mana.innovative.domain.client.WorkingHour;
+import com.mana.innovative.domain.common.Address;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
 import com.mana.innovative.logic.ItemSearchOption;
 import com.mana.innovative.logic.QueryUtil;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -39,9 +40,9 @@ public class BasicDAO {
 
 
     /**
-     * The constant log.
+     * The constant logger.
      */
-    protected static final Logger log = Logger.getLogger( BasicDAO.class );
+    protected static final Logger logger = LoggerFactory.getLogger( BasicDAO.class );
 
     /**
      * The Query util.
@@ -67,21 +68,21 @@ public class BasicDAO {
      */
     protected void openDBTransaction( ) {
 
-        log.debug( " Trying to open Hibernate DB Transaction " );
+        logger.debug( " Trying to open Hibernate DB Transaction " );
         try {
             if ( sessionFactory == null ) {
                 NullPointerException exception = new NullPointerException( "Session " + "Factory is Null" );
-                log.error( "Session Factory inject is Null", exception );
+                logger.error( "Session Factory inject is Null", exception );
                 throw exception;
             }
             session = sessionFactory.getCurrentSession( );
 //            Note Hib transaction vs spring Transaction
 //            transaction = session.beginTransaction();
         } catch ( Exception e ) {
-            log.error( "Current Session error from Session Factory, either Transaction Manager Config issue " +
+            logger.error( "Current Session error from Session Factory, either Transaction Manager Config issue " +
                     "or no DB Connection ", e );
         }
-        log.debug( "Hibernate DB Transaction Opened" );
+        logger.debug( "Hibernate DB Transaction Opened" );
     }
 
     /**
@@ -89,11 +90,11 @@ public class BasicDAO {
      */
     protected void closeDBTransaction( ) {
 
-        log.debug( "Trying to Flush Hibernate Transaction" );
+        logger.debug( "Trying to Flush Hibernate Transaction" );
         if ( session != null ) {
             session.flush( );
         }
-        log.debug( "Flushed Hibernate DB Transaction" );
+        logger.debug( "Flushed Hibernate DB Transaction" );
     }
 
     /**
@@ -105,7 +106,7 @@ public class BasicDAO {
 //        if (transaction != null) {
 //            transaction.rollback();
 //        }
-        log.error( "Hibernate Exception occurred with \nmessage: " + exception.getMessage( ), exception );
+        logger.error( "Hibernate Exception occurred with \nmessage: " + exception.getMessage( ), exception );
     }
 
     /**
@@ -118,7 +119,7 @@ public class BasicDAO {
      */
     protected ErrorContainer fillErrorContainer( String location, Exception exception ) {
 
-        log.debug( "**** Recording Error Container Object" );
+        logger.debug( "**** Recording Error Container Object" );
         ErrorContainer errorContainer = new ErrorContainer( );
         errorContainer.addError( new com.mana.innovative.exception.response.Error( location, exception ) );
         return errorContainer;
@@ -151,7 +152,7 @@ public class BasicDAO {
 //            transaction.commit();
         } catch ( HibernateException exception ) {
             this.handleExceptions( exception );
-            log.error( "Exception occurred while trying to search " + itemSearchOption.toString( ) );
+            logger.error( "Exception occurred while trying to search " + itemSearchOption.toString( ) );
         }
         return ( ( ( itemList != null ) && ( itemList.size( ) > com.mana.innovative.constants.DAOConstants.ZERO ) ) ) ?
                 itemList : null;
@@ -311,13 +312,13 @@ public class BasicDAO {
      */
     protected void updateShopValues( final Shop shop, final Shop dbShop ) {
 
-        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopValues()" );
+        logger.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopValues()" );
         dbShop.setShopName( !StringUtils.isEmpty( shop.getShopName( ) ) ? shop.getShopName( ) : dbShop.getShopName( ) );
         dbShop.setShopOwnId( shop.getShopOwnId( ) != null && shop.getShopOwnId( ) > DAOConstants.ZERO ? shop.getShopOwnId(
         ) : dbShop.getShopOwnId( ) );
         dbShop.setShopWebLink( !StringUtils.isEmpty( shop.getShopWebLink( ) ) ? shop.getShopWebLink( ) :
                 dbShop.getShopWebLink( ) );
-        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopValues()" );
+        logger.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopValues()" );
 
     }
 
@@ -329,12 +330,12 @@ public class BasicDAO {
      */
     protected void updateShopItems( final List< Item > items, final List< Item > dbItems ) {
 
-        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItems()" );
+        logger.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItems()" );
         for ( int i = DAOConstants.ZERO; i < dbItems.size( ) && dbItems.size( ) == items.size( ); i++ ) {
             Item dbItem = dbItems.get( i ), item = items.get( i );
             this.updateShopItem( item, dbItem );
         }
-        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItems()" );
+        logger.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItems()" );
     }
 
     /**
@@ -345,7 +346,7 @@ public class BasicDAO {
      */
     protected void updateShopItem( final Item item, final Item dbItem ) {
 
-        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItem()" );
+        logger.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItem()" );
 
         if ( dbItem.getItemId( ) != item.getItemId( ) ) {
             throw new IllegalArgumentValueException( "Item Id cannot be updated or overridden, dbItem " + dbItem
@@ -371,7 +372,7 @@ public class BasicDAO {
         dbItem.setBoughtFrom( item.getBoughtFrom( ) != null ? item.getBoughtFrom( ) : dbItem.getBoughtFrom( ) );
         dbItem.setBoughtDate( item.getBoughtDate( ) != null ? item.getBoughtDate( ) : dbItem.getBoughtDate( ) );
 
-        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItem()" );
+        logger.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopItem()" );
     }
 
 
@@ -383,13 +384,13 @@ public class BasicDAO {
      */
     protected void updateShopWorkingHours( final List< WorkingHour > workingHours, final List< WorkingHour > dbWorkingHours ) {
 
-        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHours()" );
+        logger.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHours()" );
 
         for ( int i = DAOConstants.ZERO; i < dbWorkingHours.size( ) && workingHours.size( ) == workingHours.size( ); i++ ) {
             WorkingHour dbWorkingHour = dbWorkingHours.get( i ), workingHour = workingHours.get( i );
             this.updateShopWorkingHour( workingHour, dbWorkingHour );
         }
-        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHours()" );
+        logger.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHours()" );
     }
 
     /**
@@ -400,7 +401,7 @@ public class BasicDAO {
      */
     protected void updateShopWorkingHour( final WorkingHour workingHour, final WorkingHour dbWorkingHour ) {
 
-        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHour()" );
+        logger.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHour()" );
         if ( dbWorkingHour.getWorkingHourId( ) != workingHour.getWorkingHourId( ) ) {
             throw new IllegalArgumentValueException( "WorkingHour Id cannot be updated or overridden, dbWorkingHour "
                     + dbWorkingHour.getWorkingHourId( ) + ", workingHourId " + workingHour.getWorkingHourId( ) );
@@ -412,7 +413,7 @@ public class BasicDAO {
         dbWorkingHour.setOffline( workingHour.isOffline( ) != null ? workingHour.isOffline( ) : dbWorkingHour.isOffline( ) );
         dbWorkingHour.setWeekend( workingHour.isWeekend( ) != null ? workingHour.isWeekend( ) : dbWorkingHour.isWeekend( ) );
         dbWorkingHour.setHoliday( workingHour.isHoliday( ) != null ? workingHour.isHoliday( ) : dbWorkingHour.isHoliday( ) );
-        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHour()" );
+        logger.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopWorkingHour()" );
     }
 
     /**
@@ -423,7 +424,7 @@ public class BasicDAO {
      */
     protected void updateShopAddress( final Address address, final Address dbAddress ) {
 
-        log.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopAddress()" );
+        logger.debug( "Starting " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopAddress()" );
         if ( dbAddress.getAddressId( ) != address.getAddressId( ) ) {
             throw new IllegalArgumentValueException( "Address Id cannot be updated or overridden, dbAddress "
                     + dbAddress.getAddressId( ) + ", addressId " + address.getAddressId( ) );
@@ -438,7 +439,7 @@ public class BasicDAO {
         dbAddress.setState( !StringUtils.isEmpty( address.getState( ) ) ? address.getState( ) : dbAddress.getState( ) );
         dbAddress.setZipCode( address.getZipCode( ) != null && address.getZipCode( ) > DAOConstants.ZERO ? address
                 .getZipCode( ) : dbAddress.getZipCode( ) );
-        log.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopAddress()" );
+        logger.debug( "Finishing " + this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateShopAddress()" );
     }
 
     /**

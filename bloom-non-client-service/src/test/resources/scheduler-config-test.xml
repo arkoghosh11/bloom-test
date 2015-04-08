@@ -8,11 +8,25 @@
        http://www.springframework.org/schema/task
        http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.mana.innovative.scheduler" annotation-config="true"/>
-    <context:property-placeholder ignore-unresolvable="true" local-override="true"
-                                  location="classpath*:schedulerTestProperty.properties"/>
+    <context:component-scan base-package="com.mana.innovative.scheduler,com.mana.innovative.reader"
+                            annotation-config="true"/>
+
+    <context:property-placeholder ignore-unresolvable="true" location="classpath*:schedulerTestProperty.properties"/>
+
+    <!--<bean id="schedulerProperties" class="${spring_property_class1}">-->
+    <!--<property name="propagateToSystemProperties" value="true"/>-->
+    <!--<property name="locations">-->
+    <!--<list>-->
+    <!--<value>${scheduler}</value>-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+
     <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
     <task:executor id="myExecutor" pool-size="5"/>
     <task:scheduler id="myScheduler" pool-size="10"/>
+    <!--<task:scheduled-tasks>-->
+    <!--<task:scheduled ref="customSchedulerImpl" method="checkForFile" fixed-delay="300000"/>-->
+    <!--</task:scheduled-tasks>-->
 
 </beans>

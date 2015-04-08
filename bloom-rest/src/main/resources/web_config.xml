@@ -12,6 +12,9 @@
 	   http://www.springframework.org/schema/context
 	   http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <context:component-scan base-package="com.mana.innovative.rest,com.mana.innovative.rest.filter"/>
+    <context:component-scan base-package="com.mana.innovative.rest.filter,
+    com.mana.innovative.rest.client,
+    com.mana.innovative.rest.common,
+    com.mana.innovative.rest.consumer"/>
 
 </beans>

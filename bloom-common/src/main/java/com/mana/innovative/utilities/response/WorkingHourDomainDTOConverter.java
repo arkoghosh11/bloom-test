@@ -1,7 +1,7 @@
 package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.DAOConstants;
-import com.mana.innovative.dto.WorkingHour;
+import com.mana.innovative.dto.client.WorkingHour;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
@@ -36,7 +36,7 @@ public class WorkingHourDomainDTOConverter {
      *
      * @return the converted dTO from domain
      */
-    public static WorkingHour getConvertedDTOFromDomain( com.mana.innovative.domain.WorkingHour workingHourDomain ) {
+    public static WorkingHour getConvertedDTOFromDomain( com.mana.innovative.domain.client.WorkingHour workingHourDomain ) {
 
         if ( workingHourDomain == null ) {
             String message = "workingHourDomain is required for conversion";
@@ -74,11 +74,11 @@ public class WorkingHourDomainDTOConverter {
      *
      * @return the converted list domain from dTO
      */
-    public static List< com.mana.innovative.domain.WorkingHour > getConvertedListDomainFromDTO( List< WorkingHour > workingHoursDTO ) {
+    public static List< com.mana.innovative.domain.client.WorkingHour > getConvertedListDomainFromDTO( List< WorkingHour > workingHoursDTO ) {
 
-        List< com.mana.innovative.domain.WorkingHour > workingHoursDomain = new ArrayList<>( );
+        List< com.mana.innovative.domain.client.WorkingHour > workingHoursDomain = new ArrayList<>( );
         for ( WorkingHour workingHourDTO : workingHoursDTO ) {
-            com.mana.innovative.domain.WorkingHour workingHourDomain = getConvertedDomainFromDTO( workingHourDTO );
+            com.mana.innovative.domain.client.WorkingHour workingHourDomain = getConvertedDomainFromDTO( workingHourDTO );
             workingHoursDomain.add( workingHourDomain );
         }
         return workingHoursDomain;
@@ -91,7 +91,7 @@ public class WorkingHourDomainDTOConverter {
      *
      * @return the converted domain from dTO
      */
-    public static com.mana.innovative.domain.WorkingHour getConvertedDomainFromDTO( WorkingHour workingHourDTO ) {
+    public static com.mana.innovative.domain.client.WorkingHour getConvertedDomainFromDTO( WorkingHour workingHourDTO ) {
 
         if ( workingHourDTO == null ) {
             String message = "WorkingHourDTO is required for conversion";
@@ -99,7 +99,7 @@ public class WorkingHourDomainDTOConverter {
             throw new NullPointerException( message );
         }
 
-        com.mana.innovative.domain.WorkingHour workingHourDomain = new com.mana.innovative.domain.WorkingHour( );
+        com.mana.innovative.domain.client.WorkingHour workingHourDomain = new com.mana.innovative.domain.client.WorkingHour( );
         boolean flag = false;
         StringBuilder stringBuilder = new StringBuilder( " Value must not be null for " );
 
@@ -148,10 +148,10 @@ public class WorkingHourDomainDTOConverter {
      *
      * @return the converted list dTO from domain
      */
-    public static List< WorkingHour > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.WorkingHour > workingHoursDomain ) {
+    public static List< WorkingHour > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.client.WorkingHour > workingHoursDomain ) {
 
         List< WorkingHour > workingHoursDTO = new ArrayList<>( );
-        for ( com.mana.innovative.domain.WorkingHour workingHourDomain : workingHoursDomain ) {
+        for ( com.mana.innovative.domain.client.WorkingHour workingHourDomain : workingHoursDomain ) {
             WorkingHour workingHourDTO = getConvertedDTOFromDomain( workingHourDomain );
             workingHoursDTO.add( workingHourDTO );
         }

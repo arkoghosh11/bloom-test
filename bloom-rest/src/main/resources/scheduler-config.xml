@@ -9,26 +9,19 @@
        http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <context:component-scan base-package="com.mana.innovative.scheduler"/>
+    <context:component-scan base-package="com.mana.innovative.scheduler,com.mana.innovative.reader"/>
 
-    <bean id="properties" class="${spring_property_class}">
-        <property name="propagateToSystemProperties" value="true"/>
-        <property name="locations">
-            <list>
-                <value>${database}</value>
-                <value>${hibernate}</value>
-            </list>
-        </property>
-
-    </bean>
-    <context:property-placeholder ignore-unresolvable="true" local-override="true"
+    <context:property-placeholder ignore-resource-not-found="false"
+                                  local-override="true"
+                                  ignore-unresolvable="false"
+                                  system-properties-mode="NEVER"
                                   location="classpath*:schedulerPropertiesFile.properties"/>
 
-    <bean id="propertyOverrideConfigurer" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">
-        <property name="location" value="file:///#{systemEnvironment['prop.dir']}/scheduler.properties"/>
-        <property name="ignoreResourceNotFound" value="false"/>
-        <property name="ignoreInvalidKeys" value="true"/>
-    </bean>
+    <!--<bean id="propertyOverrideConfigurer" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">-->
+    <!--<property name="location" value="file:///#{systemEnvironment['prop.dir']}/scheduler.properties"/>-->
+    <!--<property name="ignoreResourceNotFound" value="false"/>-->
+    <!--<property name="ignoreInvalidKeys" value="true"/>-->
+    <!--</bean>-->
 
     <task:annotation-driven scheduler="taskScheduler"/>
     <!--<task:executor id="myExecutor" pool-size="5"/>-->
@@ -47,7 +40,7 @@
     <!--</bean>-->
     <!--<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">-->
 
-    <!--<property name="jobClass" ref="com.mana.innovative.scheduler.CustomScheduler"/>-->
+    <!--<property name="jobClass" ref="com.mana.innovative.scheduler.impl.CustomScheduler"/>-->
 
     <!--<property name="jobDataAsMap">-->
     <!--<map>-->

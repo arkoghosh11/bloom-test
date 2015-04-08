@@ -1,6 +1,7 @@
 package com.mana.innovative.logic;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Bloom This class is for advanced searching of {@link com.mana.innovative.domain.Item} from DB {@code
+ * Created by Bloom This class is for advanced searching of {@link Item} from DB {@code
  * searchParams, searchConditions, searchOrder, searchMatchType } searchParams is for the columns to be search against
  * for values entered by user in DB searchConditions is for applying conditions to each pram above for the column search
  * in DB search Order is the column types on which to add a order to. Order possible is (ASC,DESC, none) searchMatchType

@@ -1,7 +1,7 @@
 package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.TestConstants;
-import com.mana.innovative.dto.WorkingHour;
+import com.mana.innovative.dto.client.WorkingHour;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.utilities.TestDummyDTOObjectGenerator;
 import com.mana.innovative.utilities.TestDummyDomainObjectGenerator;
@@ -27,7 +27,7 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
     private static final Logger logger = Logger.getLogger( WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods.class );
 
     private WorkingHour workingHourDTO, workingHourDTO2;
-    private com.mana.innovative.domain.WorkingHour workingHourDomain, workingHourDomain2;
+    private com.mana.innovative.domain.client.WorkingHour workingHourDomain, workingHourDomain2;
 
     /**
      * Sets up.
@@ -37,12 +37,12 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
     @Before
     public void setUp( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
-        workingHourDomain2 = new com.mana.innovative.domain.WorkingHour( );
+        workingHourDomain2 = new com.mana.innovative.domain.client.WorkingHour( );
         workingHourDTO2 = new WorkingHour( );
 
         // Set Values for tempValues
         workingHourDTO = TestDummyDTOObjectGenerator.getTestWorkingHourDTOObject( new WorkingHour( ) );
-        workingHourDomain = TestDummyDomainObjectGenerator.getTestWorkingHourDomainObject( new com.mana.innovative.domain.WorkingHour( ) );
+        workingHourDomain = TestDummyDomainObjectGenerator.getTestWorkingHourDomainObject( new com.mana.innovative.domain.client.WorkingHour( ) );
 
     }
 
@@ -89,7 +89,7 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         logger.debug( "Starting  GetConvertedListDTOFromDomain" );
 
         List< WorkingHour > workingHourDTOList;
-        List< com.mana.innovative.domain.WorkingHour > workingHourDomainList = new ArrayList<>( );
+        List< com.mana.innovative.domain.client.WorkingHour > workingHourDomainList = new ArrayList<>( );
         workingHourDomainList.add( workingHourDomain );
         if ( workingHourDomain.getWorkingHourId( ) != TestConstants.TEST_ID ) {
             TestDummyDomainObjectGenerator.getTestWorkingHourDomainZEROIDObject( workingHourDomain );
@@ -133,7 +133,7 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         logger.debug( "Starting  GetConvertedListDomainFromDTO" );
 
         List< WorkingHour > workingHourDTOList = new ArrayList<>( );
-        List< com.mana.innovative.domain.WorkingHour > workingHourDomainList;
+        List< com.mana.innovative.domain.client.WorkingHour > workingHourDomainList;
         workingHourDTOList.add( workingHourDTO );
         TestDummyDomainObjectGenerator.getTestWorkingHourDomainZEROIDObject( workingHourDomain );
 

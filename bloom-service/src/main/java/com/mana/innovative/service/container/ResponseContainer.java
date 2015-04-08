@@ -21,7 +21,7 @@ public class ResponseContainer < T > {
     private ErrorContainer errorContainer;
     private boolean isError;
 
-    @XmlElement( name = "count", namespace = "http://localhost:8080/bloom-test/rest/" )
+    @XmlElement( name = "count", namespace = "http://localhost:8080/Bloom/rest/" )
     public int getCount( ) {
         return count;
     }
@@ -30,7 +30,7 @@ public class ResponseContainer < T > {
         this.count = count;
     }
 
-    @XmlElement( name = "payload", namespace = "http://localhost:8080/bloom-test/rest/" )
+    @XmlElement( name = "payload", namespace = "http://localhost:8080/Bloom/rest/" )
     public T getPayload( ) {
         return payload;
     }
@@ -39,7 +39,7 @@ public class ResponseContainer < T > {
         this.payload = payload;
     }
 
-    @XmlElement( name = "error_container", namespace = "http://localhost:8080/bloom-test/rest/" )
+    @XmlElement( name = "error_container", namespace = "http://localhost:8080/Bloom/rest/" )
     public ErrorContainer getErrorContainer( ) {
         return errorContainer;
     }

@@ -3,10 +3,10 @@ package com.mana.innovative.utilities;
 import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
-import com.mana.innovative.domain.Address;
-import com.mana.innovative.domain.Item;
-import com.mana.innovative.domain.Shop;
-import com.mana.innovative.domain.WorkingHour;
+import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.domain.client.Shop;
+import com.mana.innovative.domain.client.WorkingHour;
+import com.mana.innovative.domain.common.Address;
 import org.apache.log4j.Logger;
 
 import java.text.DateFormat;

@@ -1,10 +1,10 @@
 package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.DAOConstants;
-import com.mana.innovative.domain.Address;
-import com.mana.innovative.domain.Item;
-import com.mana.innovative.domain.WorkingHour;
-import com.mana.innovative.dto.Shop;
+import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.domain.client.WorkingHour;
+import com.mana.innovative.domain.common.Address;
+import com.mana.innovative.dto.client.Shop;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
@@ -33,7 +33,7 @@ public class ShopDomainDTOConverter {
      *
      * @return the converted shop dTO from shop domain
      */
-    public static Shop getConvertedDTOFromDomain( Shop shopDTO, com.mana.innovative.domain.Shop shopDomain ) {
+    public static Shop getConvertedDTOFromDomain( Shop shopDTO, com.mana.innovative.domain.client.Shop shopDomain ) {
 
         if ( shopDomain == null ) {
             String message = "Parameter shopDomain is required for conversion";
@@ -61,11 +61,11 @@ public class ShopDomainDTOConverter {
         if ( shopDomain.getWorkingHours( ) != null && !shopDomain.getWorkingHours( ).isEmpty( ) ) {
             shopDTO.setWorkingHours( WorkingHourDomainDTOConverter.getConvertedListDTOFromDomain( shopDomain.getWorkingHours( ) ) );
         }
-        /** {@link Address,com.mana.innovative.dto.Address}*/
+        /** {@link Address, com.mana.innovative.dto.common.Address}*/
         if ( shopDomain.getAddress( ) != null ) {
             shopDTO.setAddress( AddressDomainDTOConverter.getConvertedDTOFromDomain( shopDomain.getAddress( ) ) );
         }
-        /**{@link Item,com.mana.innovative.dto.Item} */
+        /**{@link Item, com.mana.innovative.dto.client.Item} */
         if ( shopDomain.getItems( ) != null ) {
             shopDTO.setItems( ItemDomainDTOConverter.getConvertedListDTOFromDomain( shopDomain.getItems( ) ) );
         }
@@ -79,10 +79,10 @@ public class ShopDomainDTOConverter {
      *
      * @return the converted shop dTO list
      */
-    public static List< Shop > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.Shop > shops ) {
+    public static List< Shop > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.client.Shop > shops ) {
 
         List< Shop > shopDTOList = new ArrayList<>( );
-        for ( com.mana.innovative.domain.Shop shop : shops ) {
+        for ( com.mana.innovative.domain.client.Shop shop : shops ) {
 
             Shop shopDTO = new Shop( );
             shopDTO = getConvertedDTOFromDomain( shopDTO, shop );
@@ -99,7 +99,7 @@ public class ShopDomainDTOConverter {
      *
      * @return the converted shop domain from shop dTO
      */
-    public static com.mana.innovative.domain.Shop getConvertedDomainFromDTO( com.mana.innovative.domain.Shop shopDomain, Shop shopDTO ) {
+    public static com.mana.innovative.domain.client.Shop getConvertedDomainFromDTO( com.mana.innovative.domain.client.Shop shopDomain, Shop shopDTO ) {
 
         if ( shopDTO == null ) {
             String message = "Parameter shopDTO is required for conversion";
@@ -107,7 +107,7 @@ public class ShopDomainDTOConverter {
             throw new NullPointerException( message );
         }
         if ( shopDomain == null ) {
-            shopDomain = new com.mana.innovative.domain.Shop( );
+            shopDomain = new com.mana.innovative.domain.client.Shop( );
             logger.warn( "Creating shopDomain for conversion as was null " );
         }
         boolean flag = false;
@@ -166,11 +166,11 @@ public class ShopDomainDTOConverter {
      *
      * @return the converted shop domain list from shop dTO list
      */
-    public static List< com.mana.innovative.domain.Shop > getConvertedListDomainFromDTO( List< Shop > shopDTOList ) {
+    public static List< com.mana.innovative.domain.client.Shop > getConvertedListDomainFromDTO( List< Shop > shopDTOList ) {
 
-        List< com.mana.innovative.domain.Shop > shopDomainList = new ArrayList<>( );
+        List< com.mana.innovative.domain.client.Shop > shopDomainList = new ArrayList<>( );
         for ( Shop shopDTO : shopDTOList ) {
-            com.mana.innovative.domain.Shop shopDomain = new com.mana.innovative.domain.Shop( );
+            com.mana.innovative.domain.client.Shop shopDomain = new com.mana.innovative.domain.client.Shop( );
             shopDomain = getConvertedDomainFromDTO( shopDomain, shopDTO );
             shopDomainList.add( shopDomain );
         }

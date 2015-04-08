@@ -60,6 +60,11 @@ public class TestConstants {
     public static final boolean TEST_IS_CLOSED = TEST_TRUE;
     public static final boolean IS_DELETE_ALL = TEST_FALSE;
     public static final boolean IS_DELETE_ALL_TRUE = TEST_TRUE;
+    public static final java.lang.String TEST_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String TEST_EMAIL = TEST_VALUE;
+    public static final String DEFAULT_SUBJECT = "default1";
+    public static final String DEFAULT_BODY = "default1";
+
     // todo is to import these values from a properties file
     public static String setUpMethodLoggerMsg = "Initializing tests...";
     public static String tearDownMethodLoggerMsg = ".... Preparing to shutdown test";

@@ -1,8 +1,8 @@
 package com.mana.innovative.service;
 
 import com.mana.innovative.dao.response.DAOResponse;
-import com.mana.innovative.domain.Item;
-import com.mana.innovative.service.impl.ItemsServiceImpl;
+import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.service.client.impl.ItemsServiceImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

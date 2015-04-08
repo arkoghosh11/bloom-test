@@ -2,8 +2,9 @@ package com.mana.innovative.dao;
 
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.TestConstants;
+import com.mana.innovative.dao.client.ItemDAO;
 import com.mana.innovative.dao.response.DAOResponse;
-import com.mana.innovative.domain.Item;
+import com.mana.innovative.domain.client.Item;
 import junit.framework.Assert;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;

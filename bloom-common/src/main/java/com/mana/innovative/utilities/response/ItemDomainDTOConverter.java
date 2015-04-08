@@ -1,7 +1,7 @@
 package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.DAOConstants;
-import com.mana.innovative.dto.Item;
+import com.mana.innovative.dto.client.Item;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
@@ -26,11 +26,11 @@ public class ItemDomainDTOConverter {
      * Gets converted item dTO from item domain.
      *
      * @param itemDTO    {@link Item} the item dTO
-     * @param itemDomain {@link com.mana.innovative.domain.Item} the item domain
+     * @param itemDomain {@link com.mana.innovative.domain.client.Item} the item domain
      *
      * @return the converted item dTO from item domain
      */
-    public static Item getConvertedDTOFromDomain( Item itemDTO, com.mana.innovative.domain.Item itemDomain ) {
+    public static Item getConvertedDTOFromDomain( Item itemDTO, com.mana.innovative.domain.client.Item itemDomain ) {
 
         if ( itemDomain == null ) {
             String message = "Parameter itemDomain is required for conversion";
@@ -93,10 +93,10 @@ public class ItemDomainDTOConverter {
      *
      * @return the converted item dTO list
      */
-    public static List< Item > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.Item > items ) {
+    public static List< Item > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.client.Item > items ) {
 
         List< Item > itemDTOList = new ArrayList<>( );
-        for ( com.mana.innovative.domain.Item item : items ) {
+        for ( com.mana.innovative.domain.client.Item item : items ) {
 
             Item itemDTO = new Item( );
             itemDTO = getConvertedDTOFromDomain( itemDTO, item );
@@ -113,7 +113,7 @@ public class ItemDomainDTOConverter {
      *
      * @return the converted item domain from item dTO
      */
-    public static com.mana.innovative.domain.Item getConvertedDomainFromDTO( com.mana.innovative.domain.Item itemDomain, Item itemDTO ) {
+    public static com.mana.innovative.domain.client.Item getConvertedDomainFromDTO( com.mana.innovative.domain.client.Item itemDomain, Item itemDTO ) {
 
         if ( itemDTO == null ) {
             String message = "Parameter itemDTO is required for conversion";
@@ -121,7 +121,7 @@ public class ItemDomainDTOConverter {
             throw new NullPointerException( message );
         }
         if ( itemDomain == null ) {
-            itemDomain = new com.mana.innovative.domain.Item( );
+            itemDomain = new com.mana.innovative.domain.client.Item( );
             logger.warn( "Creating itemDomain, received null object" );
         }
 
@@ -211,11 +211,11 @@ public class ItemDomainDTOConverter {
      *
      * @return the converted item domain list from item dTO list
      */
-    public static List< com.mana.innovative.domain.Item > getConvertedListDomainFromDTO( List< Item > itemDTOList ) {
+    public static List< com.mana.innovative.domain.client.Item > getConvertedListDomainFromDTO( List< Item > itemDTOList ) {
 
-        List< com.mana.innovative.domain.Item > itemDomainList = new ArrayList<>( );
+        List< com.mana.innovative.domain.client.Item > itemDomainList = new ArrayList<>( );
         for ( Item itemDTO : itemDTOList ) {
-            com.mana.innovative.domain.Item itemDomain = new com.mana.innovative.domain.Item( );
+            com.mana.innovative.domain.client.Item itemDomain = new com.mana.innovative.domain.client.Item( );
             itemDomain = getConvertedDomainFromDTO( itemDomain, itemDTO );
             itemDomainList.add( itemDomain );
         }

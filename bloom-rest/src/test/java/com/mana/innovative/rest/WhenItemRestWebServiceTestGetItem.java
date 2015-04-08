@@ -4,8 +4,8 @@ package com.mana.innovative.rest;/**
  */
 
 import com.mana.innovative.constants.TestConstants;
-import com.mana.innovative.dto.payload.ItemsPayload;
-import com.mana.innovative.service.container.ItemResponseContainer;
+import com.mana.innovative.dto.client.payload.ItemsPayload;
+import com.mana.innovative.service.client.container.ItemResponseContainer;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.spi.container.TestContainerFactory;

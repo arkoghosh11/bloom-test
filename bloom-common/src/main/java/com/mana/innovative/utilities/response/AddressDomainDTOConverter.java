@@ -1,7 +1,7 @@
 package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.DAOConstants;
-import com.mana.innovative.dto.Address;
+import com.mana.innovative.dto.common.Address;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
@@ -29,7 +29,7 @@ public class AddressDomainDTOConverter {
      *
      * @return the converted dTO from domain
      */
-    public static Address getConvertedDTOFromDomain( com.mana.innovative.domain.Address addressDomain ) {
+    public static Address getConvertedDTOFromDomain( com.mana.innovative.domain.common.Address addressDomain ) {
 
         if ( addressDomain == null ) {
             String message = " Parameter addressDomain is required for conversion";
@@ -71,11 +71,11 @@ public class AddressDomainDTOConverter {
      *
      * @return the converted list domain from dTO
      */
-    public static List< com.mana.innovative.domain.Address > getConvertedListDomainFromDTO( List< Address > addressesDTO ) {
+    public static List< com.mana.innovative.domain.common.Address > getConvertedListDomainFromDTO( List< Address > addressesDTO ) {
 
-        List< com.mana.innovative.domain.Address > addressesDomain = new ArrayList<>( );
+        List< com.mana.innovative.domain.common.Address > addressesDomain = new ArrayList<>( );
         for ( Address addressDTO : addressesDTO ) {
-            com.mana.innovative.domain.Address addressDomain = getConvertedDomainFromDTO( addressDTO );
+            com.mana.innovative.domain.common.Address addressDomain = getConvertedDomainFromDTO( addressDTO );
             addressesDomain.add( addressDomain );
         }
         return addressesDomain;
@@ -88,7 +88,7 @@ public class AddressDomainDTOConverter {
      *
      * @return the converted domain from dTO
      */
-    public static com.mana.innovative.domain.Address getConvertedDomainFromDTO( Address addressDTO ) {
+    public static com.mana.innovative.domain.common.Address getConvertedDomainFromDTO( Address addressDTO ) {
 
         if ( addressDTO == null ) {
             String message = " Parameter addressDTO is required for conversion";
@@ -96,7 +96,7 @@ public class AddressDomainDTOConverter {
             throw new NullPointerException( message );
         }
 
-        com.mana.innovative.domain.Address addressDomain = new com.mana.innovative.domain.Address( );
+        com.mana.innovative.domain.common.Address addressDomain = new com.mana.innovative.domain.common.Address( );
         boolean flag = false;
         StringBuilder stringBuilder = new StringBuilder( " Value must not be null for " );
 
@@ -152,10 +152,10 @@ public class AddressDomainDTOConverter {
      *
      * @return the converted list dTO from domain
      */
-    public static List< Address > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.Address > addressesDomain ) {
+    public static List< Address > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.common.Address > addressesDomain ) {
 
         List< Address > addressesDTO = new ArrayList<>( );
-        for ( com.mana.innovative.domain.Address addressDomain : addressesDomain ) {
+        for ( com.mana.innovative.domain.common.Address addressDomain : addressesDomain ) {
             Address addressDTO = getConvertedDTOFromDomain( addressDomain );
             addressesDTO.add( addressDTO );
         }

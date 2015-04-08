@@ -1,8 +1,9 @@
 package com.mana.innovative.dao;
 
 import com.mana.innovative.constants.TestConstants;
+import com.mana.innovative.dao.client.WorkingHourDAO;
 import com.mana.innovative.dao.response.DAOResponse;
-import com.mana.innovative.domain.WorkingHour;
+import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.utilities.response.WorkingHourDomainDTOConverter;
 import junit.framework.Assert;
 import org.apache.log4j.Logger;

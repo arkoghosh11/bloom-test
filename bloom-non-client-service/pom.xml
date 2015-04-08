@@ -50,29 +50,35 @@
             <version>${spring.version}</version>
         </dependency>
 
-        <!-- @IMP  Spring Batch Dependency -->
+        <!-- Note adding thymleaf for rich html based email structure -->
         <dependency>
-            <groupId>org.springframework.batch</groupId>
-            <artifactId>spring-batch-core</artifactId>
-            <version>${spring.batch.version}</version>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>${thymeleaf.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.batch</groupId>
-            <artifactId>spring-batch-infrastructure</artifactId>
-            <version>${spring.batch.version}</version>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring3</artifactId>
+            <version>${thymeleaf.version}</version>
         </dependency>
 
+        <!-- @IMP  Spring Batch Dependency enable them if using spring batch -->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.batch</groupId>-->
+        <!--<artifactId>spring-batch-core</artifactId>-->
+        <!--<version>${spring.batch.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.batch</groupId>-->
+        <!--<artifactId>spring-batch-infrastructure</artifactId>-->
+        <!--<version>${spring.batch.version}</version>-->
+        <!--</dependency>-->
+        <!-- Note spring test module-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>2.2.1</version>
         </dependency>
         <!-- Note JMS dependency -->
         <dependency>
@@ -80,18 +86,11 @@
             <artifactId>mail</artifactId>
             <version>1.4</version>
         </dependency>
-        <!-- Note Active MQ Broker with Spring integration -->
         <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-core</artifactId>
-            <version>5.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-spring</artifactId>
-            <version>5.7.0</version>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
         </dependency>
     </dependencies>
-
 
 </project>
