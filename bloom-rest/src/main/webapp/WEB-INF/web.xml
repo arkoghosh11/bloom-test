@@ -21,12 +21,11 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:/db_config.xml
-            classpath*:/service_config.xml
             classpath*:/web_config.xml
-            <!-- Note this will not work till the property files are available for email -->
-            <!--classpath*:/email-config.xml-->
-            <!--classpath*:/scheduler-config.xml-->
+            classpath*:/config/db_config.xml
+            classpath*:/config/service_config.xml
+            classpath*:/config/email-config.xml
+            classpath*:/config/scheduler-config.xml
         </param-value>
     </context-param>
     <!--location for login credentials-->

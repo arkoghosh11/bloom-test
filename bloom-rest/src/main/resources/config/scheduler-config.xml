@@ -15,7 +15,7 @@
                                   local-override="true"
                                   ignore-unresolvable="false"
                                   system-properties-mode="NEVER"
-                                  location="classpath*:schedulerPropertiesFile.properties"/>
+                                  location="classpath*:properties/schedulerPropertiesFile.properties"/>
 
     <!--<bean id="propertyOverrideConfigurer" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer">-->
     <!--<property name="location" value="file:///#{systemEnvironment['prop.dir']}/scheduler.properties"/>-->
@@ -23,12 +23,12 @@
     <!--<property name="ignoreInvalidKeys" value="true"/>-->
     <!--</bean>-->
 
-    <task:annotation-driven scheduler="taskScheduler"/>
-    <!--<task:executor id="myExecutor" pool-size="5"/>-->
-    <task:scheduler id="taskScheduler" pool-size="10"/>
-    <!--<task:scheduled-tasks>-->
-    <!--<task:scheduled ref="customScheduler" method="loadItemsFile" cron="" />-->
-    <!--</task:scheduled-tasks>-->
+    <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
+    <task:executor id="myExecutor" pool-size="5"/>
+    <task:scheduler id="myScheduler" pool-size="10"/>
+    <task:scheduled-tasks>
+        <task:scheduled ref="customSchedulerImpl" method="checkForFile" fixed-delay="180000"/>
+    </task:scheduled-tasks>
 
 
     <!--<bean id="runMeJob"-->
@@ -48,12 +48,4 @@
     <!--</map>-->
     <!--</property>-->
 
-    <!--</bean>-->
-    <!--<bean id="cronTrigger"-->
-    <!--class="org.springframework.scheduling.quartz.CronTriggerBean">-->
-
-    <!--<property name="jobDetail" ref="runMeJob"/>-->
-    <!--<property name="cronExpression" value="0/5 * * * * ?"/>-->
-
-    <!--</bean>-->
 </beans>

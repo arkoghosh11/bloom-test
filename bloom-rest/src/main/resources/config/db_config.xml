@@ -30,7 +30,7 @@
     -->
     <context:property-placeholder system-properties-mode="FALLBACK" ignore-unresolvable="true"
 
-                                  location="classpath*:localProps.properties,classpath*:dabaseLocal.Properties,classpath*:hibernateLocal.properties"/>
+                                  location="classpath*:/properties/localProps.properties,classpath*:properties/dabaseLocal.Properties,classpath*:properties/hibernateLocal.properties"/>
 
     <!-- for direct prop file values "${propertyKey}" use double quotes as req-->
     <!-- for spring property class object "${beanId['propertyKey']} use double quotes as req spring SpEL exp evaluation"-->

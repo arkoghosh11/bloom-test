@@ -25,8 +25,8 @@
     <task:annotation-driven executor="myExecutor" scheduler="myScheduler"/>
     <task:executor id="myExecutor" pool-size="5"/>
     <task:scheduler id="myScheduler" pool-size="10"/>
-    <!--<task:scheduled-tasks>-->
-    <!--<task:scheduled ref="customSchedulerImpl" method="checkForFile" fixed-delay="300000"/>-->
-    <!--</task:scheduled-tasks>-->
+    <task:scheduled-tasks>
+        <task:scheduled ref="customSchedulerImpl" method="checkForFile" fixed-delay="180000"/>
+    </task:scheduled-tasks>
 
 </beans>

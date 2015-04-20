@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CustomScheduler {
 
+    void checkForFile( );
+
     //    @Scheduled( cron = "${cron_job_item_value}" )
     void loadItemsFile( );
 

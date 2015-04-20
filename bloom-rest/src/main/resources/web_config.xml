@@ -6,15 +6,33 @@
 -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	   http://www.springframework.org/schema/context
-	   http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	   http://www.springframework.org/schema/context/spring-context-3.1.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
     <context:component-scan base-package="com.mana.innovative.rest.filter,
     com.mana.innovative.rest.client,
     com.mana.innovative.rest.common,
     com.mana.innovative.rest.consumer"/>
+
+    <!-- *******************************
+	 ***** NOTE CACHE CONFIGURATION *****
+	 ******************************* -->
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehcache"/>
+    </bean>
+    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:/cache/ehcache.xml"/>
+        <property name="shared" value="true"/>
+    </bean>
+
+    <!-- NOTE Enable Cache -->
+    <!--<cache:annotation-driven key-generator="enhancedDefaultKeyGenerator"/>-->
+    <!--<bean id ="enhancedDefaultKeyGenerator" class="org.podcastpedia.cache.interceptor.EnhancedDefaultKeyGenerator"/>-->
+    <cache:annotation-driven key-generator="defaultKeyGenerator" cache-manager="cacheManager"/>
+    <bean id="defaultKeyGenerator" class="org.springframework.cache.interceptor.DefaultKeyGenerator"/>
 
 </beans>

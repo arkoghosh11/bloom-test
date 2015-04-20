@@ -93,9 +93,9 @@ public class CustomSchedulerImpl implements CustomScheduler {
     /**
      * Check for file.
      */
+    @Override
     public void checkForFile( ) {
         logger.info( "Checking for file with filename " );
-        System.out.println( "Checking for file with filename" );
         //todo need to complete this method
     }
 
@@ -115,6 +115,9 @@ public class CustomSchedulerImpl implements CustomScheduler {
     @Override
     @Scheduled( cron = "${bloom-non-client-service.cron_job_item_value}" )
     public void loadItemsFile( ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#loadItemsFile()";
+        logger.debug( "Starting " + location );
 
         File file = new File( csvFileToRead );
         if ( !isLoadItem ) {
@@ -139,14 +142,19 @@ public class CustomSchedulerImpl implements CustomScheduler {
         } else {
             this.readFromXMLNSave( file );
         }
+        logger.debug( "Finishing " + location );
     }
 
     @Override
     @Scheduled( cron = "${bloom-non-client-service.cron_job__email_event_value}" )
     public void getEventsNEmail( ) {
 
+        String location = this.getClass( ).getCanonicalName( ) + "#getEventsNEmail()";
+        logger.debug( "Starting " + location );
         List< CustomEvent > customEventList = this.readEventsFromDB( );
+        logger.info( "Number of events for current time" + new Date( ) + " is " + customEventList.size( ) );
         for ( CustomEvent customEvent : customEventList ) {
+            logger.debug( "Starting custom event with Date: " + customEvent.getEventDate( ) );
             boolean runNow = this.isEventRunnable( customEvent );
             EmailContents emailContents = new EmailContents( );
             emailContents.setReceiver( customEvent.getReceivers( ) );
@@ -164,7 +172,9 @@ public class CustomSchedulerImpl implements CustomScheduler {
                 emailContents.setAttachmentLocation( customEvent.getAttachmentLocation( ) );
                 bloomEmailService.sendMail( emailContents );
             }
+            logger.debug( "Completing custom event with Date: " + customEvent.getEventDate( ) );
         }
+        logger.debug( "Finishing " + location );
     }
 
     /**
@@ -285,7 +295,6 @@ public class CustomSchedulerImpl implements CustomScheduler {
     /**
      * Write from xMLN save.
      *
-     * @param file the file
      *
      * @return the boolean
      */
