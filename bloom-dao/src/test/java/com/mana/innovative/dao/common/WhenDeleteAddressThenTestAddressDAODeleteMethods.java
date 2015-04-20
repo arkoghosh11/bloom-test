@@ -1,8 +1,7 @@
-package com.mana.innovative.dao;
+package com.mana.innovative.dao.common;
 
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.TestConstants;
-import com.mana.innovative.dao.common.AddressDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.common.Address;
 import junit.framework.Assert;

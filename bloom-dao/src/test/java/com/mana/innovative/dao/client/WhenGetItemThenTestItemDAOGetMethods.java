@@ -1,9 +1,8 @@
-package com.mana.innovative.dao;
+package com.mana.innovative.dao.client;
 
 import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
-import com.mana.innovative.dao.client.ItemDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
 import junit.framework.Assert;

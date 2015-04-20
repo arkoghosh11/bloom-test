@@ -1,4 +1,4 @@
-package com.mana.innovative.dao;
+package com.mana.innovative.dao.common;
 
 import com.mana.innovative.constants.TestConstants;
 import org.apache.log4j.Logger;

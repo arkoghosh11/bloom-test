@@ -1,7 +1,6 @@
-package com.mana.innovative.dao;
+package com.mana.innovative.dao.client;
 
 import com.mana.innovative.constants.TestConstants;
-import com.mana.innovative.dao.client.WorkingHourDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.utilities.response.WorkingHourDomainDTOConverter;
