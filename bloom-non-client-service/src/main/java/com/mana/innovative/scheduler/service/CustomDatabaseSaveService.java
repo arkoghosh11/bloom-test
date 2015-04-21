@@ -10,4 +10,6 @@ package com.mana.innovative.scheduler.service;
 public interface CustomDatabaseSaveService < T > extends DatabaseService {
 
     boolean createData( T t );
+
+    boolean updateData( T eventDate, boolean isScheduler );
 }

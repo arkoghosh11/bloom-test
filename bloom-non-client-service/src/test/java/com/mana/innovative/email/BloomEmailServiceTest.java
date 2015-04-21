@@ -69,4 +69,9 @@ public class BloomEmailServiceTest {
         Assert.assertNotNull( emailIds );
         Assert.assertTrue( TestConstants.falseMessage, bloomEmailService.sendMail( emailContents ) );
     }
+
+    @Test
+    public void testMimeMailServiceWithInlineHtml( ) {
+
+    }
 }

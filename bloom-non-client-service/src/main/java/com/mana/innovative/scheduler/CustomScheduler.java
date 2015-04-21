@@ -20,4 +20,5 @@ public interface CustomScheduler {
     //    @Scheduled( cron = "${cron_job__email_event_value}" )
     void getEventsNEmail( );
 
+    void getEventsNEnableEmailedEvents( );
 }

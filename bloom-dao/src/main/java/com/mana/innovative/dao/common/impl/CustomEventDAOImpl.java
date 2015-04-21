@@ -374,4 +374,54 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
 
         return customEventDAOResponse;
     }
+
+    /**
+     * Gets events by date range.
+     *
+     * @param eventStartTime the event start time
+     * @param eventEndTime   the event end time
+     * @param requestParams  the request params
+     *
+     * @return the events by date range
+     */
+    @SuppressWarnings( "unchecked" )
+    @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
+    public DAOResponse< CustomEvent > getEventsByDateRange( final Date eventStartTime, final Date eventEndTime, final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( ) + "#getEventsByDateRange()";
+        logger.debug( "Starting " + location );
+
+        DAOResponse< CustomEvent > customEventDAOResponse = new DAOResponse<>( );
+        List< CustomEvent > customEventList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        try {
+
+            this.openDBTransaction( );
+
+            Query query = session.createQuery( " from CustomEvent where eventDate>=:eventStartTime and eventDate <= " +
+                    ":eventEndTime" );
+            query.setParameter( "eventStartTime", eventStartTime );
+            query.setParameter( "eventEndTime", eventEndTime );
+            customEventList = query.list( );
+
+            this.closeDBTransaction( );
+            customEventDAOResponse.setRequestSuccess( Boolean.TRUE );
+
+        } catch ( Exception exception ) {
+            customEventDAOResponse.setRequestSuccess( Boolean.FALSE );
+            if ( exception instanceof HibernateException ) {
+                this.handleExceptions( ( HibernateException ) exception );
+            }
+            logger.error( "Failed while getting data from custom_events table", exception );
+            if ( errorContainer != null ) {
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+        customEventDAOResponse.setResults( customEventList );
+        customEventDAOResponse.setCount( customEventList.size( ) );
+        customEventDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+        return customEventDAOResponse;
+    }
 }

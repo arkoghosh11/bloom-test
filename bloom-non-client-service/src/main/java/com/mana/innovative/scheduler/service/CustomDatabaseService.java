@@ -12,4 +12,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CustomDatabaseService < T, E > extends CustomDatabaseReadService< T, E >, CustomDatabaseSaveService< T > {
 
+
 }

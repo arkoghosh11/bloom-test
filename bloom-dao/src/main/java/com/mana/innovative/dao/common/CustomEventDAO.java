@@ -4,9 +4,6 @@ import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.common.email.CustomEvent;
 import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -28,16 +25,11 @@ public interface CustomEventDAO {
 
     DAOResponse< CustomEvent > getAllEvents( RequestParams requestParams );
 
-    @SuppressWarnings( "unchecked" )
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
-    DAOResponse< CustomEvent > updateEvent( CustomEvent customEvent, RequestParams requestParams
-    );
+    DAOResponse< CustomEvent > updateEvent( CustomEvent customEvent, RequestParams requestParams );
 
-    @SuppressWarnings( "unchecked" )
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
     DAOResponse< CustomEvent > enableEventSchedulerForDate( Date date, RequestParams requestParams );
 
-    @SuppressWarnings( "unchecked" )
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
     DAOResponse< CustomEvent > disableEventSchedulerForDate( Date date, RequestParams requestParams );
+
+    DAOResponse< CustomEvent > getEventsByDateRange( Date eventStartTime, Date eventEndTime, RequestParams requestParams );
 }

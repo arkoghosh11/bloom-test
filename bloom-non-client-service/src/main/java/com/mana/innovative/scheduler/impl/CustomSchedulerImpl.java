@@ -15,15 +15,14 @@ import com.mana.innovative.email.BloomEmailService;
 import com.mana.innovative.reader.CustomSpecificFileReader;
 import com.mana.innovative.scheduler.CustomScheduler;
 import com.mana.innovative.scheduler.service.CustomDatabaseService;
+import com.mana.innovative.utilities.date.DateCommons;
 import com.mana.innovative.utilities.response.ItemDomainDTOConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.xml.bind.JAXBContext;
@@ -51,7 +50,8 @@ public class CustomSchedulerImpl implements CustomScheduler {
      */
     private static final Logger logger = LoggerFactory.getLogger( CustomSchedulerImpl.class );
     private static final int SEVEN = 7;
-    private static final int SPECIFIC_MINUTE = 10;
+    private static final int MAX_MINUTE = 60;
+    private static final int MIN_MINUTE = 0;
 
 
 //    @Resource
@@ -68,6 +68,8 @@ public class CustomSchedulerImpl implements CustomScheduler {
 
     @Resource
     private BloomEmailService bloomEmailService;
+
+    private List< Date > eventDates = new ArrayList<>( );
 
     /**
      * The Context path. //todo something for the future to main a xml package structure
@@ -146,13 +148,22 @@ public class CustomSchedulerImpl implements CustomScheduler {
     }
 
     @Override
-    @Scheduled( cron = "${bloom-non-client-service.cron_job__email_event_value}" )
+    @Scheduled( cron = "${bloom-non-client-service.cron_job_email_event_value}" )
     public void getEventsNEmail( ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#getEventsNEmail()";
         logger.debug( "Starting " + location );
         List< CustomEvent > customEventList = this.readEventsFromDB( );
         logger.info( "Number of events for current time" + new Date( ) + " is " + customEventList.size( ) );
+
+        if ( eventDates == null ) {
+            eventDates = new ArrayList<>( );
+        }
+        if ( !eventDates.isEmpty( ) ) {
+            logger.error( "Date list object with event dates was not empty\n Performing Clear Manually" );
+            eventDates.clear( );
+        }
+
         for ( CustomEvent customEvent : customEventList ) {
             logger.debug( "Starting custom event with Date: " + customEvent.getEventDate( ) );
             boolean runNow = this.isEventRunnable( customEvent );
@@ -163,17 +174,52 @@ public class CustomSchedulerImpl implements CustomScheduler {
             emailContents.setSubject( customEvent.getSubject( ) );
             emailContents.setBody( customEvent.getBody( ) );
 
-            if ( runNow && customEvent.isAttachment( ) ) {
-                bloomEmailService.sendMail( emailContents );
-            }
-            if ( runNow && !customEvent.isAttachment( ) ) {
+            if ( runNow ) {
+                eventDates.add( customEvent.getEventDate( ) );
+                if ( !StringUtils.isEmpty( customEvent.getAttachmentLocation( ) ) && customEvent.isAttachment( ) ) {
 
-                emailContents.setHasAttachment( customEvent.isAttachment( ) );
-                emailContents.setAttachmentLocation( customEvent.getAttachmentLocation( ) );
-                bloomEmailService.sendMail( emailContents );
+                    bloomEmailService.sendMail( emailContents );
+
+                } else if ( !customEvent.isAttachment( )
+                        ) {
+
+                    emailContents.setHasAttachment( customEvent.isAttachment( ) );
+                    emailContents.setAttachmentLocation( customEvent.getAttachmentLocation( ) );
+                    bloomEmailService.sendMail( emailContents );
+                }
             }
-            logger.debug( "Completing custom event with Date: " + customEvent.getEventDate( ) );
+
+            logger.debug( "Completing sending email for custom event with Date: " + customEvent.getEventDate( ) );
         }
+        for ( Date eventDate : eventDates ) {
+            customDatabaseService.updateData( eventDate, true );
+        }
+
+        logger.debug( "Finishing " + location );
+    }
+
+    @Override
+    @Scheduled( cron = "${bloom-non-client-service.cron_job_enable_event_value}" )
+    public void getEventsNEnableEmailedEvents( ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#getEventsNEnableEmailedEvents()";
+        logger.debug( "Starting " + location );
+        List< CustomEvent > customEventList = this.readEventsFromDB( );
+        logger.info( "Number of events for current time" + new Date( ) + " is " + customEventList.size( ) );
+        if ( eventDates == null ) {
+
+            logger.error( "Not event dates found for enabling", new NullPointerException( "dates list object is null"
+            ) );
+        }
+        if ( eventDates.isEmpty( ) ) {
+            logger.debug( "No events to reschedule" );
+        }
+
+        for ( Date eventDate : eventDates ) {
+            eventDate = DateCommons.updateDateToPrevHour( eventDate );
+            customDatabaseService.updateData( eventDate, false );
+        }
+        eventDates.clear( );
         logger.debug( "Finishing " + location );
     }
 
@@ -194,16 +240,17 @@ public class CustomSchedulerImpl implements CustomScheduler {
         Calendar todayDate = Calendar.getInstance( );
 
         String eventTime = customEvent.getTimeOfEvent( );
+        if ( !customEvent.isScheduler( ) ) return false;
+
         if ( eventDate.get( Calendar.MONTH ) == todayDate.get( Calendar.MONTH ) &&
-                ( eventDate.get( Calendar.DAY_OF_MONTH ) == todayDate.get( Calendar.DAY_OF_MONTH ) ||
-                        eventDate.get( Calendar.DAY_OF_MONTH ) == ( todayDate.get( Calendar.MONTH ) + SEVEN ) ) ) {
+                ( eventDate.get( Calendar.DAY_OF_MONTH ) == todayDate.get( Calendar.DAY_OF_MONTH ) ) ) {
 
             String times[] = eventTime.split( ":" );
-            int eventTimeMinute = Integer.parseInt( times[ 1 ] );
-            int currentMinute = todayDate.get( Calendar.MINUTE );
-            if ( times[ 0 ].equalsIgnoreCase( "" + todayDate.get( Calendar.HOUR_OF_DAY ) ) &&
-                    currentMinute < SPECIFIC_MINUTE ) {
-                logger.info( "Found an event ", customEvent );
+            int eventMinute = Integer.parseInt( times[ 1 ] );
+            if ( times[ 0 ].equalsIgnoreCase( "" + todayDate.get( Calendar.HOUR_OF_DAY ) )
+                    && eventMinute >= MIN_MINUTE && eventMinute < MAX_MINUTE ) {
+                logger.warn( "Found an event cannot execute as time of event doesn't lie in range of event date",
+                        customEvent );
                 return true;
             }
         }
@@ -218,7 +265,6 @@ public class CustomSchedulerImpl implements CustomScheduler {
      *
      * @return the boolean
      */
-    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ )
     public boolean readFromCSVNSave( File file ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#readFromCSVNSave()";
@@ -294,7 +340,6 @@ public class CustomSchedulerImpl implements CustomScheduler {
 
     /**
      * Write from xMLN save.
-     *
      *
      * @return the boolean
      */

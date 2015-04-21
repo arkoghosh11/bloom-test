@@ -68,4 +68,17 @@ public class WhenCustomSchedulerThenTestMethods {
         }
         logger.debug( "Finishing test for GetEventsNEmail" );
     }
+
+    @Test
+    public void testGetEventsNEnableEmailedEvents( ) throws Exception {
+
+        logger.debug( "Starting test for GetEventsNEnableEmailedEvents" );
+        try {
+            customScheduler.getEventsNEnableEmailedEvents( );
+        } catch ( Exception exception ) {
+            logger.error( "Error occurred while testing GetEventsNEmail", exception );
+            fail( "Exception occurred" );
+        }
+        logger.debug( "Finishing test for GetEventsNEnableEmailedEvents" );
+    }
 }

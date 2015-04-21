@@ -66,6 +66,8 @@ public final class DAOConstants {
     public static final java.lang.String TIME_FORMAT = "HH:mm";
     public static final String TIME_SEPARATOR_FORMAT = ":";
 
+    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
     public static final String DEFAULT_DATE_LIMIT_FORMAT = "yy-MM-dd";
     public static final String DEFAULT_DATE_RETURN_FORMAT = "yyyy-MM-dd HH:mm:ss:SSS";
 

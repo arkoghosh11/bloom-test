@@ -4,6 +4,7 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.common.email.CustomEvent;
 import com.mana.innovative.dto.request.RequestParams;
+import com.mana.innovative.utilities.date.DateCommons;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -38,7 +39,7 @@ public class WhenGetCustomEventThenTestCustomEventDAOGet {
     @Resource
     private CustomEventDAO customEventDAO;
 
-    private Date eventDate;
+    private Date eventDate, eventStartDate, eventEndDate;
     private Long eventId;
     private String eventName;
     private RequestParams requestParams;
@@ -50,6 +51,8 @@ public class WhenGetCustomEventThenTestCustomEventDAOGet {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat( TestConstants.TEST_DATE_FORMAT );
         eventDate = simpleDateFormat.parse( "2015-04-14 17:22:12" );
+        eventStartDate = DateCommons.getStartDateTime( eventDate );
+        eventEndDate = DateCommons.getEndDateTime( eventDate );
         eventId = TestConstants.TEST_ID;
         eventName = "Test";
 
@@ -163,5 +166,32 @@ public class WhenGetCustomEventThenTestCustomEventDAOGet {
         Assert.assertTrue( TestConstants.falseMessage, customEventDAOResponse.getCount( ) >= 0 );
 
         logger.debug( "Finishing test for GetAllEvents" );
+    }
+
+    @Test
+    public void testGetEventsByDateRange( ) throws Exception {
+
+        logger.debug( "Starting test for GetEventsByDateRange" );
+
+        DAOResponse< CustomEvent > customEventDAOResponse = customEventDAO.getEventsByDateRange( eventStartDate,
+                eventEndDate,
+                requestParams );
+
+        Assert.assertNotNull( customEventDAOResponse );
+        // test customEventDAOResponse
+
+        Assert.assertNotNull( TestConstants.nullMessage, customEventDAOResponse.getErrorContainer( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, customEventDAOResponse.getErrorContainer( ).getErrors( ) );
+        Assert.assertTrue( TestConstants.falseMessage, customEventDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+
+        Assert.assertNotNull( TestConstants.nullMessage, customEventDAOResponse.getResults( ) );
+
+        Assert.assertFalse( TestConstants.trueMessage, customEventDAOResponse.isCreate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, customEventDAOResponse.isUpdate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, customEventDAOResponse.isDelete( ) );
+        Assert.assertTrue( TestConstants.falseMessage, customEventDAOResponse.isRequestSuccess( ) );
+        Assert.assertTrue( TestConstants.falseMessage, customEventDAOResponse.getCount( ) >= 0 );
+
+        logger.debug( "Finishing test for GetEventsByDateRange" );
     }
 }
