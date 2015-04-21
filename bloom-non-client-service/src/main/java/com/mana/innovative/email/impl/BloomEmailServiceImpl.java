@@ -85,6 +85,7 @@ public class BloomEmailServiceImpl implements BloomEmailService {
 
         String location = this.getClass( ).getCanonicalName( ) + "#sendMail()";
         logger.debug( "Starting " + location );
+        logger.debug( "********* emailContents " + emailContents.toString( ) );
         if ( emailContents.isSimple( ) ) {
 
             logger.info( "Using attachment Simple Message for Simple Email Construction" );
@@ -125,14 +126,14 @@ public class BloomEmailServiceImpl implements BloomEmailService {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage( );
 
         try {
-            if ( !StringUtils.isEmpty( to ) ) {
+            if ( !StringUtils.isEmpty( to.trim( ) ) ) {
                 simpleMailMessage.setTo( to.split( "," ) );
             } else throw new EmptyPropertyException( "to" );
-            if ( !StringUtils.isEmpty( cc ) ) {
+            if ( !StringUtils.isEmpty( cc.trim( ) ) ) {
                 simpleMailMessage.setCc( cc.split( "," ) );
             } else logger.debug( "No cc receivers found for emailing to" );
 
-            if ( !StringUtils.isEmpty( bcc ) ) {
+            if ( !StringUtils.isEmpty( bcc.trim( ) ) ) {
                 simpleMailMessage.setBcc( bcc.split( "," ) );
             } else logger.debug( "No bcc receivers found for emailing to" );
             if ( !StringUtils.isEmpty( subject ) ) {
@@ -147,12 +148,11 @@ public class BloomEmailServiceImpl implements BloomEmailService {
             return false;
         }
         try {
-            if ( simpleMailMessage.getFrom( ) != null ) {
+//            if ( simpleMailMessage.getFrom( ) != null ) {
                 javaMailSender.send( simpleMailMessage );
-            }
-        } catch ( Exception e ) {
-            e.printStackTrace( );
-            logger.error( "Exception occurred ", e );
+//            }
+        } catch ( Exception exception ) {
+            logger.error( "Exception occurred ", exception );
             return false;
         }
         return true;
@@ -197,17 +197,21 @@ public class BloomEmailServiceImpl implements BloomEmailService {
                 mimeMessageHelper.setSubject( subject );
             } else throw new EmptyPropertyException( "subject" );
             if ( !StringUtils.isEmpty( body ) ) {
-                mimeMessageHelper.setText( body );
+                mimeMessageHelper.setText( body, true );
             } else throw new EmptyPropertyException( "body" );
 
             if ( StringUtils.isEmpty( attachmentLocation ) ) {
                 throw new EmptyPropertyException( "attachmentLocation" );
             }
 
-            FileSystemResource fileSystemResource = new FileSystemResource( attachmentLocation );
-            if ( fileSystemResource.exists( ) && fileSystemResource.isReadable( ) ) {
-                mimeMessageHelper.addAttachment( fileSystemResource.getFilename( ), fileSystemResource );
+            String attachmentLocations[] = attachmentLocation.split( "," );
+            for ( String attachLocation : attachmentLocations ) {
+                FileSystemResource fileSystemResource = new FileSystemResource( attachLocation );
+                if ( fileSystemResource.exists( ) && fileSystemResource.isReadable( ) ) {
+                    mimeMessageHelper.addAttachment( fileSystemResource.getFilename( ), fileSystemResource );
+                }
             }
+
 
             if ( useHTMLContent ) {
                 Context ctx = new Context( );
@@ -227,11 +231,11 @@ public class BloomEmailServiceImpl implements BloomEmailService {
 
         try {
 
-            if ( mimeMessage.getFrom( ) != null ) {
+//            if ( mimeMessage.getFrom( ) != null ) {
                 logger.debug( "Email Sending" );
                 javaMailSender.send( mimeMessage );
                 logger.debug( "Email Sent" );
-            }
+//            }
 
         } catch ( Exception exception ) {
             logger.error( "Exception occurred ", exception );

@@ -2,6 +2,7 @@ package com.mana.innovative.rest.filter;
 
 import com.mana.innovative.authentication.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
@@ -19,7 +20,7 @@ import java.io.PrintWriter;
 
 /**
  * The type Login filter.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -29,6 +30,7 @@ import java.io.PrintWriter;
 public class LoginFilter implements javax.servlet.Filter {
 
     @Autowired
+    @Qualifier
     private LoginService loginService;
 
     public void init( FilterConfig filterConfig ) throws ServletException {

@@ -5,6 +5,7 @@ package com.mana.innovative.authentication;/**
 
 import com.mana.innovative.constants.ServiceConstants;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.Properties;
  * The type Login service.
  */
 @Service
+@Qualifier
 public class LoginService {
 
     private static final Logger logger = Logger.getLogger( LoginService.class );

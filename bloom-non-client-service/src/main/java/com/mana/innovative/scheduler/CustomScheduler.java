@@ -12,13 +12,26 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CustomScheduler {
 
+    /**
+     * Check for file.
+     */
     void checkForFile( );
 
-    //    @Scheduled( cron = "${cron_job_item_value}" )
+    /**
+     * Load items file.
+     */
+//    @Scheduled( cron = "${cron_job_item_value}" )
     void loadItemsFile( );
 
-    //    @Scheduled( cron = "${cron_job__email_event_value}" )
+    /**
+     * Gets events n email.
+     */
+//    @Scheduled( cron = "${cron_job__email_event_value}" )
     void getEventsNEmail( );
 
+    /**
+     * Gets events n enable emailed events.
+     */
     void getEventsNEnableEmailedEvents( );
+
 }

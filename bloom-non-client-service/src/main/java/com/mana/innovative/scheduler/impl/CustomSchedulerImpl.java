@@ -70,6 +70,7 @@ public class CustomSchedulerImpl implements CustomScheduler {
     private BloomEmailService bloomEmailService;
 
     private List< Date > eventDates = new ArrayList<>( );
+    private List< EmailContents > emailContentsList = new ArrayList<>( );
 
     /**
      * The Context path. //todo something for the future to main a xml package structure
@@ -148,7 +149,7 @@ public class CustomSchedulerImpl implements CustomScheduler {
     }
 
     @Override
-    @Scheduled( cron = "${bloom-non-client-service.cron_job_email_event_value}" )
+    @Scheduled( cron = "${bloom-non-client-service.cron_job_event_checker}" )
     public void getEventsNEmail( ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#getEventsNEmail()";
@@ -167,6 +168,9 @@ public class CustomSchedulerImpl implements CustomScheduler {
         for ( CustomEvent customEvent : customEventList ) {
             logger.debug( "Starting custom event with Date: " + customEvent.getEventDate( ) );
             boolean runNow = this.isEventRunnable( customEvent );
+            if ( !runNow ) {
+                logger.debug( "cannot run event with Date: " + customEvent.getEventDate( ) );
+            }
             EmailContents emailContents = new EmailContents( );
             emailContents.setReceiver( customEvent.getReceivers( ) );
             emailContents.setCcReceiver( customEvent.getCcReceivers( ) );
@@ -178,18 +182,19 @@ public class CustomSchedulerImpl implements CustomScheduler {
                 eventDates.add( customEvent.getEventDate( ) );
                 if ( !StringUtils.isEmpty( customEvent.getAttachmentLocation( ) ) && customEvent.isAttachment( ) ) {
 
-                    bloomEmailService.sendMail( emailContents );
-
-                } else if ( !customEvent.isAttachment( )
-                        ) {
-
                     emailContents.setHasAttachment( customEvent.isAttachment( ) );
                     emailContents.setAttachmentLocation( customEvent.getAttachmentLocation( ) );
+
+                    bloomEmailService.sendMail( emailContents );
+
+                } else if ( !customEvent.isAttachment( ) ) {
+
+                    emailContents.setIsSimple( Boolean.TRUE );
                     bloomEmailService.sendMail( emailContents );
                 }
+                logger.debug( "Completing sending email for custom event with Date: " + customEvent.getEventDate( ) );
             }
 
-            logger.debug( "Completing sending email for custom event with Date: " + customEvent.getEventDate( ) );
         }
         for ( Date eventDate : eventDates ) {
             customDatabaseService.updateData( eventDate, true );
@@ -247,7 +252,7 @@ public class CustomSchedulerImpl implements CustomScheduler {
 
             String times[] = eventTime.split( ":" );
             int eventMinute = Integer.parseInt( times[ 1 ] );
-            if ( times[ 0 ].equalsIgnoreCase( "" + todayDate.get( Calendar.HOUR_OF_DAY ) )
+            if ( Integer.parseInt( times[ 0 ] ) == todayDate.get( Calendar.HOUR_OF_DAY )
                     && eventMinute >= MIN_MINUTE && eventMinute < MAX_MINUTE ) {
                 logger.warn( "Found an event cannot execute as time of event doesn't lie in range of event date",
                         customEvent );

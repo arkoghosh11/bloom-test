@@ -299,7 +299,7 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
 
             Query query = session.createQuery( "update CustomEvent set isScheduler=:newValue where eventDate=:customDate" );
             query.setBoolean( "newValue", Boolean.TRUE );
-            query.setDate( "customDate", date );
+            query.setParameter( "customDate", date );
             int count = query.executeUpdate( );
 
             this.closeDBTransaction( );
@@ -348,8 +348,9 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
             this.openDBTransaction( );
 
             Query query = session.createQuery( "update CustomEvent set isScheduler=:newValue where eventDate=:customDate" );
+
             query.setBoolean( "newValue", Boolean.FALSE );
-            query.setDate( "customDate", date );
+            query.setParameter( "customDate", date );
             int count = query.executeUpdate( );
 
             this.closeDBTransaction( );
