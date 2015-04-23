@@ -3,7 +3,6 @@
  */
 package com.mana.innovative.service.consumer.impl;
 
-import com.mana.innovative.DummyTabData;
 import com.mana.innovative.dao.consumer.UserDAO;
 import com.mana.innovative.dto.consumer.User;
 import com.mana.innovative.dto.consumer.payload.UserPayload;
@@ -18,6 +17,7 @@ import javax.annotation.Resource;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.util.ArrayList;
 
 /**
  * The type User service.
@@ -47,8 +47,8 @@ public class UserServiceImpl implements UserService {
 
         String location = this.getClass( ).getCanonicalName( ) + "#getUser()";
         logger.debug( "Starting " + location );
-        UserResponseContainer< UserPayload > userResponseContainer = UserResponseBuilder.build(
-                new DummyTabData( ).getAlreadyGenerateUserList( ) );
+        UserResponseContainer< UserPayload > userResponseContainer
+                = UserResponseBuilder.build( new ArrayList< User >( ) );
         userDAO.getUsers( requestParams );
 
         logger.debug( "Finishing " + location );
