@@ -23,8 +23,12 @@
             classpath*:/web_config.xml
             classpath*:/config/db_config.xml
             classpath*:/config/service_config.xml
-            classpath*:/config/email-config.xml
-            classpath*:/config/scheduler-config.xml
+            <!-- Note disabled bottom config files as scheduler is tied to email
+            and without the email secure properties file these config files
+            will not load
+            -->
+            <!--classpath*:/config/email-config.xml-->
+            <!--classpath*:/config/scheduler-config.xml-->
         </param-value>
     </context-param>
     <!--location for login credentials-->
