@@ -99,7 +99,7 @@ public class ItemResponseBuilder {
         ItemsPayload itemsPayload = new ItemsPayload( );
         itemsPayload.setItems( new ArrayList< Item >( ) );
         ItemResponseContainer< ItemsPayload > itemResponseContainer = new ItemResponseContainer<>( );
-        ErrorContainer errorContainer = null;
+        ErrorContainer errorContainer;
         if ( isError ) {
             errorContainer = new ErrorContainer( );
             Error error = new Error( location, exception );

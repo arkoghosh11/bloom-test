@@ -2,6 +2,7 @@ package com.mana.innovative.dto.client;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /**
  * The type Working hour.
@@ -158,20 +159,17 @@ public class WorkingHour {
     }
 
     @Override
-    public boolean equals( Object o ) {
+    public boolean equals( final Object o ) {
         if ( this == o ) return true;
-        if ( o == null || getClass( ) != o.getClass( ) ) return false;
-
+        if ( !( o instanceof WorkingHour ) ) return false;
         WorkingHour that = ( WorkingHour ) o;
-
-        if ( isHoliday != that.isHoliday ) return false;
-        if ( isOffline != that.isOffline ) return false;
-        if ( isWeekend != that.isWeekend ) return false;
-        if ( Long.compare( workingHourId, that.workingHourId ) != 0 ) return false;
-        if ( !day.equals( that.day ) ) return false;
-        if ( !endTime.equals( that.endTime ) ) return false;
-        return startTime.equals( that.startTime );
-
+        return Objects.equals( getWorkingHourId( ), that.getWorkingHourId( ) ) &&
+                Objects.equals( getDay( ), that.getDay( ) ) &&
+                Objects.equals( getStartTime( ), that.getStartTime( ) ) &&
+                Objects.equals( getEndTime( ), that.getEndTime( ) ) &&
+                Objects.equals( isOffline, that.isOffline ) &&
+                Objects.equals( isHoliday, that.isHoliday ) &&
+                Objects.equals( isWeekend, that.isWeekend );
     }
 
     /**

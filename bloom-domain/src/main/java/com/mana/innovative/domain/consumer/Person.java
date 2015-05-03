@@ -3,6 +3,7 @@ package com.mana.innovative.domain.consumer;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import java.util.Objects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,5 +58,28 @@ public class Person extends User {
 
     public void setTitle( final String title ) {
         this.title = title;
+    }
+
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Person ) ) return false;
+        if ( !super.equals( o ) ) return false;
+        Person person = ( Person ) o;
+        return Objects.equals( getTitle( ), person.getTitle( ) ) &&
+                Objects.equals( getFirstName( ), person.getFirstName( ) ) &&
+                Objects.equals( getLastName( ), person.getLastName( ) ) &&
+                Objects.equals( getMiddleName( ), person.getMiddleName( ) );
+    }
+
+
+    @Override
+    public String toString( ) {
+        return super.toString( ) + "Person {" +
+                "title= " + title +
+                ",firstName= " + firstName +
+                ",lastName= " + lastName +
+                ",middleName= " + middleName +
+                '}';
     }
 }

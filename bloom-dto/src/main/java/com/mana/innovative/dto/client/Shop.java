@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The type Shop.
@@ -162,21 +163,19 @@ public class Shop {
         this.items = items;
     }
 
+
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
         if ( !( o instanceof Shop ) ) return false;
-
         Shop shop = ( Shop ) o;
-
-        if ( address != null ? !address.equals( shop.address ) : shop.address != null ) return false;
-        if ( items != null ? !items.equals( shop.items ) : shop.items != null ) return false;
-        if ( shopId != null ? !shopId.equals( shop.shopId ) : shop.shopId != null ) return false;
-        if ( shopName != null ? !shopName.equals( shop.shopName ) : shop.shopName != null ) return false;
-        if ( shopOwnId != null ? !shopOwnId.equals( shop.shopOwnId ) : shop.shopOwnId != null ) return false;
-        if ( shopWebLink != null ? !shopWebLink.equals( shop.shopWebLink ) : shop.shopWebLink != null ) return false;
-        return !( workingHours != null ? !workingHours.equals( shop.workingHours ) : shop.workingHours != null );
-
+        return Objects.equals( getShopId( ), shop.getShopId( ) ) &&
+                Objects.equals( getShopOwnId( ), shop.getShopOwnId( ) ) &&
+                Objects.equals( getShopName( ), shop.getShopName( ) ) &&
+                Objects.equals( getShopWebLink( ), shop.getShopWebLink( ) ) &&
+                Objects.equals( getAddress( ), shop.getAddress( ) ) &&
+                Objects.equals( getWorkingHours( ), shop.getWorkingHours( ) ) &&
+                Objects.equals( getItems( ), shop.getItems( ) );
     }
 
     /**

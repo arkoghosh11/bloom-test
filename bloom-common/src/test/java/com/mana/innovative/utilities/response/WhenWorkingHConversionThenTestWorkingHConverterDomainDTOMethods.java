@@ -41,8 +41,8 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         workingHourDTO2 = new WorkingHour( );
 
         // Set Values for tempValues
-        workingHourDTO = TestDummyDTOObjectGenerator.getTestWorkingHourDTOObject( new WorkingHour( ) );
-        workingHourDomain = TestDummyDomainObjectGenerator.getTestWorkingHourDomainObject( new com.mana.innovative.domain.client.WorkingHour( ) );
+        workingHourDTO = TestDummyDTOObjectGenerator.getTestWorkingHourDTOObject( );
+        workingHourDomain = TestDummyDomainObjectGenerator.getTestWorkingHourDomainObject( );
 
     }
 
@@ -67,9 +67,7 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
     public void testGetConvertedDTOFromDomain( ) throws Exception {
 
         logger.debug( "Starting  GetConvertedDTOFromDomain" );
-        if ( workingHourDomain.getWorkingHourId( ) != 1 ) {
-            workingHourDomain = TestDummyDomainObjectGenerator.getTestWorkingHourDomainObject( workingHourDomain );
-        }
+
         workingHourDTO2 = WorkingHourDomainDTOConverter.getConvertedDTOFromDomain( workingHourDomain );
 
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDTO2 );
@@ -92,7 +90,7 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         List< com.mana.innovative.domain.client.WorkingHour > workingHourDomainList = new ArrayList<>( );
         workingHourDomainList.add( workingHourDomain );
         if ( workingHourDomain.getWorkingHourId( ) != TestConstants.TEST_ID ) {
-            TestDummyDomainObjectGenerator.getTestWorkingHourDomainZEROIDObject( workingHourDomain );
+            TestDummyDomainObjectGenerator.setTestWorkingHourDomainZEROIDObject( workingHourDomain );
         }
         workingHourDTOList = WorkingHourDomainDTOConverter.getConvertedListDTOFromDomain( workingHourDomainList );
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDTOList );
@@ -114,7 +112,7 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         logger.debug( "Starting  GetConvertedDomainFromDTO" );
 
         workingHourDomain2 = WorkingHourDomainDTOConverter.getConvertedDomainFromDTO( workingHourDTO );
-        TestDummyDomainObjectGenerator.getTestWorkingHourDomainZEROIDObject( workingHourDomain );
+        TestDummyDomainObjectGenerator.setTestWorkingHourDomainZEROIDObject( workingHourDomain );
 
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDomain2 );
         Assert.assertEquals( TestConstants.notEqualsMessage, workingHourDomain, workingHourDomain2 );
@@ -135,7 +133,7 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         List< WorkingHour > workingHourDTOList = new ArrayList<>( );
         List< com.mana.innovative.domain.client.WorkingHour > workingHourDomainList;
         workingHourDTOList.add( workingHourDTO );
-        TestDummyDomainObjectGenerator.getTestWorkingHourDomainZEROIDObject( workingHourDomain );
+        TestDummyDomainObjectGenerator.setTestWorkingHourDomainZEROIDObject( workingHourDomain );
 
         workingHourDomainList = WorkingHourDomainDTOConverter.getConvertedListDomainFromDTO( workingHourDTOList );
 
@@ -169,15 +167,25 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         NullPointerException nullPointerException = null;
         try {
             workingHourDomain2 = WorkingHourDomainDTOConverter.getConvertedDomainFromDTO( workingHour );
-        } catch ( IllegalArgumentValueException e ) {
-            illegalArgumentValueException = e;
+        } catch ( IllegalArgumentValueException exception ) {
+            illegalArgumentValueException = exception;
+        }
+        Assert.assertNotNull( TestConstants.nullMessage, illegalArgumentValueException );
+
+        illegalArgumentValueException = null;
+
+        try {
+            workingHourDTO.setEndTime( "3e:r4" );
+            workingHourDomain2 = WorkingHourDomainDTOConverter.getConvertedDomainFromDTO( workingHourDTO );
+        } catch ( IllegalArgumentValueException exception ) {
+            illegalArgumentValueException = exception;
         }
         Assert.assertNotNull( TestConstants.nullMessage, illegalArgumentValueException );
 
         try {
             workingHourDomain2 = WorkingHourDomainDTOConverter.getConvertedDomainFromDTO( null );
-        } catch ( NullPointerException n ) {
-            nullPointerException = n;
+        } catch ( NullPointerException exception ) {
+            nullPointerException = exception;
         }
         Assert.assertNotNull( TestConstants.nullMessage, nullPointerException );
         logger.debug( "Finishing test GetConvertedDomainFromDTOForError" );
@@ -190,8 +198,8 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         NullPointerException nullPointerException = null;
         try {
             workingHourDTO2 = WorkingHourDomainDTOConverter.getConvertedDTOFromDomain( null );
-        } catch ( NullPointerException n ) {
-            nullPointerException = n;
+        } catch ( NullPointerException exception ) {
+            nullPointerException = exception;
         }
         Assert.assertNotNull( TestConstants.nullMessage, nullPointerException );
         logger.debug( "Finishing test GetConvertedDTOFromDomainForError" );

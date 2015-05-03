@@ -24,7 +24,7 @@ public class Note extends SidebarType {
 
     public void setNoteId( final int noteId ) {
         this.noteId = noteId;
-        this.setSidebarTypeId( noteId );
+//        this.setSidebarTypeId( noteId );
     }
 
     @XmlElement( name = "link", defaultValue = "", nillable = true )

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,7 +20,7 @@ public class CalendarEvent {
 
     @XmlTransient
     private static boolean dateResponse = false;
-    private int calendarEventId;
+    private Long calendarEventId;
     private Date eventStartDate;
     private Date eventEndDate;
     private String name;
@@ -36,11 +37,11 @@ public class CalendarEvent {
     }
 
     @XmlElement( name = "EVENT_ID", nillable = false )
-    public int getCalendarEventId( ) {
+    public Long getCalendarEventId( ) {
         return calendarEventId;
     }
 
-    public void setCalendarEventId( final int calendarEventId ) {
+    public void setCalendarEventId( final Long calendarEventId ) {
         this.calendarEventId = calendarEventId;
     }
 
@@ -98,6 +99,20 @@ public class CalendarEvent {
 
     public void setOptional( final String optional ) {
         this.optional = optional;
+    }
+
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof CalendarEvent ) ) return false;
+        CalendarEvent that = ( CalendarEvent ) o;
+        return Objects.equals( getCalendarEventId( ), that.getCalendarEventId( ) ) &&
+                Objects.equals( getEventStartDate( ), that.getEventStartDate( ) ) &&
+                Objects.equals( getEventEndDate( ), that.getEventEndDate( ) ) &&
+                Objects.equals( getName( ), that.getName( ) ) &&
+                Objects.equals( getEventName( ), that.getEventName( ) ) &&
+                Objects.equals( getEventDescription( ), that.getEventDescription( ) ) &&
+                Objects.equals( getOptional( ), that.getOptional( ) );
     }
 
     @Override

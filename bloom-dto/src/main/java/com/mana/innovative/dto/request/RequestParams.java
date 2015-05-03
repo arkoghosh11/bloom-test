@@ -22,6 +22,11 @@ public class RequestParams {
     private boolean isError;
 
     /**
+     * The Is delete all.
+     */
+    private boolean isDeleteAll;
+
+    /**
      * The Page size.
      */
     private Integer pageSize;
@@ -66,6 +71,24 @@ public class RequestParams {
      */
     public void setIsError( final boolean isError ) {
         this.isError = isError;
+    }
+
+    /**
+     * Is delete all.
+     *
+     * @return the boolean
+     */
+    public boolean isDeleteAll( ) {
+        return isDeleteAll;
+    }
+
+    /**
+     * Sets is delete all.
+     *
+     * @param isDeleteAll the is delete all
+     */
+    public void setIsDeleteAll( final boolean isDeleteAll ) {
+        this.isDeleteAll = isDeleteAll;
     }
 
     /**

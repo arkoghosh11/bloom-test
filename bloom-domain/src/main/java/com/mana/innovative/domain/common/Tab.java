@@ -5,25 +5,63 @@ package com.mana.innovative.domain.common;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
+import java.util.Objects;
 
 /**
- * @author Bloom
+ * The type Tab.
+ * <p/>
+ * Created by Bloom/Rono on $date $time.
+ *
+ * @author Bloom Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Entity
 @Table( name = "tabs" )
 public class Tab {
 
+    /**
+     * The Tab id.
+     */
     @Id
     @Column( name = "tab_id" )
+    @GeneratedValue( strategy = GenerationType.TABLE )
     private int tabId;
+
+    /**
+     * The Tab name.
+     */
     @Column( name = "tab_name" )
     private String tabName;
+    /**
+     * The Tab content.
+     */
     @Column( name = "tab_content" )
     private String tabContent;
 
     /**
+     * The Created date.
+     */
+    @Column( name = "created_date", updatable = false )
+    @Temporal( value = TemporalType.TIMESTAMP )
+    private Date createdDate;
+    /**
+     * The Updated date.
+     */
+    @Column( name = "updated_date" )
+    @Temporal( value = TemporalType.TIMESTAMP )
+    private Date updatedDate;
+
+    /**
+     * Gets tab id.
+     *
      * @return the tabId
      */
     public int getTabId( ) {
@@ -31,6 +69,8 @@ public class Tab {
     }
 
     /**
+     * Sets tab id.
+     *
      * @param tabId the tabId to set
      */
     public void setTabId( int tabId ) {
@@ -38,6 +78,8 @@ public class Tab {
     }
 
     /**
+     * Gets tab name.
+     *
      * @return the tabName
      */
     public String getTabName( ) {
@@ -45,6 +87,8 @@ public class Tab {
     }
 
     /**
+     * Sets tab name.
+     *
      * @param tabName the tabName to set
      */
     public void setTabName( String tabName ) {
@@ -52,6 +96,8 @@ public class Tab {
     }
 
     /**
+     * Gets tab content.
+     *
      * @return the tabContent
      */
     public String getTabContent( ) {
@@ -59,18 +105,82 @@ public class Tab {
     }
 
     /**
+     * Sets tab content.
+     *
      * @param tabContent the tabContent to set
      */
     public void setTabContent( String tabContent ) {
         this.tabContent = tabContent;
     }
 
+    /**
+     * Gets created date.
+     *
+     * @return the created date
+     */
+    public Date getCreatedDate( ) {
+        return createdDate;
+    }
+
+    /**
+     * Sets created date.
+     *
+     * @param createdDate the created date
+     */
+    public void setCreatedDate( final Date createdDate ) {
+        this.createdDate = createdDate;
+    }
+
+    /**
+     * Gets updated date.
+     *
+     * @return the updated date
+     */
+    public Date getUpdatedDate( ) {
+        return updatedDate;
+    }
+
+    /**
+     * Sets updated date.
+     *
+     * @param updatedDate the updated date
+     */
+    public void setUpdatedDate( final Date updatedDate ) {
+        this.updatedDate = updatedDate;
+    }
+
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Tab ) ) return false;
+        Tab tab = ( Tab ) o;
+        return Objects.equals( getTabId( ), tab.getTabId( ) ) &&
+                Objects.equals( getTabName( ), tab.getTabName( ) ) &&
+                Objects.equals( getTabContent( ), tab.getTabContent( ) );
+    }
+
+    /**
+     * Clone object.
+     *
+     * @return the object
+     *
+     * @throws CloneNotSupportedException the clone not supported exception
+     */
     public Object clone( ) throws CloneNotSupportedException {
         return super.clone( );
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
+    @Override
     public String toString( ) {
-        return tabId + " " + tabName + " " + tabContent;
+        return "Tab {" +
+                " tabId=" + tabId +
+                ", tabName= " + tabName +
+                ", tabContent= " + tabContent +
+                '}';
     }
-
 }

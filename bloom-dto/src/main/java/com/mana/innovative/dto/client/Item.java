@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * The type Item.
@@ -274,27 +275,21 @@ public class Item {
 
     @Override
     public boolean equals( final Object o ) {
-
         if ( this == o ) return true;
         if ( !( o instanceof Item ) ) return false;
-
-        final Item item = ( Item ) o;
-
-        if ( Long.compare( itemId, item.itemId ) != 0 ) return false;
-        if ( Double.compare( item.itemPrice, itemPrice ) != 0 ) return false;
-        if ( Double.compare( item.quantity, quantity ) != 0 ) return false;
-        if ( Double.compare( item.weight, weight ) != 0 ) return false;
-        if ( boughtDate != null ? !boughtDate.equals( item.boughtDate ) : item.boughtDate != null ) return false;
-        if ( boughtFrom != null ? !boughtFrom.equals( item.boughtFrom ) : item.boughtFrom != null ) return false;
-        if ( itemName != null ? !itemName.equals( item.itemName ) : item.itemName != null ) return false;
-        if ( itemPriceCurrency != null ? !itemPriceCurrency.equals( item.itemPriceCurrency ) : item.itemPriceCurrency != null )
-            return false;
-        if ( itemSubType != null ? !itemSubType.equals( item.itemSubType ) : item.itemSubType != null ) return false;
-        if ( itemType != null ? !itemType.equals( item.itemType ) : item.itemType != null ) return false;
-        if ( quantityType != null ? !quantityType.equals( item.quantityType ) : item.quantityType != null )
-            return false;
-        return !( weightedUnit != null ? !weightedUnit.equals( item.weightedUnit ) : item.weightedUnit != null );
-
+        Item item = ( Item ) o;
+        return Objects.equals( getItemId( ), item.getItemId( ) ) &&
+                Objects.equals( getItemPrice( ), item.getItemPrice( ) ) &&
+                Objects.equals( getQuantity( ), item.getQuantity( ) ) &&
+                Objects.equals( getWeight( ), item.getWeight( ) ) &&
+                Objects.equals( getItemPriceCurrency( ), item.getItemPriceCurrency( ) ) &&
+                Objects.equals( getItemName( ), item.getItemName( ) ) &&
+                Objects.equals( getItemType( ), item.getItemType( ) ) &&
+                Objects.equals( getItemSubType( ), item.getItemSubType( ) ) &&
+                Objects.equals( getBoughtFrom( ), item.getBoughtFrom( ) ) &&
+                Objects.equals( getQuantityType( ), item.getQuantityType( ) ) &&
+                Objects.equals( getWeightedUnit( ), item.getWeightedUnit( ) ) &&
+                Objects.equals( getBoughtDate( ), item.getBoughtDate( ) );
     }
 
     /**

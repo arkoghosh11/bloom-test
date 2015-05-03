@@ -9,6 +9,7 @@ import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,16 +39,17 @@ public class SidebarType {
     @Column( name = "subject" )
     private String subject;
     @Column( name = "group_type" )
-    private String group;
+    private String groupType;
 
     @Temporal( value = TemporalType.DATE )
-    @Column( name = "date" )
-    private Date date;
+    @Column( name = "due_date" )
+    private Date dueDate;
 
     @Id
     @Column( name = "sidebar_type_id" )
-    @GeneratedValue
-    private int sidebarTypeId;
+    @GeneratedValue( strategy = GenerationType.TABLE )
+    private long sidebarTypeId;
+
     @Column( name = "group_priority" )
     private int groupPriority;
     @Column( name = "type_priority" )
@@ -55,6 +58,13 @@ public class SidebarType {
     private int groupCount;
     @Column( name = "success" )
     private boolean success;
+
+    @Column( name = "created_date" )
+    @Temporal( value = TemporalType.TIMESTAMP )
+    private Date createdDate;
+    @Column( name = "updated_date" )
+    @Temporal( value = TemporalType.TIMESTAMP )
+    private Date updatedDate;
 
     public SidebarType( ) {
         logger.info( "Class Initialize" + logger.getClass( ).getCanonicalName( ) );
@@ -68,20 +78,20 @@ public class SidebarType {
         this.itemType = itemType;
     }
 
-    public Date getDate( ) {
-        return date;
+    public Date getDueDate( ) {
+        return dueDate;
     }
 
-    public void setDate( final Date date ) {
-        this.date = date;
+    public void setDueDate( final Date date ) {
+        this.dueDate = date;
     }
 
-    public String getGroup( ) {
-        return group;
+    public String getGroupType( ) {
+        return groupType;
     }
 
-    public void setGroup( final String group ) {
-        this.group = group;
+    public void setGroupType( final String group ) {
+        this.groupType = group;
     }
 
     public int getGroupPriority( ) {
@@ -124,11 +134,58 @@ public class SidebarType {
         this.success = success;
     }
 
-    public int getSidebarTypeId( ) {
+    public long getSidebarTypeId( ) {
         return sidebarTypeId;
     }
 
-    public void setSidebarTypeId( final int sidebarTypeId ) {
+    public void setSidebarTypeId( final long sidebarTypeId ) {
         this.sidebarTypeId = sidebarTypeId;
+    }
+
+    public Date getCreatedDate( ) {
+        return createdDate;
+    }
+
+    public void setCreatedDate( final Date createdDate ) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate( ) {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate( final Date updatedDate ) {
+        this.updatedDate = updatedDate;
+    }
+
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof SidebarType ) ) return false;
+        SidebarType that = ( SidebarType ) o;
+        return Objects.equals( getSidebarTypeId( ), that.getSidebarTypeId( ) ) &&
+                Objects.equals( getGroupPriority( ), that.getGroupPriority( ) ) &&
+                Objects.equals( getTypePriority( ), that.getTypePriority( ) ) &&
+                Objects.equals( getGroupCount( ), that.getGroupCount( ) ) &&
+                Objects.equals( isSuccess( ), that.isSuccess( ) ) &&
+                Objects.equals( getItemType( ), that.getItemType( ) ) &&
+                Objects.equals( getSubject( ), that.getSubject( ) ) &&
+                Objects.equals( getGroupType( ), that.getGroupType( ) ) &&
+                Objects.equals( getDueDate( ), that.getDueDate( ) );
+    }
+
+
+    @Override
+    public String toString( ) {
+        return "SidebarType {" +
+                " itemType= " + itemType +
+                ", subject= " + subject +
+                ", groupType= " + groupType +
+                ", dueDate=" + dueDate +
+                ", sidebarTypeId=" + sidebarTypeId +
+                ", groupPriority=" + groupPriority +
+                ", typePriority=" + typePriority +
+                ", groupCount=" + groupCount +
+                ", success=" + success + '}';
     }
 }

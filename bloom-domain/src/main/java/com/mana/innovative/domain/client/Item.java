@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * The type Item.
@@ -54,13 +55,13 @@ public class Item {
     @Column( name = "weighted_unit" )
     private String weightedUnit;
 
-    @Column( name = "bought_date", columnDefinition = "DATETIME" )
+    @Column( name = "bought_date" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date boughtDate;
-    @Column( name = "created_date", columnDefinition = "DATETIME", updatable = false )
+    @Column( name = "created_date", updatable = false )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
-    @Column( name = "updated_date", columnDefinition = "DATETIME" )
+    @Column( name = "updated_date" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
@@ -358,36 +359,19 @@ public class Item {
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
         if ( !( o instanceof Item ) ) return false;
-
-        final Item item = ( Item ) o;
-
-        if ( itemId != item.getItemId( ) ) return false;
-        if ( Double.compare( itemPrice, item.getItemPrice( ) ) != 0 ) return false;
-        if ( Double.compare( quantity, item.getQuantity( ) ) != 0 ) return false;
-        if ( Double.compare( weight, item.getWeight( ) ) != 0 ) return false;
-        if ( boughtDate != null ? !boughtDate.equals( item.getBoughtDate( ) ) : item.getBoughtDate( ) != null )
-            return false;
-        if ( boughtFrom != null ? !boughtFrom.equals( item.getBoughtFrom( ) ) : item.getBoughtFrom( ) != null )
-            return false;
-        if ( itemName != null ? !itemName.equals( item.getItemName( ) ) : item.getItemName( ) != null ) return false;
-        if ( itemPriceCurrency != null ? !itemPriceCurrency.equals( item.getItemPriceCurrency( ) ) : item.getItemPriceCurrency( ) != null )
-            return false;
-        if ( itemSubType != null ? !itemSubType.equals( item.getItemSubType( ) ) : item.getItemSubType( ) != null )
-            return false;
-        if ( itemType != null ? !itemType.equals( item.getItemType( ) ) : item.getItemType( ) != null ) return false;
-        if ( quantityType != null ? !quantityType.equals( item.getQuantityType( ) ) : item.getQuantityType( ) != null )
-            return false;
-//        if ( shopItem != null && item.getShopItem( ) != null ) {
-//            if ( !shopItem.equals( item.shopItem ) ) return false;
-//        }
-        if ( weightedUnit != null ? !weightedUnit.equalsIgnoreCase( item.getWeightedUnit( ) ) : item.getWeightedUnit( ) != null )
-            return false;
-        if ( createdDate != null ? !createdDate.equals( item.getCreatedDate( ) ) : item.getCreatedDate( ) != null )
-            return true;
-        if ( updatedDate != null ? !updatedDate.equals( item.getUpdatedDate( ) ) : item.getUpdatedDate( ) != null )
-            return true;
-
-        return true;
+        Item item = ( Item ) o;
+        return Objects.equals( getItemId( ), item.getItemId( ) ) &&
+                Objects.equals( getItemPrice( ), item.getItemPrice( ) ) &&
+                Objects.equals( getQuantity( ), item.getQuantity( ) ) &&
+                Objects.equals( getWeight( ), item.getWeight( ) ) &&
+                Objects.equals( getItemPriceCurrency( ), item.getItemPriceCurrency( ) ) &&
+                Objects.equals( getItemName( ), item.getItemName( ) ) &&
+                Objects.equals( getItemType( ), item.getItemType( ) ) &&
+                Objects.equals( getItemSubType( ), item.getItemSubType( ) ) &&
+                Objects.equals( getBoughtFrom( ), item.getBoughtFrom( ) ) &&
+                Objects.equals( getQuantityType( ), item.getQuantityType( ) ) &&
+                Objects.equals( getWeightedUnit( ), item.getWeightedUnit( ) ) &&
+                Objects.equals( getBoughtDate( ), item.getBoughtDate( ) );
     }
 
     /**

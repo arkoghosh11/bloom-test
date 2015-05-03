@@ -8,6 +8,7 @@ import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.consumer.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.ws.rs.Consumes;
@@ -32,6 +33,7 @@ import javax.ws.rs.core.UriInfo;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
+@Component
 @Path( "/{user: (?i)user}" )
 public class UserRestWebService {
 
@@ -61,7 +63,7 @@ public class UserRestWebService {
         RequestParams requestParams = new RequestParams( );
         requestParams.setIsError( isError );
 
-        return userService.getUser( userId, requestParams );
+        return userService.getUserByUserId( userId, requestParams );
     }
 
     /**
@@ -125,6 +127,6 @@ public class UserRestWebService {
 
         RequestParams requestParams = new RequestParams( );
         requestParams.setIsError( isError );
-        return userService.deleteUser( userId, requestParams );
+        return userService.deleteUserByUserId( userId, requestParams );
     }
 }

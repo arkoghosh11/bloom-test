@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * The type Working hour.
@@ -44,10 +45,10 @@ public class WorkingHour {
     @Column( name = "is_weekend" )
     private Boolean isWeekend;
 
-    @Column( name = "created_date", columnDefinition = "DATETIME" )
+    @Column( name = "created_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
-    @Column( name = "updated_date", columnDefinition = "DATETIME" )
+    @Column( name = "updated_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
@@ -139,28 +140,15 @@ public class WorkingHour {
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
         if ( !( o instanceof WorkingHour ) ) return false;
-
-        WorkingHour workingHour = ( WorkingHour ) o;
-
-        if ( workingHourId != workingHour.getWorkingHourId( ) ) return false;
-        if ( day != null ? !day.equals( workingHour.day ) : workingHour.day != null ) return false;
-        if ( startTime != null ? !startTime.equals( workingHour.getStartTime( ) ) : workingHour.getStartTime( ) != null
-                ) return false;
-        if ( endTime != null ? !endTime.equals( workingHour.getEndTime( ) ) : workingHour.getEndTime( ) != null )
-            return false;
-        if ( isHoliday != null ? !isHoliday.equals( workingHour.isHoliday( ) ) : workingHour.isHoliday( ) != null )
-            return false;
-        if ( isOffline != null ? !isOffline.equals( workingHour.isOffline( ) ) : workingHour.isOffline( ) != null )
-            return false;
-        if ( isWeekend != null ? !isWeekend.equals( workingHour.isWeekend( ) ) : workingHour.isWeekend( ) != null )
-            return false;
-        if ( createdDate != null ? !createdDate.equals( workingHour.getCreatedDate( ) ) :
-                workingHour.getCreatedDate( ) != null ) return true;
-        if ( updatedDate != null ? !updatedDate.equals( workingHour.getUpdatedDate( ) ) :
-                workingHour.getUpdatedDate( ) != null ) return true;
-
-        return true;
+        WorkingHour that = ( WorkingHour ) o;
+        return Objects.equals( getWorkingHourId( ), that.getWorkingHourId( ) ) &&
+                Objects.equals( getDay( ), that.getDay( ) ) &&
+                Objects.equals( getStartTime( ), that.getStartTime( ) ) &&
+                Objects.equals( getEndTime( ), that.getEndTime( ) ) &&
+                Objects.equals( isOffline, that.isOffline ) &&
+                Objects.equals( isHoliday, that.isHoliday );
     }
+
 
     /**
      * Returns a string representation of the object. In general, the {@code toString} method returns a string that

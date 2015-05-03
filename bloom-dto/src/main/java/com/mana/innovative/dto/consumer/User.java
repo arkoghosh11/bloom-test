@@ -5,6 +5,7 @@ package com.mana.innovative.dto.consumer;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /**
  * The type User.
@@ -19,7 +20,7 @@ public class User {
     /**
      * The User id.
      */
-    private String userId;
+    private Long userId;
 
     /**
      * The User name.
@@ -43,7 +44,7 @@ public class User {
      *
      * @return the user id
      */
-    public String getUserId( ) {
+    public Long getUserId( ) {
         return userId;
     }
 
@@ -53,7 +54,7 @@ public class User {
      * @param userId the user id
      */
     @XmlElement( name = "userId" )
-    public void setUserId( String userId ) {
+    public void setUserId( Long userId ) {
         this.userId = userId;
     }
 
@@ -114,12 +115,24 @@ public class User {
         this.email = email;
     }
 
-    /**
-     * To string.
-     *
-     * @return the string
-     */
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof User ) ) return false;
+        User user = ( User ) o;
+        return Objects.equals( getUserId( ), user.getUserId( ) ) &&
+                Objects.equals( getUserName( ), user.getUserName( ) ) &&
+                Objects.equals( getPassword( ), user.getPassword( ) ) &&
+                Objects.equals( getEmail( ), user.getEmail( ) );
+    }
+
+    @Override
     public String toString( ) {
-        return this.userId + " " + this.userName + " " + this.password + " " + this.email + "";
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

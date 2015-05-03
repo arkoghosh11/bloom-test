@@ -3,7 +3,7 @@
  */
 package com.mana.innovative.service.consumer.container;
 
-import com.mana.innovative.dto.consumer.payload.UserPayload;
+import com.mana.innovative.dto.consumer.payload.UsersPayload;
 import com.mana.innovative.service.container.ResponseContainer;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * @Copyright
  */
 @XmlRootElement( name = "response", namespace = "http://localhost:8080/rest/DoctorRest/user" )
-@XmlSeeAlso( { UserPayload.class, ResponseContainer.class } )
+@XmlSeeAlso( { UsersPayload.class, ResponseContainer.class } )
 public class UserResponseContainer < T > extends ResponseContainer< T > {
 
 }

@@ -2,6 +2,7 @@ package com.mana.innovative.dto.consumer;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /**
  * The type Card.
@@ -16,7 +17,7 @@ public class Card {
     /**
      * The Card id.
      */
-    private String cardId;
+    private Long cardId;
 
     /**
      * The First name.
@@ -29,14 +30,19 @@ public class Card {
     private String lastName;
 
     /**
-     * The Card type.
+     * The Card number.
      */
-    private String cardType;
+    private String cardNumber;
 
     /**
      * The Issue date.
      */
     private String issueDate;
+
+    /**
+     * The Picture location.
+     */
+    private String pictureLocation;
 
     /**
      * The Card has customer pic.
@@ -50,8 +56,8 @@ public class Card {
      *
      * @return the card id
      */
-    @XmlElement( name = "cardId" )
-    public String getCardId( ) {
+    @XmlElement( name = "card_id" )
+    public Long getCardId( ) {
         return cardId;
     }
 
@@ -60,7 +66,7 @@ public class Card {
      *
      * @param cardId the card id
      */
-    public void setCardId( final String cardId ) {
+    public void setCardId( final Long cardId ) {
         this.cardId = cardId;
     }
 
@@ -69,7 +75,7 @@ public class Card {
      *
      * @return the first name
      */
-    @XmlElement( name = "firstName" )
+    @XmlElement( name = "first_name" )
     public String getFirstName( ) {
         return firstName;
     }
@@ -88,7 +94,7 @@ public class Card {
      *
      * @return the last name
      */
-    @XmlElement( name = "lastName" )
+    @XmlElement( name = "last_name" )
     public String getLastName( ) {
         return lastName;
     }
@@ -103,22 +109,22 @@ public class Card {
     }
 
     /**
-     * Gets card type.
+     * Gets card number.
      *
-     * @return the card type
+     * @return the card number
      */
-    @XmlElement( name = "cardType" )
-    public String getCardType( ) {
-        return cardType;
+    @XmlElement( name = "card_number" )
+    public String getCardNumber( ) {
+        return cardNumber;
     }
 
     /**
-     * Sets card type.
+     * Sets card number.
      *
-     * @param cardType the card type
+     * @param cardNumber the card number
      */
-    public void setCardType( final String cardType ) {
-        this.cardType = cardType;
+    public void setCardNumber( final String cardNumber ) {
+        this.cardNumber = cardNumber;
     }
 
     /**
@@ -126,7 +132,7 @@ public class Card {
      *
      * @return the issue date
      */
-    @XmlElement( name = "issueDate" )
+    @XmlElement( name = "issue_date" )
     public String getIssueDate( ) {
         return issueDate;
     }
@@ -140,12 +146,32 @@ public class Card {
         this.issueDate = issueDate;
     }
 
+
+    /**
+     * Gets picture location.
+     *
+     * @return the picture location
+     */
+    @XmlElement( name = "picture_location" )
+    public String getPictureLocation( ) {
+        return pictureLocation;
+    }
+
+    /**
+     * Sets picture location.
+     *
+     * @param pictureLocation the picture location
+     */
+    public void setPictureLocation( String pictureLocation ) {
+        this.pictureLocation = pictureLocation;
+    }
+
     /**
      * Is card has customer pic.
      *
      * @return the boolean
      */
-    @XmlElement( name = "hasPicture" )
+    @XmlElement( name = "has_picture" )
     public boolean isCardHasCustomerPic( ) {
         return cardHasCustomerPic;
     }
@@ -157,5 +183,33 @@ public class Card {
      */
     public void setCardHasCustomerPic( final boolean cardHasCustomerPic ) {
         this.cardHasCustomerPic = cardHasCustomerPic;
+    }
+
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Card ) ) return false;
+        Card card = ( Card ) o;
+        return Objects.equals( isCardHasCustomerPic( ), card.isCardHasCustomerPic( ) ) &&
+                Objects.equals( getCardId( ), card.getCardId( ) ) &&
+                Objects.equals( getFirstName( ), card.getFirstName( ) ) &&
+                Objects.equals( getLastName( ), card.getLastName( ) ) &&
+                Objects.equals( getCardNumber( ), card.getCardNumber( ) ) &&
+                Objects.equals( getIssueDate( ), card.getIssueDate( ) ) &&
+                Objects.equals( getPictureLocation( ), card.getPictureLocation( ) );
+    }
+
+
+    @Override
+    public String toString( ) {
+        return "Card {" +
+                " cardId=" + cardId +
+                ", firstName='" + firstName +
+                ", lastName='" + lastName +
+                ", cardNumber='" + cardNumber +
+                ", issueDate='" + issueDate +
+                ", pictureLocation='" + pictureLocation +
+                ", cardHasCustomerPic=" + cardHasCustomerPic +
+                '}';
     }
 }

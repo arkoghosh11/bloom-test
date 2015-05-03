@@ -1,5 +1,6 @@
 package com.mana.innovative.utilities;
 
+import com.mana.innovative.constants.CardType;
 import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
@@ -7,6 +8,15 @@ import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.domain.client.Shop;
 import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.domain.common.Address;
+import com.mana.innovative.domain.common.CalendarEvent;
+import com.mana.innovative.domain.common.Phone;
+import com.mana.innovative.domain.common.SidebarType;
+import com.mana.innovative.domain.common.Tab;
+import com.mana.innovative.domain.consumer.Card;
+import com.mana.innovative.domain.consumer.CreditCard;
+import com.mana.innovative.domain.consumer.Customer;
+import com.mana.innovative.domain.consumer.Preference;
+import com.mana.innovative.domain.consumer.User;
 import org.apache.log4j.Logger;
 
 import java.text.DateFormat;
@@ -17,21 +27,27 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Bloom/Rono on 3/7/2015. This class is for .. ToDo
+ * Created by Bloom/Rono on 3/7/2015. This class is for ..
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class TestDummyDomainObjectGenerator {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( TestDummyDomainObjectGenerator.class );
 
     /**
      * Gets test shop dTO object.
      *
-     * @param shop the shop
-     *
      * @return the test shop dTO object
      */
-    public static Shop getTestShopDomainObject( Shop shop ) {
+    public static Shop getTestShopDomainObject( ) {
 
+        Shop shop = new Shop( );
         shop.setShopId( TestConstants.TEST_ID );
         shop.setShopOwnId( TestConstants.TEST_OWN_ID );
         shop.setShopName( TestConstants.TEST_NAME );
@@ -39,21 +55,27 @@ public class TestDummyDomainObjectGenerator {
 
         // WorkingHour
         final List< WorkingHour > workingHours = new ArrayList<>( );
-        workingHours.add( getTestWorkingHourDomainObject( new WorkingHour( ) ) );
+        workingHours.add( getTestWorkingHourDomainObject( ) );
         shop.setWorkingHours( workingHours );
 
         // Address
-        shop.setAddress( getTestAddressDomainObject( new Address( ) ) );
+        shop.setAddress( getTestAddressDomainObject( ) );
         // Item
         List< Item > items = new ArrayList<>( );
-        items.add( getTestItemDomainObject( new Item( ) ) );
+        items.add( getTestItemDomainObject( ) );
         shop.setItems( items );
 
         return shop;
     }
 
-    public static WorkingHour getTestWorkingHourDomainObject( final WorkingHour workingHour ) {
+    /**
+     * Gets test working hour domain object.
+     *
+     * @return the test working hour domain object
+     */
+    public static WorkingHour getTestWorkingHourDomainObject( ) {
 
+        WorkingHour workingHour = new WorkingHour( );
         workingHour.setWorkingHourId( TestConstants.TEST_ID );
         workingHour.setHoliday( TestConstants.TEST_IS_HOLIDAY );
         workingHour.setWeekend( TestConstants.TEST_IS_WEEKEND );
@@ -81,12 +103,11 @@ public class TestDummyDomainObjectGenerator {
     /**
      * Gets test item dTO object.
      *
-     * @param item the dummy item
-     *
      * @return the test item dTO object
      */
-    public static Item getTestItemDomainObject( final Item item ) {
+    public static Item getTestItemDomainObject( ) {
 
+        final Item item = new Item( );
         item.setItemId( TestConstants.TEST_ID );
         item.setItemName( TestConstants.TEST_VALUE );
         item.setItemPriceCurrency( TestConstants.TEST_PRICE_CURRENCY );
@@ -101,7 +122,7 @@ public class TestDummyDomainObjectGenerator {
         item.setQuantityType( QuantityType.UNIT.toString( ) );
         item.setWeightedUnit( WeightedUnit.POUND.toString( ) );
 
-        DateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss.SSS" );
+        DateFormat dateFormat = new SimpleDateFormat( TestConstants.TEST_DATE_FORMAT );
 
         try {
             item.setBoughtDate( dateFormat.parse( TestConstants.TEST_BOUGHT_DATE ) );
@@ -115,12 +136,11 @@ public class TestDummyDomainObjectGenerator {
     /**
      * Gets test address dTO object.
      *
-     * @param address the address
-     *
      * @return the test address dTO object
      */
-    public static Address getTestAddressDomainObject( final Address address ) {
+    public static Address getTestAddressDomainObject( ) {
 
+        final Address address = new Address( );
         address.setAddressId( TestConstants.TEST_ID );
         address.setAddress1( TestConstants.TEST );
         address.setAddress2( TestConstants.TEST );
@@ -140,12 +160,12 @@ public class TestDummyDomainObjectGenerator {
      *
      * @return the test shop Domain ZERO ID object
      */
-    public static Shop getTestShopDomainZEROIDObject( final Shop shop ) {
+    public static Shop setTestShopDomainZEROIDObject( final Shop shop ) {
 
         shop.setShopId( TestConstants.ZERO );
-        getTestAddressDomainZEROIDObject( shop.getAddress( ) );
-        getTestItemDomainZEROIDObject( shop.getItems( ).get( TestConstants.ZERO ) );
-        getTestWorkingHourDomainZEROIDObject( shop.getWorkingHours( ).get( TestConstants.ZERO ) );
+        setTestAddressDomainZEROIDObject( shop.getAddress( ) );
+        setTestItemDomainZEROIDObject( shop.getItems( ).get( TestConstants.ZERO ) );
+        setTestWorkingHourDomainZEROIDObject( shop.getWorkingHours( ).get( TestConstants.ZERO ) );
 
         return shop;
     }
@@ -157,7 +177,7 @@ public class TestDummyDomainObjectGenerator {
      *
      * @return the test address Domain ZERO ID object
      */
-    public static Address getTestAddressDomainZEROIDObject( final Address address ) {
+    public static Address setTestAddressDomainZEROIDObject( final Address address ) {
 
         address.setAddressId( TestConstants.ZERO );
         return address;
@@ -170,7 +190,7 @@ public class TestDummyDomainObjectGenerator {
      *
      * @return the test item dTO ZERO ID object
      */
-    public static Item getTestItemDomainZEROIDObject( final Item item ) {
+    public static Item setTestItemDomainZEROIDObject( final Item item ) {
 
         item.setItemId( TestConstants.ZERO );
         return item;
@@ -183,9 +203,456 @@ public class TestDummyDomainObjectGenerator {
      *
      * @return the test working hour Domain ZERO ID object
      */
-    public static WorkingHour getTestWorkingHourDomainZEROIDObject( final WorkingHour workingHour ) {
+    public static WorkingHour setTestWorkingHourDomainZEROIDObject( final WorkingHour workingHour ) {
 
         workingHour.setWorkingHourId( TestConstants.ZERO );
         return workingHour;
+    }
+
+    /**
+     * Gets test tab domain zEROID object.
+     *
+     * @param tabDomain the tab domain
+     */
+    public static void setTestTabDomainZEROIDObject( final Tab tabDomain ) {
+
+        tabDomain.setTabId( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test user domain Zero Id object.
+     *
+     * @param userDomain the user domain
+     */
+    public static void setTestUserDomainZEROIDObject( final User userDomain ) {
+
+        userDomain.setUserId( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test user domain Zero Id object.
+     *
+     * @param cardDomain the user domain
+     */
+    public static void setTestCardDomainZEROIDObject( final Card cardDomain ) {
+
+        cardDomain.setCardId( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test phone domain zEROID object.
+     *
+     * @param phoneDomain the phone domain
+     */
+    public static void setTestPhoneDomainZEROIDObject( final Phone phoneDomain ) {
+        phoneDomain.setPhoneId( TestConstants.ZERO );
+
+    }
+
+    /**
+     * Gets test preference domain zEROID object.
+     *
+     * @param preferenceDomain the preference domain
+     */
+    public static void setTestPreferenceDomainZEROIDObject( final Preference preferenceDomain ) {
+        preferenceDomain.setPreferenceId( TestConstants.ZERO );
+
+    }
+
+    /**
+     * Gets test calendar event domain zEROID object.
+     *
+     * @param calendarEventDomain the calendar event domain
+     */
+    public static void setTestCalendarEventDomainZEROIDObject( final CalendarEvent calendarEventDomain ) {
+        calendarEventDomain.setCalendarEventId( TestConstants.ZERO );
+    }
+
+    /**
+     * Sets test sidebar type domain zEROID object.
+     *
+     * @param sidebarDomain the sidebar domain
+     */
+    public static void setTestSidebarTypeDomainZEROIDObject( final SidebarType sidebarDomain ) {
+        sidebarDomain.setSidebarTypeId( TestConstants.ZERO );
+
+    }
+
+    /**
+     * Gets test tab domain object.
+     *
+     * @return the test tab domain object
+     */
+    public static Tab getTestTabDomainObject( ) {
+        return getNCreateTabDomainList( ).get( TestConstants.ZERO );
+
+    }
+
+    /**
+     * Gets test user domain object.
+     *
+     * @return the test user domain object
+     */
+    public static User getTestUserDomainObject( ) {
+        return getNCreateDomainUserList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test customer domain object.
+     *
+     * @return the test customer domain object
+     */
+    public static Customer getTestCustomerDomainObject( ) {
+        return getNCreateDomainCustomerList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test card domain object.
+     *
+     * @return the test card domain object
+     */
+    public static Card getTestCardDomainObject( ) {
+        return getNCreateDomainCardsList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test credit card domain object.
+     *
+     * @return the test credit card domain object
+     */
+    public static CreditCard getTestCreditCardDomainObject( ) {
+
+        return getNCreateDomainCreditCardsList( ).get( TestConstants.ZERO );
+
+    }
+
+    /**
+     * Gets test preference domain object.
+     *
+     * @return the test preference domain object
+     */
+    public static Preference getTestPreferenceDomainObject( ) {
+
+        return getNCreateDomainPreferenceList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test phone domain object.
+     *
+     * @return the test phone domain object
+     */
+    public static Phone getTestPhoneDomainObject( ) {
+
+        return getNCreateDomainPhoneList( ).get( TestConstants.ZERO );
+
+    }
+
+    /**
+     * Gets test sidebar type domain object.
+     *
+     * @return the test sidebar type domain object
+     */
+    public static SidebarType getTestSidebarTypeDomainObject( ) {
+
+        return getNCreateSidebarDomainList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test calendar event domain object.
+     *
+     * @return the test calendar event domain object
+     */
+    public static CalendarEvent getTestCalendarEventDomainObject( ) {
+
+        return getNCreateDomainCalendarEventList( ).get( TestConstants.ZERO );
+
+    }
+
+    /**
+     * Gets n create tab domain data.
+     *
+     * @return the n create tab domain data
+     */
+    public static List< Tab > getNCreateTabDomainList( ) {
+
+        List< Tab > tabList = new ArrayList<>( );
+        Tab tab;
+        for ( int i = 0; i < 10; i++ ) {
+            tab = new Tab( );
+            tab.setTabId( i );
+            tab.setTabContent( "Content " + i );
+            tab.setTabName( "name " + i );
+            tabList.add( tab );
+        }
+        return tabList;
+    }
+
+    /**
+     * Gets n create domain user data.
+     *
+     * @return the n create domain user data
+     */
+    private static List< User > getNCreateDomainUserList( ) {
+
+        List< User > userList = new ArrayList<>( );
+        User user;
+//        Address address;
+        for ( int i = 0; i < 10; i++ ) {
+            user = new User( );
+
+            user.setUserId( i );
+            user.setEmail( i + TestConstants.TEST_EMAIL );
+            user.setPassword( TestConstants.TEST_PASS + i );
+            user.setUserName( TestConstants.TEST_NAME + i );
+
+            userList.add( user );
+        }
+        return userList;
+    }
+
+    /**
+     * Gets n create domain customer data.
+     *
+     * @return the n create domain customer data
+     */
+    private static List< Customer > getNCreateDomainCustomerList( ) {
+
+        List< Customer > customerList = new ArrayList<>( );
+        Customer customer;
+        for ( int i = 0; i < 10; i++ ) {
+            customer = new Customer( );
+            customer.setUserId( i );
+            customer.setEmail( i + TestConstants.TEST_EMAIL );
+            customer.setPassword( TestConstants.TEST_PASS + i );
+            customer.setUserName( TestConstants.TEST_NAME + i );
+
+            customer.setFirstName( TestConstants.TEST_NAME + i );
+            customer.setLastName( TestConstants.TEST_NAME + i );
+            customer.setMiddleName( TestConstants.TEST_NAME + i );
+
+            customer.setCards( getNCreateDomainCreditCardsList( ).subList( TestConstants.ZERO, TestConstants.ONE ) );
+            customer.setPhones( getNCreateDomainPhoneList( ).subList( TestConstants.ZERO, TestConstants.ONE ) );
+            customer.setPreferences( getNCreateDomainPreferenceList( ).subList( TestConstants.ZERO, TestConstants.ONE ) );
+
+            List< Address > addressList = new ArrayList<>( );
+            addressList.add( getTestAddressDomainObject( ) );
+            customer.setShippingAddress( addressList );
+            setTestAddressDomainZEROIDObject( customer.getShippingAddress( ).get( TestConstants.ZERO ) );
+            customerList.add( customer );
+
+        }
+        return customerList;
+    }
+
+    public static List< Card > getNCreateDomainCardsList( ) {
+
+        List< Card > cardList = new ArrayList<>( );
+        Card card;
+        for ( int i = 0; i < 10; i++ ) {
+            card = new Card( );
+            card.setCardId( i );
+
+            card.setFirstName( TestConstants.TEST_NAME + i );
+            card.setLastName( TestConstants.TEST_NAME + i );
+
+            card.setIssueDate( TestConstants.TEST_ISSUE );
+
+            if ( i % 2 == 0 ) {
+                card.setCardHasCustomerPic( TestConstants.TEST_TRUE );
+                card.setPictureLocation( TestConstants.TEST );
+            } else {
+                card.setCardHasCustomerPic( false );
+                card.setPictureLocation( "" );
+            }
+
+            if ( i < 3 ) {
+                card.setCardNumber( TestConstants.VALID_CC_NUMBER );
+            } else if ( i >= 3 && i < 6 ) {
+                card.setCardNumber( "556373653467325" + i );
+
+            } else if ( i >= 6 && i < 8 ) {
+                card.setCardNumber( "656373653467325" + i );
+
+            } else {
+                card.setCardNumber( "356373653467324" + i );
+            }
+            cardList.add( card );
+        }
+        return cardList;
+    }
+
+    /**
+     * Gets n create domain cards data.
+     *
+     * @return the n create domain cards data
+     */
+    public static List< CreditCard > getNCreateDomainCreditCardsList( ) {
+
+        List< CreditCard > creditCardList = new ArrayList<>( );
+        CreditCard creditCard;
+        for ( int i = 0; i < 10; i++ ) {
+            creditCard = new CreditCard( );
+            creditCard.setCardId( i );
+
+            creditCard.setFirstName( TestConstants.TEST_NAME + i );
+            creditCard.setLastName( TestConstants.TEST_NAME + i );
+            creditCard.setMiddleName( TestConstants.TEST_NAME + i );
+
+            try {
+                creditCard.setCreateOrModified( new SimpleDateFormat( TestConstants.TEST_DATE_FORMAT ).parse(
+                        TestConstants.DEFAULT_DATE ) );
+            } catch ( ParseException exception ) {
+                logger.error( "Failed to create dummy creditCard createOrModified date", exception );
+            }
+
+            creditCard.setExpiryDate( TestConstants.TEST_EXPIRY );
+            creditCard.setIssueDate( TestConstants.TEST_ISSUE );
+
+            if ( i % 2 == 0 ) {
+                creditCard.setCardHasCustomerPic( TestConstants.TEST_TRUE );
+                creditCard.setPictureLocation( TestConstants.TEST );
+            } else {
+                creditCard.setCardHasCustomerPic( false );
+                creditCard.setPictureLocation( "" );
+            }
+
+            if ( i < 3 ) {
+                creditCard.setCardNumber( TestConstants.VALID_CC_NUMBER );
+                creditCard.setCardType( CardType.Visa.toString( ) );
+            } else if ( i >= 3 && i < 6 ) {
+                creditCard.setCardNumber( "556373653467325" + i );
+                creditCard.setCardType( CardType.MasterCard.toString( ) );
+
+            } else if ( i >= 6 && i < 8 ) {
+                creditCard.setCardNumber( "656373653467325" + i );
+                creditCard.setCardType( CardType.Discover.toString( ) );
+
+            } else {
+                creditCard.setCardNumber( "356373653467324" + i );
+                creditCard.setCardType( CardType.AmericanExpress.toString( ) );
+            }
+
+            creditCard.setCVV( TestConstants.TEST_CVV );
+            creditCardList.add( creditCard );
+
+        }
+        return creditCardList;
+    }
+
+    /**
+     * Gets n create domain phone data.
+     *
+     * @return the n create domain phone data
+     */
+    public static List< Phone > getNCreateDomainPhoneList( ) {
+
+        List< Phone > phoneList = new ArrayList<>( );
+        Phone phone;
+        for ( int i = 0; i < 10; i++ ) {
+            phone = new Phone( );
+            phone.setPhoneNumber( i + TestConstants.TEST_PH_NO );
+            phone.setPhoneName( TestConstants.TEST_NAME );
+            phone.setPhoneCarrier( TestConstants.TEST + i );
+
+            try {
+                phone.setBoughtDate( new SimpleDateFormat( TestConstants.TEST_DATE_FORMAT ).parse(
+                        TestConstants.TEST_BOUGHT_DATE ) );
+            } catch ( ParseException exception ) {
+                logger.error( "Failed to create dummy phone boughtDate", exception );
+            }
+            phone.setPhoneModel( TestConstants.TEST + i );
+            phone.setPhoneType( TestConstants.TEST + i );
+
+            phone.setPhoneId( i );
+            phoneList.add( phone );
+        }
+        return phoneList;
+    }
+
+    /**
+     * Gets n create domain preference data.
+     *
+     * @return the n create domain preference data
+     */
+    public static List< Preference > getNCreateDomainPreferenceList( ) {
+
+        List< Preference > preferenceList = new ArrayList<>( );
+        Preference preference;
+        for ( int i = 0; i < 10; i++ ) {
+            preference = new Preference( );
+
+            preference.setPreferenceId( i );
+            preference.setPreferenceName( TestConstants.TEST_NAME + i );
+            preference.setIsPreferred( i % 2 == 0 );
+
+            preferenceList.add( preference );
+        }
+        return preferenceList;
+    }
+
+    /**
+     * Gets n create domain calendar event.
+     *
+     * @return the n create domain calendar event
+     */
+    public static List< CalendarEvent > getNCreateDomainCalendarEventList( ) {
+
+        List< CalendarEvent > calendarEventList = new ArrayList<>( );
+        CalendarEvent calendarEvent;
+        for ( int i = 0; i < 10; i++ ) {
+
+            calendarEvent = new CalendarEvent( );
+            calendarEvent.setName( TestConstants.TEST_NAME + i );
+            calendarEvent.setOptional( TestConstants.TEST + i );
+            calendarEvent.setEventName( TestConstants.TEST_NAME + i );
+            calendarEvent.setEventDescription( TestConstants.TEST + i * 2 );
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat( TestConstants.TEST_DATE_FORMAT );
+            try {
+                calendarEvent.setEventStartDate( simpleDateFormat.parse(
+                        TestConstants.DEFAULT_DATE ) );
+                calendarEvent.setEventEndDate( simpleDateFormat.parse(
+                        TestConstants.DEFAULT_DATE ) );
+            } catch ( ParseException exception ) {
+                logger.error( "Failed to parse date string " + TestConstants.TEST_DATE_FORMAT, exception );
+            }
+            calendarEvent.setCalendarEventId( i );
+            calendarEventList.add( calendarEvent );
+        }
+        return calendarEventList;
+    }
+
+    /**
+     * Gets n create sidebar domain list.
+     *
+     * @return the n create sidebar domain list
+     */
+    public static List< SidebarType > getNCreateSidebarDomainList( ) {
+
+        List< SidebarType > sidebarTypeList = new ArrayList<>( );
+        SidebarType sidebarType;
+
+        for ( int i = 0; i < 10; i++ ) {
+            sidebarType = new SidebarType( );
+
+            sidebarType.setSidebarTypeId( ( long ) i );
+            sidebarType.setTypePriority( i * 100 + i );
+            sidebarType.setSuccess( TestConstants.TEST_TRUE );
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat( TestConstants.TEST_DATE_FORMAT );
+            try {
+                sidebarType.setDueDate( simpleDateFormat.parse( TestConstants.DEFAULT_DATE ) );
+            } catch ( Exception exception ) {
+                logger.error( "Parse exception for date testing", exception );
+            }
+            sidebarType.setItemType( TestConstants.TEST_ITEM_TYPE );
+            sidebarType.setSubject( TestConstants.TEST_SUBJECT );
+            sidebarType.setGroupCount( i );
+            sidebarType.setGroupPriority( TestConstants.ZERO );
+            sidebarType.setGroupType( TestConstants.TEST );
+
+            sidebarTypeList.add( sidebarType );
+        }
+
+        return sidebarTypeList;
     }
 }

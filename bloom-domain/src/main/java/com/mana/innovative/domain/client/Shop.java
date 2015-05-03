@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The type Shop.
@@ -47,10 +48,10 @@ public class Shop {
     @OneToMany( orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "shopItem" )
     private List< Item > items;
 
-    @Column( name = "created_date", columnDefinition = "DATETIME" )
+    @Column( name = "created_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
-    @Column( name = "updated_date", columnDefinition = "DATETIME" )
+    @Column( name = "updated_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
@@ -217,28 +218,19 @@ public class Shop {
     }
 
     @Override
-    public boolean equals( Object o ) {
+    public boolean equals( final Object o ) {
         if ( this == o ) return true;
         if ( !( o instanceof Shop ) ) return false;
-
         Shop shop = ( Shop ) o;
-
-        if ( this.getShopId( ) != shop.getShopId( ) ) return false;
-        if ( Long.compare( shopOwnId, shop.getShopOwnId( ) ) != 0 ) return false;
-        if ( !address.equals( shop.getAddress( ) ) ) return false;
-        if ( !items.equals( shop.getItems( ) ) ) return false;
-        if ( !shopWebLink.equals( shop.getShopWebLink( ) ) ) return false;
-        if ( !shopName.equals( shop.getShopName( ) ) ) return false;
-        if ( !workingHours.equals( shop.getWorkingHours( ) ) ) return false;
-        if ( createdDate != null && shop.getCreatedDate( ) != null ? createdDate.getTime( ) != shop.getCreatedDate( )
-                .getTime( ) : createdDate == null )
-            return true;
-        if ( updatedDate != null && shop.getUpdatedDate( ) != null ? updatedDate.getTime( ) != shop.getUpdatedDate( )
-                .getTime( ) : updatedDate == null )
-            return true;
-
-        return true;
+        return Objects.equals( getShopId( ), shop.getShopId( ) ) &&
+                Objects.equals( getShopOwnId( ), shop.getShopOwnId( ) ) &&
+                Objects.equals( getShopName( ), shop.getShopName( ) ) &&
+                Objects.equals( getShopWebLink( ), shop.getShopWebLink( ) ) &&
+                Objects.equals( getAddress( ), shop.getAddress( ) ) &&
+                Objects.equals( getWorkingHours( ), shop.getWorkingHours( ) ) &&
+                Objects.equals( getItems( ), shop.getItems( ) );
     }
+
 
     /**
      * Returns a string representation of the object. In general, the {@code toString} method returns a string that

@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * The type Custom event.
@@ -356,29 +357,20 @@ public class CustomEvent {
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
         if ( !( o instanceof CustomEvent ) ) return false;
-
         CustomEvent that = ( CustomEvent ) o;
-
-        if ( getCustomEventId( ) != that.getCustomEventId( ) ) return false;
-        if ( isAttachment( ) != that.isAttachment( ) ) return false;
-        if ( isScheduler( ) != that.isScheduler( ) ) return false;
-        if ( getEventDate( ) != null ? !getEventDate( ).equals( that.getEventDate( ) ) : that.getEventDate( ) != null )
-            return false;
-        if ( getSubject( ) != null ? !getSubject( ).equals( that.getSubject( ) ) : that.getSubject( ) != null )
-            return false;
-        if ( getBody( ) != null ? !getBody( ).equals( that.getBody( ) ) : that.getBody( ) != null ) return false;
-        if ( getAttachmentLocation( ) != null ? !getAttachmentLocation( ).equals( that.getAttachmentLocation( ) ) : that.getAttachmentLocation( ) != null )
-            return false;
-        if ( getEventName( ) != null ? !getEventName( ).equals( that.getEventName( ) ) : that.getEventName( ) != null )
-            return false;
-        if ( getReceivers( ) != null ? !getReceivers( ).equals( that.getReceivers( ) ) : that.getReceivers( ) != null )
-            return false;
-        if ( getCcReceivers( ) != null ? !getCcReceivers( ).equals( that.getCcReceivers( ) ) : that.getCcReceivers( ) != null )
-            return false;
-        if ( getBccReceivers( ) != null ? !getBccReceivers( ).equals( that.getBccReceivers( ) ) : that.getBccReceivers( ) != null )
-            return false;
-        return !( getOptionalData( ) != null ? !getOptionalData( ).equals( that.getOptionalData( ) ) : that.getOptionalData( ) != null );
-
+        return Objects.equals( getCustomEventId( ), that.getCustomEventId( ) ) &&
+                Objects.equals( isAttachment( ), that.isAttachment( ) ) &&
+                Objects.equals( isScheduler( ), that.isScheduler( ) ) &&
+                Objects.equals( getTimeOfEvent( ), that.getTimeOfEvent( ) ) &&
+                Objects.equals( getEventDate( ), that.getEventDate( ) ) &&
+                Objects.equals( getSubject( ), that.getSubject( ) ) &&
+                Objects.equals( getBody( ), that.getBody( ) ) &&
+                Objects.equals( getAttachmentLocation( ), that.getAttachmentLocation( ) ) &&
+                Objects.equals( getEventName( ), that.getEventName( ) ) &&
+                Objects.equals( getReceivers( ), that.getReceivers( ) ) &&
+                Objects.equals( getCcReceivers( ), that.getCcReceivers( ) ) &&
+                Objects.equals( getBccReceivers( ), that.getBccReceivers( ) ) &&
+                Objects.equals( getOptionalData( ), that.getOptionalData( ) );
     }
 
     /**

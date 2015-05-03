@@ -137,7 +137,7 @@ public class ItemServiceImpl implements ItemService {
             return response;
 
         } finally {
-            logger.debug( " Response for createItem generated successfully from Service Level" );
+            logger.debug( "Response for createItem generated successfully from Service Level" );
         }
     }
 
@@ -242,7 +242,7 @@ public class ItemServiceImpl implements ItemService {
     public Response deleteItemByItemId( long itemId, boolean isError ) {
 
         logger.debug( "Initiating deleteItemByItemId for incoming item, itemDAO injected successfully" );
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteITem";
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteItemByItemId()";
         ItemResponseContainer< ItemsPayload > itemResponseContainer;
 
         if ( itemId < ONE ) {

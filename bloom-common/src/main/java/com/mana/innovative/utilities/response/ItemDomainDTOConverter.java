@@ -41,6 +41,7 @@ public class ItemDomainDTOConverter {
             itemDTO = new Item( );
             logger.warn( " Creating itemDTO, received null object" );
         }
+
         if ( itemDomain.getItemId( ) >= ZERO ) {
             itemDTO.setItemId( itemDomain.getItemId( ) );
         }
@@ -115,11 +116,13 @@ public class ItemDomainDTOConverter {
      */
     public static com.mana.innovative.domain.client.Item getConvertedDomainFromDTO( com.mana.innovative.domain.client.Item itemDomain, Item itemDTO ) {
 
+
         if ( itemDTO == null ) {
             String message = "Parameter itemDTO is required for conversion";
             logger.error( message );
             throw new NullPointerException( message );
         }
+
         if ( itemDomain == null ) {
             itemDomain = new com.mana.innovative.domain.client.Item( );
             logger.warn( "Creating itemDomain, received null object" );
@@ -221,4 +224,5 @@ public class ItemDomainDTOConverter {
         }
         return itemDomainList;
     }
+
 }

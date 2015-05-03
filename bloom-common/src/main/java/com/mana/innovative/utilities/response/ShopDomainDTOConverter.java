@@ -35,14 +35,14 @@ public class ShopDomainDTOConverter {
      */
     public static Shop getConvertedDTOFromDomain( Shop shopDTO, com.mana.innovative.domain.client.Shop shopDomain ) {
 
+        if ( shopDTO == null ) {
+            shopDTO = new Shop( );
+            logger.warn( "Creating shopDTO for conversion as was null " );
+        }
         if ( shopDomain == null ) {
             String message = "Parameter shopDomain is required for conversion";
             logger.error( message );
             throw new NullPointerException( message );
-        }
-        if ( shopDTO == null ) {
-            shopDTO = new Shop( );
-            logger.warn( "Creating shopDTO for conversion as was null " );
         }
 
         if ( shopDomain.getShopId( ) >= ZERO ) {
@@ -101,15 +101,16 @@ public class ShopDomainDTOConverter {
      */
     public static com.mana.innovative.domain.client.Shop getConvertedDomainFromDTO( com.mana.innovative.domain.client.Shop shopDomain, Shop shopDTO ) {
 
+        if ( shopDomain == null ) {
+            shopDomain = new com.mana.innovative.domain.client.Shop( );
+            logger.warn( "Creating shopDomain for conversion as was null " );
+        }
         if ( shopDTO == null ) {
             String message = "Parameter shopDTO is required for conversion";
             logger.error( message );
             throw new NullPointerException( message );
         }
-        if ( shopDomain == null ) {
-            shopDomain = new com.mana.innovative.domain.client.Shop( );
-            logger.warn( "Creating shopDomain for conversion as was null " );
-        }
+
         boolean flag = false;
         StringBuilder stringBuilder = new StringBuilder( " Value must not be null for " );
         if ( shopDTO.getShopOwnId( ) != null && shopDTO.getShopOwnId( ) > ZERO ) {

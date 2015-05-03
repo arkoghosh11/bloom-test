@@ -14,9 +14,10 @@ import java.util.List;
 /**
  * @author Bloom
  */
-public class UserPayload {
+public class UsersPayload {
 
     private List< User > users;
+    private int totalCount;
 
     /**
      * @return the user
@@ -34,4 +35,12 @@ public class UserPayload {
         this.users = users;
     }
 
+    public int getTotalCount( ) {
+        return totalCount;
+    }
+
+    @XmlElement( name = "total_count", defaultValue = "0", nillable = false )
+    public void setTotalCount( final int totalCount ) {
+        this.totalCount = totalCount;
+    }
 }

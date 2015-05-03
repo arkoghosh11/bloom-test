@@ -2,6 +2,7 @@ package com.mana.innovative.dto.common;
 
 import java.util.Currency;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,7 +12,7 @@ import java.util.Locale;
  */
 public class PhoneTechnicalDetail {
 
-    private String phoneDetailId;
+    private Long phoneDetailId;
     private String phoneCompany;
     private String IMEINumber;
     private String model;
@@ -34,11 +35,11 @@ public class PhoneTechnicalDetail {
             this.currency = currency;
     }
 
-    public String getPhoneDetailId( ) {
+    public Long getPhoneDetailId( ) {
         return phoneDetailId;
     }
 
-    public void setPhoneDetailId( final String phoneDetailId ) {
+    public void setPhoneDetailId( final Long phoneDetailId ) {
         this.phoneDetailId = phoneDetailId;
     }
 
@@ -80,5 +81,33 @@ public class PhoneTechnicalDetail {
 
     public void setPrice( final String price ) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals( final Object o ) {
+
+        if ( this == o ) return true;
+        if ( !( o instanceof PhoneTechnicalDetail ) ) return false;
+        PhoneTechnicalDetail that = ( PhoneTechnicalDetail ) o;
+        return Objects.equals( getPhoneDetailId( ), that.getPhoneDetailId( ) ) &&
+                Objects.equals( getPhoneCompany( ), that.getPhoneCompany( ) ) &&
+                Objects.equals( getIMEINumber( ), that.getIMEINumber( ) ) &&
+                Objects.equals( getModel( ), that.getModel( ) ) &&
+                Objects.equals( getModelNumber( ), that.getModelNumber( ) ) &&
+                Objects.equals( getPrice( ), that.getPrice( ) ) &&
+                Objects.equals( getCurrency( ), that.getCurrency( ) );
+    }
+
+    @Override
+    public String toString( ) {
+        return "PhoneTechnicalDetail {" +
+                " phoneDetailId=" + phoneDetailId +
+                ", phoneCompany='" + phoneCompany +
+                ", IMEINumber='" + IMEINumber +
+                ", model='" + model +
+                ", modelNumber='" + modelNumber +
+                ", price='" + price +
+                ", currency=" + currency +
+                '}';
     }
 }

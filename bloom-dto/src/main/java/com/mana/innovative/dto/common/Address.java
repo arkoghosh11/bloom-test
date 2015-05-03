@@ -2,6 +2,7 @@ package com.mana.innovative.dto.common;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /**
  * The type Address.
@@ -182,23 +183,19 @@ public class Address {
 //    public void setLocation(Location location) {
 //        this.location = location;
 //    }
+
     @Override
-    public boolean equals( Object o ) {
+    public boolean equals( final Object o ) {
         if ( this == o ) return true;
         if ( !( o instanceof Address ) ) return false;
-
         Address address = ( Address ) o;
-
-        if ( Integer.compare( zipCode, address.zipCode ) != 0 ) return false;
-        if ( !address1.equals( address.address1 ) ) return false;
-        if ( !address2.equals( address.address2 ) ) return false;
-        if ( Long.compare( addressId, address.addressId ) != 0 ) return false;
-        if ( !city.equals( address.city ) ) return false;
-        if ( !district.equals( address.district ) ) return false;
-        if ( !state.equals( address.state ) ) return false;
-//        if (location != null ? !location.equals(address.location) : address.location != null) return true;
-
-        return true;
+        return Objects.equals( getAddressId( ), address.getAddressId( ) ) &&
+                Objects.equals( getAddress1( ), address.getAddress1( ) ) &&
+                Objects.equals( getAddress2( ), address.getAddress2( ) ) &&
+                Objects.equals( getCity( ), address.getCity( ) ) &&
+                Objects.equals( getState( ), address.getState( ) ) &&
+                Objects.equals( getDistrict( ), address.getDistrict( ) ) &&
+                Objects.equals( getZipCode( ), address.getZipCode( ) );
     }
 
     /**
@@ -211,12 +208,12 @@ public class Address {
     @Override
     public String toString( ) {
         return "Address{" +
-                "addressId='" + addressId + '\'' +
-                ", address1='" + address1 + '\'' +
-                ", address2='" + address2 + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", district='" + district + '\'' +
+                "addressId='" + addressId +
+                ", address1='" + address1 +
+                ", address2='" + address2 +
+                ", city='" + city +
+                ", state='" + state +
+                ", district='" + district +
                 ", zipCode=" + zipCode +
 //                ", location=" + location +
                 '}';

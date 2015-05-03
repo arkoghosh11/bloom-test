@@ -30,22 +30,34 @@ import java.util.Map;
  * Created by Bloom/Rono on 4/10/2015. This class is TabDAOImpl
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Repository
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class TabDAOImpl implements TabDAO {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( TabDAOImpl.class );
 
     static {
         logger.setLevel( Level.DEBUG );
     }
 
+    /**
+     * The Query util.
+     */
     private QueryUtil queryUtil = new QueryUtil( );
+    /**
+     * The Session.
+     */
     private Session session;
 
+    /**
+     * The Session factory.
+     */
     @Resource
     private SessionFactory sessionFactory;
 
@@ -65,9 +77,9 @@ public class TabDAOImpl implements TabDAO {
             session = sessionFactory.getCurrentSession( );
 //            Note Hib transaction vs spring Transaction
 //            transaction = session.beginTransaction();
-        } catch ( Exception e ) {
+        } catch ( Exception exception ) {
             logger.error( "Current Session error from Session Factory, either Transaction Manager Config issue " +
-                    "or no DB Connection ", e );
+                    "or no DB Connection ", exception );
         }
         logger.debug( "Hibernate DB Transaction Opened" );
     }
@@ -90,9 +102,6 @@ public class TabDAOImpl implements TabDAO {
      * @param exception the exception
      */
     private void handleExceptions( HibernateException exception ) {
-//        if (transaction != null) {
-//            transaction.rollback();
-//        }
         logger.error( "Hibernate Exception occurred with \nmessage: " + exception.getMessage( ), exception );
     }
 
@@ -115,7 +124,9 @@ public class TabDAOImpl implements TabDAO {
     /**
      * This method is to retrieve all the tabs values from the DB
      *
-     * @return List<Tab></> Return a list of {@link Tab}
+     * @param requestParams the request params
+     *
+     * @return List<Tab> </> Return a list of
      */
     @Override
     @SuppressWarnings( value = "unchecked" )
@@ -127,7 +138,7 @@ public class TabDAOImpl implements TabDAO {
         logger.debug( "Starting " + location );
         DAOResponse< Tab > tabDAOResponse = new DAOResponse<>( );
         List< Tab > tabList = new ArrayList<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
         try {
             this.openDBTransaction( );
 
@@ -142,34 +153,38 @@ public class TabDAOImpl implements TabDAO {
             this.handleExceptions( exception );
             logger.error( "Failed while getting data from tabs table", exception );
             tabDAOResponse.setRequestSuccess( Boolean.FALSE );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                tabDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
 
         tabDAOResponse.setCount( tabList.size( ) );
         tabDAOResponse.setResults( tabList );
+        tabDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return tabDAOResponse;
     }
 
     /**
-     * @param tabId {@link Integer}
+     * Delete tab by tab id.
      *
-     * @return {@link Boolean} Returns a boolean value to indicate a successful deletion
+     * @param tabId         the tab id
+     * @param requestParams the request params
+     *
+     * @return Returns a boolean value to indicate a successful deletion
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Tab > deleteTabByTabId( int tabId, RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#createTab()";
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteTabByTabId()";
 
         logger.debug( "Starting " + location );
         DAOResponse< Tab > tabDAOResponse = new DAOResponse<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
 
@@ -189,14 +204,13 @@ public class TabDAOImpl implements TabDAO {
             tabDAOResponse.setRequestSuccess( Boolean.FALSE );
             tabDAOResponse.setCount( DAOConstants.ZERO );
 
-            if ( isError ) {
-
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                tabDAOResponse.setErrorContainer( errorContainer );
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
-
+        tabDAOResponse.setDelete( true );
         tabDAOResponse.setResults( null );
+        tabDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return tabDAOResponse;
@@ -205,9 +219,10 @@ public class TabDAOImpl implements TabDAO {
     /**
      * This method is to update the DB with the persistence layer to keep the Tab value synced
      *
-     * @param tab {@link Tab}
+     * @param tab           the tab
+     * @param requestParams the request params
      *
-     * @return {@link Boolean} Returns a boolean value to indicate a successful update
+     * @return Returns a boolean value to indicate a successful update
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
@@ -218,14 +233,14 @@ public class TabDAOImpl implements TabDAO {
         logger.debug( "Starting " + location );
         DAOResponse< Tab > tabDAOResponse = new DAOResponse<>( );
         List< Tab > tabList = new ArrayList<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
 
             session.update( tab );
 
             this.closeDBTransaction( );
-
             tabList.add( tab );
             tabDAOResponse.setRequestSuccess( Boolean.TRUE );
 
@@ -236,15 +251,14 @@ public class TabDAOImpl implements TabDAO {
             tabDAOResponse.setRequestSuccess( Boolean.FALSE );
             tabDAOResponse.setCount( DAOConstants.ZERO );
 
-            if ( isError ) {
-
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                tabDAOResponse.setErrorContainer( errorContainer );
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
-
+        tabDAOResponse.setUpdate( true );
         tabDAOResponse.setCount( tabList.size( ) );
         tabDAOResponse.setResults( tabList );
+        tabDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return tabDAOResponse;
@@ -253,9 +267,10 @@ public class TabDAOImpl implements TabDAO {
     /**
      * This method is to create a Tab object and save it in the DB
      *
-     * @param tab {@link Tab}
+     * @param tab           the tab
+     * @param requestParams the request params
      *
-     * @return {@link Boolean} Returns a boolean value to indicate a successful creation
+     * @return Returns a boolean value to indicate a successful creation
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
@@ -266,7 +281,8 @@ public class TabDAOImpl implements TabDAO {
         logger.debug( "Starting " + location );
         DAOResponse< Tab > tabDAOResponse = new DAOResponse<>( );
         List< Tab > tabList = new ArrayList<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
 
@@ -284,15 +300,16 @@ public class TabDAOImpl implements TabDAO {
             tabDAOResponse.setRequestSuccess( Boolean.FALSE );
             tabDAOResponse.setCount( DAOConstants.ZERO );
 
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                tabDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
 
+        tabDAOResponse.setCreate( true );
         tabDAOResponse.setCount( tabList.size( ) );
         tabDAOResponse.setResults( tabList );
+        tabDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return tabDAOResponse;
@@ -302,6 +319,7 @@ public class TabDAOImpl implements TabDAO {
      * Gets tab by search params.
      *
      * @param tabSearchOption the tab search option
+     * @param requestParams   the request params
      *
      * @return the tab by search params
      */
@@ -315,6 +333,8 @@ public class TabDAOImpl implements TabDAO {
         logger.debug( "Starting " + location );
 
         DAOResponse< Tab > tabDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
 
@@ -323,17 +343,18 @@ public class TabDAOImpl implements TabDAO {
             tabList = detachedCriteria.getExecutableCriteria( session ).list( );
             this.closeDBTransaction( );
             tabDAOResponse.setRequestSuccess( Boolean.TRUE );
+
         } catch ( HibernateException exception ) {
             this.handleExceptions( exception );
             tabDAOResponse.setRequestSuccess( Boolean.FALSE );
             if ( requestParams.isError( ) ) {
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                tabDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
             logger.error( "Failed searching for tabs in database with search params" );
         }
         tabDAOResponse.setResults( tabList );
         tabDAOResponse.setCount( tabList.size( ) );
+        tabDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
 
@@ -358,6 +379,7 @@ public class TabDAOImpl implements TabDAO {
 
         DAOResponse< Tab > tabDAOResponse = new DAOResponse<>( );
         List< Tab > tabList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
 
         try {
             this.openDBTransaction( );
@@ -375,13 +397,14 @@ public class TabDAOImpl implements TabDAO {
             tabDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                tabDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
             logger.error( "Failed to get data from database for tab", exception );
         }
         tabDAOResponse.setCount( tabList.size( ) );
         tabDAOResponse.setResults( tabList );
+        tabDAOResponse.setErrorContainer( errorContainer );
+
         logger.debug( "Finishing " + location );
 
         return tabDAOResponse;
@@ -398,11 +421,11 @@ public class TabDAOImpl implements TabDAO {
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Tab > deleteTabs( List< Integer > tabIds, RequestParams requestParams ) {
-        String location = this.getClass( ).getCanonicalName( ) + "#createTab()";
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteTabs()";
 
         logger.debug( "Starting " + location );
         DAOResponse< Tab > tabDAOResponse = new DAOResponse<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
         try {
             this.openDBTransaction( );
 
@@ -422,14 +445,13 @@ public class TabDAOImpl implements TabDAO {
             tabDAOResponse.setRequestSuccess( Boolean.FALSE );
             tabDAOResponse.setCount( DAOConstants.ZERO );
 
-            if ( isError ) {
-
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                tabDAOResponse.setErrorContainer( errorContainer );
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
-
+        tabDAOResponse.setDelete( true );
         tabDAOResponse.setResults( null );
+        tabDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return tabDAOResponse;
@@ -440,9 +462,9 @@ public class TabDAOImpl implements TabDAO {
     /**
      * This method is to create a detached criteria
      *
-     * @param tabSearchOption {@link TabSearchOption}
+     * @param tabSearchOption the tab search option
      *
-     * @return {@link DetachedCriteria} A detached criteria object
+     * @return A detached criteria object
      */
     private DetachedCriteria getDetachedCriteriaBySearchParams( TabSearchOption tabSearchOption ) {
 
@@ -559,9 +581,9 @@ public class TabDAOImpl implements TabDAO {
     /**
      * This method is for getting the keys for searching
      *
-     * @param searchConditions {@link List<Map>} A list of type Map of type {@link Map<String></>}
+     * @param searchConditions A list of type Map of type
      *
-     * @return {@link List<String>} A list of type String
+     * @return A list of type String
      */
     private List< String > getKeysForSearch( final List< Map< String, String > > searchConditions ) {
 
@@ -577,10 +599,20 @@ public class TabDAOImpl implements TabDAO {
         return keys;
     }
 
+    /**
+     * Gets session factory.
+     *
+     * @return the session factory
+     */
     public SessionFactory getSessionFactory( ) {
         return sessionFactory;
     }
 
+    /**
+     * Sets session factory.
+     *
+     * @param sessionFactory the session factory
+     */
     public void setSessionFactory( SessionFactory sessionFactory ) {
 
         this.sessionFactory = sessionFactory;

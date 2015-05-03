@@ -25,7 +25,7 @@ public class Log extends SidebarType {
 
     public void setLogId( final int logId ) {
         this.logId = logId;
-        this.setSidebarTypeId( logId );
+//        this.setSidebarTypeId( logId );
     }
 
     @XmlElement( name = "LINK", defaultValue = "", nillable = false )

@@ -24,7 +24,7 @@ public class Guideline extends SidebarType {
 
     public void setGuidelineId( final int guidelineId ) {
         this.guidelineId = guidelineId;
-        this.setSidebarTypeId( guidelineId );
+//        this.setSidebarTypeId( guidelineId );
     }
 
     @XmlElement( name = "link", defaultValue = "", nillable = false )

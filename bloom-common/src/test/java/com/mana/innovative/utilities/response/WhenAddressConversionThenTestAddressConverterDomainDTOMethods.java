@@ -39,8 +39,8 @@ public class WhenAddressConversionThenTestAddressConverterDomainDTOMethods {
         addressDTO2 = new Address( );
 
         // Set Values for tempValues
-        addressDTO = TestDummyDTOObjectGenerator.getTestAddressDTOObject( new Address( ) );
-        addressDomain = TestDummyDomainObjectGenerator.getTestAddressDomainObject( new com.mana.innovative.domain.common.Address( ) );
+        addressDTO = TestDummyDTOObjectGenerator.getTestAddressDTOObject( );
+        addressDomain = TestDummyDomainObjectGenerator.getTestAddressDomainObject( );
 
     }
 
@@ -65,7 +65,7 @@ public class WhenAddressConversionThenTestAddressConverterDomainDTOMethods {
 
         logger.debug( "Starting  GetConvertedDTOFromDomain" );
         if ( addressDomain.getAddressId( ) != 1 ) {
-            addressDomain = TestDummyDomainObjectGenerator.getTestAddressDomainObject( addressDomain );
+            addressDomain = TestDummyDomainObjectGenerator.getTestAddressDomainObject( );
         }
         addressDTO2 = AddressDomainDTOConverter.getConvertedDTOFromDomain( addressDomain );
 
@@ -89,7 +89,7 @@ public class WhenAddressConversionThenTestAddressConverterDomainDTOMethods {
         List< com.mana.innovative.domain.common.Address > addressDomainList = new ArrayList<>( );
         addressDomainList.add( addressDomain );
         if ( addressDomain.getAddressId( ) != TestConstants.TEST_ID ) {
-            TestDummyDomainObjectGenerator.getTestAddressDomainZEROIDObject( addressDomain );
+            TestDummyDomainObjectGenerator.setTestAddressDomainZEROIDObject( addressDomain );
         }
         addressDTOList = AddressDomainDTOConverter.getConvertedListDTOFromDomain( addressDomainList );
         Assert.assertNotNull( TestConstants.nullMessage, addressDTOList );
@@ -111,7 +111,7 @@ public class WhenAddressConversionThenTestAddressConverterDomainDTOMethods {
         logger.debug( "Starting  GetConvertedDomainFromDTO" );
 
         addressDomain2 = AddressDomainDTOConverter.getConvertedDomainFromDTO( addressDTO );
-        TestDummyDomainObjectGenerator.getTestAddressDomainZEROIDObject( addressDomain );
+        TestDummyDomainObjectGenerator.setTestAddressDomainZEROIDObject( addressDomain );
 
         Assert.assertNotNull( TestConstants.nullMessage, addressDomain2 );
         Assert.assertEquals( TestConstants.notEqualsMessage, addressDomain, addressDomain2 );
@@ -132,7 +132,7 @@ public class WhenAddressConversionThenTestAddressConverterDomainDTOMethods {
         List< Address > addressDTOList = new ArrayList<>( );
         List< com.mana.innovative.domain.common.Address > addressDomainList;
         addressDTOList.add( addressDTO );
-        TestDummyDomainObjectGenerator.getTestAddressDomainZEROIDObject( addressDomain );
+        TestDummyDomainObjectGenerator.setTestAddressDomainZEROIDObject( addressDomain );
 
         addressDomainList = AddressDomainDTOConverter.getConvertedListDomainFromDTO( addressDTOList );
 

@@ -9,11 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * The type Address.
@@ -57,13 +60,13 @@ public class Address {
     @OneToOne( orphanRemoval = true, cascade = { CascadeType.ALL }, mappedBy = "address" )
     private Shop shopAddress;
 
-    @OneToOne( orphanRemoval = true, cascade = { CascadeType.ALL }, mappedBy = "shippingAddress" )
-    private Customer customerAddress;
+    @ManyToMany( cascade = { CascadeType.ALL }, mappedBy = "shippingAddress" )
+    private List< Customer > customerAddress;
 
-    @Column( name = "created_date", columnDefinition = "DATETIME" )
+    @Column( name = "created_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
-    @Column( name = "updated_date", columnDefinition = "DATETIME" )
+    @Column( name = "updated_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
@@ -231,6 +234,14 @@ public class Address {
         this.shopAddress = shopAddress;
     }
 
+    public List< Customer > getCustomerAddress( ) {
+        return customerAddress;
+    }
+
+    public void setCustomerAddress( final List< Customer > customerAddress ) {
+        this.customerAddress = customerAddress;
+    }
+
     /**
      * Gets created date.
      *
@@ -268,31 +279,20 @@ public class Address {
         this.updatedDate = updatedDate;
     }
 
-
     @Override
-    public boolean equals( Object o ) {
-
+    public boolean equals( final Object o ) {
         if ( this == o ) return true;
         if ( !( o instanceof Address ) ) return false;
-
         Address address = ( Address ) o;
-
-        if ( addressId != address.getAddressId( ) ) return false;
-        if ( Integer.compare( zipCode, address.getZipCode( ) ) != 0 ) return false;
-        if ( !address1.equals( address.getAddress1( ) ) ) return false;
-        if ( !address2.equals( address.getAddress2( ) ) ) return false;
-        if ( !city.equals( address.city ) ) return false;
-        if ( !district.equals( address.getDistrict( ) ) ) return false;
-//        if (!location.equals(address.location)) return false;
-        if ( !state.equals( address.getState( ) ) ) return false;
-        if ( createdDate != null && address.getCreatedDate( ) != null ? createdDate.getTime( ) != address.getCreatedDate( )
-                .getTime( ) : createdDate == null )
-            return true;
-        if ( updatedDate != null && address.getUpdatedDate( ) != null ? updatedDate.getTime( ) != address.getUpdatedDate( )
-                .getTime( ) : updatedDate == null )
-            return true;
-        return true;
+        return Objects.equals( getAddressId( ), address.getAddressId( ) ) &&
+                Objects.equals( getAddress1( ), address.getAddress1( ) ) &&
+                Objects.equals( getAddress2( ), address.getAddress2( ) ) &&
+                Objects.equals( getCity( ), address.getCity( ) ) &&
+                Objects.equals( getState( ), address.getState( ) ) &&
+                Objects.equals( getDistrict( ), address.getDistrict( ) ) &&
+                Objects.equals( getZipCode( ), address.getZipCode( ) );
     }
+
 
     /**
      * Returns a string representation of the object. In general, the {@code toString} method returns a string that
@@ -303,18 +303,18 @@ public class Address {
      */
     @Override
     public String toString( ) {
-        return "Address{" +
-                "addressId='" + addressId + '\'' +
-                ", address1='" + address1 + '\'' +
-                ", address2='" + address2 + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", district='" + district + '\'' +
-                ", zipCode=" + zipCode +
-//                ", location=" + location +
-                ", shopAddress=" + shopAddress +
-                ", createdDate=" + createdDate +
-                ", updatedDate=" + updatedDate +
+        return "Address {" +
+                " addressId=" + addressId +
+                ",address1= " + address1 +
+                ",address2= " + address2 +
+                ",city= " + city +
+                ",state= " + state +
+                ",district= " + district +
+                ",zipCode=" + zipCode +
+//                ", shopAddress=" + shopAddress +
+//                ", customerAddress=" + customerAddress +
+                ",createdDate=" + createdDate +
+                ",updatedDate=" + updatedDate +
                 '}';
     }
 }

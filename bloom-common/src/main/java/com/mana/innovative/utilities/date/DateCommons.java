@@ -54,6 +54,7 @@ public class DateCommons {
      * @return the date
      */
     public static Date updateDateToPrevHour( final Date eventDate ) {
+
         String location = DateCommons.class.getCanonicalName( ) + "#updateDateToPrevHour()";
         logger.debug( "Starting " + location );
         Calendar calendar = Calendar.getInstance( );
@@ -81,7 +82,7 @@ public class DateCommons {
                 calendar.set( Calendar.DAY_OF_MONTH, day );
             }
         }
-        System.out.println( eventDate + " -- old \n" + calendar.getTime( ) + " -- new" );
+//        logger.debug( eventDate + " -- old \n" + calendar.getTime( ) + " -- new" );
         logger.info( "New Date date is " + calendar.getTime( ) );
         logger.debug( "Finishing " + location );
         return calendar.getTime( );

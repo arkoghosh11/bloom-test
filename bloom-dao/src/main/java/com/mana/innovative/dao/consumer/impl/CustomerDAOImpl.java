@@ -1,11 +1,7 @@
 package com.mana.innovative.dao.consumer.impl;
 
-import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dao.consumer.CustomerDAO;
 import com.mana.innovative.dao.response.DAOResponse;
-import com.mana.innovative.domain.common.Address;
-import com.mana.innovative.domain.common.Phone;
-import com.mana.innovative.domain.consumer.CreditCard;
 import com.mana.innovative.domain.consumer.Customer;
 import com.mana.innovative.domain.consumer.User;
 import com.mana.innovative.dto.request.RequestParams;
@@ -79,68 +75,34 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
         String location = this.getClass( ).getCanonicalName( ) + "#createCustomer()";
         logger.debug( "Starting " + location );
 
-        Address customerShippingAddress = customer.getShippingAddress( );
-        List< CreditCard > customerCreditCards = customer.getCards( );
-        List< Phone > phones = customer.getPhones( );
+        DAOResponse< Customer > customerDAOResponse = new DAOResponse<>( );
         ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
 
-        try {
-            this.createCustomerAddress( customerShippingAddress );
-        } catch ( Exception exception ) {
-            logger.error( "Failed to create Address in table address", exception );
-            if ( errorContainer != null ) {
-                errorContainer.addError( fillErrorContainer( location, exception )
-                        .getErrors( )
-                        .get( DAOConstants.ZERO ) );
-            }
-            throw exception;
-        }
-        for ( CreditCard creditCard : customerCreditCards ) {
-            try {
-                this.createCard( creditCard );
-            } catch ( Exception exception ) {
-                logger.error( "Failed to create credit cards in table cards", exception );
-                if ( errorContainer != null ) {
-                    errorContainer.addError( fillErrorContainer( location, exception )
-                            .getErrors( )
-                            .get( DAOConstants.ZERO ) );
-                }
-                throw exception;
-            }
-        }
-
-        for ( Phone phone : phones ) {
-            try {
-                this.createPhone( phone );
-            } catch ( Exception exception ) {
-                logger.error( "Failed to create phone in table phones", exception );
-                if ( errorContainer != null ) {
-                    errorContainer.addError( fillErrorContainer( location, exception )
-                            .getErrors( )
-                            .get( DAOConstants.ZERO ) );
-                }
-                throw exception;
-            }
-        }
-
-        DAOResponse< User > userDAOResponse = super.createUser( customer, requestParams );
-        DAOResponse< Customer > customerDAOResponse = new DAOResponse<>( );
-
-        customerDAOResponse.setRequestSuccess( userDAOResponse.isRequestSuccess( ) );
-        customerDAOResponse.setCreate( userDAOResponse.isCreate( ) );
-        customerDAOResponse.setCount( userDAOResponse.getCount( ) );
-        customerDAOResponse.setErrorContainer( userDAOResponse.getErrorContainer( ) );
-
         List< Customer > customerList = new ArrayList<>( );
-        customerList.add( customer );
-        customerDAOResponse.setResults( customerList );
+        customerDAOResponse.setCreate( true );
+        try {
+            this.openDBTransaction( );
+            session.save( customer );
+            this.closeDBTransaction( );
 
+            customerList.add( customer );
+            customerDAOResponse.setRequestSuccess( true );
+        } catch ( Exception exception ) {
+
+            customerDAOResponse.setRequestSuccess( false );
+            logger.error( "Failed to create customer in table users", exception );
+            if ( errorContainer != null ) {
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+        customerDAOResponse.setResults( customerList );
+        customerDAOResponse.setCount( customerList.size( ) );
+        customerDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
 
         return customerDAOResponse;
     }
-
 
     /**
      * Gets customers.
@@ -151,7 +113,7 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
      */
     @SuppressWarnings( "unchecked" )
     @Override
-    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED )
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
     public DAOResponse< Customer > getCustomers( RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#getCustomers()";
@@ -159,6 +121,7 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
         logger.debug( "Starting " + location );
         DAOResponse< Customer > customerDAOResponse = new DAOResponse<>( );
         List< Customer > customerList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
         try {
             this.openDBTransaction( );
 
@@ -176,30 +139,128 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
 
             if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                customerDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
 
         customerDAOResponse.setCount( customerList.size( ) );
         customerDAOResponse.setResults( customerList );
+        customerDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return customerDAOResponse;
     }
 
     /**
+     * Gets customer.
+     *
+     * @param customerId    the customer id
+     * @param requestParams the request params
+     *
+     * @return the customer
+     */
+    @SuppressWarnings( "unchecked" )
+    @Override
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED )
+    public DAOResponse< Customer > getCustomerByUserId( final long customerId, final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( ) + "#getCustomerByUserId()";
+
+        logger.debug( "Starting " + location );
+        DAOResponse< Customer > customerDAOResponse = new DAOResponse<>( );
+        List< Customer > customerList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.createQuery( "from Customer where userId=:customerId" );
+            query.setParameter( "customerId", customerId );
+            Customer customer = ( Customer ) query.uniqueResult( );
+
+            this.closeDBTransaction( );
+            customerList.add( customer );
+            customerDAOResponse.setRequestSuccess( Boolean.TRUE );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error( "Failed while getting data from users table for customers ", exception );
+            customerDAOResponse.setRequestSuccess( Boolean.FALSE );
+
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        customerDAOResponse.setCount( customerList.size( ) );
+        customerDAOResponse.setResults( customerList );
+        customerDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+
+        return customerDAOResponse;
+    }
+
+    /**
+     * Update customer.
+     *
+     * @param customer      the customer
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
+//    @SuppressWarnings( "unchecked" )
+    @Override
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_COMMITTED )
+    public DAOResponse< Customer > updateCustomer( final Customer customer, final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( ) + "#updateCustomer()";
+        logger.debug( "Starting " + location );
+
+        DAOResponse< Customer > customerDAOResponse = new DAOResponse<>( );
+        List< Customer > customerList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        customerDAOResponse.setUpdate( true );
+
+        try {
+            this.openDBTransaction( );
+            session.saveOrUpdate( customer );
+            this.closeDBTransaction( );
+            customerList.add( customer );
+
+            customerDAOResponse.setRequestSuccess( Boolean.TRUE );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error( "Failed while getting data from users table for customers ", exception );
+            customerDAOResponse.setRequestSuccess( Boolean.FALSE );
+
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        customerDAOResponse.setCount( customerList.size( ) );
+        customerDAOResponse.setResults( customerList );
+        customerDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+
+        return customerDAOResponse;
+    }
+
+    /**
      * Delete customer.
      *
-     * @param customerId the customer id
+     * @param customerId    the customer id
+     * @param requestParams the request params
      *
      * @return the boolean
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Customer > deleteCustomer( Long customerId, RequestParams requestParams ) {
+    public DAOResponse< Customer > deleteCustomerByUserId( Long customerId, RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteCustomer()";
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteCustomerByUserId()";
 
         logger.debug( "Starting " + location );
         DAOResponse< User > userDAOResponse = super.deleteUserByUserId( customerId, requestParams, "Customer" );
@@ -216,95 +277,4 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
         return customerDAOResponse;
     }
 
-
-    /**
-     * Create customer address.
-     *
-     * @param customerAddress the customer address
-     *
-     * @return the boolean
-     */
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    private Address createCustomerAddress( Address customerAddress ) {
-
-        String location = this.getClass( ).getCanonicalName( ) + "#createCustomerAddress()";
-        logger.debug( "Starting " + location );
-
-        try {
-            this.openDBTransaction( );
-            session.save( customerAddress );
-            this.closeDBTransaction( );
-        } catch ( Exception exception ) {
-            if ( exception instanceof HibernateException ) {
-                this.handleExceptions( ( HibernateException ) exception );
-            }
-            logger.error( "Exception occurred while creating data for address table", exception );
-            throw exception;
-
-        }
-
-        logger.debug( "Finishing " + location );
-
-        return customerAddress;
-    }
-
-    /**
-     * Create card.
-     *
-     * @param customerCreditCard the card
-     *
-     * @return the boolean
-     */
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    private CreditCard createCard( final CreditCard customerCreditCard ) {
-
-        String location = this.getClass( ).getCanonicalName( ) + "#createCard()";
-        logger.debug( "Starting " + location );
-
-        try {
-            this.openDBTransaction( );
-            session.save( customerCreditCard );
-            this.closeDBTransaction( );
-        } catch ( Exception exception ) {
-            if ( exception instanceof HibernateException ) {
-                this.handleExceptions( ( HibernateException ) exception );
-            }
-            logger.error( "Exception occurred while creating data for cards table", exception );
-            throw exception;
-
-        }
-        logger.debug( "Finishing " + location );
-        return customerCreditCard;
-    }
-
-    /**
-     * Create phone.
-     *
-     * @param customerPhone the phone
-     *
-     * @return the phone
-     */
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    private Phone createPhone( final Phone customerPhone ) {
-
-        String location = this.getClass( ).getCanonicalName( ) + "#createPhone()";
-        logger.debug( "Starting " + location );
-
-        try {
-            this.openDBTransaction( );
-            session.save( customerPhone );
-            this.closeDBTransaction( );
-        } catch ( Exception exception ) {
-
-            if ( exception instanceof HibernateException ) {
-                this.handleExceptions( ( HibernateException ) exception );
-            }
-            logger.error( "Exception occurred while creating data for phones table", exception );
-            throw exception;
-
-        }
-        logger.debug( "Finishing " + location );
-
-        return customerPhone;
-    }
 }

@@ -58,6 +58,7 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
 
     @After
     @AfterTransaction
+    @SuppressWarnings( "unchecked" )
     public void tearDown( ) throws Exception {
 
         Session session = sessionFactory.openSession( );

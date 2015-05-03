@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The type Customer.
@@ -39,7 +40,7 @@ public class Customer extends User {
     /**
      * The Shipping address.
      */
-    private Address shippingAddress;
+    private List< Address > shippingAddress;
 
     /**
      * The Phones.
@@ -120,8 +121,8 @@ public class Customer extends User {
      *
      * @return the shipping address
      */
-    @XmlElement( name = "address" )
-    public Address getShippingAddress( ) {
+    @XmlElement( name = "addresses" )
+    public List< Address > getShippingAddress( ) {
         return shippingAddress;
     }
 
@@ -130,7 +131,7 @@ public class Customer extends User {
      *
      * @param shippingAddress the shipping address
      */
-    public void setShippingAddress( final Address shippingAddress ) {
+    public void setShippingAddress( final List< Address > shippingAddress ) {
         this.shippingAddress = shippingAddress;
     }
 
@@ -192,5 +193,33 @@ public class Customer extends User {
      */
     public void setPreferences( final List< Preference > preferences ) {
         this.preferences = preferences;
+    }
+
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Customer ) ) return false;
+        if ( !super.equals( o ) ) return false;
+        Customer customer = ( Customer ) o;
+        return Objects.equals( getFirstName( ), customer.getFirstName( ) ) &&
+                Objects.equals( getLastName( ), customer.getLastName( ) ) &&
+                Objects.equals( getMiddleName( ), customer.getMiddleName( ) ) &&
+                Objects.equals( getShippingAddress( ), customer.getShippingAddress( ) ) &&
+                Objects.equals( getPhones( ), customer.getPhones( ) ) &&
+                Objects.equals( getCards( ), customer.getCards( ) ) &&
+                Objects.equals( getPreferences( ), customer.getPreferences( ) );
+    }
+
+    @Override
+    public String toString( ) {
+        return super.toString( ) + "Customer {" +
+                " firstName='" + firstName +
+                ",   lastName='" + lastName +
+                ",   middleName='" + middleName +
+                ",   shippingAddress=" + shippingAddress +
+                ",   phones=" + phones +
+                ",   cards=" + cards +
+                ",   preferences=" + preferences +
+                '}';
     }
 }

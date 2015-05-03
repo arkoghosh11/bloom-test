@@ -5,6 +5,7 @@ package com.mana.innovative.dto.common;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /**
  * @author Bloom
@@ -12,14 +13,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement( name = "tabs", namespace = "http://localhost/rest/Bloom" )
 public class Tab {
 
-    private int tabId;
+    private Integer tabId;
     private String tabName;
     private String tabContent;
 
     /**
      * @return the tabId
      */
-    public int getTabId( ) {
+    public Integer getTabId( ) {
         return tabId;
     }
 
@@ -27,7 +28,7 @@ public class Tab {
      * @param tabId the tabId to set
      */
     @XmlElement( name = "tabId", nillable = false, required = true )
-    public void setTabId( int tabId ) {
+    public void setTabId( Integer tabId ) {
         this.tabId = tabId;
     }
 
@@ -61,8 +62,22 @@ public class Tab {
         this.tabContent = tabContent;
     }
 
-    public String toString( ) {
-        return tabId + " " + tabName + " " + tabContent;
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Tab ) ) return false;
+        Tab tab = ( Tab ) o;
+        return Objects.equals( getTabId( ), tab.getTabId( ) ) &&
+                Objects.equals( getTabName( ), tab.getTabName( ) ) &&
+                Objects.equals( getTabContent( ), tab.getTabContent( ) );
     }
 
+    @Override
+    public String toString( ) {
+        return "Tab {" +
+                " tabId=" + tabId +
+                ", tabName='" + tabName +
+                ", tabContent='" + tabContent +
+                '}';
+    }
 }

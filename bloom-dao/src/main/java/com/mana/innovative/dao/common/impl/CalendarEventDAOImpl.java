@@ -62,30 +62,32 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
         logger.debug( "Starting " + location );
         List< CalendarEvent > calendarEvents = new ArrayList<>( );
         DAOResponse< CalendarEvent > calendarEventDAOResponse = new DAOResponse<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
             Query query = session.createQuery( " from CalendarEvent " );
             calendarEvents = query.list( );
             this.closeDBTransaction( );
-            calendarEventDAOResponse.setResults( calendarEvents );
-            calendarEventDAOResponse.setCount( calendarEvents.size( ) );
             calendarEventDAOResponse.setRequestSuccess( Boolean.TRUE );
 
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
             logger.error( "Failed while getting data from calendar_events table", exception );
-            calendarEventDAOResponse.setRequestSuccess( Boolean.FALSE );
             calendarEventDAOResponse.setCount( DAOConstants.ZERO );
-            calendarEventDAOResponse.setResults( calendarEvents );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                calendarEventDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
+
+        calendarEventDAOResponse.setResults( calendarEvents );
+        calendarEventDAOResponse.setCount( calendarEvents.size( ) );
+        calendarEventDAOResponse.setErrorContainer( errorContainer );
+
         logger.debug( "Finishing " + location );
+
         return calendarEventDAOResponse;
     }
 
@@ -108,7 +110,8 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
         logger.debug( "Starting " + location );
         List< CalendarEvent > calendarEvents = new ArrayList<>( );
         DAOResponse< CalendarEvent > calendarEventDAOResponse = new DAOResponse<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
             Criteria criteria = session.createCriteria( CalendarEvent.class )
@@ -116,24 +119,25 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
                     .add( Restrictions.le( "eventEndDate", endDate ) );
             calendarEvents = criteria.list( );
             this.closeDBTransaction( );
-            calendarEventDAOResponse.setResults( calendarEvents );
-            calendarEventDAOResponse.setCount( calendarEvents.size( ) );
             calendarEventDAOResponse.setRequestSuccess( Boolean.TRUE );
 
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
             logger.error( "Failed while getting data from calendar_events table", exception );
-            calendarEventDAOResponse.setRequestSuccess( Boolean.FALSE );
             calendarEventDAOResponse.setCount( DAOConstants.ZERO );
-            calendarEventDAOResponse.setResults( calendarEvents );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                calendarEventDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
+
+        calendarEventDAOResponse.setResults( calendarEvents );
+        calendarEventDAOResponse.setCount( calendarEvents.size( ) );
+        calendarEventDAOResponse.setErrorContainer( errorContainer );
+
         logger.debug( "Finishing " + location );
+
         return calendarEventDAOResponse;
     }
 
@@ -155,7 +159,8 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
         logger.debug( "Starting " + location );
         List< CalendarEvent > calendarEvents = new ArrayList<>( );
         DAOResponse< CalendarEvent > calendarEventDAOResponse = new DAOResponse<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
 
@@ -165,8 +170,6 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
 
             this.closeDBTransaction( );
 
-            calendarEventDAOResponse.setResults( calendarEvents );
-            calendarEventDAOResponse.setCount( calendarEvents.size( ) );
             calendarEventDAOResponse.setRequestSuccess( Boolean.TRUE );
 
         } catch ( Exception exception ) {
@@ -175,16 +178,18 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Failed while getting data from calendar_events table", exception );
-            calendarEventDAOResponse.setRequestSuccess( Boolean.FALSE );
             calendarEventDAOResponse.setCount( DAOConstants.ZERO );
-            calendarEventDAOResponse.setResults( calendarEvents );
-            if ( isError ) {
-
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                calendarEventDAOResponse.setErrorContainer( errorContainer );
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
+
+        calendarEventDAOResponse.setResults( calendarEvents );
+        calendarEventDAOResponse.setCount( calendarEvents.size( ) );
+        calendarEventDAOResponse.setErrorContainer( errorContainer );
+
         logger.debug( "Finishing " + location );
+
         return calendarEventDAOResponse;
     }
 
@@ -205,7 +210,8 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
         logger.debug( "Starting " + location );
         List< CalendarEvent > calendarEvents = new ArrayList<>( );
         DAOResponse< CalendarEvent > calendarEventDAOResponse = new DAOResponse<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
 
@@ -214,24 +220,26 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
             this.closeDBTransaction( );
 
             calendarEvents.add( calendarEvent );
-            calendarEventDAOResponse.setResults( calendarEvents );
-            calendarEventDAOResponse.setCount( calendarEvents.size( ) );
             calendarEventDAOResponse.setRequestSuccess( Boolean.TRUE );
 
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
             logger.error( "Failed while getting data from calendar_events table", exception );
-            calendarEventDAOResponse.setRequestSuccess( Boolean.FALSE );
             calendarEventDAOResponse.setCount( DAOConstants.ZERO );
-            calendarEventDAOResponse.setResults( calendarEvents );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                calendarEventDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
+
+        calendarEventDAOResponse.setCreate( true );
+        calendarEventDAOResponse.setCount( calendarEvents.size( ) );
+        calendarEventDAOResponse.setResults( calendarEvents );
+        calendarEventDAOResponse.setErrorContainer( errorContainer );
+
         logger.debug( "Finishing " + location );
+
         return calendarEventDAOResponse;
     }
 
@@ -252,32 +260,33 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
         logger.debug( "Starting " + location );
         List< CalendarEvent > calendarEvents = new ArrayList<>( );
         DAOResponse< CalendarEvent > calendarEventDAOResponse = new DAOResponse<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
             // todo might need to change logic here similar to {@link ShopDAO.updateShop()}
             session.update( calendarEvent );
 
             this.closeDBTransaction( );
-
-            calendarEventDAOResponse.setResults( calendarEvents );
-            calendarEventDAOResponse.setCount( calendarEvents.size( ) );
             calendarEventDAOResponse.setRequestSuccess( Boolean.TRUE );
 
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
             logger.error( "Failed while updating or getting data for update from calendar_events table", exception );
-            calendarEventDAOResponse.setRequestSuccess( Boolean.FALSE );
-            calendarEventDAOResponse.setCount( DAOConstants.ZERO );
-            calendarEventDAOResponse.setResults( calendarEvents );
-            if ( isError ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                calendarEventDAOResponse.setErrorContainer( errorContainer );
+            calendarEventDAOResponse.setCount( DAOConstants.ZERO );
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
+        calendarEventDAOResponse.setUpdate( true );
+        calendarEventDAOResponse.setCount( calendarEvents.size( ) );
+        calendarEventDAOResponse.setResults( calendarEvents );
+        calendarEventDAOResponse.setErrorContainer( errorContainer );
+
         logger.debug( "Finishing " + location );
+
         return calendarEventDAOResponse;
     }
 
@@ -297,7 +306,8 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
 
         logger.debug( "Starting " + location );
         DAOResponse< CalendarEvent > calendarEventDAOResponse = new DAOResponse<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
 
@@ -307,7 +317,6 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
 
             this.closeDBTransaction( );
 
-            calendarEventDAOResponse.setResults( null );
             calendarEventDAOResponse.setCount( count );
             calendarEventDAOResponse.setRequestSuccess( Boolean.TRUE );
 
@@ -315,16 +324,19 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
 
             this.handleExceptions( exception );
             logger.error( "Failed while deleting data from calendar_events table", exception );
-            calendarEventDAOResponse.setRequestSuccess( Boolean.FALSE );
             calendarEventDAOResponse.setCount( DAOConstants.ZERO );
-            calendarEventDAOResponse.setResults( null );
-            if ( isError ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                calendarEventDAOResponse.setErrorContainer( errorContainer );
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
+
+        calendarEventDAOResponse.setDelete( true );
+        calendarEventDAOResponse.setResults( null );
+        calendarEventDAOResponse.setErrorContainer( errorContainer );
+
         logger.debug( "Finishing " + location );
+
         return calendarEventDAOResponse;
     }
 
@@ -347,7 +359,8 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
 
         logger.debug( "Starting " + location );
         DAOResponse< CalendarEvent > calendarEventDAOResponse = new DAOResponse<>( );
-        boolean isError = requestParams.isError( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
 
@@ -356,7 +369,6 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
             int count = query.executeUpdate( );
             this.closeDBTransaction( );
 
-            calendarEventDAOResponse.setResults( null );
             calendarEventDAOResponse.setCount( count );
             calendarEventDAOResponse.setRequestSuccess( Boolean.TRUE );
 
@@ -364,15 +376,16 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
 
             this.handleExceptions( exception );
             logger.error( "Failed while deleting data from calendar_events table", exception );
-            calendarEventDAOResponse.setRequestSuccess( Boolean.FALSE );
-            calendarEventDAOResponse.setCount( DAOConstants.ZERO );
-            calendarEventDAOResponse.setResults( null );
-            if ( isError ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                calendarEventDAOResponse.setErrorContainer( errorContainer );
+            calendarEventDAOResponse.setCount( DAOConstants.ZERO );
+            if ( requestParams.isError( ) ) {
+
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
+        calendarEventDAOResponse.setDelete( true );
+        calendarEventDAOResponse.setResults( null );
+        calendarEventDAOResponse.setErrorContainer( errorContainer );
         logger.debug( "Finishing " + location );
         return calendarEventDAOResponse;
     }

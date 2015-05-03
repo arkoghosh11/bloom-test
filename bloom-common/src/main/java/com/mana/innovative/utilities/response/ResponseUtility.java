@@ -80,7 +80,7 @@ public class ResponseUtility {
     public static Response forbiddenRequest( String optionalMsg ) {
         optionalMsg = optionalMsg != null ? optionalMsg : "You do not have access to this method " +
                 "Insufficient Access";
-        return Response.status(Response.Status.BAD_REQUEST).entity(optionalMsg).build();
+        return Response.status( Response.Status.FORBIDDEN ).entity( optionalMsg ).build( );
 
     }
 }

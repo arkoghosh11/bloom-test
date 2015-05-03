@@ -16,6 +16,7 @@ import java.util.List;
 public class CustomersPayload {
 
     private List< Customer > customers;
+    private int totalCount;
 
     /**
      * This method returns a list of customers
@@ -35,5 +36,15 @@ public class CustomersPayload {
      */
     public void setCustomers( final List< Customer > customers ) {
         this.customers = customers;
+    }
+
+
+    public int getTotalCount( ) {
+        return totalCount;
+    }
+
+    @XmlElement( name = "customer_count" )
+    public void setTotalCount( final int totalCount ) {
+        this.totalCount = totalCount;
     }
 }

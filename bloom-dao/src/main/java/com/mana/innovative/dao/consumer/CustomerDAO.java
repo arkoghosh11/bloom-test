@@ -17,9 +17,51 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CustomerDAO {
 
+    /**
+     * Create customer.
+     *
+     * @param customer      the customer
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
     DAOResponse< Customer > createCustomer( Customer customer, RequestParams requestParams );
 
+    /**
+     * Gets customers.
+     *
+     * @param requestParams the request params
+     * @return the customers
+     */
     DAOResponse< Customer > getCustomers( RequestParams requestParams );
 
-    DAOResponse< Customer > deleteCustomer( Long customerId, RequestParams requestParams );
+    /**
+     * Gets customer.
+     *
+     * @param customerId    the customer id
+     * @param requestParams the request params
+     *
+     * @return the customer
+     */
+    DAOResponse< Customer > getCustomerByUserId( long customerId, RequestParams requestParams );
+
+    /**
+     * Update customer.
+     *
+     * @param customer      the customer
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
+    DAOResponse< Customer > updateCustomer( Customer customer, RequestParams requestParams );
+
+    /**
+     * Delete customer by user id.
+     *
+     * @param customerId    the customer id
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
+    DAOResponse< Customer > deleteCustomerByUserId( Long customerId, RequestParams requestParams );
 }

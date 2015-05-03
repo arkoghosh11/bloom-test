@@ -28,7 +28,7 @@ public interface UserService {
      *
      * @return the user
      */
-    Response getUser( Long userId, RequestParams requestParams );
+    Response getUserByUserId( Long userId, RequestParams requestParams );
 
     /**
      * Create user.
@@ -58,5 +58,5 @@ public interface UserService {
      *
      * @return the response
      */
-    Response deleteUser( Long userId, RequestParams requestParams );
+    Response deleteUserByUserId( Long userId, RequestParams requestParams );
 }

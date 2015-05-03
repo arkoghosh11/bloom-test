@@ -3,6 +3,7 @@ package com.mana.innovative.dto.consumer;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import java.util.Objects;
 
 /**
  * The type Person.
@@ -112,4 +113,28 @@ public class Person extends User {
     public void setTitle( final String title ) {
         this.title = title;
     }
+
+    @Override
+    public boolean equals( final Object o ) {
+
+        if ( this == o ) return true;
+        if ( !( o instanceof Person ) ) return false;
+        if ( !super.equals( o ) ) return false;
+        Person person = ( Person ) o;
+        return Objects.equals( getTitle( ), person.getTitle( ) ) &&
+                Objects.equals( getFirstName( ), person.getFirstName( ) ) &&
+                Objects.equals( getLastName( ), person.getLastName( ) ) &&
+                Objects.equals( getMiddleName( ), person.getMiddleName( ) );
+    }
+
+    @Override
+    public String toString( ) {
+        return "Person{" +
+                "title='" + title +
+                ", firstName='" + firstName +
+                ", lastName='" + lastName +
+                ", middleName='" + middleName +
+                "} " + super.toString( );
+    }
+
 }

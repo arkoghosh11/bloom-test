@@ -2,6 +2,7 @@ package com.mana.innovative.dto.consumer;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /**
  * The type Preference.
@@ -16,7 +17,7 @@ public class Preference {
     /**
      * The Preference id.
      */
-    private String preferenceId;
+    private Long preferenceId;
 
     /**
      * The Preference name.
@@ -36,7 +37,7 @@ public class Preference {
      * @return the preference id
      */
     @XmlElement( name = "preference_id" )
-    public String getPreferenceId( ) {
+    public Long getPreferenceId( ) {
         return preferenceId;
     }
 
@@ -45,7 +46,7 @@ public class Preference {
      *
      * @param preferenceId the preference id
      */
-    public void setPreferenceId( final String preferenceId ) {
+    public void setPreferenceId( final Long preferenceId ) {
         this.preferenceId = preferenceId;
     }
 
@@ -85,5 +86,24 @@ public class Preference {
      */
     public void setPreferenceName( final String preferenceName ) {
         this.preferenceName = preferenceName;
+    }
+
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Preference ) ) return false;
+        Preference that = ( Preference ) o;
+        return Objects.equals( isPreferred( ), that.isPreferred( ) ) &&
+                Objects.equals( getPreferenceId( ), that.getPreferenceId( ) ) &&
+                Objects.equals( getPreferenceName( ), that.getPreferenceName( ) );
+    }
+
+    @Override
+    public String toString( ) {
+        return "Preference{" +
+                "preferenceId=" + preferenceId +
+                ", preferenceName='" + preferenceName + '\'' +
+                ", isPreferred=" + isPreferred +
+                '}';
     }
 }

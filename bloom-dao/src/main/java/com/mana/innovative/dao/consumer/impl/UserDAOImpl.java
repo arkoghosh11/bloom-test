@@ -24,28 +24,46 @@ import java.util.List;
  * Created by Bloom/Rono on 4/10/2015. This class is UserDAOImpl
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Repository( value = "userDAO" )
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class UserDAOImpl extends BasicDAO implements UserDAO {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( UserDAOImpl.class );
 
+    /**
+     * The Session factory.
+     */
     @Resource
     private SessionFactory sessionFactory;
 
+    /**
+     * Gets session factory.
+     *
+     * @return the session factory
+     */
     public SessionFactory getSessionFactory( ) {
         return sessionFactory;
     }
 
+    /**
+     * Sets session factory.
+     *
+     * @param sessionFactory the session factory
+     */
     public void setSessionFactory( final SessionFactory sessionFactory ) {
         this.sessionFactory = sessionFactory;
     }
 
     /**
      * This method is to create a user
+     *
+     * @param requestParams the request params
      *
      * @return boolean Return a boolean value to indicate if user creation passed or failed
      */
@@ -59,6 +77,8 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
         logger.debug( "Starting " + location );
         DAOResponse< User > userDAOResponse = new DAOResponse<>( );
         List< User > userList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
 
@@ -76,13 +96,13 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
 
             if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                userDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
 
         userDAOResponse.setCount( userList.size( ) );
         userDAOResponse.setResults( userList );
+        userDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return userDAOResponse;
@@ -107,6 +127,7 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
         logger.debug( "Starting " + location );
         DAOResponse< User > userDAOResponse = new DAOResponse<>( );
         List< User > userList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
         try {
             this.openDBTransaction( );
 
@@ -125,13 +146,13 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
 
             if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                userDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
 
         userDAOResponse.setCount( userList.size( ) );
         userDAOResponse.setResults( userList );
+        userDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return userDAOResponse;
@@ -142,7 +163,8 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     /**
      * This method is to create a user
      *
-     * @param user {@link User}
+     * @param user          the user
+     * @param requestParams the request params
      *
      * @return boolean Return a boolean value to indicate if user creation passed or failed
      */
@@ -156,6 +178,7 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
         logger.debug( "Starting " + location );
         DAOResponse< User > userDAOResponse = new DAOResponse<>( );
         List< User > userList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
         try {
             this.openDBTransaction( );
 
@@ -173,14 +196,14 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
 
             if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                userDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
 
         userDAOResponse.setCreate( Boolean.TRUE );
         userDAOResponse.setCount( userList.size( ) );
         userDAOResponse.setResults( userList );
+        userDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return userDAOResponse;
@@ -203,6 +226,7 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
         logger.debug( "Starting " + location );
         DAOResponse< User > userDAOResponse = new DAOResponse<>( );
         List< User > userList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
         try {
             this.openDBTransaction( );
 
@@ -221,14 +245,14 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
 
             if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                userDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
 
         userDAOResponse.setUpdate( Boolean.TRUE );
         userDAOResponse.setCount( userList.size( ) );
         userDAOResponse.setResults( userList );
+        userDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return userDAOResponse;
@@ -239,22 +263,23 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
      *
      * @param userId        the user id
      * @param requestParams the request params
-     * @param tableName     Optional Param only to be set by subclass to the query works without issues
+     * @param entityName    Optional Param only to be set by subclass to the query works without issues
      *
      * @return the dAO response
      */
     @Override
-    public DAOResponse< User > deleteUserByUserId( Long userId, RequestParams requestParams, String tableName ) {
+    public DAOResponse< User > deleteUserByUserId( Long userId, RequestParams requestParams, String entityName ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deleteUserByUserId()";
 
         logger.debug( "Starting " + location );
         DAOResponse< User > userDAOResponse = new DAOResponse<>( );
-        tableName = tableName != null ? tableName : "User";
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        entityName = entityName != null ? entityName : "User";
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "delete  from " + tableName + " where userId=:userId" );
+            Query query = session.createQuery( "delete  from " + entityName + " where userId=:userId" );
             query.setParameter( "userId", userId );
             int count = query.executeUpdate( );
 
@@ -271,14 +296,13 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
             userDAOResponse.setCount( DAOConstants.ZERO );
 
             if ( requestParams.isError( ) ) {
-
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                userDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
 
         userDAOResponse.setDelete( Boolean.TRUE );
         userDAOResponse.setResults( null );
+        userDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return userDAOResponse;
@@ -301,6 +325,7 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
 
         logger.debug( "Starting " + location );
         DAOResponse< User > userDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
         tableName = tableName != null ? tableName : "User";
 
         try {
@@ -324,13 +349,13 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
 
             if ( requestParams.isError( ) ) {
 
-                ErrorContainer errorContainer = fillErrorContainer( location, exception );
-                userDAOResponse.setErrorContainer( errorContainer );
+                errorContainer = fillErrorContainer( location, exception );
             }
         }
 
         userDAOResponse.setDelete( Boolean.TRUE );
         userDAOResponse.setResults( null );
+        userDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );
         return userDAOResponse;

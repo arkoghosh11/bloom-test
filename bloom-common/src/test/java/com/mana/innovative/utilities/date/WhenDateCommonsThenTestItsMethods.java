@@ -17,9 +17,9 @@ import java.util.Date;
  * This class is a test class for testing class todo...
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
-public class DateCommonsTest {
+public class WhenDateCommonsThenTestItsMethods {
 
-    private static final Logger logger = LoggerFactory.getLogger( DateCommonsTest.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenDateCommonsThenTestItsMethods.class );
 
     private Date testDate;
     private SimpleDateFormat simpleDateFormat;

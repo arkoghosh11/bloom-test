@@ -53,7 +53,7 @@ public class CalendarEventsRestWebService {
 
         final List< CalendarEvent > calendarEvents = new ArrayList<>( );
         CalendarEvent calendarEvent = new CalendarEvent( );
-        calendarEvent.setCalendarEventId( 1 );
+        calendarEvent.setCalendarEventId( 1L );
         calendarEvent.setEventDescription( "Event Description" );
         calendarEvent.setEventEndDate( new Date( ) );
         calendarEvent.setEventStartDate( new Date( ) );

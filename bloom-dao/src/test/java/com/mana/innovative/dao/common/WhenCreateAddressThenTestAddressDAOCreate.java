@@ -13,6 +13,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.BeforeTransaction;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +24,8 @@ import javax.annotation.Resource;
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
-//@TransactionConfiguration // If required
-//@Transactional   // If required
+@TransactionConfiguration( defaultRollback = true ) // If required
+@Transactional   // If required
 public class WhenCreateAddressThenTestAddressDAOCreate {
 
     private static final Logger logger = Logger.getLogger( WhenCreateAddressThenTestAddressDAOCreate.class );

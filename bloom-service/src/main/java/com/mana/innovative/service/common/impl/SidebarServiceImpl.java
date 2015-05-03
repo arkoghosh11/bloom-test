@@ -2,6 +2,7 @@ package com.mana.innovative.service.common.impl;
 
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.common.SidebarService;
+import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
 
@@ -11,6 +12,7 @@ import javax.ws.rs.core.Response;
  * @author Bloom Date: 3/23/13 Time: 7:37 PM
  * @since: jdk 1.7
  */
+@Service
 public class SidebarServiceImpl implements SidebarService {
 
 //    @GET

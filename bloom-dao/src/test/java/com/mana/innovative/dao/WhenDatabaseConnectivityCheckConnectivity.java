@@ -154,18 +154,18 @@ public class WhenDatabaseConnectivityCheckConnectivity {
     @Test
     public void testDatabaseWithWrongCredentials() {
 
-        Exception exception = null;
-        this.setProperties();
+        Exception exception1 = null;
+        this.setProperties( );
         try {
             getConnection("fake", "fail");
             Assert.assertNull(connection);
-        } catch (ClassNotFoundException e) {
+        } catch ( ClassNotFoundException exception ) {
+            exception1 = exception;
             Assert.fail("Class Not Found exception occurred");
-        } catch (SQLException e) {
-            exception = e;
+        } catch ( SQLException exception ) {
+            exception1 = exception;
         }
-        Assert.assertNotNull(exception);
-        Assert.assertTrue(exception instanceof SQLException);
+        Assert.assertNotNull( exception1 );
     }
 
     /**

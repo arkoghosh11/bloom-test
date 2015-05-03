@@ -3,6 +3,8 @@ package com.mana.innovative.dto.common.email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
+
 /**
  * The type Email contents.
  *
@@ -236,5 +238,41 @@ public class EmailContents {
 
     public void setUseHTMLInLinePicture( final boolean useHTMLInLinePicture ) {
         this.useHTMLInLinePicture = useHTMLInLinePicture;
+    }
+
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof EmailContents ) ) return false;
+        EmailContents that = ( EmailContents ) o;
+        return Objects.equals( hasAttachment, that.hasAttachment ) &&
+                Objects.equals( isSimple( ), that.isSimple( ) ) &&
+                Objects.equals( isUseHTMLContent( ), that.isUseHTMLContent( ) ) &&
+                Objects.equals( isUseHTMLInLinePicture( ), that.isUseHTMLInLinePicture( ) ) &&
+                Objects.equals( getSender( ), that.getSender( ) ) &&
+                Objects.equals( getReceiver( ), that.getReceiver( ) ) &&
+                Objects.equals( getCcReceiver( ), that.getCcReceiver( ) ) &&
+                Objects.equals( getBccReceiver( ), that.getBccReceiver( ) ) &&
+                Objects.equals( getSubject( ), that.getSubject( ) ) &&
+                Objects.equals( getBody( ), that.getBody( ) ) &&
+                Objects.equals( getAttachmentLocation( ), that.getAttachmentLocation( ) );
+    }
+
+
+    @Override
+    public String toString( ) {
+        return "EmailContents {" +
+                "                            sender='" + sender +
+                ",                            receiver='" + receiver +
+                ",                            ccReceiver='" + ccReceiver +
+                ",                            bccReceiver='" + bccReceiver +
+                ",                            subject='" + subject +
+                ",                            body='" + body +
+                ",                            attachmentLocation='" + attachmentLocation +
+                ",                            hasAttachment=" + hasAttachment +
+                ",                            isSimple=" + isSimple +
+                ",                            useHTMLContent=" + useHTMLContent +
+                ",                            useHTMLInLinePicture=" + useHTMLInLinePicture +
+                '}';
     }
 }

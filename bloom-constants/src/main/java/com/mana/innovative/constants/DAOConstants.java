@@ -70,6 +70,7 @@ public final class DAOConstants {
 
     public static final String DEFAULT_DATE_LIMIT_FORMAT = "yy-MM-dd";
     public static final String DEFAULT_DATE_RETURN_FORMAT = "yyyy-MM-dd HH:mm:ss:SSS";
+    public static final String EMPTY_STRING = "";
 
 
     /**

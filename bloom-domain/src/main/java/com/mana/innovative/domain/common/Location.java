@@ -9,6 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * The type Location.
@@ -35,10 +36,10 @@ public class Location {
     @Transient
     private Address address;
 
-    @Column( name = "created_date", columnDefinition = "DATETIME" )
+    @Column( name = "created_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
-    @Column( name = "updated_date", columnDefinition = "DATETIME" )
+    @Column( name = "updated_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
@@ -94,23 +95,14 @@ public class Location {
     }
 
     @Override
-    public boolean equals( Object o ) {
+    public boolean equals( final Object o ) {
         if ( this == o ) return true;
         if ( !( o instanceof Location ) ) return false;
-
         Location location = ( Location ) o;
-
-        if ( Double.compare( location.latitude, latitude ) != 0 ) return false;
-        if ( locationId != location.locationId ) return false;
-        if ( Double.compare( location.longitude, longitude ) != 0 ) return false;
-        if ( !address.equals( location.address ) ) return false;
-        if ( createdDate != null && location.getCreatedDate( ) != null ? createdDate.getTime( ) != location.getCreatedDate( )
-                .getTime( ) : createdDate == null )
-            return true;
-        if ( updatedDate != null && location.getUpdatedDate( ) != null ? updatedDate.getTime( ) != location.getUpdatedDate( )
-                .getTime( ) : updatedDate == null )
-            return true;
-        return true;
+        return Objects.equals( getLocationId( ), location.getLocationId( ) ) &&
+                Objects.equals( getLatitude( ), location.getLatitude( ) ) &&
+                Objects.equals( getLongitude( ), location.getLongitude( ) ) &&
+                Objects.equals( getAddress( ), location.getAddress( ) );
     }
 
     /**
@@ -127,8 +119,6 @@ public class Location {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", address=" + address +
-                ", createdDate=" + createdDate +
-                ", updatedDate=" + updatedDate +
                 '}';
     }
 }

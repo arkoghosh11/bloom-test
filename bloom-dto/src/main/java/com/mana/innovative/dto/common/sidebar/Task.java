@@ -24,7 +24,7 @@ public class Task extends SidebarType {
 
     public void setTaskId( final int taskId ) {
         this.taskId = taskId;
-        this.setSidebarTypeId( taskId );
+//        this.setSidebarTypeId( taskId );
     }
 
     @XmlElement( name = "link", defaultValue = "", nillable = true )

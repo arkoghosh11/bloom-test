@@ -10,13 +10,24 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
+import java.util.Objects;
 
 /**
- * @author Bloom
+ * The type User.
+
+ * Created by Bloom/Rono on $date $time.
+ * @author Bloom Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Entity
 @Table( name = "users" )
@@ -25,35 +36,67 @@ import javax.persistence.Table;
 @DiscriminatorValue( "User" )
 public class User {
 
+    /**
+     * The User id.
+     */
     @Id
     @Column( name = "user_id", nullable = false )
-    private String userId;
+    @GeneratedValue( strategy = GenerationType.TABLE )
+    private long userId;
 
+    /**
+     * The User name.
+     */
     @Column( name = "user_name", nullable = false, unique = true )
     private String userName;
 
+    /**
+     * The Password.
+     */
     @Column( name = "password", nullable = false )
     private String password;
 
+    /**
+     * The Email.
+     */
     @Column( name = "email", nullable = false )
     @Email
     private String email;
 
     /**
+     * The Created date.
+     */
+    @Column( name = "created_date", updatable = false )
+    @Temporal( value = TemporalType.TIMESTAMP )
+    private Date createdDate;
+    /**
+     * The Updated date.
+     */
+    @Column( name = "updated_date" )
+    @Temporal( value = TemporalType.TIMESTAMP )
+    private Date updatedDate;
+
+    /**
+     * Gets user id.
+     *
      * @return the userId
      */
-    public String getUserId( ) {
+    public long getUserId( ) {
         return userId;
     }
 
     /**
+     * Sets user id.
+     *
      * @param userId the userId to set
      */
-    public void setUserId( String userId ) {
+    public void setUserId( long userId ) {
         this.userId = userId;
     }
 
     /**
+     * Gets user name.
+     *
      * @return the userName
      */
     public String getUserName( ) {
@@ -61,6 +104,8 @@ public class User {
     }
 
     /**
+     * Sets user name.
+     *
      * @param userName the userName to set
      */
     public void setUserName( String userName ) {
@@ -68,6 +113,8 @@ public class User {
     }
 
     /**
+     * Gets password.
+     *
      * @return the password
      */
     public String getPassword( ) {
@@ -75,6 +122,8 @@ public class User {
     }
 
     /**
+     * Sets password.
+     *
      * @param password the password to set
      */
     public void setPassword( String password ) {
@@ -82,6 +131,8 @@ public class User {
     }
 
     /**
+     * Gets email.
+     *
      * @return the email
      */
     public String getEmail( ) {
@@ -89,13 +140,71 @@ public class User {
     }
 
     /**
+     * Sets email.
+     *
      * @param email the email to set
      */
     public void setEmail( String email ) {
         this.email = email;
     }
 
+    /**
+     * Gets created date.
+     *
+     * @return the created date
+     */
+    public Date getCreatedDate( ) {
+        return createdDate;
+    }
+
+    /**
+     * Sets created date.
+     *
+     * @param createdDate the created date
+     */
+    public void setCreatedDate( final Date createdDate ) {
+        this.createdDate = createdDate;
+    }
+
+    /**
+     * Gets updated date.
+     *
+     * @return the updated date
+     */
+    public Date getUpdatedDate( ) {
+        return updatedDate;
+    }
+
+    /**
+     * Sets updated date.
+     *
+     * @param updatedDate the updated date
+     */
+    public void setUpdatedDate( final Date updatedDate ) {
+        this.updatedDate = updatedDate;
+    }
+
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof User ) ) return false;
+        User user = ( User ) o;
+        return Objects.equals( getUserId( ), user.getUserId( ) ) &&
+                Objects.equals( getUserName( ), user.getUserName( ) ) &&
+                Objects.equals( getPassword( ), user.getPassword( ) ) &&
+                Objects.equals( getEmail( ), user.getEmail( ) );
+    }
+
+
+    @Override
     public String toString( ) {
-        return this.userId + " " + this.userName + " " + this.password + " " + this.email + "";
+        return "User {" +
+                " userId=" + userId +
+                ", userName= " + userName +
+                ", password= " + password +
+                ", email= " + email +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                '}';
     }
 }

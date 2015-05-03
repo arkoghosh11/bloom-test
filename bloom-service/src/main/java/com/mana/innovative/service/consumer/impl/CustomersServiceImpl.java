@@ -7,23 +7,30 @@ package com.mana.innovative.service.consumer.impl;
  * @since: jdk 1.7
  */
 
+import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dao.consumer.CustomerDAO;
 import com.mana.innovative.dao.response.DAOResponse;
-import com.mana.innovative.dto.consumer.Customer;
 import com.mana.innovative.dto.consumer.payload.CustomersPayload;
 import com.mana.innovative.dto.request.RequestParams;
+import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.service.consumer.CustomersService;
 import com.mana.innovative.service.consumer.builder.CustomerResponseBuilder;
 import com.mana.innovative.service.consumer.container.CustomerResponseContainer;
+import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CustomersServiceImpl implements CustomersService {
+
+    private static final Logger logger = Logger.getLogger( CustomersServiceImpl.class );
 
     @Resource
     private CustomerDAO customerDAO;
@@ -34,23 +41,77 @@ public class CustomersServiceImpl implements CustomersService {
      *
      * @return {@link Response} A response object containing all of the tabs within the Database
      */
-    @SuppressWarnings( "unused" ) // todo complete customer service
     @Override
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public Response getAllCustomers( RequestParams requestParams ) {
 
-        DAOResponse< com.mana.innovative.domain.consumer.Customer > customerDAOResponse
-                = customerDAO.getCustomers( requestParams );
-        CustomerResponseContainer< CustomersPayload > customerResponseContainer
-                = CustomerResponseBuilder.build( new ArrayList< Customer >( ) );
-        return Response.ok( customerResponseContainer ).build( );
+        logger.debug( "Initiating getCustomers, customerDAO injected successfully" );
+
+        DAOResponse< com.mana.innovative.domain.consumer.Customer > customerDAOResponse;
+        Response response;
+        String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getCustomers()";
+        CustomerResponseContainer< CustomersPayload > customerResponseContainer;
+        try {
+            customerDAOResponse = customerDAO.getCustomers( requestParams );
+
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                logger.error( "Hibernate Exception occurred while trying fetch data from DB " + location, exception );
+            } else
+                logger.error( "Exception occurred in" + location, exception );
+
+            customerResponseContainer = CustomerResponseBuilder.buildError( location, requestParams.isError( ), exception );
+            response = Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( customerResponseContainer ).build( );
+            return response;
+        }
+        try {
+            customerResponseContainer = CustomerResponseBuilder.build( customerDAOResponse, requestParams.isError( ) );
+            response = Response.status( Response.Status.OK ).entity( customerResponseContainer ).build( );
+            return response;
+
+        } catch ( Exception exception ) {
+            logger.error( "Exception occurred while building response", exception );
+            customerResponseContainer = CustomerResponseBuilder.buildError( location, requestParams.isError( ), exception );
+            response = Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( customerResponseContainer ).build( );
+            return response;
+        } finally {
+            logger.debug( " Response for getCustomersByUserId sent Successfully " );
+        }
     }
 
     /**
      * @return {@link Response} A response from the server
      */
+    //todo decide whether to delete all the if one fails or not or write a dao delete for a collection of customers
     @Override
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
     public Response deleteCustomers( List< Long > customerIds, RequestParams requestParams ) {
-        // TODO Auto-generated method stub
-        return null;
+        logger.debug( "Initiating deleteCustomers for incoming customerIDs, customerDAO injected successfully" );
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteCustomers()";
+        CustomerResponseContainer< CustomersPayload > customerResponseContainer = null;
+
+        for ( Long customerId : customerIds ) {
+            if ( customerId < 1 ) {
+                customerResponseContainer = CustomerResponseBuilder.buildError( location, requestParams.isError( ),
+                        new IllegalArgumentValueException( ", CustomerId is required for deleting a Customer" ) );
+                return Response.status( Response.Status.BAD_REQUEST ).entity( customerResponseContainer ).build( );
+            }
+
+            DAOResponse< com.mana.innovative.domain.consumer.Customer > customerDAOResponse;
+            try {
+                customerDAOResponse = customerDAO.deleteCustomerByUserId( customerId, requestParams );
+            } catch ( Exception exception ) {
+                if ( exception instanceof HibernateException ) {
+                    logger.error( "Hibernate Exception occurred while trying to send data to DB " + location, exception );
+                } else
+                    logger.error( "Exception occurred in" + location, exception );
+
+                customerResponseContainer = CustomerResponseBuilder.buildError( location, requestParams.isError( ), exception );
+                return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( customerResponseContainer ).build( );
+            }
+            customerResponseContainer = CustomerResponseBuilder.build( customerDAOResponse, requestParams.isError( ) );
+        }
+        logger.debug( " Response for deleteCustomers generated successfully from Service Level" );
+        return Response.ok( ).entity( customerResponseContainer ).build( );
     }
 }

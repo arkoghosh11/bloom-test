@@ -41,8 +41,8 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
         itemDTO2 = new Item( );
 
         // Set Values for tempValues
-        itemDTO = TestDummyDTOObjectGenerator.getTestItemDTOObject( new Item( ) );
-        itemDomain = TestDummyDomainObjectGenerator.getTestItemDomainObject( new com.mana.innovative.domain.client.Item( ) );
+        itemDTO = TestDummyDTOObjectGenerator.getTestItemDTOObject( );
+        itemDomain = TestDummyDomainObjectGenerator.getTestItemDomainObject( );
     }
 
     /**
@@ -65,13 +65,22 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
     public void testGetConvertedDTOFromDomain( ) throws Exception {
 
         logger.debug( "Starting  GetConvertedDTOFromDomain" );
-        if ( itemDomain.getItemId( ) != 1 ) {
-            itemDomain = TestDummyDomainObjectGenerator.getTestItemDomainObject( itemDomain );
-        }
+
         itemDTO2 = ItemDomainDTOConverter.getConvertedDTOFromDomain( itemDTO2, itemDomain );
 
         Assert.assertNotNull( TestConstants.notNullMessage, itemDTO2 );
         Assert.assertEquals( TestConstants.notEqualsMessage, itemDTO, itemDTO2 );
+
+        itemDTO2 = ItemDomainDTOConverter.getConvertedDTOFromDomain( null, itemDomain );
+
+        Assert.assertNotNull( TestConstants.notNullMessage, itemDTO2 );
+        Assert.assertEquals( TestConstants.notEqualsMessage, itemDTO, itemDTO2 );
+
+        itemDomain.setItemSubType( null );
+        itemDTO2 = ItemDomainDTOConverter.getConvertedDTOFromDomain( null, itemDomain );
+
+        Assert.assertNotNull( TestConstants.notNullMessage, itemDTO2 );
+        Assert.assertEquals( TestConstants.notEqualsMessage, "", itemDTO2.getItemSubType( ) );
 
         logger.debug( "Finishing GetConvertedDTOFromDomain" );
     }
@@ -90,7 +99,7 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
         List< com.mana.innovative.domain.client.Item > itemDomainList = new ArrayList<>( );
         itemDomainList.add( itemDomain );
         if ( itemDomain.getItemId( ) != TestConstants.TEST_ID ) {
-            TestDummyDomainObjectGenerator.getTestItemDomainZEROIDObject( itemDomain );
+            TestDummyDomainObjectGenerator.setTestItemDomainZEROIDObject( itemDomain );
         }
         itemDTOList = ItemDomainDTOConverter.getConvertedListDTOFromDomain( itemDomainList );
         Assert.assertNotNull( TestConstants.notNullMessage, itemDTOList );
@@ -112,7 +121,13 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
         logger.debug( "Starting  GetConvertedDomainFromDTO" );
 
         itemDomain2 = ItemDomainDTOConverter.getConvertedDomainFromDTO( itemDomain2, itemDTO );
-        TestDummyDomainObjectGenerator.getTestItemDomainZEROIDObject( itemDomain );
+        TestDummyDomainObjectGenerator.setTestItemDomainZEROIDObject( itemDomain );
+
+        Assert.assertNotNull( TestConstants.notNullMessage, itemDomain2 );
+        Assert.assertEquals( TestConstants.notEqualsMessage, itemDomain, itemDomain2 );
+
+        itemDomain2 = ItemDomainDTOConverter.getConvertedDomainFromDTO( null, itemDTO );
+        TestDummyDomainObjectGenerator.setTestItemDomainZEROIDObject( itemDomain );
 
         Assert.assertNotNull( TestConstants.notNullMessage, itemDomain2 );
         Assert.assertEquals( TestConstants.notEqualsMessage, itemDomain, itemDomain2 );
@@ -133,7 +148,7 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
         List< Item > itemDTOList = new ArrayList<>( );
         List< com.mana.innovative.domain.client.Item > itemDomainList;
         itemDTOList.add( itemDTO );
-        TestDummyDomainObjectGenerator.getTestItemDomainZEROIDObject( itemDomain );
+        TestDummyDomainObjectGenerator.setTestItemDomainZEROIDObject( itemDomain );
 
         itemDomainList = ItemDomainDTOConverter.getConvertedListDomainFromDTO( itemDTOList );
 
@@ -159,14 +174,14 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
         NullPointerException nullPointerException = null;
         try {
             itemDomain2 = ItemDomainDTOConverter.getConvertedDomainFromDTO( itemDomain2, item );
-        } catch ( IllegalArgumentValueException e ) {
-            illegalArgumentValueException = e;
+        } catch ( IllegalArgumentValueException exception ) {
+            illegalArgumentValueException = exception;
         }
         Assert.assertNotNull( TestConstants.notNullMessage, illegalArgumentValueException );
         try {
             itemDomain2 = ItemDomainDTOConverter.getConvertedDomainFromDTO( null, null );
-        } catch ( NullPointerException n ) {
-            nullPointerException = n;
+        } catch ( NullPointerException exception ) {
+            nullPointerException = exception;
         }
         Assert.assertNotNull( TestConstants.nullMessage, nullPointerException );
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
@@ -179,8 +194,8 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
         NullPointerException nullPointerException = null;
         try {
             itemDTO2 = ItemDomainDTOConverter.getConvertedDTOFromDomain( null, null );
-        } catch ( NullPointerException n ) {
-            nullPointerException = n;
+        } catch ( NullPointerException exception ) {
+            nullPointerException = exception;
         }
         Assert.assertNotNull( TestConstants.nullMessage, nullPointerException );
         logger.debug( "Finishing test GetConvertedDTOFromDomainForError" );

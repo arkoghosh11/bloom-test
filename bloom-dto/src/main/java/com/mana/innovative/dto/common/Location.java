@@ -2,6 +2,7 @@ package com.mana.innovative.dto.common;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Objects;
 
 /**
  * The type Location.
@@ -78,17 +79,15 @@ public class Location {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Location)) return false;
-
-        Location location = (Location) o;
-
-        if (Double.compare(location.latitude, latitude) != 0) return false;
-        if (locationId != location.locationId) return false;
-        return Double.compare( location.longitude, longitude ) == 0;
-
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Location ) ) return false;
+        Location location = ( Location ) o;
+        return Objects.equals( getLocationId( ), location.getLocationId( ) ) &&
+                Objects.equals( getLatitude( ), location.getLatitude( ) ) &&
+                Objects.equals( getLongitude( ), location.getLongitude( ) );
     }
+
 
     /**
      * Returns a string representation of the object. In general, the

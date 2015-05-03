@@ -25,7 +25,7 @@ public class Alert extends SidebarType {
 
     public void setAlertId( final int alertId ) {
         this.alertId = alertId;
-        this.setSidebarTypeId( alertId );
+//        this.setSidebarTypeId( alertId );
     }
 
     @XmlElement( name = "link", defaultValue = "", nillable = false )

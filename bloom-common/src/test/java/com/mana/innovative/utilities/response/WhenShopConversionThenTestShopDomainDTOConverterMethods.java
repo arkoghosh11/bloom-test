@@ -36,8 +36,8 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         shopDTO2 = new Shop( );
 
         // Set Values for tempValues
-        shopDTO = TestDummyDTOObjectGenerator.getTestShopDTOObject( shopDTO );
-        shopDomain = TestDummyDomainObjectGenerator.getTestShopDomainObject( shopDomain );
+        shopDTO = TestDummyDTOObjectGenerator.getTestShopDTOObject( );
+        shopDomain = TestDummyDomainObjectGenerator.getTestShopDomainObject( );
     }
 
     @After
@@ -50,10 +50,6 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
     public void testGetConvertedDTOFromDomain( ) throws Exception {
 
         logger.debug( "Starting  testGetConvertedDTOFromDomain" );
-
-        if ( shopDomain.getShopId( ) != TestConstants.TEST_ID ) {
-            shopDomain = TestDummyDomainObjectGenerator.getTestShopDomainObject( shopDomain );
-        }
 
         shopDTO2 = ShopDomainDTOConverter.getConvertedDTOFromDomain( shopDTO2, shopDomain );
 
@@ -73,9 +69,6 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         List< com.mana.innovative.domain.client.Shop > shopDomainList = new ArrayList<>( );
         shopDomainList.add( shopDomain );
 
-        if ( shopDomain.getShopId( ) != TestConstants.TEST_ID ) {
-            shopDomain = TestDummyDomainObjectGenerator.getTestShopDomainObject( shopDomain );
-        }
         shopDTOList = ShopDomainDTOConverter.getConvertedListDTOFromDomain( shopDomainList );
         Assert.assertNotNull( TestConstants.nullMessage, shopDTOList );
         Assert.assertFalse( TestConstants.trueMessage, shopDTOList.isEmpty( ) );
@@ -91,7 +84,7 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         logger.debug( "Starting  testGetConvertedDomainFromDTO" );
 
         shopDomain2 = ShopDomainDTOConverter.getConvertedDomainFromDTO( shopDomain2, shopDTO );
-        TestDummyDomainObjectGenerator.getTestShopDomainZEROIDObject( shopDomain );
+        TestDummyDomainObjectGenerator.setTestShopDomainZEROIDObject( shopDomain );
 
         Assert.assertNotNull( TestConstants.nullMessage, shopDomain2 );
         Assert.assertEquals( TestConstants.notEqualsMessage, shopDomain, shopDomain2 );
@@ -107,7 +100,7 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         List< Shop > shopDTOList = new ArrayList<>( );
         List< com.mana.innovative.domain.client.Shop > shopDomainList;
         shopDTOList.add( shopDTO );
-        TestDummyDomainObjectGenerator.getTestShopDomainZEROIDObject( shopDomain );
+        TestDummyDomainObjectGenerator.setTestShopDomainZEROIDObject( shopDomain );
 
         shopDomainList = ShopDomainDTOConverter.getConvertedListDomainFromDTO( shopDTOList );
 

@@ -2,6 +2,7 @@ package com.mana.innovative.service.common;
 
 import com.mana.innovative.dto.common.CalendarEvent;
 import com.mana.innovative.dto.request.RequestParams;
+import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
 
@@ -12,6 +13,7 @@ import javax.ws.rs.core.Response;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
+@Service
 public interface CalendarEventService {
 
     /**

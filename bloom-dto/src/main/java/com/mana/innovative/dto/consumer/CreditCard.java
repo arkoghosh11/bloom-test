@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * The type Credit card.
@@ -12,7 +13,7 @@ import java.util.Date;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@XmlRootElement( name = "CreditCard" )
+@XmlRootElement( name = "credit_card" )
 @XmlSeeAlso( { Card.class } )
 public class CreditCard extends Card {
 
@@ -22,14 +23,11 @@ public class CreditCard extends Card {
     private String middleName;
 
     /**
-     * The Card number.
-     */
-    private String cardNumber;
-
-    /**
      * The Expiry date.
      */
     private String expiryDate;
+
+    private String cardType;
 
     /**
      * The CVV.
@@ -44,7 +42,7 @@ public class CreditCard extends Card {
     /**
      * The Customer card.
      */
-    private Customer customerCard;
+//    private Customer customerCard;
 
     // Note getters and setters start from here
 
@@ -53,7 +51,7 @@ public class CreditCard extends Card {
      *
      * @return the middle name
      */
-    @XmlElement( name = "middleName" )
+    @XmlElement( name = "middle_name" )
     public String getMiddleName( ) {
         return middleName;
     }
@@ -68,30 +66,11 @@ public class CreditCard extends Card {
     }
 
     /**
-     * Gets card number.
-     *
-     * @return the card number
-     */
-    @XmlElement( name = "cardNumber" )
-    public String getCardNumber( ) {
-        return cardNumber;
-    }
-
-    /**
-     * Sets card number.
-     *
-     * @param cardNumber the card number
-     */
-    public void setCardNumber( final String cardNumber ) {
-        this.cardNumber = cardNumber;
-    }
-
-    /**
      * Gets expiry date.
      *
      * @return the expiry date
      */
-    @XmlElement( name = "expiryDate" )
+    @XmlElement( name = "expiry_date" )
     public String getExpiryDate( ) {
         return expiryDate;
     }
@@ -106,11 +85,30 @@ public class CreditCard extends Card {
     }
 
     /**
+     * Gets card type.
+     *
+     * @return the card type
+     */
+    @XmlElement( name = "card_type" )
+    public String getCardType( ) {
+        return cardType;
+    }
+
+    /**
+     * Sets card type.
+     *
+     * @param cardType the card type
+     */
+    public void setCardType( final String cardType ) {
+        this.cardType = cardType;
+    }
+
+    /**
      * Gets cVV.
      *
      * @return the cVV
      */
-    @XmlElement( name = "CVV" )
+    @XmlElement( name = "cvv" )
     public String getCVV( ) {
         return CVV;
     }
@@ -143,4 +141,27 @@ public class CreditCard extends Card {
         this.createOrModified = createOrModified;
     }
 
+    @Override
+    public boolean equals( final Object o ) {
+        if ( this == o ) return true;
+        if ( !( o instanceof CreditCard ) ) return false;
+        CreditCard that = ( CreditCard ) o;
+        return Objects.equals( getMiddleName( ), that.getMiddleName( ) ) &&
+                Objects.equals( getExpiryDate( ), that.getExpiryDate( ) ) &&
+                Objects.equals( getCardType( ), that.getCardType( ) ) &&
+                Objects.equals( getCVV( ), that.getCVV( ) ) &&
+                Objects.equals( getCreateOrModified( ), that.getCreateOrModified( ) );
+    }
+
+
+    @Override
+    public String toString( ) {
+        return super.toString( ) + "CreditCard {" +
+                " cardType='" + cardType +
+                ",   CVV='" + CVV +
+                ",   createOrModified=" + createOrModified +
+                ",   expiryDate='" + expiryDate +
+                ",   middleName='" + middleName +
+                '}';
+    }
 }
