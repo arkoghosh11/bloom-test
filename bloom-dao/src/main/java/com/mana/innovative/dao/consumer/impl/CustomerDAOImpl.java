@@ -161,7 +161,7 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
      */
     @SuppressWarnings( "unchecked" )
     @Override
-    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED )
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
     public DAOResponse< Customer > getCustomerByUserId( final long customerId, final RequestParams requestParams ) {
         String location = this.getClass( ).getCanonicalName( ) + "#getCustomerByUserId()";
 
