@@ -49,12 +49,23 @@ import java.util.List;
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( ItemDAOImpl.class );
 
 
 //    private static final String HASH = DAOConstants.HASH;
 
-    /* IMP DELETE Functions */
+    /**
+     * Delete all items.
+     *
+     * @param deleteAllItems the delete all items
+     * @param isError        the is error
+     *
+     * @return the dAO response
+     */
+/* IMP DELETE Functions */
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Item > deleteAllItems( final boolean deleteAllItems, final boolean isError ) {
 
@@ -94,9 +105,11 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     }
 
     /**
-     * @param itemId {@link Integer}
+     * Delete item by item id.
      *
-     * @return {@link Boolean} Returns a boolean value to indicate a successful deletion
+     * @param itemId the item id
+     * @param isError the is error
+     * @return Returns a boolean value to indicate a successful deletion
      */
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Item > deleteItemByItemId( long itemId, boolean isError ) {
@@ -138,7 +151,6 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
      *
      * @param itemIds the item ids
      * @param isError the is error
-     *
      * @return the dAO response
      */
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
@@ -180,9 +192,9 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     /**
      * This method is to update the DB with the persistence layer to keep the Item value synced
      *
-     * @param item {@link Item}
-     *
-     * @return {@link Boolean} Returns a boolean value to indicate a successful update
+     * @param item the item
+     * @param isError the is error
+     * @return Returns a boolean value to indicate a successful update
      */
     @SuppressWarnings( "unchecked" )
     @Override
@@ -244,9 +256,9 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     /**
      * This method is to create a Item object and save it in the DB
      *
-     * @param item {@link Item}
-     *
-     * @return {@link Boolean} Returns a boolean value to indicate a successful creation
+     * @param item the item
+     * @param isError the is error
+     * @return Returns a boolean value to indicate a successful creation
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE )
@@ -286,6 +298,13 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     }
 
 
+    /**
+     * Gets item by item id.
+     *
+     * @param itemId the item id
+     * @param isError the is error
+     * @return the item by item id
+     */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
@@ -330,7 +349,8 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     /**
      * This method is to retrieve all the items values from the DB
      *
-     * @return List<Item></> Return a list of {@link Item}
+     * @param isError the is error
+     * @return List<Item> </> Return a list of
      */
     @SuppressWarnings( "unchecked" )
     @Override

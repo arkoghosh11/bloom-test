@@ -18,7 +18,6 @@ public interface ItemsService {
      * Gets items.
      *
      * @param isError the is error
-     *
      * @return the items
      */
     Response getItems( boolean isError );
@@ -26,9 +25,8 @@ public interface ItemsService {
     /**
      * Delete all items.
      *
-     * @param isError        the is error
+     * @param isError the is error
      * @param deleteAllItems the delete all items
-     *
      * @return the response
      */
     Response deleteAllItems( boolean isError, boolean deleteAllItems );

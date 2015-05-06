@@ -24,17 +24,31 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * @author Bloom
+ * The type Tabs rest web service.
+
+ * Created by Bloom/Rono on $date $time.
+ * @author Bloom Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Component
 @Path( "/{tabs : (?i)tabs}" )
 public class TabsRestWebService {
 
+    /**
+     * The constant log.
+     */
     private static final Logger log = Logger.getLogger( TabsRestWebService.class );
 
+    /**
+     * The Servlet request.
+     */
     @Context
     private HttpServletRequest servletRequest;
 
+    /**
+     * The Tabs service.
+     */
     @Resource
     private TabsService tabsService;
 
@@ -42,9 +56,10 @@ public class TabsRestWebService {
 
 
     /**
-     * This method is for giving service for url /rest/tabs with all the tabs data as a {@link java.util.List<Tab></>}
+     * This method is for giving service for url /rest/tabs with all the tabs data as a {@link List<Tab></>}
      *
-     * @return {@link Response} A response object containing all of the tabs within the Database
+     * @param isError the is error
+     * @return A response object containing all of the tabs within the Database
      */
     @GET
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
@@ -57,6 +72,14 @@ public class TabsRestWebService {
         return tabsService.getAllTabs( requestParams );
     }
 
+    /**
+     * Delete tabs.
+     *
+     * @param tabIds  the tab ids
+     * @param isError the is error
+     *
+     * @return the response
+     */
     @DELETE
     @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )

@@ -19,9 +19,8 @@ public interface ItemService {
     /**
      * Gets item by item id.
      *
-     * @param itemID  the item iD
+     * @param itemID the item iD
      * @param isError the is error
-     *
      * @return the item by item id
      */
     Response getItemByItemId( long itemID, boolean isError );
@@ -31,7 +30,6 @@ public interface ItemService {
      *
      * @param itemDTO the item dTO
      * @param isError the is error
-     *
      * @return the response
      */
     Response createItem( Item itemDTO, boolean isError );
@@ -41,7 +39,6 @@ public interface ItemService {
      *
      * @param itemDTO the item dTO
      * @param isError the is error
-     *
      * @return the response
      */
     Response updateItem( Item itemDTO, boolean isError );
@@ -51,7 +48,6 @@ public interface ItemService {
      *
      * @param itemIds the item ids
      * @param isError the is error
-     *
      * @return the response
      */
     Response deleteItemsByItemIds( List< Long > itemIds, boolean isError );
@@ -59,9 +55,8 @@ public interface ItemService {
     /**
      * Delete item by item id.
      *
-     * @param itemId  the item id
+     * @param itemId the item id
      * @param isError the is error
-     *
      * @return the response
      */
     Response deleteItemByItemId( long itemId, boolean isError );

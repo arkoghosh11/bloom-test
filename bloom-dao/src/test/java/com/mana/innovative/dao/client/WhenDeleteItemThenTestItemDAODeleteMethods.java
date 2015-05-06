@@ -34,6 +34,9 @@ import java.util.List;
  * <p/>
  * Please uncomment the following lines to enable Spring Integration Test the 2nd line requires location on Context
  * Config Files for beans and properties extra, the 1st one is to enable Spring for the Class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
@@ -41,22 +44,37 @@ import java.util.List;
 @Transactional
 public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenDeleteItemThenTestItemDAODeleteMethods.class );
 
+    /**
+     * The Item dAO impl.
+     */
     @Resource
     private ItemDAO itemDAOImpl;
 
+    /**
+     * The Session factory.
+     */
     @Resource
     private SessionFactory sessionFactory;
 
+    /**
+     * The Item id.
+     */
     private Long itemId;
+    /**
+     * The Item ids.
+     */
     private List< Long > itemIds;
 
 
     /**
      * This method is to initialize Objects and configuration files before testing test method
      *
-     * @throws Exception
+     * @throws Exception the exception
      */
     @Before
     @BeforeTransaction
@@ -296,6 +314,7 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteItemsByItemIdsWithErrorEnabled" );
     }
+
     /**
      * Tear down. This method is to release objects and shut down OR close any connections after Test is completed
      * before testing test method

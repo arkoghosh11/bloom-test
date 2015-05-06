@@ -20,6 +20,9 @@ import javax.ws.rs.core.Response;
 /**
  * Created by alex1 on 1/23/2015.
  * This is a domain class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/service-config-test.xml","/db-config-test.xml"})
@@ -27,11 +30,20 @@ import javax.ws.rs.core.Response;
 @Transactional
 public class WhenItemServiceTestGetItems {
 
+    /**
+     * The constant logger.
+     */
     public static final Logger logger = Logger.getLogger(WhenItemServiceTestGetItems.class);
 
+    /**
+     * The Items service impl.
+     */
     @Resource
     private ItemsService itemsServiceImpl;
 
+    /**
+     * Sets up.
+     */
     @Before
     public void setUp () {
 
@@ -39,6 +51,9 @@ public class WhenItemServiceTestGetItems {
     }
 
 
+    /**
+     * Test get items.
+     */
     @Test
     public void testGetItems () {
 
@@ -59,6 +74,9 @@ public class WhenItemServiceTestGetItems {
         Assert.assertTrue(itemsPayload.getItems().size() > 1);
     }
 
+    /**
+     * Close void.
+     */
     @After
     public void close() {
 

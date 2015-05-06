@@ -14,17 +14,33 @@ import org.mockito.stubbing.Answer;
 /**
  * Created by alex1 on 1/28/2015.
  * This is a domain class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith(value = MockitoJUnitRunner.class)
 public class WhenMockErrorTestSetErrorData {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger(WhenMockErrorTestSetErrorData.class);
-
-    private Error error;
-
+    /**
+     * The constant errorType.
+     */
     private static final String errorType = ErrorConstants.TEST_ERROR_TYPE;
+    /**
+     * The Error.
+     */
+    private Error error;
+    /**
+     * The Invocation on mock.
+     */
     private InvocationOnMock invocationOnMock;
 
+    /**
+     * Set up.
+     */
     @Before
     public void setUp(){
 
@@ -41,6 +57,9 @@ public class WhenMockErrorTestSetErrorData {
     }
 
 
+    /**
+     * Test set error.
+     */
     @Test
     public void testSetError(){
 

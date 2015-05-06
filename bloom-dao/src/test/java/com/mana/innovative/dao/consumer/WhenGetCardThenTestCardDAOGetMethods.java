@@ -25,18 +25,35 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 5/2/2015 6:14 PM. This class WhenGetCardThenTestCardDAOGetMethods is a test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
 @Transactional   // If required
 public class WhenGetCardThenTestCardDAOGetMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenGetCardThenTestCardDAOGetMethods.class );
 
+    /**
+     * The Card dAO.
+     */
     @Resource
     private CardDAO cardDAO;
+    /**
+     * The Request params.
+     */
     private RequestParams requestParams;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
@@ -44,12 +61,22 @@ public class WhenGetCardThenTestCardDAOGetMethods {
         requestParams = new RequestParams( );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 
+    /**
+     * Test get cards with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCardsWithErrorDisabled( ) throws Exception {
@@ -78,6 +105,11 @@ public class WhenGetCardThenTestCardDAOGetMethods {
         logger.debug( "Finishing test for GetCardsWithErrorDisabled" );
     }
 
+    /**
+     * Test get card with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCardWithErrorDisabled( ) throws Exception {
@@ -121,6 +153,11 @@ public class WhenGetCardThenTestCardDAOGetMethods {
         logger.debug( "Finishing test for GetCardWithErrorDisabled" );
     }
 
+    /**
+     * Test get cards with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCardsWithErrorEnabled( ) throws Exception {
@@ -154,6 +191,11 @@ public class WhenGetCardThenTestCardDAOGetMethods {
         logger.debug( "Finishing test for GetCardsWithErrorEnabled" );
     }
 
+    /**
+     * Test get card with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCardWithErrorEnabled( ) throws Exception {

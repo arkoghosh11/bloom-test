@@ -157,7 +157,6 @@ public class TestDummyDomainObjectGenerator {
      * Gets test shop Domain ZERO ID object.
      *
      * @param shop the shop
-     *
      * @return the test shop Domain ZERO ID object
      */
     public static Shop setTestShopDomainZEROIDObject( final Shop shop ) {
@@ -174,7 +173,6 @@ public class TestDummyDomainObjectGenerator {
      * Gets test address Domain ZERO ID object.
      *
      * @param address the address
-     *
      * @return the test address Domain ZERO ID object
      */
     public static Address setTestAddressDomainZEROIDObject( final Address address ) {
@@ -187,7 +185,6 @@ public class TestDummyDomainObjectGenerator {
      * Gets test item dTO ZERO ID object.
      *
      * @param item the item
-     *
      * @return the test item dTO ZERO ID object
      */
     public static Item setTestItemDomainZEROIDObject( final Item item ) {
@@ -200,7 +197,6 @@ public class TestDummyDomainObjectGenerator {
      * Gets test working hour Domain ZERO ID object.
      *
      * @param workingHour the working hour
-     *
      * @return the test working hour Domain ZERO ID object
      */
     public static WorkingHour setTestWorkingHourDomainZEROIDObject( final WorkingHour workingHour ) {
@@ -444,6 +440,11 @@ public class TestDummyDomainObjectGenerator {
         return customerList;
     }
 
+    /**
+     * Gets n create domain cards list.
+     *
+     * @return the n create domain cards list
+     */
     public static List< Card > getNCreateDomainCardsList( ) {
 
         List< Card > cardList = new ArrayList<>( );

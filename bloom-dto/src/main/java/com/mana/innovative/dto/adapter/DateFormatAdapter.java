@@ -3,7 +3,6 @@ package com.mana.innovative.dto.adapter;
 import com.mana.innovative.constants.DAOConstants;
 import org.apache.log4j.Logger;
 
-import javax.xml.bind.ValidationEventHandler;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,15 +21,19 @@ public class DateFormatAdapter extends XmlAdapter< String, Date > {
      */
     private static final Logger logger = Logger.getLogger( DateFormatAdapter.class );
 
+    /**
+     * The Simple date format.
+     */
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat( DAOConstants.DEFAULT_DATE_FORMAT );
 
     /**
      * Convert a value type to a bound type.
      *
      * @param stringDate The value to be converted. Can be null.
-     *
+     * @return the date
      * @throws Exception if there's an error during the conversion. The caller is responsible for reporting the error to
-     *                   the user through {@link ValidationEventHandler}.
+     *                   the user through
+     *.
      */
     @Override
     public Date unmarshal( final String stringDate ) throws Exception {
@@ -43,9 +46,10 @@ public class DateFormatAdapter extends XmlAdapter< String, Date > {
      * Convert a bound type to a value type.
      *
      * @param date The value to be converted. Can be null.
-     *
+     * @return the string
      * @throws Exception if there's an error during the conversion. The caller is responsible for reporting the error to
-     *                   the user through {@link ValidationEventHandler}.
+     *                   the user through
+     *.
      */
     @Override
     public String marshal( final Date date ) throws Exception {

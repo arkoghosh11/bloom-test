@@ -13,6 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import java.util.Date;
 import java.util.Objects;
 
@@ -25,7 +26,8 @@ import java.util.Objects;
  * @since: jdk 1.7
  */
 @Entity
-@Table( name = "cards" )
+@Table( name = "cards", uniqueConstraints = @UniqueConstraint( name = "card_number_issuer", columnNames =
+        { "card_number", "issue_date" } ) )
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE )
 @DiscriminatorColumn( name = "discriminator", discriminatorType = DiscriminatorType.STRING )
 @DiscriminatorValue( value = "Card" )
@@ -70,6 +72,9 @@ public class Card {
     private boolean cardHasCustomerPic;
 
 
+    /**
+     * The Picture location.
+     */
     @Column( name = "picture_location", nullable = true )
     private String pictureLocation;
 
@@ -198,10 +203,20 @@ public class Card {
         this.cardHasCustomerPic = cardHasCustomerPic;
     }
 
+    /**
+     * Gets picture location.
+     *
+     * @return the picture location
+     */
     public String getPictureLocation( ) {
         return pictureLocation;
     }
 
+    /**
+     * Sets picture location.
+     *
+     * @param pictureLocation the picture location
+     */
     public void setPictureLocation( final String pictureLocation ) {
         this.pictureLocation = pictureLocation;
     }
@@ -242,6 +257,13 @@ public class Card {
         this.updatedDate = updatedDate;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
 
@@ -256,6 +278,11 @@ public class Card {
                 Objects.equals( getPictureLocation( ), card.getPictureLocation( ) );
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString( ) {
         return "Card{" +

@@ -16,15 +16,27 @@ import javax.annotation.Resource;
 
 /**
  * Created by alex1 on 1/23/2015. This is a domain class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
 public class WhenHibernateInitiatedTestSessionFactory {
 
+    /**
+     * The Session factory.
+     */
     @Resource
     SessionFactory sessionFactory;
+    /**
+     * The Logger.
+     */
     private Logger logger = LoggerFactory.getLogger( WhenHibernateInitiatedTestSessionFactory.class );
 
+    /**
+     * Sets up.
+     */
     public void setUp( ) {
         logger.debug( "Initiating Test" );
     }
@@ -47,6 +59,9 @@ public class WhenHibernateInitiatedTestSessionFactory {
         }
     }
 
+    /**
+     * Close void.
+     */
     @After
     public void close( ) {
 

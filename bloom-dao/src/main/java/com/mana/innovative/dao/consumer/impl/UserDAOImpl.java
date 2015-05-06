@@ -64,7 +64,6 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
      * This method is to create a user
      *
      * @param requestParams the request params
-     *
      * @return boolean Return a boolean value to indicate if user creation passed or failed
      */
     @SuppressWarnings( "unchecked" )
@@ -112,9 +111,8 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     /**
      * Gets user by user id.
      *
-     * @param userId        the user id
+     * @param userId the user id
      * @param requestParams the request params
-     *
      * @return the user by user id
      */
     @SuppressWarnings( "unchecked" )
@@ -163,9 +161,8 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     /**
      * This method is to create a user
      *
-     * @param user          the user
+     * @param user the user
      * @param requestParams the request params
-     *
      * @return boolean Return a boolean value to indicate if user creation passed or failed
      */
     @Override
@@ -212,9 +209,8 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     /**
      * Update user.
      *
-     * @param user          the user
+     * @param user the user
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -261,10 +257,9 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     /**
      * Delete user by user id.
      *
-     * @param userId        the user id
+     * @param userId the user id
      * @param requestParams the request params
-     * @param entityName    Optional Param only to be set by subclass to the query works without issues
-     *
+     * @param entityName Optional Param only to be set by subclass to the query works without issues
      * @return the dAO response
      */
     @Override
@@ -311,10 +306,9 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     /**
      * Delete users.
      *
-     * @param userIds       the user ids
+     * @param userIds the user ids
      * @param requestParams the request params
-     * @param tableName     the table name
-     *
+     * @param tableName the table name
      * @return the dAO response
      */
     @Override

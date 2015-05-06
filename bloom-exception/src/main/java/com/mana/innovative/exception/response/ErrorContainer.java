@@ -17,7 +17,13 @@ import java.util.List;
 @XmlRootElement( name = "error_container" )
 public class ErrorContainer {
 
+    /**
+     * The Current error.
+     */
     private Error currentError;
+    /**
+     * The Errors.
+     */
     private List< Error > errors;
 
     /**
@@ -39,6 +45,9 @@ public class ErrorContainer {
         this.setCurrentError( currentError );
     }
 
+    /**
+     * Instantiate errors.
+     */
     private void instantiateErrors( ) {
         errors = new ArrayList<>( );
     }

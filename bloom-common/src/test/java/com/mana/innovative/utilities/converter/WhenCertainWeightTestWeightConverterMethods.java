@@ -15,16 +15,31 @@ import javax.annotation.Resource;
 
 /**
  * The type When certain weight test weight converter methods.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/weight-converter-test-config.xml")
 public class WhenCertainWeightTestWeightConverterMethods {
 
+    /**
+     * The Weight converter.
+     */
     @Resource
     private WeightConverter weightConverter;
 
+    /**
+     * The Default value.
+     */
     private double defaultValue;
+    /**
+     * The Expected result.
+     */
     private double expectedResult;
+    /**
+     * The Fail message.
+     */
     private String failMessage;
 
     /**

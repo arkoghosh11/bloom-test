@@ -4,20 +4,19 @@
 package com.mana.innovative.service.common.impl;
 
 import com.mana.innovative.dao.common.TabDAO;
-import com.mana.innovative.dto.common.Tab;
+import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.dto.common.payload.TabsPayload;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.common.TabsService;
 import com.mana.innovative.service.common.builder.TabResponseBuilder;
 import com.mana.innovative.service.common.container.TabResponseContainer;
+import com.mana.innovative.utilities.response.ResponseUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,24 +43,31 @@ public class TabsServiceImpl implements TabsService {
     /**
      * Gets all tabs.
      *
+     * @param requestParams the request params
      * @return the all tabs
      */
     public Response getAllTabs( RequestParams requestParams ) {
 
         log.debug( "**** Tab DAO is " + tabDAO );
-        tabDAO.getTabs( requestParams );
-        TabResponseContainer< TabsPayload > tabResponseContainer
-                = TabResponseBuilder.build( new ArrayList< Tab >( ) );
-        Response.status( Status.BAD_REQUEST );
-        return Response.ok( tabResponseContainer ).build( );
+        Response response;
+        TabResponseContainer< TabsPayload > tabResponseContainer;
+
+        try {
+            DAOResponse< com.mana.innovative.domain.common.Tab > tabDAOResponse =
+                    tabDAO.getTabs( requestParams );
+            tabResponseContainer = TabResponseBuilder.build( tabDAOResponse, requestParams.isError( ) );
+            response = Response.ok( tabResponseContainer ).build( );
+        } catch ( Exception exception ) {
+            response = ResponseUtility.internalServerErrorMsg( null );
+        }
+        return response;
     }
 
     /**
      * Delete tabs.
      *
-     * @param tabIds        the tab ids
+     * @param tabIds the tab ids
      * @param requestParams the request params
-     *
      * @return the response
      */
     public Response deleteTabs( List< Integer > tabIds, RequestParams requestParams ) {

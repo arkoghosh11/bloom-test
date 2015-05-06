@@ -20,14 +20,32 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/30/2015 7:58 PM. This class WhenCalEventConversionThenTestCalEventConverterDomainDTOMethods
  * is a test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenCalEventConversionThenTestCalEventConverterDomainDTOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenCalEventConversionThenTestCalEventConverterDomainDTOMethods.class );
 
-    private CalendarEvent calendarEventDTO, calendarEventDTO2;
-    private com.mana.innovative.domain.common.CalendarEvent calendarEventDomain, calendarEventDomain2;
+    /**
+     * The Calendar event dTO.
+     */
+    private CalendarEvent calendarEventDTO, /**
+     * The Calendar event dTO 2.
+     */
+    calendarEventDTO2;
+    /**
+     * The Calendar event domain.
+     */
+    private com.mana.innovative.domain.common.CalendarEvent calendarEventDomain, /**
+     * The Calendar event domain 2.
+     */
+    calendarEventDomain2;
 
     /**
      * Sets up.
@@ -173,6 +191,11 @@ public class WhenCalEventConversionThenTestCalEventConverterDomainDTOMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted dTO from domain for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainForError( ) throws Exception {
 

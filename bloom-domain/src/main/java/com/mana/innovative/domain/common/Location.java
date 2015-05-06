@@ -22,78 +22,163 @@ import java.util.Objects;
 @Table( name = "locations" )
 public class Location {
 
+    /**
+     * The Location id.
+     */
     @Id
     @Column
     @GeneratedValue
     private long locationId;
 
+    /**
+     * The Latitude.
+     */
     @Column( name = "latitude" )
     private double latitude;
+    /**
+     * The Longitude.
+     */
     @Column( name = "longitude" )
     private double longitude;
 
-    //    @OneToOne(cascade = CascadeType.ALL, mappedBy =
+    /**
+     * The Address.
+     */
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy =
     @Transient
     private Address address;
 
+    /**
+     * The Created date.
+     */
     @Column( name = "created_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
+    /**
+     * The Updated date.
+     */
     @Column( name = "updated_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
+    /**
+     * Gets location id.
+     *
+     * @return the location id
+     */
     public long getLocationId( ) {
         return locationId;
     }
 
+    /**
+     * Sets location id.
+     *
+     * @param locationId the location id
+     */
     public void setLocationId( long locationId ) {
         this.locationId = locationId;
     }
 
+    /**
+     * Gets latitude.
+     *
+     * @return the latitude
+     */
     public double getLatitude( ) {
         return latitude;
     }
 
+    /**
+     * Sets latitude.
+     *
+     * @param latitude the latitude
+     */
     public void setLatitude( double latitude ) {
         this.latitude = latitude;
     }
 
 
+    /**
+     * Gets longitude.
+     *
+     * @return the longitude
+     */
     public double getLongitude( ) {
         return longitude;
     }
 
+    /**
+     * Sets longitude.
+     *
+     * @param longitude the longitude
+     */
     public void setLongitude( double longitude ) {
         this.longitude = longitude;
     }
 
-    //   Note the following fields do not need to be in the xml mappings
+    /**
+     * Gets address.
+     *
+     * @return the address
+     */
+//   Note the following fields do not need to be in the xml mappings
     public Address getAddress( ) {
         return address;
     }
 
+    /**
+     * Sets address.
+     *
+     * @param address the address
+     */
     public void setAddress( Address address ) {
         this.address = address;
     }
 
+    /**
+     * Gets created date.
+     *
+     * @return the created date
+     */
     public Date getCreatedDate( ) {
         return createdDate;
     }
 
+    /**
+     * Sets created date.
+     *
+     * @param createdDate the created date
+     */
     public void setCreatedDate( Date createdDate ) {
         this.createdDate = createdDate;
     }
 
 
+    /**
+     * Gets updated date.
+     *
+     * @return the updated date
+     */
     public Date getUpdatedDate( ) {
         return updatedDate;
     }
 
+    /**
+     * Sets updated date.
+     *
+     * @param updatedDate the updated date
+     */
     public void setUpdatedDate( Date updatedDate ) {
         this.updatedDate = updatedDate;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -110,7 +195,7 @@ public class Location {
      * "textually represents" this object. The result should be a concise but informative representation that is easy
      * for a person to read.
      *
-     * @return {@link String}a string representation of the object.
+     * @return a string representation of the object.
      */
     @Override
     public String toString( ) {

@@ -14,18 +14,39 @@ import java.util.Objects;
 @XmlRootElement( name = "address" )
 public class Address {
 
+    /**
+     * The Address id.
+     */
     private Long addressId;
 
+    /**
+     * The Address 1.
+     */
     private String address1;
 
+    /**
+     * The Address 2.
+     */
     private String address2;
 
+    /**
+     * The City.
+     */
     private String city;
 
+    /**
+     * The State.
+     */
     private String state;
 
+    /**
+     * The District.
+     */
     private String district;
 
+    /**
+     * The Zip code.
+     */
     private Integer zipCode;
 
 //    private Location location;
@@ -167,6 +188,7 @@ public class Address {
     /**
      * Gets location.
      *
+     * @param o the o
      * @return the location
      */
 //    @XmlElement(name = "location")
@@ -203,7 +225,7 @@ public class Address {
      * "textually represents" this object. The result should be a concise but informative representation that is easy
      * for a person to read.
      *
-     * @return {@link String}a string representation of the object.
+     * @return a string representation of the object.
      */
     @Override
     public String toString( ) {

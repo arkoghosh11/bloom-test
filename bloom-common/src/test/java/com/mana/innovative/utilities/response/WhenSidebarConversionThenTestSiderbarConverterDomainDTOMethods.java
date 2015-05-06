@@ -20,14 +20,32 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/30/2015 7:46 PM. This class WhenSidebarConversionThenTestSiderbarConverterDomainDTOMethods
  * is a test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenSidebarConversionThenTestSiderbarConverterDomainDTOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenSidebarConversionThenTestSiderbarConverterDomainDTOMethods.class );
 
-    private SidebarType sidebarDTO, sidebarDTO2;
-    private com.mana.innovative.domain.common.SidebarType sidebarDomain, sidebarDomain2;
+    /**
+     * The Sidebar dTO.
+     */
+    private SidebarType sidebarDTO, /**
+     * The Sidebar dTO 2.
+     */
+    sidebarDTO2;
+    /**
+     * The Sidebar domain.
+     */
+    private com.mana.innovative.domain.common.SidebarType sidebarDomain, /**
+     * The Sidebar domain 2.
+     */
+    sidebarDomain2;
 
     /**
      * Sets up.
@@ -175,6 +193,11 @@ public class WhenSidebarConversionThenTestSiderbarConverterDomainDTOMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted dTO from domain for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainForError( ) throws Exception {
 

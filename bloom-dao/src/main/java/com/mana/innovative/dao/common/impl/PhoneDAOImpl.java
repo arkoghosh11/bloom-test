@@ -23,21 +23,23 @@ import java.util.List;
  * Created by Bloom/Rono on 5/2/2015 5:38 PM. This class is PhoneDAOImpl
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Repository
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( PhoneDAOImpl.class );
 
     /**
      * Create phone.
      *
-     * @param phone         the phone
+     * @param phone the phone
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -85,7 +87,6 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
      * Gets phones.
      *
      * @param requestParams the request params
-     *
      * @return the phones
      */
     @SuppressWarnings( "unchecked" )
@@ -129,6 +130,14 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
         return phoneDAOResponse;
     }
 
+    /**
+     * Gets phone.
+     *
+     * @param phoneId       the phone id
+     * @param requestParams the request params
+     *
+     * @return the phone
+     */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
@@ -171,6 +180,13 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
         return phoneDAOResponse;
     }
 
+    /**
+     * Update phone.
+     *
+     * @param phone the phone
+     * @param requestParams the request params
+     * @return the dAO response
+     */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_COMMITTED )
     public DAOResponse< Phone > updatePhone( final Phone phone, final RequestParams requestParams ) {
@@ -215,7 +231,7 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
      * Delete phone.
      *
      * @param phoneId the phone id
-     *
+     * @param requestParams the request params
      * @return the boolean
      */
     @Override
@@ -263,7 +279,6 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
      * Delete all phones.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override

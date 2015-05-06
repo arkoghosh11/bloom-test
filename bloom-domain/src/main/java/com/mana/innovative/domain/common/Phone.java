@@ -275,6 +275,13 @@ public class Phone {
         this.customerPhone = customerPhone;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -289,6 +296,11 @@ public class Phone {
                 Objects.equals( getBoughtDate( ), phone.getBoughtDate( ) );
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString( ) {
         return "Phone{" +

@@ -26,6 +26,9 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 5/2/2015 6:18 PM. This class WhenGetCreditCardDAOThenTestGetCreditCardGetMethods is a test
  * class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -33,12 +36,26 @@ import java.util.List;
 @Transactional   // If required
 public class WhenGetCreditCardDAOThenTestGetCreditCardGetMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenGetCreditCardDAOThenTestGetCreditCardGetMethods.class );
 
+    /**
+     * The Credit card dAO.
+     */
     @Resource
     private CreditCardDAO creditCardDAO;
+    /**
+     * The Request params.
+     */
     private RequestParams requestParams;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
@@ -46,12 +63,22 @@ public class WhenGetCreditCardDAOThenTestGetCreditCardGetMethods {
         requestParams = new RequestParams( );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 
+    /**
+     * Test get credit cards with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCreditCardsWithErrorDisabled( ) throws Exception {
@@ -80,6 +107,11 @@ public class WhenGetCreditCardDAOThenTestGetCreditCardGetMethods {
         logger.debug( "Finishing test for GetCreditCardsWithErrorDisabled" );
     }
 
+    /**
+     * Test get credit card with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCreditCardWithErrorDisabled( ) throws Exception {
@@ -132,6 +164,11 @@ public class WhenGetCreditCardDAOThenTestGetCreditCardGetMethods {
         logger.debug( "Finishing test for GetCreditCardWithErrorDisabled" );
     }
 
+    /**
+     * Test get credit cards with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCreditCardsWithErrorEnabled( ) throws Exception {
@@ -165,6 +202,11 @@ public class WhenGetCreditCardDAOThenTestGetCreditCardGetMethods {
         logger.debug( "Finishing test for GetCreditCardsWithErrorEnabled" );
     }
 
+    /**
+     * Test get credit card with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCreditCardWithErrorEnabled( ) throws Exception {

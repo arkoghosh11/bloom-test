@@ -28,8 +28,17 @@ public class WhenDateConvertThenTestDateFormatAdapterMethods {
      */
     private static final Logger logger = Logger.getLogger( WhenDateConvertThenTestDateFormatAdapterMethods.class );
 
+    /**
+     * The Date format adapter.
+     */
     private DateFormatAdapter dateFormatAdapter;
+    /**
+     * The String date.
+     */
     private String stringDate;
+    /**
+     * The Date.
+     */
     private Date date;
 
     /**

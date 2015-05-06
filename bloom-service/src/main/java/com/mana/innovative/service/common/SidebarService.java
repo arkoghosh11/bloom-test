@@ -19,7 +19,6 @@ public interface SidebarService {
      * Gets sidebar by type.
      *
      * @param requestParams the request params
-     *
      * @return the sidebar by type
      */
     Response getSidebarByType( RequestParams requestParams );

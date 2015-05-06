@@ -29,19 +29,34 @@ import java.util.List;
 
 /**
  * Created by alex1 on 1/21/2015. This is a domain class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = "/dbConfig-test.xml" )
 @TransactionConfiguration( transactionManager = "transactionManager", defaultRollback = true )
 public class WhenGetItemThenTestItemDAOGetMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenGetItemThenTestItemDAOGetMethods.class );
 
+    /**
+     * The Default item.
+     */
     private Item defaultItem;
 
+    /**
+     * The Item dAO impl.
+     */
     @Resource
     private ItemDAO itemDAOImpl;
 
+    /**
+     * Sets up.
+     */
     @Before
     @BeforeTransaction
     public void setUp( ) {
@@ -76,12 +91,18 @@ public class WhenGetItemThenTestItemDAOGetMethods {
     }
 
 
+    /**
+     * Test item dAO not null.
+     */
     @Test
     public void testItemDAONotNull( ) {
 
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOImpl );
     }
 
+    /**
+     * Test item dAO get item ny item id with error disabled.
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
     public void testItemDAOGetItemNyItemIdWithErrorDisabled( ) {
@@ -121,6 +142,9 @@ public class WhenGetItemThenTestItemDAOGetMethods {
         logger.debug( "Finishing testItemDAOGetItemNyItemIdWithErrorDisabled" );
     }
 
+    /**
+     * Test item dAO read with error disabled.
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
     public void testItemDAOReadWithErrorDisabled( ) {
@@ -146,6 +170,9 @@ public class WhenGetItemThenTestItemDAOGetMethods {
         logger.debug( "Finishing testItemDAOReadWithErrorDisabled" );
     }
 
+    /**
+     * Test item dAO get item ny item id with error enabled.
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
     public void testItemDAOGetItemNyItemIdWithErrorEnabled( ) {
@@ -190,6 +217,9 @@ public class WhenGetItemThenTestItemDAOGetMethods {
         logger.debug( "Finishing testItemDAOGetItemNyItemIdWithErrorEnabled" );
     }
 
+    /**
+     * Test item dAO read with error enabled.
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
     public void testItemDAOReadWithErrorEnabled( ) {
@@ -218,6 +248,9 @@ public class WhenGetItemThenTestItemDAOGetMethods {
     }
 
 
+    /**
+     * Tear down.
+     */
     @After
     @AfterTransaction
     public void tearDown( ) {

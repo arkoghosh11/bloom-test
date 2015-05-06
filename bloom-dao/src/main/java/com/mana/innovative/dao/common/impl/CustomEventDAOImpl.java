@@ -40,7 +40,6 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
      *
      * @param customEventId the custom event id
      * @param requestParams the request params
-     *
      * @return the event by id
      */
     @SuppressWarnings( "unchecked" )
@@ -87,9 +86,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * Gets events by date.
      *
-     * @param eventDate     the event date
+     * @param eventDate the event date
      * @param requestParams the request params
-     *
      * @return the events by date
      */
     @SuppressWarnings( "unchecked" )
@@ -136,9 +134,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * Gets events by event name.
      *
-     * @param eventName     the event name
+     * @param eventName the event name
      * @param requestParams the request params
-     *
      * @return the events by event name
      */
     @SuppressWarnings( "unchecked" )
@@ -187,7 +184,6 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
      * Gets all events.
      *
      * @param requestParams the request params
-     *
      * @return the all events
      */
     @SuppressWarnings( "unchecked" )
@@ -231,9 +227,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * Update event.
      *
-     * @param customEvent   the custom event
+     * @param customEvent the custom event
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @SuppressWarnings( "unchecked" )
@@ -278,9 +273,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * Enable event scheduler for date.
      *
-     * @param date          the date
+     * @param date the date
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @SuppressWarnings( "unchecked" )
@@ -328,9 +322,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * Disable event scheduler for date.
      *
-     * @param date          the date
+     * @param date the date
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @SuppressWarnings( "unchecked" )
@@ -380,9 +373,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
      * Gets events by date range.
      *
      * @param eventStartTime the event start time
-     * @param eventEndTime   the event end time
-     * @param requestParams  the request params
-     *
+     * @param eventEndTime the event end time
+     * @param requestParams the request params
      * @return the events by date range
      */
     @SuppressWarnings( "unchecked" )

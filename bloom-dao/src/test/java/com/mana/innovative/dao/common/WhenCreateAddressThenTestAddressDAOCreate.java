@@ -21,6 +21,9 @@ import javax.annotation.Resource;
 
 /**
  * This class is a test class for testing class todo...
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -28,13 +31,27 @@ import javax.annotation.Resource;
 @Transactional   // If required
 public class WhenCreateAddressThenTestAddressDAOCreate {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenCreateAddressThenTestAddressDAOCreate.class );
 
+    /**
+     * The Dummy address.
+     */
     private Address dummyAddress;
 
+    /**
+     * The Address dAO impl.
+     */
     @Resource
     private AddressDAO addressDAOImpl;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
@@ -53,11 +70,21 @@ public class WhenCreateAddressThenTestAddressDAOCreate {
 
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
     }
 
+    /**
+     * Test create a address with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback
     @Transactional( propagation = Propagation.REQUIRES_NEW )
@@ -92,6 +119,11 @@ public class WhenCreateAddressThenTestAddressDAOCreate {
         logger.debug( "Finishing test for CreateAAddressWithErrorEnabled" );
     }
 
+    /**
+     * Test create a address with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback
     @Transactional( propagation = Propagation.REQUIRES_NEW )

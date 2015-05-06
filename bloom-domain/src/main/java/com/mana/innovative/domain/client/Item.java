@@ -25,7 +25,10 @@ import java.util.Objects;
 @Table( name = "items" )
 public class Item {
 
-    /* */
+    /**
+     * The Item id.
+     */
+/* */
     @Id
     @Column( name = "item_id", unique = true, updatable = false, nullable = false )
     @GeneratedValue( strategy = GenerationType.TABLE )
@@ -33,38 +36,80 @@ public class Item {
 //    @GenericGenerator (name = "gen", strategy = "foreign", parameters = { @Parameter (name = "property", value =
 //            "item") })
     private long itemId;
+    /**
+     * The Item price.
+     */
     @Column( name = "item_price" )
     private Double itemPrice;
+    /**
+     * The Quantity.
+     */
     @Column( name = "quantity" )
     private Double quantity;
+    /**
+     * The Weight.
+     */
     @Column( name = "weight" )
     private Double weight;
 
+    /**
+     * The Item price currency.
+     */
     @Column( name = "item_price_currency" )
     private String itemPriceCurrency;
+    /**
+     * The Item name.
+     */
     @Column( name = "item_name" )
     private String itemName;
+    /**
+     * The Item type.
+     */
     @Column( name = "item_type" )
     private String itemType;
+    /**
+     * The Item sub type.
+     */
     @Column( name = "item_sub_type" )
     private String itemSubType;
+    /**
+     * The Bought from.
+     */
     @Column( name = "bought_from" )
     private String boughtFrom;
+    /**
+     * The Quantity type.
+     */
     @Column( name = "quantity_type" )
     private String quantityType;
+    /**
+     * The Weighted unit.
+     */
     @Column( name = "weighted_unit" )
     private String weightedUnit;
 
+    /**
+     * The Bought date.
+     */
     @Column( name = "bought_date" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date boughtDate;
+    /**
+     * The Created date.
+     */
     @Column( name = "created_date", updatable = false )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
+    /**
+     * The Updated date.
+     */
     @Column( name = "updated_date" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
+    /**
+     * The Shop item.
+     */
     @ManyToOne( cascade = { CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH } )
     @JoinColumn( name = "shop_id", updatable = true )
     private Shop shopItem;
@@ -355,6 +400,13 @@ public class Item {
         this.shopItem = shopItem;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -379,7 +431,7 @@ public class Item {
      * "textually represents" this object. The result should be a concise but informative representation that is easy
      * for a person to read.
      *
-     * @return {@link String}a string representation of the object.
+     * @return a string representation of the object.
      */
     @Override
     public String toString( ) {

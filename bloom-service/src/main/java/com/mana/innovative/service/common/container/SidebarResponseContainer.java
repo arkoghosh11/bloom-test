@@ -8,7 +8,11 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 /**
  * Created by IntelliJ IDEA.
  *
+ * @param <T>   the type parameter
+ * Created by Bloom/Rono on $date $time.
  * @author Bloom Date: 4/9/13 Time: 4:24 PM
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  * @since: jdk 1.7
  */
 @XmlSeeAlso( { ResponseContainer.class, SidebarPayload.class } )

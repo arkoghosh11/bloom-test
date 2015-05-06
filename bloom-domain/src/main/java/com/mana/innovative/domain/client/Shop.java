@@ -29,28 +29,55 @@ import java.util.Objects;
 @Table( name = "shops" )
 public class Shop {
 
+    /**
+     * The Shop id.
+     */
     @Id
     @Column( name = "shop_id" )
     @GeneratedValue( strategy = GenerationType.TABLE )
     private long shopId;
+    /**
+     * The Shop own id.
+     */
     @Column( name = "shop_main_id", unique = true, nullable = false )
     private Long shopOwnId;
+    /**
+     * The Shop name.
+     */
     @Column( name = "shop_name" )
     private String shopName;
+    /**
+     * The Shop web link.
+     */
     @Column( name = "shop_web_link" )
     private String shopWebLink;
 
+    /**
+     * The Address.
+     */
     @OneToOne( cascade = CascadeType.ALL )
     @JoinColumn( name = "address_id", nullable = false )
     private Address address;
+    /**
+     * The Working hours.
+     */
     @OneToMany( orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "shopWorkingHour" )
     private List< WorkingHour > workingHours;
+    /**
+     * The Items.
+     */
     @OneToMany( orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "shopItem" )
     private List< Item > items;
 
+    /**
+     * The Created date.
+     */
     @Column( name = "created_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
+    /**
+     * The Updated date.
+     */
     @Column( name = "updated_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
@@ -217,6 +244,13 @@ public class Shop {
         this.updatedDate = updatedDate;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -237,7 +271,7 @@ public class Shop {
      * "textually represents" this object. The result should be a concise but informative representation that is easy
      * for a person to read.
      *
-     * @return {@link String}a string representation of the object.
+     * @return a string representation of the object.
      */
     @Override
     public String toString( ) {

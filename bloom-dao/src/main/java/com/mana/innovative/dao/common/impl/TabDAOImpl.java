@@ -108,9 +108,8 @@ public class TabDAOImpl implements TabDAO {
     /**
      * Fill error container.
      *
-     * @param location  the location
+     * @param location the location
      * @param exception the exception
-     *
      * @return the error container
      */
     private ErrorContainer fillErrorContainer( String location, Exception exception ) {
@@ -125,8 +124,7 @@ public class TabDAOImpl implements TabDAO {
      * This method is to retrieve all the tabs values from the DB
      *
      * @param requestParams the request params
-     *
-     * @return List<Tab> </> Return a list of
+     * @return List<Tab>  </> Return a list of
      */
     @Override
     @SuppressWarnings( value = "unchecked" )
@@ -170,13 +168,12 @@ public class TabDAOImpl implements TabDAO {
     /**
      * Delete tab by tab id.
      *
-     * @param tabId         the tab id
+     * @param tabId the tab id
      * @param requestParams the request params
-     *
      * @return Returns a boolean value to indicate a successful deletion
      */
     @Override
-    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Tab > deleteTabByTabId( int tabId, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deleteTabByTabId()";
@@ -219,9 +216,8 @@ public class TabDAOImpl implements TabDAO {
     /**
      * This method is to update the DB with the persistence layer to keep the Tab value synced
      *
-     * @param tab           the tab
+     * @param tab the tab
      * @param requestParams the request params
-     *
      * @return Returns a boolean value to indicate a successful update
      */
     @Override
@@ -267,9 +263,8 @@ public class TabDAOImpl implements TabDAO {
     /**
      * This method is to create a Tab object and save it in the DB
      *
-     * @param tab           the tab
+     * @param tab the tab
      * @param requestParams the request params
-     *
      * @return Returns a boolean value to indicate a successful creation
      */
     @Override
@@ -319,8 +314,7 @@ public class TabDAOImpl implements TabDAO {
      * Gets tab by search params.
      *
      * @param tabSearchOption the tab search option
-     * @param requestParams   the request params
-     *
+     * @param requestParams the request params
      * @return the tab by search params
      */
     @SuppressWarnings( "unchecked" )
@@ -364,9 +358,8 @@ public class TabDAOImpl implements TabDAO {
     /**
      * Gets tab by tab id.
      *
-     * @param tabId         the tab id
+     * @param tabId the tab id
      * @param requestParams the request params
-     *
      * @return the tab by tab id
      */
     @SuppressWarnings( "unchecked" )
@@ -413,9 +406,8 @@ public class TabDAOImpl implements TabDAO {
     /**
      * Delete tabs.
      *
-     * @param tabIds        the tab ids
+     * @param tabIds the tab ids
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -463,7 +455,6 @@ public class TabDAOImpl implements TabDAO {
      * This method is to create a detached criteria
      *
      * @param tabSearchOption the tab search option
-     *
      * @return A detached criteria object
      */
     private DetachedCriteria getDetachedCriteriaBySearchParams( TabSearchOption tabSearchOption ) {
@@ -497,11 +488,10 @@ public class TabDAOImpl implements TabDAO {
     /**
      * Add condition params.
      *
-     * @param detachedCriteria      the detached criteria
+     * @param detachedCriteria the detached criteria
      * @param searchConditionParams the search condition params
-     * @param searchConditions      the search conditions
-     * @param keys                  the keys
-     *
+     * @param searchConditions the search conditions
+     * @param keys the keys
      * @return the detached criteria
      */
     private DetachedCriteria addConditionParams( DetachedCriteria detachedCriteria, List< Map< String,
@@ -524,9 +514,8 @@ public class TabDAOImpl implements TabDAO {
      * Add order params.
      *
      * @param detachedCriteria the detached criteria
-     * @param searchOrders     the search orders
-     * @param keys             the keys
-     *
+     * @param searchOrders the search orders
+     * @param keys the keys
      * @return the detached criteria
      */
     private DetachedCriteria addOrderParams( DetachedCriteria detachedCriteria, List< Map< String, String > > searchOrders,
@@ -545,11 +534,10 @@ public class TabDAOImpl implements TabDAO {
      * Add match type params.
      *
      * @param detachedCriteria the detached criteria
-     * @param searchParams     the search params
+     * @param searchParams the search params
      * @param searchMatchTypes the search match types
      * @param searchConditions the search conditions
-     * @param keys             the keys
-     *
+     * @param keys the keys
      * @return the detached criteria
      */
     private DetachedCriteria addMatchTypeParams( DetachedCriteria detachedCriteria, List< Map< String,
@@ -582,7 +570,6 @@ public class TabDAOImpl implements TabDAO {
      * This method is for getting the keys for searching
      *
      * @param searchConditions A list of type Map of type
-     *
      * @return A list of type String
      */
     private List< String > getKeysForSearch( final List< Map< String, String > > searchConditions ) {

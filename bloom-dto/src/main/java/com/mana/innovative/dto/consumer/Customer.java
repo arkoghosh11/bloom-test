@@ -195,6 +195,13 @@ public class Customer extends User {
         this.preferences = preferences;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -210,6 +217,11 @@ public class Customer extends User {
                 Objects.equals( getPreferences( ), customer.getPreferences( ) );
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString( ) {
         return super.toString( ) + "Customer {" +

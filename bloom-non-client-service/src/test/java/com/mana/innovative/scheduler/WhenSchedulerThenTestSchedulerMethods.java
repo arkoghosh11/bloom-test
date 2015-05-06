@@ -119,6 +119,11 @@ public class WhenSchedulerThenTestSchedulerMethods {
         logger.debug( "Finishing test for ReadFromXMLNSave" );
     }
 
+    /**
+     * Test send email for event.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testSendEmailForEvent( ) throws Exception {
 
@@ -131,6 +136,11 @@ public class WhenSchedulerThenTestSchedulerMethods {
         logger.debug( "Finishing test for SendEmailForEvent" );
     }
 
+    /**
+     * Test out dummy item data.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testOutDummyItemData( ) throws Exception {
 

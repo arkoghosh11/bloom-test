@@ -29,26 +29,47 @@ import java.util.Objects;
 @Table( name = "address" )
 public class Address {
 
+    /**
+     * The Address id.
+     */
     @Id
     @Column( name = "address_id", nullable = false )
     @GeneratedValue( strategy = GenerationType.TABLE )
     private long addressId;
 
+    /**
+     * The Address 1.
+     */
     @Column( name = "address1" )
     private String address1;
 
+    /**
+     * The Address 2.
+     */
     @Column( name = "address2" )
     private String address2;
 
+    /**
+     * The City.
+     */
     @Column( name = "city" )
     private String city;
 
+    /**
+     * The State.
+     */
     @Column( name = "state" )
     private String state;
 
+    /**
+     * The District.
+     */
     @Column( name = "district" )
     private String district;
 
+    /**
+     * The Zip code.
+     */
     @Column( name = "zipcode" )
     private Integer zipCode;
 
@@ -57,15 +78,27 @@ public class Address {
 //    @Transient
 //    private Location location;
 
+    /**
+     * The Shop address.
+     */
     @OneToOne( orphanRemoval = true, cascade = { CascadeType.ALL }, mappedBy = "address" )
     private Shop shopAddress;
 
+    /**
+     * The Customer address.
+     */
     @ManyToMany( cascade = { CascadeType.ALL }, mappedBy = "shippingAddress" )
     private List< Customer > customerAddress;
 
+    /**
+     * The Created date.
+     */
     @Column( name = "created_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
+    /**
+     * The Updated date.
+     */
     @Column( name = "updated_date", columnDefinition = "TIMESTAMP" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
@@ -234,10 +267,20 @@ public class Address {
         this.shopAddress = shopAddress;
     }
 
+    /**
+     * Gets customer address.
+     *
+     * @return the customer address
+     */
     public List< Customer > getCustomerAddress( ) {
         return customerAddress;
     }
 
+    /**
+     * Sets customer address.
+     *
+     * @param customerAddress the customer address
+     */
     public void setCustomerAddress( final List< Customer > customerAddress ) {
         this.customerAddress = customerAddress;
     }
@@ -279,6 +322,13 @@ public class Address {
         this.updatedDate = updatedDate;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -299,7 +349,7 @@ public class Address {
      * "textually represents" this object. The result should be a concise but informative representation that is easy
      * for a person to read.
      *
-     * @return {@link String}a string representation of the object.
+     * @return a string representation of the object.
      */
     @Override
     public String toString( ) {

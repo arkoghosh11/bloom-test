@@ -16,9 +16,15 @@ import org.springframework.web.context.request.RequestContextListener;
 
 /**
  * The type Rest test.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class RestTest extends JerseyTest {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( RestTest.class );
 
     /**
@@ -35,9 +41,9 @@ public class RestTest extends JerseyTest {
 //              IMP context path must be a logical name and not /
                 .contextPath("bloom")
 //              IMP all the spring config files in webapp resources with no line break only 1 space minimum
-                .contextParam("contextConfigLocation", "classpath*:/db_config.xml" +
-                        "  classpath*:/service_config.xml" +
-                        "  classpath*:web_config.xml")
+                .contextParam( "contextConfigLocation", "classpath*:/db_config_test.xml" +
+                        "  classpath*:/service_config_test.xml" +
+                        "  classpath*:/web_config_test.xml" )
 //                        "file:./src/main/resources/db_config.xml;" +
 //                        " file:./src/main/resources/service_config.xml;" +
 //                        " file:./src/main/resources/web_config.xml")
@@ -51,6 +57,20 @@ public class RestTest extends JerseyTest {
 //              Note request listener class , using spring's
                 .requestListenerClass(RequestContextListener.class)
                 .build();
+    }
+
+    /**
+     * Tear down.
+     */
+    @Override
+    @After
+    public void setUp( ) {
+        try {
+            super.setUp( );
+        } catch ( Exception exception ) {
+            logger.error( "An exception occurred while trying to start the jersey Grizzly Servlet Container" );
+        }
+        logger.info( TestConstants.setUpMethodLoggerMsg );
     }
 
     /**

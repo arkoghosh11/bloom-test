@@ -16,15 +16,38 @@ import java.util.List;
 
 /**
  * This class is a test class for testing class todo...
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenShopConversionThenTestShopDomainDTOConverterMethods
             .class );
 
-    private Shop shopDTO, shopDTO2;
-    private com.mana.innovative.domain.client.Shop shopDomain, shopDomain2;
+    /**
+     * The Shop dTO.
+     */
+    private Shop shopDTO, /**
+     * The Shop dTO 2.
+     */
+    shopDTO2;
+    /**
+     * The Shop domain.
+     */
+    private com.mana.innovative.domain.client.Shop shopDomain, /**
+     * The Shop domain 2.
+     */
+    shopDomain2;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void setUp( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
@@ -40,12 +63,22 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         shopDomain = TestDummyDomainObjectGenerator.getTestShopDomainObject( );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
 
     }
 
+    /**
+     * Test get converted dTO from domain.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomain( ) throws Exception {
 
@@ -60,6 +93,11 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
 
     }
 
+    /**
+     * Test get converted list dTO from domain.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedListDTOFromDomain( ) throws Exception {
 
@@ -78,6 +116,11 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         logger.debug( "Finishing testGetConvertedListDTOFromDomain" );
     }
 
+    /**
+     * Test get converted domain from dTO.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDomainFromDTO( ) throws Exception {
 
@@ -92,6 +135,11 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTO" );
     }
 
+    /**
+     * Test get converted list domain from dTO.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedListDomainFromDTO( ) throws Exception {
 
@@ -112,6 +160,11 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         logger.debug( "Finishing testGetConvertedListDomainFromDTO" );
     }
 
+    /**
+     * Test get converted domain from dTO for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDomainFromDTOForError( ) throws Exception {
 
@@ -134,6 +187,11 @@ public class WhenShopConversionThenTestShopDomainDTOConverterMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted dTO from domain for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainForError( ) throws Exception {
 

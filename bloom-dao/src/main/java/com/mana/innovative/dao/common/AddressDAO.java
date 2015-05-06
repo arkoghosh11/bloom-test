@@ -37,8 +37,7 @@ public interface AddressDAO {
      * Delete address by address id.
      *
      * @param addressId the address id
-     * @param isError   the is error
-     *
+     * @param isError the is error
      * @return the dAO response
      */
     DAOResponse< Address > deleteAddressByAddressId( long addressId, boolean
@@ -48,8 +47,7 @@ public interface AddressDAO {
      * Delete addresses by address ids.
      *
      * @param addressIds the address ids
-     * @param isError    the is error
-     *
+     * @param isError the is error
      * @return the dAO response
      */
     DAOResponse< Address > deleteAddressesByAddressIds( List< Long > addressIds, boolean isError );
@@ -78,7 +76,6 @@ public interface AddressDAO {
      *
      * @param address the address
      * @param isError the is error
-     *
      * @return the dAO response
      */
     DAOResponse< Address > updateAddress( Address address, boolean isError );

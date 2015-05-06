@@ -30,6 +30,9 @@ import java.util.List;
 
 /**
  * The type When create a shop test shop dAO create shop.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
@@ -37,13 +40,31 @@ import java.util.List;
 @Transactional
 public class WhenCreateAShopTestShopDAOCreateShop {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenCreateAShopTestShopDAOCreateShop.class );
+    /**
+     * The Shop dAO impl.
+     */
     @Resource
     private ShopDAO shopDAOImpl;
 
+    /**
+     * The Dummy shop.
+     */
     private Shop dummyShop;
+    /**
+     * The Dummy item.
+     */
     private Item dummyItem;
+    /**
+     * The Dummy address.
+     */
     private Address dummyAddress;
+    /**
+     * The Dummy working hour.
+     */
     private WorkingHour dummyWorkingHour;
 
     /**

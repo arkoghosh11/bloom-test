@@ -40,6 +40,11 @@ public class RequestParams {
     private Long endLimit;
 
     /**
+     * The Id.
+     */
+    private Long Id;
+
+    /**
      * The Start date.
      */
     private String startDate;
@@ -145,6 +150,23 @@ public class RequestParams {
         this.endLimit = endLimit;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public Long getId( ) {
+        return Id;
+    }
+
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId( final Long id ) {
+        Id = id;
+    }
 
     /**
      * Gets start date.

@@ -21,16 +21,21 @@ import java.util.List;
  */
 public class ShopDomainDTOConverter {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( ShopDomainDTOConverter.class );
+    /**
+     * The constant ZERO.
+     */
     private static final int ZERO = DAOConstants.ZERO;
 //    private static final int ONE = DAOConstants.ONE;
 
     /**
      * Gets converted shop dTO from shop domain.
      *
-     * @param shopDTO    the shop dTO
+     * @param shopDTO the shop dTO
      * @param shopDomain the shop
-     *
      * @return the converted shop dTO from shop domain
      */
     public static Shop getConvertedDTOFromDomain( Shop shopDTO, com.mana.innovative.domain.client.Shop shopDomain ) {
@@ -76,7 +81,6 @@ public class ShopDomainDTOConverter {
      * Gets converted shop dTO list.
      *
      * @param shops the shops
-     *
      * @return the converted shop dTO list
      */
     public static List< Shop > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.client.Shop > shops ) {
@@ -95,8 +99,7 @@ public class ShopDomainDTOConverter {
      * Gets converted shop domain from shop dTO.
      *
      * @param shopDomain the shop domain
-     * @param shopDTO    the shop dTO
-     *
+     * @param shopDTO the shop dTO
      * @return the converted shop domain from shop dTO
      */
     public static com.mana.innovative.domain.client.Shop getConvertedDomainFromDTO( com.mana.innovative.domain.client.Shop shopDomain, Shop shopDTO ) {
@@ -164,7 +167,6 @@ public class ShopDomainDTOConverter {
      * Gets converted shop domain list from shop dTO list.
      *
      * @param shopDTOList the shop dTO list
-     *
      * @return the converted shop domain list from shop dTO list
      */
     public static List< com.mana.innovative.domain.client.Shop > getConvertedListDomainFromDTO( List< Shop > shopDTOList ) {

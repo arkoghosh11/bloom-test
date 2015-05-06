@@ -19,27 +19,45 @@ import javax.annotation.Resource;
 /**
  * Created by Bloom on 1/30/2015 : 12:20 AM
  * todo This class is for ...
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/service-config-test.xml","/db-config-test.xml" })
 public class WhenDoLoginThenTestLoginService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger(WhenDoLoginThenTestLoginService.class);
 
+    /**
+     * The Login service.
+     */
     @Resource
     private LoginService loginService;
 
+    /**
+     * Set up.
+     */
     @Before
     public void setUp(){
     logger.log(Level.DEBUG, " starting set up ");
     }
 
+    /**
+     * Test login service object.
+     */
     @Test
     public void testLoginServiceObject(){
 
         Assert.assertNotNull("Login Service is null", loginService);
     }
 
+    /**
+     * Tear down.
+     */
     @After
     public void tearDown() {
         logger.log(Level.DEBUG," ending test, finishing tear down");

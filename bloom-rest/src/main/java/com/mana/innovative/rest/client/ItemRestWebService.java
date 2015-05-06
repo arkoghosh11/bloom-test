@@ -47,19 +47,24 @@ public class ItemRestWebService {
     /**
      * The Item service impl.
      */
-    @Resource( name = "itemServiceImpl" )
+    @Resource
     ItemService itemServiceImpl;
+    /**
+     * The Login service.
+     */
     @Resource // todo login service
     private LoginService loginService;
+    /**
+     * The Http servlet request.
+     */
     @Context
     private HttpServletRequest httpServletRequest;
 
     /**
      * Gets items.
      *
-     * @param itemId  the item id
+     * @param itemId the item id
      * @param isError the is error
-     *
      * @return the items
      */
     @GET

@@ -22,10 +22,25 @@ import java.util.List;
  */
 public class WorkingHourDomainDTOConverter {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WorkingHourDomainDTOConverter.class );
+    /**
+     * The constant ZERO.
+     */
     private static final int ZERO = DAOConstants.ZERO;
+    /**
+     * The constant ONE.
+     */
     private static final int ONE = DAOConstants.ONE;
+    /**
+     * The constant STRING_ZERO.
+     */
     private static final String STRING_ZERO = DAOConstants.STRING_ZERO;
+    /**
+     * The constant FOUR.
+     */
     private static final int FOUR = 4;
 
 
@@ -33,7 +48,6 @@ public class WorkingHourDomainDTOConverter {
      * Gets converted dTO from domain.
      *
      * @param workingHourDomain the workingHour domain
-     *
      * @return the converted dTO from domain
      */
     public static WorkingHour getConvertedDTOFromDomain( com.mana.innovative.domain.client.WorkingHour workingHourDomain ) {
@@ -71,7 +85,6 @@ public class WorkingHourDomainDTOConverter {
      * Gets converted list domain from dTO.
      *
      * @param workingHoursDTO the workingHours dTO
-     *
      * @return the converted list domain from dTO
      */
     public static List< com.mana.innovative.domain.client.WorkingHour > getConvertedListDomainFromDTO( List< WorkingHour > workingHoursDTO ) {
@@ -88,7 +101,6 @@ public class WorkingHourDomainDTOConverter {
      * Gets converted domain from dTO.
      *
      * @param workingHourDTO the workingHour dTO
-     *
      * @return the converted domain from dTO
      */
     public static com.mana.innovative.domain.client.WorkingHour getConvertedDomainFromDTO( WorkingHour workingHourDTO ) {
@@ -145,7 +157,6 @@ public class WorkingHourDomainDTOConverter {
      * Gets converted list dTO from domain.
      *
      * @param workingHoursDomain the workingHours domain
-     *
      * @return the converted list dTO from domain
      */
     public static List< WorkingHour > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.client.WorkingHour > workingHoursDomain ) {
@@ -162,7 +173,6 @@ public class WorkingHourDomainDTOConverter {
      * To string time from date.
      *
      * @param date the date
-     *
      * @return the string
      */
     public static String toStringTimeFromDate( Date date ) {

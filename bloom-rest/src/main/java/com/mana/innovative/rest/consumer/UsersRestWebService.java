@@ -22,21 +22,33 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * @author Bloom
+ * The type Users rest web service.
+
+ * Created by Bloom/Rono on $date $time.
+ * @author Bloom Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Component
 @Path( "/{users: (?i)users}" )
 public class UsersRestWebService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( UsersRestWebService.class );
 
+    /**
+     * The Users service.
+     */
     @Resource
     private UsersService usersService;
 
     /**
      * This method is for HTTP GET response for getting
      *
-     * @return {@link Response}  A response object
+     * @param isError the is error
+     * @return A response object
      */
     @GET
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
@@ -51,8 +63,8 @@ public class UsersRestWebService {
     /**
      * Delete users.
      *
+     * @param userIds the user ids
      * @param isError the is error
-     *
      * @return the response
      */
     @DELETE

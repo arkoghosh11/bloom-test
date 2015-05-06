@@ -17,20 +17,31 @@ import javax.ws.rs.core.Response;
 public interface CalendarEventService {
 
     /**
-     * Gets calendar events.
+     * Gets calendar event.
      *
+     * @param calendarEventId {
+     *Integer
+     *}
      * @param requestParams the request params
-     *
-     * @return the calendar events
-     */
-    Response getCalendarEvents( RequestParams requestParams );
-
-    /**
-     * @param calendarEventId {Integer}
-     *
-     * @return Response
+     * @return Response calendar event
      */
     Response getCalendarEvent( Long calendarEventId, RequestParams requestParams );
 
+    /**
+     * Gets calendar event by date limits.
+     *
+     * @param requestParams the request params
+     * @return the calendar event by date limits
+     */
+    Response getCalendarEventByDateLimits( RequestParams requestParams );
+
+    /**
+     * Create calendar event.
+     *
+     * @param calendarEvent the calendar event
+     * @param requestParams the request params
+     *
+     * @return the response
+     */
     Response createCalendarEvent( CalendarEvent calendarEvent, RequestParams requestParams );
 }

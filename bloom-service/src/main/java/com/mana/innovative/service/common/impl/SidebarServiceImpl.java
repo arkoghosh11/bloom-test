@@ -10,6 +10,8 @@ import javax.ws.rs.core.Response;
  * Created by IntelliJ IDEA.
  *
  * @author Bloom Date: 3/23/13 Time: 7:37 PM
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  * @since: jdk 1.7
  */
 @Service
@@ -22,6 +24,13 @@ public class SidebarServiceImpl implements SidebarService {
 //        return Response.ok().build();
 //    }
 
+    /**
+     * Gets sidebar by type.
+     *
+     * @param requestParams the request params
+     *
+     * @return the sidebar by type
+     */
     public Response getSidebarByType( RequestParams requestParams ) {
         return Response.ok( ).build( );
     }

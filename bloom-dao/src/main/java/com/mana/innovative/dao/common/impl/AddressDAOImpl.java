@@ -23,21 +23,23 @@ import java.util.List;
  * The type Address dAO impl.
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Repository
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class AddressDAOImpl extends BasicDAO implements AddressDAO {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( AddressDAOImpl.class );
 
     /**
      * Gets address by address id.
      *
      * @param addressId the address id
-     * @param isError   the is error
-     *
+     * @param isError the is error
      * @return the address by address id
      */
     @SuppressWarnings( "unchecked" )
@@ -83,7 +85,8 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * This method is to retrieve all the address values from the DB
      *
-     * @return List<Address></> Return a list of {@link Address}
+     * @param isError the is error
+     * @return List<Address> </> Return a list of
      */
     @SuppressWarnings( "unchecked" )
     @Override
@@ -122,8 +125,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
      * Delete working hour by working hr ids.
      *
      * @param addressId the working hour id
-     * @param isError   the is error
-     *
+     * @param isError the is error
      * @return the dAO response
      */
     @Override
@@ -165,8 +167,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
      * Delete working hours by working hr ids.
      *
      * @param addressIds the working hour ids
-     * @param isError    the is error
-     *
+     * @param isError the is error
      * @return the dAO response
      */
     @Override
@@ -206,8 +207,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
      * Delete all address.
      *
      * @param deleteAllAddresses the is delete all
-     * @param isError            the is error true
-     *
+     * @param isError the is error true
      * @return the dAO response
      */
     @Override
@@ -253,7 +253,6 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
      *
      * @param address the address
      * @param isError the is error
-     *
      * @return the dAO response
      */
     @Override
@@ -297,7 +296,6 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
      *
      * @param address the address
      * @param isError the is error
-     *
      * @return the dAO response
      */
     @SuppressWarnings( "unchecked" )

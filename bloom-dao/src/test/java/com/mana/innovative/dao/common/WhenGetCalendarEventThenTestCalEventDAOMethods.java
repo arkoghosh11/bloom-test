@@ -27,6 +27,9 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 5/2/2015 11:51 PM. This class WhenCalendarEventThenTestCalEventDAOMethods is a test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -34,12 +37,26 @@ import java.util.List;
 @Transactional   // If required
 public class WhenGetCalendarEventThenTestCalEventDAOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenGetCalendarEventThenTestCalEventDAOMethods.class );
 
+    /**
+     * The Calendar event dAO.
+     */
     @Resource
     private CalendarEventDAO calendarEventDAO;
+    /**
+     * The Request params.
+     */
     private RequestParams requestParams;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
@@ -47,12 +64,22 @@ public class WhenGetCalendarEventThenTestCalEventDAOMethods {
         requestParams = new RequestParams( );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 
+    /**
+     * Test get calendar events with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCalendarEventsWithErrorDisabled( ) throws Exception {
@@ -81,6 +108,11 @@ public class WhenGetCalendarEventThenTestCalEventDAOMethods {
         logger.debug( "Finishing test for GetCalendarEventsWithErrorDisabled" );
     }
 
+    /**
+     * Test get calendar event with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCalendarEventWithErrorDisabled( ) throws Exception {
@@ -123,6 +155,11 @@ public class WhenGetCalendarEventThenTestCalEventDAOMethods {
         logger.debug( "Finishing test for GetCalendarEventWithErrorDisabled" );
     }
 
+    /**
+     * Test get calendar events with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCalendarEventsWithErrorEnabled( ) throws Exception {
@@ -156,6 +193,11 @@ public class WhenGetCalendarEventThenTestCalEventDAOMethods {
         logger.debug( "Finishing test for GetCalendarEventsWithErrorEnabled" );
     }
 
+    /**
+     * Test get calendar event with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCalendarEventWithErrorEnabled( ) throws Exception {
@@ -204,6 +246,11 @@ public class WhenGetCalendarEventThenTestCalEventDAOMethods {
         logger.debug( "Finishing test for GetCalendarEventWithErrorEnabled" );
     }
 
+    /**
+     * Test get calendar events by date limits with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCalendarEventsByDateLimitsWithErrorEnabled( ) throws Exception {
@@ -257,6 +304,11 @@ public class WhenGetCalendarEventThenTestCalEventDAOMethods {
         logger.debug( "Finishing test for GetCalendarEventsByDateLimitsWithErrorEnabled" );
     }
 
+    /**
+     * Test get calendar events by date limits with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCalendarEventsByDateLimitsWithErrorDisabled( ) throws Exception {

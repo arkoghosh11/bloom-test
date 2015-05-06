@@ -8,20 +8,47 @@ package com.mana.innovative.constants;
  */
 public enum QuantityType {
 
+    /**
+     * The UNIT.
+     */
     UNIT(1),
+    /**
+     * The DOZEN.
+     */
     DOZEN(12),
+    /**
+     * The SCORE.
+     */
     SCORE(20);
 
+    /**
+     * The Value.
+     */
     private final int value;
 
+    /**
+     * Instantiates a new Quantity type.
+     *
+     * @param value the value
+     */
     QuantityType(int value) {
         this.value = value;
     }
 
+    /**
+     * Gets value.
+     *
+     * @return the value
+     */
     public int getValue() {
         return value;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return super.toString().toLowerCase();

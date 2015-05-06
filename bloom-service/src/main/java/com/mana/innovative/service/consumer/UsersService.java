@@ -19,8 +19,22 @@ import java.util.List;
 @Service
 public interface UsersService {
 
+    /**
+     * Gets all users.
+     *
+     * @param requestParams the request params
+     *
+     * @return the all users
+     */
     Response getAllUsers( RequestParams requestParams );
 
+    /**
+     * Delete users.
+     *
+     * @param userIds the user ids
+     * @param requestParams the request params
+     * @return the response
+     */
     Response deleteUsers( List< Long > userIds, RequestParams requestParams );
 
 }

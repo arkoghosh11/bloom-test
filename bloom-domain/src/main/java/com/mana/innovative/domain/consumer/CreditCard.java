@@ -41,6 +41,9 @@ public class CreditCard extends Card {
     @Column( name = "cvv_code" )
     private int CVV;
 
+    /**
+     * The Expiry date.
+     */
     @Column( name = "expiry_date" )
     private String expiryDate;
 
@@ -112,10 +115,20 @@ public class CreditCard extends Card {
         this.cardType = cardType;
     }
 
+    /**
+     * Gets expiry date.
+     *
+     * @return the expiry date
+     */
     public String getExpiryDate( ) {
         return expiryDate;
     }
 
+    /**
+     * Sets expiry date.
+     *
+     * @param expiryDate the expiry date
+     */
     public void setExpiryDate( final String expiryDate ) {
         this.expiryDate = expiryDate;
     }
@@ -156,6 +169,13 @@ public class CreditCard extends Card {
         this.customerCard = customerCard;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -170,6 +190,11 @@ public class CreditCard extends Card {
                 Objects.equals( getCreateOrModified( ), that.getCreateOrModified( ) );
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString( ) {
         return super.toString( ) + " CreditCard{" +

@@ -15,14 +15,35 @@ import java.util.Objects;
 public class WorkingHour {
 
 
+    /**
+     * The Working hour id.
+     */
     private Long workingHourId;
 
+    /**
+     * The Day.
+     */
     private String day;
+    /**
+     * The Start time.
+     */
     private String startTime;
+    /**
+     * The End time.
+     */
     private String endTime;
 
+    /**
+     * The Is offline.
+     */
     private Boolean isOffline;
+    /**
+     * The Is holiday.
+     */
     private Boolean isHoliday;
+    /**
+     * The Is weekend.
+     */
     private Boolean isWeekend;
 
     /**
@@ -158,6 +179,13 @@ public class WorkingHour {
         this.isWeekend = isWeekend;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -177,7 +205,7 @@ public class WorkingHour {
      * "textually represents" this object. The result should be a concise but informative representation that is easy
      * for a person to read.
      *
-     * @return {@link String}a string representation of the object.
+     * @return a string representation of the object.
      */
     @Override
     public String toString( ) {

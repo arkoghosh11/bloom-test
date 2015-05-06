@@ -32,6 +32,9 @@ import java.util.List;
  * @ ContextConfiguration(location {"loc1"."loc2"})
  * @ TransactionConfiguration   <--- Only If required
  * @ Transactional              <--- Only If required
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
@@ -39,17 +42,33 @@ import java.util.List;
 @Transactional
 public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenUpdateAShopThenTestShopDAOUpdateMethods.class );
+    /**
+     * The Id.
+     */
     private final long id = TestConstants.ONE;
 
+    /**
+     * The Shop dAO impl.
+     */
     @Resource
     private ShopDAO shopDAOImpl;
+    /**
+     * The Session factory.
+     */
     @Resource
     private SessionFactory sessionFactory;
+    /**
+     * The Dummy shop.
+     */
     private Shop dummyShop;
 
     /**
      * This method is to initialize Objects and configuration files before testing test method
+     * @throws Exception the exception
      */
     @Before
     public void setUp( ) throws Exception {
@@ -64,6 +83,9 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
 
     }
 
+    /**
+     * Test shop dAO not null.
+     */
     @Test
     public void testShopDAONotNull( ) {
 
@@ -72,6 +94,7 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
 
     /**
      * todo This method is to test the behavior of ...
+     * @throws Exception the exception
      */
     // @Test
     //  @Rollback( value = true )
@@ -107,6 +130,11 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
 //        Assert.assertEquals( TestConstants.notEqualsMessage, 2.0, dummyShop.getShopPrice( ) );
     }
 
+    /**
+     * Test update shop with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testUpdateShopWithErrorEnabled( ) throws Exception {
 
@@ -115,6 +143,11 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
         logger.debug( "Finishing test for UpdateShopWithErrorEnabled" );
     }
 
+    /**
+     * Test update shop with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testUpdateShopWithErrorDisabled( ) throws Exception {
 
@@ -123,6 +156,11 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
         logger.debug( "Finishing test for UpdateShopWithErrorDisabled" );
     }
 
+    /**
+     * Test update shop with item only.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testUpdateShopWithItemOnly( ) throws Exception {
 
@@ -131,6 +169,11 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
         logger.debug( "Finishing test for UpdateShopWithItemOnly" );
     }
 
+    /**
+     * Test update shop with address only.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testUpdateShopWithAddressOnly( ) throws Exception {
 
@@ -139,6 +182,11 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
         logger.debug( "Finishing test for UpdateShopWithAddressOnly" );
     }
 
+    /**
+     * Test update shop with working hour only.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testUpdateShopWithWorkingHourOnly( ) throws Exception {
 
@@ -150,6 +198,7 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
     /**
      * This method is to release objects and shut down OR close any connections after Test is completed before testing
      * test method
+     * @throws Exception the exception
      */
     @After
     @AfterTransaction

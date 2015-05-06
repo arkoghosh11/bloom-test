@@ -29,14 +29,21 @@ import javax.ws.rs.core.Response;
 @Service
 public class ShopsServiceImpl implements ShopsService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( ShopsServiceImpl.class );
 
+    /**
+     * The Shop dAO impl.
+     */
     @Resource
     private ShopDAO shopDAOImpl;
 
     /**
      * Gets shops.
      *
+     * @param isError the is error
      * @return the shops
      */
     @Override
@@ -71,9 +78,8 @@ public class ShopsServiceImpl implements ShopsService {
     /**
      * Delete all shops.
      *
-     * @param isError        the is error
+     * @param isError the is error
      * @param deleteAllShops the delete all shops
-     *
      * @return the response
      */
     @Override

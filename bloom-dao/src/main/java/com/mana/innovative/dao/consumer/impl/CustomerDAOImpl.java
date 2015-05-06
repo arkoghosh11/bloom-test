@@ -63,9 +63,8 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Create customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -108,7 +107,6 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
      * Gets customers.
      *
      * @param requestParams the request params
-     *
      * @return the customers
      */
     @SuppressWarnings( "unchecked" )
@@ -154,9 +152,8 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Gets customer.
      *
-     * @param customerId    the customer id
+     * @param customerId the customer id
      * @param requestParams the request params
-     *
      * @return the customer
      */
     @SuppressWarnings( "unchecked" )
@@ -203,9 +200,8 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Update customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
 //    @SuppressWarnings( "unchecked" )
@@ -251,9 +247,8 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Delete customer.
      *
-     * @param customerId    the customer id
+     * @param customerId the customer id
      * @param requestParams the request params
-     *
      * @return the boolean
      */
     @Override

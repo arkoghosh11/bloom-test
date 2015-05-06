@@ -24,23 +24,45 @@ import java.util.Date;
 /**
  * Created by Bloom/Rono on 4/17/2015. This class is CustomDatabaseServiceImpl
  *
+ * @param <T>  the type parameter
+ * @param <E>  the type parameter
+ * Created by Bloom/Rono on $date $time.
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Service
 public class CustomDatabaseServiceImpl < T, E > implements CustomDatabaseService< T, E > {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( CustomDatabaseServiceImpl.class );
 
+    /**
+     * The Item dAO.
+     */
     @Resource
     private ItemDAO itemDAO;
+    /**
+     * The Shop dAO.
+     */
     @Resource
     private ShopDAO shopDAO;
 
+    /**
+     * The Custom event dAO.
+     */
     @Resource
     private CustomEventDAO customEventDAO;
 
+    /**
+     * Read data.
+     *
+     * @param e the e
+     *
+     * @return the t
+     */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
@@ -77,6 +99,12 @@ public class CustomDatabaseServiceImpl < T, E > implements CustomDatabaseService
         return ( T ) customEventDAOResponse;
     }
 
+    /**
+     * Create data.
+     *
+     * @param t the t
+     * @return the boolean
+     */
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ )
     public boolean createData( final T t ) {
@@ -98,6 +126,13 @@ public class CustomDatabaseServiceImpl < T, E > implements CustomDatabaseService
         return true;
     }
 
+    /**
+     * Update data.
+     *
+     * @param e the e
+     * @param isScheduler the is scheduler
+     * @return the boolean
+     */
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ )
     public boolean updateData( final T e, boolean isScheduler ) {

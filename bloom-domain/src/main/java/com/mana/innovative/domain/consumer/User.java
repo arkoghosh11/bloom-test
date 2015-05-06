@@ -184,6 +184,13 @@ public class User {
         this.updatedDate = updatedDate;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -196,6 +203,11 @@ public class User {
     }
 
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString( ) {
         return "User {" +

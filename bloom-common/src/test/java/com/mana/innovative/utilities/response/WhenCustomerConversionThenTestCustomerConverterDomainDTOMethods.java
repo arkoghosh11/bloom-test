@@ -37,9 +37,26 @@ public class WhenCustomerConversionThenTestCustomerConverterDomainDTOMethods {
      */
     private static final Logger logger = LoggerFactory.getLogger( WhenCustomerConversionThenTestCustomerConverterDomainDTOMethods.class );
 
-    private Customer customerDTO, customerDTO2;
-    private com.mana.innovative.domain.consumer.Customer customerDomain, customerDomain2;
+    /**
+     * The Customer dTO.
+     */
+    private Customer customerDTO, /**
+     * The Customer dTO 2.
+     */
+    customerDTO2;
+    /**
+     * The Customer domain.
+     */
+    private com.mana.innovative.domain.consumer.Customer customerDomain, /**
+     * The Customer domain 2.
+     */
+    customerDomain2;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void setUp( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
@@ -53,12 +70,22 @@ public class WhenCustomerConversionThenTestCustomerConverterDomainDTOMethods {
                 .getTestCustomerDomainObject( );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
 
     }
 
+    /**
+     * Test get converted dTO from domain.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomain( ) throws Exception {
 
@@ -72,6 +99,11 @@ public class WhenCustomerConversionThenTestCustomerConverterDomainDTOMethods {
         logger.debug( "Finishing test for GetConvertedDTOFromDomain" );
     }
 
+    /**
+     * Test get converted list dTO from domain.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedListDTOFromDomain( ) throws Exception {
 
@@ -92,6 +124,11 @@ public class WhenCustomerConversionThenTestCustomerConverterDomainDTOMethods {
         logger.debug( "Finishing test for GetConvertedListDTOFromDomain" );
     }
 
+    /**
+     * Test get converted domain from dTO.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDomainFromDTO( ) throws Exception {
 
@@ -105,6 +142,11 @@ public class WhenCustomerConversionThenTestCustomerConverterDomainDTOMethods {
         logger.debug( "Finishing test for GetConvertedDomainFromDTO" );
     }
 
+    /**
+     * Test get converted list domain from dTO.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedListDomainFromDTO( ) throws Exception {
 
@@ -155,6 +197,11 @@ public class WhenCustomerConversionThenTestCustomerConverterDomainDTOMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted domain from dTO with property errors.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDomainFromDTOWithPropertyErrors( ) throws Exception {
 
@@ -200,6 +247,11 @@ public class WhenCustomerConversionThenTestCustomerConverterDomainDTOMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOWithPropertyErrors" );
     }
 
+    /**
+     * Test get converted dTO from domain for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainForError( ) throws Exception {
 
@@ -214,6 +266,11 @@ public class WhenCustomerConversionThenTestCustomerConverterDomainDTOMethods {
         logger.debug( "Finishing test GetConvertedDTOFromDomainForError" );
     }
 
+    /**
+     * Test get converted dTO from domain with property errors.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainWithPropertyErrors( ) throws Exception {
 

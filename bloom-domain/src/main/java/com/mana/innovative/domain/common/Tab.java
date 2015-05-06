@@ -149,6 +149,13 @@ public class Tab {
         this.updatedDate = updatedDate;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -163,7 +170,6 @@ public class Tab {
      * Clone object.
      *
      * @return the object
-     *
      * @throws CloneNotSupportedException the clone not supported exception
      */
     public Object clone( ) throws CloneNotSupportedException {

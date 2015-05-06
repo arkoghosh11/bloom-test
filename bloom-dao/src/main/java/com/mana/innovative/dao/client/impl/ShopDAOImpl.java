@@ -31,14 +31,16 @@ import java.util.List;
 @Transactional( propagation = Propagation.MANDATORY )
 public class ShopDAOImpl extends BasicDAO implements ShopDAO {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( ShopDAOImpl.class );
 
     /**
      * Gets shop by shop id.
      *
-     * @param shopId  the shop id
+     * @param shopId the shop id
      * @param isError the is error
-     *
      * @return the shop by shop id
      */
     @SuppressWarnings( "unchecked" )
@@ -83,7 +85,6 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      * This method is to retrieve all the shops values from the DB
      *
      * @param isError the is error
-     *
      * @return the shops
      */
     @SuppressWarnings( "unchecked" )
@@ -123,9 +124,8 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
     /**
      * Create shop.
      *
-     * @param shop    the shop
+     * @param shop the shop
      * @param isError the is error
-     *
      * @return the dAO response
      */
     @Override
@@ -169,9 +169,8 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
     /**
      * Update shop.
      *
-     * @param shop    the shop
+     * @param shop the shop
      * @param isError the is error
-     *
      * @return the dAO response
      */
     @SuppressWarnings( "unchecked" )
@@ -228,6 +227,14 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
         return shopDAOResponse;
     }
 
+    /**
+     * Delete shop by shop id.
+     *
+     * @param shopId  the shop id
+     * @param isError the is error
+     *
+     * @return the dAO response
+     */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Shop > deleteShopByShopId( final long shopId, final boolean isError ) {
@@ -261,6 +268,13 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
         return shopDAOResponse;
     }
 
+    /**
+     * Delete shops by shop ids.
+     *
+     * @param shopIds the shop ids
+     * @param isError the is error
+     * @return the dAO response
+     */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Shop > deleteShopsByShopIds( final List< Long > shopIds, final boolean isError ) {
@@ -296,6 +310,13 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
         return shopDAOResponse;
     }
 
+    /**
+     * Delete all shops.
+     *
+     * @param deleteAllShops the delete all shops
+     * @param isError the is error
+     * @return the dAO response
+     */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Shop > deleteAllShops( final boolean deleteAllShops, final boolean isError ) {

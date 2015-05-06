@@ -15,14 +15,24 @@ import java.io.File;
  * Created by Bloom/Rono on 4/17/2015. This class is CustomFileReaderImpl
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Service( value = "customFileReaderImpl" )
 public class CustomFileReaderImpl implements CustomSpecificFileReader< ItemsPayload > {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( CustomFileReaderImpl.class );
 
+    /**
+     * Read excel file reader.
+     *
+     * @param file the file
+     *
+     * @return the items payload
+     */
     @Override
     public ItemsPayload readExcelFileReader( File file ) {
         String location = this.getClass( ).getCanonicalName( ) + "#readExcelFileReader()";
@@ -32,6 +42,12 @@ public class CustomFileReaderImpl implements CustomSpecificFileReader< ItemsPayl
         return null;
     }
 
+    /**
+     * Read xML file.
+     *
+     * @param file the file
+     * @return the items payload
+     */
     @Override
     public ItemsPayload readXMLFile( final File file ) {
 

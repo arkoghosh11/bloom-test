@@ -24,6 +24,9 @@ import java.util.Date;
 
 /**
  * Created by Bloom/Rono on 3/19/2015. This class is for .. ToDo
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
@@ -31,15 +34,32 @@ import java.util.Date;
 @Transactional
 public class WhenCreateAWorkingHrThenTestDAOCreateWorkingHr {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenCreateAWorkingHrThenTestDAOCreateWorkingHr.class );
 
+    /**
+     * The Dummy working hour.
+     */
     private WorkingHour dummyWorkingHour;
 
+    /**
+     * The Working hour dAO impl.
+     */
     @Resource
     private WorkingHourDAO workingHourDAOImpl;
+    /**
+     * The Shop dAO impl.
+     */
     @Resource
     private ShopDAO shopDAOImpl;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
     public void setUp( ) throws Exception {
@@ -67,11 +87,21 @@ public class WhenCreateAWorkingHrThenTestDAOCreateWorkingHr {
         dummyWorkingHour.setShopWorkingHour( shop );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
     }
 
+    /**
+     * Test create a working hour with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback
     @Transactional( propagation = Propagation.REQUIRES_NEW )
@@ -106,6 +136,11 @@ public class WhenCreateAWorkingHrThenTestDAOCreateWorkingHr {
         logger.debug( "Finishing test for CreateAWorkingHourWithErrorEnabled" );
     }
 
+    /**
+     * Test create a working hour with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback
     @Transactional( propagation = Propagation.REQUIRES_NEW )

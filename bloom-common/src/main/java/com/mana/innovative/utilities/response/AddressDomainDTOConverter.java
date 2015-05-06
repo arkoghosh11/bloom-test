@@ -19,14 +19,19 @@ import java.util.List;
 public class AddressDomainDTOConverter {
 
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( AddressDomainDTOConverter.class );
+    /**
+     * The constant ZERO.
+     */
     private static final int ZERO = DAOConstants.ZERO;
 
     /**
      * Gets converted dTO from domain.
      *
      * @param addressDomain the address domain
-     *
      * @return the converted dTO from domain
      */
     public static Address getConvertedDTOFromDomain( com.mana.innovative.domain.common.Address addressDomain ) {
@@ -68,7 +73,6 @@ public class AddressDomainDTOConverter {
      * Gets converted list domain from dTO.
      *
      * @param addressesDTO the addresses dTO
-     *
      * @return the converted list domain from dTO
      */
     public static List< com.mana.innovative.domain.common.Address > getConvertedListDomainFromDTO( List< Address > addressesDTO ) {
@@ -85,7 +89,6 @@ public class AddressDomainDTOConverter {
      * Gets converted domain from dTO.
      *
      * @param addressDTO the address dTO
-     *
      * @return the converted domain from dTO
      */
     public static com.mana.innovative.domain.common.Address getConvertedDomainFromDTO( Address addressDTO ) {
@@ -149,7 +152,6 @@ public class AddressDomainDTOConverter {
      * Gets converted list dTO from domain.
      *
      * @param addressesDomain the addresses domain
-     *
      * @return the converted list dTO from domain
      */
     public static List< Address > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.common.Address > addressesDomain ) {

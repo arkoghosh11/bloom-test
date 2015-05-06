@@ -114,6 +114,13 @@ public class Person extends User {
         this.title = title;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
 
@@ -127,6 +134,11 @@ public class Person extends User {
                 Objects.equals( getMiddleName( ), person.getMiddleName( ) );
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString( ) {
         return "Person{" +

@@ -24,10 +24,16 @@ import static org.junit.Assert.fail;
 /**
  * Created by Bloom/Rono on 4/29/2015 2:16 PM. This class WhenCreditCardConversionThenTestCCConverterMethods is a test
  * class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenCreditCardConversionThenTestCCConverterDomainDTOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenCreditCardConversionThenTestCCConverterDomainDTOMethods.class );
 
 
@@ -199,6 +205,11 @@ public class WhenCreditCardConversionThenTestCCConverterDomainDTOMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted domain from dTO with cC property errors.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDomainFromDTOWithCCPropertyErrors( ) throws Exception {
 
@@ -235,6 +246,11 @@ public class WhenCreditCardConversionThenTestCCConverterDomainDTOMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOWithCCPropertyErrors" );
     }
 
+    /**
+     * Test get converted domain from dTO with invalid cVV.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDomainFromDTOWithInvalidCVV( ) throws Exception {
 
@@ -257,6 +273,11 @@ public class WhenCreditCardConversionThenTestCCConverterDomainDTOMethods {
         logger.debug( "Finishing test for GetConvertedDomainFromDTOWithInvalidCVV" );
     }
 
+    /**
+     * Test get converted domain from dTO with null create or modified date.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDomainFromDTOWithNullCreateOrModifiedDate( ) throws Exception {
 
@@ -305,7 +326,7 @@ public class WhenCreditCardConversionThenTestCCConverterDomainDTOMethods {
      * Need to fix this method, break it into different units todo make a class with separate tests for this complex
      * test todo also make the date dynamic is something to look for
      *
-     * @throws Exception
+     * @throws Exception the exception
      */
     @Test
     public void testIsValidCardExpiryDate( ) throws Exception {
@@ -335,7 +356,7 @@ public class WhenCreditCardConversionThenTestCCConverterDomainDTOMethods {
      * Need to fix this method, break it into different units todo make a class with separate tests for this complex
      * test
      *
-     * @throws Exception
+     * @throws Exception the exception
      */
     @Test( expected = Exception.class )
     public void testValidateCVVWithCardType( ) throws Exception {
@@ -411,6 +432,11 @@ public class WhenCreditCardConversionThenTestCCConverterDomainDTOMethods {
         }
     }
 
+    /**
+     * Test validate card number with card type.
+     *
+     * @throws Exception the exception
+     */
     @Test( expected = IllegalArgumentValueException.class )
     public void testValidateCardNumberWithCardType( ) throws Exception {
 

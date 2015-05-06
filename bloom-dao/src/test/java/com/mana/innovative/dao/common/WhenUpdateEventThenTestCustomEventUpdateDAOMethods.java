@@ -27,6 +27,9 @@ import java.util.Date;
 
 /**
  * This class is a test class for testing class todo...
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -34,13 +37,27 @@ import java.util.Date;
 @Transactional   // If required
 public class WhenUpdateEventThenTestCustomEventUpdateDAOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenUpdateEventThenTestCustomEventUpdateDAOMethods.class );
 
+    /**
+     * The Custom event dAO.
+     */
     @Resource
     private CustomEventDAO customEventDAO;
 
+    /**
+     * The Custom event.
+     */
     private CustomEvent customEvent;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @BeforeTransaction
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED, readOnly = true )
@@ -58,6 +75,11 @@ public class WhenUpdateEventThenTestCustomEventUpdateDAOMethods {
         customEvent.setEventName( TestConstants.UPDATED_TEST_VALUE );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
@@ -65,6 +87,11 @@ public class WhenUpdateEventThenTestCustomEventUpdateDAOMethods {
 
     }
 
+    /**
+     * Test update event with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -95,6 +122,11 @@ public class WhenUpdateEventThenTestCustomEventUpdateDAOMethods {
         logger.debug( "Finishing test for UpdateEventWithErrorDisabled" );
     }
 
+    /**
+     * Test enable event scheduler for date with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -118,6 +150,11 @@ public class WhenUpdateEventThenTestCustomEventUpdateDAOMethods {
         logger.debug( "Finishing test for EnableEventSchedulerForDateWithErrorDisabled" );
     }
 
+    /**
+     * Test disable event scheduler for date.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )

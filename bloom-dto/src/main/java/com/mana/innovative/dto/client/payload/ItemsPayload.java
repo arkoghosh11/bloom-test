@@ -19,31 +19,48 @@ import java.util.List;
 @XmlRootElement( name = "items_payload" )
 public class ItemsPayload {
 
+    /**
+     * The Items.
+     */
     private List<Item> items;
+    /**
+     * The Total count.
+     */
     private int totalCount;
 
 
     /**
      * This method returns a list of items
-     * @return {@link java.util.List<Item></>}  Return a list of items
+     * @return Return a list of items
      */
     @XmlElementWrapper(name = "items")
     @XmlElement(name = "item")
     public List<Item> getItems() {
         return items;
     }
+
     /**
      * This method sets a list of items to its class property
-     * @param items {@link java.util.List<Item></Item>} A list of items
+     * @param items  A list of items
      */
     public void setItems(List<Item> items) {
         this.items = items;
     }
 
+    /**
+     * Gets total count.
+     *
+     * @return the total count
+     */
     public int getTotalCount () {
         return totalCount;
     }
 
+    /**
+     * Sets total count.
+     *
+     * @param totalCount the total count
+     */
     @XmlElement(name = "item_count")
     public void setTotalCount (final int totalCount) {
         this.totalCount = totalCount;

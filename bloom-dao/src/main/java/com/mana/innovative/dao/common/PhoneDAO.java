@@ -18,9 +18,8 @@ public interface PhoneDAO {
     /**
      * Create phone.
      *
-     * @param phone         the phone
+     * @param phone the phone
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Phone > createPhone( Phone phone, RequestParams requestParams );
@@ -29,7 +28,6 @@ public interface PhoneDAO {
      * Gets phones.
      *
      * @param requestParams the request params
-     *
      * @return the phones
      */
     DAOResponse< Phone > getPhones( RequestParams requestParams );
@@ -37,9 +35,8 @@ public interface PhoneDAO {
     /**
      * Gets phone.
      *
-     * @param phoneId       the phone id
+     * @param phoneId the phone id
      * @param requestParams the request params
-     *
      * @return the phone
      */
     DAOResponse< Phone > getPhone( long phoneId, RequestParams requestParams );
@@ -47,9 +44,8 @@ public interface PhoneDAO {
     /**
      * Update phone.
      *
-     * @param phone         the phone
+     * @param phone the phone
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Phone > updatePhone( Phone phone, RequestParams requestParams );
@@ -57,9 +53,8 @@ public interface PhoneDAO {
     /**
      * Delete phone by phone id.
      *
-     * @param phoneId       the phone id
+     * @param phoneId the phone id
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Phone > deletePhoneByPhoneId( Long phoneId, RequestParams requestParams );
@@ -68,7 +63,6 @@ public interface PhoneDAO {
      * Delete all phones.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Phone > deleteAllPhones( RequestParams requestParams );

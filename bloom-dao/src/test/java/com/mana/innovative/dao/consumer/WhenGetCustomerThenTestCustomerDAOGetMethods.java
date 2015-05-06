@@ -22,6 +22,9 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 5/1/2015 2:03 AM. This class WhenGetCustomerThenTestCustomerDAOGetMethods is a test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -29,24 +32,48 @@ import java.util.List;
 @Transactional   // If required
 public class WhenGetCustomerThenTestCustomerDAOGetMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenGetCustomerThenTestCustomerDAOGetMethods.class );
 
+    /**
+     * The Customer dAO.
+     */
     @Resource
     private CustomerDAO customerDAO;
+    /**
+     * The Request params.
+     */
     private RequestParams requestParams;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void setUp( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
         requestParams = new RequestParams( );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
 
     }
 
+    /**
+     * Test get customers with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCustomersWithErrorDisabled( ) throws Exception {
@@ -75,6 +102,11 @@ public class WhenGetCustomerThenTestCustomerDAOGetMethods {
         logger.debug( "Finishing test for GetCustomersWithErrorDisabled" );
     }
 
+    /**
+     * Test get customer with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCustomerWithErrorDisabled( ) throws Exception {
@@ -120,6 +152,11 @@ public class WhenGetCustomerThenTestCustomerDAOGetMethods {
         logger.debug( "Finishing test for GetCustomerWithErrorDisabled" );
     }
 
+    /**
+     * Test get customers with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCustomersWithErrorEnabled( ) throws Exception {
@@ -153,6 +190,11 @@ public class WhenGetCustomerThenTestCustomerDAOGetMethods {
         logger.debug( "Finishing test for GetCustomersWithErrorEnabled" );
     }
 
+    /**
+     * Test get customer with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetCustomerWithErrorEnabled( ) throws Exception {

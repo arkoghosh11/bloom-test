@@ -27,20 +27,22 @@ import javax.ws.rs.core.Response;
 @Path( "/{items : (?i)items}" ) //@Path( "/{tabs : (?i)tabs}" )
 public class ItemsRestWebService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( ItemsRestWebService.class );
     /* Constructor injection */
 
     /**
      * The Items service impl.
      */
-    @Resource( name = "itemsServiceImpl" )
+    @Resource
     ItemsService itemsServiceImpl;
 
     /**
      * Gets items.
      *
      * @param isError the is error
-     *
      * @return the items
      */
     @GET
@@ -53,8 +55,8 @@ public class ItemsRestWebService {
 
         try {
             return itemsServiceImpl.getItems( isError );
-        } catch ( Exception e ) {
-            logger.error( " Failed to retrieve Items" + e );
+        } catch ( Exception exception ) {
+            logger.error( " Failed to retrieve Items" + exception );
             return ResponseUtility.internalServerErrorMsg( null );
         } finally {
             logger.debug( "Response for Item Rest Service Completed " );
@@ -64,9 +66,8 @@ public class ItemsRestWebService {
     /**
      * Delete items.
      *
-     * @param isError     the is error
+     * @param isError the is error
      * @param isDeleteAll the is delete all
-     *
      * @return the response
      */
     @DELETE
@@ -76,8 +77,8 @@ public class ItemsRestWebService {
         //return ResponseUtility.forbiddenRequest( null );
         try {
             return itemsServiceImpl.deleteAllItems( isError, isDeleteAll );
-        } catch ( Exception e ) {
-            logger.error( " Failed to delete All Items" + e );
+        } catch ( Exception exception ) {
+            logger.error( " Failed to delete All Items" + exception );
             return ResponseUtility.internalServerErrorMsg( null );
         } finally {
             logger.debug( "Response for Items Rest Service Completed " );

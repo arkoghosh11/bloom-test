@@ -14,9 +14,21 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement( name = "error" )
 public class Error {
 
+    /**
+     * The Error type.
+     */
     private String errorType;
+    /**
+     * The Error location.
+     */
     private String errorLocation;
+    /**
+     * The Error message.
+     */
     private String errorMessage;
+    /**
+     * The Error data.
+     */
     private Object errorData;
 
     /**
@@ -39,7 +51,7 @@ public class Error {
      * Instantiates a new Error.
      *
      * @param errorLocation the error location
-     * @param throwable     the throwable
+     * @param throwable the throwable
      */
     public Error( String errorLocation, Throwable throwable ) {
 

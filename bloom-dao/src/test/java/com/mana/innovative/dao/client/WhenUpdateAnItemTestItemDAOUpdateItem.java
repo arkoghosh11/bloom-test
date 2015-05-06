@@ -27,6 +27,9 @@ import java.util.List;
 
 /**
  * The type When update an item test item dAO update item.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
@@ -34,15 +37,33 @@ import java.util.List;
 @Transactional
 public class WhenUpdateAnItemTestItemDAOUpdateItem {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenUpdateAnItemTestItemDAOUpdateItem.class );
+    /**
+     * The Id.
+     */
     private final long id = TestConstants.ONE;
 
+    /**
+     * The Item dAO impl.
+     */
     @Resource
     private ItemDAO itemDAOImpl;
+    /**
+     * The Shop dAO impl.
+     */
     @Resource
     private ShopDAO shopDAOImpl;
+    /**
+     * The Session factory.
+     */
     @Resource
     private SessionFactory sessionFactory;
+    /**
+     * The Dummy item.
+     */
     private Item dummyItem;
 
     /**

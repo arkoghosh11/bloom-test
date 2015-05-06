@@ -18,14 +18,32 @@ import java.util.List;
 
 /**
  * The type When item conversion then test item converter domain dTO methods.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenItemConversionThenTestItemConverterDomainDTOMethods.class );
 
-    private Item itemDTO, itemDTO2;
-    private com.mana.innovative.domain.client.Item itemDomain, itemDomain2;
+    /**
+     * The Item dTO.
+     */
+    private Item itemDTO, /**
+     * The Item dTO 2.
+     */
+    itemDTO2;
+    /**
+     * The Item domain.
+     */
+    private com.mana.innovative.domain.client.Item itemDomain, /**
+     * The Item domain 2.
+     */
+    itemDomain2;
 
     /**
      * Sets up.
@@ -187,6 +205,11 @@ public class WhenItemConversionThenTestItemConverterDomainDTOMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted dTO from domain for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainForError( ) throws Exception {
 

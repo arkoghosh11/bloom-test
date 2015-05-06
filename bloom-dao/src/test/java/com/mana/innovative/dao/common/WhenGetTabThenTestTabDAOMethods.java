@@ -24,18 +24,35 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 5/3/2015 12:06 AM. This class WhenGetTabThenTestTabDAOMethods is a test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
 @Transactional   // If required
 public class WhenGetTabThenTestTabDAOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenGetTabThenTestTabDAOMethods.class );
 
+    /**
+     * The Tab dAO.
+     */
     @Resource
     private TabDAO tabDAO;
+    /**
+     * The Request params.
+     */
     private RequestParams requestParams;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
@@ -43,12 +60,22 @@ public class WhenGetTabThenTestTabDAOMethods {
         requestParams = new RequestParams( );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 
+    /**
+     * Test get tabs with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetTabsWithErrorDisabled( ) throws Exception {
@@ -77,6 +104,11 @@ public class WhenGetTabThenTestTabDAOMethods {
         logger.debug( "Finishing test for GetTabsWithErrorDisabled" );
     }
 
+    /**
+     * Test get tab with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetTabWithErrorDisabled( ) throws Exception {
@@ -114,6 +146,11 @@ public class WhenGetTabThenTestTabDAOMethods {
         logger.debug( "Finishing test for GetTabWithErrorDisabled" );
     }
 
+    /**
+     * Test get tabs with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetTabsWithErrorEnabled( ) throws Exception {
@@ -147,6 +184,11 @@ public class WhenGetTabThenTestTabDAOMethods {
         logger.debug( "Finishing test for GetTabsWithErrorEnabled" );
     }
 
+    /**
+     * Test get tab with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetTabWithErrorEnabled( ) throws Exception {
@@ -191,6 +233,11 @@ public class WhenGetTabThenTestTabDAOMethods {
     }
 
 
+    /**
+     * Test get tab by search params.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetTabBySearchParams( ) throws Exception {
 

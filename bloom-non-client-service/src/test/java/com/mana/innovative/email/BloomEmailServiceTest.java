@@ -27,17 +27,52 @@ import javax.annotation.Resource;
 @ContextConfiguration( locations = { "/email-config-test.xml" } )
 public class BloomEmailServiceTest {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( BloomEmailServiceTest.class );
 
-    String receiver, cc, bcc, subject, body, attachmentLocation;
+    /**
+     * The Receiver.
+     */
+    String receiver, /**
+     * The Cc.
+     */
+    cc, /**
+     * The Bcc.
+     */
+    bcc, /**
+     * The Subject.
+     */
+    subject, /**
+     * The Body.
+     */
+    body, /**
+     * The Attachment location.
+     */
+    attachmentLocation;
 
+    /**
+     * The Bloom email service.
+     */
     @Resource
     private BloomEmailService bloomEmailService;
 
+    /**
+     * The Email ids.
+     */
     @Value( value = "${email_receiver}" )
     private String emailIds;
+    /**
+     * The Email contents.
+     */
     private EmailContents emailContents;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void setUp( ) throws Exception {
 
@@ -53,6 +88,9 @@ public class BloomEmailServiceTest {
         emailContents.setAttachmentLocation( "C:/Properties/resources/pictures/RJ_froggie.jpg" );
     }
 
+    /**
+     * Test simple mail service.
+     */
     @Test
     public void testSimpleMailService( ) {
         Assert.assertNotNull( emailIds );
@@ -63,6 +101,9 @@ public class BloomEmailServiceTest {
         Assert.assertTrue( TestConstants.falseMessage, bloomEmailService.sendMail( emailContents ) );
     }
 
+    /**
+     * Test mime mail service.
+     */
     @Test
     public void testMimeMailService( ) {
 
@@ -70,6 +111,9 @@ public class BloomEmailServiceTest {
         Assert.assertTrue( TestConstants.falseMessage, bloomEmailService.sendMail( emailContents ) );
     }
 
+    /**
+     * Test mime mail service with inline html.
+     */
     @Test
     public void testMimeMailServiceWithInlineHtml( ) {
 

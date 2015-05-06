@@ -17,8 +17,8 @@ public class SystemPropertiesValueLoader extends SystemEnvironmentPropertySource
      * Create a new {@code SystemEnvironmentPropertySource} with the given name and
      * delegating to the given {@code MapPropertySource}.
      *
-     * @param name {@link String}
-     * @param source {@link Map<String,Object></>}
+     * @param name the name
+     * @param source the source
      */
     public SystemPropertiesValueLoader(String name, Map<String, Object> source) {
         super(name, source);

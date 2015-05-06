@@ -16,12 +16,24 @@ import org.springframework.stereotype.Component;
 @Component
 public final class WeightConverter {
 
+    /**
+     * The Ounce to gram ratio.
+     */
     @Value(value = "${ounce_to_gram}")
     private double ounceToGramRatio;
+    /**
+     * The Kilogram to pound ratio.
+     */
     @Value(value = "${kilogram_to_pound}")
     private double kilogramToPoundRatio;
+    /**
+     * The Gram to pound ratio.
+     */
     @Value(value = "${gram_to_pound}")
     private double gramToPoundRatio;
+    /**
+     * The Ounce to pound ratio.
+     */
     @Value(value = "${ounce_to_pound}")
     private double ounceToPoundRatio;
 
@@ -144,7 +156,7 @@ public final class WeightConverter {
     /**
      * Custom converter with given ratio.
      *
-     * @param dataToConvert      the data to convert
+     * @param dataToConvert the data to convert
      * @param ratioForConversion the ratio for conversion
      * @return the double
      */

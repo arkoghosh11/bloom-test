@@ -16,14 +16,32 @@ import java.util.Properties;
  */
 public class SystemPropertiesFactoryBean extends PropertiesFactoryBean {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( SystemPropertiesFactoryBean.class );
+    /**
+     * The Propagate to system properties.
+     */
     private boolean propagateToSystemProperties;
 
+    /**
+     * Sets propagate to system properties.
+     *
+     * @param propagateToSystemProperties the propagate to system properties
+     */
     public void setPropagateToSystemProperties( final boolean propagateToSystemProperties ) {
         logger.info( "Setting propagateToSystemProperties value" );
         this.propagateToSystemProperties = propagateToSystemProperties;
     }
 
+    /**
+     * Create properties.
+     *
+     * @return the properties
+     *
+     * @throws IOException the iO exception
+     */
     @Override
     protected Properties createProperties( ) throws IOException {
 

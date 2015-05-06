@@ -10,19 +10,31 @@ import org.springframework.stereotype.Service;
 import javax.ws.rs.core.Response;
 
 /**
- * @author Bloom
+ * The interface Tab service.
+
+ * Created by Bloom/Rono on ${DATE} ${TIME}.
+ * @author Bloom Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Service
 public interface TabService {
 
+    /**
+     * Gets tab.
+     *
+     * @param tabId         the tab id
+     * @param requestParams the request params
+     *
+     * @return the tab
+     */
     Response getTab( Integer tabId, RequestParams requestParams );
 
     /**
      * Update tab.
      *
-     * @param tab           the tab
+     * @param tab the tab
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response updateTab( Tab tab, RequestParams requestParams );
@@ -31,9 +43,8 @@ public interface TabService {
     /**
      * Delete tab.
      *
-     * @param tabId         the tab id
+     * @param tabId the tab id
      * @param requestParams the request params
-     *
      * @return the response
      */
 
@@ -43,9 +54,8 @@ public interface TabService {
     /**
      * Create tab.
      *
-     * @param tab           the tab
+     * @param tab the tab
      * @param requestParams the request params
-     *
      * @return the response
      */
 

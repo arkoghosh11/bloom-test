@@ -26,7 +26,7 @@ import java.util.List;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@Repository
+@Repository( value = "creditCardDAO" )
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
 
@@ -38,9 +38,8 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
     /**
      * Create creditCard.
      *
-     * @param creditCard    the creditCard
+     * @param creditCard the creditCard
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -87,7 +86,6 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
      * Gets creditCards.
      *
      * @param requestParams the request params
-     *
      * @return the creditCards
      */
     @SuppressWarnings( "unchecked" )
@@ -133,9 +131,8 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
     /**
      * Gets credit card.
      *
-     * @param cardId        the card id
+     * @param cardId the card id
      * @param requestParams the request params
-     *
      * @return the credit card
      */
     @SuppressWarnings( "unchecked" )
@@ -183,9 +180,8 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
     /**
      * Update credit card.
      *
-     * @param creditCard    the credit card
+     * @param creditCard the credit card
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -230,9 +226,8 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
     /**
      * Delete creditCard.
      *
-     * @param cardId        the creditCard id
+     * @param cardId the creditCard id
      * @param requestParams the request params
-     *
      * @return the boolean
      */
     @Override
@@ -247,8 +242,10 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "delete  from CreditCard where cardId=:cardId" );
+            Query query = session.createQuery( "delete  from CreditCard where cardId=:cardId and customerCard" +
+                    ".userId=:userId" );
             query.setParameter( "cardId", cardId );
+            query.setParameter( "userId", requestParams.getId( ) );
             int count = query.executeUpdate( );
 
             this.closeDBTransaction( );
@@ -281,7 +278,6 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
      * Delete all creditCards.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override

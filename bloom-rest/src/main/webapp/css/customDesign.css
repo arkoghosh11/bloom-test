@@ -1,0 +1,20 @@
+a:link {
+    font-family: sans-serif;
+    font-size: large;
+    color: #FF0000;
+}
+
+/* visited link */
+a:visited {
+    color: #db73ff;
+}
+
+/* mouse over link */
+a:hover {
+    color: aquamarine;
+}
+
+/* selected link */
+a:active {
+    color: #2fc846;
+}

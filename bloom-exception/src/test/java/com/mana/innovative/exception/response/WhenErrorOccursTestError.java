@@ -8,14 +8,29 @@ import org.junit.Test;
 /**
  * Created by alex1 on 1/28/2015.
  * This is a domain class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class WhenErrorOccursTestError {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger =  Logger.getLogger(WhenErrorOccursTestError.class);
 
+    /**
+     * The Error.
+     */
     private Error error;
+    /**
+     * The Class cast exception.
+     */
     private Exception classCastException;
 
+    /**
+     * Sets up.
+     */
     @Before
     public void setUp() {
 
@@ -28,6 +43,9 @@ public class WhenErrorOccursTestError {
     }
 
 
+    /**
+     * Test get error.
+     */
     @Test
     public void testGetError() {
 

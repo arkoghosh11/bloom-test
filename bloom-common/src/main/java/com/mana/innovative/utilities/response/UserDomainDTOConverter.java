@@ -14,21 +14,26 @@ import java.util.List;
  * Created by Bloom/Rono on 4/23/2015. This class is UserDomainDTOConverter
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 public class UserDomainDTOConverter {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( UserDomainDTOConverter.class );
 
+    /**
+     * The constant ZERO.
+     */
     private static final int ZERO = DAOConstants.ZERO;
 
     /**
      * Gets converted user dTO from user domain.
      *
-     * @param userDTO    {@link User} the user dTO
-     * @param userDomain {@link com.mana.innovative.domain.consumer.User} the user domain
-     *
+     * @param userDTO  the user dTO
+     * @param userDomain  the user domain
      * @return the converted user dTO from user domain
      */
     public static User getConvertedDTOFromDomain( User userDTO, com.mana.innovative.domain.consumer.User userDomain ) {
@@ -65,7 +70,6 @@ public class UserDomainDTOConverter {
      * Gets converted user dTO list.
      *
      * @param users the users
-     *
      * @return the converted user dTO list
      */
     public static List< User > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.consumer.User > users ) {
@@ -84,8 +88,7 @@ public class UserDomainDTOConverter {
      * Gets converted user domain from user dTO.
      *
      * @param userDomain the user domain
-     * @param userDTO    the user dTO
-     *
+     * @param userDTO the user dTO
      * @return the converted user domain from user dTO
      */
     public static com.mana.innovative.domain.consumer.User getConvertedDomainFromDTO( com.mana.innovative.domain.consumer.User userDomain, User userDTO ) {
@@ -134,7 +137,6 @@ public class UserDomainDTOConverter {
      * Gets converted user domain list from user dTO list.
      *
      * @param userDTOList the user dTO list
-     *
      * @return the converted user domain list from user dTO list
      */
     public static List< com.mana.innovative.domain.consumer.User > getConvertedListDomainFromDTO( List< User > userDTOList ) {

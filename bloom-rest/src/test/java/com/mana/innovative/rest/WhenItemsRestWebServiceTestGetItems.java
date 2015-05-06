@@ -19,11 +19,22 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Rono on 2/26/2015.
  * This is a class for .. todo
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class WhenItemsRestWebServiceTestGetItems extends RestTest {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger(WhenItemsRestWebServiceTestGetItems.class);
 
+    /**
+     * Configure app descriptor.
+     *
+     * @return the app descriptor
+     */
     @Override
     protected AppDescriptor configure() {
 
@@ -33,6 +44,9 @@ public class WhenItemsRestWebServiceTestGetItems extends RestTest {
     }
 
 
+    /**
+     * Test get items client response with xML.
+     */
     @Test
     public void testGetItemsClientResponseWithXML() {
 
@@ -51,6 +65,9 @@ public class WhenItemsRestWebServiceTestGetItems extends RestTest {
         assertTrue("Count is 0 or less", itemsPayloadItemResponseContainer.getPayload().getItems().size() > 0);
     }
 
+    /**
+     * Test get items client response with jSON.
+     */
     @Test
     public void testGetItemsClientResponseWithJSON() {
 

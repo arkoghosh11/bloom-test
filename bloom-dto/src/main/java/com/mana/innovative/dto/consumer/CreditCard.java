@@ -27,6 +27,9 @@ public class CreditCard extends Card {
      */
     private String expiryDate;
 
+    /**
+     * The Card type.
+     */
     private String cardType;
 
     /**
@@ -141,6 +144,13 @@ public class CreditCard extends Card {
         this.createOrModified = createOrModified;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -154,6 +164,11 @@ public class CreditCard extends Card {
     }
 
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString( ) {
         return super.toString( ) + "CreditCard {" +

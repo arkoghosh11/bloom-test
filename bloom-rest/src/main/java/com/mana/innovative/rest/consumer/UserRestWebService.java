@@ -21,10 +21,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 /**
  * The type User service.
@@ -37,11 +35,14 @@ import javax.ws.rs.core.UriInfo;
 @Path( "/{user: (?i)user}" )
 public class UserRestWebService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( UserRestWebService.class );
 
-    @Context
-    private UriInfo uriInfo;
-
+    /**
+     * The User service.
+     */
     @Resource
     private UserService userService;
 
@@ -49,7 +50,7 @@ public class UserRestWebService {
      * Gets single user details.
      *
      * @param userId the user id
-     *
+     * @param isError the is error
      * @return the single user details
      */
     @GET
@@ -69,9 +70,8 @@ public class UserRestWebService {
     /**
      * Create new user.
      *
-     * @param user    the user
+     * @param user the user
      * @param isError the is error
-     *
      * @return the response
      */
     @POST
@@ -91,8 +91,9 @@ public class UserRestWebService {
     /**
      * Update specific user details.
      *
+     * @param user the user
      * @param userId the user id
-     *
+     * @param isError the is error
      * @return the response
      */
     @PUT
@@ -115,7 +116,7 @@ public class UserRestWebService {
      * Delete specific user.
      *
      * @param userId the user id
-     *
+     * @param isError the is error
      * @return the response
      */
     @DELETE

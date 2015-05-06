@@ -18,19 +18,55 @@ import java.util.Objects;
 @XmlRootElement( name = "item", namespace = "http://localhost:8080/bloom-test/rest/items" )
 public class Item {
 
+    /**
+     * The Item id.
+     */
     private Long itemId;
+    /**
+     * The Item price.
+     */
     private Double itemPrice;
+    /**
+     * The Quantity.
+     */
     private Double quantity;
+    /**
+     * The Weight.
+     */
     private Double weight;
 
+    /**
+     * The Item price currency.
+     */
     private String itemPriceCurrency;
+    /**
+     * The Item name.
+     */
     private String itemName;
+    /**
+     * The Item type.
+     */
     private String itemType;
+    /**
+     * The Item sub type.
+     */
     private String itemSubType;
+    /**
+     * The Bought from.
+     */
     private String boughtFrom;
+    /**
+     * The Quantity type.
+     */
     private String quantityType;
+    /**
+     * The Weighted unit.
+     */
     private String weightedUnit;
 
+    /**
+     * The Bought date.
+     */
     private Date boughtDate;
 
     /**
@@ -273,6 +309,13 @@ public class Item {
     }
 
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -297,7 +340,7 @@ public class Item {
      * "textually represents" this object. The result should be a concise but informative representation that is easy
      * for a person to read.
      *
-     * @return {@link String}a string representation of the object.
+     * @return a string representation of the object.
      */
     @Override
     public String toString( ) {

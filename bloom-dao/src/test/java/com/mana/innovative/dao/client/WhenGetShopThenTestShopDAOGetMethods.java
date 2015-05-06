@@ -20,6 +20,9 @@ import java.util.List;
 
 /**
  * The type When get shop then test shop dAO get methods.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -27,6 +30,9 @@ import java.util.List;
 @Transactional   // If required
 public class WhenGetShopThenTestShopDAOGetMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenGetShopThenTestShopDAOGetMethods.class );
     /**
      * The Shop id.

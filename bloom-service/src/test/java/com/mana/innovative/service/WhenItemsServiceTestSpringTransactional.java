@@ -21,16 +21,23 @@ import javax.ws.rs.core.Response;
  *
  * @ RunWith(value = SpringJUnit4ClassRunner.class | MockitoWithJunitRunner.Class)
  * @ ContextConfiguration(location {"loc1"."loc2"})
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith(value = MockitoJUnitRunner.class)
 public class WhenItemsServiceTestSpringTransactional {
 
+    /**
+     * The Items service impl.
+     */
     @Mock
     private ItemsServiceImpl itemsServiceImpl;
 
     /**
      * This method is to initialize Objects and configuration files
      * before testing test method
+     * @throws Exception the exception
      */
     @Before
     public void setUp () throws Exception {
@@ -41,13 +48,18 @@ public class WhenItemsServiceTestSpringTransactional {
     }
 
 
+    /**
+     * Test spring transactional.
+     */
     @Test
     public void testSpringTransactional(){
 
     }
+
     /**
      * This method is to release objects and shut down OR close any connections after Test is completed
      * before testing test method
+     * @throws Exception the exception
      */
     @After
     public void tearDown () throws Exception {

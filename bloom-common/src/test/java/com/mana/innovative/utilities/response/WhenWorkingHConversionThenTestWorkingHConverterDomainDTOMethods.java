@@ -20,14 +20,32 @@ import java.util.List;
 
 /**
  * This class is a test class for testing class todo...
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods.class );
 
-    private WorkingHour workingHourDTO, workingHourDTO2;
-    private com.mana.innovative.domain.client.WorkingHour workingHourDomain, workingHourDomain2;
+    /**
+     * The Working hour dTO.
+     */
+    private WorkingHour workingHourDTO, /**
+     * The Working hour dTO 2.
+     */
+    workingHourDTO2;
+    /**
+     * The Working hour domain.
+     */
+    private com.mana.innovative.domain.client.WorkingHour workingHourDomain, /**
+     * The Working hour domain 2.
+     */
+    workingHourDomain2;
 
     /**
      * Sets up.
@@ -145,6 +163,11 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         logger.debug( "Finishing GetConvertedListDomainFromDTO" );
     }
 
+    /**
+     * Test to string time from date.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testToStringTimeFromDate( ) throws Exception {
 
@@ -158,6 +181,11 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         logger.debug( "Finishing ToStringTimeFromDate" );
     }
 
+    /**
+     * Test get converted domain from dTO for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDomainFromDTOForError( ) throws Exception {
 
@@ -191,6 +219,11 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
         logger.debug( "Finishing test GetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted dTO from domain for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainForError( ) throws Exception {
 

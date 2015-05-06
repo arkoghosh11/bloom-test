@@ -1,11 +1,10 @@
 package com.mana.innovative.rest.common;
 
-import com.mana.innovative.dto.common.CalendarEvent;
-import com.mana.innovative.dto.common.payload.CalendarEventPayload;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.common.CalendarEventsService;
-import com.mana.innovative.service.common.builder.CalendarEventResponseBuilder;
-import com.mana.innovative.service.common.container.CalendarEventResponseContainer;
+import com.mana.innovative.utilities.response.ResponseUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -18,9 +17,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +31,11 @@ import java.util.List;
 public class CalendarEventsRestWebService {
 
     /**
+     * The constant logger.
+     */
+    private static final Logger logger = LoggerFactory.getLogger( CalendarEventsRestWebService.class );
+
+    /**
      * The Calendar events service.
      */
     @Resource
@@ -44,31 +45,33 @@ public class CalendarEventsRestWebService {
      * Gets all events.
      *
      * @param isError the is error
-     *
      * @return the all events
      */
     @GET
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     public Response getAllEvents( @QueryParam( "is_error" ) @DefaultValue( "false" ) Boolean isError ) {
 
-        final List< CalendarEvent > calendarEvents = new ArrayList<>( );
-        CalendarEvent calendarEvent = new CalendarEvent( );
-        calendarEvent.setCalendarEventId( 1L );
-        calendarEvent.setEventDescription( "Event Description" );
-        calendarEvent.setEventEndDate( new Date( ) );
-        calendarEvent.setEventStartDate( new Date( ) );
-        calendarEvent.setEventName( "Event Name" );
-        calendarEvent.setName( "Name" );
-        calendarEvent.setOptional( "Optional" );
-        calendarEvents.add( calendarEvent );
-        CalendarEventResponseContainer< CalendarEventPayload > calendarEventResponseContainer =
-                CalendarEventResponseBuilder.build( calendarEvents );
+//        final List< CalendarEvent > calendarEvents = new ArrayList<>( );
+//        CalendarEvent calendarEvent = new CalendarEvent( );
+//        calendarEvent.setCalendarEventId( 1L );
+//        calendarEvent.setEventDescription( "Event Description" );
+//        calendarEvent.setEventEndDate( new Date( ) );
+//        calendarEvent.setEventStartDate( new Date( ) );
+//        calendarEvent.setEventName( "Event Name" );
+//        calendarEvent.setName( "Name" );
+//        calendarEvent.setOptional( "Optional" );
+//        calendarEvents.add( calendarEvent );
+//        CalendarEventResponseContainer< CalendarEventPayload > calendarEventResponseContainer =
+//                CalendarEventResponseBuilder.build( calendarEvents );
 //                CalendarEventResponseBuilder.build( calendarEventDAO.getAllCalendarEvents() );
         RequestParams requestParams = new RequestParams( );
         requestParams.setIsError( isError );
-        calendarEventsService.getAllEvents( requestParams );
-        Response.status( Status.BAD_REQUEST );
-        return Response.ok( calendarEventResponseContainer ).build( );
+        try {
+            return calendarEventsService.getCalendarEvents( requestParams );
+        } catch ( Exception exception ) {
+            logger.error( "exception occurred", exception );
+            return ResponseUtility.internalServerErrorMsg( null );
+        }
     }
 
 
@@ -76,8 +79,7 @@ public class CalendarEventsRestWebService {
      * Delete events.
      *
      * @param calendarEventIds the calendar event ids
-     * @param isError          the is error
-     *
+     * @param isError the is error
      * @return the response
      */
     @DELETE
@@ -89,8 +91,8 @@ public class CalendarEventsRestWebService {
         RequestParams requestParams = new RequestParams( );
         requestParams.setIsError( isError );
 
-        calendarEventsService.deleteEvents( calendarEventIds, requestParams );
-
-        return Response.ok( ).build( );
+//        calendarEventsService.deleteEvents( calendarEventIds, requestParams );
+        logger.warn( "Service not ready was accessed , Service Name:" + "#deleteEvents()" );
+        return ResponseUtility.notAvailable( null );
     }
 }

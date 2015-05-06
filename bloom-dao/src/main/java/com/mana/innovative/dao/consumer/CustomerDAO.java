@@ -20,9 +20,8 @@ public interface CustomerDAO {
     /**
      * Create customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Customer > createCustomer( Customer customer, RequestParams requestParams );
@@ -38,9 +37,8 @@ public interface CustomerDAO {
     /**
      * Gets customer.
      *
-     * @param customerId    the customer id
+     * @param customerId the customer id
      * @param requestParams the request params
-     *
      * @return the customer
      */
     DAOResponse< Customer > getCustomerByUserId( long customerId, RequestParams requestParams );
@@ -48,9 +46,8 @@ public interface CustomerDAO {
     /**
      * Update customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Customer > updateCustomer( Customer customer, RequestParams requestParams );
@@ -58,9 +55,8 @@ public interface CustomerDAO {
     /**
      * Delete customer by user id.
      *
-     * @param customerId    the customer id
+     * @param customerId the customer id
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Customer > deleteCustomerByUserId( Long customerId, RequestParams requestParams );

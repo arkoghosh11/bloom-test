@@ -15,6 +15,8 @@ public interface BloomEmailService {
 
     /**
      * This method will send compose and send the message
+     * @param emailContents the email contents
+     * @return the boolean
      */
     boolean sendMail( EmailContents emailContents );
 }

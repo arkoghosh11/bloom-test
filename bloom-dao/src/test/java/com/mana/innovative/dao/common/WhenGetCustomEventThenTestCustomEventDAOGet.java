@@ -27,6 +27,9 @@ import java.util.Date;
 
 /**
  * This class is a test class for testing class todo...
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -34,16 +37,45 @@ import java.util.Date;
 @Transactional   // If required
 public class WhenGetCustomEventThenTestCustomEventDAOGet {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenGetCustomEventThenTestCustomEventDAOGet.class );
 
+    /**
+     * The Custom event dAO.
+     */
     @Resource
     private CustomEventDAO customEventDAO;
 
-    private Date eventDate, eventStartDate, eventEndDate;
+    /**
+     * The Event date.
+     */
+    private Date eventDate, /**
+     * The Event start date.
+     */
+    eventStartDate, /**
+     * The Event end date.
+     */
+    eventEndDate;
+    /**
+     * The Event id.
+     */
     private Long eventId;
+    /**
+     * The Event name.
+     */
     private String eventName;
+    /**
+     * The Request params.
+     */
     private RequestParams requestParams;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
@@ -60,6 +92,11 @@ public class WhenGetCustomEventThenTestCustomEventDAOGet {
         requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
@@ -67,6 +104,11 @@ public class WhenGetCustomEventThenTestCustomEventDAOGet {
 
     }
 
+    /**
+     * Test get event by id.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetEventById( ) throws Exception {
 
@@ -92,6 +134,11 @@ public class WhenGetCustomEventThenTestCustomEventDAOGet {
         logger.debug( "Finishing test for GetEventById" );
     }
 
+    /**
+     * Test get events by date with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetEventsByDateWithErrorEnabled( ) throws Exception {
@@ -117,6 +164,11 @@ public class WhenGetCustomEventThenTestCustomEventDAOGet {
         logger.debug( "Finishing test for GetEventsByDateWithErrorEnabled" );
     }
 
+    /**
+     * Test get events by event name.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetEventsByEventName( ) throws Exception {
 
@@ -143,6 +195,11 @@ public class WhenGetCustomEventThenTestCustomEventDAOGet {
         logger.debug( "Finishing test for GetEventsByEventName" );
     }
 
+    /**
+     * Test get all events.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetAllEvents( ) throws Exception {
 
@@ -168,6 +225,11 @@ public class WhenGetCustomEventThenTestCustomEventDAOGet {
         logger.debug( "Finishing test for GetAllEvents" );
     }
 
+    /**
+     * Test get events by date range.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetEventsByDateRange( ) throws Exception {
 

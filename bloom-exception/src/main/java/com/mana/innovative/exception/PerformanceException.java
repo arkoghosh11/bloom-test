@@ -15,10 +15,15 @@ package com.mana.innovative.exception;
 public class PerformanceException extends Exception {
 
     /**
-     *
+     * The constant serialVersionUID.
      */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     public String toString( ) {
 
         return "Performance Exception Raised";

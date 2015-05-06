@@ -29,10 +29,20 @@ import java.io.PrintWriter;
 @Component
 public class LoginFilter implements javax.servlet.Filter {
 
+    /**
+     * The Login service.
+     */
     @Autowired
     @Qualifier
     private LoginService loginService;
 
+    /**
+     * Init void.
+     *
+     * @param filterConfig the filter config
+     *
+     * @throws ServletException the servlet exception
+     */
     public void init( FilterConfig filterConfig ) throws ServletException {
 
         ServletContext servletContext = filterConfig.getServletContext( );
@@ -43,6 +53,15 @@ public class LoginFilter implements javax.servlet.Filter {
         autowireCapableBeanFactory.configureBean( this, beanName );
     }
 
+    /**
+     * Do filter.
+     *
+     * @param request the request
+     * @param response the response
+     * @param chain the chain
+     * @throws ServletException the servlet exception
+     * @throws IOException the iO exception
+     */
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain ) throws ServletException, IOException {
 
         boolean valid = loginService.checkLogin( request );
@@ -66,6 +85,9 @@ public class LoginFilter implements javax.servlet.Filter {
         }
     }
 
+    /**
+     * Destroy void.
+     */
     public void destroy( ) {
 
     }

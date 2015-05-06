@@ -64,12 +64,27 @@ public final class DAOConstants {
      * The constant TIME_FORMAT.
      */
     public static final java.lang.String TIME_FORMAT = "HH:mm";
+    /**
+     * The constant TIME_SEPARATOR_FORMAT.
+     */
     public static final String TIME_SEPARATOR_FORMAT = ":";
 
+    /**
+     * The constant DEFAULT_DATE_FORMAT.
+     */
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
+    /**
+     * The constant DEFAULT_DATE_LIMIT_FORMAT.
+     */
     public static final String DEFAULT_DATE_LIMIT_FORMAT = "yy-MM-dd";
+    /**
+     * The constant DEFAULT_DATE_RETURN_FORMAT.
+     */
     public static final String DEFAULT_DATE_RETURN_FORMAT = "yyyy-MM-dd HH:mm:ss:SSS";
+    /**
+     * The constant EMPTY_STRING.
+     */
     public static final String EMPTY_STRING = "";
 
 
@@ -77,7 +92,6 @@ public final class DAOConstants {
      * To string from number.
      *
      * @param number the number
-     *
      * @return the string
      */
     public static String toStringFromNumber( final int number ) {
@@ -90,7 +104,6 @@ public final class DAOConstants {
      * To number from string.
      *
      * @param number the number
-     *
      * @return the integer
      */
     public static Integer toNumberFromString( final String number ) {

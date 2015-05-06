@@ -20,14 +20,32 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/30/2015 7:45 PM. This class WhenTabConversionThenTestTabConverterDomainDTOMethods is a
  * test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenTabConversionThenTestTabConverterDomainDTOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenTabConversionThenTestTabConverterDomainDTOMethods.class );
 
-    private Tab tabDTO, tabDTO2;
-    private com.mana.innovative.domain.common.Tab tabDomain, tabDomain2;
+    /**
+     * The Tab dTO.
+     */
+    private Tab tabDTO, /**
+     * The Tab dTO 2.
+     */
+    tabDTO2;
+    /**
+     * The Tab domain.
+     */
+    private com.mana.innovative.domain.common.Tab tabDomain, /**
+     * The Tab domain 2.
+     */
+    tabDomain2;
 
     /**
      * Sets up.
@@ -173,6 +191,11 @@ public class WhenTabConversionThenTestTabConverterDomainDTOMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted dTO from domain for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainForError( ) throws Exception {
 

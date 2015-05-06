@@ -25,14 +25,16 @@ import java.util.List;
 public class ShopResponseBuilder {
 
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( ShopResponseBuilder.class );
 
     /**
      * Build shop response container.
      *
      * @param shopDAOResponse the shop dAO response
-     * @param isError         the is error
-     *
+     * @param isError the is error
      * @return the shop response container
      */
     public static ShopResponseContainer< ShopsPayload > build( DAOResponse< Shop > shopDAOResponse, boolean isError ) {
@@ -86,10 +88,9 @@ public class ShopResponseBuilder {
     /**
      * Build error.
      *
-     * @param location  the location
-     * @param isError   the is error
+     * @param location the location
+     * @param isError the is error
      * @param exception the exception
-     *
      * @return the shop response container
      */
     public static ShopResponseContainer< ShopsPayload > buildError( String location, final boolean isError, Exception

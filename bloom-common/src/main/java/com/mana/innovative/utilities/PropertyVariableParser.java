@@ -14,13 +14,18 @@ import java.util.Scanner;
  */
 public class PropertyVariableParser {
 
+    /**
+     * The Log.
+     */
     private final Logger log = Logger.getLogger( PropertyVariableParser.class );
 
     /**
      * Replaces variables with the pattern ${aSystemPropertyValue}.
      *
-     * @param propertyValue a string with the pattern ${ASystem.property.value}
-     *
+     * @param propertyValue a string with the pattern $
+     *{
+     *ASystem.property.value
+     *}
      * @return replacement of propertyValue with the value of System.getEnv(propertyValue);
      */
     public String replaceVariables( String propertyValue ) {

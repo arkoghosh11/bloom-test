@@ -29,6 +29,9 @@ import java.util.List;
 
 /**
  * This class is a test class for testing class todo...
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -36,16 +39,36 @@ import java.util.List;
 @Transactional   // If required
 public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods.class );
 
+    /**
+     * The Working hour dAO impl.
+     */
     @Resource
     private WorkingHourDAO workingHourDAOImpl;
+    /**
+     * The Session factory.
+     */
     @Resource
     private SessionFactory sessionFactory;
 
+    /**
+     * The Test id.
+     */
     private long testId;
+    /**
+     * The Test ids.
+     */
     private List< Long > testIds;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
@@ -56,6 +79,11 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
         testIds.add( testId );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
@@ -69,6 +97,11 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
 
     }
 
+    /**
+     * Test working hour dAO not null.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testWorkingHourDAONotNull( ) throws Exception {
 
@@ -77,6 +110,11 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
         logger.debug( "Finishing test for WorkingHourDAONotNull" );
     }
 
+    /**
+     * Test delete working hour by working hr id error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -101,6 +139,11 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
         logger.debug( "Finishing test for DeleteWorkingHourByWorkingHrIdErrorEnabled" );
     }
 
+    /**
+     * Test delete working hour by working hr id error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -121,6 +164,11 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
         logger.debug( "Finishing test for DeleteWorkingHourByWorkingHrIdErrorDisabled" );
     }
 
+    /**
+     * Test delete working hours by working hr ids error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -145,6 +193,11 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
         logger.debug( "Finishing test for DeleteWorkingHoursByWorkingHrIdsErrorEnabled" );
     }
 
+    /**
+     * Test delete working hours by working hr ids error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -166,7 +219,12 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
         logger.debug( "Finishing test for DeleteWorkingHoursByWorkingHrIdsErrorDisabled" );
     }
 
-    //  IMP Delete all WorkingHour Test Cases
+    /**
+     * Test delete all working hours with error enabled.
+     *
+     * @throws Exception the exception
+     */
+//  IMP Delete all WorkingHour Test Cases
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -192,6 +250,11 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
         logger.debug( "Finishing test for DeleteAllWorkingHoursWithErrorEnabled" );
     }
 
+    /**
+     * Test delete all working hours with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -213,6 +276,11 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
         logger.debug( "Finishing test for DeleteAllWorkingHoursWithErrorDisabled" );
     }
 
+    /**
+     * Test delete all working hours with delete all true with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -237,6 +305,11 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
         logger.debug( "Finishing test for DeleteAllWorkingHoursWithDeleteAllTrueWithErrorEnabled" );
     }
 
+    /**
+     * Test delete all working hours with delete all true error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )

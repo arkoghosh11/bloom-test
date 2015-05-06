@@ -18,9 +18,8 @@ public interface CreditCardDAO {
     /**
      * Create credit card.
      *
-     * @param creditCard    the credit card
+     * @param creditCard the credit card
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< CreditCard > createCreditCard( CreditCard creditCard, RequestParams requestParams );
@@ -29,7 +28,6 @@ public interface CreditCardDAO {
      * Gets credit cards.
      *
      * @param requestParams the request params
-     *
      * @return the credit cards
      */
     DAOResponse< CreditCard > getCreditCards( RequestParams requestParams );
@@ -37,9 +35,8 @@ public interface CreditCardDAO {
     /**
      * Gets credit card.
      *
-     * @param cardId        the credit card id
+     * @param cardId the credit card id
      * @param requestParams the request params
-     *
      * @return the credit card
      */
     DAOResponse< CreditCard > getCreditCard( long cardId, RequestParams requestParams );
@@ -47,9 +44,8 @@ public interface CreditCardDAO {
     /**
      * Update credit card.
      *
-     * @param creditCard    the credit card
+     * @param creditCard the credit card
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< CreditCard > updateCreditCard( CreditCard creditCard, RequestParams requestParams );
@@ -57,9 +53,8 @@ public interface CreditCardDAO {
     /**
      * Delete credit card by credit card id.
      *
-     * @param cardId        the credit card id
+     * @param cardId the credit card id
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< CreditCard > deleteCreditCardByCardId( Long cardId, RequestParams requestParams );
@@ -68,7 +63,6 @@ public interface CreditCardDAO {
      * Delete all credit cards.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< CreditCard > deleteAllCreditCards( RequestParams requestParams );

@@ -26,7 +26,7 @@ import java.util.List;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@Repository
+@Repository( value = "cardDAO" )
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class CardDAOImpl extends BasicDAO implements CardDAO {
 
@@ -38,9 +38,8 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     /**
      * Create card.
      *
-     * @param card          the card
+     * @param card the card
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -87,7 +86,6 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
      * Gets cards.
      *
      * @param requestParams the request params
-     *
      * @return the cards
      */
     @SuppressWarnings( "unchecked" )
@@ -134,9 +132,8 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     /**
      * Gets card.
      *
-     * @param cardId        the card id
+     * @param cardId the card id
      * @param requestParams the request params
-     *
      * @return the card
      */
     @SuppressWarnings( "unchecked" )
@@ -183,9 +180,8 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     /**
      * Update card.
      *
-     * @param card          the card
+     * @param card the card
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -228,9 +224,8 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     /**
      * Delete card.
      *
-     * @param cardId        the card id
+     * @param cardId the card id
      * @param requestParams the request params
-     *
      * @return the boolean
      */
     @Override
@@ -279,7 +274,6 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
      * Delete all cards.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override

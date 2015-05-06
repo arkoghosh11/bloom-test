@@ -24,18 +24,35 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 5/2/2015 6:19 PM. This class WhenGetPhoneDAOThenTestGetPhoneGetMethods is a test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
 @Transactional   // If required
 public class WhenGetPhoneDAOThenTestGetPhoneGetMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenGetPhoneDAOThenTestGetPhoneGetMethods.class );
 
+    /**
+     * The Phone dAO.
+     */
     @Resource
     private PhoneDAO phoneDAO;
+    /**
+     * The Request params.
+     */
     private RequestParams requestParams;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
@@ -43,12 +60,22 @@ public class WhenGetPhoneDAOThenTestGetPhoneGetMethods {
         requestParams = new RequestParams( );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 
+    /**
+     * Test get phones with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetPhonesWithErrorDisabled( ) throws Exception {
@@ -77,6 +104,11 @@ public class WhenGetPhoneDAOThenTestGetPhoneGetMethods {
         logger.debug( "Finishing test for GetPhonesWithErrorDisabled" );
     }
 
+    /**
+     * Test get phone with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetPhoneWithErrorDisabled( ) throws Exception {
@@ -119,6 +151,11 @@ public class WhenGetPhoneDAOThenTestGetPhoneGetMethods {
         logger.debug( "Finishing test for GetPhoneWithErrorDisabled" );
     }
 
+    /**
+     * Test get phones with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetPhonesWithErrorEnabled( ) throws Exception {
@@ -152,6 +189,11 @@ public class WhenGetPhoneDAOThenTestGetPhoneGetMethods {
         logger.debug( "Finishing test for GetPhonesWithErrorEnabled" );
     }
 
+    /**
+     * Test get phone with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetPhoneWithErrorEnabled( ) throws Exception {

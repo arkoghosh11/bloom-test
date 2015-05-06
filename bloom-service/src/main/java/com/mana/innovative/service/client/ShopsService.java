@@ -21,7 +21,6 @@ public interface ShopsService {
      * Gets shops.
      *
      * @param isError the is error
-     *
      * @return the shops
      */
     Response getShops( boolean isError );
@@ -29,9 +28,8 @@ public interface ShopsService {
     /**
      * Delete all shops.
      *
-     * @param isError        the is error
+     * @param isError the is error
      * @param deleteAllShops the delete all shops
-     *
      * @return the response
      */
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )

@@ -29,6 +29,9 @@ import java.util.List;
 
 /**
  * Created by alex1 on 1/28/2015. This is a domain class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
@@ -36,22 +39,38 @@ import java.util.List;
 @Transactional
 public class WhenCreateAnItemTestItemDAOCreateItem {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenCreateAnItemTestItemDAOCreateItem.class );
 
+    /**
+     * The Item dAO impl.
+     */
     @Resource
     private ItemDAO itemDAOImpl;
 
+    /**
+     * The Shop dAO impl.
+     */
     @Resource
     private ShopDAO shopDAOImpl;
 
+    /**
+     * The Session factory.
+     */
     @Resource
     private SessionFactory sessionFactory;
 
+    /**
+     * The Dummy item.
+     */
     private Item dummyItem;
 
 
     /**
      * This method is to initialize Objects and configuration files before testing test method
+     * @throws Exception the exception
      */
     @Before
     public void setUp( ) throws Exception {
@@ -77,12 +96,18 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         dummyItem.setBoughtDate( new Date( ) );
     }
 
+    /**
+     * Test item dAO not null.
+     */
     @Test
     public void testItemDAONotNull( ) {
 
         Assert.assertNotNull( itemDAOImpl );
     }
 
+    /**
+     * Test item dAO create without exception.
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRED )
@@ -120,6 +145,9 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
 
     }
 
+    /**
+     * Test item dAO create throws exception.
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRED )
@@ -147,6 +175,9 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
 
     }
 
+    /**
+     * Test item dAO create throws exception n error container.
+     */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRED )
@@ -182,6 +213,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
     /**
      * This method is to release objects and shut down OR close any connections after Test is completed before testing
      * test method
+     * @throws Exception the exception
      */
     @After
     @AfterTransaction

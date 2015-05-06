@@ -4,12 +4,14 @@
 package com.mana.innovative.service.common.impl;
 
 import com.mana.innovative.dao.common.TabDAO;
+import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.dto.common.Tab;
 import com.mana.innovative.dto.common.payload.TabsPayload;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.common.TabService;
 import com.mana.innovative.service.common.builder.TabResponseBuilder;
 import com.mana.innovative.service.common.container.TabResponseContainer;
+import com.mana.innovative.utilities.response.TabDomainDTOConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -43,42 +45,43 @@ public class TabServiceImpl implements TabService {
     /**
      * Gets tab.
      *
-     * @param tabId         the tab id
+     * @param tabId the tab id
      * @param requestParams the request params
-     *
      * @return the tab
      */
     @Override
     public Response getTab( Integer tabId, RequestParams requestParams ) {
 
-        tabDAO.getTabByTabId( tabId, requestParams );
+        DAOResponse< com.mana.innovative.domain.common.Tab >
+                tabDAOResponse = tabDAO.getTabByTabId( tabId, requestParams );
 
         TabResponseContainer< TabsPayload > tabResponseContainer
-                = TabResponseBuilder.build( new Tab( ) );
+                = TabResponseBuilder.build( tabDAOResponse, requestParams.isError( ) );
         return Response.ok( tabResponseContainer ).build( );
     }
 
     /**
      * Update tab.
      *
-     * @param tab           the tab
+     * @param tabDTO the tab
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override
-    public Response updateTab( Tab tab, RequestParams requestParams ) {
+    public Response updateTab( Tab tabDTO, RequestParams requestParams ) {
 
-        tabDAO.updateTab( null, requestParams );
-        return null;
+        com.mana.innovative.domain.common.Tab tabDomain =
+                TabDomainDTOConverter.getConvertedDomainFromDTO( null, tabDTO );
+        DAOResponse< com.mana.innovative.domain.common.Tab > tabDAOResponse = tabDAO.updateTab( tabDomain,
+                requestParams );
+        return Response.ok( ).build( );
     }
 
     /**
      * Delete tab.
      *
-     * @param tabId         the tab id
+     * @param tabId the tab id
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override
@@ -91,9 +94,8 @@ public class TabServiceImpl implements TabService {
     /**
      * Create tab.
      *
-     * @param tab           the tab
+     * @param tab the tab
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override

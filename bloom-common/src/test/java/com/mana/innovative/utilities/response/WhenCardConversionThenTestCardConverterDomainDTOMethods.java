@@ -21,10 +21,16 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/30/2015 11:18 PM. This class WhenCardConversionThenTestCardConverterDomainDTOMethods is a
  * test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenCardConversionThenTestCardConverterDomainDTOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenCardConversionThenTestCardConverterDomainDTOMethods.class );
 
     /**
@@ -228,6 +234,11 @@ public class WhenCardConversionThenTestCardConverterDomainDTOMethods {
         logger.debug( "Finishing test GetConvertedDTOFromDomainForError" );
     }
 
+    /**
+     * Test is valid card issue date.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testIsValidCardIssueDate( ) throws Exception {
 
@@ -248,6 +259,11 @@ public class WhenCardConversionThenTestCardConverterDomainDTOMethods {
         logger.debug( "Finishing test for IsValidCardIssueDate" );
     }
 
+    /**
+     * Test is valid card number.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testIsValidCardNumber( ) throws Exception {
 
@@ -261,6 +277,11 @@ public class WhenCardConversionThenTestCardConverterDomainDTOMethods {
         logger.debug( "Finishing test for IsValidCardNumber" );
     }
 
+    /**
+     * Test get sum of digits.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetSumOfDigits( ) throws Exception {
 

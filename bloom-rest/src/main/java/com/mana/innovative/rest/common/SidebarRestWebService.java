@@ -15,6 +15,8 @@ import javax.ws.rs.core.UriInfo;
  * Created by IntelliJ IDEA.
  *
  * @author Bloom Date: 3/23/13 Time: 7:37 PM
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  * @since: jdk 1.7
  */
 @Component
@@ -28,6 +30,15 @@ public class SidebarRestWebService {
 //        return Response.ok().build();
 //    }
 
+    /**
+     * Gets sidebar by type.
+     *
+     * @param type    the type
+     * @param id      the id
+     * @param uriInfo the uri info
+     *
+     * @return the sidebar by type
+     */
     @GET
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     public Response getSidebarByType( @QueryParam( "type" ) String type, @QueryParam( "id" ) String id,

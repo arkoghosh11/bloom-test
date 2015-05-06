@@ -49,8 +49,17 @@ public class CustomSchedulerImpl implements CustomScheduler {
      * The constant logger.
      */
     private static final Logger logger = LoggerFactory.getLogger( CustomSchedulerImpl.class );
+    /**
+     * The constant SEVEN.
+     */
     private static final int SEVEN = 7;
+    /**
+     * The constant MAX_MINUTE.
+     */
     private static final int MAX_MINUTE = 60;
+    /**
+     * The constant MIN_MINUTE.
+     */
     private static final int MIN_MINUTE = 0;
 
 
@@ -63,13 +72,25 @@ public class CustomSchedulerImpl implements CustomScheduler {
     @Resource
     private CustomSpecificFileReader< ItemsPayload > customSpecificFileReader;
 
+    /**
+     * The Custom database service.
+     */
     @Resource
     private CustomDatabaseService< Object, Date > customDatabaseService;
 
+    /**
+     * The Bloom email service.
+     */
     @Resource
     private BloomEmailService bloomEmailService;
 
+    /**
+     * The Event dates.
+     */
     private List< Date > eventDates = new ArrayList<>( );
+    /**
+     * The Email contents list.
+     */
     private List< EmailContents > emailContentsList = new ArrayList<>( );
 
     /**
@@ -148,6 +169,9 @@ public class CustomSchedulerImpl implements CustomScheduler {
         logger.debug( "Finishing " + location );
     }
 
+    /**
+     * Gets events n email.
+     */
     @Override
     @Scheduled( cron = "${bloom-non-client-service.cron_job_event_checker}" )
     public void getEventsNEmail( ) {
@@ -203,6 +227,9 @@ public class CustomSchedulerImpl implements CustomScheduler {
         logger.debug( "Finishing " + location );
     }
 
+    /**
+     * Gets events n enable emailed events.
+     */
     @Override
     @Scheduled( cron = "${bloom-non-client-service.cron_job_enable_event_value}" )
     public void getEventsNEnableEmailedEvents( ) {
@@ -232,7 +259,6 @@ public class CustomSchedulerImpl implements CustomScheduler {
      * Is event runnable.
      *
      * @param customEvent the custom event
-     *
      * @return the boolean
      */
     private boolean isEventRunnable( final CustomEvent customEvent ) {
@@ -267,7 +293,6 @@ public class CustomSchedulerImpl implements CustomScheduler {
      * Read from cSVN save.
      *
      * @param file the file
-     *
      * @return the boolean
      */
     public boolean readFromCSVNSave( File file ) {
@@ -297,7 +322,6 @@ public class CustomSchedulerImpl implements CustomScheduler {
      * Read from xMLN save.
      *
      * @param file the file
-     *
      * @return the boolean
      */
     public boolean readFromXMLNSave( File file ) {
@@ -325,6 +349,11 @@ public class CustomSchedulerImpl implements CustomScheduler {
         }
     }
 
+    /**
+     * Read events from dB.
+     *
+     * @return the list
+     */
     @SuppressWarnings( "unchecked" )
     public List< CustomEvent > readEventsFromDB( ) {
 

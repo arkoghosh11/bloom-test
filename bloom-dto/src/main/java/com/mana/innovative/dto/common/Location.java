@@ -14,9 +14,18 @@ import java.util.Objects;
 @XmlRootElement(name = "location")
 public class Location {
 
+    /**
+     * The Location id.
+     */
     private long locationId;
 
+    /**
+     * The Latitude.
+     */
     private double latitude;
+    /**
+     * The Longitude.
+     */
     private double longitude;
 
 
@@ -78,6 +87,13 @@ public class Location {
         this.longitude = longitude;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -96,7 +112,7 @@ public class Location {
      * be a concise but informative representation that is easy for a
      * person to read.
      *
-     * @return {@link String}a string representation of the object.
+     * @return a string representation of the object.
      */
     @Override
     public String toString() {

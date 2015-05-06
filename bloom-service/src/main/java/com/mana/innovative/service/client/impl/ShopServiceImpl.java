@@ -31,18 +31,26 @@ import java.util.List;
 @Service
 public class ShopServiceImpl implements ShopService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( ShopServiceImpl.class );
+    /**
+     * The ONE.
+     */
     private final int ONE = 1;
 
+    /**
+     * The Shop dAO impl.
+     */
     @Resource
     private ShopDAO shopDAOImpl;
 
     /**
      * Gets shopDTO.
      *
-     * @param shopId  the shopDTO id
+     * @param shopId the shopDTO id
      * @param isError the is error
-     *
      * @return the shopDTO
      */
     @Override
@@ -94,7 +102,6 @@ public class ShopServiceImpl implements ShopService {
      *
      * @param shopDTO the shop dTO
      * @param isError the is error
-     *
      * @return the response
      */
     @Override
@@ -147,7 +154,6 @@ public class ShopServiceImpl implements ShopService {
      *
      * @param shopDTO the shop
      * @param isError the is error
-     *
      * @return the response
      */
     @Override
@@ -196,9 +202,8 @@ public class ShopServiceImpl implements ShopService {
     /**
      * This method is to Delete an shop via shopId only.
      *
-     * @param shopId  the shop id
+     * @param shopId the shop id
      * @param isError the is error
-     *
      * @return the response
      */
     @Override
@@ -237,7 +242,6 @@ public class ShopServiceImpl implements ShopService {
      *
      * @param shopIds the shop ids
      * @param isError the is error
-     *
      * @return the response
      */
     @Override

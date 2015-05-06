@@ -27,19 +27,21 @@ import javax.ws.rs.core.Response;
 @Path( "/{shops : (?i)shops}" )
 public class ShopsRestWebService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( ShopsRestWebService.class );
 
     /**
      * The Shops service impl.
      */
-    @Resource( name = "shopsServiceImpl" )
+    @Resource
     private ShopsService shopsServiceImpl;
 
     /**
      * Gets shops.
      *
      * @param isError the is error
-     *
      * @return the shops
      */
     @GET
@@ -63,9 +65,8 @@ public class ShopsRestWebService {
     /**
      * Delete shops.
      *
-     * @param isError     the is error
+     * @param isError the is error
      * @param isDeleteAll the is delete all
-     *
      * @return the response
      */
     @DELETE

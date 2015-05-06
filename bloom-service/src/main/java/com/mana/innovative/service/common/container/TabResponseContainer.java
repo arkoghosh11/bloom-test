@@ -10,9 +10,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 /**
- * @param <T>
- *
- * @author Bloom
+ * The type Tab response container.
+ * @param <T>   the type parameter
+ * Created by Bloom/Rono on $date $time.
+ * @author Bloom Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @XmlRootElement( name = "response", namespace = "http://localhost:8080/rest/Bloom/tab" )
 @XmlSeeAlso( { TabsPayload.class, ResponseContainer.class } )

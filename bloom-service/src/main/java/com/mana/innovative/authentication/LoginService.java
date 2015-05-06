@@ -5,7 +5,6 @@ package com.mana.innovative.authentication;/**
 
 import com.mana.innovative.constants.ServiceConstants;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +13,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Properties;
 
 /**
  * The type Login service.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @Service
-@Qualifier
 public class LoginService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( LoginService.class );
 
+    /**
+     * The Login parameter name for session.
+     */
     @Value( value = "${bloom-service.loginVariable}" )
     private String loginParameterNameForSession;
 
@@ -34,7 +43,6 @@ public class LoginService {
      *
      * @param httpRequest the http request
      * @param httpSession the http session
-     *
      * @return the boolean
      */
     public boolean doLogin( HttpServletRequest httpRequest, HttpSession httpSession ) {
@@ -89,6 +97,14 @@ public class LoginService {
             return false;
         }
 
+//        Cookie cookies[] =httpRequest.getCookies();
+//        for(Cookie cookie: cookies) {
+//            String value = cookie.getValue();
+//            String name = cookie.getName();
+//            int maxAge = cookie.getMaxAge();
+//        }
+//        todo work with cookies for saving login information
+
         httpSession.setAttribute( "user_name", user );
         httpRequest.setAttribute( loginParameterNameForSession, Boolean.TRUE );
         httpSession.setMaxInactiveInterval( ServiceConstants.HALF_HOUR );
@@ -97,10 +113,22 @@ public class LoginService {
     }
 
     /**
+     * Generate unique user token.
+     *
+     * @param userName the user name
+     * @return the string
+     */
+    protected String generateUniqueUserToken( String userName ) {
+
+
+        SecureRandom secureRandom = new SecureRandom( );
+        return new BigInteger( 130, secureRandom ).toString( 32 );
+    }
+
+    /**
      * Check login.
      *
      * @param httpRequest the http request
-     *
      * @return the boolean
      */
     public boolean checkLogin( ServletRequest httpRequest ) {

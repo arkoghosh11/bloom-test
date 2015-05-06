@@ -20,8 +20,7 @@ public interface ItemDAO {
      * Delete all items.
      *
      * @param deleteAllItems the delete all items
-     * @param isError        the is error
-     *
+     * @param isError the is error
      * @return the dAO response
      */
     DAOResponse< Item > deleteAllItems( final boolean deleteAllItems, final boolean isError );

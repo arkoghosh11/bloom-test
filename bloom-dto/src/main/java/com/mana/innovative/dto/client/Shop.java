@@ -19,13 +19,34 @@ import java.util.Objects;
 public class Shop {
 
 
+    /**
+     * The Shop id.
+     */
     private Long shopId;
+    /**
+     * The Shop own id.
+     */
     private Long shopOwnId;
+    /**
+     * The Shop name.
+     */
     private String shopName;
+    /**
+     * The Shop web link.
+     */
     private String shopWebLink;
 
+    /**
+     * The Address.
+     */
     private Address address;
+    /**
+     * The Working hours.
+     */
     private List< WorkingHour > workingHours;
+    /**
+     * The Items.
+     */
     private List< Item > items;
 
     /**
@@ -164,6 +185,13 @@ public class Shop {
     }
 
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -183,7 +211,7 @@ public class Shop {
      * "textually represents" this object. The result should be a concise but informative representation that is easy
      * for a person to read.
      *
-     * @return {@link String}a string representation of the object.
+     * @return a string representation of the object.
      */
     @Override
     public String toString( ) {

@@ -10,28 +10,57 @@ import java.util.List;
 /**
  * The type DAO response.
  *
- * @param <T> the type parameter
- *
+ * @param <T>  the type parameter
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 public class DAOResponse < T > {
 
+    /**
+     * The Is update.
+     */
     private boolean isUpdate;
+    /**
+     * The Is create.
+     */
     private boolean isCreate;
+    /**
+     * The Is delete.
+     */
     private boolean isDelete;
+    /**
+     * The Request success.
+     */
     private boolean requestSuccess;
 
+    /**
+     * The Count.
+     */
     private int count;
+    /**
+     * The Total limit.
+     */
     private int totalLimit;
+    /**
+     * The Start limit.
+     */
     @DefaultValue( value = DAOConstants.STRING_ZERO )
     private int startLimit;
+    /**
+     * The Offset.
+     */
     @DefaultValue( value = DAOConstants.DEFAULT_STRING_PAGE_LIMIT )
     private int offset;
 
+    /**
+     * The Results.
+     */
     private List< T > results;
 
+    /**
+     * The Error container.
+     */
     private ErrorContainer errorContainer;
 
 
@@ -39,7 +68,7 @@ public class DAOResponse < T > {
      * Sets error.
      *
      * @param location the location
-     * @param e        the e
+     * @param e the e
      */
     public void setError( final String location, final Exception e ) {
 

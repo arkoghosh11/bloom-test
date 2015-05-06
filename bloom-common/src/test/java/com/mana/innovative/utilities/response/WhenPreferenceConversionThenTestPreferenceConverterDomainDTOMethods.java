@@ -20,14 +20,32 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/30/2015 7:48 PM. This class WhenPreferenceConversionThenTestPreferenceConverterDomainDTOMethods
  * is a test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenPreferenceConversionThenTestPreferenceConverterDomainDTOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenPreferenceConversionThenTestPreferenceConverterDomainDTOMethods.class );
 
-    private Preference preferenceDTO, preferenceDTO2;
-    private com.mana.innovative.domain.consumer.Preference preferenceDomain, preferenceDomain2;
+    /**
+     * The Preference dTO.
+     */
+    private Preference preferenceDTO, /**
+     * The Preference dTO 2.
+     */
+    preferenceDTO2;
+    /**
+     * The Preference domain.
+     */
+    private com.mana.innovative.domain.consumer.Preference preferenceDomain, /**
+     * The Preference domain 2.
+     */
+    preferenceDomain2;
 
     /**
      * Sets up.
@@ -173,6 +191,11 @@ public class WhenPreferenceConversionThenTestPreferenceConverterDomainDTOMethods
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted dTO from domain for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainForError( ) throws Exception {
 

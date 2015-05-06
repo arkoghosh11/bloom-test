@@ -30,6 +30,9 @@ import java.util.List;
 @Service
 public class UsersServiceImpl implements UsersService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( UserServiceImpl.class );
 
     /**
@@ -42,7 +45,6 @@ public class UsersServiceImpl implements UsersService {
      * Gets all users.
      *
      * @param requestParams the request params
-     *
      * @return the all users
      */
     @Override
@@ -85,9 +87,8 @@ public class UsersServiceImpl implements UsersService {
     /**
      * Delete users.
      *
-     * @param userIds       the user ids
+     * @param userIds the user ids
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override

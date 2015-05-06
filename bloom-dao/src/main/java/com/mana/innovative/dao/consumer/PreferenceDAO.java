@@ -18,9 +18,8 @@ public interface PreferenceDAO {
     /**
      * Create preference.
      *
-     * @param preference    the preference
+     * @param preference the preference
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Preference > createPreference( Preference preference, RequestParams requestParams );
@@ -29,7 +28,6 @@ public interface PreferenceDAO {
      * Gets preferences.
      *
      * @param requestParams the request params
-     *
      * @return the preferences
      */
     DAOResponse< Preference > getPreferences( RequestParams requestParams );
@@ -37,9 +35,8 @@ public interface PreferenceDAO {
     /**
      * Gets preference.
      *
-     * @param preferenceId  the preference id
+     * @param preferenceId the preference id
      * @param requestParams the request params
-     *
      * @return the preference
      */
     DAOResponse< Preference > getPreference( long preferenceId, RequestParams requestParams );
@@ -47,9 +44,8 @@ public interface PreferenceDAO {
     /**
      * Update preference.
      *
-     * @param preference    the preference
+     * @param preference the preference
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Preference > updatePreference( Preference preference, RequestParams requestParams );
@@ -57,9 +53,8 @@ public interface PreferenceDAO {
     /**
      * Delete preference by preference id.
      *
-     * @param preferenceId  the preference id
+     * @param preferenceId the preference id
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Preference > deletePreferenceByPreferenceId( Long preferenceId, RequestParams requestParams );
@@ -68,7 +63,6 @@ public interface PreferenceDAO {
      * Delete all preferences.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Preference > deleteAllPreferences( RequestParams requestParams );

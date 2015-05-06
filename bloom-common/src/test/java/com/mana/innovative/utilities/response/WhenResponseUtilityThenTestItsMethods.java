@@ -14,24 +14,45 @@ import javax.ws.rs.core.Response;
 
 /**
  * Created by Bloom/Rono on 5/1/2015 1:31 AM. This class WhenResponseUtilityThenTestItsMethods is a test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenResponseUtilityThenTestItsMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenResponseUtilityThenTestItsMethods.class );
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void setUp( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
 
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
 
     }
 
+    /**
+     * Test internal server error msg.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testInternalServerErrorMsg( ) throws Exception {
 
@@ -45,6 +66,11 @@ public class WhenResponseUtilityThenTestItsMethods {
         logger.debug( "Finishing test for InternalServerErrorMsg" );
     }
 
+    /**
+     * Test unauthorized access.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testUnauthorizedAccess( ) throws Exception {
 
@@ -58,6 +84,11 @@ public class WhenResponseUtilityThenTestItsMethods {
         logger.debug( "Finishing test for UnauthorizedAccess" );
     }
 
+    /**
+     * Test no resource found.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testNoResourceFound( ) throws Exception {
 
@@ -71,6 +102,11 @@ public class WhenResponseUtilityThenTestItsMethods {
         logger.debug( "Finishing test for NoResourceFound" );
     }
 
+    /**
+     * Test bad request.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testBadRequest( ) throws Exception {
 
@@ -84,6 +120,11 @@ public class WhenResponseUtilityThenTestItsMethods {
         logger.debug( "Finishing test for BadRequest" );
     }
 
+    /**
+     * Test forbidden request.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testForbiddenRequest( ) throws Exception {
 

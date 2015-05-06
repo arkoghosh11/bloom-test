@@ -15,15 +15,32 @@ import java.util.Date;
 
 /**
  * This class is a test class for testing class todo...
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenDateCommonsThenTestItsMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenDateCommonsThenTestItsMethods.class );
 
+    /**
+     * The Test date.
+     */
     private Date testDate;
+    /**
+     * The Simple date format.
+     */
     private SimpleDateFormat simpleDateFormat;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void setUp( ) throws Exception {
 
@@ -33,12 +50,22 @@ public class WhenDateCommonsThenTestItsMethods {
 
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
 
     }
 
+    /**
+     * Test get start date time.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetStartDateTime( ) throws Exception {
 
@@ -52,6 +79,11 @@ public class WhenDateCommonsThenTestItsMethods {
         logger.debug( "Finishing test for GetStartDateTime" );
     }
 
+    /**
+     * Test get end date time.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetEndDateTime( ) throws Exception {
 
@@ -63,6 +95,11 @@ public class WhenDateCommonsThenTestItsMethods {
         logger.debug( "Finishing test for GetEndDateTime" );
     }
 
+    /**
+     * Test update date to prev hour.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testUpdateDateToPrevHour( ) throws Exception {
 

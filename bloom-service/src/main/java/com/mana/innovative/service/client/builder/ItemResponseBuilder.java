@@ -24,14 +24,16 @@ import java.util.List;
  */
 public class ItemResponseBuilder {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( ItemResponseBuilder.class );
 
     /**
      * Build item response container.
      *
      * @param itemDAOResponse the item dAO response
-     * @param isError         the is error
-     *
+     * @param isError the is error
      * @return the item response container
      */
     public static ItemResponseContainer< ItemsPayload > build( DAOResponse< com.mana.innovative.domain.client.Item > itemDAOResponse,
@@ -86,10 +88,9 @@ public class ItemResponseBuilder {
     /**
      * Build error.
      *
-     * @param location  the location of the error
-     * @param isError   the is error
+     * @param location the location of the error
+     * @param isError the is error
      * @param exception the exception
-     *
      * @return the item response container
      */
     public static ItemResponseContainer< ItemsPayload > buildError( String location, boolean isError,

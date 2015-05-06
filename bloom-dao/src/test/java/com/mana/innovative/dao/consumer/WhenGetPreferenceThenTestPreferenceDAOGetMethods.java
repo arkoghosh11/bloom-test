@@ -25,6 +25,9 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 5/2/2015 6:16 PM. This class WhenGetPreferenceThenTestPreferenceDAOGetMethods is a test
  * class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -32,12 +35,26 @@ import java.util.List;
 @Transactional   // If required
 public class WhenGetPreferenceThenTestPreferenceDAOGetMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenGetPreferenceThenTestPreferenceDAOGetMethods.class );
 
+    /**
+     * The Preference dAO.
+     */
     @Resource
     private PreferenceDAO preferenceDAO;
+    /**
+     * The Request params.
+     */
     private RequestParams requestParams;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
@@ -45,12 +62,22 @@ public class WhenGetPreferenceThenTestPreferenceDAOGetMethods {
         requestParams = new RequestParams( );
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 
+    /**
+     * Test get preferences with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetPreferencesWithErrorDisabled( ) throws Exception {
@@ -79,6 +106,11 @@ public class WhenGetPreferenceThenTestPreferenceDAOGetMethods {
         logger.debug( "Finishing test for GetPreferencesWithErrorDisabled" );
     }
 
+    /**
+     * Test get preference with error disabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetPreferenceWithErrorDisabled( ) throws Exception {
@@ -118,6 +150,11 @@ public class WhenGetPreferenceThenTestPreferenceDAOGetMethods {
         logger.debug( "Finishing test for GetPreferenceWithErrorDisabled" );
     }
 
+    /**
+     * Test get preferences with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetPreferencesWithErrorEnabled( ) throws Exception {
@@ -151,6 +188,11 @@ public class WhenGetPreferenceThenTestPreferenceDAOGetMethods {
         logger.debug( "Finishing test for GetPreferencesWithErrorEnabled" );
     }
 
+    /**
+     * Test get preference with error enabled.
+     *
+     * @throws Exception the exception
+     */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public void testGetPreferenceWithErrorEnabled( ) throws Exception {

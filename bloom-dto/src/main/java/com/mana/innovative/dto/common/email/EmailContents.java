@@ -59,7 +59,13 @@ public class EmailContents {
      */
     private boolean isSimple;
 
+    /**
+     * The Use hTML content.
+     */
     private boolean useHTMLContent;
+    /**
+     * The Use hTML in line picture.
+     */
     private boolean useHTMLInLinePicture;
 
     /**
@@ -224,22 +230,49 @@ public class EmailContents {
         this.isSimple = isSimple;
     }
 
+    /**
+     * Is use hTML content.
+     *
+     * @return the boolean
+     */
     public boolean isUseHTMLContent( ) {
         return useHTMLContent;
     }
 
+    /**
+     * Sets use hTML content.
+     *
+     * @param useHTMLContent the use hTML content
+     */
     public void setUseHTMLContent( final boolean useHTMLContent ) {
         this.useHTMLContent = useHTMLContent;
     }
 
+    /**
+     * Is use hTML in line picture.
+     *
+     * @return the boolean
+     */
     public boolean isUseHTMLInLinePicture( ) {
         return useHTMLInLinePicture;
     }
 
+    /**
+     * Sets use hTML in line picture.
+     *
+     * @param useHTMLInLinePicture the use hTML in line picture
+     */
     public void setUseHTMLInLinePicture( final boolean useHTMLInLinePicture ) {
         this.useHTMLInLinePicture = useHTMLInLinePicture;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -259,6 +292,11 @@ public class EmailContents {
     }
 
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString( ) {
         return "EmailContents {" +

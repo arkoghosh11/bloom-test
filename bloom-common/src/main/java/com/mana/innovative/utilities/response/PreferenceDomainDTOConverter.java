@@ -14,21 +14,26 @@ import java.util.List;
  * Created by Bloom/Rono on 4/23/2015. This class is PreferenceDomainDTOConverter
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 public class PreferenceDomainDTOConverter {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( PreferenceDomainDTOConverter.class );
 
+    /**
+     * The constant ZERO.
+     */
     private static final long ZERO = DAOConstants.ZERO;
 
     /**
      * Gets converted preference dTO from preference domain.
      *
-     * @param preferenceDTO    {@link Preference} the preference dTO
-     * @param preferenceDomain {@link com.mana.innovative.domain.consumer.Preference} the preference domain
-     *
+     * @param preferenceDTO  the preference dTO
+     * @param preferenceDomain  the preference domain
      * @return the converted preference dTO from preference domain
      */
     public static Preference getConvertedDTOFromDomain( Preference preferenceDTO, com.mana.innovative.domain.consumer.Preference preferenceDomain ) {
@@ -57,7 +62,6 @@ public class PreferenceDomainDTOConverter {
      * Gets converted preference dTO list.
      *
      * @param preferenceDomainList the preferences
-     *
      * @return the converted preference dTO list
      */
     public static List< Preference > getConvertedListDTOFromDomain( List< com.mana
@@ -75,8 +79,7 @@ public class PreferenceDomainDTOConverter {
      * Gets converted preference domain from preference dTO.
      *
      * @param preferenceDomain the preference domain
-     * @param preferenceDTO    the preference dTO
-     *
+     * @param preferenceDTO the preference dTO
      * @return the converted preference domain from preference dTO
      */
     public static com.mana.innovative.domain.consumer.Preference getConvertedDomainFromDTO( com.mana.innovative.domain.consumer.Preference preferenceDomain, final Preference preferenceDTO ) {
@@ -116,7 +119,6 @@ public class PreferenceDomainDTOConverter {
      * Gets converted preference domain list from preference dTO list.
      *
      * @param preferenceDTOList the preference dTO list
-     *
      * @return the converted preference domain list from preference dTO list
      */
     public static List< com.mana.innovative.domain.consumer.Preference > getConvertedListDomainFromDTO( List< Preference >

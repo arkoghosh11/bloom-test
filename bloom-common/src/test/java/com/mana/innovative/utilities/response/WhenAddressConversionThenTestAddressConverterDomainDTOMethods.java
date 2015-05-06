@@ -18,14 +18,32 @@ import java.util.List;
 
 /**
  * The type When address conversion then test address converter domain dTO methods.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenAddressConversionThenTestAddressConverterDomainDTOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenAddressConversionThenTestAddressConverterDomainDTOMethods.class );
 
-    private Address addressDTO, addressDTO2;
-    private com.mana.innovative.domain.common.Address addressDomain, addressDomain2;
+    /**
+     * The Address dTO.
+     */
+    private Address addressDTO, /**
+     * The Address dTO 2.
+     */
+    addressDTO2;
+    /**
+     * The Address domain.
+     */
+    private com.mana.innovative.domain.common.Address addressDomain, /**
+     * The Address domain 2.
+     */
+    addressDomain2;
 
     /**
      * Sets up.
@@ -173,6 +191,11 @@ public class WhenAddressConversionThenTestAddressConverterDomainDTOMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted dTO from domain for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainForError( ) throws Exception {
 

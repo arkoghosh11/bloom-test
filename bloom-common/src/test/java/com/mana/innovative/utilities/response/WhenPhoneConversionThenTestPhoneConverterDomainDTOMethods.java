@@ -19,14 +19,32 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 4/30/2015 7:29 PM. This class WhenPhoneConversionThenTestPhoneConverter is a test class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenPhoneConversionThenTestPhoneConverterDomainDTOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenPhoneConversionThenTestPhoneConverterDomainDTOMethods.class );
 
-    private Phone phoneDTO, phoneDTO2;
-    private com.mana.innovative.domain.common.Phone phoneDomain, phoneDomain2;
+    /**
+     * The Phone dTO.
+     */
+    private Phone phoneDTO, /**
+     * The Phone dTO 2.
+     */
+    phoneDTO2;
+    /**
+     * The Phone domain.
+     */
+    private com.mana.innovative.domain.common.Phone phoneDomain, /**
+     * The Phone domain 2.
+     */
+    phoneDomain2;
 
     /**
      * Sets up.
@@ -172,6 +190,11 @@ public class WhenPhoneConversionThenTestPhoneConverterDomainDTOMethods {
         logger.debug( "Finishing testGetConvertedDomainFromDTOForError" );
     }
 
+    /**
+     * Test get converted dTO from domain for error.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testGetConvertedDTOFromDomainForError( ) throws Exception {
 

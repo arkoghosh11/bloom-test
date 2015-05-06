@@ -37,8 +37,7 @@ public class UserResponseBuilder {
      * Build user response container.
      *
      * @param userDAOResponse the user dAO response
-     * @param isError         the is error
-     *
+     * @param isError the is error
      * @return Returns a response object for users
      */
     public static UserResponseContainer< UsersPayload > build( DAOResponse< com.mana.innovative.domain.consumer.User > userDAOResponse, boolean isError ) {
@@ -91,10 +90,9 @@ public class UserResponseBuilder {
     /**
      * Build error.
      *
-     * @param location  the location of the error
-     * @param isError   the is error
+     * @param location the location of the error
+     * @param isError the is error
      * @param exception the exception
-     *
      * @return the user response container
      */
     public static UserResponseContainer< UsersPayload > buildError( String location, boolean isError,

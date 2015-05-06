@@ -38,9 +38,8 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Create preference.
      *
-     * @param preference    the preference
+     * @param preference the preference
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -88,7 +87,6 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
      * Gets preferences.
      *
      * @param requestParams the request params
-     *
      * @return the preferences
      */
     @SuppressWarnings( "unchecked" )
@@ -134,9 +132,8 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Gets preference.
      *
-     * @param preferenceId  the preference id
+     * @param preferenceId the preference id
      * @param requestParams the request params
-     *
      * @return the preference
      */
     @SuppressWarnings( "unchecked" )
@@ -184,9 +181,8 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Update preference.
      *
-     * @param preference    the preference
+     * @param preference the preference
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -231,9 +227,8 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Delete preference.
      *
-     * @param preferenceId  the preference id
+     * @param preferenceId the preference id
      * @param requestParams the request params
-     *
      * @return the boolean
      */
     @Override
@@ -280,7 +275,6 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
      * Delete all preferences.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override

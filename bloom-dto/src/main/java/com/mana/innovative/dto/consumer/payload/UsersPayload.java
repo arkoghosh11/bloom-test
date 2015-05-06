@@ -12,14 +12,27 @@ import java.util.List;
 
 
 /**
- * @author Bloom
+ * The type Users payload.
+
+ * Created by Bloom/Rono on $date $time.
+ * @author Bloom Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class UsersPayload {
 
+    /**
+     * The Users.
+     */
     private List< User > users;
+    /**
+     * The Total count.
+     */
     private int totalCount;
 
     /**
+     * Gets users.
+     *
      * @return the user
      */
     public List< User > getUsers( ) {
@@ -27,6 +40,8 @@ public class UsersPayload {
     }
 
     /**
+     * Sets users.
+     *
      * @param users The user to set
      */
     @XmlElement( name = "user" )
@@ -35,10 +50,20 @@ public class UsersPayload {
         this.users = users;
     }
 
+    /**
+     * Gets total count.
+     *
+     * @return the total count
+     */
     public int getTotalCount( ) {
         return totalCount;
     }
 
+    /**
+     * Sets total count.
+     *
+     * @param totalCount the total count
+     */
     @XmlElement( name = "total_count", defaultValue = "0", nillable = false )
     public void setTotalCount( final int totalCount ) {
         this.totalCount = totalCount;

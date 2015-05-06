@@ -9,8 +9,20 @@ package com.mana.innovative.constants;
  */
 public class ServiceConstants {
 
+    /**
+     * The constant HALF_HOUR.
+     */
     public static final int HALF_HOUR = ( 30 * 60 );
+    /**
+     * The constant TRUE.
+     */
     public static final boolean TRUE = true;
+    /**
+     * The constant HASH.
+     */
     public static final String HASH = "#";
+    /**
+     * The constant FALSE.
+     */
     public static final String FALSE = "false";
 }

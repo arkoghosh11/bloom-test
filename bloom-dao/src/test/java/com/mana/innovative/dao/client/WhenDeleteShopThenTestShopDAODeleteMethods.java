@@ -29,6 +29,9 @@ import java.util.List;
 
 /**
  * The type When delete a shop test delete methods.
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
@@ -36,11 +39,20 @@ import java.util.List;
 @Transactional
 public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenDeleteShopThenTestShopDAODeleteMethods.class );
 
+    /**
+     * The Shop dAO impl.
+     */
     @Resource
     private ShopDAO shopDAOImpl;
 
+    /**
+     * The Session factory.
+     */
     @Resource
     private SessionFactory sessionFactory;
 

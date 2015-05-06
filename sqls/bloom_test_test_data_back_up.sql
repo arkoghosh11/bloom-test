@@ -33,7 +33,7 @@ CREATE TABLE `address` (
   `location_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`address_id`),
   UNIQUE KEY `FK_address_locations_location_id` (`location_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2129922 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2523143 DEFAULT CHARSET=latin1;
 
 /*Data for the table `address` */
 
@@ -53,7 +53,8 @@ CREATE TABLE `calendar_events` (
   `optional` varchar(255) DEFAULT NULL,
   `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`calendar_event_id`)
+  PRIMARY KEY (`calendar_event_id`),
+  UNIQUE KEY `event_name` (`event_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `calendar_events` */
@@ -82,6 +83,7 @@ CREATE TABLE `cards` (
   `updated_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `customer_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`card_id`),
+  UNIQUE KEY `card_number` (`card_number`,`customer_id`),
   KEY `FK5A0E763189EC4A7` (`customer_id`),
   CONSTRAINT `FK5A0E763189EC4A7` FOREIGN KEY (`customer_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -125,7 +127,7 @@ CREATE TABLE `customer_address` (
   UNIQUE KEY `customer_address_id` (`customer_id`,`address_id`),
   KEY `FK_address_address_id` (`address_id`),
   KEY `FK_user_customer_id` (`customer_id`),
-  CONSTRAINT `FK_address_address_id` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_address_address_id` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_user_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -142,8 +144,8 @@ CREATE TABLE `customer_preference` (
   `customer_id` bigint(20) NOT NULL,
   KEY `FK64319BDC189EC4A7` (`customer_id`),
   KEY `FK64319BDC2E651047` (`preference_id`),
-  CONSTRAINT `FK64319BDC189EC4A7` FOREIGN KEY (`customer_id`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `FK64319BDC2E651047` FOREIGN KEY (`preference_id`) REFERENCES `preferences` (`preference_id`)
+  CONSTRAINT `FK64319BDC189EC4A7` FOREIGN KEY (`customer_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE,
+  CONSTRAINT `FK64319BDC2E651047` FOREIGN KEY (`preference_id`) REFERENCES `preferences` (`preference_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `customer_preference` */
@@ -161,7 +163,7 @@ CREATE TABLE `hibernate_sequences` (
 
 /*Data for the table `hibernate_sequences` */
 
-insert  into `hibernate_sequences`(`sequence_name`,`sequence_next_hi_value`) values ('items',70),('shops',66),('address',66),('working_hours',67),('users',7),('cards',7),('phones',7),('preferences',7);
+insert  into `hibernate_sequences`(`sequence_name`,`sequence_next_hi_value`) values ('items',73),('shops',69),('address',78),('working_hours',70),('users',18),('cards',18),('phones',18),('preferences',18);
 
 /*Table structure for table `items` */
 
@@ -186,7 +188,7 @@ CREATE TABLE `items` (
   PRIMARY KEY (`item_id`),
   KEY `FK_items_shops_shop_id` (`shop_id`),
   CONSTRAINT `FK_items_shops_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`shop_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2260998 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2359302 DEFAULT CHARSET=latin1;
 
 /*Data for the table `items` */
 
@@ -226,6 +228,7 @@ CREATE TABLE `phones` (
   `updated_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `customer_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`phone_id`),
+  UNIQUE KEY `phone_number` (`phone_number`),
   KEY `FKC50C70C5189EC4A7` (`customer_id`),
   CONSTRAINT `FKC50C70C5189EC4A7` FOREIGN KEY (`customer_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -244,7 +247,8 @@ CREATE TABLE `preferences` (
   `preference_name` varchar(255) NOT NULL,
   `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`preference_id`)
+  PRIMARY KEY (`preference_id`),
+  UNIQUE KEY `preference_name` (`preference_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `preferences` */
@@ -266,7 +270,7 @@ CREATE TABLE `shops` (
   PRIMARY KEY (`shop_id`),
   UNIQUE KEY `FK_shops_address_address_id` (`address_id`),
   CONSTRAINT `FK_shops_address_address_id` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2129924 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2228228 DEFAULT CHARSET=latin1;
 
 /*Data for the table `shops` */
 
@@ -327,7 +331,9 @@ CREATE TABLE `users` (
   `title` varchar(255) DEFAULT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_name` (`user_name`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */
@@ -352,7 +358,7 @@ CREATE TABLE `working_hours` (
   PRIMARY KEY (`working_hour_id`),
   KEY `FK_working_hours_shops_shop_id` (`shop_id`),
   CONSTRAINT `FK_working_hours_shops_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`shop_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2162693 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2260997 DEFAULT CHARSET=latin1;
 
 /*Data for the table `working_hours` */
 

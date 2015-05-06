@@ -25,15 +25,21 @@ import javax.ws.rs.core.Response;
  * Created by Bloom/Rono on 5/3/2015 3:29 AM. This class is CustomerResWebService
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Component
 @Path( "/{customer: (?i)customer}" )
 public class CustomerResWebService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( CustomerResWebService.class );
 
+    /**
+     * The Customer service.
+     */
     @Resource
     private CustomerService customerService;
 
@@ -41,7 +47,7 @@ public class CustomerResWebService {
      * Gets single customer details.
      *
      * @param customerId the customer id
-     *
+     * @param isError the is error
      * @return the single customer details
      */
     @GET
@@ -62,8 +68,7 @@ public class CustomerResWebService {
      * Create new customer.
      *
      * @param customer the customer
-     * @param isError  the is error
-     *
+     * @param isError the is error
      * @return the response
      */
     @POST
@@ -83,8 +88,9 @@ public class CustomerResWebService {
     /**
      * Update specific customer details.
      *
+     * @param customer the customer
      * @param customerId the customer id
-     *
+     * @param isError the is error
      * @return the response
      */
     @PUT
@@ -107,7 +113,7 @@ public class CustomerResWebService {
      * Delete specific customer.
      *
      * @param customerId the customer id
-     *
+     * @param isError the is error
      * @return the response
      */
     @DELETE

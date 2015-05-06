@@ -147,7 +147,6 @@ public class TestDummyDTOObjectGenerator {
      * Gets test address DTO ZERO ID object.
      *
      * @param address the address
-     *
      * @return the test address DTO ZERO ID object
      */
     public static Address setTestAddressDTOZEROIDObject( final Address address ) {
@@ -315,6 +314,11 @@ public class TestDummyDTOObjectGenerator {
         return customerList;
     }
 
+    /**
+     * Gets n create dTO cards list.
+     *
+     * @return the n create dTO cards list
+     */
     public static List< Card > getNCreateDTOCardsList( ) {
 
         List< Card > cardList = new ArrayList<>( );

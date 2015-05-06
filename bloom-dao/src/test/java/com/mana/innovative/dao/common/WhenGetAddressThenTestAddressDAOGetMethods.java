@@ -19,6 +19,9 @@ import java.util.List;
 
 /**
  * This class is a test class for testing class todo...
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -26,6 +29,9 @@ import java.util.List;
 @Transactional   // If required
 public class WhenGetAddressThenTestAddressDAOGetMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenGetAddressThenTestAddressDAOGetMethods.class );
     /**
      * The Address id.
@@ -37,6 +43,11 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
     @Resource
     private AddressDAO addressDAO;
 
+    /**
+     * Sets up.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void setUp( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
@@ -44,6 +55,11 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
 
     }
 
+    /**
+     * Tear down.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void tearDown( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );

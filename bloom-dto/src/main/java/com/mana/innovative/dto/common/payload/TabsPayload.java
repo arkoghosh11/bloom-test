@@ -11,16 +11,28 @@ import java.util.List;
 
 
 /**
- * @author Bloom
+ * The type Tabs payload.
+
+ * Created by Bloom/Rono on $date $time.
+ * @author Bloom Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class TabsPayload {
 
+    /**
+     * The Tabs.
+     */
     private List< Tab > tabs;
+    /**
+     * The Total count.
+     */
+    private int totalCount;
 
     /**
      * This method returns a list of tabs
      *
-     * @return {@link List<Tab></Tab>} Return a list of tabs
+     * @return Return a list of tabs
      */
     @XmlElementWrapper( name = "tabs" )
     @XmlElement( name = "tab" )
@@ -32,10 +44,28 @@ public class TabsPayload {
     /**
      * This method sets a list of tabs to its class property
      *
-     * @param tabs {@link List<Tab></Tab>} A list of tabs
+     * @param tabs  A list of tabs
      */
     public void setTabs( List< Tab > tabs ) {
 
         this.tabs = tabs;
+    }
+
+    /**
+     * Gets total count.
+     *
+     * @return the total count
+     */
+    public int getTotalCount( ) {
+        return totalCount;
+    }
+
+    /**
+     * Sets total count.
+     *
+     * @param totalCount the total count
+     */
+    public void setTotalCount( final int totalCount ) {
+        this.totalCount = totalCount;
     }
 }

@@ -27,19 +27,35 @@ import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+/**
+ * The type Customers service impl.
+ * <p/>
+ * Created by Bloom/Rono on $date $time.
+ *
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
+ */
 @Service
 public class CustomersServiceImpl implements CustomersService {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( CustomersServiceImpl.class );
 
+    /**
+     * The Customer dAO.
+     */
     @Resource
     private CustomerDAO customerDAO;
 
     /**
-     * This method is for giving service for url /rest/tabs with all the tabs data as a {@link java.util.List < com
-     * .mana.domain.Tab ></>}
+     * This method is for giving service for url /rest/tabs with all the tabs data as a {@link List < com
+     * .mana.domain.Tab ></>}*
      *
-     * @return {@link Response} A response object containing all of the tabs within the Database
+     * @param requestParams the request params
+     * @return A response object containing all of the tabs within the Database
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
@@ -80,7 +96,11 @@ public class CustomersServiceImpl implements CustomersService {
     }
 
     /**
-     * @return {@link Response} A response from the server
+     * Delete customers.
+     *
+     * @param customerIds the customer ids
+     * @param requestParams the request params
+     * @return A response from the server
      */
     //todo decide whether to delete all the if one fails or not or write a dao delete for a collection of customers
     @Override

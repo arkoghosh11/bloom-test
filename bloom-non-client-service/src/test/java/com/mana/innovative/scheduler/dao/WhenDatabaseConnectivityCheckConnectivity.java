@@ -20,20 +20,47 @@ import java.util.Properties;
 
 /**
  * Created by alex1 on 1/23/2015. This is a domain class
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 @RunWith( value = JUnit4.class )
 public class WhenDatabaseConnectivityCheckConnectivity {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenDatabaseConnectivityCheckConnectivity.class );
 
+    /**
+     * The constant JDBC_URL.
+     */
     private static final String JDBC_URL = "jdbc_url";
+    /**
+     * The constant JDBC_DRIVER.
+     */
     private static final String JDBC_DRIVER = "jdbc_driver";
+    /**
+     * The constant USERNAME.
+     */
     private static final String USERNAME = "username";
+    /**
+     * The constant PASSWORD.
+     */
     private static final String PASSWORD = "password";
 
+    /**
+     * The Connection.
+     */
     private Connection connection;
+    /**
+     * The Properties.
+     */
     private Properties properties;
 
+    /**
+     * Sets up.
+     */
     @Before
     public void setUp( ) {
 
@@ -42,7 +69,7 @@ public class WhenDatabaseConnectivityCheckConnectivity {
     }
 
     /**
-     *
+     * Sets properties.
      */
     private void setProperties( ) {
 
@@ -56,11 +83,12 @@ public class WhenDatabaseConnectivityCheckConnectivity {
     }
 
     /**
-     * @param user {@link String}
-     * @param pass {@link String}
+     * Gets connection.
      *
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param user the user
+     * @param pass the pass
+     * @throws ClassNotFoundException the class not found exception
+     * @throws ClassNotFoundException the sQL exception
      */
     private void getConnection( String user, String pass ) throws ClassNotFoundException, SQLException {
 
@@ -73,7 +101,9 @@ public class WhenDatabaseConnectivityCheckConnectivity {
     }
 
     /**
-     * @return {@link Exception}
+     * Load database properties.
+     *
+     * @return exception
      */
     private Exception loadDatabaseProperties( ) {
 
@@ -91,6 +121,9 @@ public class WhenDatabaseConnectivityCheckConnectivity {
         return exception;
     }
 
+    /**
+     * Test database properties.
+     */
     @Test
     public void testDatabaseProperties( ) {
 
@@ -183,6 +216,9 @@ public class WhenDatabaseConnectivityCheckConnectivity {
     }
 
 
+    /**
+     * Close void.
+     */
     @After
     public void close( ) {
 

@@ -88,6 +88,13 @@ public class Preference {
         this.preferenceName = preferenceName;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -98,6 +105,11 @@ public class Preference {
                 Objects.equals( getPreferenceName( ), that.getPreferenceName( ) );
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString( ) {
         return "Preference{" +

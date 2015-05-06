@@ -3,6 +3,9 @@ package com.mana.innovative.rest.common;
 import com.mana.innovative.dto.common.CalendarEvent;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.common.CalendarEventService;
+import com.mana.innovative.utilities.response.ResponseUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -22,22 +25,37 @@ import javax.ws.rs.core.Response.Status;
  * Created by IntelliJ IDEA.
  *
  * @author Bloom Date: 1/1/13 Time: 5:49 PM
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  * @since: jdk 1.7
  */
 @Component
 @Path( "/{calendarEvent : (?i)calendarEvent}" )
 public class CalendarEventRestWebService {
 
+    /**
+     * The constant logger.
+     */
+    private static final Logger logger = LoggerFactory.getLogger( CalendarEventRestWebService.class );
 
+    /**
+     * The Calendar event service.
+     */
     @Resource
     private CalendarEventService calendarEventService;
 
 
     /**
-     * @param startDate{String}
-     * @param endDate{String}
+     * Gets calendar events.
      *
-     * @return {Response}
+     * @param startDate {String
+     *}
+     * @param endDate {String
+     *}
+     * @param isError the is error
+     * @return  {
+     *Response
+     *}
      */
     @GET
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
@@ -49,16 +67,22 @@ public class CalendarEventRestWebService {
         requestParams.setStartDate( startDate );
         requestParams.setEndDate( endDate );
 
-        if ( startDate != null && endDate != null ) {
-            return calendarEventService.getCalendarEvents( requestParams );
-        } else
-            return Response.status( Status.NOT_ACCEPTABLE ).build( );
+        try {
+            return calendarEventService.getCalendarEventByDateLimits( requestParams );
+        } catch ( Exception exception ) {
+            logger.error( "exception occurred", exception );
+            return ResponseUtility.notAcceptable( "StartDate or EndDate has invalid data or format" );
+        }
     }
 
     /**
-     * @param calendarEventId {Integer}
+     * Gets calendar event.
      *
-     * @return Response
+     * @param calendarEventId {
+     *Integer
+     *}
+     * @param isError the is error
+     * @return Response calendar event
      */
     @GET
     @Path( "/{eventId}" )
@@ -71,6 +95,14 @@ public class CalendarEventRestWebService {
         return calendarEventService.getCalendarEvent( calendarEventId, requestParams );
     }
 
+    /**
+     * Create calendar event.
+     *
+     * @param calendarEvent the calendar event
+     * @param isError       the is error
+     *
+     * @return the response
+     */
     @POST
     @Consumes( { MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON } )
     @Produces( { MediaType.APPLICATION_JSON } )

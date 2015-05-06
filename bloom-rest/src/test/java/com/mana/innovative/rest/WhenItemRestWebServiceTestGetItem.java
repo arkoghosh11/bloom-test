@@ -20,13 +20,24 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Bloom on 2/26/2015 : 11:25 PM todo This class is for ...
+ * Created by Bloom on 2/26/2015 : 11:25 PM
+ * @author Rono, Ankur Bhardwaj
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @Copyright
  */
 public class WhenItemRestWebServiceTestGetItem extends RestTest {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = Logger.getLogger( WhenItemRestWebServiceTestGetItem.class );
 
 
+    /**
+     * Configure app descriptor.
+     *
+     * @return the app descriptor
+     */
     @Override
     protected AppDescriptor configure( ) {
         logger.info( TestConstants.setUpMethodLoggerMsg );
@@ -34,11 +45,19 @@ public class WhenItemRestWebServiceTestGetItem extends RestTest {
         return super.configure( );
     }
 
+    /**
+     * Gets test container factory.
+     *
+     * @return the test container factory
+     */
     @Override
     public TestContainerFactory getTestContainerFactory( ) {
         return new GrizzlyWebTestContainerFactory( );
     }
 
+    /**
+     * Test get items client response.
+     */
     @Test
     public void testGetItemsClientResponse( ) {
 
