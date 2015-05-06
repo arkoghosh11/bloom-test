@@ -49,7 +49,7 @@ public class LoginFilter implements javax.servlet.Filter {
         WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext( servletContext );
 
         AutowireCapableBeanFactory autowireCapableBeanFactory = webApplicationContext.getAutowireCapableBeanFactory( );
-        String beanName = servletContext.getInitParameter( "location" );
+        String beanName = servletContext.getInitParameter( "lService" );
         autowireCapableBeanFactory.configureBean( this, beanName );
     }
 
