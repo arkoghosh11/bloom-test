@@ -17,6 +17,7 @@ import org.junit.Test;
 import javax.ws.rs.core.MediaType;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -58,8 +59,9 @@ public class WhenItemRestWebServiceTestGetItem extends RestTest {
     /**
      * Test get items client response.
      */
+    @SuppressWarnings( "unchecked" )
     @Test
-    public void testGetItemsClientResponse( ) {
+    public void testGetItemsClientResponseWithXML( ) {
 
         ClientResponse response = resource( ).path( "item/0" ).accept( MediaType.APPLICATION_XML ).get( ClientResponse.class );
 
@@ -73,6 +75,21 @@ public class WhenItemRestWebServiceTestGetItem extends RestTest {
         assertTrue( "Count is 0 or less", itemsPayloadItemResponseContainer.getCount( ) > 0 );
         Assert.assertNotNull( itemsPayloadItemResponseContainer.getPayload( ) );
         assertTrue( "Count is 0 or less", itemsPayloadItemResponseContainer.getPayload( ).getItems( ).size( ) > 0 );
+    }
+
+    /**
+     * Test get items client response with jSON.
+     */
+    @Test
+    public void testGetItemsClientResponseWithJSON( ) {
+
+        ClientResponse response = resource( ).path( "item/0" ).accept( MediaType.APPLICATION_JSON ).get( ClientResponse
+                .class );
+        String jsonString = response.toString( );
+        logger.info( " URI used is " + jsonString );
+        assertEquals( "Failed to get a proper response ", 200, response.getStatus( ) );
+        assertNotNull( TestConstants.nullMessage, jsonString );
+
     }
 
 }

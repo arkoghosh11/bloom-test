@@ -47,15 +47,16 @@ public class RestTest extends JerseyTest {
 //                        "file:./src/main/resources/db_config.xml;" +
 //                        " file:./src/main/resources/service_config.xml;" +
 //                        " file:./src/main/resources/web_config.xml")
+                .contextParam( "lService", "loginService" )
 //              IMP Resource and Provider classes for spring-jersey servlet
-                .initParam("com.sun.jersey.config.property.packages", "com.mana.innovative.rest;org.codehaus.jackson.jaxrs")
+                .initParam( "com.sun.jersey.config.property.packages", "com.mana.innovative.rest;org.codehaus.jackson.jaxrs" )
                 .addFilter( LoginFilter.class, "loginFilter" )
 //              NOTE Servlet class to be used servlets can be chained with filter
                 .servletClass( SpringServlet.class )
 //              Note context listener class , using spring's
-                .contextListenerClass(ContextLoaderListener.class)
+                .contextListenerClass( ContextLoaderListener.class )
 //              Note request listener class , using spring's
-                .requestListenerClass(RequestContextListener.class)
+                .requestListenerClass( RequestContextListener.class )
                 .build();
     }
 

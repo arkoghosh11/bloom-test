@@ -47,6 +47,7 @@ public class WhenItemsRestWebServiceTestGetItems extends RestTest {
     /**
      * Test get items client response with xML.
      */
+    @SuppressWarnings( "unchecked" )
     @Test
     public void testGetItemsClientResponseWithXML() {
 
@@ -75,7 +76,7 @@ public class WhenItemsRestWebServiceTestGetItems extends RestTest {
         String jsonString = response.toString( );
         logger.info( " URI used is " + jsonString );
         assertEquals("Failed to get a proper response ", 200, response.getStatus());
-        assertNotNull( TestConstants.notEqualsMessage, jsonString );
+        assertNotNull( TestConstants.nullMessage, jsonString );
 
     }
 

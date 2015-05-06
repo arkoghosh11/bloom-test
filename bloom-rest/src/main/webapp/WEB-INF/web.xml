@@ -33,7 +33,7 @@
     </context-param>
     <!--location for login credentials-->
     <context-param>
-        <param-name>location</param-name>
+        <param-name>lService</param-name>
         <param-value>loginService</param-value>
     </context-param>
     <!--@Note listener classes by Spring to instantiate Spring Application Context -->

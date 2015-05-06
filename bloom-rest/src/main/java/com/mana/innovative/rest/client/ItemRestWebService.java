@@ -73,10 +73,12 @@ public class ItemRestWebService {
     public Response getItems( @PathParam( value = "item_id" ) long itemId, @QueryParam( value = "is_error" )
     @DefaultValue( value = ServiceConstants.FALSE ) boolean isError ) {
 
-        // IMP verify access for this method
-        if ( !loginService.checkLogin( httpServletRequest ) ) {
-            return ResponseUtility.unauthorizedAccess( null );
-        }
+        System.out.println( "****** Item Service.********" );
+        // IMP verify access for this method, right now enabling this line will block all calls to this
+        // web service as login service is not implemented yet
+//        if ( !loginService.checkLogin( httpServletRequest ) ) {
+//            return ResponseUtility.unauthorizedAccess( null );
+//        }
 
         Response response;
         try {
