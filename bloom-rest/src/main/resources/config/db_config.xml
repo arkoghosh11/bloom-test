@@ -61,6 +61,23 @@
         <property name="username" value="${dev.username}"/>
         <property name="password" value="${dev.password}"/>
         <property name="driverClassName" value="${dev.jdbc_driver}"/>
+        <property name="connectionProperties">
+            <props>
+                <prop key="accessToUnderlyingConnectionAllowed">false</prop>
+                <prop key="defaultAutoCommit">true</prop>
+                <prop key="initialSize">0</prop>
+                <!--jtaManaged=true-->
+                <prop key="maxActive">20</prop>
+                <prop key="maxIdle">20</prop>
+                <prop key="maxOpenPreparedStatements">0</prop>
+                <prop key="maxWaitTime">-1 millisecond</prop>
+                <prop key="minEvictableIdleTime">30 minutes</prop>
+                <prop key="minIdle">0</prop>
+                <prop key="poolPreparedStatements">true</prop>
+                <prop key="timeBetweenEvictionRuns">-1 millisecond</prop>
+                <prop key="validationQuery">select 1</prop>
+            </props>
+        </property>
     </bean>
 
     <!--<bean id="annotatedSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">-->

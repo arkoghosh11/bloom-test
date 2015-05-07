@@ -11,6 +11,7 @@ import com.mana.innovative.service.client.container.ItemResponseContainer;
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -47,6 +48,7 @@ public class ItemsServiceImpl implements ItemsService {
      * @param isError the is error
      * @return the items
      */
+    @Cacheable( value = "itemsCache", key = "#root.method.name" )
     @Transactional( propagation = Propagation.REQUIRED, readOnly = true )
     public Response getItems( boolean isError ) {
 

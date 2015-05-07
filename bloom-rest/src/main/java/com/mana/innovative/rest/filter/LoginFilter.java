@@ -56,11 +56,12 @@ public class LoginFilter implements javax.servlet.Filter {
     /**
      * Do filter.
      *
-     * @param request the request
+     * @param request  the request
      * @param response the response
-     * @param chain the chain
+     * @param chain    the chain
+     *
      * @throws ServletException the servlet exception
-     * @throws IOException the iO exception
+     * @throws IOException      the iO exception
      */
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain ) throws ServletException, IOException {
 
