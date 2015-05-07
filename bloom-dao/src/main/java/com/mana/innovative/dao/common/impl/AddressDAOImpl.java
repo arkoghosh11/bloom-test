@@ -8,9 +8,10 @@ import com.mana.innovative.domain.common.Address;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -33,7 +34,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( AddressDAOImpl.class );
+    private static final Logger logger = LoggerFactory.getLogger( AddressDAOImpl.class );
 
     /**
      * Gets address by address id.

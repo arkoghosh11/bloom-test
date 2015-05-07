@@ -6,10 +6,11 @@ import com.mana.innovative.domain.consumer.Customer;
 import com.mana.innovative.domain.consumer.User;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.exception.response.ErrorContainer;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -33,7 +34,7 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * The constant log.
      */
-    private static final Logger logger = Logger.getLogger( CustomerDAOImpl.class );
+    private static final Logger logger = LoggerFactory.getLogger( CustomerDAOImpl.class );
 
     /**
      * The Session factory.

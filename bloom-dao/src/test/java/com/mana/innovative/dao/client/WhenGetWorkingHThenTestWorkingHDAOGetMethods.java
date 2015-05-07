@@ -5,11 +5,12 @@ import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.utilities.response.WorkingHourDomainDTOConverter;
 import junit.framework.Assert;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -33,7 +34,7 @@ public class WhenGetWorkingHThenTestWorkingHDAOGetMethods {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( WhenGetWorkingHThenTestWorkingHDAOGetMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenGetWorkingHThenTestWorkingHDAOGetMethods.class );
 
     /**
      * The Working hour dAO.

@@ -10,8 +10,9 @@ import com.mana.innovative.service.client.ItemService;
 import com.mana.innovative.service.client.builder.ItemResponseBuilder;
 import com.mana.innovative.service.client.container.ItemResponseContainer;
 import com.mana.innovative.utilities.response.ItemDomainDTOConverter;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -35,7 +36,7 @@ public class ItemServiceImpl implements ItemService {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( ItemServiceImpl.class );
+    private static final Logger logger = LoggerFactory.getLogger( ItemServiceImpl.class );
     /**
      * The ONE.
      */

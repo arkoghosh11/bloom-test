@@ -9,8 +9,9 @@ import com.sun.jersey.spi.spring.container.servlet.SpringServlet;
 import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.JerseyTest;
 import com.sun.jersey.test.framework.WebAppDescriptor;
-import org.apache.log4j.Logger;
 import org.junit.After;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
 
@@ -25,7 +26,7 @@ public class RestTest extends JerseyTest {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( RestTest.class );
+    private static final Logger logger = LoggerFactory.getLogger( RestTest.class );
 
     /**
      * Configure app descriptor. Added Custom contextPAth, rest class packages and context param Added

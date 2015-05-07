@@ -17,7 +17,8 @@ import com.mana.innovative.dto.consumer.CreditCard;
 import com.mana.innovative.dto.consumer.Customer;
 import com.mana.innovative.dto.consumer.Preference;
 import com.mana.innovative.dto.consumer.User;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -39,7 +40,7 @@ public class TestDummyDTOObjectGenerator {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( TestDummyDTOObjectGenerator.class );
+    private static final Logger logger = LoggerFactory.getLogger( TestDummyDTOObjectGenerator.class );
 
     /**
      * Gets test shop dTO object.

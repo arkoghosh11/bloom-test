@@ -11,8 +11,9 @@ import com.mana.innovative.service.consumer.CustomerService;
 import com.mana.innovative.service.consumer.builder.CustomerResponseBuilder;
 import com.mana.innovative.service.consumer.container.CustomerResponseContainer;
 import com.mana.innovative.utilities.response.CustomerDomainDTOConverter;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -34,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( CustomerServiceImpl.class );
+    private static final Logger logger = LoggerFactory.getLogger( CustomerServiceImpl.class );
 
     /**
      * The Customer dAO.

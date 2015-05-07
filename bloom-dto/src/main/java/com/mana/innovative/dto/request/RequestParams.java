@@ -1,6 +1,7 @@
 package com.mana.innovative.dto.request;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The type Request params.
@@ -14,7 +15,7 @@ public class RequestParams {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( RequestParams.class );
+    private static final Logger logger = LoggerFactory.getLogger( RequestParams.class );
 
     /**
      * The Is error.

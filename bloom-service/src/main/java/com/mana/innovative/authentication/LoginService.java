@@ -4,7 +4,8 @@ package com.mana.innovative.authentication;/**
  */
 
 import com.mana.innovative.constants.ServiceConstants;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class LoginService {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( LoginService.class );
+    private static final Logger logger = LoggerFactory.getLogger( LoginService.class );
 
     /**
      * The Login parameter name for session.

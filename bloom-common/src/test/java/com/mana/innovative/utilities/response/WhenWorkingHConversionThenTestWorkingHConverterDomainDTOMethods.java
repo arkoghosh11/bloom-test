@@ -6,12 +6,13 @@ import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.utilities.TestDummyDTOObjectGenerator;
 import com.mana.innovative.utilities.TestDummyDomainObjectGenerator;
 import junit.framework.Assert;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenWorkingHConversionThenTestWorkingHConverterDomainDTOMethods.class );
 
     /**
      * The Working hour dTO.

@@ -3,12 +3,13 @@ package com.mana.innovative.service;
 import com.mana.innovative.dto.client.payload.ItemsPayload;
 import com.mana.innovative.service.client.ItemsService;
 import com.mana.innovative.service.client.container.ItemResponseContainer;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -33,7 +34,7 @@ public class WhenItemServiceTestGetItems {
     /**
      * The constant logger.
      */
-    public static final Logger logger = Logger.getLogger(WhenItemServiceTestGetItems.class);
+    public static final Logger logger = LoggerFactory.getLogger( WhenItemServiceTestGetItems.class );
 
     /**
      * The Items service impl.

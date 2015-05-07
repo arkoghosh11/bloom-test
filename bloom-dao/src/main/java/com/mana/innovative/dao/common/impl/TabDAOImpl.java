@@ -9,13 +9,13 @@ import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.exception.IllegalItemSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
 import com.mana.innovative.logic.QueryUtil;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -40,11 +40,7 @@ public class TabDAOImpl implements TabDAO {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( TabDAOImpl.class );
-
-    static {
-        logger.setLevel( Level.DEBUG );
-    }
+    private static final Logger logger = LoggerFactory.getLogger( TabDAOImpl.class );
 
     /**
      * The Query util.

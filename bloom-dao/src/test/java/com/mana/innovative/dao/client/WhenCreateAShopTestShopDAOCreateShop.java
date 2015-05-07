@@ -9,11 +9,12 @@ import com.mana.innovative.domain.client.Shop;
 import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.domain.common.Address;
 import junit.framework.Assert;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -43,7 +44,7 @@ public class WhenCreateAShopTestShopDAOCreateShop {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( WhenCreateAShopTestShopDAOCreateShop.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenCreateAShopTestShopDAOCreateShop.class );
     /**
      * The Shop dAO impl.
      */

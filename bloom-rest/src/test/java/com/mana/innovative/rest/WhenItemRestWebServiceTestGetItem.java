@@ -11,8 +11,9 @@ import com.sun.jersey.test.framework.AppDescriptor;
 import com.sun.jersey.test.framework.spi.container.TestContainerFactory;
 import com.sun.jersey.test.framework.spi.container.grizzly2.web.GrizzlyWebTestContainerFactory;
 import junit.framework.Assert;
-import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.MediaType;
 
@@ -31,7 +32,7 @@ public class WhenItemRestWebServiceTestGetItem extends RestTest {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( WhenItemRestWebServiceTestGetItem.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenItemRestWebServiceTestGetItem.class );
 
 
     /**

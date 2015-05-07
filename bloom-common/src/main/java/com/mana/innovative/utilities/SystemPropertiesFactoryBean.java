@@ -1,6 +1,7 @@
 package com.mana.innovative.utilities;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class SystemPropertiesFactoryBean extends PropertiesFactoryBean {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( SystemPropertiesFactoryBean.class );
+    private static final Logger logger = LoggerFactory.getLogger( SystemPropertiesFactoryBean.class );
     /**
      * The Propagate to system properties.
      */

@@ -6,7 +6,8 @@ import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dto.client.Shop;
 import com.mana.innovative.service.client.ShopService;
 import com.mana.innovative.utilities.response.ResponseUtility;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -41,7 +42,7 @@ public class ShopRestWebService {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( ShopRestWebService.class );
+    private static final Logger logger = LoggerFactory.getLogger( ShopRestWebService.class );
 
 
     /**

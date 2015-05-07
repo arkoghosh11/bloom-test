@@ -54,6 +54,7 @@
     <!--<property name="password" value="#{properties['dev.password']}"/>-->
     <!--<property name="driverClassName" value="#{properties['dev.jdbc_driver']}"/>-->
     <!--</bean>-->
+    <!--<jee:jndi-lookup id="jndiDataSource"  jndi-name="localDatabase"  expected-type="javax.sql.DataSource" />-->
 
     <bean id="dataSource" class="${bloom-dao.datasource_class}">
         <property name="url" value="${dev.jdbc_url}"/>

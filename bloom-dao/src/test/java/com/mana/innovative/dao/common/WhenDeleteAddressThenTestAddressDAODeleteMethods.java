@@ -5,7 +5,6 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.common.Address;
 import junit.framework.Assert;
-import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -42,7 +43,7 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( WhenDeleteAddressThenTestAddressDAODeleteMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenDeleteAddressThenTestAddressDAODeleteMethods.class );
 
     /**
      * The Address dAO impl.

@@ -1,7 +1,8 @@
 package com.mana.innovative.dto.adapter;
 
 import com.mana.innovative.constants.DAOConstants;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.text.SimpleDateFormat;
@@ -19,7 +20,7 @@ public class DateFormatAdapter extends XmlAdapter< String, Date > {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( DateFormatAdapter.class );
+    private static final Logger logger = LoggerFactory.getLogger( DateFormatAdapter.class );
 
     /**
      * The Simple date format.

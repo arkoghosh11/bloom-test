@@ -6,7 +6,8 @@ import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.domain.common.Address;
 import com.mana.innovative.dto.client.Shop;
 import com.mana.innovative.exception.IllegalArgumentValueException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class ShopDomainDTOConverter {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( ShopDomainDTOConverter.class );
+    private static final Logger logger = LoggerFactory.getLogger( ShopDomainDTOConverter.class );
     /**
      * The constant ZERO.
      */
@@ -156,7 +157,7 @@ public class ShopDomainDTOConverter {
         }
         //            shop.setShopShop();
         if ( flag ) {
-            logger.error( stringBuilder );
+            logger.error( stringBuilder.toString( ) );
             throw new IllegalArgumentValueException( );
         }
         logger.info( stringBuilder.toString( ) );

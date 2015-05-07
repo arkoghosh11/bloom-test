@@ -6,7 +6,8 @@ package com.mana.innovative.rest.common;
 import com.mana.innovative.dto.common.Tab;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.common.TabsService;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -38,7 +39,7 @@ public class TabsRestWebService {
     /**
      * The constant log.
      */
-    private static final Logger log = Logger.getLogger( TabsRestWebService.class );
+    private static final Logger log = LoggerFactory.getLogger( TabsRestWebService.class );
 
     /**
      * The Servlet request.

@@ -3,7 +3,8 @@ package com.mana.innovative.rest.client;
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.service.client.ItemsService;
 import com.mana.innovative.utilities.response.ResponseUtility;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -30,7 +31,7 @@ public class ItemsRestWebService {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( ItemsRestWebService.class );
+    private static final Logger logger = LoggerFactory.getLogger( ItemsRestWebService.class );
     /* Constructor injection */
 
     /**

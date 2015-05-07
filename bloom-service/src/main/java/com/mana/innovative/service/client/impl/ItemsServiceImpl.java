@@ -8,8 +8,9 @@ import com.mana.innovative.dto.client.payload.ItemsPayload;
 import com.mana.innovative.service.client.ItemsService;
 import com.mana.innovative.service.client.builder.ItemResponseBuilder;
 import com.mana.innovative.service.client.container.ItemResponseContainer;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -32,7 +33,7 @@ public class ItemsServiceImpl implements ItemsService {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( ItemsServiceImpl.class );
+    private static final Logger logger = LoggerFactory.getLogger( ItemsServiceImpl.class );
 
     /**
      * The Item dAO impl.

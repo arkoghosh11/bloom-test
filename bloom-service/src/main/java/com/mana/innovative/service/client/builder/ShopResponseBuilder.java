@@ -10,7 +10,8 @@ import com.mana.innovative.exception.response.Error;
 import com.mana.innovative.exception.response.ErrorContainer;
 import com.mana.innovative.service.client.container.ShopResponseContainer;
 import com.mana.innovative.utilities.response.ShopDomainDTOConverter;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ShopResponseBuilder {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( ShopResponseBuilder.class );
+    private static final Logger logger = LoggerFactory.getLogger( ShopResponseBuilder.class );
 
     /**
      * Build shop response container.

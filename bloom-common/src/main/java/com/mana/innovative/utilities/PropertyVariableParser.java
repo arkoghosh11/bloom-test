@@ -1,7 +1,8 @@
 package com.mana.innovative.utilities;
 
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class PropertyVariableParser {
     /**
      * The Log.
      */
-    private final Logger log = Logger.getLogger( PropertyVariableParser.class );
+    private final Logger log = LoggerFactory.getLogger( PropertyVariableParser.class );
 
     /**
      * Replaces variables with the pattern ${aSystemPropertyValue}.

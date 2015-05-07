@@ -16,8 +16,9 @@ import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.service.consumer.CustomersService;
 import com.mana.innovative.service.consumer.builder.CustomerResponseBuilder;
 import com.mana.innovative.service.consumer.container.CustomerResponseContainer;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -42,7 +43,7 @@ public class CustomersServiceImpl implements CustomersService {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( CustomersServiceImpl.class );
+    private static final Logger logger = LoggerFactory.getLogger( CustomersServiceImpl.class );
 
     /**
      * The Customer dAO.

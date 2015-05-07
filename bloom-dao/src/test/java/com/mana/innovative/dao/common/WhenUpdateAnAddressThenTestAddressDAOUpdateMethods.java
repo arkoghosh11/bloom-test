@@ -1,11 +1,12 @@
 package com.mana.innovative.dao.common;
 
 import com.mana.innovative.constants.TestConstants;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -24,7 +25,7 @@ public class WhenUpdateAnAddressThenTestAddressDAOUpdateMethods {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( WhenUpdateAnAddressThenTestAddressDAOUpdateMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenUpdateAnAddressThenTestAddressDAOUpdateMethods.class );
 
     /**
      * Sets up.

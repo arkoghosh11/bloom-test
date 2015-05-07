@@ -3,7 +3,8 @@ package com.mana.innovative.utilities.response;
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dto.client.Item;
 import com.mana.innovative.exception.IllegalArgumentValueException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class ItemDomainDTOConverter {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( ItemDomainDTOConverter.class );
+    private static final Logger logger = LoggerFactory.getLogger( ItemDomainDTOConverter.class );
     /**
      * The constant ZERO.
      */

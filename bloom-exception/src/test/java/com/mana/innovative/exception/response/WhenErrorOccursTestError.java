@@ -1,9 +1,10 @@
 package com.mana.innovative.exception.response;
 
 import junit.framework.Assert;
-import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by alex1 on 1/28/2015.
@@ -17,7 +18,7 @@ public class WhenErrorOccursTestError {
     /**
      * The constant logger.
      */
-    private static final Logger logger =  Logger.getLogger(WhenErrorOccursTestError.class);
+    private static final Logger logger = LoggerFactory.getLogger( WhenErrorOccursTestError.class );
 
     /**
      * The Error.

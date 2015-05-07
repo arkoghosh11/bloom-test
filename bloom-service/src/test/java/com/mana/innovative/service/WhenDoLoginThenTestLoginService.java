@@ -1,16 +1,16 @@
 package com.mana.innovative.service;/**
- * Created by alex1 on 1/30/2015.
- * This is a class for .. todo 
+ * Created by alex1 on 1/30/2015. This is a class for .. todo
  */
 
 import com.mana.innovative.authentication.LoginService;
+import com.mana.innovative.constants.TestConstants;
 import junit.framework.Assert;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -23,14 +23,14 @@ import javax.annotation.Resource;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/service-config-test.xml","/db-config-test.xml" })
+@RunWith( value = SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "/service-config-test.xml", "/db-config-test.xml" } )
 public class WhenDoLoginThenTestLoginService {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger(WhenDoLoginThenTestLoginService.class);
+    private static final Logger logger = LoggerFactory.getLogger( WhenDoLoginThenTestLoginService.class );
 
     /**
      * The Login service.
@@ -42,24 +42,24 @@ public class WhenDoLoginThenTestLoginService {
      * Set up.
      */
     @Before
-    public void setUp(){
-    logger.log(Level.DEBUG, " starting set up ");
+    public void setUp( ) {
+        logger.debug( TestConstants.setUpMethodLoggerMsg );
     }
 
     /**
      * Test login service object.
      */
     @Test
-    public void testLoginServiceObject(){
+    public void testLoginServiceObject( ) {
 
-        Assert.assertNotNull("Login Service is null", loginService);
+        Assert.assertNotNull( "Login Service is null", loginService );
     }
 
     /**
      * Tear down.
      */
     @After
-    public void tearDown() {
-        logger.log(Level.DEBUG," ending test, finishing tear down");
+    public void tearDown( ) {
+        logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 }

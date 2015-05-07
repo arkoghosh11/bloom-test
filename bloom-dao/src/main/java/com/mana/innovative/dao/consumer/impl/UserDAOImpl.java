@@ -7,10 +7,11 @@ import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.consumer.User;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.exception.response.ErrorContainer;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -34,7 +35,7 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( UserDAOImpl.class );
+    private static final Logger logger = LoggerFactory.getLogger( UserDAOImpl.class );
 
     /**
      * The Session factory.

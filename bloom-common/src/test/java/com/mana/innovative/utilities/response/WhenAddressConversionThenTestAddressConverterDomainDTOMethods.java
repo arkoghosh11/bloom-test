@@ -6,12 +6,13 @@ import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.utilities.TestDummyDTOObjectGenerator;
 import com.mana.innovative.utilities.TestDummyDomainObjectGenerator;
 import junit.framework.Assert;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class WhenAddressConversionThenTestAddressConverterDomainDTOMethods {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( WhenAddressConversionThenTestAddressConverterDomainDTOMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenAddressConversionThenTestAddressConverterDomainDTOMethods.class );
 
     /**
      * The Address dTO.

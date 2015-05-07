@@ -4,12 +4,13 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.domain.common.email.CustomEvent;
 import com.mana.innovative.scheduler.impl.CustomSchedulerImpl;
 import junit.framework.Assert;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -34,7 +35,7 @@ public class WhenSchedulerThenTestSchedulerMethods {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( WhenSchedulerThenTestSchedulerMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenSchedulerThenTestSchedulerMethods.class );
 
     /**
      * The Custom scheduler.

@@ -6,8 +6,9 @@ import com.mana.innovative.service.client.container.ItemResponseContainer;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.test.framework.AppDescriptor;
 import junit.framework.Assert;
-import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.MediaType;
 
@@ -28,7 +29,7 @@ public class WhenItemsRestWebServiceTestGetItems extends RestTest {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger(WhenItemsRestWebServiceTestGetItems.class);
+    private static final Logger logger = LoggerFactory.getLogger( WhenItemsRestWebServiceTestGetItems.class );
 
     /**
      * Configure app descriptor.

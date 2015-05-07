@@ -9,8 +9,9 @@ import com.mana.innovative.dto.client.payload.ShopsPayload;
 import com.mana.innovative.service.client.ShopsService;
 import com.mana.innovative.service.client.builder.ShopResponseBuilder;
 import com.mana.innovative.service.client.container.ShopResponseContainer;
-import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -32,7 +33,7 @@ public class ShopsServiceImpl implements ShopsService {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( ShopsServiceImpl.class );
+    private static final Logger logger = LoggerFactory.getLogger( ShopsServiceImpl.class );
 
     /**
      * The Shop dAO impl.

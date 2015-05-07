@@ -3,7 +3,8 @@ package com.mana.innovative.utilities.response;
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dto.common.Address;
 import com.mana.innovative.exception.IllegalArgumentValueException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class AddressDomainDTOConverter {
     /**
      * The constant logger.
      */
-    private static final Logger logger = Logger.getLogger( AddressDomainDTOConverter.class );
+    private static final Logger logger = LoggerFactory.getLogger( AddressDomainDTOConverter.class );
     /**
      * The constant ZERO.
      */
@@ -141,7 +142,7 @@ public class AddressDomainDTOConverter {
         }
 
         if ( flag ) {
-            logger.error( stringBuilder );
+            logger.error( stringBuilder.toString( ) );
             throw new IllegalArgumentValueException( );
         }
         logger.debug( stringBuilder.toString( ) );
