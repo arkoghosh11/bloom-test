@@ -4,6 +4,7 @@
 package com.mana.innovative.service.consumer.impl;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.consumer.UserDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.dto.consumer.payload.UsersPayload;
@@ -14,7 +15,11 @@ import com.mana.innovative.service.consumer.container.UserResponseContainer;
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
@@ -48,6 +53,8 @@ public class UsersServiceImpl implements UsersService {
      * @return the all users
      */
     @Override
+    @Cacheable( value = ServiceConstants.USERS_CACHE, key = ServiceConstants.KEY_NAME )
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public Response getAllUsers( RequestParams requestParams ) {
 
         logger.debug( "Initiating getUsers, userDAO injected successfully" );
@@ -92,6 +99,7 @@ public class UsersServiceImpl implements UsersService {
      * @return the response
      */
     @Override
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ )
     public Response deleteUsers( List< Long > userIds, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deleteUsers()";

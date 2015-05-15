@@ -16,7 +16,9 @@ import com.mana.innovative.domain.consumer.Card;
 import com.mana.innovative.domain.consumer.CreditCard;
 import com.mana.innovative.domain.consumer.Customer;
 import com.mana.innovative.domain.consumer.Preference;
+import com.mana.innovative.domain.consumer.Privilege;
 import com.mana.innovative.domain.consumer.User;
+import com.mana.innovative.domain.consumer.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -207,7 +209,7 @@ public class TestDummyDomainObjectGenerator {
     }
 
     /**
-     * Gets test tab domain zEROID object.
+     * Gets test tab domain ZERO ID object.
      *
      * @param tabDomain the tab domain
      */
@@ -237,7 +239,7 @@ public class TestDummyDomainObjectGenerator {
     }
 
     /**
-     * Gets test phone domain zEROID object.
+     * Gets test phone domain ZERO ID object.
      *
      * @param phoneDomain the phone domain
      */
@@ -247,7 +249,7 @@ public class TestDummyDomainObjectGenerator {
     }
 
     /**
-     * Gets test preference domain zEROID object.
+     * Gets test preference domain ZERO ID object.
      *
      * @param preferenceDomain the preference domain
      */
@@ -257,7 +259,7 @@ public class TestDummyDomainObjectGenerator {
     }
 
     /**
-     * Gets test calendar event domain zEROID object.
+     * Gets test calendar event domain ZERO ID object.
      *
      * @param calendarEventDomain the calendar event domain
      */
@@ -266,7 +268,7 @@ public class TestDummyDomainObjectGenerator {
     }
 
     /**
-     * Sets test sidebar type domain zEROID object.
+     * Sets test sidebar type domain ZERO ID object.
      *
      * @param sidebarDomain the sidebar domain
      */
@@ -401,6 +403,7 @@ public class TestDummyDomainObjectGenerator {
             user.setEmail( i + TestConstants.TEST_EMAIL );
             user.setPassword( TestConstants.TEST_PASS + i );
             user.setUserName( TestConstants.TEST_NAME + i );
+            user.setUserRole( getTestUserRoleDomainObject( ) );
 
             userList.add( user );
         }
@@ -418,10 +421,12 @@ public class TestDummyDomainObjectGenerator {
         Customer customer;
         for ( int i = 0; i < 10; i++ ) {
             customer = new Customer( );
+            // Set User properties
             customer.setUserId( i );
             customer.setEmail( i + TestConstants.TEST_EMAIL );
             customer.setPassword( TestConstants.TEST_PASS + i );
             customer.setUserName( TestConstants.TEST_NAME + i );
+            customer.setUserRole( getTestUserRoleDomainObject( ) );
 
             customer.setFirstName( TestConstants.TEST_NAME + i );
             customer.setLastName( TestConstants.TEST_NAME + i );
@@ -657,4 +662,51 @@ public class TestDummyDomainObjectGenerator {
 
         return sidebarTypeList;
     }
+
+    /**
+     * Gets test user role domain object.
+     *
+     * @return the test user role domain object
+     */
+    public static UserRole getTestUserRoleDomainObject( ) {
+
+        UserRole userRole = new UserRole( );
+
+        userRole.setUserRoleId( TestConstants.ONE );
+        userRole.setUserRoleName( TestConstants.TEST_NAME );
+        userRole.setIsActive( TestConstants.TEST_TRUE );
+        userRole.setPrivileges( getNCreatePrivilegeDomainList( ) );
+
+        return userRole;
+    }
+
+    /**
+     * Gets n create privilege domain list.
+     *
+     * @return the n create privilege domain list
+     */
+    public static List< Privilege > getNCreatePrivilegeDomainList( ) {
+
+        List< Privilege > privilegeList = new ArrayList<>( );
+        Privilege privilege;
+        for ( int i = 1; i < 5; i++ ) {
+            privilege = new Privilege( );
+            privilege.setPrivilegeId( i );
+            privilege.setPrivilegeName( TestConstants.TEST_NAME + i );
+            privilege.setAccessible( i % 2 == 0 );
+            privilegeList.add( privilege );
+        }
+        return privilegeList;
+    }
+
+    /**
+     * Gets test privilege domain object.
+     *
+     * @return the test privilege domain object
+     */
+    public static Privilege getTestPrivilegeDomainObject( ) {
+
+        return getNCreatePrivilegeDomainList( ).get( TestConstants.ZERO );
+    }
+
 }

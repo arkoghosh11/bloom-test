@@ -3,6 +3,7 @@
  */
 package com.mana.innovative.service.common.impl;
 
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.common.TabDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.dto.common.payload.TabsPayload;
@@ -13,7 +14,11 @@ import com.mana.innovative.service.common.container.TabResponseContainer;
 import com.mana.innovative.utilities.response.ResponseUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
@@ -46,9 +51,12 @@ public class TabsServiceImpl implements TabsService {
      * @param requestParams the request params
      * @return the all tabs
      */
+    @Override
+    @Cacheable( value = ServiceConstants.TABS_CACHE, key = ServiceConstants.KEY_NAME )
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public Response getAllTabs( RequestParams requestParams ) {
 
-        log.debug( "**** Tab DAO is " + tabDAO );
+        log.debug( " Executing #getAllTabs for tabsService " );
         Response response;
         TabResponseContainer< TabsPayload > tabResponseContainer;
 
@@ -59,7 +67,9 @@ public class TabsServiceImpl implements TabsService {
             response = Response.ok( tabResponseContainer ).build( );
         } catch ( Exception exception ) {
             response = ResponseUtility.internalServerErrorMsg( null );
+            log.error( "Exception occurred while fetching all tabs ", exception );
         }
+        log.debug( " Finished #getAllTabs for tabsService" );
         return response;
     }
 
@@ -70,6 +80,8 @@ public class TabsServiceImpl implements TabsService {
      * @param requestParams the request params
      * @return the response
      */
+    @Override
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
     public Response deleteTabs( List< Integer > tabIds, RequestParams requestParams ) {
 
         tabDAO.deleteTabs( tabIds, requestParams );

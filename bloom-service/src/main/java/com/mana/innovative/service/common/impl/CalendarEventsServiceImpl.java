@@ -1,6 +1,7 @@
 package com.mana.innovative.service.common.impl;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.common.CalendarEventDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.dto.common.payload.CalendarEventsPayload;
@@ -11,6 +12,7 @@ import com.mana.innovative.service.common.container.CalendarEventResponseContain
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -65,6 +67,7 @@ public class CalendarEventsServiceImpl implements CalendarEventsService {
      * @return the calendar events
      */
     @Override
+    @Cacheable( value = ServiceConstants.CALENDAR_EVENTS_CACHE, key = ServiceConstants.KEY_NAME )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public Response getCalendarEvents( RequestParams requestParams ) {
 
@@ -102,6 +105,8 @@ public class CalendarEventsServiceImpl implements CalendarEventsService {
      * @param requestParams the request params
      * @return the response
      */
+    @Override
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public Response deleteEvents( List< Long > calendarEventIds, RequestParams requestParams ) {
 
         calendarEventDAO.deleteCalendarEvents( calendarEventIds, requestParams );

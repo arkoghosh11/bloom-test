@@ -33,7 +33,7 @@ CREATE TABLE `address` (
   `location_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`address_id`),
   UNIQUE KEY `FK_address_locations_location_id` (`location_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2523143 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `address` */
 
@@ -111,11 +111,11 @@ CREATE TABLE `custom_events` (
   `optional_data` varchar(255) DEFAULT NULL,
   `time_of_event` varchar(255) NOT NULL,
   PRIMARY KEY (`custom_event_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `custom_events` */
 
-insert  into `custom_events`(`custom_event_id`,`receivers`,`cc_receivers`,`bcc_receivers`,`subject`,`body`,`has_attachment`,`attachment_location`,`event_date`,`event_name`,`use_scheduler`,`optional_data`,`time_of_event`) values (0,'meankur2@gmail.com','','arkoghosh@hotmail.com','default1','default1',0,NULL,'2015-04-15 00:12:51','default1',0,NULL,'00:00'),(1,'meankur2@gmail.com','bloomrono11@gmail.com','arkoghosh@hotmail.com,arkogh@gmail.com','Test','Test',1,'C:/Properties/resources/pictures/happy_birthday_froggie_card.jpg','2015-04-20 23:13:53','test',0,'Test','23:13'),(2,'meankur2@gmail.com','ronobloom11@gmail.com','arkoghosh@hotmail.com,arkogh@gmail.com','Hello Test','Hello Test',1,'C:/Properties/resources/pictures/happy_birthday_cartoon_card.jpg,C:/Properties/resources/pictures/happy_birthday_froggie_card.jpg','2015-04-20 23:13:58','hello',0,'Hello','23:13'),(3,'ronobloom11@gmail.com','','arkoghosh@hotmail.com,arkogh@gmail.com','Test2','Body',0,NULL,'2015-04-20 23:14:05','test2',0,'Test2','23:14'),(4,'ruchij.mhs@gmail.com','','arkoghosh@hotmail.com','Happy Birthday','\nHello Ruchi,\n\n\n\nHappy Birthday to you from your friends and Froggie.\n\nMany Happy returns of the day.\n\n\nYours faithfully,\nFroggie',1,'C:/Properties/resources/pictures/happy_birthday_cartoon_card.jpg,C:/Properties/resources/pictures/happy_birthday_froggie_card.jpg,C:/Properties/resources/pictures/RJ_froggie_sleeping.jpg','2015-04-21 00:23:01','Happy_Birthday_Ruchi_Joshi',0,'name:Ruchi_Joshi, BD:04-21-1989','00:23'),(8,'ronobloom11@gmail.com','','arkoghosh@hotmail.com,arkogh@gmail.com','Happy Birthday','Happy Birthday',0,NULL,'2015-04-29 15:15:04','Happy_Birthday_Deepander_Bagdas',0,'name:Deepander Bagdas, BD:04-29-1987','15:15');
+insert  into `custom_events`(`custom_event_id`,`receivers`,`cc_receivers`,`bcc_receivers`,`subject`,`body`,`has_attachment`,`attachment_location`,`event_date`,`event_name`,`use_scheduler`,`optional_data`,`time_of_event`) values (0,'meankur2@gmail.com','','arkoghosh@hotmail.com','default1','default1',0,NULL,'2015-04-15 00:12:51','default1',0,NULL,'00:00'),(1,'meankur2@gmail.com','bloomrono11@gmail.com','arkoghosh@hotmail.com,arkogh@gmail.com','Test','Test',1,'C:/Properties/resources/pictures/happy_birthday_froggie_card.jpg','2015-04-20 23:13:53','test',0,'Test','23:13'),(2,'meankur2@gmail.com','ronobloom11@gmail.com','arkoghosh@hotmail.com,arkogh@gmail.com','Hello Test','Hello Test',1,'C:/Properties/resources/pictures/happy_birthday_cartoon_card.jpg,C:/Properties/resources/pictures/happy_birthday_froggie_card.jpg','2015-04-20 23:13:58','hello',0,'Hello','23:13'),(3,'ronobloom11@gmail.com','','arkoghosh@hotmail.com,arkogh@gmail.com','Test2','Body',0,NULL,'2015-04-20 23:14:05','test2',0,'Test2','23:14'),(4,'ruchij.mhs@gmail.com','','arkoghosh@hotmail.com','Happy Birthday','\nHello Ruchi,\n\n\n\nHappy Birthday to you from your friends and Froggie.\n\nMany Happy returns of the day.\n\n\nYours faithfully,\nFroggie',1,'C:/Properties/resources/pictures/happy_birthday_cartoon_card.jpg,C:/Properties/resources/pictures/happy_birthday_froggie_card.jpg,C:/Properties/resources/pictures/RJ_froggie_sleeping.jpg','2015-04-21 00:23:01','Happy_Birthday_Ruchi_Joshi',0,'name:Ruchi_Joshi, BD:04-21-1989','00:23'),(8,'ronobloom11@gmail.com','','arkoghosh@hotmail.com,arkogh@gmail.com','Happy Birthday','Happy Birthday',0,NULL,'2015-04-29 15:15:04','Happy_Birthday_Deepander_Bagdas',0,'name:Deepander Bagdas, BD:04-29-1987','15:15'),(9,'ronobloom11@gmail.com','','arkoghosh@hotmail.com,arkogh@gmail.com','HB','HB',0,NULL,'2015-05-28 21:43:39','HB_WOlfie',0,'name: Servetnik Vadim, BD:05-28-1982','21:43');
 
 /*Table structure for table `customer_address` */
 
@@ -163,7 +163,7 @@ CREATE TABLE `hibernate_sequences` (
 
 /*Data for the table `hibernate_sequences` */
 
-insert  into `hibernate_sequences`(`sequence_name`,`sequence_next_hi_value`) values ('items',73),('shops',69),('address',78),('working_hours',70),('users',18),('cards',18),('phones',18),('preferences',18);
+insert  into `hibernate_sequences`(`sequence_name`,`sequence_next_hi_value`) values ('items',75),('shops',71),('address',80),('working_hours',72),('users',20),('cards',20),('phones',20),('preferences',20);
 
 /*Table structure for table `items` */
 
@@ -188,11 +188,27 @@ CREATE TABLE `items` (
   PRIMARY KEY (`item_id`),
   KEY `FK_items_shops_shop_id` (`shop_id`),
   CONSTRAINT `FK_items_shops_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`shop_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2359302 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `items` */
 
 insert  into `items`(`item_id`,`item_name`,`item_price`,`item_type`,`item_price_currency`,`quantity`,`weight`,`bought_from`,`quantity_type`,`item_sub_type`,`weighted_unit`,`bought_date`,`created_date`,`updated_date`,`shop_id`) values (0,'default_name',0,'default_type','Dollar',0,0,'default','unit','default_type','kg','2015-02-25 01:00:00','2015-01-29 04:45:31','2015-03-14 15:04:20',0),(1,'test',2,'test_type','Rupee',1,1,'test','unit','test','pound','2015-02-25 01:00:00','2015-01-29 04:50:08','2015-02-28 01:13:49',1);
+
+/*Table structure for table `katie cooks` */
+
+DROP TABLE IF EXISTS `katie cooks`;
+
+CREATE TABLE `katie cooks` (
+  `employee_id` bigint(20) NOT NULL,
+  `Cook_name` varchar(200) NOT NULL,
+  `Position` varchar(200) NOT NULL,
+  `Experience` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`employee_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `katie cooks` */
+
+insert  into `katie cooks`(`employee_id`,`Cook_name`,`Position`,`Experience`) values (123,'Dada','Head cook\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0',105),(124,'palak','chinesefood',30),(125,'joshi','jki',500);
 
 /*Table structure for table `locations` */
 
@@ -255,6 +271,23 @@ CREATE TABLE `preferences` (
 
 insert  into `preferences`(`preference_id`,`is_preferred`,`preference_name`,`created_date`,`updated_date`) values (0,0,'default','2015-05-02 18:40:07','2015-05-02 18:40:07'),(1,1,'test','2015-05-02 18:40:07','2015-05-02 18:40:07');
 
+/*Table structure for table `privileges` */
+
+DROP TABLE IF EXISTS `privileges`;
+
+CREATE TABLE `privileges` (
+  `privilege_id` int(10) NOT NULL AUTO_INCREMENT,
+  `privilege_name` varchar(150) NOT NULL DEFAULT 'default',
+  `accessible` tinyint(1) NOT NULL DEFAULT '0',
+  `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`privilege_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+/*Data for the table `privileges` */
+
+insert  into `privileges`(`privilege_id`,`privilege_name`,`accessible`,`created_date`,`update_date`) values (0,'default',0,'2015-05-14 18:21:54','2015-05-14 19:06:27'),(1,'create',1,'2015-05-14 18:21:21','2015-05-14 18:22:03'),(2,'update',1,'2015-05-14 18:21:21','2015-05-14 18:22:04'),(3,'read',1,'2015-05-14 18:21:21','2015-05-14 18:22:06'),(4,'delete',1,'2015-05-14 18:21:21','2015-05-14 18:21:21'),(5,'all',1,'2015-05-14 18:21:21','2015-05-14 18:21:21');
+
 /*Table structure for table `shops` */
 
 DROP TABLE IF EXISTS `shops`;
@@ -270,7 +303,7 @@ CREATE TABLE `shops` (
   PRIMARY KEY (`shop_id`),
   UNIQUE KEY `FK_shops_address_address_id` (`address_id`),
   CONSTRAINT `FK_shops_address_address_id` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2228228 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `shops` */
 
@@ -315,6 +348,40 @@ CREATE TABLE `tabs` (
 
 insert  into `tabs`(`tab_id`,`tab_content`,`tab_name`,`created_date`,`updated_date`) values (0,'default','default','2015-05-02 16:06:43','2015-05-02 16:10:03'),(1,'test','test','2015-05-02 16:06:50','2015-05-02 16:06:50');
 
+/*Table structure for table `user_role_privilege` */
+
+DROP TABLE IF EXISTS `user_role_privilege`;
+
+CREATE TABLE `user_role_privilege` (
+  `user_role_id` int(10) NOT NULL,
+  `privilege_id` int(10) NOT NULL,
+  UNIQUE KEY `user_role_privilege_id` (`user_role_id`,`privilege_id`),
+  KEY `FK_privileges_privilege_id` (`privilege_id`),
+  CONSTRAINT `FK_privileges_privilege_id` FOREIGN KEY (`privilege_id`) REFERENCES `privileges` (`privilege_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_user_roles_user_role_id` FOREIGN KEY (`user_role_id`) REFERENCES `user_roles` (`user_role_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `user_role_privilege` */
+
+insert  into `user_role_privilege`(`user_role_id`,`privilege_id`) values (0,0),(3,1),(4,1),(5,1),(4,2),(5,2),(1,3),(2,3),(3,3),(4,3),(5,3),(6,3),(5,4),(6,4),(7,5);
+
+/*Table structure for table `user_roles` */
+
+DROP TABLE IF EXISTS `user_roles`;
+
+CREATE TABLE `user_roles` (
+  `user_role_id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_role_name` varchar(100) NOT NULL,
+  `is_active` tinyint(1) DEFAULT NULL,
+  `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+/*Data for the table `user_roles` */
+
+insert  into `user_roles`(`user_role_id`,`user_role_name`,`is_active`,`created_date`,`updated_date`) values (0,'default',0,'2015-05-13 11:12:19','2015-05-13 11:12:38'),(1,'anonymus',1,'2015-05-13 11:11:01','2015-05-13 11:11:01'),(2,'free_user',1,'2015-05-13 11:11:01','2015-05-13 11:11:01'),(3,'vip_user',1,'2015-05-13 11:11:01','2015-05-13 11:11:01'),(4,'moderator',1,'2015-05-13 11:11:01','2015-05-13 11:11:01'),(5,'super_moderator',1,'2015-05-13 11:11:01','2015-05-13 11:11:01'),(6,'maintainence_support',1,'2015-05-13 11:11:01','2015-05-13 11:11:01'),(7,'admin_super_user',1,'2015-05-13 11:11:01','2015-05-13 11:11:01');
+
 /*Table structure for table `users` */
 
 DROP TABLE IF EXISTS `users`;
@@ -331,14 +398,17 @@ CREATE TABLE `users` (
   `title` varchar(255) DEFAULT NULL,
   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_date` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_role_id` int(10) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name` (`user_name`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  KEY `FK_users_user_roles_id` (`user_role_id`),
+  CONSTRAINT `FK_users_user_roles_id` FOREIGN KEY (`user_role_id`) REFERENCES `user_roles` (`user_role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `users` */
 
-insert  into `users`(`discriminator`,`user_id`,`user_name`,`password`,`email`,`first_name`,`last_name`,`middle_name`,`title`,`created_date`,`updated_date`) values ('User',0,'default','default','default@default.com',NULL,NULL,NULL,NULL,'2015-05-01 10:23:29','2015-05-02 16:13:57'),('Customer',1,'test','test','test@test.com','test_f_n','test_l_n','test_m_n','test','2015-05-01 10:24:59','2015-05-02 16:14:58');
+insert  into `users`(`discriminator`,`user_id`,`user_name`,`password`,`email`,`first_name`,`last_name`,`middle_name`,`title`,`created_date`,`updated_date`,`user_role_id`) values ('User',0,'default','default','default@default.com',NULL,NULL,NULL,NULL,'2015-05-01 10:23:29','2015-05-02 16:13:57',0),('Customer',1,'test','test','test@test.com','test_f_n','test_l_n','test_m_n','test','2015-05-01 10:24:59','2015-05-02 16:14:58',0);
 
 /*Table structure for table `working_hours` */
 
@@ -358,7 +428,7 @@ CREATE TABLE `working_hours` (
   PRIMARY KEY (`working_hour_id`),
   KEY `FK_working_hours_shops_shop_id` (`shop_id`),
   CONSTRAINT `FK_working_hours_shops_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`shop_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2260997 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `working_hours` */
 

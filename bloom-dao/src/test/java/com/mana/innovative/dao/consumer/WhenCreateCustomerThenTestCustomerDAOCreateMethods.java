@@ -4,6 +4,7 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.TestDummyDomainObjectGenerator;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.consumer.Customer;
+import com.mana.innovative.domain.consumer.UserRole;
 import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.junit.After;
@@ -57,6 +58,9 @@ public class WhenCreateCustomerThenTestCustomerDAOCreateMethods {
     @Resource
     private CustomerDAO customerDAO;
 
+    @Resource
+    private UserRoleDAO userRoleDAO;
+
     /**
      * Sets up.
      *
@@ -70,6 +74,15 @@ public class WhenCreateCustomerThenTestCustomerDAOCreateMethods {
         dummyCustomer = TestDummyDomainObjectGenerator.getTestCustomerDomainObject( );
 
         requestParams = new RequestParams( );
+
+        DAOResponse< UserRole > userRoleDAOResponse = userRoleDAO.getUserRoleByUserRoleId( TestConstants.ONE,
+                requestParams );
+        Assert.assertNotNull( TestConstants.nullMessage, userRoleDAOResponse );
+        Assert.assertNotNull( TestConstants.nullMessage, userRoleDAOResponse.getResults( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRoleDAOResponse.getResults( ).isEmpty( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.ONE, userRoleDAOResponse.getCount( ) );
+
+        dummyCustomer.setUserRole( userRoleDAOResponse.getResults( ).get( TestConstants.ZERO ) );
 
     }
 

@@ -2,6 +2,7 @@ package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dto.consumer.User;
+import com.mana.innovative.dto.consumer.UserRole;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,6 +64,10 @@ public class UserDomainDTOConverter {
             userDTO.setEmail( userDomain.getEmail( ) );
         }
 
+        if ( userDomain.getUserRole( ) != null ) {
+            userDTO.setUserRole( UserRoleDomainDTOConverter.getConvertedDTOFromDomain( new UserRole( ), userDomain
+                    .getUserRole( ) ) );
+        }
         return userDTO;
     }
 
@@ -123,6 +128,14 @@ public class UserDomainDTOConverter {
         } else {
             flag = true;
             stringBuilder.append( " User Email," );
+        }
+
+        if ( userDTO.getUserRole( ) != null ) {
+            userDomain.setUserRole( UserRoleDomainDTOConverter.getConvertedDomainFromDTO( new com.mana.innovative
+                    .domain.consumer.UserRole( ), userDTO.getUserRole( ) ) );
+        } else {
+            flag = true;
+            stringBuilder.append( " User Role" );
         }
 //            user.setShopUser();
         if ( flag ) {

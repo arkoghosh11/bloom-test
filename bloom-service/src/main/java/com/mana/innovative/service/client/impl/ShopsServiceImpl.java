@@ -12,6 +12,7 @@ import com.mana.innovative.service.client.container.ShopResponseContainer;
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -47,6 +48,7 @@ public class ShopsServiceImpl implements ShopsService {
      * @param isError the is error
      * @return the shops
      */
+    @Cacheable( value = ServiceConstants.SHOPS_CACHE, key = ServiceConstants.KEY_NAME )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, readOnly = true )
     public Response getShops( boolean isError ) {

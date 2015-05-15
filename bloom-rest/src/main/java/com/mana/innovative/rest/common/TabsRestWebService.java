@@ -66,8 +66,6 @@ public class TabsRestWebService {
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     public Response getAllTabs( @QueryParam( "is_error" ) @DefaultValue( "false" ) Boolean isError ) {
 
-
-        log.debug( "**** Tab Service is " + tabsService );
         RequestParams requestParams = new RequestParams( );
         requestParams.setIsError( isError );
         return tabsService.getAllTabs( requestParams );

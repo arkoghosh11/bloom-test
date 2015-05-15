@@ -86,6 +86,9 @@ public final class DAOConstants {
      * The constant EMPTY_STRING.
      */
     public static final String EMPTY_STRING = "";
+    public static final int DEFAULT_PRIVILEGE = 3;
+    public static final int DEFAULT_USER_ROLE = 1;
+    public static final String DEFAULT_USER_ROLE_NAME = "anonymous";
 
 
     /**

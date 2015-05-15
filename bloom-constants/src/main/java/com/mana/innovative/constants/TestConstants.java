@@ -47,6 +47,8 @@ public class TestConstants {
      */
     public static final long TEST_OWN_ID = 1111L;
 
+    public static final String DEFAULT = "default";
+
     /**
      * The constant DEFAULT_PRICE.
      */
@@ -266,6 +268,8 @@ public class TestConstants {
      * The constant FAIL_MESSAGE.
      */
     public static final String FAIL_MESSAGE = "Failed due to expected and actual results being different";
+    public static final String DEFAULT_USER_ROLE_NAME = "anonymous";
+    public static final int DEFAULT_USER_ROLE_ID = ONE;
 
     /**
      * The constant setUpMethodLoggerMsg.

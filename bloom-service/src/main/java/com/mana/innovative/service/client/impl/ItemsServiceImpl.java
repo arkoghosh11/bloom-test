@@ -1,6 +1,7 @@
 package com.mana.innovative.service.client.impl;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.client.ItemDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
@@ -48,7 +49,7 @@ public class ItemsServiceImpl implements ItemsService {
      * @param isError the is error
      * @return the items
      */
-    @Cacheable( value = "itemsCache", key = "#root.method.name" )
+    @Cacheable( value = ServiceConstants.ITEMS_CACHE, key = ServiceConstants.KEY_NAME )
     @Transactional( propagation = Propagation.REQUIRED, readOnly = true )
     public Response getItems( boolean isError ) {
 

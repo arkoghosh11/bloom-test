@@ -8,6 +8,7 @@ package com.mana.innovative.service.consumer.impl;
  */
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.consumer.CustomerDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.dto.consumer.payload.CustomersPayload;
@@ -19,6 +20,7 @@ import com.mana.innovative.service.consumer.container.CustomerResponseContainer;
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -59,6 +61,7 @@ public class CustomersServiceImpl implements CustomersService {
      * @return A response object containing all of the tabs within the Database
      */
     @Override
+    @Cacheable( value = ServiceConstants.CUSTOMERS_CACHE, key = ServiceConstants.KEY_NAME )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public Response getAllCustomers( RequestParams requestParams ) {
 

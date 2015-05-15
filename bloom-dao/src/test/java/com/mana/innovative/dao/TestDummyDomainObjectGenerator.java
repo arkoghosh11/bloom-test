@@ -16,7 +16,9 @@ import com.mana.innovative.domain.consumer.Card;
 import com.mana.innovative.domain.consumer.CreditCard;
 import com.mana.innovative.domain.consumer.Customer;
 import com.mana.innovative.domain.consumer.Preference;
+import com.mana.innovative.domain.consumer.Privilege;
 import com.mana.innovative.domain.consumer.User;
+import com.mana.innovative.domain.consumer.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -419,10 +421,11 @@ public class TestDummyDomainObjectGenerator {
         for ( int i = 0; i < 10; i++ ) {
             customer = new Customer( );
 //            customer.setUserId( i );
+//           Set User Id
             customer.setEmail( i + TestConstants.TEST_EMAIL );
             customer.setPassword( TestConstants.TEST_PASS + i );
             customer.setUserName( TestConstants.TEST_NAME + i );
-
+//          Set Customer Id
             customer.setFirstName( TestConstants.TEST_NAME + i );
             customer.setLastName( TestConstants.TEST_NAME + i );
             customer.setMiddleName( TestConstants.TEST_NAME + i );
@@ -659,5 +662,51 @@ public class TestDummyDomainObjectGenerator {
         }
 
         return sidebarTypeList;
+    }
+
+    /**
+     * Gets test user role domain object.
+     *
+     * @return the test user role domain object
+     */
+    public static UserRole getTestUserRoleDomainObject( ) {
+
+        UserRole userRole = new UserRole( );
+
+        userRole.setUserRoleId( TestConstants.ZERO );
+        userRole.setUserRoleName( TestConstants.DEFAULT );
+        userRole.setIsActive( TestConstants.TEST_FALSE );
+        userRole.setPrivileges( getNCreatePrivilegeDomainList( ) );
+
+        return userRole;
+    }
+
+    /**
+     * Gets n create privilege domain list.
+     *
+     * @return the n create privilege domain list
+     */
+    public static List< Privilege > getNCreatePrivilegeDomainList( ) {
+
+        List< Privilege > privilegeList = new ArrayList<>( );
+        Privilege privilege;
+
+        privilege = new Privilege( );
+        privilege.setPrivilegeId( 0 );
+        privilege.setPrivilegeName( TestConstants.DEFAULT );
+        privilege.setAccessible( TestConstants.TEST_FALSE );
+        privilegeList.add( privilege );
+
+        return privilegeList;
+    }
+
+    /**
+     * Gets test privilege domain object.
+     *
+     * @return the test privilege domain object
+     */
+    public static Privilege getTestPrivilegeDomainObject( ) {
+
+        return getNCreatePrivilegeDomainList( ).get( TestConstants.ZERO );
     }
 }

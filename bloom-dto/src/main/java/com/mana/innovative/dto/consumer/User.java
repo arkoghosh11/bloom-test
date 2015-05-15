@@ -37,6 +37,8 @@ public class User {
      */
     private String email;
 
+    private UserRole userRole;
+
     //    Note getters and setters start from here
 
     /**
@@ -115,6 +117,15 @@ public class User {
         this.email = email;
     }
 
+    @XmlElement( name = "user_role" )
+    public UserRole getUserRole( ) {
+        return userRole;
+    }
+
+    public void setUserRole( final UserRole userRole ) {
+        this.userRole = userRole;
+    }
+
     /**
      * Equals boolean.
      *
@@ -130,8 +141,10 @@ public class User {
         return Objects.equals( getUserId( ), user.getUserId( ) ) &&
                 Objects.equals( getUserName( ), user.getUserName( ) ) &&
                 Objects.equals( getPassword( ), user.getPassword( ) ) &&
-                Objects.equals( getEmail( ), user.getEmail( ) );
+                Objects.equals( getEmail( ), user.getEmail( ) ) &&
+                Objects.equals( getUserRole( ), user.getUserRole( ) );
     }
+
 
     /**
      * To string.
@@ -140,11 +153,12 @@ public class User {
      */
     @Override
     public String toString( ) {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
+        return "User {" +
+                " userId=" + userId +
+                ", userName= " + userName +
+                ", password= " + password +
+                ", email= " + email +
+                ", userRole=" + userRole +
                 '}';
     }
 }

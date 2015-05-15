@@ -16,7 +16,9 @@ import com.mana.innovative.dto.consumer.Card;
 import com.mana.innovative.dto.consumer.CreditCard;
 import com.mana.innovative.dto.consumer.Customer;
 import com.mana.innovative.dto.consumer.Preference;
+import com.mana.innovative.dto.consumer.Privilege;
 import com.mana.innovative.dto.consumer.User;
+import com.mana.innovative.dto.consumer.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -275,6 +277,7 @@ public class TestDummyDTOObjectGenerator {
             user.setEmail( i + TestConstants.TEST_EMAIL );
             user.setPassword( TestConstants.TEST_PASS + i );
             user.setUserName( TestConstants.TEST_NAME + i );
+            user.setUserRole( getTestUserRoleDTOObject( ) );
 
             userList.add( user );
         }
@@ -292,10 +295,12 @@ public class TestDummyDTOObjectGenerator {
         Customer customer;
         for ( int i = 0; i < 10; i++ ) {
             customer = new Customer( );
+            // Set User properties
             customer.setUserId( ( long ) i );
             customer.setEmail( i + TestConstants.TEST_EMAIL );
             customer.setPassword( TestConstants.TEST_PASS + i );
             customer.setUserName( TestConstants.TEST_NAME + i );
+            customer.setUserRole( getTestUserRoleDTOObject( ) );
 
             customer.setFirstName( TestConstants.TEST_NAME + i );
             customer.setLastName( TestConstants.TEST_NAME + i );
@@ -539,6 +544,52 @@ public class TestDummyDTOObjectGenerator {
         }
 
         return sidebarTypeList;
+    }
+
+    /**
+     * Gets test user role dTO object.
+     *
+     * @return the test user role dTO object
+     */
+    public static UserRole getTestUserRoleDTOObject( ) {
+
+        UserRole userRole = new UserRole( );
+
+        userRole.setUserRoleId( TestConstants.ONE );
+        userRole.setUserRoleName( TestConstants.TEST_NAME );
+        userRole.setIsActive( TestConstants.TEST_TRUE );
+        userRole.setPrivileges( getNCreatePrivilegeDTOList( ) );
+
+        return userRole;
+    }
+
+    /**
+     * Gets n create privilege dTO list.
+     *
+     * @return the n create privilege dTO list
+     */
+    public static List< Privilege > getNCreatePrivilegeDTOList( ) {
+
+        List< Privilege > privilegeList = new ArrayList<>( );
+        Privilege privilege;
+        for ( int i = 1; i < 5; i++ ) {
+            privilege = new Privilege( );
+            privilege.setPrivilegeId( i );
+            privilege.setPrivilegeName( TestConstants.TEST_NAME + i );
+            privilege.setAccessible( i % 2 == 0 );
+            privilegeList.add( privilege );
+        }
+        return privilegeList;
+    }
+
+    /**
+     * Gets test privilege dTO object.
+     *
+     * @return the test privilege dTO object
+     */
+    public static Privilege getTestPrivilegeDTOObject( ) {
+
+        return getNCreatePrivilegeDTOList( ).get( TestConstants.ZERO );
     }
 
 }

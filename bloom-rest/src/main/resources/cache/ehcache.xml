@@ -6,23 +6,66 @@
          dynamicConfig="true">
 
     <diskStore path="java.io.tmpdir"/>
+    <!-- Note all caches below have a default value of 5MB-->
 
-    <cache name="itemsCache"
+    <!-- Note Client -->
+    <cache name="items_cache"
            maxBytesLocalHeap="5M"
            eternal="true"
            memoryStoreEvictionPolicy="LRU">
         <pinning store="localMemory"/>
     </cache>
 
-    <cache name="shopsCache"
-           maxEntriesLocalHeap="10000"
-           maxEntriesLocalDisk="1000"
+    <cache name="shops_cache"
+           maxBytesLocalHeap="5M"
            eternal="true"
-           diskSpoolBufferSizeMB="20"
-           timeToIdleSeconds="300" timeToLiveSeconds="600"
-           memoryStoreEvictionPolicy="LFU"
-           transactionalMode="off">
-        <persistence strategy="localTempSwap"/>
+           memoryStoreEvictionPolicy="LRU">
+        <pinning store="localMemory"/>
     </cache>
+
+    <!-- Note Consumer -->
+
+    <cache name="users_cache"
+           maxBytesLocalHeap="5M"
+           eternal="true"
+           memoryStoreEvictionPolicy="LRU">
+        <pinning store="localMemory"/>
+    </cache>
+    <cache name="customers_cache"
+           maxBytesLocalHeap="5M"
+           eternal="true"
+           memoryStoreEvictionPolicy="LRU">
+        <pinning store="localMemory"/>
+    </cache>
+
+    <!-- Note Common -->
+
+    <cache name="calendar_events_cache"
+           maxBytesLocalHeap="5M"
+           eternal="true"
+           memoryStoreEvictionPolicy="LRU">
+        <pinning store="localMemory"/>
+    </cache>
+    <cache name="tabs_cache"
+           maxBytesLocalHeap="5M"
+           eternal="true"
+           memoryStoreEvictionPolicy="LRU">
+        <pinning store="localMemory"/>
+    </cache>
+    <cache name="sidebar_cache"
+           maxBytesLocalHeap="5M"
+           eternal="true"
+           memoryStoreEvictionPolicy="LRU">
+        <pinning store="localMemory"/>
+    </cache>
+
+    <!--maxEntriesLocalHeap="10000"-->
+    <!--maxEntriesLocalDisk="1000"-->
+    <!--eternal="true"-->
+    <!--diskSpoolBufferSizeMB="20"-->
+    <!--timeToIdleSeconds="3000" timeToLiveSeconds="6000"-->
+    <!--memoryStoreEvictionPolicy="LFU"-->
+    <!--transactionalMode="off">-->
+    <!--<persistence strategy="localTempSwap"/>-->
 
 </ehcache>

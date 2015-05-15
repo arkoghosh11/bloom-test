@@ -18,6 +18,15 @@
     <!--<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class> -->
     <!--</listener> -->
     <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>dev</param-value>
+    </context-param>
+    <!-- Note to be set from environment or JNDI -->
+    <!--<context-param>-->
+    <!--<param-name>spring.profiles.active</param-name>-->
+    <!--<param-value>dev</param-value>-->
+    <!--</context-param>-->
+    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath*:/web_config.xml
@@ -55,6 +64,17 @@
         <filter-name>Login Filter</filter-name>
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/rest/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>Cache Filter</filter-name>
+        <filter-class>com.mana.innovative.rest.filter.ResetCacheFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Cache Filter</filter-name>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 

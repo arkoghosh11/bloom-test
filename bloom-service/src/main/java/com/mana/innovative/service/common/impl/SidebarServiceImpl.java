@@ -31,6 +31,10 @@ public class SidebarServiceImpl implements SidebarService {
      *
      * @return the sidebar by type
      */
+    @Override
+//    Todo implement as future feature for the moment front end customer sidebar is in works
+//    @Cacheable( value = ServiceConstants.SIDEBAR_CACHE, key = ServiceConstants.KEY_NAME)
+//    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT)
     public Response getSidebarByType( RequestParams requestParams ) {
         return Response.ok( ).build( );
     }

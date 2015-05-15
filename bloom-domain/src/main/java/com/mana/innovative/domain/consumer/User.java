@@ -5,6 +5,7 @@ package com.mana.innovative.domain.consumer;
 
 import org.hibernate.validator.constraints.Email;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -15,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -75,6 +78,10 @@ public class User {
     @Column( name = "updated_date" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
+
+    @ManyToOne( cascade = { CascadeType.MERGE, CascadeType.PERSIST } )
+    @JoinColumn( name = "user_role_id", referencedColumnName = "user_role_id" )
+    private UserRole userRole;
 
     /**
      * Gets user id.
@@ -182,6 +189,25 @@ public class User {
      */
     public void setUpdatedDate( final Date updatedDate ) {
         this.updatedDate = updatedDate;
+    }
+
+
+    /**
+     * Gets user role.
+     *
+     * @return the user role
+     */
+    public UserRole getUserRole( ) {
+        return userRole;
+    }
+
+    /**
+     * Sets user role.
+     *
+     * @param userRole the user role
+     */
+    public void setUserRole( final UserRole userRole ) {
+        this.userRole = userRole;
     }
 
     /**
