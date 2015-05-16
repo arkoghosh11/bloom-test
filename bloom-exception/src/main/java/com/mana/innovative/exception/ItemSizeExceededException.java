@@ -10,6 +10,10 @@ package com.mana.innovative.exception;
 public class ItemSizeExceededException extends Exception {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = 7088044909373562430L;
+    /**
      * The Message.
      */
     private String message = "ItemSizeExceededException occurred ";
@@ -18,6 +22,7 @@ public class ItemSizeExceededException extends Exception {
      * Instantiates a new Item size exceeded exception.
      */
     public ItemSizeExceededException( ) {
+
         super( );
     }
 
@@ -38,6 +43,7 @@ public class ItemSizeExceededException extends Exception {
      * @return the error
      */
     public String getError( ) {
+
         return message;
     }
 
@@ -46,7 +52,9 @@ public class ItemSizeExceededException extends Exception {
      *
      * @return the string
      */
+    @Override
     public String toString( ) {
+
         return message;
     }
 }

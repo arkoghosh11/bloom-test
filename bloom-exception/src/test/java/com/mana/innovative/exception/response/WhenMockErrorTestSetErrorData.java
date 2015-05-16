@@ -1,7 +1,9 @@
 package com.mana.innovative.exception.response;
 
 import com.mana.innovative.constants.ErrorConstants;
+import com.mana.innovative.constants.TestConstants;
 import junit.framework.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,13 +15,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by alex1 on 1/28/2015.
- * This is a domain class
+ * Created by alex1 on 1/28/2015. This is a domain class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@RunWith(value = MockitoJUnitRunner.class)
+@RunWith( value = MockitoJUnitRunner.class )
 public class WhenMockErrorTestSetErrorData {
 
     /**
@@ -43,29 +45,42 @@ public class WhenMockErrorTestSetErrorData {
      * Set up.
      */
     @Before
-    public void setUp(){
+    public void setUp( ) {
 
-        error = Mockito.mock(Error.class);
+        logger.debug( TestConstants.setUpMethodLoggerMsg );
+
+        error = Mockito.mock( Error.class );
         final WhenMockErrorTestSetErrorData me = this;
-        Mockito.doAnswer(new Answer<Void>() {
+        Mockito.doAnswer( new Answer< Void >( ) {
+
             @Override
-            public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
+            public Void answer( InvocationOnMock invocationOnMock ) throws Throwable {
+
                 me.invocationOnMock = invocationOnMock;
                 return null;
             }
-        }).when(error).setErrorType(errorType);
+        } ).when( error ).setErrorType( errorType );
 
     }
 
+    @After
+    public void tearDown( ) {
+
+        logger.debug( TestConstants.tearDownMethodLoggerMsg );
+    }
 
     /**
      * Test set error.
      */
     @Test
-    public void testSetError(){
+    public void testSetError( ) {
 
-        error.setErrorType(errorType);
+        logger.debug( "Starting test for SetError" );
+
+        error.setErrorType( errorType );
         InvocationOnMock invocationOnMock = this.invocationOnMock;
-        Assert.assertEquals(1, invocationOnMock.getArguments().length);
+        Assert.assertEquals( 1, invocationOnMock.getArguments( ).length );
+
+        logger.debug( "Finishing test for SetError" );
     }
 }

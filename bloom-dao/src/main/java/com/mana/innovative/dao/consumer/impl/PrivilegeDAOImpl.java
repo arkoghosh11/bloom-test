@@ -27,6 +27,7 @@ import java.util.List;
  * @Copyright
  */
 @Repository( value = "privilegeDAO" )
+@Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
 
     private static final Logger logger = LoggerFactory.getLogger( PrivilegeDAOImpl.class );
@@ -86,11 +87,10 @@ public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
      *
      * @return the privilege
      */
-    @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Privilege > getPrivilegeByPrivilegeId( final int privilegeId, final RequestParams requestParams
-    ) {
+    public DAOResponse< Privilege > getPrivilegeByPrivilegeId( final int privilegeId, final RequestParams requestParams ) {
+
         String location = this.getClass( ).getCanonicalName( ) + "#getPrivilegeByPrivilegeId()";
 
         logger.debug( "Starting " + location );
@@ -150,7 +150,9 @@ public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
 
         try {
             this.openDBTransaction( );
+
             session.save( privilege );
+
             this.closeDBTransaction( );
 
             privilegeDAOResponse.setRequestSuccess( true );
@@ -164,7 +166,6 @@ public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
             logger.error( "Exception occurred while creating data for privileges table", exception );
 
             if ( requestParams.isError( ) ) {
-
                 errorContainer = fillErrorContainer( location, exception );
             }
         }
@@ -189,6 +190,7 @@ public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_COMMITTED )
     public DAOResponse< Privilege > updatePrivilege( final Privilege privilege, final RequestParams requestParams ) {
+
         String location = this.getClass( ).getCanonicalName( ) + "#updatePrivilege()";
         logger.debug( "Starting " + location );
 

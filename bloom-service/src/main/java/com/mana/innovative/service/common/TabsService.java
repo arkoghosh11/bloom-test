@@ -11,8 +11,9 @@ import java.util.List;
 
 /**
  * The interface Tabs service.
-
+ * <p/>
  * Created by Bloom/Rono on ${DATE} ${TIME}.
+ *
  * @author Bloom Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -24,6 +25,7 @@ public interface TabsService {
      * Gets all tabs.
      *
      * @param requestParams the request params
+     *
      * @return the all tabs
      */
     Response getAllTabs( RequestParams requestParams );
@@ -31,8 +33,9 @@ public interface TabsService {
     /**
      * Delete tabs.
      *
-     * @param tabIds the tab ids
+     * @param tabIds        the tab ids
      * @param requestParams the request params
+     *
      * @return the response
      */
     Response deleteTabs( List< Integer > tabIds, RequestParams requestParams );

@@ -10,6 +10,10 @@ package com.mana.innovative.exception;
 public class EmptyPropertyException extends Exception {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = 3009234819814022974L;
+    /**
      * The Message.
      */
     private String message = "Exception occurred while constructing an email";
@@ -19,17 +23,18 @@ public class EmptyPropertyException extends Exception {
      * subsequently be initialized by a call to {@link #initCause}.
      */
     public EmptyPropertyException( ) {
+
         super( );
     }
 
     /**
-     * Constructs a new exception with the specified detail message.  The cause is not initialized, and may subsequently
+     * Constructs a new exception with the specified detail message. The cause is not initialized, and may subsequently
      * be initialized by a call to {@link #initCause}.
      *
-     * @param message the detail message. The detail message is saved for later retrieval by the
-     *                method.
+     * @param message the detail message. The detail message is saved for later retrieval by the method.
      */
     public EmptyPropertyException( final String message ) {
+
         this.message = message + this.message;
     }
 
@@ -39,6 +44,7 @@ public class EmptyPropertyException extends Exception {
      * @return the error
      */
     public String getError( ) {
+
         return message;
     }
 
@@ -47,7 +53,9 @@ public class EmptyPropertyException extends Exception {
      *
      * @return the string
      */
+    @Override
     public String toString( ) {
+
         return message;
     }
 }

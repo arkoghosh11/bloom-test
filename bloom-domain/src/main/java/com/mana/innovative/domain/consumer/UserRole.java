@@ -1,8 +1,5 @@
 package com.mana.innovative.domain.consumer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,10 +29,6 @@ import java.util.Objects;
 @Table( name = "user_roles" )
 public class UserRole {
 
-    /**
-     * The constant logger.
-     */
-    private static final Logger logger = LoggerFactory.getLogger( UserRole.class );
 
     /**
      * The User role id.
@@ -74,7 +67,7 @@ public class UserRole {
     /**
      * The Users.
      */
-    @OneToMany( mappedBy = "userRole", cascade = { CascadeType.MERGE, CascadeType.PERSIST } )
+    @OneToMany( orphanRemoval = true, mappedBy = "userRole", cascade = { CascadeType.ALL } )
     private List< User > users;
 
     @ManyToMany( cascade = CascadeType.ALL )

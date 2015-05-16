@@ -1,9 +1,6 @@
 package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.DAOConstants;
-import com.mana.innovative.domain.client.Item;
-import com.mana.innovative.domain.client.WorkingHour;
-import com.mana.innovative.domain.common.Address;
 import com.mana.innovative.dto.client.Shop;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import org.slf4j.Logger;
@@ -25,21 +22,25 @@ public class ShopDomainDTOConverter {
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( ShopDomainDTOConverter.class );
+    private static final Logger logger = LoggerFactory
+            .getLogger( ShopDomainDTOConverter.class );
     /**
      * The constant ZERO.
      */
     private static final int ZERO = DAOConstants.ZERO;
-//    private static final int ONE = DAOConstants.ONE;
+
+    // private static final int ONE = DAOConstants.ONE;
 
     /**
      * Gets converted shop dTO from shop domain.
      *
-     * @param shopDTO the shop dTO
+     * @param shopDTO    the shop dTO
      * @param shopDomain the shop
+     *
      * @return the converted shop dTO from shop domain
      */
-    public static Shop getConvertedDTOFromDomain( Shop shopDTO, com.mana.innovative.domain.client.Shop shopDomain ) {
+    public static Shop getConvertedDTOFromDomain( Shop shopDTO,
+                                                  com.mana.innovative.domain.client.Shop shopDomain ) {
 
         if ( shopDTO == null ) {
             shopDTO = new Shop( );
@@ -64,16 +65,20 @@ public class ShopDomainDTOConverter {
             shopDTO.setShopWebLink( shopDomain.getShopWebLink( ) );
         }
         /** {@link WorkingHour} List */
-        if ( shopDomain.getWorkingHours( ) != null && !shopDomain.getWorkingHours( ).isEmpty( ) ) {
-            shopDTO.setWorkingHours( WorkingHourDomainDTOConverter.getConvertedListDTOFromDomain( shopDomain.getWorkingHours( ) ) );
+        if ( shopDomain.getWorkingHours( ) != null
+                && !shopDomain.getWorkingHours( ).isEmpty( ) ) {
+            shopDTO.setWorkingHours( WorkingHourDomainDTOConverter
+                    .getConvertedListDTOFromDomain( shopDomain.getWorkingHours( ) ) );
         }
-        /** {@link Address, com.mana.innovative.dto.common.Address}*/
+        /** {@link Address, com.mana.innovative.dto.common.Address} */
         if ( shopDomain.getAddress( ) != null ) {
-            shopDTO.setAddress( AddressDomainDTOConverter.getConvertedDTOFromDomain( shopDomain.getAddress( ) ) );
+            shopDTO.setAddress( AddressDomainDTOConverter
+                    .getConvertedDTOFromDomain( shopDomain.getAddress( ) ) );
         }
-        /**{@link Item, com.mana.innovative.dto.client.Item} */
+        /** {@link Item, com.mana.innovative.dto.client.Item} */
         if ( shopDomain.getItems( ) != null ) {
-            shopDTO.setItems( ItemDomainDTOConverter.getConvertedListDTOFromDomain( shopDomain.getItems( ) ) );
+            shopDTO.setItems( ItemDomainDTOConverter
+                    .getConvertedListDTOFromDomain( shopDomain.getItems( ) ) );
         }
         return shopDTO;
     }
@@ -82,9 +87,11 @@ public class ShopDomainDTOConverter {
      * Gets converted shop dTO list.
      *
      * @param shops the shops
+     *
      * @return the converted shop dTO list
      */
-    public static List< Shop > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.client.Shop > shops ) {
+    public static List< Shop > getConvertedListDTOFromDomain(
+            List< com.mana.innovative.domain.client.Shop > shops ) {
 
         List< Shop > shopDTOList = new ArrayList<>( );
         for ( com.mana.innovative.domain.client.Shop shop : shops ) {
@@ -100,10 +107,12 @@ public class ShopDomainDTOConverter {
      * Gets converted shop domain from shop dTO.
      *
      * @param shopDomain the shop domain
-     * @param shopDTO the shop dTO
+     * @param shopDTO    the shop dTO
+     *
      * @return the converted shop domain from shop dTO
      */
-    public static com.mana.innovative.domain.client.Shop getConvertedDomainFromDTO( com.mana.innovative.domain.client.Shop shopDomain, Shop shopDTO ) {
+    public static com.mana.innovative.domain.client.Shop getConvertedDomainFromDTO(
+            com.mana.innovative.domain.client.Shop shopDomain, Shop shopDTO ) {
 
         if ( shopDomain == null ) {
             shopDomain = new com.mana.innovative.domain.client.Shop( );
@@ -116,14 +125,15 @@ public class ShopDomainDTOConverter {
         }
 
         boolean flag = false;
-        StringBuilder stringBuilder = new StringBuilder( " Value must not be null for " );
+        StringBuilder stringBuilder = new StringBuilder(
+                " Value must not be null for " );
         if ( shopDTO.getShopOwnId( ) != null && shopDTO.getShopOwnId( ) > ZERO ) {
             shopDomain.setShopOwnId( shopDTO.getShopOwnId( ) );
         } else {
             flag = true;
             stringBuilder.append( " ShopOwnID," );
         }
-        //shopDomain.setShopId(shopDTO.getShopId());
+        // shopDomain.setShopId(shopDTO.getShopId());
         if ( shopDTO.getShopName( ) != null && !shopDTO.getShopName( ).isEmpty( ) ) {
             shopDomain.setShopName( shopDTO.getShopName( ) );
         } else {
@@ -138,24 +148,28 @@ public class ShopDomainDTOConverter {
         }
         // check Address
         if ( shopDTO.getAddress( ) != null ) {
-            shopDomain.setAddress( AddressDomainDTOConverter.getConvertedDomainFromDTO( shopDTO.getAddress( ) ) );
+            shopDomain.setAddress( AddressDomainDTOConverter
+                    .getConvertedDomainFromDTO( shopDTO.getAddress( ) ) );
         } else {
             stringBuilder.append( " Address," );
         }
         // check Working Hours
-        if ( shopDTO.getWorkingHours( ) != null && !shopDTO.getWorkingHours( ).isEmpty( ) ) {
-            shopDomain.setWorkingHours( WorkingHourDomainDTOConverter.getConvertedListDomainFromDTO( shopDTO.getWorkingHours( ) ) );
+        if ( shopDTO.getWorkingHours( ) != null
+                && !shopDTO.getWorkingHours( ).isEmpty( ) ) {
+            shopDomain.setWorkingHours( WorkingHourDomainDTOConverter
+                    .getConvertedListDomainFromDTO( shopDTO.getWorkingHours( ) ) );
         } else {
             flag = true;
             stringBuilder.append( " Working Hours," );
         }
         // check Items
         if ( shopDTO.getItems( ) != null && !shopDTO.getItems( ).isEmpty( ) ) {
-            shopDomain.setItems( ItemDomainDTOConverter.getConvertedListDomainFromDTO( shopDTO.getItems( ) ) );
+            shopDomain.setItems( ItemDomainDTOConverter
+                    .getConvertedListDomainFromDTO( shopDTO.getItems( ) ) );
         } else {
             stringBuilder.append( " Items" );
         }
-        //            shop.setShopShop();
+        // shop.setShopShop();
         if ( flag ) {
             logger.error( stringBuilder.toString( ) );
             throw new IllegalArgumentValueException( );
@@ -168,9 +182,11 @@ public class ShopDomainDTOConverter {
      * Gets converted shop domain list from shop dTO list.
      *
      * @param shopDTOList the shop dTO list
+     *
      * @return the converted shop domain list from shop dTO list
      */
-    public static List< com.mana.innovative.domain.client.Shop > getConvertedListDomainFromDTO( List< Shop > shopDTOList ) {
+    public static List< com.mana.innovative.domain.client.Shop > getConvertedListDomainFromDTO(
+            List< Shop > shopDTOList ) {
 
         List< com.mana.innovative.domain.client.Shop > shopDomainList = new ArrayList<>( );
         for ( Shop shopDTO : shopDTOList ) {

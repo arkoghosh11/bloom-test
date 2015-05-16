@@ -3,6 +3,7 @@ package com.mana.innovative.dao.common;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.common.Address;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -22,6 +23,7 @@ import javax.annotation.Resource;
 
 /**
  * This class is a test class for testing class todo...
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -48,6 +50,8 @@ public class WhenCreateAddressThenTestAddressDAOCreate {
     @Resource
     private AddressDAO addressDAOImpl;
 
+    private RequestParams requestParams;
+
     /**
      * Sets up.
      *
@@ -67,6 +71,8 @@ public class WhenCreateAddressThenTestAddressDAOCreate {
         dummyAddress.setCity( TestConstants.TEST_CITY );
         dummyAddress.setState( TestConstants.TEST_STATE );
         dummyAddress.setZipCode( TestConstants.TEST_ZIPCODE );
+
+        requestParams = new RequestParams( );
         logger.debug( "Initialized dummyAddress for creation" );
 
     }
@@ -93,8 +99,9 @@ public class WhenCreateAddressThenTestAddressDAOCreate {
 
         logger.debug( "Starting test for CreateAAddressWithErrorEnabled" );
 
-        DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
-        addressDAOResponse = addressDAOImpl.createAddress( dummyAddress, TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Address > addressDAOResponse;
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        addressDAOResponse = addressDAOImpl.createAddress( dummyAddress, requestParams );
 
         // Test Error Container
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse.getErrorContainer( ) );
@@ -132,8 +139,9 @@ public class WhenCreateAddressThenTestAddressDAOCreate {
 
         logger.debug( "Starting test for CreateAAddressWithErrorDisabled" );
 
-        DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
-        addressDAOResponse = addressDAOImpl.createAddress( dummyAddress, TestConstants.IS_ERROR );
+        DAOResponse< Address > addressDAOResponse;
+        requestParams.setIsError( TestConstants.IS_ERROR );
+        addressDAOResponse = addressDAOImpl.createAddress( dummyAddress, requestParams );
 
         // Test Error Container
         Assert.assertNull( TestConstants.notNullMessage, addressDAOResponse.getErrorContainer( ) );

@@ -12,7 +12,6 @@
     </parent>
 
     <artifactId>bloom-common</artifactId>
-    <version>1.0.RELEASE</version>
 
     <packaging>jar</packaging>
 
@@ -73,5 +72,5 @@
         </dependency>
 
     </dependencies>
-    
+
 </project>

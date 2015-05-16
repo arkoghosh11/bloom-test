@@ -50,8 +50,9 @@ public class ShopServiceImpl implements ShopService {
     /**
      * Gets shopDTO.
      *
-     * @param shopId the shopDTO id
+     * @param shopId  the shopDTO id
      * @param isError the is error
+     *
      * @return the shopDTO
      */
     @Override
@@ -103,6 +104,7 @@ public class ShopServiceImpl implements ShopService {
      *
      * @param shopDTO the shop dTO
      * @param isError the is error
+     *
      * @return the response
      */
     @Override
@@ -155,6 +157,7 @@ public class ShopServiceImpl implements ShopService {
      *
      * @param shopDTO the shop
      * @param isError the is error
+     *
      * @return the response
      */
     @Override
@@ -203,8 +206,9 @@ public class ShopServiceImpl implements ShopService {
     /**
      * This method is to Delete an shop via shopId only.
      *
-     * @param shopId the shop id
+     * @param shopId  the shop id
      * @param isError the is error
+     *
      * @return the response
      */
     @Override
@@ -243,6 +247,7 @@ public class ShopServiceImpl implements ShopService {
      *
      * @param shopIds the shop ids
      * @param isError the is error
+     *
      * @return the response
      */
     @Override

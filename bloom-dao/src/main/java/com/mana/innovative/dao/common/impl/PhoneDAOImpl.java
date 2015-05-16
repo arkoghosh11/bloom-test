@@ -33,25 +33,29 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( PhoneDAOImpl.class );
+    private static final Logger logger = LoggerFactory
+            .getLogger( PhoneDAOImpl.class );
 
     /**
      * Create phone.
      *
-     * @param phone the phone
+     * @param phone         the phone
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Phone > createPhone( final Phone phone, RequestParams requestParams ) {
+    public DAOResponse< Phone > createPhone( final Phone phone,
+                                             RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#createPhone()";
         logger.debug( "Starting " + location );
 
         DAOResponse< Phone > phoneDAOResponse = new DAOResponse<>( );
         List< Phone > phoneList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
 
         try {
             this.openDBTransaction( );
@@ -66,7 +70,9 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Exception occurred while creating data for phones table", exception );
+            logger.error(
+                    "Exception occurred while creating data for phones table",
+                    exception );
 
             if ( requestParams.isError( ) ) {
 
@@ -87,6 +93,7 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
      * Gets phones.
      *
      * @param requestParams the request params
+     *
      * @return the phones
      */
     @SuppressWarnings( "unchecked" )
@@ -99,7 +106,8 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
         logger.debug( "Starting " + location );
         DAOResponse< Phone > phoneDAOResponse = new DAOResponse<>( );
         List< Phone > phoneList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
 
         try {
             this.openDBTransaction( );
@@ -113,7 +121,9 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from phones table for phones ", exception );
+            logger.error(
+                    "Failed while getting data from phones table for phones ",
+                    exception );
             phoneDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -138,21 +148,23 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
      *
      * @return the phone
      */
-    @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Phone > getPhone( final long phoneId, final RequestParams requestParams ) {
+    public DAOResponse< Phone > getPhone( final long phoneId,
+                                          final RequestParams requestParams ) {
         String location = this.getClass( ).getCanonicalName( ) + "#getPhone()";
 
         logger.debug( "Starting " + location );
         DAOResponse< Phone > phoneDAOResponse = new DAOResponse<>( );
         List< Phone > phoneList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
 
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "from Phone where phoneId=:phoneId" );
+            Query query = session
+                    .createQuery( "from Phone where phoneId=:phoneId" );
             query.setParameter( "phoneId", phoneId );
             Phone phone = ( Phone ) query.uniqueResult( );
 
@@ -163,7 +175,9 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from phones table for phones ", exception );
+            logger.error(
+                    "Failed while getting data from phones table for phones ",
+                    exception );
             phoneDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -183,19 +197,22 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
     /**
      * Update phone.
      *
-     * @param phone the phone
+     * @param phone         the phone
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Phone > updatePhone( final Phone phone, final RequestParams requestParams ) {
+    public DAOResponse< Phone > updatePhone( final Phone phone,
+                                             final RequestParams requestParams ) {
         String location = this.getClass( ).getCanonicalName( ) + "#updatePhone()";
         logger.debug( "Starting " + location );
 
         DAOResponse< Phone > phoneDAOResponse = new DAOResponse<>( );
         List< Phone > phoneList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
 
         try {
             this.openDBTransaction( );
@@ -208,7 +225,9 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from phones table for phones ", exception );
+            logger.error(
+                    "Failed while getting data from phones table for phones ",
+                    exception );
             phoneDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -230,13 +249,15 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
     /**
      * Delete phone.
      *
-     * @param phoneId the phone id
+     * @param phoneId       the phone id
      * @param requestParams the request params
+     *
      * @return the boolean
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Phone > deletePhoneByPhoneId( Long phoneId, RequestParams requestParams ) {
+    public DAOResponse< Phone > deletePhoneByPhoneId( Long phoneId,
+                                                      RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deletePhoneByPhoneId()";
         logger.debug( "Starting " + location );
@@ -245,7 +266,8 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "delete  from Phone where phoneId=:phoneId" );
+            Query query = session
+                    .createQuery( "delete  from Phone where phoneId=:phoneId" );
             query.setParameter( "phoneId", phoneId );
             int count = query.executeUpdate( );
 
@@ -257,7 +279,8 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while deleting data from phones table", exception );
+            logger.error( "Failed while deleting data from phones table",
+                    exception );
             phoneDAOResponse.setRequestSuccess( Boolean.FALSE );
             phoneDAOResponse.setCount( DAOConstants.ZERO );
 
@@ -276,19 +299,71 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
     }
 
     /**
+     * Delete phones.
+     *
+     * @param phoneIds      the phone ids
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
+    @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< Phone > deletePhonesByPhoneIds( final List< Long > phoneIds,
+                                                        final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( ) + "#deletePhonesByPhoneIds()";
+        logger.debug( "Starting " + location );
+        DAOResponse< Phone > phoneDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.createQuery( "delete  from Phone where phoneId in(:phoneIds)" );
+            query.setParameterList( "phoneIds", phoneIds );
+            int count = query.executeUpdate( );
+
+            this.closeDBTransaction( );
+
+            phoneDAOResponse.setRequestSuccess( Boolean.TRUE );
+            phoneDAOResponse.setCount( count );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error( "Failed while deleting data from phones table",
+                    exception );
+            phoneDAOResponse.setRequestSuccess( Boolean.FALSE );
+            phoneDAOResponse.setCount( DAOConstants.ZERO );
+
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        phoneDAOResponse.setDelete( Boolean.TRUE );
+        phoneDAOResponse.setResults( null );
+        phoneDAOResponse.setErrorContainer( errorContainer );
+        logger.debug( "Finishing " + location );
+        return phoneDAOResponse;
+    }
+
+    /**
      * Delete all phones.
      *
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
     public DAOResponse< Phone > deleteAllPhones( final RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteAllPhones()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#deleteAllPhones()";
         logger.debug( "Starting " + location );
         DAOResponse< Phone > phoneDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
 
         try {
             if ( requestParams.isDeleteAll( ) ) {
@@ -306,7 +381,8 @@ public class PhoneDAOImpl extends BasicDAO implements PhoneDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while deleting data from phones table", exception );
+            logger.error( "Failed while deleting data from phones table",
+                    exception );
             phoneDAOResponse.setRequestSuccess( Boolean.FALSE );
             phoneDAOResponse.setCount( DAOConstants.ZERO );
 

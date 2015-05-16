@@ -12,8 +12,9 @@ import java.util.List;
 
 /**
  * The type Tabs payload.
-
+ * <p/>
  * Created by Bloom/Rono on $date $time.
+ *
  * @author Bloom Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -44,7 +45,7 @@ public class TabsPayload {
     /**
      * This method sets a list of tabs to its class property
      *
-     * @param tabs  A list of tabs
+     * @param tabs A list of tabs
      */
     public void setTabs( List< Tab > tabs ) {
 

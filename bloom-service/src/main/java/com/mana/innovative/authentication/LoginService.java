@@ -1,6 +1,5 @@
 package com.mana.innovative.authentication;/**
- * Created by alex1 on 1/29/2015.
- * This is a class for .. todo 
+ * Created by alex1 on 1/29/2015. This is a class for .. todo
  */
 
 import com.mana.innovative.constants.ServiceConstants;

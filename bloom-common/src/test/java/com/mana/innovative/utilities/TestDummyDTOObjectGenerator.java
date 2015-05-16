@@ -150,6 +150,7 @@ public class TestDummyDTOObjectGenerator {
      * Gets test address DTO ZERO ID object.
      *
      * @param address the address
+     *
      * @return the test address DTO ZERO ID object
      */
     public static Address setTestAddressDTOZEROIDObject( final Address address ) {

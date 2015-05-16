@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * The interface Working hour dAO.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -20,7 +20,8 @@ public interface WorkingHourDAO {
      * Gets working hour by working hour id.
      *
      * @param workingHourId the working hour id
-     * @param isError the is error
+     * @param isError       the is error
+     *
      * @return the working hour by working hour id
      */
     DAOResponse< WorkingHour > getWorkingHourByWorkingHourId( long workingHourId, boolean isError );
@@ -29,6 +30,7 @@ public interface WorkingHourDAO {
      * Gets working hours.
      *
      * @param isError the is error
+     *
      * @return the working hours
      */
     DAOResponse< WorkingHour > getWorkingHours( boolean isError );
@@ -37,7 +39,8 @@ public interface WorkingHourDAO {
      * Delete working hour by working hr ids.
      *
      * @param workingHourId the working hour id
-     * @param isError the is error
+     * @param isError       the is error
+     *
      * @return the dAO response
      */
     DAOResponse< WorkingHour > deleteWorkingHourByWorkingHrId( long workingHourId, boolean
@@ -47,7 +50,8 @@ public interface WorkingHourDAO {
      * Delete working hours by working hr ids.
      *
      * @param workingHourIds the working hour ids
-     * @param isError the is error
+     * @param isError        the is error
+     *
      * @return the dAO response
      */
     DAOResponse< WorkingHour > deleteWorkingHoursByWorkingHrIds( List< Long > workingHourIds, boolean isError );
@@ -56,7 +60,8 @@ public interface WorkingHourDAO {
      * Delete all working hours.
      *
      * @param deleteAllWorkingHrs the delete all working hrs
-     * @param isError the is error
+     * @param isError             the is error
+     *
      * @return the dAO response
      */
     DAOResponse< WorkingHour > deleteAllWorkingHours( boolean deleteAllWorkingHrs, boolean isError );
@@ -65,7 +70,8 @@ public interface WorkingHourDAO {
      * Create dAO response.
      *
      * @param workingHour the working hour
-     * @param isError the is error
+     * @param isError     the is error
+     *
      * @return the dAO response
      */
     DAOResponse< WorkingHour > createWorkingHour( WorkingHour workingHour, boolean isError );
@@ -75,7 +81,8 @@ public interface WorkingHourDAO {
      * Update working hour.
      *
      * @param workingHour the working hour
-     * @param isError the is error
+     * @param isError     the is error
+     *
      * @return the dAO response
      */
     DAOResponse< WorkingHour > updateWorkingHour( WorkingHour workingHour, boolean isError );

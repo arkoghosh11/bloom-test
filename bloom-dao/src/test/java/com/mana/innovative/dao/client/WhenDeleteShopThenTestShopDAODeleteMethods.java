@@ -30,6 +30,7 @@ import java.util.List;
 
 /**
  * The type When delete a shop test delete methods.
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -65,6 +66,7 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
+
         logger.debug( TestConstants.setUpMethodLoggerMsg );
     }
 
@@ -73,6 +75,7 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
      */
     @Test
     public void testShopDAONotNull( ) {
+
         Assert.assertNotNull( shopDAOImpl );
     }
 
@@ -88,8 +91,8 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllShopsWithErrorEnabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL, TestConstants
-                .IS_ERROR_TRUE );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL,
+                TestConstants.IS_ERROR_TRUE );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -118,8 +121,8 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllShopsWithErrorDisabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL, TestConstants
-                .IS_ERROR );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL,
+                TestConstants.IS_ERROR );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -144,8 +147,8 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllShopsWithDeleteAllTrueWithErrorEnabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL_TRUE, TestConstants
-                .IS_ERROR_TRUE );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL_TRUE,
+                TestConstants.IS_ERROR_TRUE );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -173,8 +176,8 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllShopsWithDeleteAllTrueWithErrorDisabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL_TRUE, TestConstants
-                .IS_ERROR );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL_TRUE,
+                TestConstants.IS_ERROR );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -186,7 +189,6 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Finishing test for DeleteAllShopsWithDeleteAllTrueWithErrorDisabled" );
     }
-
 
     /**
      * Test delete shop by shop id with error enabled.
@@ -200,7 +202,8 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteShopByShopIdWithErrorEnabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteShopByShopId( TestConstants.ZERO, TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteShopByShopId( TestConstants.ZERO,
+                TestConstants.IS_ERROR_TRUE );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -306,6 +309,7 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
      *
      * @throws Exception the exception
      */
+    @SuppressWarnings( "unchecked" )
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {

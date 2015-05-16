@@ -39,8 +39,9 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
     /**
      * Gets shop by shop id.
      *
-     * @param shopId the shop id
+     * @param shopId  the shop id
      * @param isError the is error
+     *
      * @return the shop by shop id
      */
     @SuppressWarnings( "unchecked" )
@@ -85,6 +86,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      * This method is to retrieve all the shops values from the DB
      *
      * @param isError the is error
+     *
      * @return the shops
      */
     @SuppressWarnings( "unchecked" )
@@ -124,8 +126,9 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
     /**
      * Create shop.
      *
-     * @param shop the shop
+     * @param shop    the shop
      * @param isError the is error
+     *
      * @return the dAO response
      */
     @Override
@@ -169,8 +172,9 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
     /**
      * Update shop.
      *
-     * @param shop the shop
+     * @param shop    the shop
      * @param isError the is error
+     *
      * @return the dAO response
      */
     @SuppressWarnings( "unchecked" )
@@ -273,6 +277,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      *
      * @param shopIds the shop ids
      * @param isError the is error
+     *
      * @return the dAO response
      */
     @Override
@@ -314,7 +319,8 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      * Delete all shops.
      *
      * @param deleteAllShops the delete all shops
-     * @param isError the is error
+     * @param isError        the is error
+     *
      * @return the dAO response
      */
     @Override

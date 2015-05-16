@@ -1,6 +1,5 @@
 package com.mana.innovative.rest;/**
- * Created by Rono on 2/26/2015.
- * This is a class for .. todo 
+ * Created by Rono on 2/26/2015. This is a class for .. todo
  */
 
 import com.mana.innovative.constants.TestConstants;
@@ -34,13 +33,13 @@ public class RestTest extends JerseyTest {
      * @return the app descriptor
      */
     @Override
-    protected AppDescriptor configure() {
+    protected AppDescriptor configure( ) {
 
         logger.debug( "Configuring and returning AppDescriptor for GrizzlyTestContainer" );
 //      IMP the param value in Builder must be the package for rest web service classes
-        return new WebAppDescriptor.Builder("com.mana.innovative.rest")
+        return new WebAppDescriptor.Builder( "com.mana.innovative.rest" )
 //              IMP context path must be a logical name and not /
-                .contextPath("bloom")
+                .contextPath( "bloom" )
 //              IMP all the spring config files in webapp resources with no line break only 1 space minimum
                 .contextParam( "contextConfigLocation", "classpath*:/db_config_test.xml" +
                         "  classpath*:/service_config_test.xml" +
@@ -58,7 +57,7 @@ public class RestTest extends JerseyTest {
                 .contextListenerClass( ContextLoaderListener.class )
 //              Note request listener class , using spring's
                 .requestListenerClass( RequestContextListener.class )
-                .build();
+                .build( );
     }
 
     /**

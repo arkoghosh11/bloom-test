@@ -33,25 +33,30 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( PreferenceDAOImpl.class );
+    private static final Logger logger = LoggerFactory
+            .getLogger( PreferenceDAOImpl.class );
 
     /**
      * Create preference.
      *
-     * @param preference the preference
+     * @param preference    the preference
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Preference > createPreference( final Preference preference, RequestParams requestParams ) {
+    public DAOResponse< Preference > createPreference(
+            final Preference preference, RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#createPreference()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#createPreference()";
         logger.debug( "Starting " + location );
 
         DAOResponse< Preference > preferenceDAOResponse = new DAOResponse<>( );
         List< Preference > preferenceList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
 
         try {
             this.openDBTransaction( );
@@ -66,7 +71,9 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Exception occurred while creating data for preferences table", exception );
+            logger.error(
+                    "Exception occurred while creating data for preferences table",
+                    exception );
 
             if ( requestParams.isError( ) ) {
 
@@ -87,6 +94,7 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
      * Gets preferences.
      *
      * @param requestParams the request params
+     *
      * @return the preferences
      */
     @SuppressWarnings( "unchecked" )
@@ -94,12 +102,14 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
     public DAOResponse< Preference > getPreferences( RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#getPreferences()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getPreferences()";
 
         logger.debug( "Starting " + location );
         DAOResponse< Preference > preferenceDAOResponse = new DAOResponse<>( );
         List< Preference > preferenceList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
             this.openDBTransaction( );
 
@@ -112,7 +122,9 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from preferences table for preferences ", exception );
+            logger.error(
+                    "Failed while getting data from preferences table for preferences ",
+                    exception );
             preferenceDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -132,24 +144,28 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Gets preference.
      *
-     * @param preferenceId the preference id
+     * @param preferenceId  the preference id
      * @param requestParams the request params
+     *
      * @return the preference
      */
-    @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Preference > getPreference( final long preferenceId, final RequestParams requestParams ) {
-        String location = this.getClass( ).getCanonicalName( ) + "#getPreference()";
+    public DAOResponse< Preference > getPreferenceByPreferenceId( final long preferenceId,
+                                                                  final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getPreferenceByPreferenceId()";
 
         logger.debug( "Starting " + location );
         DAOResponse< Preference > preferenceDAOResponse = new DAOResponse<>( );
         List< Preference > preferenceList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "from Preference where preferenceId=:preferenceId" );
+            Query query = session
+                    .createQuery( "from Preference where preferenceId=:preferenceId" );
             query.setParameter( "preferenceId", preferenceId );
             Preference preference = ( Preference ) query.uniqueResult( );
 
@@ -160,7 +176,9 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from preferences table for preferences ", exception );
+            logger.error(
+                    "Failed while getting data from preferences table for preferences ",
+                    exception );
             preferenceDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -181,19 +199,23 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Update preference.
      *
-     * @param preference the preference
+     * @param preference    the preference
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Preference > updatePreference( final Preference preference, final RequestParams requestParams ) {
-        String location = this.getClass( ).getCanonicalName( ) + "#updatePreference()";
+    public DAOResponse< Preference > updatePreference(
+            final Preference preference, final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( )
+                + "#updatePreference()";
         logger.debug( "Starting " + location );
 
         DAOResponse< Preference > preferenceDAOResponse = new DAOResponse<>( );
         List< Preference > preferenceList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         preferenceDAOResponse.setUpdate( true );
 
         try {
@@ -207,7 +229,9 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from preferences table for preferences ", exception );
+            logger.error(
+                    "Failed while getting data from preferences table for preferences ",
+                    exception );
             preferenceDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -227,23 +251,67 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Delete preference.
      *
-     * @param preferenceId the preference id
+     * @param preferenceId  the preference id
      * @param requestParams the request params
+     *
      * @return the boolean
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Preference > deletePreferenceByPreferenceId( Long preferenceId, RequestParams requestParams ) {
+    public DAOResponse< Preference > deletePreferenceByPreferenceId( long preferenceId, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deletePreferenceByPreferenceId()";
         logger.debug( "Starting " + location );
         DAOResponse< Preference > preferenceDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "delete  from Preference where preferenceId=:preferenceId" );
+            Query query = session
+                    .createQuery( "delete  from Preference where preferenceId=:preferenceId" );
             query.setParameter( "preferenceId", preferenceId );
+            int count = query.executeUpdate( );
+
+            this.closeDBTransaction( );
+
+            preferenceDAOResponse.setRequestSuccess( Boolean.TRUE );
+            preferenceDAOResponse.setCount( count );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error( "Failed while deleting data from preferences table",
+                    exception );
+            preferenceDAOResponse.setRequestSuccess( Boolean.FALSE );
+            preferenceDAOResponse.setCount( DAOConstants.ZERO );
+
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        preferenceDAOResponse.setDelete( Boolean.TRUE );
+        preferenceDAOResponse.setResults( null );
+        preferenceDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+        return preferenceDAOResponse;
+    }
+
+    @Override
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< Preference > deletePreferencesByPreferenceIds( final List< Long > preferenceIds, final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( ) + "#deletePreferencesByPreferenceIds()";
+        logger.debug( "Starting " + location );
+        DAOResponse< Preference > preferenceDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.createQuery( "delete  from Preference where preferenceId in (:preferenceIds)" );
+            query.setParameterList( "preferenceIds", preferenceIds );
             int count = query.executeUpdate( );
 
             this.closeDBTransaction( );
@@ -275,13 +343,16 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
      * Delete all preferences.
      *
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< Preference > deleteAllPreferences( final RequestParams requestParams ) {
+    public DAOResponse< Preference > deleteAllPreferences(
+            final RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteAllPreferences()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#deleteAllPreferences()";
         logger.debug( "Starting " + location );
         DAOResponse< Preference > preferenceDAOResponse = new DAOResponse<>( );
         ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
@@ -302,7 +373,8 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while deleting data from preferences table", exception );
+            logger.error( "Failed while deleting data from preferences table",
+                    exception );
             preferenceDAOResponse.setRequestSuccess( Boolean.FALSE );
             preferenceDAOResponse.setCount( DAOConstants.ZERO );
 

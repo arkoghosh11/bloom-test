@@ -18,8 +18,8 @@ import static org.junit.Assert.assertTrue;
 
 
 /**
- * Created by Rono on 2/26/2015.
- * This is a class for .. todo
+ * Created by Rono on 2/26/2015. This is a class for .. todo
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -37,11 +37,11 @@ public class WhenItemsRestWebServiceTestGetItems extends RestTest {
      * @return the app descriptor
      */
     @Override
-    protected AppDescriptor configure() {
+    protected AppDescriptor configure( ) {
 
         logger.info( TestConstants.setUpMethodLoggerMsg );
         logger.info( "Starting Jersey WebContainer" );
-        return super.configure();
+        return super.configure( );
     }
 
 
@@ -50,33 +50,33 @@ public class WhenItemsRestWebServiceTestGetItems extends RestTest {
      */
     @SuppressWarnings( "unchecked" )
     @Test
-    public void testGetItemsClientResponseWithXML() {
+    public void testGetItemsClientResponseWithXML( ) {
 
 
-        ClientResponse response = resource().path("items").accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
-        logger.debug(" URI used is " + response.toString());
-        assertEquals("Failed to get a proper response ", 200, response.getStatus());
+        ClientResponse response = resource( ).path( "items" ).accept( MediaType.APPLICATION_XML ).get( ClientResponse.class );
+        logger.debug( " URI used is " + response.toString( ) );
+        assertEquals( "Failed to get a proper response ", 200, response.getStatus( ) );
 
-        ItemResponseContainer<ItemsPayload> itemsPayloadItemResponseContainer = response.getEntity(ItemResponseContainer.class);
+        ItemResponseContainer< ItemsPayload > itemsPayloadItemResponseContainer = response.getEntity( ItemResponseContainer.class );
 
 //        verify(dataAccessService, atMost(1)).getProductByWebId("123", false, false);
-        Assert.assertNotNull(response);
-        Assert.assertNotNull(itemsPayloadItemResponseContainer);
-        assertTrue("Count is 0 or less", itemsPayloadItemResponseContainer.getCount() > 0);
-        Assert.assertNotNull(itemsPayloadItemResponseContainer.getPayload());
-        assertTrue("Count is 0 or less", itemsPayloadItemResponseContainer.getPayload().getItems().size() > 0);
+        Assert.assertNotNull( response );
+        Assert.assertNotNull( itemsPayloadItemResponseContainer );
+        assertTrue( "Count is 0 or less", itemsPayloadItemResponseContainer.getCount( ) > 0 );
+        Assert.assertNotNull( itemsPayloadItemResponseContainer.getPayload( ) );
+        assertTrue( "Count is 0 or less", itemsPayloadItemResponseContainer.getPayload( ).getItems( ).size( ) > 0 );
     }
 
     /**
      * Test get items client response with jSON.
      */
     @Test
-    public void testGetItemsClientResponseWithJSON() {
+    public void testGetItemsClientResponseWithJSON( ) {
 
-        ClientResponse response = resource().path("items").accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        ClientResponse response = resource( ).path( "items" ).accept( MediaType.APPLICATION_JSON ).get( ClientResponse.class );
         String jsonString = response.toString( );
         logger.info( " URI used is " + jsonString );
-        assertEquals("Failed to get a proper response ", 200, response.getStatus());
+        assertEquals( "Failed to get a proper response ", 200, response.getStatus( ) );
         assertNotNull( TestConstants.nullMessage, jsonString );
 
     }

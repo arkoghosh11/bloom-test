@@ -22,6 +22,7 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 5/1/2015 2:03 AM. This class WhenGetCustomerThenTestCustomerDAOGetMethods is a test class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright

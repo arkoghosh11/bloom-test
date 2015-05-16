@@ -30,13 +30,14 @@ import java.util.List;
 
 /**
  * Created by alex1 on 1/28/2015. This is a domain class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
-@TransactionConfiguration(/* transactionManager = "transactionManager", */  defaultRollback = true )
+@TransactionConfiguration(/* transactionManager = "transactionManager", */defaultRollback = true )
 @Transactional
 public class WhenCreateAnItemTestItemDAOCreateItem {
 
@@ -68,9 +69,9 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
      */
     private Item dummyItem;
 
-
     /**
      * This method is to initialize Objects and configuration files before testing test method
+     *
      * @throws Exception the exception
      */
     @Before
@@ -128,7 +129,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         dummyItem.setShopItem( shop );
         itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR );
 
-        //Test itemDAOResponse
+        // Test itemDAOResponse
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
 
         Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isCreate( ) );
@@ -161,7 +162,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
 
         itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR );
 
-        //Test WorkingHourDAOResponse
+        // Test WorkingHourDAOResponse
         Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isCreate( ) );
         Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isRequestSuccess( ) );
         Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isUpdate( ) );
@@ -195,10 +196,9 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
         Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ).getCurrentError( ) );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ).getErrors( ) );
-        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.getErrorContainer( ).getErrors( )
-                .isEmpty( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
 
-        //Test WorkingHourDAOResponse
+        // Test WorkingHourDAOResponse
         Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isCreate( ) );
         Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isRequestSuccess( ) );
         Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isUpdate( ) );
@@ -210,12 +210,13 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         logger.debug( "Finishing test for ItemDAOCreateThrowsExceptionNErrorContainer" );
     }
 
-
     /**
      * This method is to release objects and shut down OR close any connections after Test is completed before testing
      * test method
+     *
      * @throws Exception the exception
      */
+    @SuppressWarnings( "unchecked" )
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {

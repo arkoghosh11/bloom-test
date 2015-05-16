@@ -1,8 +1,5 @@
 package com.mana.innovative.dto.common.email;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.Objects;
 
 /**
@@ -13,12 +10,6 @@ import java.util.Objects;
  * @Copyright
  */
 public class EmailContents {
-
-    /**
-     * The constant logger.
-     */
-    private static final Logger logger = LoggerFactory.getLogger( EmailContents.class );
-
 
     /**
      * The Sender.

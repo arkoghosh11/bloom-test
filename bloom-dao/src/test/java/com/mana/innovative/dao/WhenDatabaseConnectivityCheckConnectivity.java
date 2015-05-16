@@ -19,19 +19,19 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * Created by alex1 on 1/23/2015.
- * This is a domain class
+ * Created by alex1 on 1/23/2015. This is a domain class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@RunWith(value = JUnit4.class)
+@RunWith( value = JUnit4.class )
 public class WhenDatabaseConnectivityCheckConnectivity {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger(WhenDatabaseConnectivityCheckConnectivity.class);
+    private static final Logger logger = LoggerFactory.getLogger( WhenDatabaseConnectivityCheckConnectivity.class );
 
     /**
      * The constant JDBC_URL.
@@ -63,23 +63,23 @@ public class WhenDatabaseConnectivityCheckConnectivity {
      * Sets up.
      */
     @Before
-    public void setUp() {
+    public void setUp( ) {
 
-        properties = new Properties();
+        properties = new Properties( );
 
     }
 
     /**
      * Sets properties.
      */
-    private void setProperties() {
+    private void setProperties( ) {
 
         Exception exception = null;
-        if (properties.isEmpty()) {
-            exception = loadDatabaseProperties();
+        if ( properties.isEmpty( ) ) {
+            exception = loadDatabaseProperties( );
         }
-        if (exception != null) {
-            Assert.fail("No Database property file found or no properties defined in existing file");
+        if ( exception != null ) {
+            Assert.fail( "No Database property file found or no properties defined in existing file" );
         }
     }
 
@@ -88,16 +88,17 @@ public class WhenDatabaseConnectivityCheckConnectivity {
      *
      * @param user the user
      * @param pass the pass
+     *
      * @throws ClassNotFoundException the class not found exception
      * @throws ClassNotFoundException the sQL exception
      */
-    private void getConnection(String user, String pass) throws ClassNotFoundException, SQLException {
+    private void getConnection( String user, String pass ) throws ClassNotFoundException, SQLException {
 
-        Class.forName(properties.getProperty(JDBC_DRIVER));
-        user = user != null ? user : properties.getProperty(USERNAME);
-        pass = pass != null ? pass : properties.getProperty(PASSWORD);
+        Class.forName( properties.getProperty( JDBC_DRIVER ) );
+        user = user != null ? user : properties.getProperty( USERNAME );
+        pass = pass != null ? pass : properties.getProperty( PASSWORD );
         connection = DriverManager
-                .getConnection(properties.getProperty(JDBC_URL), user, pass);
+                .getConnection( properties.getProperty( JDBC_URL ), user, pass );
 
     }
 
@@ -106,17 +107,17 @@ public class WhenDatabaseConnectivityCheckConnectivity {
      *
      * @return exception
      */
-    private Exception loadDatabaseProperties() {
+    private Exception loadDatabaseProperties( ) {
 
         Exception exception = null;
         try {
 
-            String fileName = System.getenv("database");
-            fileName = fileName.startsWith("file:/")?fileName.replaceFirst("^file:/",""):fileName;
-            InputStream inputStream = new FileInputStream(new File(fileName));
-            properties.load(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
+            String fileName = System.getenv( "database" );
+            fileName = fileName.startsWith( "file:/" ) ? fileName.replaceFirst( "^file:/", "" ) : fileName;
+            InputStream inputStream = new FileInputStream( new File( fileName ) );
+            properties.load( inputStream );
+        } catch ( IOException e ) {
+            e.printStackTrace( );
             exception = e;
         }
         return exception;
@@ -126,10 +127,10 @@ public class WhenDatabaseConnectivityCheckConnectivity {
      * Test database properties.
      */
     @Test
-    public void testDatabaseProperties() {
+    public void testDatabaseProperties( ) {
 
-        Exception exception = loadDatabaseProperties();
-        Assert.assertNull(exception);
+        Exception exception = loadDatabaseProperties( );
+        Assert.assertNull( exception );
     }
 
 
@@ -137,44 +138,43 @@ public class WhenDatabaseConnectivityCheckConnectivity {
      * Test Class to check the Driver Manager for a particular database
      */
     @Test
-    public void testDriverClass() {
+    public void testDriverClass( ) {
 
-        Assert.assertNotNull(properties);
-        setProperties();
+        Assert.assertNotNull( properties );
+        setProperties( );
 
         try {
-            getConnection(null, null);
-            Assert.assertNotNull(connection);
-        } catch (ClassNotFoundException e) {
-            Assert.fail("Class Not Found exception occurred");
-        } catch (SQLException e) {
+            getConnection( null, null );
+            Assert.assertNotNull( connection );
+        } catch ( ClassNotFoundException e ) {
+            Assert.fail( "Class Not Found exception occurred" );
+        } catch ( SQLException e ) {
 
-            e.printStackTrace();
-            Assert.fail("SQLException occurred");
+            e.printStackTrace( );
+            Assert.fail( "SQLException occurred" );
         }
     }
 
     /**
-     * To check if the database is on or not, this method will through SQL except with message
-     * connection refused if connection cannot be established
-     * or database is down or some other connectivity issue is present
+     * To check if the database is on or not, this method will through SQL except with message connection refused if
+     * connection cannot be established or database is down or some other connectivity issue is present
      */
     @Test
-    public void testDatabaseIsOn() {
+    public void testDatabaseIsOn( ) {
 
-        Assert.assertNotNull(properties);
-        setProperties();
+        Assert.assertNotNull( properties );
+        setProperties( );
 
         try {
-            getConnection(null, null);
-            Assert.assertNotNull(connection);
-            Assert.assertFalse(connection.isClosed());
-        } catch (ClassNotFoundException e) {
-            Assert.fail("Class Not Found exception occurred");
-        } catch (SQLException e) {
+            getConnection( null, null );
+            Assert.assertNotNull( connection );
+            Assert.assertFalse( connection.isClosed( ) );
+        } catch ( ClassNotFoundException e ) {
+            Assert.fail( "Class Not Found exception occurred" );
+        } catch ( SQLException e ) {
 
-            e.printStackTrace();
-            Assert.fail("SQLException occurred");
+            e.printStackTrace( );
+            Assert.fail( "SQLException occurred" );
         }
 
     }
@@ -183,16 +183,16 @@ public class WhenDatabaseConnectivityCheckConnectivity {
      * This method is to check the credentials given through property files is correct for database
      */
     @Test
-    public void testDatabaseWithWrongCredentials() {
+    public void testDatabaseWithWrongCredentials( ) {
 
         Exception exception1 = null;
         this.setProperties( );
         try {
-            getConnection("fake", "fail");
-            Assert.assertNull(connection);
+            getConnection( "fake", "fail" );
+            Assert.assertNull( connection );
         } catch ( ClassNotFoundException exception ) {
             exception1 = exception;
-            Assert.fail("Class Not Found exception occurred");
+            Assert.fail( "Class Not Found exception occurred" );
         } catch ( SQLException exception ) {
             exception1 = exception;
         }
@@ -203,19 +203,19 @@ public class WhenDatabaseConnectivityCheckConnectivity {
      * This method is the check a proper exception is thrown if a database error occurs
      */
     @Test
-    public void testDatabaseWithRightCredentials() {
+    public void testDatabaseWithRightCredentials( ) {
 
         Exception exception = null;
-        this.setProperties();
+        this.setProperties( );
         try {
-            getConnection(null, null);
-            Assert.assertNotNull(connection);
-        } catch (ClassNotFoundException e) {
-            Assert.fail("Class Not Found exception occurred");
-        } catch (SQLException e) {
+            getConnection( null, null );
+            Assert.assertNotNull( connection );
+        } catch ( ClassNotFoundException e ) {
+            Assert.fail( "Class Not Found exception occurred" );
+        } catch ( SQLException e ) {
             exception = e;
         }
-        Assert.assertNull(exception);
+        Assert.assertNull( exception );
     }
 
 
@@ -223,15 +223,15 @@ public class WhenDatabaseConnectivityCheckConnectivity {
      * Close void.
      */
     @After
-    public void close() {
+    public void close( ) {
 
-        if (connection != null) {
+        if ( connection != null ) {
             try {
-                connection.close();
-            } catch (SQLException e) {
-                logger.error("Exception occurred while testing connection", e);
+                connection.close( );
+            } catch ( SQLException e ) {
+                logger.error( "Exception occurred while testing connection", e );
             } finally {
-                logger.debug("Closing Test Class");
+                logger.debug( "Closing Test Class" );
             }
         }
 

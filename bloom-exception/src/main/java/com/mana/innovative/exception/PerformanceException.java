@@ -1,7 +1,5 @@
 /**
- * @author Bloom
- * This Class PerformanceException.java is for 
- * Created at Sep 5, 2012 8:04:13 PM
+ * @author Bloom This Class PerformanceException.java is for Created at Sep 5, 2012 8:04:13 PM
  */
 package com.mana.innovative.exception;
 

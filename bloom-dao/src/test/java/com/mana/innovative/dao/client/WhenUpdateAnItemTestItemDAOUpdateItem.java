@@ -28,6 +28,7 @@ import java.util.List;
 
 /**
  * The type When update an item test item dAO update item.
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -78,10 +79,10 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
         dummyItem = new Item( );
         dummyItem.setItemId( id );
-//        dummyItem.setItemName(TestConstants.TEST_VALUE);
-//        dummyItem.setItemPriceCurrency(TestConstants.TEST_PRICE_CURRENCY);
+        // dummyItem.setItemName(TestConstants.TEST_VALUE);
+        // dummyItem.setItemPriceCurrency(TestConstants.TEST_PRICE_CURRENCY);
         dummyItem.setItemType( TestConstants.UPDATED_TEST_VALUE );
-//        dummyItem.setItemPrice(TestConstants.THREE);
+        // dummyItem.setItemPrice(TestConstants.THREE);
 
     }
 
@@ -105,7 +106,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
     public void testItemDAOUpdateWithErrorDisabled( ) throws Exception {
 
         logger.debug( "Starting test for ItemDAOUpdateWithErrorDisabled" );
-//        dummyItem.setItemPrice(TestConstants.UPDATED_ITEM_PRICE);
+        // dummyItem.setItemPrice(TestConstants.UPDATED_ITEM_PRICE);
         dummyItem.setItemName( TestConstants.UPDATED_TEST_VALUE );
         dummyItem.setItemPriceCurrency( TestConstants.UPDATED_TEST_VALUE );
 
@@ -134,7 +135,8 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
         // check dummyItem's updated values
         Assert.assertNotNull( dummyItem );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemName( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemPriceCurrency( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE,
+                dummyItem.getItemPriceCurrency( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemType( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, ( double ) TestConstants.TWO, dummyItem.getItemPrice( ) );
 
@@ -187,7 +189,8 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
         // check dummyItem's updated values
         Assert.assertNotNull( dummyItem );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemName( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemPriceCurrency( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE,
+                dummyItem.getItemPriceCurrency( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyItem.getItemType( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, ( double ) TestConstants.TWO, dummyItem.getItemPrice( ) );
 
@@ -199,6 +202,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
      *
      * @throws Exception the exception
      */
+    @SuppressWarnings( "unchecked" )
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
@@ -212,8 +216,8 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
         } else if ( items.size( ) == TestConstants.ONE ) {
             Item item = items.get( TestConstants.ZERO );
             Assert.assertNotNull( item );
-            Assert.assertEquals( " Data modified by Hibernate", TestConstants.TEST_PRICE_CURRENCY, item
-                    .getItemPriceCurrency( ) );
+            Assert.assertEquals( " Data modified by Hibernate", TestConstants.TEST_PRICE_CURRENCY,
+                    item.getItemPriceCurrency( ) );
         } else {
             Assert.fail( " Unique result expected but got duplicate data" );
         }

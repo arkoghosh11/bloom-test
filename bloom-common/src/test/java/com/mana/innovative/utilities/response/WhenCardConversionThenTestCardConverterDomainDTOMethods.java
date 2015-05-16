@@ -21,6 +21,7 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/30/2015 11:18 PM. This class WhenCardConversionThenTestCardConverterDomainDTOMethods is a
  * test class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright

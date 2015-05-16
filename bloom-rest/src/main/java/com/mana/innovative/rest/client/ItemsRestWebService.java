@@ -44,6 +44,7 @@ public class ItemsRestWebService {
      * Gets items.
      *
      * @param isError the is error
+     *
      * @return the items
      */
     @GET
@@ -67,8 +68,9 @@ public class ItemsRestWebService {
     /**
      * Delete items.
      *
-     * @param isError the is error
+     * @param isError     the is error
      * @param isDeleteAll the is delete all
+     *
      * @return the response
      */
     @DELETE

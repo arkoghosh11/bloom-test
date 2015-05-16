@@ -11,11 +11,10 @@ import java.util.Collection;
 
 /**
  * Created by IntelliJ IDEA.
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
- * @Copyright Date
- *: 10/2/12
- *         Time: 9:58 AM
+ * @Copyright Date : 10/2/12 Time: 9:58 AM
  * @since: jdk 1.7
  */
 public class QueryUtil {
@@ -75,11 +74,11 @@ public class QueryUtil {
      *
      * @return the criteria
      */
-    public Criteria addBetweenRestriction ( Criteria criteria, String property, String minValue, String maxValue ) {
+    public Criteria addBetweenRestriction( Criteria criteria, String property, String minValue, String maxValue ) {
         return criteria.add( Restrictions.between( property, minValue, maxValue ) );
     }
 
- //  Todo implement DB operations like and, or , in and between later on
+    //  Todo implement DB operations like and, or , in and between later on
 //    public Criteria addAndRestriction ( Criteria criteria, List<String> properties, List<String> values,
 //                                        List<String> operators, String minValue,
 //                                        String maxValue ) {
@@ -96,11 +95,12 @@ public class QueryUtil {
      * Gets added restriction.
      *
      * @param property the property
-     * @param value the value
+     * @param value    the value
      * @param operator the operator
+     *
      * @return the added restriction
      */
-    public Criterion getAddedRestriction ( String property, Object value, String operator ) {
+    public Criterion getAddedRestriction( String property, Object value, String operator ) {
 
 //        switch ( operator ) {
 //            case GE:
@@ -122,13 +122,14 @@ public class QueryUtil {
     /**
      * Gets added restriction.
      *
-     * @param property the property
-     * @param value the value
-     * @param operator the operator
+     * @param property  the property
+     * @param value     the value
+     * @param operator  the operator
      * @param matchType the match type
+     *
      * @return the added restriction
      */
-    public Criterion getAddedRestriction ( String property, Object value, String operator, String matchType ) {
+    public Criterion getAddedRestriction( String property, Object value, String operator, String matchType ) {
 
         MatchMode matchMode;
         if ( matchType.equalsIgnoreCase( EXACT_VALUE ) ) {
@@ -141,9 +142,9 @@ public class QueryUtil {
             matchMode = MatchMode.ANYWHERE;
         }
         if ( operator.equals( LIKE ) ) {
-            return Restrictions.like( property, value.toString(), matchMode );
+            return Restrictions.like( property, value.toString( ), matchMode );
         } else if ( operator.equals( I_LIKE ) ) {
-            return Restrictions.ilike( property, value.toString(), matchMode );
+            return Restrictions.ilike( property, value.toString( ), matchMode );
         }
         return null;
     }
@@ -152,10 +153,11 @@ public class QueryUtil {
      * Add in restriction.
      *
      * @param property the property
-     * @param values the values
+     * @param values   the values
+     *
      * @return the criterion
      */
-    public Criterion addInRestriction ( String property, Collection values ) {
+    public Criterion addInRestriction( String property, Collection values ) {
 
         return Restrictions.in( property, values );
     }
@@ -165,9 +167,10 @@ public class QueryUtil {
      *
      * @param criteria the criteria
      * @param maxLimit the max limit
+     *
      * @return the criteria
      */
-    public Criteria limitMaxResultsPerCall ( Criteria criteria, int maxLimit ) {
+    public Criteria limitMaxResultsPerCall( Criteria criteria, int maxLimit ) {
 
         return criteria.setMaxResults( maxLimit );
     }
@@ -175,11 +178,12 @@ public class QueryUtil {
     /**
      * Starting limit.
      *
-     * @param criteria the criteria
+     * @param criteria   the criteria
      * @param startLimit the start limit
+     *
      * @return the criteria
      */
-    public Criteria startingLimit ( Criteria criteria, int startLimit ) {
+    public Criteria startingLimit( Criteria criteria, int startLimit ) {
         return criteria.setFirstResult( startLimit );
     }
 
@@ -188,13 +192,14 @@ public class QueryUtil {
      *
      * @param property the property
      * @param ordering the ordering
+     *
      * @return the created order
      */
-    public Order getCreatedOrder ( final String property, final String ordering ) {
+    public Order getCreatedOrder( final String property, final String ordering ) {
 
-        if ( ordering.toLowerCase().equals( DAOConstants.ASC ) ) {
+        if ( ordering.toLowerCase( ).equals( DAOConstants.ASC ) ) {
             return Order.asc( property );
-        } else if ( ordering.toLowerCase().equals( DAOConstants.DESC ) ) {
+        } else if ( ordering.toLowerCase( ).equals( DAOConstants.DESC ) ) {
             return Order.desc( property );
         }
         throw new IllegalArgumentException( "Invalid Order" );

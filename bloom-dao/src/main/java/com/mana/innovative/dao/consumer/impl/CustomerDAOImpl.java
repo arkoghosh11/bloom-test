@@ -34,7 +34,8 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * The constant log.
      */
-    private static final Logger logger = LoggerFactory.getLogger( CustomerDAOImpl.class );
+    private static final Logger logger = LoggerFactory
+            .getLogger( CustomerDAOImpl.class );
 
     /**
      * The Session factory.
@@ -42,12 +43,12 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     @Resource
     private SessionFactory sessionFactory;
 
-
     /**
      * Gets session factory.
      *
      * @return the session factory
      */
+    @Override
     public SessionFactory getSessionFactory( ) {
         return sessionFactory;
     }
@@ -57,6 +58,7 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
      *
      * @param sessionFactory the session factory
      */
+    @Override
     public void setSessionFactory( final SessionFactory sessionFactory ) {
         this.sessionFactory = sessionFactory;
     }
@@ -64,13 +66,15 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Create customer.
      *
-     * @param customer the customer
+     * @param customer      the customer
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Customer > createCustomer( Customer customer, RequestParams requestParams ) {
+    public DAOResponse< Customer > createCustomer( Customer customer,
+                                                   RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#createCustomer()";
         logger.debug( "Starting " + location );
@@ -108,6 +112,7 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
      * Gets customers.
      *
      * @param requestParams the request params
+     *
      * @return the customers
      */
     @SuppressWarnings( "unchecked" )
@@ -137,7 +142,6 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
             customerDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
-
                 errorContainer = fillErrorContainer( location, exception );
             }
         }
@@ -153,14 +157,15 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Gets customer.
      *
-     * @param customerId the customer id
+     * @param customerId    the customer id
      * @param requestParams the request params
+     *
      * @return the customer
      */
-    @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Customer > getCustomerByUserId( final long customerId, final RequestParams requestParams ) {
+    public DAOResponse< Customer > getCustomerByUserId( final long customerId,
+                                                        final RequestParams requestParams ) {
         String location = this.getClass( ).getCanonicalName( ) + "#getCustomerByUserId()";
 
         logger.debug( "Starting " + location );
@@ -181,7 +186,8 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from users table for customers ", exception );
+            logger.error( "Failed while getting data from users table for customers ",
+                    exception );
             customerDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -201,14 +207,16 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Update customer.
      *
-     * @param customer the customer
+     * @param customer      the customer
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
-//    @SuppressWarnings( "unchecked" )
+    // @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Customer > updateCustomer( final Customer customer, final RequestParams requestParams ) {
+    public DAOResponse< Customer > updateCustomer( final Customer customer,
+                                                   final RequestParams requestParams ) {
         String location = this.getClass( ).getCanonicalName( ) + "#updateCustomer()";
         logger.debug( "Starting " + location );
 
@@ -228,7 +236,9 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from users table for customers ", exception );
+            logger.error(
+                    "Failed while getting data from users table for customers ",
+                    exception );
             customerDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -248,23 +258,70 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Delete customer.
      *
-     * @param customerId the customer id
+     * @param customerId    the customer id
      * @param requestParams the request params
+     *
      * @return the boolean
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Customer > deleteCustomerByUserId( Long customerId, RequestParams requestParams ) {
+    public DAOResponse< Customer > deleteCustomerByUserId( long customerId, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deleteCustomerByUserId()";
 
         logger.debug( "Starting " + location );
-        DAOResponse< User > userDAOResponse = super.deleteUserByUserId( customerId, requestParams, "Customer" );
+        DAOResponse< User > userDAOResponse = super.deleteUserByUserId(
+                customerId, requestParams, "Customer" );
         DAOResponse< Customer > customerDAOResponse = new DAOResponse<>( );
 
         customerDAOResponse.setRequestSuccess( userDAOResponse.isRequestSuccess( ) );
         customerDAOResponse.setCreate( userDAOResponse.isCreate( ) );
         customerDAOResponse.setCount( userDAOResponse.getCount( ) );
+        customerDAOResponse.setDelete( userDAOResponse.isDelete( ) );
+        customerDAOResponse.setErrorContainer( userDAOResponse.getErrorContainer( ) );
+        customerDAOResponse.setResults( null );
+
+        logger.debug( "Finishing " + location );
+
+        return customerDAOResponse;
+    }
+
+    @Override
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< Customer > deleteCustomersByUserIds( final List< Long > userIds, final RequestParams requestParams ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteCustomerByUserId()";
+
+        logger.debug( "Starting " + location );
+        DAOResponse< User > userDAOResponse = super.deleteUsersByUserIds( userIds, requestParams, "Customer" );
+        DAOResponse< Customer > customerDAOResponse = new DAOResponse<>( );
+
+        customerDAOResponse.setRequestSuccess( userDAOResponse.isRequestSuccess( ) );
+        customerDAOResponse.setCreate( userDAOResponse.isCreate( ) );
+        customerDAOResponse.setCount( userDAOResponse.getCount( ) );
+        customerDAOResponse.setDelete( userDAOResponse.isDelete( ) );
+        customerDAOResponse.setErrorContainer( userDAOResponse.getErrorContainer( ) );
+        customerDAOResponse.setResults( null );
+
+        logger.debug( "Finishing " + location );
+
+        return customerDAOResponse;
+    }
+
+    @Override
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< Customer > deleteAllCustomers( final RequestParams requestParams ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteCustomerByUserId()";
+
+        logger.debug( "Starting " + location );
+        DAOResponse< User > userDAOResponse = super.deleteAllUsers( requestParams, "Customer" );
+        DAOResponse< Customer > customerDAOResponse = new DAOResponse<>( );
+
+        customerDAOResponse.setRequestSuccess( userDAOResponse.isRequestSuccess( ) );
+        customerDAOResponse.setCreate( userDAOResponse.isCreate( ) );
+        customerDAOResponse.setCount( userDAOResponse.getCount( ) );
+        customerDAOResponse.setDelete( userDAOResponse.isDelete( ) );
         customerDAOResponse.setErrorContainer( userDAOResponse.getErrorContainer( ) );
         customerDAOResponse.setResults( null );
 

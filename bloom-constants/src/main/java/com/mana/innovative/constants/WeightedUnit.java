@@ -2,6 +2,7 @@ package com.mana.innovative.constants;
 
 /**
  * The enum Weighted unit.
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -31,7 +32,7 @@ public enum WeightedUnit {
      * @return the string
      */
     @Override
-    public String toString(){
-        return super.toString().toLowerCase();
+    public String toString( ) {
+        return super.toString( ).toLowerCase( );
     }
 }

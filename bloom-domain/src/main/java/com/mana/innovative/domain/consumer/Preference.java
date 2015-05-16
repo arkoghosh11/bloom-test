@@ -52,7 +52,7 @@ public class Preference {
     /**
      * The Customer preferences.
      */
-    @ManyToMany( cascade = CascadeType.ALL )
+    @ManyToMany( cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
     @JoinTable( name = "customer_preference", joinColumns = { @JoinColumn( name = "preference_id" ) },
             inverseJoinColumns = { @JoinColumn( name = "customer_id", referencedColumnName = "user_id" ) },
             uniqueConstraints = { @UniqueConstraint( name = "customer_preference_id",

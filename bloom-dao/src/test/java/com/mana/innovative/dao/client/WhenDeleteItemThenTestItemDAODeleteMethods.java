@@ -35,6 +35,7 @@ import java.util.List;
  * <p/>
  * Please uncomment the following lines to enable Spring Integration Test the 2nd line requires location on Context
  * Config Files for beans and properties extra, the 1st one is to enable Spring for the Class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -71,7 +72,6 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
      */
     private List< Long > itemIds;
 
-
     /**
      * This method is to initialize Objects and configuration files before testing test method
      *
@@ -93,6 +93,7 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
      */
     @Test
     public void testItemDAONotNull( ) {
+
         Assert.assertNotNull( itemDAOImpl );
     }
 
@@ -108,8 +109,8 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllItemsWithErrorEnabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL, TestConstants
-                .IS_ERROR_TRUE );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL,
+                TestConstants.IS_ERROR_TRUE );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
@@ -138,8 +139,8 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllItemsWithErrorDisabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL, TestConstants
-                .IS_ERROR );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL,
+                TestConstants.IS_ERROR );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
@@ -164,8 +165,8 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllItemsWithDeleteAllTrueWithErrorEnabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL_TRUE, TestConstants
-                .IS_ERROR_TRUE );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL_TRUE,
+                TestConstants.IS_ERROR_TRUE );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
@@ -193,8 +194,8 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllItemsWithDeleteAllTrueWithErrorDisabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL_TRUE, TestConstants
-                .IS_ERROR );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL_TRUE,
+                TestConstants.IS_ERROR );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
@@ -206,7 +207,6 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Finishing test for DeleteAllItemsWithDeleteAllTrueWithErrorDisabled" );
     }
-
 
     /**
      * Test delete item by item id with error enabled.
@@ -322,6 +322,7 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
      *
      * @throws Exception the exception
      */
+    @SuppressWarnings( "unchecked" )
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
@@ -334,6 +335,3 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 }
-
-
-

@@ -1,6 +1,5 @@
 package com.mana.innovative.domain.consumer;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,42 +30,38 @@ public class Privilege {
      * The Privilege id.
      */
     @Id
-    @Column( name = "privilege_id", columnDefinition = "bigint", length = 20 )
+    @Column( name = "privilege_id" )
     @GeneratedValue( strategy = GenerationType.TABLE )
     private int privilegeId;
     /**
      * The Privilege name.
      */
-    @Basic
     @Column( name = "privilege_name", length = 100 )
     private String privilegeName;
     /**
      * The Accessible.
      */
-    @Basic
-    @Column( name = "accessible", columnDefinition = "tinyint", length = 1 )
+    @Column( name = "is_accessible" )
     private boolean accessible;
 
     /**
      * The Created date.
      */
-    @Basic
     @Column( name = "created_date", columnDefinition = "timestamp" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date createdDate;
 
     /**
-     * The Update date.
+     * The Updated date.
      */
-    @Basic
-    @Column( name = "update_date", columnDefinition = "timestamp" )
+    @Column( name = "updated_date", columnDefinition = "timestamp" )
     @Temporal( value = TemporalType.TIMESTAMP )
-    private Date updateDate;
+    private Date updatedDate;
 
     /**
      * The User roles.
      */
-    @ManyToMany( mappedBy = "privileges", cascade = CascadeType.ALL )
+    @ManyToMany( mappedBy = "privileges", cascade = { CascadeType.MERGE, CascadeType.REFRESH } )
     private List< UserRole > userRoles;
 
     /**
@@ -146,17 +141,17 @@ public class Privilege {
      *
      * @return the update date
      */
-    public Date getUpdateDate( ) {
-        return updateDate;
+    public Date getUpdatedDate( ) {
+        return updatedDate;
     }
 
     /**
      * Sets update date.
      *
-     * @param updateDate the update date
+     * @param updatedDate the update date
      */
-    public void setUpdateDate( final Date updateDate ) {
-        this.updateDate = updateDate;
+    public void setUpdatedDate( final Date updatedDate ) {
+        this.updatedDate = updatedDate;
     }
 
     /**
@@ -207,7 +202,7 @@ public class Privilege {
                 ",  privilegeName= " + privilegeName +
                 ",  accessible=" + accessible +
                 ",  createdDate=" + createdDate +
-                ",  updateDate=" + updateDate +
+                ",  updatedDate=" + updatedDate +
                 '}';
     }
 }

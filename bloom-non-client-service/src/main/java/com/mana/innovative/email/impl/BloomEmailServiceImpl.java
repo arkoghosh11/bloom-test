@@ -77,6 +77,7 @@ public class BloomEmailServiceImpl implements BloomEmailService {
      * Send mail.
      *
      * @param emailContents the email contents
+     *
      * @return the boolean
      */
     @Override
@@ -113,11 +114,12 @@ public class BloomEmailServiceImpl implements BloomEmailService {
     /**
      * Send mail.
      *
-     * @param to the to
-     * @param cc the cc
-     * @param bcc the bcc
+     * @param to      the to
+     * @param cc      the cc
+     * @param bcc     the bcc
      * @param subject the subject
-     * @param body the body
+     * @param body    the body
+     *
      * @return the boolean
      */
     private boolean sendMail( String to, String cc, String bcc, String subject, String body ) {
@@ -147,7 +149,7 @@ public class BloomEmailServiceImpl implements BloomEmailService {
         }
         try {
 //            if ( simpleMailMessage.getFrom( ) != null ) {
-                javaMailSender.send( simpleMailMessage );
+            javaMailSender.send( simpleMailMessage );
 //            }
         } catch ( Exception exception ) {
             logger.error( "Exception occurred ", exception );
@@ -159,12 +161,13 @@ public class BloomEmailServiceImpl implements BloomEmailService {
     /**
      * Send mail.
      *
-     * @param to the to
-     * @param cc the cc
-     * @param bcc the bcc
-     * @param subject the subject
-     * @param body the body
+     * @param to                 the to
+     * @param cc                 the cc
+     * @param bcc                the bcc
+     * @param subject            the subject
+     * @param body               the body
      * @param attachmentLocation the attachment location
+     *
      * @return the boolean
      */
     private boolean sendMail( String to, String cc, String bcc, String subject, String body, String attachmentLocation
@@ -229,9 +232,9 @@ public class BloomEmailServiceImpl implements BloomEmailService {
         try {
 
 //            if ( mimeMessage.getFrom( ) != null ) {
-                logger.debug( "Email Sending" );
-                javaMailSender.send( mimeMessage );
-                logger.debug( "Email Sent" );
+            logger.debug( "Email Sending" );
+            javaMailSender.send( mimeMessage );
+            logger.debug( "Email Sent" );
 //            }
 
         } catch ( Exception exception ) {
@@ -246,6 +249,7 @@ public class BloomEmailServiceImpl implements BloomEmailService {
      * Check mail properties.
      *
      * @param mailProperties the mail properties
+     *
      * @return the boolean
      */
     private boolean checkMailProperties( String mailProperties[] ) {

@@ -25,6 +25,7 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 5/2/2015 6:16 PM. This class WhenGetPreferenceThenTestPreferenceDAOGetMethods is a test
  * class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -118,7 +119,7 @@ public class WhenGetPreferenceThenTestPreferenceDAOGetMethods {
         logger.debug( "Starting test for GetPreferenceWithErrorDisabled" );
 
         requestParams.setIsError( TestConstants.IS_ERROR );
-        DAOResponse< Preference > preferenceDAOResponse = preferenceDAO.getPreference( TestConstants.TEST_ID, requestParams );
+        DAOResponse< Preference > preferenceDAOResponse = preferenceDAO.getPreferenceByPreferenceId( TestConstants.TEST_ID, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, preferenceDAOResponse );
         // test error container
@@ -200,7 +201,7 @@ public class WhenGetPreferenceThenTestPreferenceDAOGetMethods {
         logger.debug( "Starting test for GetPreferenceWithErrorEnabled" );
 
         requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
-        DAOResponse< Preference > preferenceDAOResponse = preferenceDAO.getPreference( TestConstants.TEST_ID, requestParams );
+        DAOResponse< Preference > preferenceDAOResponse = preferenceDAO.getPreferenceByPreferenceId( TestConstants.TEST_ID, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, preferenceDAOResponse );
 

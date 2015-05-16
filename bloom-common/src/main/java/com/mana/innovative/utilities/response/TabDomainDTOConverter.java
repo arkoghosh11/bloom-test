@@ -35,8 +35,9 @@ public class TabDomainDTOConverter {
     /**
      * Gets converted tab dTO from tab domain.
      *
-     * @param tabDTO  the tab dTO
-     * @param tabDomain  the tab domain
+     * @param tabDTO    the tab dTO
+     * @param tabDomain the tab domain
+     *
      * @return the converted tab dTO from tab domain
      */
     public static Tab getConvertedDTOFromDomain( Tab tabDTO, com.mana.innovative.domain.common.Tab tabDomain ) {
@@ -63,6 +64,7 @@ public class TabDomainDTOConverter {
      * Gets converted tab dTO list.
      *
      * @param tabDomainList the tab domain list
+     *
      * @return the converted tab dTO list
      */
     public static List< Tab > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.common.Tab > tabDomainList ) {
@@ -81,7 +83,8 @@ public class TabDomainDTOConverter {
      * Gets converted tab domain from tab dTO.
      *
      * @param tabDomain the tab domain
-     * @param tabDTO the tab dTO
+     * @param tabDTO    the tab dTO
+     *
      * @return the converted tab domain from tab dTO
      */
     public static com.mana.innovative.domain.common.Tab getConvertedDomainFromDTO( com.mana.innovative.domain.common.Tab tabDomain, Tab tabDTO ) {
@@ -121,6 +124,7 @@ public class TabDomainDTOConverter {
      * Gets converted tab domain list from tab dTO list.
      *
      * @param tabDTOList the tab dTO list
+     *
      * @return the converted tab domain list from tab dTO list
      */
     public static List< com.mana.innovative.domain.common.Tab > getConvertedListDomainFromDTO( List< Tab > tabDTOList ) {

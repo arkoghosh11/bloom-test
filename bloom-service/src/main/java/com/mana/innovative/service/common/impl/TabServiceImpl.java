@@ -45,43 +45,44 @@ public class TabServiceImpl implements TabService {
     /**
      * Gets tab.
      *
-     * @param tabId the tab id
+     * @param tabId         the tab id
      * @param requestParams the request params
+     *
      * @return the tab
      */
     @Override
     public Response getTab( Integer tabId, RequestParams requestParams ) {
 
-        DAOResponse< com.mana.innovative.domain.common.Tab >
-                tabDAOResponse = tabDAO.getTabByTabId( tabId, requestParams );
+        DAOResponse< com.mana.innovative.domain.common.Tab > tabDAOResponse = tabDAO.getTabByTabId( tabId, requestParams );
 
-        TabResponseContainer< TabsPayload > tabResponseContainer
-                = TabResponseBuilder.build( tabDAOResponse, requestParams.isError( ) );
+        TabResponseContainer< TabsPayload > tabResponseContainer = TabResponseBuilder.build( tabDAOResponse,
+                requestParams.isError( ) );
         return Response.ok( tabResponseContainer ).build( );
     }
 
     /**
      * Update tab.
      *
-     * @param tabDTO the tab
+     * @param tabDTO        the tab
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override
     public Response updateTab( Tab tabDTO, RequestParams requestParams ) {
 
-        com.mana.innovative.domain.common.Tab tabDomain =
-                TabDomainDTOConverter.getConvertedDomainFromDTO( null, tabDTO );
-        DAOResponse< com.mana.innovative.domain.common.Tab > tabDAOResponse = tabDAO.updateTab( tabDomain,
-                requestParams );
+        com.mana.innovative.domain.common.Tab tabDomain = TabDomainDTOConverter.getConvertedDomainFromDTO( null, tabDTO );
+        DAOResponse< com.mana.innovative.domain.common.Tab > tabDAOResponse = tabDAO.updateTab( tabDomain, requestParams );
+        // Todo Need to implement this method
         return Response.ok( ).build( );
     }
 
     /**
      * Delete tab.
      *
-     * @param tabId the tab id
+     * @param tabId         the tab id
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override
@@ -94,8 +95,9 @@ public class TabServiceImpl implements TabService {
     /**
      * Create tab.
      *
-     * @param tab the tab
+     * @param tab           the tab
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override

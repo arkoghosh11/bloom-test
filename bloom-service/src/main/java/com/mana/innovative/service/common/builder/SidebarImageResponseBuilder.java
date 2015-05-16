@@ -1,6 +1,6 @@
 package com.mana.innovative.service.common.builder;
 
-import com.mana.innovative.service.common.container.SidebarImageResponseContainer;
+import javax.ws.rs.core.Response;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,7 +17,8 @@ public class SidebarImageResponseBuilder {
      *
      * @return the sidebar image response container
      */
-    public SidebarImageResponseContainer build( ) {
+    public Response build( ) {
+
         return null;
     }
 }

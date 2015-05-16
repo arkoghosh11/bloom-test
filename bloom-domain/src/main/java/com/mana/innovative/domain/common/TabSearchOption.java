@@ -9,16 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by IntelliJ IDEA.
- * This class is for advanced searching of {@link Tab} from DB {@code searchParams, searchConditions, searchOrder,
- * searchMatchType }* searchParams is for the columns to be search against for values entered by user in DB
- * searchConditions is for applying conditions to each pram above for the column search in DB
+ * Created by IntelliJ IDEA. This class is for advanced searching of {@link Tab} from DB {@code searchParams,
+ * searchConditions, searchOrder, searchMatchType }* searchParams is for the columns to be search against for values
+ * entered by user in DB searchConditions is for applying conditions to each pram above for the column search in DB
  * search Order is the column types on which to add a order to. Order possible is (ASC,DESC, none) searchMatchType is
  * match applied to to a specified column with whichever match the user desires like a user may enter a few letter and
  * do Anywhere or a word and to exact. possible matchTypes are Exact, Anywhere, Start, End
- *
- * Note This class will be replaced by a generic searching class for any Concrete Domain class searching
- * IMP this class is not  thread safe
+ * <p/>
+ * Note This class will be replaced by a generic searching class for any Concrete Domain class searching IMP this class
+ * is not  thread safe
  *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com

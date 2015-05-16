@@ -23,6 +23,7 @@ public interface TabDAO {
      * Gets tabs.
      *
      * @param requestParams the request params
+     *
      * @return the tabs
      */
     DAOResponse< Tab > getTabs( RequestParams requestParams );
@@ -30,8 +31,9 @@ public interface TabDAO {
     /**
      * Delete tab.
      *
-     * @param tabId the tab id
+     * @param tabId         the tab id
      * @param requestParams the request params
+     *
      * @return the boolean
      */
     DAOResponse< Tab > deleteTabByTabId( int tabId, RequestParams requestParams );
@@ -39,8 +41,9 @@ public interface TabDAO {
     /**
      * Update tab.
      *
-     * @param tab the tab
+     * @param tab           the tab
      * @param requestParams the request params
+     *
      * @return the boolean
      */
     DAOResponse< Tab > updateTab( Tab tab, RequestParams requestParams );
@@ -48,8 +51,9 @@ public interface TabDAO {
     /**
      * Create tab.
      *
-     * @param tab the tab
+     * @param tab           the tab
      * @param requestParams the request params
+     *
      * @return the boolean
      */
     DAOResponse< Tab > createTab( Tab tab, RequestParams requestParams );
@@ -58,7 +62,8 @@ public interface TabDAO {
      * Gets tab by search params.
      *
      * @param tabSearchOption the tab search option
-     * @param requestParams the request params
+     * @param requestParams   the request params
+     *
      * @return the tab by search params
      */
     DAOResponse< Tab > getTabBySearchParams( TabSearchOption tabSearchOption, RequestParams requestParams );
@@ -66,8 +71,9 @@ public interface TabDAO {
     /**
      * Gets tab by tab id.
      *
-     * @param tabId the tab id
+     * @param tabId         the tab id
      * @param requestParams the request params
+     *
      * @return the tab by tab id
      */
     DAOResponse< Tab > getTabByTabId( int tabId, RequestParams requestParams );
@@ -75,9 +81,19 @@ public interface TabDAO {
     /**
      * Delete tabs.
      *
-     * @param tabIds the tab ids
+     * @param tabIds        the tab ids
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< Tab > deleteTabs( List< Integer > tabIds, RequestParams requestParams );
+
+    /**
+     * Delete all tabs.
+     *
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
+    DAOResponse< Tab > deleteAllTabs( RequestParams requestParams );
 }

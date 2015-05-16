@@ -2,7 +2,7 @@ package com.mana.innovative.constants;
 
 /**
  * The type DAO constants.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -95,6 +95,7 @@ public final class DAOConstants {
      * To string from number.
      *
      * @param number the number
+     *
      * @return the string
      */
     public static String toStringFromNumber( final int number ) {
@@ -107,6 +108,7 @@ public final class DAOConstants {
      * To number from string.
      *
      * @param number the number
+     *
      * @return the integer
      */
     public static Integer toNumberFromString( final String number ) {

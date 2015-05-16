@@ -58,6 +58,7 @@ public class CustomersServiceImpl implements CustomersService {
      * .mana.domain.Tab ></>}*
      *
      * @param requestParams the request params
+     *
      * @return A response object containing all of the tabs within the Database
      */
     @Override
@@ -102,8 +103,9 @@ public class CustomersServiceImpl implements CustomersService {
     /**
      * Delete customers.
      *
-     * @param customerIds the customer ids
+     * @param customerIds   the customer ids
      * @param requestParams the request params
+     *
      * @return A response from the server
      */
     //todo decide whether to delete all the if one fails or not or write a dao delete for a collection of customers

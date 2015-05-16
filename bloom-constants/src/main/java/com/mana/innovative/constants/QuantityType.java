@@ -2,6 +2,7 @@ package com.mana.innovative.constants;
 
 /**
  * The enum Quantity type.
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -11,15 +12,15 @@ public enum QuantityType {
     /**
      * The UNIT.
      */
-    UNIT(1),
+    UNIT( 1 ),
     /**
      * The DOZEN.
      */
-    DOZEN(12),
+    DOZEN( 12 ),
     /**
      * The SCORE.
      */
-    SCORE(20);
+    SCORE( 20 );
 
     /**
      * The Value.
@@ -31,7 +32,7 @@ public enum QuantityType {
      *
      * @param value the value
      */
-    QuantityType(int value) {
+    QuantityType( int value ) {
         this.value = value;
     }
 
@@ -40,7 +41,7 @@ public enum QuantityType {
      *
      * @return the value
      */
-    public int getValue() {
+    public int getValue( ) {
         return value;
     }
 
@@ -50,8 +51,8 @@ public enum QuantityType {
      * @return the string
      */
     @Override
-    public String toString() {
-        return super.toString().toLowerCase();
+    public String toString( ) {
+        return super.toString( ).toLowerCase( );
     }
 
 //    public String getValue(QuantityType quantityType) {

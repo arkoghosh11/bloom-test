@@ -55,6 +55,15 @@ public class RequestParams {
     private String endDate;
 
     /**
+     * The Role name.
+     */
+    private String roleName;
+    /**
+     * The Privilege type.
+     */
+    private String privilegeType;
+
+    /**
      * Instantiates a new Request params.
      */
     public RequestParams( ) {
@@ -203,5 +212,41 @@ public class RequestParams {
      */
     public void setEndDate( final String endDate ) {
         this.endDate = endDate;
+    }
+
+    /**
+     * Gets role name.
+     *
+     * @return the role name
+     */
+    public String getRoleName( ) {
+        return roleName;
+    }
+
+    /**
+     * Sets role name.
+     *
+     * @param roleName the role name
+     */
+    public void setRoleName( final String roleName ) {
+        this.roleName = roleName;
+    }
+
+    /**
+     * Gets privilege type.
+     *
+     * @return the privilege type
+     */
+    public String getPrivilegeType( ) {
+        return privilegeType;
+    }
+
+    /**
+     * Sets privilege type.
+     *
+     * @param privilegeType the privilege type
+     */
+    public void setPrivilegeType( final String privilegeType ) {
+        this.privilegeType = privilegeType;
     }
 }

@@ -13,7 +13,7 @@
     </parent>
 
     <artifactId>bloom-rest</artifactId>
-    <version>1.0.RELEASE</version>
+
     <packaging>war</packaging>
     <build>
         <plugins>

@@ -46,6 +46,7 @@ public class CustomFileReaderImpl implements CustomSpecificFileReader< ItemsPayl
      * Read xML file.
      *
      * @param file the file
+     *
      * @return the items payload
      */
     @Override

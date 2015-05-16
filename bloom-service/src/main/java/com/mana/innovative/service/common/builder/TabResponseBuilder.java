@@ -20,8 +20,9 @@ import java.util.List;
 
 /**
  * The type Tab response builder.
-
+ * <p/>
  * Created by Bloom/Rono on $date $time.
+ *
  * @author Bloom Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -38,7 +39,8 @@ public class TabResponseBuilder {
      * Build tab response container.
      *
      * @param tabDAOResponse the tab dAO response
-     * @param isError the is error
+     * @param isError        the is error
+     *
      * @return Returns a response object for tabs
      */
     public static TabResponseContainer< TabsPayload > build( DAOResponse< com.mana.innovative.domain.common.Tab > tabDAOResponse, boolean isError ) {

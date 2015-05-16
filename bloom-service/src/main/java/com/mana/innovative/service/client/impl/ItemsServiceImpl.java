@@ -47,6 +47,7 @@ public class ItemsServiceImpl implements ItemsService {
      * Gets items.
      *
      * @param isError the is error
+     *
      * @return the items
      */
     @Cacheable( value = ServiceConstants.ITEMS_CACHE, key = ServiceConstants.KEY_NAME )
@@ -86,8 +87,9 @@ public class ItemsServiceImpl implements ItemsService {
     /**
      * Delete all items.
      *
-     * @param isError the is error
+     * @param isError        the is error
      * @param deleteAllItems the delete all items
+     *
      * @return the response
      */
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )

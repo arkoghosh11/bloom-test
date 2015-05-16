@@ -5,6 +5,8 @@ import com.mana.innovative.domain.consumer.Customer;
 import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by Bloom/Rono on 4/10/2015.
  * <p/>
@@ -20,8 +22,9 @@ public interface CustomerDAO {
     /**
      * Create customer.
      *
-     * @param customer the customer
+     * @param customer      the customer
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< Customer > createCustomer( Customer customer, RequestParams requestParams );
@@ -30,6 +33,7 @@ public interface CustomerDAO {
      * Gets customers.
      *
      * @param requestParams the request params
+     *
      * @return the customers
      */
     DAOResponse< Customer > getCustomers( RequestParams requestParams );
@@ -37,17 +41,19 @@ public interface CustomerDAO {
     /**
      * Gets customer.
      *
-     * @param customerId the customer id
+     * @param userId        the customer id
      * @param requestParams the request params
+     *
      * @return the customer
      */
-    DAOResponse< Customer > getCustomerByUserId( long customerId, RequestParams requestParams );
+    DAOResponse< Customer > getCustomerByUserId( long userId, RequestParams requestParams );
 
     /**
      * Update customer.
      *
-     * @param customer the customer
+     * @param customer      the customer
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< Customer > updateCustomer( Customer customer, RequestParams requestParams );
@@ -55,9 +61,29 @@ public interface CustomerDAO {
     /**
      * Delete customer by user id.
      *
-     * @param customerId the customer id
+     * @param userId        the customer id
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
-    DAOResponse< Customer > deleteCustomerByUserId( Long customerId, RequestParams requestParams );
+    DAOResponse< Customer > deleteCustomerByUserId( long userId, RequestParams requestParams );
+
+    /**
+     * Delete customers by user ids.
+     *
+     * @param userIds       the customer ids
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
+    DAOResponse< Customer > deleteCustomersByUserIds( List< Long > userIds, RequestParams requestParams );
+
+    /**
+     * Delete all customers.
+     *
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
+    DAOResponse< Customer > deleteAllCustomers( RequestParams requestParams );
 }

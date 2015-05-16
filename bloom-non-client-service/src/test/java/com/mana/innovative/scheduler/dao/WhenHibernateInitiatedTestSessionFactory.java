@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 
 /**
  * Created by alex1 on 1/23/2015. This is a domain class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright

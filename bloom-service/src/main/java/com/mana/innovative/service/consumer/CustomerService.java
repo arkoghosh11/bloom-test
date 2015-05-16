@@ -29,8 +29,9 @@ public interface CustomerService {
     /**
      * Create customer.
      *
-     * @param customer the customer
+     * @param customer      the customer
      * @param requestParams the request params
+     *
      * @return the response
      */
     Response createCustomer( Customer customer, RequestParams requestParams );
@@ -38,8 +39,9 @@ public interface CustomerService {
     /**
      * Update customer.
      *
-     * @param customer the customer
+     * @param customer      the customer
      * @param requestParams the request params
+     *
      * @return the response
      */
     Response updateCustomer( Customer customer, RequestParams requestParams );
@@ -47,8 +49,9 @@ public interface CustomerService {
     /**
      * Delete customer by user id.
      *
-     * @param customerId the customer id
+     * @param customerId    the customer id
      * @param requestParams the request params
+     *
      * @return the response
      */
     Response deleteCustomerByUserId( Long customerId, RequestParams requestParams );

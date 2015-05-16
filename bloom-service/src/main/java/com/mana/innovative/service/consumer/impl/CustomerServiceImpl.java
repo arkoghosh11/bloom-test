@@ -46,8 +46,9 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * Gets single customer details.
      *
-     * @param customerId the customer id
+     * @param customerId    the customer id
      * @param requestParams the request params
+     *
      * @return the single customer details
      */
     @Override
@@ -95,8 +96,9 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * Create customer.
      *
-     * @param customer the customer
+     * @param customer      the customer
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override
@@ -146,8 +148,9 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * Update customer.
      *
-     * @param customerDTO the customer
+     * @param customerDTO   the customer
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override
@@ -192,8 +195,9 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * Delete specific customer.
      *
-     * @param customerId the customer id
+     * @param customerId    the customer id
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override

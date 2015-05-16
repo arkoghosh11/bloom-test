@@ -1,6 +1,5 @@
 package com.mana.innovative.utilities.converter;/**
- * Created by Rono on 2/19/2015.
- * This is a class for .. todo 
+ * Created by Rono on 2/19/2015. This is a class for .. todo
  */
 
 import com.mana.innovative.constants.TestConstants;
@@ -19,8 +18,8 @@ import javax.annotation.Resource;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/weight-converter-test-config.xml")
+@RunWith( value = SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = "/weight-converter-test-config.xml" )
 public class WhenCertainWeightTestWeightConverterMethods {
 
     /**
@@ -46,7 +45,7 @@ public class WhenCertainWeightTestWeightConverterMethods {
      * Sets up.
      */
     @Before
-    public void setUp() {
+    public void setUp( ) {
 
         defaultValue = 10;
         failMessage = TestConstants.FAIL_MESSAGE;
@@ -58,11 +57,11 @@ public class WhenCertainWeightTestWeightConverterMethods {
      * @throws Exception the exception
      */
     @Test
-    public void testConvertOunceToPound() throws Exception {
+    public void testConvertOunceToPound( ) throws Exception {
 
-        double result = weightConverter.convertFromOunceToPound(defaultValue);
-        expectedResult = (defaultValue * weightConverter.getOunceToPoundRatio());
-        Assert.assertEquals(failMessage, expectedResult, result);
+        double result = weightConverter.convertFromOunceToPound( defaultValue );
+        expectedResult = ( defaultValue * weightConverter.getOunceToPoundRatio( ) );
+        Assert.assertEquals( failMessage, expectedResult, result );
 
     }
 
@@ -72,11 +71,11 @@ public class WhenCertainWeightTestWeightConverterMethods {
      * @throws Exception the exception
      */
     @Test
-    public void testConvertFromOunceToGram() throws Exception {
+    public void testConvertFromOunceToGram( ) throws Exception {
 
-        double result = weightConverter.convertFromOunceToGram(defaultValue);
-        expectedResult = (defaultValue * weightConverter.getOunceToGramRatio());
-        Assert.assertEquals(failMessage, expectedResult, result);
+        double result = weightConverter.convertFromOunceToGram( defaultValue );
+        expectedResult = ( defaultValue * weightConverter.getOunceToGramRatio( ) );
+        Assert.assertEquals( failMessage, expectedResult, result );
 
     }
 
@@ -86,11 +85,11 @@ public class WhenCertainWeightTestWeightConverterMethods {
      * @throws Exception the exception
      */
     @Test
-    public void testConvertFromGramToOunce() throws Exception {
+    public void testConvertFromGramToOunce( ) throws Exception {
 
-        double result = weightConverter.convertFromGramToOunce(defaultValue);
-        expectedResult = (defaultValue * (1 / weightConverter.getOunceToGramRatio()));
-        Assert.assertEquals(failMessage, expectedResult, result);
+        double result = weightConverter.convertFromGramToOunce( defaultValue );
+        expectedResult = ( defaultValue * ( 1 / weightConverter.getOunceToGramRatio( ) ) );
+        Assert.assertEquals( failMessage, expectedResult, result );
 
     }
 
@@ -100,11 +99,11 @@ public class WhenCertainWeightTestWeightConverterMethods {
      * @throws Exception the exception
      */
     @Test
-    public void testConvertFromGramToPound() throws Exception {
+    public void testConvertFromGramToPound( ) throws Exception {
 
-        double result = weightConverter.convertFromGramToPound(defaultValue);
-        expectedResult = (defaultValue * (weightConverter.getGramToPoundRatio()));
-        Assert.assertEquals(failMessage, expectedResult, result);
+        double result = weightConverter.convertFromGramToPound( defaultValue );
+        expectedResult = ( defaultValue * ( weightConverter.getGramToPoundRatio( ) ) );
+        Assert.assertEquals( failMessage, expectedResult, result );
 
     }
 
@@ -115,11 +114,11 @@ public class WhenCertainWeightTestWeightConverterMethods {
      * @throws Exception the exception
      */
     @Test
-    public void testConvertFromKilogramToPound() throws Exception {
+    public void testConvertFromKilogramToPound( ) throws Exception {
 
-        double result = weightConverter.convertFromKilogramToPound(defaultValue);
-        expectedResult = (defaultValue * (weightConverter.getKilogramToPoundRatio()));
-        Assert.assertEquals(failMessage, expectedResult, result);
+        double result = weightConverter.convertFromKilogramToPound( defaultValue );
+        expectedResult = ( defaultValue * ( weightConverter.getKilogramToPoundRatio( ) ) );
+        Assert.assertEquals( failMessage, expectedResult, result );
 
     }
 
@@ -129,11 +128,11 @@ public class WhenCertainWeightTestWeightConverterMethods {
      * @throws Exception the exception
      */
     @Test
-    public void testConvertFromPoundToKilogram() throws Exception {
+    public void testConvertFromPoundToKilogram( ) throws Exception {
 
-        double result = weightConverter.convertFromPoundToKilogram(defaultValue);
-        expectedResult = (defaultValue * (1 / weightConverter.getKilogramToPoundRatio()));
-        Assert.assertEquals(failMessage, expectedResult, result);
+        double result = weightConverter.convertFromPoundToKilogram( defaultValue );
+        expectedResult = ( defaultValue * ( 1 / weightConverter.getKilogramToPoundRatio( ) ) );
+        Assert.assertEquals( failMessage, expectedResult, result );
     }
 
     /**
@@ -142,11 +141,11 @@ public class WhenCertainWeightTestWeightConverterMethods {
      * @throws Exception the exception
      */
     @Test
-    public void testConvertFromPoundToGram() throws Exception {
+    public void testConvertFromPoundToGram( ) throws Exception {
 
-        double result = weightConverter.convertFromPoundToGram(defaultValue);
-        expectedResult = (defaultValue * (1 / weightConverter.getGramToPoundRatio()));
-        Assert.assertEquals(failMessage, expectedResult, result);
+        double result = weightConverter.convertFromPoundToGram( defaultValue );
+        expectedResult = ( defaultValue * ( 1 / weightConverter.getGramToPoundRatio( ) ) );
+        Assert.assertEquals( failMessage, expectedResult, result );
     }
 
     /**
@@ -155,11 +154,11 @@ public class WhenCertainWeightTestWeightConverterMethods {
      * @throws Exception the exception
      */
     @Test
-    public void testConvertFromPoundToOunce() throws Exception {
+    public void testConvertFromPoundToOunce( ) throws Exception {
 
-        double result = weightConverter.convertFromPoundToOunce(defaultValue);
-        expectedResult = (defaultValue * (1 / weightConverter.getOunceToPoundRatio()));
-        Assert.assertEquals(failMessage, expectedResult, result);
+        double result = weightConverter.convertFromPoundToOunce( defaultValue );
+        expectedResult = ( defaultValue * ( 1 / weightConverter.getOunceToPoundRatio( ) ) );
+        Assert.assertEquals( failMessage, expectedResult, result );
     }
 
     /**
@@ -168,12 +167,12 @@ public class WhenCertainWeightTestWeightConverterMethods {
      * @throws Exception the exception
      */
     @Test
-    public void testCustomConverterWithGivenRation() throws Exception {
+    public void testCustomConverterWithGivenRation( ) throws Exception {
 
         double tempRatio = 50.0247;
-        double result = weightConverter.customConverterWithGivenRatio(defaultValue, tempRatio);
-        expectedResult = (defaultValue * tempRatio);
-        Assert.assertEquals(failMessage, expectedResult, result);
+        double result = weightConverter.customConverterWithGivenRatio( defaultValue, tempRatio );
+        expectedResult = ( defaultValue * tempRatio );
+        Assert.assertEquals( failMessage, expectedResult, result );
     }
 
 }

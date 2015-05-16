@@ -5,6 +5,7 @@ import com.mana.innovative.dao.BasicDAO;
 import com.mana.innovative.dao.common.AddressDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.common.Address;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
@@ -39,21 +40,22 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Gets address by address id.
      *
-     * @param addressId the address id
-     * @param isError the is error
+     * @param addressId     the address id
+     * @param requestParams the request params
+     *
      * @return the address by address id
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( readOnly = true, propagation = Propagation.SUPPORTS, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Address > getAddressByAddressId( long addressId, boolean isError ) {
+    public DAOResponse< Address > getAddressByAddressId( long addressId, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#getAddressByAddressId()";
         logger.debug( "Starting " + location );
 
         List< Address > address = null;
         DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -72,7 +74,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Error occurred while trying to fetch data from address table for " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }
@@ -86,20 +88,21 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * This method is to retrieve all the address values from the DB
      *
-     * @param isError the is error
-     * @return List<Address> </> Return a list of
+     * @param requestParams the request params
+     *
+     * @return List<Address>  </> Return a list of
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( readOnly = true, propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Address > getAddress( boolean isError ) {
+    public DAOResponse< Address > getAddress( RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#getAddress()";
         logger.debug( "Starting " + location );
 
         List< Address > address = null;
         DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -109,7 +112,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
         } catch ( HibernateException exception ) {
             this.handleExceptions( exception );
             logger.error( "Error occurred while trying to fetch data from address table for " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }
@@ -125,21 +128,21 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Delete working hour by working hr ids.
      *
-     * @param addressId the working hour id
-     * @param isError the is error
+     * @param addressId     the working hour id
+     * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED )
-    public DAOResponse< Address > deleteAddressByAddressId( final long addressId, final boolean
-            isError ) {
+    public DAOResponse< Address > deleteAddressByAddressId( final long addressId, final RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deleteAddressByAddressId()";
         logger.debug( "Starting " + location );
 
         DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
         addressDAOResponse.setDelete( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -153,7 +156,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Failed to delete address", exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }
@@ -167,19 +170,20 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Delete working hours by working hr ids.
      *
-     * @param addressIds the working hour ids
-     * @param isError the is error
+     * @param addressIds    the working hour ids
+     * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< Address > deleteAddressesByAddressIds( List< Long > addressIds, boolean isError ) {
+    public DAOResponse< Address > deleteAddressesByAddressIds( List< Long > addressIds, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deleteAddressesByAddressIds()";
         logger.debug( "Starting " + location );
         DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
         addressDAOResponse.setDelete( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -193,7 +197,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Failed to delete address with given ids " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
             addressDAOResponse.setRequestSuccess( false );
@@ -207,22 +211,22 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Delete all address.
      *
-     * @param deleteAllAddresses the is delete all
-     * @param isError the is error true
+     * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Address > deleteAllAddress( final boolean deleteAllAddresses, final boolean isError ) {
+    public DAOResponse< Address > deleteAllAddress( final RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteAllAddresses()";
         logger.debug( "Starting " + location );
         DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
         addressDAOResponse.setDelete( true );
         addressDAOResponse.setCount( DAOConstants.ZERO );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
-        if ( deleteAllAddresses ) {
+        if ( requestParams.isDeleteAll( ) ) {
             try {
                 this.openDBTransaction( );
                 // Note: Will delete all Address class rows stored in DB also will delete anything from address class
@@ -237,7 +241,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
                     this.handleExceptions( ( HibernateException ) exception );
                 }
                 logger.error( "Error occurred while trying to clear address table " + location, exception );
-                if ( isError ) {
+                if ( requestParams.isError( ) ) {
                     errorContainer = this.fillErrorContainer( location, exception );
                 }
                 addressDAOResponse.setRequestSuccess( false );
@@ -252,13 +256,14 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Create address.
      *
-     * @param address the address
-     * @param isError the is error
+     * @param address       the address
+     * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Address > createAddress( final Address address, final boolean isError ) {
+    public DAOResponse< Address > createAddress( final Address address, final RequestParams requestParams ) {
         if ( address == null ) {
             throw new NullPointerException( "Creation object Address is null" );
         }
@@ -266,7 +271,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
         logger.debug( "Starting " + location );
         DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
         addressDAOResponse.setCreate( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
         List< Address > addresses = new ArrayList<>( );
         try {
             this.openDBTransaction( );
@@ -281,7 +286,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Failed to create address", exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }
@@ -295,14 +300,15 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Update address.
      *
-     * @param address the address
-     * @param isError the is error
+     * @param address       the address
+     * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< Address > updateAddress( final Address address, boolean isError ) {
+    public DAOResponse< Address > updateAddress( final Address address, RequestParams requestParams ) {
 
         if ( address == null ) {
             throw new NullPointerException( "Update object Address is null" );
@@ -312,7 +318,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
 
         DAOResponse< Address > addressDAOResponse = new DAOResponse<>( );
         addressDAOResponse.setUpdate( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
         List< Address > addresses = null;
 
         try {
@@ -339,7 +345,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Failed to update address", exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }

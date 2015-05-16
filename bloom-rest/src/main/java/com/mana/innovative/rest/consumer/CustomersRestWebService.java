@@ -54,6 +54,7 @@ public class CustomersRestWebService {
      * .mana.domain.Tab ></>}*
      *
      * @param isError the is error
+     *
      * @return A response object containing all of the tabs within the Database
      */
     @GET
@@ -70,7 +71,8 @@ public class CustomersRestWebService {
      * Delete customers.
      *
      * @param customerIds the customer ids
-     * @param isError the is error
+     * @param isError     the is error
+     *
      * @return the response
      */
     @DELETE

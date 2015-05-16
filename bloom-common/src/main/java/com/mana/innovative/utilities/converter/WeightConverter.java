@@ -1,6 +1,5 @@
 package com.mana.innovative.utilities.converter;/**
- * Created by Rono on 2/19/2015.
- * This is a class for .. todo 
+ * Created by Rono on 2/19/2015. This is a class for .. todo
  */
 
 import org.springframework.beans.factory.annotation.Value;
@@ -19,22 +18,22 @@ public final class WeightConverter {
     /**
      * The Ounce to gram ratio.
      */
-    @Value(value = "${ounce_to_gram}")
+    @Value( value = "${ounce_to_gram}" )
     private double ounceToGramRatio;
     /**
      * The Kilogram to pound ratio.
      */
-    @Value(value = "${kilogram_to_pound}")
+    @Value( value = "${kilogram_to_pound}" )
     private double kilogramToPoundRatio;
     /**
      * The Gram to pound ratio.
      */
-    @Value(value = "${gram_to_pound}")
+    @Value( value = "${gram_to_pound}" )
     private double gramToPoundRatio;
     /**
      * The Ounce to pound ratio.
      */
-    @Value(value = "${ounce_to_pound}")
+    @Value( value = "${ounce_to_pound}" )
     private double ounceToPoundRatio;
 
     /**
@@ -42,7 +41,7 @@ public final class WeightConverter {
      *
      * @return the ounce to gram ratio
      */
-    public double getOunceToGramRatio() {
+    public double getOunceToGramRatio( ) {
         return ounceToGramRatio;
     }
 
@@ -51,7 +50,7 @@ public final class WeightConverter {
      *
      * @return the kilogram to pound ratio
      */
-    public double getKilogramToPoundRatio() {
+    public double getKilogramToPoundRatio( ) {
         return kilogramToPoundRatio;
     }
 
@@ -60,7 +59,7 @@ public final class WeightConverter {
      *
      * @return the gram to pound ratio
      */
-    public double getGramToPoundRatio() {
+    public double getGramToPoundRatio( ) {
         return gramToPoundRatio;
     }
 
@@ -69,7 +68,7 @@ public final class WeightConverter {
      *
      * @return the ounce to pound ratio
      */
-    public double getOunceToPoundRatio() {
+    public double getOunceToPoundRatio( ) {
         return ounceToPoundRatio;
     }
 
@@ -79,7 +78,7 @@ public final class WeightConverter {
      * @param amountInOunce the amount in ounce
      * @return the double
      */
-    public double convertFromOunceToGram(final double amountInOunce) {
+    public double convertFromOunceToGram( final double amountInOunce ) {
         return amountInOunce * this.ounceToGramRatio;
     }
 
@@ -89,7 +88,7 @@ public final class WeightConverter {
      * @param amountInKiloGram the amount in kilo gram
      * @return the double
      */
-    public double convertFromKilogramToPound(final double amountInKiloGram) {
+    public double convertFromKilogramToPound( final double amountInKiloGram ) {
         return amountInKiloGram * this.kilogramToPoundRatio;
     }
 
@@ -99,7 +98,9 @@ public final class WeightConverter {
      * @param amountInGram the amount in gram
      * @return the double
      */
-    public double convertFromGramToPound(final double amountInGram) { return amountInGram * this.gramToPoundRatio; }
+    public double convertFromGramToPound( final double amountInGram ) {
+        return amountInGram * this.gramToPoundRatio;
+    }
 
     /**
      * Convert from ounce to pound.
@@ -107,7 +108,7 @@ public final class WeightConverter {
      * @param amountInOunce the amount in ounce
      * @return the double
      */
-    public double convertFromOunceToPound(final double amountInOunce) {
+    public double convertFromOunceToPound( final double amountInOunce ) {
         return amountInOunce * this.ounceToPoundRatio;
     }
 
@@ -119,8 +120,8 @@ public final class WeightConverter {
      * @param amountInOunce the amount in ounce
      * @return the double
      */
-    public double convertFromGramToOunce(final double amountInOunce) {
-        return amountInOunce * (1 / this.ounceToGramRatio);
+    public double convertFromGramToOunce( final double amountInOunce ) {
+        return amountInOunce * ( 1 / this.ounceToGramRatio );
     }
 
     /**
@@ -129,8 +130,8 @@ public final class WeightConverter {
      * @param amountInPound the amount in pound
      * @return the double
      */
-    public double convertFromPoundToKilogram(final double amountInPound) {
-        return amountInPound * (1 / this.kilogramToPoundRatio);
+    public double convertFromPoundToKilogram( final double amountInPound ) {
+        return amountInPound * ( 1 / this.kilogramToPoundRatio );
     }
 
     /**
@@ -139,8 +140,8 @@ public final class WeightConverter {
      * @param amountInPound the amount in pound
      * @return the double
      */
-    public double convertFromPoundToGram(final double amountInPound) {
-        return amountInPound * (1 / this.gramToPoundRatio);
+    public double convertFromPoundToGram( final double amountInPound ) {
+        return amountInPound * ( 1 / this.gramToPoundRatio );
     }
 
     /**
@@ -149,8 +150,8 @@ public final class WeightConverter {
      * @param amountInPound the amount in pound
      * @return the double
      */
-    public double convertFromPoundToOunce(final double amountInPound) {
-        return amountInPound * (1 / this.ounceToPoundRatio);
+    public double convertFromPoundToOunce( final double amountInPound ) {
+        return amountInPound * ( 1 / this.ounceToPoundRatio );
     }
 
     /**
@@ -160,7 +161,7 @@ public final class WeightConverter {
      * @param ratioForConversion the ratio for conversion
      * @return the double
      */
-    public double customConverterWithGivenRatio(final double dataToConvert, final double ratioForConversion) {
+    public double customConverterWithGivenRatio( final double dataToConvert, final double ratioForConversion ) {
         return dataToConvert * ratioForConversion;
     }
 

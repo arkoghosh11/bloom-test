@@ -30,20 +30,25 @@ import java.util.List;
 
 /**
  * This class is a test class for testing class todo...
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
-@ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
-@TransactionConfiguration // If required
-@Transactional   // If required
+@ContextConfiguration( locations = { "/dbConfig-test.xml" } )
+// "" <- <add location file>
+@TransactionConfiguration
+// If required
+@Transactional
+// If required
 public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods.class );
+    private static final Logger logger = LoggerFactory
+            .getLogger( WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods.class );
 
     /**
      * The Working hour dAO impl.
@@ -73,6 +78,7 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
     @Before
     @BeforeTransaction
     public void setUp( ) throws Exception {
+
         logger.debug( TestConstants.setUpMethodLoggerMsg );
         testId = TestConstants.TEST_ID;
         testIds = new ArrayList<>( );
@@ -85,6 +91,7 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
      *
      * @throws Exception the exception
      */
+    @SuppressWarnings( "unchecked" )
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
@@ -152,7 +159,8 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteWorkingHourByWorkingHrIdErrorDisabled" );
 
-        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteWorkingHourByWorkingHrId( testId, TestConstants.IS_ERROR );
+        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteWorkingHourByWorkingHrId( testId,
+                TestConstants.IS_ERROR );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, workingHourDAOResponse.getErrorContainer( ) );
 
@@ -176,8 +184,8 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
     public void testDeleteWorkingHoursByWorkingHrIdsErrorEnabled( ) throws Exception {
 
         logger.debug( "Starting test for DeleteWorkingHoursByWorkingHrIdsErrorEnabled" );
-        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteWorkingHoursByWorkingHrIds(
-                testIds, TestConstants.IS_ERROR_TRUE );
+        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteWorkingHoursByWorkingHrIds( testIds,
+                TestConstants.IS_ERROR_TRUE );
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDAOResponse.getErrorContainer( ) );
@@ -206,8 +214,8 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteWorkingHoursByWorkingHrIdsErrorDisabled" );
 
-        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteWorkingHoursByWorkingHrIds(
-                testIds, TestConstants.IS_ERROR );
+        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteWorkingHoursByWorkingHrIds( testIds,
+                TestConstants.IS_ERROR );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, workingHourDAOResponse.getErrorContainer( ) );
 
@@ -225,7 +233,7 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
      *
      * @throws Exception the exception
      */
-//  IMP Delete all WorkingHour Test Cases
+    // IMP Delete all WorkingHour Test Cases
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -233,8 +241,8 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllWorkingHoursWithErrorEnabled" );
 
-        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteAllWorkingHours( TestConstants
-                .IS_DELETE_ALL, TestConstants.IS_ERROR_TRUE );
+        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteAllWorkingHours(
+                TestConstants.IS_DELETE_ALL, TestConstants.IS_ERROR_TRUE );
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDAOResponse.getErrorContainer( ) );
@@ -263,8 +271,8 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllWorkingHoursWithErrorDisabled" );
 
-        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl
-                .deleteAllWorkingHours( TestConstants.IS_DELETE_ALL, TestConstants.IS_ERROR );
+        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteAllWorkingHours(
+                TestConstants.IS_DELETE_ALL, TestConstants.IS_ERROR );
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, workingHourDAOResponse.getErrorContainer( ) );
@@ -289,8 +297,8 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllWorkingHoursWithDeleteAllTrueWithErrorEnabled" );
 
-        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteAllWorkingHours( TestConstants
-                .IS_DELETE_ALL_TRUE, TestConstants.IS_ERROR_TRUE );
+        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteAllWorkingHours(
+                TestConstants.IS_DELETE_ALL_TRUE, TestConstants.IS_ERROR_TRUE );
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDAOResponse.getErrorContainer( ) );
@@ -318,8 +326,8 @@ public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllWorkingHoursWithDeleteAllTrueWithErrorDisabled" );
 
-        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteAllWorkingHours( TestConstants
-                .IS_DELETE_ALL_TRUE, TestConstants.IS_ERROR );
+        DAOResponse< WorkingHour > workingHourDAOResponse = workingHourDAOImpl.deleteAllWorkingHours(
+                TestConstants.IS_DELETE_ALL_TRUE, TestConstants.IS_ERROR );
         Assert.assertNotNull( TestConstants.nullMessage, workingHourDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, workingHourDAOResponse.getErrorContainer( ) );

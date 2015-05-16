@@ -65,8 +65,9 @@ public class ShopRestWebService {
     /**
      * Gets shops.
      *
-     * @param shopId the shop id
+     * @param shopId  the shop id
      * @param isError the is error
+     *
      * @return the shops
      */
     @GET
@@ -97,6 +98,7 @@ public class ShopRestWebService {
      *
      * @param shopDTO the shop dTO
      * @param isError the is error
+     *
      * @return the response
      */
     @POST
@@ -122,9 +124,10 @@ public class ShopRestWebService {
     /**
      * Update an shop.
      *
-     * @param shopId the shop id
+     * @param shopId  the shop id
      * @param shopDTO the shop dTO
      * @param isError the is error
+     *
      * @return the response
      */
     @PUT
@@ -154,8 +157,9 @@ public class ShopRestWebService {
     /**
      * Delete an shop.
      *
-     * @param shopId the shop id
+     * @param shopId  the shop id
      * @param isError the is error
+     *
      * @return the response
      */
     @DELETE
@@ -186,6 +190,7 @@ public class ShopRestWebService {
      *
      * @param shopIds the shop ids
      * @param isError the is error
+     *
      * @return the response
      */
     @DELETE

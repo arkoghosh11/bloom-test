@@ -50,8 +50,9 @@ public class ItemServiceImpl implements ItemService {
     /**
      * Gets item.
      *
-     * @param itemId the item id
+     * @param itemId  the item id
      * @param isError the is error
+     *
      * @return the item
      */
     @Transactional( propagation = Propagation.REQUIRED, readOnly = true, isolation = Isolation.DEFAULT )
@@ -100,6 +101,7 @@ public class ItemServiceImpl implements ItemService {
      *
      * @param itemDTO the item dTO
      * @param isError the is error
+     *
      * @return the response
      */
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
@@ -151,6 +153,7 @@ public class ItemServiceImpl implements ItemService {
      *
      * @param itemDTO the item
      * @param isError the is error
+     *
      * @return the response
      */
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
@@ -201,6 +204,7 @@ public class ItemServiceImpl implements ItemService {
      *
      * @param itemIds the item ids
      * @param isError the is error
+     *
      * @return the response
      */
     @Transactional( propagation = Propagation.REQUIRES_NEW )
@@ -236,8 +240,9 @@ public class ItemServiceImpl implements ItemService {
     /**
      * This method is to Delete an item via itemId only.
      *
-     * @param itemId the item id
+     * @param itemId  the item id
      * @param isError the is error
+     *
      * @return the response
      */
     @Transactional( propagation = Propagation.REQUIRES_NEW )

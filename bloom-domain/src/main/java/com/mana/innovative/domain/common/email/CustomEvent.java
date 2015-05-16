@@ -1,9 +1,6 @@
 package com.mana.innovative.domain.common.email;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,10 +22,6 @@ import java.util.Objects;
 @Table( name = "custom_events" )
 public class CustomEvent {
 
-    /**
-     * The constant logger.
-     */
-    private static final Logger logger = LoggerFactory.getLogger( CustomEvent.class );
 
     /**
      * The Custom event id.
@@ -350,6 +343,7 @@ public class CustomEvent {
      * Equals boolean.
      *
      * @param o the o
+     *
      * @return the boolean
      */
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * The type Shops payload.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -18,7 +18,7 @@ public class ShopsPayload {
     /**
      * The Shops.
      */
-    private List<Shop> shops;
+    private List< Shop > shops;
     /**
      * The Total count.
      */
@@ -27,19 +27,21 @@ public class ShopsPayload {
 
     /**
      * This method returns a list of items
+     *
      * @return Return a list of items
      */
-    @XmlElementWrapper(name = "shops")
-    @XmlElement(name = "shop")
-    public List<Shop> getShops() {
+    @XmlElementWrapper( name = "shops" )
+    @XmlElement( name = "shop" )
+    public List< Shop > getShops( ) {
         return shops;
     }
 
     /**
      * This method sets a list of shops to its class property
-     * @param shops  A list of shops
+     *
+     * @param shops A list of shops
      */
-    public void setShops(List<Shop> shops) {
+    public void setShops( List< Shop > shops ) {
         this.shops = shops;
     }
 
@@ -48,7 +50,7 @@ public class ShopsPayload {
      *
      * @return the total count
      */
-    public int getTotalCount () {
+    public int getTotalCount( ) {
         return totalCount;
     }
 
@@ -57,8 +59,8 @@ public class ShopsPayload {
      *
      * @param totalCount the total count
      */
-    @XmlElement(name = "shop_count")
-    public void setTotalCount (final int totalCount) {
+    @XmlElement( name = "shop_count" )
+    public void setTotalCount( final int totalCount ) {
         this.totalCount = totalCount;
     }
 }

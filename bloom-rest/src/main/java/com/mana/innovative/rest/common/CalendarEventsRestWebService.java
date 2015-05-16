@@ -45,6 +45,7 @@ public class CalendarEventsRestWebService {
      * Gets all events.
      *
      * @param isError the is error
+     *
      * @return the all events
      */
     @GET
@@ -79,7 +80,8 @@ public class CalendarEventsRestWebService {
      * Delete events.
      *
      * @param calendarEventIds the calendar event ids
-     * @param isError the is error
+     * @param isError          the is error
+     *
      * @return the response
      */
     @DELETE

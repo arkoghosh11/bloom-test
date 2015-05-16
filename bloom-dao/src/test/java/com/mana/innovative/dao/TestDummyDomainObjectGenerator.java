@@ -125,7 +125,7 @@ public class TestDummyDomainObjectGenerator {
         item.setQuantityType( QuantityType.UNIT.toString( ) );
         item.setWeightedUnit( WeightedUnit.POUND.toString( ) );
 
-        DateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss.SSS" );
+        DateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 
         try {
             item.setBoughtDate( dateFormat.parse( TestConstants.TEST_BOUGHT_DATE ) );
@@ -156,125 +156,18 @@ public class TestDummyDomainObjectGenerator {
         return address;
     }
 
-    /**
-     * Gets test shop Domain ZERO ID object.
-     *
-     * @param shop the shop
-     * @return the test shop Domain ZERO ID object
-     */
-    public static Shop setTestShopDomainZEROIDObject( final Shop shop ) {
-
-        shop.setShopId( TestConstants.ZERO );
-        setTestAddressDomainZEROIDObject( shop.getAddress( ) );
-        setTestItemDomainZEROIDObject( shop.getItems( ).get( TestConstants.ZERO ) );
-        setTestWorkingHourDomainZEROIDObject( shop.getWorkingHours( ).get( TestConstants.ZERO ) );
-
-        return shop;
-    }
 
     /**
      * Gets test address Domain ZERO ID object.
      *
      * @param address the address
+     *
      * @return the test address Domain ZERO ID object
      */
     public static Address setTestAddressDomainZEROIDObject( final Address address ) {
 
         address.setAddressId( TestConstants.ZERO );
         return address;
-    }
-
-    /**
-     * Gets test item dTO ZERO ID object.
-     *
-     * @param item the item
-     * @return the test item dTO ZERO ID object
-     */
-    public static Item setTestItemDomainZEROIDObject( final Item item ) {
-
-        item.setItemId( TestConstants.ZERO );
-        return item;
-    }
-
-    /**
-     * Gets test working hour Domain ZERO ID object.
-     *
-     * @param workingHour the working hour
-     * @return the test working hour Domain ZERO ID object
-     */
-    public static WorkingHour setTestWorkingHourDomainZEROIDObject( final WorkingHour workingHour ) {
-
-        workingHour.setWorkingHourId( TestConstants.ZERO );
-        return workingHour;
-    }
-
-    /**
-     * Gets test tab domain ZERO ID object.
-     *
-     * @param tabDomain the tab domain
-     */
-    public static void setTestTabDomainZEROIDObject( final Tab tabDomain ) {
-
-        tabDomain.setTabId( TestConstants.ZERO );
-    }
-
-    /**
-     * Gets test user domain Zero Id object.
-     *
-     * @param userDomain the user domain
-     */
-    public static void setTestUserDomainZEROIDObject( final User userDomain ) {
-
-        userDomain.setUserId( TestConstants.ZERO );
-    }
-
-    /**
-     * Gets test user domain Zero Id object.
-     *
-     * @param cardDomain the user domain
-     */
-    public static void setTestCardDomainZEROIDObject( final Card cardDomain ) {
-
-        cardDomain.setCardId( TestConstants.ZERO );
-    }
-
-    /**
-     * Gets test phone domain ZERO ID object.
-     *
-     * @param phoneDomain the phone domain
-     */
-    public static void setTestPhoneDomainZEROIDObject( final Phone phoneDomain ) {
-        phoneDomain.setPhoneId( TestConstants.ZERO );
-
-    }
-
-    /**
-     * Gets test preference domain ZERO ID object.
-     *
-     * @param preferenceDomain the preference domain
-     */
-    public static void setTestPreferenceDomainZEROIDObject( final Preference preferenceDomain ) {
-        preferenceDomain.setPreferenceId( TestConstants.ZERO );
-
-    }
-
-    /**
-     * Gets test calendar event domain ZERO ID object.
-     *
-     * @param calendarEventDomain the calendar event domain
-     */
-    public static void setTestCalendarEventDomainZEROIDObject( final CalendarEvent calendarEventDomain ) {
-        calendarEventDomain.setCalendarEventId( TestConstants.ZERO );
-    }
-
-    /**
-     * Sets test sidebar type domain ZERO ID object.
-     *
-     * @param sidebarDomain the sidebar domain
-     */
-    public static void setTestSidebarTypeDomainZEROIDObject( final SidebarType sidebarDomain ) {
-        sidebarDomain.setSidebarTypeId( TestConstants.ZERO );
-
     }
 
     /**
@@ -673,7 +566,7 @@ public class TestDummyDomainObjectGenerator {
 
         UserRole userRole = new UserRole( );
 
-        userRole.setUserRoleId( TestConstants.ZERO );
+//        userRole.setUserRoleId( TestConstants.ZERO );
         userRole.setUserRoleName( TestConstants.DEFAULT );
         userRole.setIsActive( TestConstants.TEST_FALSE );
         userRole.setPrivileges( getNCreatePrivilegeDomainList( ) );
@@ -692,9 +585,11 @@ public class TestDummyDomainObjectGenerator {
         Privilege privilege;
 
         privilege = new Privilege( );
-        privilege.setPrivilegeId( 0 );
-        privilege.setPrivilegeName( TestConstants.DEFAULT );
-        privilege.setAccessible( TestConstants.TEST_FALSE );
+//        privilege.setPrivilegeId( 0 );
+        privilege.setPrivilegeName( TestConstants.TEST_NAME );
+        privilege.setAccessible( TestConstants.TEST_TRUE );
+        privilege.setCreatedDate( new Date( ) );
+        privilege.setUpdatedDate( new Date( ) );
         privilegeList.add( privilege );
 
         return privilegeList;

@@ -47,7 +47,8 @@ public class CustomerResWebService {
      * Gets single customer details.
      *
      * @param customerId the customer id
-     * @param isError the is error
+     * @param isError    the is error
+     *
      * @return the single customer details
      */
     @GET
@@ -68,7 +69,8 @@ public class CustomerResWebService {
      * Create new customer.
      *
      * @param customer the customer
-     * @param isError the is error
+     * @param isError  the is error
+     *
      * @return the response
      */
     @POST
@@ -88,9 +90,10 @@ public class CustomerResWebService {
     /**
      * Update specific customer details.
      *
-     * @param customer the customer
+     * @param customer   the customer
      * @param customerId the customer id
-     * @param isError the is error
+     * @param isError    the is error
+     *
      * @return the response
      */
     @PUT
@@ -113,7 +116,8 @@ public class CustomerResWebService {
      * Delete specific customer.
      *
      * @param customerId the customer id
-     * @param isError the is error
+     * @param isError    the is error
+     *
      * @return the response
      */
     @DELETE

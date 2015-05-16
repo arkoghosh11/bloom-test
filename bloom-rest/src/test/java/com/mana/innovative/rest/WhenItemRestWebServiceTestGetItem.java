@@ -1,6 +1,5 @@
 package com.mana.innovative.rest;/**
- * Created by Rono on 2/26/2015.
- * This is a class for .. todo 
+ * Created by Rono on 2/26/2015. This is a class for .. todo
  */
 
 import com.mana.innovative.constants.TestConstants;

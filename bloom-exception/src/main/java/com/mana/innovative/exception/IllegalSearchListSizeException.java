@@ -13,6 +13,10 @@ import com.mana.innovative.constants.DAOConstants;
 public class IllegalSearchListSizeException extends RuntimeException {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = -8231463104563105591L;
+    /**
      * The Message.
      */
     private String message = "Size of Search String keywords cannot be Greater than "

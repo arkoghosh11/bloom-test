@@ -20,6 +20,7 @@ import java.util.Properties;
 
 /**
  * Created by alex1 on 1/23/2015. This is a domain class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -87,6 +88,7 @@ public class WhenDatabaseConnectivityCheckConnectivity {
      *
      * @param user the user
      * @param pass the pass
+     *
      * @throws ClassNotFoundException the class not found exception
      * @throws ClassNotFoundException the sQL exception
      */

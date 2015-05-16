@@ -3,7 +3,6 @@
  */
 package com.mana.innovative.rest.common;
 
-import com.mana.innovative.dto.common.Tab;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.common.TabsService;
 import org.slf4j.Logger;
@@ -26,8 +25,9 @@ import java.util.List;
 
 /**
  * The type Tabs rest web service.
-
+ * <p/>
  * Created by Bloom/Rono on $date $time.
+ *
  * @author Bloom Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -39,7 +39,7 @@ public class TabsRestWebService {
     /**
      * The constant log.
      */
-    private static final Logger log = LoggerFactory.getLogger( TabsRestWebService.class );
+    private static final Logger logger = LoggerFactory.getLogger( TabsRestWebService.class );
 
     /**
      * The Servlet request.
@@ -53,22 +53,26 @@ public class TabsRestWebService {
     @Resource
     private TabsService tabsService;
 
-//    private HttpSession session;
-
+    // private HttpSession session;
 
     /**
      * This method is for giving service for url /rest/tabs with all the tabs data as a {@link List<Tab></>}
      *
      * @param isError the is error
+     *
      * @return A response object containing all of the tabs within the Database
      */
     @GET
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     public Response getAllTabs( @QueryParam( "is_error" ) @DefaultValue( "false" ) Boolean isError ) {
 
+        logger.debug( "Starting request for #getAllTabs()" );
         RequestParams requestParams = new RequestParams( );
         requestParams.setIsError( isError );
-        return tabsService.getAllTabs( requestParams );
+        Response response = tabsService.getAllTabs( requestParams );
+        logger.debug( "Finishing response for #getAllTabs()" );
+
+        return response;
     }
 
     /**
@@ -82,11 +86,16 @@ public class TabsRestWebService {
     @DELETE
     @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response deleteTabs( List< Integer > tabIds,
-                                @QueryParam( "is_error" ) @DefaultValue( "false" ) Boolean isError ) {
+    public Response deleteTabs( List< Integer > tabIds, @QueryParam( "is_error" ) @DefaultValue( "false" ) Boolean isError ) {
+
+        logger.debug( "Starting request for #deleteTabs()" );
 
         RequestParams requestParams = new RequestParams( );
         requestParams.setIsError( isError );
-        return tabsService.deleteTabs( tabIds, requestParams );
+        Response response = tabsService.deleteTabs( tabIds, requestParams );
+
+        logger.debug( "Finishing response for #deleteTabs()" );
+
+        return response;
     }
 }

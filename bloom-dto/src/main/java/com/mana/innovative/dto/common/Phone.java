@@ -9,8 +9,8 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * The type Phone.
- * Created by Bloom/Rono on Date: 10/22/12 Time: 11:14 AM
+ * The type Phone. Created by Bloom/Rono on Date: 10/22/12 Time: 11:14 AM
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright

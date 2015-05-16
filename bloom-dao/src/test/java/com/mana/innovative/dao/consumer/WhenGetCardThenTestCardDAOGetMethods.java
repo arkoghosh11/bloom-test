@@ -25,6 +25,7 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 5/2/2015 6:14 PM. This class WhenGetCardThenTestCardDAOGetMethods is a test class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -117,7 +118,7 @@ public class WhenGetCardThenTestCardDAOGetMethods {
         logger.debug( "Starting test for GetCardWithErrorDisabled" );
 
         requestParams.setIsError( TestConstants.IS_ERROR );
-        DAOResponse< Card > cardDAOResponse = cardDAO.getCard( TestConstants.TEST_ID, requestParams );
+        DAOResponse< Card > cardDAOResponse = cardDAO.getCardByCardId( TestConstants.TEST_ID, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, cardDAOResponse );
         // test error container
@@ -203,7 +204,7 @@ public class WhenGetCardThenTestCardDAOGetMethods {
         logger.debug( "Starting test for GetCardWithErrorEnabled" );
 
         requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
-        DAOResponse< Card > cardDAOResponse = cardDAO.getCard( TestConstants.TEST_ID, requestParams );
+        DAOResponse< Card > cardDAOResponse = cardDAO.getCardByCardId( TestConstants.TEST_ID, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, cardDAOResponse );
 

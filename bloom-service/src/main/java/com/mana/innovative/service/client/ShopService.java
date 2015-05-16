@@ -19,8 +19,9 @@ public interface ShopService {
     /**
      * Gets shopDTO.
      *
-     * @param shopId the shopDTO id
+     * @param shopId  the shopDTO id
      * @param isError the is error
+     *
      * @return the shopDTO
      */
     Response getShopByShopId( long shopId, boolean isError );
@@ -30,6 +31,7 @@ public interface ShopService {
      *
      * @param shopDTO the shopDTO
      * @param isError the is error
+     *
      * @return the response
      */
     Response createShop( Shop shopDTO, boolean isError );
@@ -39,6 +41,7 @@ public interface ShopService {
      *
      * @param shopDTO the shopDTO
      * @param isError the is error
+     *
      * @return the response
      */
     Response updateShop( Shop shopDTO, boolean isError );
@@ -46,8 +49,9 @@ public interface ShopService {
     /**
      * Delete shop by shop id.
      *
-     * @param shopId the shop id
+     * @param shopId  the shop id
      * @param isError the is error
+     *
      * @return the response
      */
     Response deleteShopByShopId( Long shopId, boolean isError );
@@ -57,6 +61,7 @@ public interface ShopService {
      *
      * @param shopIds the shop ids
      * @param isError the is error
+     *
      * @return the response
      */
     Response deleteShopsByShopIds( List< Long > shopIds, boolean isError );

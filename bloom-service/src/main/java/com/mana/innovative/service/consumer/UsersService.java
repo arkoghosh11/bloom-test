@@ -31,10 +31,10 @@ public interface UsersService {
     /**
      * Delete users.
      *
-     * @param userIds the user ids
      * @param requestParams the request params
+     *
      * @return the response
      */
-    Response deleteUsers( List< Long > userIds, RequestParams requestParams );
+    Response deleteAllUsers( RequestParams requestParams );
 
 }

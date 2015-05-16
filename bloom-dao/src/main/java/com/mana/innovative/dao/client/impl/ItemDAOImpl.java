@@ -107,8 +107,9 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     /**
      * Delete item by item id.
      *
-     * @param itemId the item id
+     * @param itemId  the item id
      * @param isError the is error
+     *
      * @return Returns a boolean value to indicate a successful deletion
      */
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
@@ -151,6 +152,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
      *
      * @param itemIds the item ids
      * @param isError the is error
+     *
      * @return the dAO response
      */
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
@@ -192,8 +194,9 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     /**
      * This method is to update the DB with the persistence layer to keep the Item value synced
      *
-     * @param item the item
+     * @param item    the item
      * @param isError the is error
+     *
      * @return Returns a boolean value to indicate a successful update
      */
     @SuppressWarnings( "unchecked" )
@@ -256,8 +259,9 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     /**
      * This method is to create a Item object and save it in the DB
      *
-     * @param item the item
+     * @param item    the item
      * @param isError the is error
+     *
      * @return Returns a boolean value to indicate a successful creation
      */
     @Override
@@ -301,8 +305,9 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     /**
      * Gets item by item id.
      *
-     * @param itemId the item id
+     * @param itemId  the item id
      * @param isError the is error
+     *
      * @return the item by item id
      */
     @SuppressWarnings( "unchecked" )
@@ -350,6 +355,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
      * This method is to retrieve all the items values from the DB
      *
      * @param isError the is error
+     *
      * @return List<Item> </> Return a list of
      */
     @SuppressWarnings( "unchecked" )

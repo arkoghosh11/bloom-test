@@ -23,8 +23,9 @@ import java.util.List;
 
 /**
  * The type Users rest web service.
-
+ * <p/>
  * Created by Bloom/Rono on $date $time.
+ *
  * @author Bloom Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -48,6 +49,7 @@ public class UsersRestWebService {
      * This method is for HTTP GET response for getting
      *
      * @param isError the is error
+     *
      * @return A response object
      */
     @GET
@@ -63,21 +65,19 @@ public class UsersRestWebService {
     /**
      * Delete users.
      *
-     * @param userIds the user ids
      * @param isError the is error
+     *
      * @return the response
      */
     @DELETE
-    @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response deleteUsers( List< Long > userIds,
-                                 @QueryParam( "is_error" ) @DefaultValue( "false" ) Boolean isError ) {
+    public Response deleteUsers( @QueryParam( "is_error" ) @DefaultValue( "false" ) Boolean isError ) {
 
-        logger.debug( "Starting #deleteUsers()" );
+        logger.debug( "Starting #deleteAllUsers()" );
         RequestParams requestParams = new RequestParams( );
         requestParams.setIsError( isError );
 
-        return usersService.deleteUsers( userIds, requestParams );
+        return usersService.deleteAllUsers( requestParams );
     }
 
 }

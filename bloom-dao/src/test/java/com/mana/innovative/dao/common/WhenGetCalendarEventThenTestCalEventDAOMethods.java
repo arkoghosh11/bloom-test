@@ -27,6 +27,7 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 5/2/2015 11:51 PM. This class WhenCalendarEventThenTestCalEventDAOMethods is a test class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright

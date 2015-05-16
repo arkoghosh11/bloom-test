@@ -9,8 +9,12 @@ package com.mana.innovative.exception;
  */
 public class ListEmptyException extends RuntimeException {
 
-//    private static final Logger logger = Logger.getLogger( ListEmptyException.class );
+    // private static final Logger logger = Logger.getLogger( ListEmptyException.class );
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4617909591581505624L;
     /**
      * The Message.
      */
@@ -20,6 +24,7 @@ public class ListEmptyException extends RuntimeException {
      * Instantiates a new List empty exception.
      */
     public ListEmptyException( ) {
+
         super( );
     }
 
@@ -40,6 +45,7 @@ public class ListEmptyException extends RuntimeException {
      * @return the error
      */
     public String getError( ) {
+
         return message;
     }
 
@@ -48,7 +54,9 @@ public class ListEmptyException extends RuntimeException {
      *
      * @return the string
      */
+    @Override
     public String toString( ) {
+
         return message;
     }
 }

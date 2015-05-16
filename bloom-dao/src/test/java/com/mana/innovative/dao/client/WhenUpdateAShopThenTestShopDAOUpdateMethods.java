@@ -29,11 +29,9 @@ import java.util.List;
  * Please uncomment the following lines to enable Spring Integration Test the 2nd line requires location on Context
  * Config Files for beans and properties extra, the 1st one is to enable Spring for the Class
  *
- * @ RunWith(value = SpringJUnit4ClassRunner.class | MockitoWithJunitRunner.Class)
- * @ ContextConfiguration(location {"loc1"."loc2"})
- * @ TransactionConfiguration   <--- Only If required
- * @ Transactional              <--- Only If required
  * @author Rono, Ankur Bhardwaj
+ * @ RunWith(value = SpringJUnit4ClassRunner.class | MockitoWithJunitRunner.Class) @ ContextConfiguration(location
+ * {"loc1"."loc2"}) @ TransactionConfiguration <--- Only If required @ Transactional <--- Only If required
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
@@ -69,6 +67,7 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
 
     /**
      * This method is to initialize Objects and configuration files before testing test method
+     *
      * @throws Exception the exception
      */
     @Before
@@ -77,10 +76,10 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
         dummyShop = new Shop( );
         dummyShop.setShopId( id );
-//        dummyShop.setShopName(TestConstants.TEST_VALUE);
-//        dummyShop.setShopPriceCurrency(TestConstants.TEST_PRICE_CURRENCY);
-//        dummyShop.setShopType( TestConstants.UPDATED_TEST_VALUE );
-//        dummyShop.setShopPrice(TestConstants.THREE);
+        // dummyShop.setShopName(TestConstants.TEST_VALUE);
+        // dummyShop.setShopPriceCurrency(TestConstants.TEST_PRICE_CURRENCY);
+        // dummyShop.setShopType( TestConstants.UPDATED_TEST_VALUE );
+        // dummyShop.setShopPrice(TestConstants.THREE);
 
     }
 
@@ -95,21 +94,22 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
 
     /**
      * todo This method is to test the behavior of ...
+     *
      * @throws Exception the exception
      */
     // @Test
-    //  @Rollback( value = true )
-    //   @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
+    // @Rollback( value = true )
+    // @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
     public void testShopDAOUpdate( ) throws Exception {
 
-//        dummyShop.setShopPrice(TestConstants.UPDATED_ITEM_PRICE);
+        // dummyShop.setShopPrice(TestConstants.UPDATED_ITEM_PRICE);
         dummyShop.setShopName( TestConstants.UPDATED_TEST_VALUE );
-        //dummyShop.setShopPriceCurrency( TestConstants.UPDATED_TEST_VALUE );
+        // dummyShop.setShopPriceCurrency( TestConstants.UPDATED_TEST_VALUE );
 
-//        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( id, TestConstants.IS_ERROR );
-//        Assert.assertNotNull( shopDAOResponse );
-//        Assert.assertNotNull( shopDAOResponse.getResults( ) );
-//        Assert.assertFalse( shopDAOResponse.getResults( ).isEmpty( ) );
+        // DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( id, TestConstants.IS_ERROR );
+        // Assert.assertNotNull( shopDAOResponse );
+        // Assert.assertNotNull( shopDAOResponse.getResults( ) );
+        // Assert.assertFalse( shopDAOResponse.getResults( ).isEmpty( ) );
 
         // dummyShop.setShopShop( shopDAOResponse.getResults( ).get( TestConstants.ZERO ) );
 
@@ -121,14 +121,17 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
         Assert.assertFalse( TestConstants.trueMessage, shopDAOResponse.isDelete( ) );
 
         dummyShop = shopDAOResponse.getResults( ).get( TestConstants.ZERO );
-//        dummyShop = shopDAO.getShopByShopId(dummyShop.getShopId(), TestConstants.IS_ERROR).getResults().get
-//                (TestConstants.ZERO);
+        // dummyShop = shopDAO.getShopByShopId(dummyShop.getShopId(), TestConstants.IS_ERROR).getResults().get
+        // (TestConstants.ZERO);
 
         Assert.assertNotNull( dummyShop );
-//        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyShop.getShopName( ) );
-//        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyShop.getShopPriceCurrency( ) );
-//        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyShop.getShopType( ) );
-//        Assert.assertEquals( TestConstants.notEqualsMessage, 2.0, dummyShop.getShopPrice( ) );
+        // Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyShop.getShopName(
+        // ) );
+        // Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE,
+        // dummyShop.getShopPriceCurrency( ) );
+        // Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.UPDATED_TEST_VALUE, dummyShop.getShopType(
+        // ) );
+        // Assert.assertEquals( TestConstants.notEqualsMessage, 2.0, dummyShop.getShopPrice( ) );
     }
 
     /**
@@ -199,8 +202,10 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
     /**
      * This method is to release objects and shut down OR close any connections after Test is completed before testing
      * test method
+     *
      * @throws Exception the exception
      */
+    @SuppressWarnings( "unchecked" )
     @After
     @AfterTransaction
     public void tearDown( ) throws Exception {
@@ -214,11 +219,11 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
         } else if ( shops.size( ) == TestConstants.ONE ) {
             Shop shop = shops.get( TestConstants.ZERO );
             Assert.assertNotNull( shop );
-//            Assert.assertEquals( " Data modified by Hibernate", TestConstants.TEST_PRICE_CURRENCY, shop.getShopPriceCurrency( ) );
+            // Assert.assertEquals( " Data modified by Hibernate", TestConstants.TEST_PRICE_CURRENCY,
+            // shop.getShopPriceCurrency( ) );
         } else {
             Assert.fail( " Unique result expected but got duplicate data" );
         }
         logger.debug( TestConstants.tearDownMethodLoggerMsg );
     }
 }
-

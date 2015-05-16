@@ -38,7 +38,8 @@ public class CalendarEventServiceImpl implements CalendarEventService {
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( CalendarEventServiceImpl.class );
+    private static final Logger logger = LoggerFactory
+            .getLogger( CalendarEventServiceImpl.class );
 
     /**
      * The Calendar event dAO.
@@ -49,47 +50,46 @@ public class CalendarEventServiceImpl implements CalendarEventService {
     /**
      * Gets calendar event.
      *
-     * @param calendarEventId {
-     *Integer
-     *}
-     * @param requestParams the request params
+     * @param calendarEventId { Integer }
+     * @param requestParams   the request params
+     *
      * @return Response calendar event
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
     public Response getCalendarEvent( Long calendarEventId, RequestParams requestParams ) {
 
-
         logger.debug( "Initiating #getCalendarEvent , calendarEventDAO injected successfully" );
 
         String location = this.getClass( ).getCanonicalName( )
                 + DAOConstants.HASH + "getCalendarEvent()";
-        String startDate = requestParams.getStartDate( ),
-                endDate = requestParams.getEndDate( );
+
         CalendarEventResponseContainer< CalendarEventsPayload > calendarEventResponseContainer;
         Response response;
-        if ( startDate != null && endDate != null ) {
 
-            Date start = DateCommons.getDateFromDateString( startDate ),
-                    end = DateCommons.getDateFromDateString( endDate );
+        try {
+            DAOResponse< com.mana.innovative.domain.common.CalendarEvent > calendarEventDAOResponse = calendarEventDAO
+                    .getCalendarEventByEventId( calendarEventId,
+                            requestParams );
+            calendarEventResponseContainer = CalendarEventResponseBuilder
+                    .build( calendarEventDAOResponse,
+                            requestParams.isError( ) );
+            response = Response.ok( calendarEventResponseContainer ).build( );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                logger.error(
+                        "Hibernate Exception occurred while trying fetch data from DB "
+                                + location, exception );
+            } else
+                logger.error( "Exception occurred in" + location, exception );
 
-            try {
-                DAOResponse< com.mana.innovative.domain.common.CalendarEvent > calendarEventDAOResponse =
-                        calendarEventDAO.getCalendarEventByEventId( calendarEventId, requestParams );
-                calendarEventResponseContainer =
-                        CalendarEventResponseBuilder.build( calendarEventDAOResponse, requestParams.isError( ) );
-                response = Response.ok( calendarEventResponseContainer ).build( );
-            } catch ( Exception exception ) {
-                if ( exception instanceof HibernateException ) {
-                    logger.error( "Hibernate Exception occurred while trying fetch data from DB " + location, exception );
-                } else
-                    logger.error( "Exception occurred in" + location, exception );
-
-                calendarEventResponseContainer = CalendarEventResponseBuilder.buildError( location, requestParams.isError( ), exception );
-                response = Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( calendarEventResponseContainer ).build( );
-            }
-        } else
-            response = ResponseUtility.notAcceptable( null );
+            calendarEventResponseContainer = CalendarEventResponseBuilder
+                    .buildError( location, requestParams.isError( ),
+                            exception );
+            response = Response
+                    .status( Response.Status.INTERNAL_SERVER_ERROR )
+                    .entity( calendarEventResponseContainer ).build( );
+        }
         logger.debug( "Response for getCalendarEvent sent Successfully" );
         return response;
     }
@@ -98,39 +98,49 @@ public class CalendarEventServiceImpl implements CalendarEventService {
      * Gets calendar event by date limits.
      *
      * @param requestParams the request params
+     *
      * @return the calendar event by date limits
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
-    public Response getCalendarEventByDateLimits( final RequestParams requestParams ) {
+    public Response getCalendarEventByDateLimits(
+            final RequestParams requestParams ) {
 
         logger.debug( "Initiating #getCalendarEventByDateLimits , calendarEventDAO injected successfully" );
 
         String location = this.getClass( ).getCanonicalName( )
                 + DAOConstants.HASH + "getCalendarEventByDateLimits()";
-        String startDate = requestParams.getStartDate( ),
-                endDate = requestParams.getEndDate( );
+        String startDate = requestParams.getStartDate( ), endDate = requestParams
+                .getEndDate( );
         CalendarEventResponseContainer< CalendarEventsPayload > calendarEventResponseContainer;
         Response response;
         if ( startDate != null && endDate != null ) {
 
-            Date start = DateCommons.getDateFromDateString( startDate ),
-                    end = DateCommons.getDateFromDateString( endDate );
+            Date start = DateCommons.getDateFromDateString( startDate ), end = DateCommons
+                    .getDateFromDateString( endDate );
 
             try {
-                DAOResponse< com.mana.innovative.domain.common.CalendarEvent > calendarEventDAOResponse =
-                        calendarEventDAO.getCalendarEventsByDateLimits( start, end, requestParams );
-                calendarEventResponseContainer =
-                        CalendarEventResponseBuilder.build( calendarEventDAOResponse, requestParams.isError( ) );
+                DAOResponse< com.mana.innovative.domain.common.CalendarEvent > calendarEventDAOResponse = calendarEventDAO
+                        .getCalendarEventsByDateLimits( start, end,
+                                requestParams );
+                calendarEventResponseContainer = CalendarEventResponseBuilder
+                        .build( calendarEventDAOResponse,
+                                requestParams.isError( ) );
                 response = Response.ok( calendarEventResponseContainer ).build( );
             } catch ( Exception exception ) {
                 if ( exception instanceof HibernateException ) {
-                    logger.error( "Hibernate Exception occurred while trying fetch data from DB " + location, exception );
+                    logger.error(
+                            "Hibernate Exception occurred while trying fetch data from DB "
+                                    + location, exception );
                 } else
                     logger.error( "Exception occurred in" + location, exception );
 
-                calendarEventResponseContainer = CalendarEventResponseBuilder.buildError( location, requestParams.isError( ), exception );
-                response = Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( calendarEventResponseContainer ).build( );
+                calendarEventResponseContainer = CalendarEventResponseBuilder
+                        .buildError( location, requestParams.isError( ),
+                                exception );
+                response = Response
+                        .status( Response.Status.INTERNAL_SERVER_ERROR )
+                        .entity( calendarEventResponseContainer ).build( );
             }
         } else
             response = ResponseUtility.notAcceptable( null );
@@ -148,14 +158,16 @@ public class CalendarEventServiceImpl implements CalendarEventService {
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
-    public Response createCalendarEvent( CalendarEvent calendarEvent, RequestParams requestParams ) {
+    public Response createCalendarEvent( CalendarEvent calendarEvent,
+                                         RequestParams requestParams ) {
 
         if ( calendarEvent != null ) {
-            com.mana.innovative.domain.common.CalendarEvent calendarEventDomain
-                    = new com.mana.innovative.domain.common.CalendarEvent( );
-            calendarEventDAO.createCalendarEvent( calendarEventDomain, requestParams );
+            com.mana.innovative.domain.common.CalendarEvent calendarEventDomain = new com.mana.innovative.domain.common.CalendarEvent( );
+            calendarEventDAO.createCalendarEvent( calendarEventDomain,
+                    requestParams );
         } else {
-            return Response.status( Status.BAD_REQUEST ).entity( "Entity Got is null" ).build( );
+            return Response.status( Status.BAD_REQUEST )
+                    .entity( "Entity Got is null" ).build( );
         }
         return Response.ok( calendarEvent ).build( );
     }

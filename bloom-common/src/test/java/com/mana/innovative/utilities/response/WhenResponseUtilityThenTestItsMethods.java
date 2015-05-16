@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 /**
  * Created by Bloom/Rono on 5/1/2015 1:31 AM. This class WhenResponseUtilityThenTestItsMethods is a test class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright

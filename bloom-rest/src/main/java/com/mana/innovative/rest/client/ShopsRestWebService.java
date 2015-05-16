@@ -43,6 +43,7 @@ public class ShopsRestWebService {
      * Gets shops.
      *
      * @param isError the is error
+     *
      * @return the shops
      */
     @GET
@@ -66,8 +67,9 @@ public class ShopsRestWebService {
     /**
      * Delete shops.
      *
-     * @param isError the is error
+     * @param isError     the is error
      * @param isDeleteAll the is delete all
+     *
      * @return the response
      */
     @DELETE

@@ -259,6 +259,7 @@ public class CustomSchedulerImpl implements CustomScheduler {
      * Is event runnable.
      *
      * @param customEvent the custom event
+     *
      * @return the boolean
      */
     private boolean isEventRunnable( final CustomEvent customEvent ) {
@@ -293,6 +294,7 @@ public class CustomSchedulerImpl implements CustomScheduler {
      * Read from cSVN save.
      *
      * @param file the file
+     *
      * @return the boolean
      */
     public boolean readFromCSVNSave( File file ) {
@@ -322,6 +324,7 @@ public class CustomSchedulerImpl implements CustomScheduler {
      * Read from xMLN save.
      *
      * @param file the file
+     *
      * @return the boolean
      */
     public boolean readFromXMLNSave( File file ) {

@@ -25,10 +25,6 @@ public class UserRoleDomainDTOConverter {
      * The constant ZERO.
      */
     private static final int ZERO = DAOConstants.ZERO;
-    /**
-     * The constant EMPTY_STRING.
-     */
-    private static final String EMPTY_STRING = DAOConstants.EMPTY_STRING;
 
     /**
      * Gets converted userRole dTO from userRole domain.
@@ -38,7 +34,8 @@ public class UserRoleDomainDTOConverter {
      *
      * @return the converted userRole dTO from userRole domain
      */
-    public static UserRole getConvertedDTOFromDomain( UserRole userRoleDTO, com.mana.innovative.domain.consumer.UserRole userRoleDomain ) {
+    public static UserRole getConvertedDTOFromDomain( UserRole userRoleDTO,
+                                                      com.mana.innovative.domain.consumer.UserRole userRoleDomain ) {
 
         if ( userRoleDomain == null ) {
             String message = "Parameter userRoleDomain is required for conversion";
@@ -59,12 +56,11 @@ public class UserRoleDomainDTOConverter {
             userRoleDTO.setIsActive( userRoleDomain.isActive( ) );
         }
         if ( userRoleDomain.getPrivileges( ) != null ) {
-            userRoleDTO.setPrivileges( PrivilegeDomainDTOConverter
-                    .getConvertedListDTOFromDomain( userRoleDomain.getPrivileges( )
-                    ) );
+            userRoleDTO.setPrivileges( PrivilegeDomainDTOConverter.getConvertedListDTOFromDomain( userRoleDomain
+                    .getPrivileges( ) ) );
         }
 
-//            userRole.setShopUserRole();
+        // userRole.setShopUserRole();
         return userRoleDTO;
     }
 
@@ -75,7 +71,8 @@ public class UserRoleDomainDTOConverter {
      *
      * @return the converted userRole dTO list
      */
-    public static List< UserRole > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.consumer.UserRole > userRoleDomainList ) {
+    public static List< UserRole > getConvertedListDTOFromDomain(
+            List< com.mana.innovative.domain.consumer.UserRole > userRoleDomainList ) {
 
         List< UserRole > userRoleDTOList = new ArrayList<>( );
         for ( com.mana.innovative.domain.consumer.UserRole userRole : userRoleDomainList ) {
@@ -95,7 +92,8 @@ public class UserRoleDomainDTOConverter {
      *
      * @return the converted userRole domain from userRole dTO
      */
-    public static com.mana.innovative.domain.consumer.UserRole getConvertedDomainFromDTO( com.mana.innovative.domain.consumer.UserRole userRoleDomain, UserRole userRoleDTO ) {
+    public static com.mana.innovative.domain.consumer.UserRole getConvertedDomainFromDTO(
+            com.mana.innovative.domain.consumer.UserRole userRoleDomain, UserRole userRoleDTO ) {
 
         if ( userRoleDTO == null ) {
             String message = "Parameter userRoleDTO is required for conversion";
@@ -117,13 +115,13 @@ public class UserRoleDomainDTOConverter {
             stringBuilder.append( " UserRoleName," );
         }
 
-//            userRole.setShopUserRole();
+        // userRole.setShopUserRole();
         userRoleDomain.setIsActive( userRoleDTO.isActive( ) );
         if ( !userRoleDTO.isActive( ) ) {
             logger.warn( "Deprecated user role used for login " );
         }
 
-        //Note might need to check role and privilege validation here
+        // Note might need to check role and privilege validation here
         if ( userRoleDTO.getUserRoleId( ) != null && userRoleDTO.getUserRoleId( ) > ZERO ) {
             userRoleDomain.setUserRoleId( userRoleDTO.getUserRoleId( ) );
         } else {
@@ -134,8 +132,8 @@ public class UserRoleDomainDTOConverter {
         }
 
         if ( userRoleDTO.getPrivileges( ) != null && !userRoleDTO.getPrivileges( ).isEmpty( ) ) {
-            userRoleDomain.setPrivileges( PrivilegeDomainDTOConverter
-                    .getConvertedListDomainFromDTO( userRoleDTO.getPrivileges( ) ) );
+            userRoleDomain.setPrivileges( PrivilegeDomainDTOConverter.getConvertedListDomainFromDTO( userRoleDTO
+                    .getPrivileges( ) ) );
         } else {
             flag = true;
             stringBuilder.append( " Privileges " );
@@ -155,7 +153,8 @@ public class UserRoleDomainDTOConverter {
      *
      * @return the converted userRole domain list from userRole dTO list
      */
-    public static List< com.mana.innovative.domain.consumer.UserRole > getConvertedListDomainFromDTO( List< UserRole > userRoleDTOList ) {
+    public static List< com.mana.innovative.domain.consumer.UserRole > getConvertedListDomainFromDTO(
+            List< UserRole > userRoleDTOList ) {
 
         List< com.mana.innovative.domain.consumer.UserRole > userRoleDomainList = new ArrayList<>( );
         for ( UserRole userRoleDTO : userRoleDTOList ) {

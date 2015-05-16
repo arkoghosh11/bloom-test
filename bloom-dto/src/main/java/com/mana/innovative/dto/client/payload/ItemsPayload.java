@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * The type Items payload.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -22,7 +22,7 @@ public class ItemsPayload {
     /**
      * The Items.
      */
-    private List<Item> items;
+    private List< Item > items;
     /**
      * The Total count.
      */
@@ -31,19 +31,21 @@ public class ItemsPayload {
 
     /**
      * This method returns a list of items
+     *
      * @return Return a list of items
      */
-    @XmlElementWrapper(name = "items")
-    @XmlElement(name = "item")
-    public List<Item> getItems() {
+    @XmlElementWrapper( name = "items" )
+    @XmlElement( name = "item" )
+    public List< Item > getItems( ) {
         return items;
     }
 
     /**
      * This method sets a list of items to its class property
-     * @param items  A list of items
+     *
+     * @param items A list of items
      */
-    public void setItems(List<Item> items) {
+    public void setItems( List< Item > items ) {
         this.items = items;
     }
 
@@ -52,7 +54,7 @@ public class ItemsPayload {
      *
      * @return the total count
      */
-    public int getTotalCount () {
+    public int getTotalCount( ) {
         return totalCount;
     }
 
@@ -61,8 +63,8 @@ public class ItemsPayload {
      *
      * @param totalCount the total count
      */
-    @XmlElement(name = "item_count")
-    public void setTotalCount (final int totalCount) {
+    @XmlElement( name = "item_count" )
+    public void setTotalCount( final int totalCount ) {
         this.totalCount = totalCount;
     }
 }

@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 /**
  * The type Users service impl.
@@ -50,6 +49,7 @@ public class UsersServiceImpl implements UsersService {
      * Gets all users.
      *
      * @param requestParams the request params
+     *
      * @return the all users
      */
     @Override
@@ -94,18 +94,18 @@ public class UsersServiceImpl implements UsersService {
     /**
      * Delete users.
      *
-     * @param userIds the user ids
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ )
-    public Response deleteUsers( List< Long > userIds, RequestParams requestParams ) {
+    public Response deleteAllUsers( RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteUsers()";
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteAllUsers()";
         logger.debug( "Starting " + location );
 
-        userDAO.deleteUsers( userIds, requestParams, null );
+        userDAO.deleteAllUsers( requestParams, null );
 
         logger.debug( "Finishing " + location );
 

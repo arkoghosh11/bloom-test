@@ -27,9 +27,11 @@ import java.util.List;
  * @Copyright
  */
 @Repository( value = "userRoleDAO" )
+@Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
 
-    private static final Logger logger = LoggerFactory.getLogger( UserRoleDAOImpl.class );
+    private static final Logger logger = LoggerFactory
+            .getLogger( UserRoleDAOImpl.class );
 
     /**
      * Gets userRoles.
@@ -43,12 +45,14 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
     public DAOResponse< UserRole > getUserRoles( RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#getUserRoles()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getUserRoles()";
 
         logger.debug( "Starting " + location );
         DAOResponse< UserRole > userRoleDAOResponse = new DAOResponse<>( );
         List< UserRole > userRoleList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
             this.openDBTransaction( );
 
@@ -61,7 +65,9 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from userRoles table for userRoles ", exception );
+            logger.error(
+                    "Failed while getting data from userRoles table for userRoles ",
+                    exception );
             userRoleDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -86,20 +92,23 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
      *
      * @return the userRole
      */
-    @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< UserRole > getUserRoleByUserRoleId( final int userRoleId, final RequestParams requestParams ) {
-        String location = this.getClass( ).getCanonicalName( ) + "#getUserRoleByUserRoleId()";
+    public DAOResponse< UserRole > getUserRoleByUserRoleId( final int userRoleId,
+                                                            final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getUserRoleByUserRoleId()";
 
         logger.debug( "Starting " + location );
         DAOResponse< UserRole > userRoleDAOResponse = new DAOResponse<>( );
         List< UserRole > userRoleList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "from UserRole where userRoleId=:userRoleId" );
+            Query query = session
+                    .createQuery( "from UserRole where userRoleId=:userRoleId" );
             query.setParameter( "userRoleId", userRoleId );
             UserRole userRole = ( UserRole ) query.uniqueResult( );
 
@@ -110,7 +119,9 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from userRoles table for userRoles ", exception );
+            logger.error(
+                    "Failed while getting data from userRoles table for userRoles ",
+                    exception );
             userRoleDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -138,14 +149,17 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< UserRole > createUserRole( final UserRole userRole, RequestParams requestParams ) {
+    public DAOResponse< UserRole > createUserRole( final UserRole userRole,
+                                                   RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#createUserRole()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#createUserRole()";
         logger.debug( "Starting " + location );
 
         DAOResponse< UserRole > userRoleDAOResponse = new DAOResponse<>( );
         List< UserRole > userRoleList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
 
         try {
             this.openDBTransaction( );
@@ -160,7 +174,9 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Exception occurred while creating data for userRoles table", exception );
+            logger.error(
+                    "Exception occurred while creating data for userRoles table",
+                    exception );
 
             if ( requestParams.isError( ) ) {
 
@@ -187,13 +203,16 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
      */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< UserRole > updateUserRole( final UserRole userRole, final RequestParams requestParams ) {
-        String location = this.getClass( ).getCanonicalName( ) + "#updateUserRole()";
+    public DAOResponse< UserRole > updateUserRole( final UserRole userRole,
+                                                   final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( )
+                + "#updateUserRole()";
         logger.debug( "Starting " + location );
 
         DAOResponse< UserRole > userRoleDAOResponse = new DAOResponse<>( );
         List< UserRole > userRoleList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         userRoleDAOResponse.setUpdate( true );
 
         try {
@@ -207,7 +226,9 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from userRoles table for userRoles ", exception );
+            logger.error(
+                    "Failed while getting data from userRoles table for userRoles ",
+                    exception );
             userRoleDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -234,16 +255,20 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< UserRole > deleteUserRoleByUserRoleId( int userRoleId, RequestParams requestParams ) {
+    public DAOResponse< UserRole > deleteUserRoleByUserRoleId( int userRoleId,
+                                                               RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteUserRoleByUserRoleId()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#deleteUserRoleByUserRoleId()";
         logger.debug( "Starting " + location );
         DAOResponse< UserRole > userRoleDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "delete  from UserRole where userRoleId=:userRoleId" );
+            Query query = session
+                    .createQuery( "delete  from UserRole where userRoleId=:userRoleId" );
             query.setParameter( "userRoleId", userRoleId );
             int count = query.executeUpdate( );
 
@@ -255,7 +280,8 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while deleting data from userRoles table", exception );
+            logger.error( "Failed while deleting data from userRoles table",
+                    exception );
             userRoleDAOResponse.setRequestSuccess( Boolean.FALSE );
             userRoleDAOResponse.setCount( DAOConstants.ZERO );
 
@@ -281,12 +307,15 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< UserRole > deleteAllUserRoles( final RequestParams requestParams ) {
+    public DAOResponse< UserRole > deleteAllUserRoles(
+            final RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteAllUserRoles()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#deleteAllUserRoles()";
         logger.debug( "Starting " + location );
         DAOResponse< UserRole > userRoleDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
 
         try {
             if ( requestParams.isDeleteAll( ) ) {
@@ -304,7 +333,8 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while deleting data from userRoles table", exception );
+            logger.error( "Failed while deleting data from userRoles table",
+                    exception );
             userRoleDAOResponse.setRequestSuccess( Boolean.FALSE );
             userRoleDAOResponse.setCount( DAOConstants.ZERO );
 

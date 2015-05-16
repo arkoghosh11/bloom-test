@@ -26,6 +26,7 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 5/2/2015 6:18 PM. This class WhenGetCreditCardDAOThenTestGetCreditCardGetMethods is a test
  * class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -119,7 +120,7 @@ public class WhenGetCreditCardDAOThenTestGetCreditCardGetMethods {
         logger.debug( "Starting test for GetCreditCardWithErrorDisabled" );
 
         requestParams.setIsError( TestConstants.IS_ERROR );
-        DAOResponse< CreditCard > creditCardDAOResponse = creditCardDAO.getCreditCard( TestConstants.TEST_ID, requestParams );
+        DAOResponse< CreditCard > creditCardDAOResponse = creditCardDAO.getCreditCardByCardId( TestConstants.TEST_ID, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, creditCardDAOResponse );
         // test error container
@@ -214,7 +215,7 @@ public class WhenGetCreditCardDAOThenTestGetCreditCardGetMethods {
         logger.debug( "Starting test for GetCreditCardWithErrorEnabled" );
 
         requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
-        DAOResponse< CreditCard > creditCardDAOResponse = creditCardDAO.getCreditCard( TestConstants.TEST_ID, requestParams );
+        DAOResponse< CreditCard > creditCardDAOResponse = creditCardDAO.getCreditCardByCardId( TestConstants.TEST_ID, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, creditCardDAOResponse );
 

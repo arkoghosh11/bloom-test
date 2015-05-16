@@ -25,10 +25,6 @@ public class PrivilegeDomainDTOConverter {
      * The constant ZERO.
      */
     private static final int ZERO = DAOConstants.ZERO;
-    /**
-     * The constant EMPTY_STRING.
-     */
-    private static final String EMPTY_STRING = DAOConstants.EMPTY_STRING;
 
     /**
      * Gets converted privilege dTO from privilege domain.
@@ -38,7 +34,8 @@ public class PrivilegeDomainDTOConverter {
      *
      * @return the converted privilege dTO from privilege domain
      */
-    public static Privilege getConvertedDTOFromDomain( Privilege privilegeDTO, com.mana.innovative.domain.consumer.Privilege privilegeDomain ) {
+    public static Privilege getConvertedDTOFromDomain( Privilege privilegeDTO,
+                                                       com.mana.innovative.domain.consumer.Privilege privilegeDomain ) {
 
         if ( privilegeDomain == null ) {
             String message = "Parameter privilegeDomain is required for conversion";
@@ -55,7 +52,7 @@ public class PrivilegeDomainDTOConverter {
         privilegeDTO.setPrivilegeName( privilegeDomain.getPrivilegeName( ) );
         privilegeDTO.setPrivilegeId( privilegeDomain.getPrivilegeId( ) );
         privilegeDTO.setAccessible( privilegeDomain.isAccessible( ) );
-//            privilege.setShopPrivilege();
+        // privilege.setShopPrivilege();
         return privilegeDTO;
     }
 
@@ -66,7 +63,8 @@ public class PrivilegeDomainDTOConverter {
      *
      * @return the converted privilege dTO list
      */
-    public static List< Privilege > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.consumer.Privilege > privilegeDomainList ) {
+    public static List< Privilege > getConvertedListDTOFromDomain(
+            List< com.mana.innovative.domain.consumer.Privilege > privilegeDomainList ) {
 
         List< Privilege > privilegeDTOList = new ArrayList<>( );
         for ( com.mana.innovative.domain.consumer.Privilege privilege : privilegeDomainList ) {
@@ -86,7 +84,8 @@ public class PrivilegeDomainDTOConverter {
      *
      * @return the converted privilege domain from privilege dTO
      */
-    public static com.mana.innovative.domain.consumer.Privilege getConvertedDomainFromDTO( com.mana.innovative.domain.consumer.Privilege privilegeDomain, Privilege privilegeDTO ) {
+    public static com.mana.innovative.domain.consumer.Privilege getConvertedDomainFromDTO(
+            com.mana.innovative.domain.consumer.Privilege privilegeDomain, Privilege privilegeDTO ) {
 
         if ( privilegeDTO == null ) {
             String message = "Parameter privilegeDTO is required for conversion";
@@ -132,7 +131,8 @@ public class PrivilegeDomainDTOConverter {
      *
      * @return the converted privilege domain list from privilege dTO list
      */
-    public static List< com.mana.innovative.domain.consumer.Privilege > getConvertedListDomainFromDTO( List< Privilege > privilegeDTOList ) {
+    public static List< com.mana.innovative.domain.consumer.Privilege > getConvertedListDomainFromDTO(
+            List< Privilege > privilegeDTOList ) {
 
         List< com.mana.innovative.domain.consumer.Privilege > privilegeDomainList = new ArrayList<>( );
         for ( Privilege privilegeDTO : privilegeDTOList ) {

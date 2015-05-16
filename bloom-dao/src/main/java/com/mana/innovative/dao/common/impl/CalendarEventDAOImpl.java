@@ -32,7 +32,7 @@ import java.util.List;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@Repository
+@Repository( value = "calendarEventDAO" )
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
 
@@ -51,6 +51,7 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      * Gets calendar events.
      *
      * @param requestParams the request params
+     *
      * @return the calendar events
      */
     @SuppressWarnings( "unchecked" )
@@ -95,9 +96,10 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
     /**
      * Gets calendar events by date limits.
      *
-     * @param startDate the start date
-     * @param endDate the end date
+     * @param startDate     the start date
+     * @param endDate       the end date
      * @param requestParams the request params
+     *
      * @return the calendar events by date limits
      */
     @SuppressWarnings( "unchecked" )
@@ -145,8 +147,9 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
     /**
      * Gets calendar event by event id.
      *
-     * @param eventId the event id
+     * @param eventId       the event id
      * @param requestParams the request params
+     *
      * @return the calendar event by event id
      */
     @SuppressWarnings( "unchecked" )
@@ -198,6 +201,7 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      *
      * @param calendarEvent the calendar event
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -247,6 +251,7 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      *
      * @param calendarEvent the calendar event
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -292,7 +297,8 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      * Delete calendar event by event id.
      *
      * @param calendarEventId the calendar event id
-     * @param requestParams the request params
+     * @param requestParams   the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -341,7 +347,8 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      * Delete calendar events.
      *
      * @param calendarEventIds the calendar event ids
-     * @param requestParams the request params
+     * @param requestParams    the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -390,6 +397,7 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      * Delete all calendar events.
      *
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -398,20 +406,36 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
         String location = this.getClass( ).getCanonicalName( ) + "#deleteAllCalendarEvents()";
 
         logger.debug( "Starting " + location );
-        DAOResponse< CalendarEvent > calendarEventDAOResponse =
-                new DAOResponse<>( );
+        DAOResponse< CalendarEvent > calendarEventDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
 
+        calendarEventDAOResponse.setDelete( Boolean.TRUE );
         calendarEventDAOResponse.setRequestSuccess( Boolean.FALSE );
         calendarEventDAOResponse.setCount( DAOConstants.ZERO );
-        calendarEventDAOResponse.setResults( null );
+        if ( requestParams.isDeleteAll( ) ) {
+            try {
+                this.openDBTransaction( );
 
-        logger.warn( "Accessing" + location + "\nThis method is not allowed for execution under any circumstance\n" +
-                " to purge all data please contact a system or db administrator" );
-        if ( requestParams.isError( ) ) {
+                Query query = session.createQuery( "delete from CalendarEvent " );
+                int count = query.executeUpdate( );
+                calendarEventDAOResponse.setCount( count );
+                calendarEventDAOResponse.setRequestSuccess( Boolean.TRUE );
+                this.closeDBTransaction( );
+            } catch ( HibernateException exception ) {
+                this.handleExceptions( exception );
+                logger.error( "Failed while deleting data from calendar_events table", exception );
 
-            ErrorContainer errorContainer = fillErrorContainer( location, new Exception( "Unauthorized" ) );
-            calendarEventDAOResponse.setErrorContainer( errorContainer );
+                calendarEventDAOResponse.setCount( DAOConstants.ZERO );
+                if ( requestParams.isError( ) ) {
+                    errorContainer = fillErrorContainer( location, exception );
+                }
+            }
         }
+        calendarEventDAOResponse.setErrorContainer( errorContainer );
+//
+//        logger.warn( "Accessing" + location + "\nThis method is not allowed for execution under any circumstance\n" +
+//                " to purge all data please contact a system or db administrator" );
+
         logger.debug( "Finishing " + location );
         return calendarEventDAOResponse;
     }

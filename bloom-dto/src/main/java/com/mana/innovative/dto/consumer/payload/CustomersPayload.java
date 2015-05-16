@@ -40,7 +40,7 @@ public class CustomersPayload {
     /**
      * This method sets a list of customers to its class property
      *
-     * @param customers  A list of customers
+     * @param customers A list of customers
      */
     public void setCustomers( final List< Customer > customers ) {
         this.customers = customers;

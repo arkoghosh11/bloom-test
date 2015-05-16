@@ -6,7 +6,7 @@ import javax.ws.rs.core.Response;
 
 /**
  * The type Response utility.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -16,7 +16,8 @@ public class ResponseUtility {
     /**
      * This method is for returns a Response object with a proper message for an Internal Server Error
      *
-     * @param optionalMsg  An optional Message to override default Message for HTTP Response Header
+     * @param optionalMsg An optional Message to override default Message for HTTP Response Header
+     *
      * @return Response Object for Jersey Response
      */
     public static Response internalServerErrorMsg( String optionalMsg ) {
@@ -28,7 +29,8 @@ public class ResponseUtility {
     /**
      * This method is for returns a Response object with a proper message for an Unauthorized Access for a WebService
      *
-     * @param optionalMsg  An optional Message to override default Message for HTTP Response Header
+     * @param optionalMsg An optional Message to override default Message for HTTP Response Header
+     *
      * @return Response Object for Jersey Response
      */
     public static Response unauthorizedAccess( String optionalMsg ) {
@@ -41,7 +43,8 @@ public class ResponseUtility {
     /**
      * This method is for returns a Response object with a proper message for no data service found for a WebService
      *
-     * @param optionalMsg  An optional Message to override default Message for HTTP Response Header
+     * @param optionalMsg An optional Message to override default Message for HTTP Response Header
+     *
      * @return Response Object for Jersey Response
      */
     public static Response noResourceFound( String optionalMsg ) {
@@ -54,7 +57,8 @@ public class ResponseUtility {
     /**
      * This method is for returns a Response object with a proper message for a Bad Request for a WebService
      *
-     * @param optionalMsg  An optional Message to override default Message for HTTP Response Header
+     * @param optionalMsg An optional Message to override default Message for HTTP Response Header
+     *
      * @return Response Object for Jersey Response
      */
     public static Response badRequest( String optionalMsg ) {
@@ -67,7 +71,8 @@ public class ResponseUtility {
     /**
      * This method is for returns a Response object with a proper message for a Not Acceptable for a WebService
      *
-     * @param optionalMsg  An optional Message to override default Message for HTTP Response Header
+     * @param optionalMsg An optional Message to override default Message for HTTP Response Header
+     *
      * @return Response Object for Jersey Response
      */
     public static Response notAcceptable( String optionalMsg ) {
@@ -81,7 +86,8 @@ public class ResponseUtility {
     /**
      * This method is for returns a Response object with a proper message for an Forbidden Access for a WebService
      *
-     * @param optionalMsg  An optional Message to override default Message for HTTP Response Header
+     * @param optionalMsg An optional Message to override default Message for HTTP Response Header
+     *
      * @return Response Object for Jersey Response
      */
     public static Response forbiddenRequest( String optionalMsg ) {

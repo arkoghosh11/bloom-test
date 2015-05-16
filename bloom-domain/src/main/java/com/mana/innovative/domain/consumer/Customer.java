@@ -73,7 +73,7 @@ public class Customer extends User {
     /**
      * The Preferences.
      */
-    @ManyToMany( mappedBy = "customerPreferences", cascade = CascadeType.ALL )
+    @ManyToMany( mappedBy = "customerPreferences", cascade = { CascadeType.PERSIST, CascadeType.MERGE } )
     private List< Preference > preferences;
 
 

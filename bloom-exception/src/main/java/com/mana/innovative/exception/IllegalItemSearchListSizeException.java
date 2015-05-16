@@ -13,15 +13,21 @@ import com.mana.innovative.constants.DAOConstants;
 public class IllegalItemSearchListSizeException extends RuntimeException {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = -1988171265095486516L;
+    /**
      * The Message.
      */
     private String message = "Size of Search String keywords cannot be Greater than "
-            + DAOConstants.THREE + " OR Less " + "Than " + DAOConstants.ONE;
+            + DAOConstants.THREE + " OR Less " + "Than "
+            + DAOConstants.ONE;
 
     /**
      * Instantiates a new Illegal item search list size exception.
      */
     public IllegalItemSearchListSizeException( ) {
+
         super( );
     }
 
@@ -42,6 +48,7 @@ public class IllegalItemSearchListSizeException extends RuntimeException {
      * @return the error
      */
     public String getError( ) {
+
         return message;
     }
 
@@ -50,7 +57,9 @@ public class IllegalItemSearchListSizeException extends RuntimeException {
      *
      * @return the string
      */
+    @Override
     public String toString( ) {
+
         return message;
     }
 }

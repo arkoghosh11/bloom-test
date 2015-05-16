@@ -3,6 +3,7 @@ package com.mana.innovative.dao.common;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.common.Address;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -20,6 +21,7 @@ import java.util.List;
 
 /**
  * This class is a test class for testing class todo...
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -44,6 +46,8 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
     @Resource
     private AddressDAO addressDAO;
 
+    private RequestParams requestParams;
+
     /**
      * Sets up.
      *
@@ -53,6 +57,7 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
     public void setUp( ) throws Exception {
         logger.debug( TestConstants.setUpMethodLoggerMsg );
         addressId = ( long ) TestConstants.ONE;
+        requestParams = new RequestParams( );
 
     }
 
@@ -77,7 +82,9 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
     public void testGetAddressByAddressIdWithErrorEnabled( ) throws Exception {
 
         logger.debug( "Starting testGetAddressByAddressIdWithErrorEnabled" );
-        DAOResponse< Address > addressDAOResponse = addressDAO.getAddressByAddressId( addressId, TestConstants.IS_ERROR_TRUE );
+
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Address > addressDAOResponse = addressDAO.getAddressByAddressId( addressId, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse );
         // test Error Container
@@ -120,7 +127,9 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
     public void testGetAddressWithErrorEnabled( ) throws Exception {
 
         logger.debug( "Starting testGetAddressWithErrorEnabled" );
-        DAOResponse< Address > addressDAOResponse = addressDAO.getAddress( TestConstants.IS_ERROR_TRUE );
+
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Address > addressDAOResponse = addressDAO.getAddress( requestParams );
 
         // test DAO Response errorContainer
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse );
@@ -152,7 +161,8 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
 
         logger.debug( "Starting testGetAddressByAddressIdWithErrorDisabled" );
 
-        DAOResponse< Address > addressDAOResponse = addressDAO.getAddressByAddressId( addressId, TestConstants.IS_ERROR );
+        requestParams.setIsError( TestConstants.IS_ERROR );
+        DAOResponse< Address > addressDAOResponse = addressDAO.getAddressByAddressId( addressId, requestParams );
         // test errorContainer
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse );
         Assert.assertNull( TestConstants.notNullMessage, addressDAOResponse.getErrorContainer( ) );
@@ -190,7 +200,9 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
     public void testGetAddressWithErrorDisabled( ) throws Exception {
 
         logger.debug( "Starting testGetAddressWithErrorDisabled" );
-        DAOResponse< Address > addressDAOResponse = addressDAO.getAddress( TestConstants.IS_ERROR );
+
+        requestParams.setIsError( TestConstants.IS_ERROR );
+        DAOResponse< Address > addressDAOResponse = addressDAO.getAddress( requestParams );
 
         // test errorContainer
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse );

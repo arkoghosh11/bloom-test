@@ -11,6 +11,10 @@ package com.mana.innovative.exception;
 public class IllegalArgumentValueException extends RuntimeException {
 
     /**
+     *
+     */
+    private static final long serialVersionUID = -7145437185646248528L;
+    /**
      * The Message.
      */
     private String message = "   \nArgument value is Invalid or Null ";
@@ -19,6 +23,7 @@ public class IllegalArgumentValueException extends RuntimeException {
      * Instantiates a new Illegal argument value exception.
      */
     public IllegalArgumentValueException( ) {
+
         super( );
     }
 
@@ -39,6 +44,7 @@ public class IllegalArgumentValueException extends RuntimeException {
      * @return the error
      */
     public String getError( ) {
+
         return message;
     }
 
@@ -47,7 +53,9 @@ public class IllegalArgumentValueException extends RuntimeException {
      *
      * @return the string
      */
+    @Override
     public String toString( ) {
+
         return message;
     }
 }

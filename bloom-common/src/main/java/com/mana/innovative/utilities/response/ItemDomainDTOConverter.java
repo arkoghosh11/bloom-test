@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * The type Item domain dTO converter.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -32,8 +32,9 @@ public class ItemDomainDTOConverter {
     /**
      * Gets converted item dTO from item domain.
      *
-     * @param itemDTO  the item dTO
-     * @param itemDomain  the item domain
+     * @param itemDTO    the item dTO
+     * @param itemDomain the item domain
+     *
      * @return the converted item dTO from item domain
      */
     public static Item getConvertedDTOFromDomain( Item itemDTO, com.mana.innovative.domain.client.Item itemDomain ) {
@@ -97,6 +98,7 @@ public class ItemDomainDTOConverter {
      * Gets converted item dTO list.
      *
      * @param items the items
+     *
      * @return the converted item dTO list
      */
     public static List< Item > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.client.Item > items ) {
@@ -115,7 +117,8 @@ public class ItemDomainDTOConverter {
      * Gets converted item domain from item dTO.
      *
      * @param itemDomain the item domain
-     * @param itemDTO the item dTO
+     * @param itemDTO    the item dTO
+     *
      * @return the converted item domain from item dTO
      */
     public static com.mana.innovative.domain.client.Item getConvertedDomainFromDTO( com.mana.innovative.domain.client.Item itemDomain, Item itemDTO ) {
@@ -215,6 +218,7 @@ public class ItemDomainDTOConverter {
      * Gets converted item domain list from item dTO list.
      *
      * @param itemDTOList the item dTO list
+     *
      * @return the converted item domain list from item dTO list
      */
     public static List< com.mana.innovative.domain.client.Item > getConvertedListDomainFromDTO( List< Item > itemDTOList ) {

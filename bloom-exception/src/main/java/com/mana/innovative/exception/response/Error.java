@@ -51,7 +51,7 @@ public class Error {
      * Instantiates a new Error.
      *
      * @param errorLocation the error location
-     * @param throwable the throwable
+     * @param throwable     the throwable
      */
     public Error( String errorLocation, Throwable throwable ) {
 

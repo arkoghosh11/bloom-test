@@ -28,6 +28,7 @@ import javax.annotation.Resource;
 /**
  * Created by Bloom/Rono on 5/1/2015 2:02 AM. This class WhenCreateCustomerThenTestCustomerDAOGetMethods is a test
  * class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -121,7 +122,7 @@ public class WhenCreateCustomerThenTestCustomerDAOCreateMethods {
         Assert.assertFalse( TestConstants.trueMessage, customerDAOResponse.isUpdate( ) );
         Assert.assertFalse( TestConstants.trueMessage, customerDAOResponse.isDelete( ) );
         Assert.assertTrue( TestConstants.falseMessage, customerDAOResponse.isRequestSuccess( ) );
-        
+
         Customer customer = customerDAOResponse.getResults( ).get( TestConstants.ZERO );
         Assert.assertNotNull( TestConstants.nullMessage, customer );
         Assert.assertEquals( TestConstants.notEqualsMessage, dummyCustomer, customer );

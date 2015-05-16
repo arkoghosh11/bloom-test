@@ -4,7 +4,9 @@ import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.common.Address;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,8 +30,11 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.fail;
+
 /**
  * This class is a test class for testing class todo...
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -56,6 +61,8 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
     @Resource
     private SessionFactory sessionFactory;
 
+    private RequestParams requestParams;
+
     /**
      * The Test id.
      */
@@ -78,6 +85,8 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
         testIds = new ArrayList<>( );
         testIds.add( ( long ) TestConstants.ZERO );
         testIds.add( testId );
+
+        requestParams = new RequestParams( );
     }
 
     /**
@@ -91,10 +100,19 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
     public void tearDown( ) throws Exception {
 
         Session session = sessionFactory.openSession( );
-        Query query = session.createQuery( " from Address where addressId=:address_id" );
-        query.setLong( "address_id", DAOConstants.ZERO );
-        List< Address > addresses = query.list( );
-        Assert.assertFalse( " List is Empty, Hib deleted the default row Row ", addresses.isEmpty( ) );
+        try {
+            Query query = session.createQuery( " from Address where addressId=:address_id" );
+            query.setLong( "address_id", DAOConstants.ZERO );
+            List< Address > addresses = query.list( );
+            Assert.assertFalse( " List is Empty, Hib deleted the default row Row ", addresses.isEmpty( ) );
+        } catch ( HibernateException exception ) {
+            fail( "Hibernate issue occurred while trying to verify data wasnt modified during test" );
+        } finally {
+            if ( session != null ) {
+                session.flush( );
+                session.close( );
+            }
+        }
         logger.debug( TestConstants.setUpMethodLoggerMsg );
 
     }
@@ -123,7 +141,10 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
     public void testDeleteAddressByAddressIdErrorEnabled( ) throws Exception {
 
         logger.debug( "Starting test for DeleteAddressByAddressIdErrorEnabled" );
-        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAddressByAddressId( testId, TestConstants.IS_ERROR_TRUE );
+
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Address > addressDAOResponse = addressDAOImpl
+                .deleteAddressByAddressId( testId, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse.getErrorContainer( ) );
@@ -152,7 +173,9 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAddressByAddressIdErrorDisabled" );
 
-        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAddressByAddressId( testId, TestConstants.IS_ERROR );
+        requestParams.setIsError( TestConstants.IS_ERROR );
+        DAOResponse< Address > addressDAOResponse = addressDAOImpl
+                .deleteAddressByAddressId( testId, requestParams );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, addressDAOResponse.getErrorContainer( ) );
 
@@ -176,8 +199,10 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
     public void testDeleteAddressesByAddressIdsErrorEnabled( ) throws Exception {
 
         logger.debug( "Starting test for DeleteAddressesByAddressIdsErrorEnabled" );
-        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAddressesByAddressIds( testIds, TestConstants
-                .IS_ERROR_TRUE );
+
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Address > addressDAOResponse = addressDAOImpl
+                .deleteAddressesByAddressIds( testIds, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse.getErrorContainer( ) );
@@ -206,8 +231,9 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAddressesByAddressIdsErrorDisabled" );
 
-        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAddressesByAddressIds( testIds, TestConstants
-                .IS_ERROR );
+        requestParams.setIsError( TestConstants.IS_ERROR );
+        DAOResponse< Address > addressDAOResponse = addressDAOImpl
+                .deleteAddressesByAddressIds( testIds, requestParams );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, addressDAOResponse.getErrorContainer( ) );
 
@@ -232,8 +258,10 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllAddressWithErrorEnabled" );
 
-        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAllAddress( TestConstants.IS_DELETE_ALL, TestConstants
-                .IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsDeleteAll( TestConstants.TEST_FALSE );
+        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAllAddress( requestParams );
+
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse.getErrorContainer( ) );
@@ -262,8 +290,10 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllAddressWithErrorDisabled" );
 
-        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAllAddress( TestConstants.IS_DELETE_ALL, TestConstants
-                .IS_ERROR );
+        requestParams.setIsError( TestConstants.IS_ERROR );
+        requestParams.setIsDeleteAll( TestConstants.TEST_FALSE );
+        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAllAddress( requestParams );
+
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, addressDAOResponse.getErrorContainer( ) );
@@ -288,8 +318,10 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllAddressWithDeleteAllTrueWithErrorEnabled" );
 
-        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAllAddress( TestConstants.IS_DELETE_ALL_TRUE, TestConstants
-                .IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsDeleteAll( TestConstants.TEST_TRUE );
+        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAllAddress( requestParams );
+
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse.getErrorContainer( ) );
@@ -317,8 +349,10 @@ public class WhenDeleteAddressThenTestAddressDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllAddressWithDeleteAllTrueWithErrorDisabled" );
 
-        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAllAddress( TestConstants.IS_DELETE_ALL_TRUE, TestConstants
-                .IS_ERROR );
+        requestParams.setIsError( TestConstants.IS_ERROR );
+        requestParams.setIsDeleteAll( TestConstants.TEST_TRUE );
+        DAOResponse< Address > addressDAOResponse = addressDAOImpl.deleteAllAddress( requestParams );
+
         Assert.assertNotNull( TestConstants.nullMessage, addressDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, addressDAOResponse.getErrorContainer( ) );

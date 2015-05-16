@@ -19,14 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 /**
- * Created by alex1 on 1/23/2015.
- * This is a domain class
+ * Created by alex1 on 1/23/2015. This is a domain class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/dbConfig-test.xml"})
+@RunWith( value = SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "/dbConfig-test.xml" } )
 @TransactionConfiguration( defaultRollback = false, transactionManager = "transactionManager" )
 @Transactional
 public class WhenHibernateInitiatedTestSessionFactory {
@@ -44,8 +44,8 @@ public class WhenHibernateInitiatedTestSessionFactory {
     /**
      * Sets up.
      */
-    public void setUp() {
-         logger.debug("Initiating Test");
+    public void setUp( ) {
+        logger.debug( "Initiating Test" );
     }
 
     /**
@@ -54,17 +54,17 @@ public class WhenHibernateInitiatedTestSessionFactory {
     @Test
     @Rollback( value = false )
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testSessionFactory() {
+    public void testSessionFactory( ) {
 
         logger.debug( "Performing Test" );
-        Assert.assertNotNull(sessionFactory);
-        Session session = sessionFactory.openSession();
-        Assert.assertNotNull(session);
+        Assert.assertNotNull( sessionFactory );
+        Session session = sessionFactory.openSession( );
+        Assert.assertNotNull( session );
         try {
-            session.close();
+            session.close( );
         } catch ( HibernateException exception ) {
             logger.error( exception.getMessage( ), exception );
-            Assert.fail("Exception Occurred");
+            Assert.fail( "Exception Occurred" );
         }
         logger.debug( "Completing Test" );
     }
@@ -73,7 +73,7 @@ public class WhenHibernateInitiatedTestSessionFactory {
      * Close void.
      */
     @After
-    public void close() {
+    public void close( ) {
 
 //        logger.debug("Shutting Down Test");
 //        sessionFactory.close();

@@ -102,7 +102,8 @@ public class CalendarEventsServiceImpl implements CalendarEventsService {
      * Delete events.
      *
      * @param calendarEventIds the calendar event ids
-     * @param requestParams the request params
+     * @param requestParams    the request params
+     *
      * @return the response
      */
     @Override

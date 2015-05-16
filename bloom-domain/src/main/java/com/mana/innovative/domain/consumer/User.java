@@ -26,8 +26,9 @@ import java.util.Objects;
 
 /**
  * The type User.
-
+ * <p/>
  * Created by Bloom/Rono on $date $time.
+ *
  * @author Bloom Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -79,7 +80,7 @@ public class User {
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
-    @ManyToOne( cascade = { CascadeType.MERGE, CascadeType.PERSIST } )
+    @ManyToOne( cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH } )
     @JoinColumn( name = "user_role_id", referencedColumnName = "user_role_id" )
     private UserRole userRole;
 

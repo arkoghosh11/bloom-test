@@ -38,8 +38,9 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     /**
      * Create card.
      *
-     * @param card the card
+     * @param card          the card
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -86,6 +87,7 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
      * Gets cards.
      *
      * @param requestParams the request params
+     *
      * @return the cards
      */
     @SuppressWarnings( "unchecked" )
@@ -132,15 +134,15 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     /**
      * Gets card.
      *
-     * @param cardId the card id
+     * @param cardId        the card id
      * @param requestParams the request params
+     *
      * @return the card
      */
-    @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Card > getCard( final long cardId, final RequestParams requestParams ) {
-        String location = this.getClass( ).getCanonicalName( ) + "#getCard()";
+    public DAOResponse< Card > getCardByCardId( final long cardId, final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( ) + "#getCardByCardId()";
 
         logger.debug( "Starting " + location );
         DAOResponse< Card > cardDAOResponse = new DAOResponse<>( );
@@ -180,8 +182,9 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     /**
      * Update card.
      *
-     * @param card the card
+     * @param card          the card
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -222,15 +225,65 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     }
 
     /**
+     * Delete cards by cards id.
+     *
+     * @param cardIds the card ids
+     * @param requestParams the request params
+     * @return the dAO response
+     */
+    @Override
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< Card > deleteCardsByCardIds( final List< Long > cardIds, final RequestParams requestParams ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteCardsByCardId()";
+        logger.debug( "Starting " + location );
+        DAOResponse< Card > cardDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.createQuery( "delete  from Card where cardId in(:cardIds)" );
+            query.setParameterList( "cardIds", cardIds );
+            int count = query.executeUpdate( );
+
+            this.closeDBTransaction( );
+
+            cardDAOResponse.setRequestSuccess( Boolean.TRUE );
+            cardDAOResponse.setCount( count );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error( "Failed while deleting data from cards table", exception );
+            cardDAOResponse.setRequestSuccess( Boolean.FALSE );
+            cardDAOResponse.setCount( DAOConstants.ZERO );
+
+            if ( requestParams.isError( ) ) {
+
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        cardDAOResponse.setErrorContainer( errorContainer );
+        cardDAOResponse.setDelete( Boolean.TRUE );
+        cardDAOResponse.setResults( null );
+
+        logger.debug( "Finishing " + location );
+        return cardDAOResponse;
+    }
+
+    /**
      * Delete card.
      *
-     * @param cardId the card id
+     * @param cardId        the card id
      * @param requestParams the request params
+     *
      * @return the boolean
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Card > deleteCardByCardId( Long cardId, RequestParams requestParams ) {
+    public DAOResponse< Card > deleteCardByCardId( long cardId, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deleteCardByCardId()";
         logger.debug( "Starting " + location );
@@ -274,6 +327,7 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
      * Delete all cards.
      *
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override

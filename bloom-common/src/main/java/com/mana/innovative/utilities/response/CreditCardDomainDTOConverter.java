@@ -46,8 +46,9 @@ public class CreditCardDomainDTOConverter {
     /**
      * Gets converted card dTO from card domain.
      *
-     * @param creditCardDTO the card dTO
+     * @param creditCardDTO    the card dTO
      * @param creditCardDomain the card domain
+     *
      * @return the converted card dTO from card domain
      */
     public static CreditCard getConvertedDTOFromDomain( CreditCard creditCardDTO,
@@ -82,6 +83,7 @@ public class CreditCardDomainDTOConverter {
      * Gets converted card dTO list.
      *
      * @param cardDomainList the card domain list
+     *
      * @return the converted card dTO list
      */
     public static List< CreditCard > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.consumer
@@ -100,7 +102,8 @@ public class CreditCardDomainDTOConverter {
      * Gets converted card domain from card dTO.
      *
      * @param creditCardDomain the card domain
-     * @param creditCardDTO the card dTO
+     * @param creditCardDTO    the card dTO
+     *
      * @return the converted card domain from card dTO
      */
     public static com.mana.innovative.domain.consumer.CreditCard getConvertedDomainFromDTO
@@ -176,6 +179,7 @@ public class CreditCardDomainDTOConverter {
      * Gets converted card domain list from card dTO list.
      *
      * @param cardDTOList the card dTO list
+     *
      * @return the converted card domain list from card dTO list
      */
     public static List< com.mana.innovative.domain.consumer.CreditCard > getConvertedListDomainFromDTO( List< CreditCard >
@@ -194,6 +198,7 @@ public class CreditCardDomainDTOConverter {
      * Is valid card expiry date.
      *
      * @param formattedDate the date format
+     *
      * @return the boolean
      */
     public static boolean isValidCardExpiryDate( String formattedDate ) {
@@ -244,7 +249,7 @@ public class CreditCardDomainDTOConverter {
      * starting with 2131 or 1800, or 16 digits starting with 35. </p>
      *
      * @param cardNumber the card number
-     * @param cardType the card type
+     * @param cardType   the card type
      */
     public static void validateCardNumberWithCardType( String cardNumber, String cardType ) {
 

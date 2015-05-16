@@ -47,6 +47,7 @@ public class DateCommons {
      * Gets end date time.
      *
      * @param eventDate the event date
+     *
      * @return the end date time
      */
     public static Date getEndDateTime( final Date eventDate ) {
@@ -61,8 +62,9 @@ public class DateCommons {
     /**
      * Create n get custom calendar.
      *
-     * @param date the date
+     * @param date      the date
      * @param minsNSecs the mins n secs
+     *
      * @return the calendar
      */
     private static Calendar createNGetCustomCalendar( Date date, int minsNSecs ) {
@@ -78,6 +80,7 @@ public class DateCommons {
      * Update date to prev hour. Complex method for return the date taht was 1 hour before the date passed in
      *
      * @param eventDate the event date
+     *
      * @return the date
      */
     public static Date updateDateToPrevHour( final Date eventDate ) {

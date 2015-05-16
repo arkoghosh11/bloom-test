@@ -19,14 +19,14 @@ import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
 
 /**
- * Created by alex1 on 1/23/2015.
- * This is a domain class
+ * Created by alex1 on 1/23/2015. This is a domain class
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@RunWith(value = SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/service-config-test.xml","/db-config-test.xml"})
+@RunWith( value = SpringJUnit4ClassRunner.class )
+@ContextConfiguration( locations = { "/service-config-test.xml", "/db-config-test.xml" } )
 @TransactionConfiguration
 @Transactional
 public class WhenItemServiceTestGetItems {
@@ -46,41 +46,42 @@ public class WhenItemServiceTestGetItems {
      * Sets up.
      */
     @Before
-    public void setUp () {
+    public void setUp( ) {
 
-        logger.info("Initiating ItemService Test");
+        logger.info( "Initiating ItemService Test" );
     }
-
 
     /**
      * Test get items.
      */
+    @SuppressWarnings( "unchecked" )
     @Test
-    public void testGetItems () {
+    public void testGetItems( ) {
 
-        logger.info("Testing ItemService GetItems method");
+        logger.info( "Testing ItemService GetItems method" );
 
         Response response = itemsServiceImpl.getItems( false );
 
-        Assert.assertNotNull(response);
-        Assert.assertNotNull(response.getEntity());
-        logger.info("Testing ItemResponseContainer GetItems method");
-        ItemResponseContainer itemResponseContainer = (ItemResponseContainer) response.getEntity();
-        Assert.assertNotNull(itemResponseContainer.getPayload());
-        Assert.assertTrue(itemResponseContainer.getCount() > 0);
+        Assert.assertNotNull( response );
+        Assert.assertNotNull( response.getEntity( ) );
+        logger.info( "Testing ItemResponseContainer GetItems method" );
+        ItemResponseContainer< ItemsPayload > itemResponseContainer = ( ItemResponseContainer< ItemsPayload > ) response
+                .getEntity( );
+        Assert.assertNotNull( itemResponseContainer.getPayload( ) );
+        Assert.assertTrue( itemResponseContainer.getCount( ) > 0 );
 
-        logger.info("Testing ItemsPayload GetItems method");
-        ItemsPayload itemsPayload = (ItemsPayload) itemResponseContainer.getPayload();
-        Assert.assertNotNull(itemsPayload.getItems());
-        Assert.assertTrue(itemsPayload.getItems().size() > 1);
+        logger.info( "Testing ItemsPayload GetItems method" );
+        ItemsPayload itemsPayload = itemResponseContainer.getPayload( );
+        Assert.assertNotNull( itemsPayload.getItems( ) );
+        Assert.assertTrue( itemsPayload.getItems( ).size( ) > 1 );
     }
 
     /**
      * Close void.
      */
     @After
-    public void close() {
+    public void close( ) {
 
-        logger.info("Shutting  Testing for " + logger.getClass().getCanonicalName());
+        logger.info( "Shutting  Testing for " + logger.getClass( ).getCanonicalName( ) );
     }
 }

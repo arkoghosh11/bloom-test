@@ -49,6 +49,7 @@ public class TabsServiceImpl implements TabsService {
      * Gets all tabs.
      *
      * @param requestParams the request params
+     *
      * @return the all tabs
      */
     @Override
@@ -76,8 +77,9 @@ public class TabsServiceImpl implements TabsService {
     /**
      * Delete tabs.
      *
-     * @param tabIds the tab ids
+     * @param tabIds        the tab ids
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override

@@ -5,16 +5,8 @@ import java.io.File;
 /**
  * Created by Bloom/Rono on 4/17/2015. This class is CustomXMLFileReader
  *
- * @param <T>  the type parameter
- * Created by Bloom/Rono on $
- *{
- *DATE
- *}
- * $
- *{
- *TIME
- *}
- *.
+ * @param <T> the type parameter Created by Bloom/Rono on $ { DATE } $ { TIME } .
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright

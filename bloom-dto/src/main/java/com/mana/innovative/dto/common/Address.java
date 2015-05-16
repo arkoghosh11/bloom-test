@@ -189,6 +189,7 @@ public class Address {
      * Gets location.
      *
      * @param o the o
+     *
      * @return the location
      */
 //    @XmlElement(name = "location")
@@ -205,7 +206,6 @@ public class Address {
 //    public void setLocation(Location location) {
 //        this.location = location;
 //    }
-
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;

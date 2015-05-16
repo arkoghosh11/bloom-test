@@ -74,17 +74,17 @@
 
     <!-- this is the aspect -->
     <!--<bean id="profiler" class="com.mana.innovative.aop.SimpleProfiler">-->
-        <!--&lt;!&ndash; execute before the transactional advice (hence the lower order number) &ndash;&gt;-->
-        <!--<property name="order" value="1"/>-->
+    <!--&lt;!&ndash; execute before the transactional advice (hence the lower order number) &ndash;&gt;-->
+    <!--<property name="order" value="1"/>-->
     <!--</bean>-->
 
     <!--<aop:config>-->
-        <!--&lt;!&ndash; this advice will execute around the transactional advice &ndash;&gt;-->
-        <!--<aop:aspect id="profilingAspect" ref="profiler">-->
-            <!--<aop:pointcut id="serviceMethodWithReturnValue"-->
-                          <!--expression="execution(!void x.y..*Service.*(..))"/>-->
-            <!--<aop:around method="profile" pointcut-ref="serviceMethodWithReturnValue"/>-->
-        <!--</aop:aspect>-->
+    <!--&lt;!&ndash; this advice will execute around the transactional advice &ndash;&gt;-->
+    <!--<aop:aspect id="profilingAspect" ref="profiler">-->
+    <!--<aop:pointcut id="serviceMethodWithReturnValue"-->
+    <!--expression="execution(!void x.y..*Service.*(..))"/>-->
+    <!--<aop:around method="profile" pointcut-ref="serviceMethodWithReturnValue"/>-->
+    <!--</aop:aspect>-->
     <!--</aop:config>-->
 
     <tx:annotation-driven transaction-manager="transactionManager"/>

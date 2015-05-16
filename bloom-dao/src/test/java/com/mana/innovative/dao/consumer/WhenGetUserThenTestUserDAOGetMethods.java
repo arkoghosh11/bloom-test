@@ -116,7 +116,7 @@ public class WhenGetUserThenTestUserDAOGetMethods {
         logger.debug( "Starting test for GetUserWithErrorDisabled" );
 
         requestParams.setIsError( TestConstants.IS_ERROR );
-        DAOResponse< User > userDAOResponse = userDAO.getUserByUserId( TestConstants.TEST_ID, requestParams );
+        DAOResponse< User > userDAOResponse = userDAO.getUserByUserId( TestConstants.ZERO, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, userDAOResponse );
         // test error container
@@ -196,7 +196,7 @@ public class WhenGetUserThenTestUserDAOGetMethods {
         logger.debug( "Starting test for GetUserWithErrorEnabled" );
 
         requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
-        DAOResponse< User > userDAOResponse = userDAO.getUserByUserId( TestConstants.TEST_ID, requestParams );
+        DAOResponse< User > userDAOResponse = userDAO.getUserByUserId( TestConstants.ZERO, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, userDAOResponse );
 

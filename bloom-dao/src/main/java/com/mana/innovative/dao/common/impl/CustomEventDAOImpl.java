@@ -33,31 +33,37 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( CustomEventDAOImpl.class );
+    private static final Logger logger = LoggerFactory
+            .getLogger( CustomEventDAOImpl.class );
 
     /**
      * Gets event by id.
      *
      * @param customEventId the custom event id
      * @param requestParams the request params
+     *
      * @return the event by id
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< CustomEvent > getEventById( final long customEventId, final RequestParams requestParams ) {
+    public DAOResponse< CustomEvent > getEventById( final long customEventId,
+                                                    final RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#getEventById()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getEventById()";
 
         logger.debug( "Starting " + location );
         DAOResponse< CustomEvent > customEventDAOResponse = new DAOResponse<>( );
         List< CustomEvent > customEventList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams != null && requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams != null
+                && requestParams.isError( ) ? new ErrorContainer( ) : null;
         try {
 
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "from CustomEvent where customEventId=:eventId" );
+            Query query = session
+                    .createQuery( "from CustomEvent where customEventId=:eventId" );
             query.setParameter( "eventId", customEventId );
             customEventList = query.list( );
 
@@ -69,7 +75,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Failed while getting data from custom_events table", exception );
+            logger.error( "Failed while getting data from custom_events table",
+                    exception );
             if ( errorContainer != null ) {
                 errorContainer = fillErrorContainer( location, exception );
             }
@@ -86,26 +93,31 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * Gets events by date.
      *
-     * @param eventDate the event date
+     * @param eventDate     the event date
      * @param requestParams the request params
+     *
      * @return the events by date
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< CustomEvent > getEventsByDate( final Date eventDate, final RequestParams requestParams ) {
+    public DAOResponse< CustomEvent > getEventsByDate( final Date eventDate,
+                                                       final RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#getEventsByDate()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getEventsByDate()";
 
         logger.debug( "Starting " + location );
         DAOResponse< CustomEvent > customEventDAOResponse = new DAOResponse<>( );
         List< CustomEvent > customEventList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
 
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "from CustomEvent where eventDate=:eventDate" );
+            Query query = session
+                    .createQuery( "from CustomEvent where eventDate=:eventDate" );
             query.setParameter( "eventDate", eventDate );
             customEventList = query.list( );
 
@@ -117,7 +129,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Failed while getting data from custom_events table", exception );
+            logger.error( "Failed while getting data from custom_events table",
+                    exception );
             if ( errorContainer != null ) {
                 errorContainer = fillErrorContainer( location, exception );
             }
@@ -126,7 +139,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
         customEventDAOResponse.setCount( customEventList.size( ) );
         customEventDAOResponse.setErrorContainer( errorContainer );
 
-        logger.debug( "Finishing " + location, customEventDAOResponse.getResults( ).toArray( ) );
+        logger.debug( "Finishing " + location, customEventDAOResponse
+                .getResults( ).toArray( ) );
 
         return customEventDAOResponse;
     }
@@ -134,27 +148,32 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * Gets events by event name.
      *
-     * @param eventName the event name
+     * @param eventName     the event name
      * @param requestParams the request params
+     *
      * @return the events by event name
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< CustomEvent > getEventsByEventName( final String eventName, final RequestParams requestParams ) {
+    public DAOResponse< CustomEvent > getEventsByEventName(
+            final String eventName, final RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#getEventsByEventName()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getEventsByEventName()";
 
         logger.debug( "Starting " + location );
 
         DAOResponse< CustomEvent > customEventDAOResponse = new DAOResponse<>( );
         List< CustomEvent > customEventList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
 
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "from CustomEvent where eventName=:eventName" );
+            Query query = session
+                    .createQuery( "from CustomEvent where eventName=:eventName" );
             query.setParameter( "eventName", eventName );
             customEventList = query.list( );
 
@@ -166,7 +185,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Failed while getting data from custom_events table", exception );
+            logger.error( "Failed while getting data from custom_events table",
+                    exception );
             if ( errorContainer != null ) {
                 errorContainer = fillErrorContainer( location, exception );
             }
@@ -184,17 +204,21 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
      * Gets all events.
      *
      * @param requestParams the request params
+     *
      * @return the all events
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< CustomEvent > getAllEvents( final RequestParams requestParams ) {
-        String location = this.getClass( ).getCanonicalName( ) + "#getAllEvents()";
+    public DAOResponse< CustomEvent > getAllEvents(
+            final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getAllEvents()";
         logger.debug( "Starting " + location );
         DAOResponse< CustomEvent > customEventDAOResponse = new DAOResponse<>( );
         List< CustomEvent > customEventList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
 
             this.openDBTransaction( );
@@ -210,7 +234,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Failed while getting data from custom_events table", exception );
+            logger.error( "Failed while getting data from custom_events table",
+                    exception );
             if ( errorContainer != null ) {
                 errorContainer = fillErrorContainer( location, exception );
             }
@@ -227,20 +252,22 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * Update event.
      *
-     * @param customEvent the custom event
+     * @param customEvent   the custom event
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
-    @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< CustomEvent > updateEvent( final CustomEvent customEvent, final RequestParams requestParams
-    ) {
-        String location = this.getClass( ).getCanonicalName( ) + "#getAllEvents()";
+    public DAOResponse< CustomEvent > updateEvent( final CustomEvent customEvent,
+                                                   final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getAllEvents()";
         logger.debug( "Starting " + location );
         DAOResponse< CustomEvent > customEventDAOResponse = new DAOResponse<>( );
         List< CustomEvent > customEventList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
 
             this.openDBTransaction( );
@@ -256,7 +283,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Failed while getting data from custom_events table", exception );
+            logger.error( "Failed while getting data from custom_events table",
+                    exception );
             if ( errorContainer != null ) {
                 errorContainer = fillErrorContainer( location, exception );
             }
@@ -273,25 +301,29 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * Enable event scheduler for date.
      *
-     * @param date the date
+     * @param date          the date
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
-    @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< CustomEvent > enableEventSchedulerForDate( Date date, final RequestParams requestParams ) {
+    public DAOResponse< CustomEvent > enableEventSchedulerForDate( Date date,
+                                                                   final RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#enableEventSchedulerForDate()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#enableEventSchedulerForDate()";
         logger.debug( "Starting " + location );
         DAOResponse< CustomEvent > customEventDAOResponse = new DAOResponse<>( );
         List< CustomEvent > customEventList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
 
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "update CustomEvent set isScheduler=:newValue where eventDate=:customDate" );
+            Query query = session
+                    .createQuery( "update CustomEvent set isScheduler=:newValue where eventDate=:customDate" );
             query.setBoolean( "newValue", Boolean.TRUE );
             query.setParameter( "customDate", date );
             int count = query.executeUpdate( );
@@ -306,7 +338,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Failed while getting data from custom_events table", exception );
+            logger.error( "Failed while getting data from custom_events table",
+                    exception );
             if ( errorContainer != null ) {
                 errorContainer = fillErrorContainer( location, exception );
             }
@@ -322,25 +355,29 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
     /**
      * Disable event scheduler for date.
      *
-     * @param date the date
+     * @param date          the date
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
-    @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< CustomEvent > disableEventSchedulerForDate( Date date, final RequestParams requestParams ) {
+    public DAOResponse< CustomEvent > disableEventSchedulerForDate( Date date,
+                                                                    final RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#disableEventSchedulerForDate()";
+        String location = this.getClass( ).getCanonicalName( )
+                + "#disableEventSchedulerForDate()";
         logger.debug( "Starting " + location );
         DAOResponse< CustomEvent > customEventDAOResponse = new DAOResponse<>( );
         List< CustomEvent > customEventList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
 
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "update CustomEvent set isScheduler=:newValue where eventDate=:customDate" );
+            Query query = session
+                    .createQuery( "update CustomEvent set isScheduler=:newValue where eventDate=:customDate" );
 
             query.setBoolean( "newValue", Boolean.FALSE );
             query.setParameter( "customDate", date );
@@ -356,7 +393,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Failed while getting data from custom_events table", exception );
+            logger.error( "Failed while getting data from custom_events table",
+                    exception );
             if ( errorContainer != null ) {
                 errorContainer = fillErrorContainer( location, exception );
             }
@@ -373,26 +411,32 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
      * Gets events by date range.
      *
      * @param eventStartTime the event start time
-     * @param eventEndTime the event end time
-     * @param requestParams the request params
+     * @param eventEndTime   the event end time
+     * @param requestParams  the request params
+     *
      * @return the events by date range
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< CustomEvent > getEventsByDateRange( final Date eventStartTime, final Date eventEndTime, final RequestParams requestParams ) {
-        String location = this.getClass( ).getCanonicalName( ) + "#getEventsByDateRange()";
+    public DAOResponse< CustomEvent > getEventsByDateRange(
+            final Date eventStartTime, final Date eventEndTime,
+            final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getEventsByDateRange()";
         logger.debug( "Starting " + location );
 
         DAOResponse< CustomEvent > customEventDAOResponse = new DAOResponse<>( );
         List< CustomEvent > customEventList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
         try {
 
             this.openDBTransaction( );
 
-            Query query = session.createQuery( " from CustomEvent where eventDate>=:eventStartTime and eventDate <= " +
-                    ":eventEndTime" );
+            Query query = session
+                    .createQuery( " from CustomEvent where eventDate>=:eventStartTime and eventDate <= "
+                            + ":eventEndTime" );
             query.setParameter( "eventStartTime", eventStartTime );
             query.setParameter( "eventEndTime", eventEndTime );
             customEventList = query.list( );
@@ -405,7 +449,8 @@ public class CustomEventDAOImpl extends BasicDAO implements CustomEventDAO {
             if ( exception instanceof HibernateException ) {
                 this.handleExceptions( ( HibernateException ) exception );
             }
-            logger.error( "Failed while getting data from custom_events table", exception );
+            logger.error( "Failed while getting data from custom_events table",
+                    exception );
             if ( errorContainer != null ) {
                 errorContainer = fillErrorContainer( location, exception );
             }

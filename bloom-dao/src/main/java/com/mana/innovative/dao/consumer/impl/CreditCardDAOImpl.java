@@ -38,8 +38,9 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
     /**
      * Create creditCard.
      *
-     * @param creditCard the creditCard
+     * @param creditCard    the creditCard
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -86,6 +87,7 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
      * Gets creditCards.
      *
      * @param requestParams the request params
+     *
      * @return the creditCards
      */
     @SuppressWarnings( "unchecked" )
@@ -99,6 +101,7 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
         DAOResponse< CreditCard > creditCardDAOResponse = new DAOResponse<>( );
         List< CreditCard > creditCardList = new ArrayList<>( );
         ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
         try {
             this.openDBTransaction( );
 
@@ -131,15 +134,16 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
     /**
      * Gets credit card.
      *
-     * @param cardId the card id
+     * @param cardId        the card id
      * @param requestParams the request params
+     *
      * @return the credit card
      */
-    @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< CreditCard > getCreditCard( final long cardId, final RequestParams requestParams ) {
-        String location = this.getClass( ).getCanonicalName( ) + "#getCreditCard()";
+    public DAOResponse< CreditCard > getCreditCardByCardId( final long cardId, final RequestParams requestParams ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#getCreditCardByCardId()";
 
         logger.debug( "Starting " + location );
         DAOResponse< CreditCard > creditCardDAOResponse = new DAOResponse<>( );
@@ -149,7 +153,8 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "from CreditCard where cardId=:cardId" );
+            Query query = session
+                    .createQuery( "from CreditCard where cardId=:cardId" );
             query.setParameter( "cardId", cardId );
             CreditCard creditCard = ( CreditCard ) query.uniqueResult( );
 
@@ -164,7 +169,6 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
             creditCardDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
-
                 errorContainer = fillErrorContainer( location, exception );
             }
         }
@@ -180,13 +184,15 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
     /**
      * Update credit card.
      *
-     * @param creditCard the credit card
+     * @param creditCard    the credit card
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_COMMITTED )
     public DAOResponse< CreditCard > updateCreditCard( final CreditCard creditCard, final RequestParams requestParams ) {
+
         String location = this.getClass( ).getCanonicalName( ) + "#updateCreditCard()";
         logger.debug( "Starting " + location );
 
@@ -206,7 +212,9 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while getting data from creditCards table for creditCards ", exception );
+            logger.error(
+                    "Failed while getting data from creditCards table for creditCards ",
+                    exception );
             creditCardDAOResponse.setRequestSuccess( Boolean.FALSE );
 
             if ( requestParams.isError( ) ) {
@@ -224,17 +232,18 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
     }
 
     /**
-     * Delete creditCard.
+     * Delete credit cards by card ids.
      *
-     * @param cardId the creditCard id
+     * @param cardIds       the card ids
      * @param requestParams the request params
-     * @return the boolean
+     *
+     * @return the dAO response
      */
     @Override
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< CreditCard > deleteCreditCardByCardId( Long cardId, RequestParams requestParams ) {
+    @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< CreditCard > deleteCreditCardsByCardIds( final List< Long > cardIds, final RequestParams requestParams ) {
 
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteCreditCardByCreditCardId()";
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteCreditCardsByCardIds()";
         logger.debug( "Starting " + location );
         DAOResponse< CreditCard > creditCardDAOResponse = new DAOResponse<>( );
         ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
@@ -242,8 +251,62 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "delete  from CreditCard where cardId=:cardId and customerCard" +
-                    ".userId=:userId" );
+            Query query = session.createQuery( "delete from CreditCard where cardId in(:cardIds) " +
+                    "and customerCard.userId=:userId" );
+            query.setParameterList( "cardIds", cardIds );
+            query.setParameter( "userId", requestParams.getId( ) );
+            int count = query.executeUpdate( );
+
+            this.closeDBTransaction( );
+
+            creditCardDAOResponse.setRequestSuccess( Boolean.TRUE );
+            creditCardDAOResponse.setCount( count );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error( "Failed while deleting data from creditCards table",
+                    exception );
+            creditCardDAOResponse.setRequestSuccess( Boolean.FALSE );
+            creditCardDAOResponse.setCount( DAOConstants.ZERO );
+
+            if ( requestParams.isError( ) ) {
+
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        creditCardDAOResponse.setDelete( Boolean.TRUE );
+        creditCardDAOResponse.setResults( null );
+        creditCardDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+        return creditCardDAOResponse;
+    }
+
+    /**
+     * Delete creditCard.
+     *
+     * @param cardId        the creditCard id
+     * @param requestParams the request params
+     *
+     * @return the boolean
+     */
+    @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< CreditCard > deleteCreditCardByCardId( long cardId,
+                                                               RequestParams requestParams ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteCreditCardByCreditCardId()";
+        logger.debug( "Starting " + location );
+        DAOResponse< CreditCard > creditCardDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
+
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.createQuery( "delete  from CreditCard where cardId=:cardId and customerCard.userId=:userId" );
             query.setParameter( "cardId", cardId );
             query.setParameter( "userId", requestParams.getId( ) );
             int count = query.executeUpdate( );
@@ -256,7 +319,8 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
         } catch ( HibernateException exception ) {
 
             this.handleExceptions( exception );
-            logger.error( "Failed while deleting data from creditCards table", exception );
+            logger.error( "Failed while deleting data from creditCards table",
+                    exception );
             creditCardDAOResponse.setRequestSuccess( Boolean.FALSE );
             creditCardDAOResponse.setCount( DAOConstants.ZERO );
 
@@ -278,6 +342,7 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
      * Delete all creditCards.
      *
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -285,6 +350,7 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
     public DAOResponse< CreditCard > deleteAllCreditCards( final RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#deleteAllCreditCards()";
+
         logger.debug( "Starting " + location );
         DAOResponse< CreditCard > creditCardDAOResponse = new DAOResponse<>( );
         ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
@@ -310,7 +376,6 @@ public class CreditCardDAOImpl extends BasicDAO implements CreditCardDAO {
             creditCardDAOResponse.setCount( DAOConstants.ZERO );
 
             if ( requestParams.isError( ) ) {
-
                 errorContainer = fillErrorContainer( location, exception );
             }
         }

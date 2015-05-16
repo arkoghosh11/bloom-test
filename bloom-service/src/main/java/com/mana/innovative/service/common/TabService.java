@@ -11,8 +11,9 @@ import javax.ws.rs.core.Response;
 
 /**
  * The interface Tab service.
-
+ * <p/>
  * Created by Bloom/Rono on ${DATE} ${TIME}.
+ *
  * @author Bloom Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -33,8 +34,9 @@ public interface TabService {
     /**
      * Update tab.
      *
-     * @param tab the tab
+     * @param tab           the tab
      * @param requestParams the request params
+     *
      * @return the response
      */
     Response updateTab( Tab tab, RequestParams requestParams );
@@ -43,8 +45,9 @@ public interface TabService {
     /**
      * Delete tab.
      *
-     * @param tabId the tab id
+     * @param tabId         the tab id
      * @param requestParams the request params
+     *
      * @return the response
      */
 
@@ -54,8 +57,9 @@ public interface TabService {
     /**
      * Create tab.
      *
-     * @param tab the tab
+     * @param tab           the tab
      * @param requestParams the request params
+     *
      * @return the response
      */
 

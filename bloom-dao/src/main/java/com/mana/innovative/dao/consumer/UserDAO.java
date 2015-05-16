@@ -29,6 +29,7 @@ public interface UserDAO {
      * This method is to create a user
      *
      * @param requestParams the request params
+     *
      * @return boolean Return a boolean value to indicate if user creation passed or failed
      */
     DAOResponse< User > getUsers( RequestParams requestParams );
@@ -36,17 +37,19 @@ public interface UserDAO {
     /**
      * Gets user by user id.
      *
-     * @param userId the user id
+     * @param userId        the user id
      * @param requestParams the request params
+     *
      * @return the user by user id
      */
-    DAOResponse< User > getUserByUserId( Long userId, RequestParams requestParams );
+    DAOResponse< User > getUserByUserId( long userId, RequestParams requestParams );
 
     /**
      * This method is to create a user
      *
-     * @param user the user
+     * @param user          the user
      * @param requestParams the request params
+     *
      * @return boolean Return a boolean value to indicate if user creation passed or failed
      */
     DAOResponse< User > createUser( User user, RequestParams requestParams );
@@ -54,8 +57,9 @@ public interface UserDAO {
     /**
      * Update user.
      *
-     * @param user the user
+     * @param user          the user
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< User > updateUser( User user, RequestParams requestParams );
@@ -64,20 +68,31 @@ public interface UserDAO {
     /**
      * Delete user.
      *
-     * @param userId the user id
+     * @param userId        the user id
      * @param requestParams the request params
-     * @param tableName the table name
+     * @param tableName     the table name
+     *
      * @return the dAO response
      */
-    DAOResponse< User > deleteUserByUserId( Long userId, RequestParams requestParams, String tableName );
+    DAOResponse< User > deleteUserByUserId( long userId, RequestParams requestParams, String tableName );
 
     /**
-     * Delete users.
+     * Delete users by user ids.
      *
      * @param userIds the user ids
      * @param requestParams the request params
      * @param tableName the table name
      * @return the dAO response
      */
-    DAOResponse< User > deleteUsers( List< Long > userIds, RequestParams requestParams, String tableName );
+    DAOResponse< User > deleteUsersByUserIds( List< Long > userIds, RequestParams requestParams, String tableName );
+
+    /**
+     * Delete users.
+     *
+     * @param requestParams the request params
+     * @param tableName     the table name
+     *
+     * @return the dAO response
+     */
+    DAOResponse< User > deleteAllUsers( RequestParams requestParams, String tableName );
 }

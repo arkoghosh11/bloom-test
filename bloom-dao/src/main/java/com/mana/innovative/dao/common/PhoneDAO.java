@@ -5,6 +5,8 @@ import com.mana.innovative.domain.common.Phone;
 import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by Bloom/Rono on 5/2/2015 5:27 PM. This interface is PhoneDAO
  *
@@ -18,8 +20,9 @@ public interface PhoneDAO {
     /**
      * Create phone.
      *
-     * @param phone the phone
+     * @param phone         the phone
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< Phone > createPhone( Phone phone, RequestParams requestParams );
@@ -28,6 +31,7 @@ public interface PhoneDAO {
      * Gets phones.
      *
      * @param requestParams the request params
+     *
      * @return the phones
      */
     DAOResponse< Phone > getPhones( RequestParams requestParams );
@@ -35,8 +39,9 @@ public interface PhoneDAO {
     /**
      * Gets phone.
      *
-     * @param phoneId the phone id
+     * @param phoneId       the phone id
      * @param requestParams the request params
+     *
      * @return the phone
      */
     DAOResponse< Phone > getPhone( long phoneId, RequestParams requestParams );
@@ -44,8 +49,9 @@ public interface PhoneDAO {
     /**
      * Update phone.
      *
-     * @param phone the phone
+     * @param phone         the phone
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< Phone > updatePhone( Phone phone, RequestParams requestParams );
@@ -53,16 +59,28 @@ public interface PhoneDAO {
     /**
      * Delete phone by phone id.
      *
-     * @param phoneId the phone id
+     * @param phoneId       the phone id
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< Phone > deletePhoneByPhoneId( Long phoneId, RequestParams requestParams );
 
     /**
+     * Delete phones.
+     *
+     * @param phoneIds      the phone ids
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
+    DAOResponse< Phone > deletePhonesByPhoneIds( List< Long > phoneIds, RequestParams requestParams );
+
+    /**
      * Delete all phones.
      *
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< Phone > deleteAllPhones( RequestParams requestParams );

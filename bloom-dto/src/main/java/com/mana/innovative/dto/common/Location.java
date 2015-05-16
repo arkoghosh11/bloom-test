@@ -6,12 +6,12 @@ import java.util.Objects;
 
 /**
  * The type Location.
-
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@XmlRootElement(name = "location")
+@XmlRootElement( name = "location" )
 public class Location {
 
     /**
@@ -34,8 +34,8 @@ public class Location {
      *
      * @return the location id
      */
-    @XmlElement(name = "location_id")
-    public long getLocationId() {
+    @XmlElement( name = "location_id" )
+    public long getLocationId( ) {
         return locationId;
     }
 
@@ -44,7 +44,7 @@ public class Location {
      *
      * @param locationId the location id
      */
-    public void setLocationId(long locationId) {
+    public void setLocationId( long locationId ) {
         this.locationId = locationId;
     }
 
@@ -53,8 +53,8 @@ public class Location {
      *
      * @return the latitude
      */
-    @XmlElement(name = "latitude")
-    public double getLatitude() {
+    @XmlElement( name = "latitude" )
+    public double getLatitude( ) {
         return latitude;
     }
 
@@ -63,7 +63,7 @@ public class Location {
      *
      * @param latitude the latitude
      */
-    public void setLatitude(double latitude) {
+    public void setLatitude( double latitude ) {
         this.latitude = latitude;
     }
 
@@ -73,8 +73,8 @@ public class Location {
      *
      * @return the longitude
      */
-    @XmlElement(name = "longitude")
-    public double getLongitude() {
+    @XmlElement( name = "longitude" )
+    public double getLongitude( ) {
         return longitude;
     }
 
@@ -83,7 +83,7 @@ public class Location {
      *
      * @param longitude the longitude
      */
-    public void setLongitude(double longitude) {
+    public void setLongitude( double longitude ) {
         this.longitude = longitude;
     }
 
@@ -106,16 +106,14 @@ public class Location {
 
 
     /**
-     * Returns a string representation of the object. In general, the
-     * {@code toString} method returns a string that
-     * "textually represents" this object. The result should
-     * be a concise but informative representation that is easy for a
-     * person to read.
+     * Returns a string representation of the object. In general, the {@code toString} method returns a string that
+     * "textually represents" this object. The result should be a concise but informative representation that is easy
+     * for a person to read.
      *
      * @return a string representation of the object.
      */
     @Override
-    public String toString() {
+    public String toString( ) {
         return "Location{" +
                 "locationId=" + locationId +
                 ", latitude=" + latitude +

@@ -19,10 +19,9 @@ public interface CalendarEventService {
     /**
      * Gets calendar event.
      *
-     * @param calendarEventId {
-     *Integer
-     *}
-     * @param requestParams the request params
+     * @param calendarEventId { Integer }
+     * @param requestParams   the request params
+     *
      * @return Response calendar event
      */
     Response getCalendarEvent( Long calendarEventId, RequestParams requestParams );
@@ -31,6 +30,7 @@ public interface CalendarEventService {
      * Gets calendar event by date limits.
      *
      * @param requestParams the request params
+     *
      * @return the calendar event by date limits
      */
     Response getCalendarEventByDateLimits( RequestParams requestParams );

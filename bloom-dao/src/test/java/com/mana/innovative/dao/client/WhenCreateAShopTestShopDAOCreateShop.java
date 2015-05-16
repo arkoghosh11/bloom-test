@@ -1,8 +1,7 @@
 package com.mana.innovative.dao.client;
 
-import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
-import com.mana.innovative.constants.WeightedUnit;
+import com.mana.innovative.dao.TestDummyDomainObjectGenerator;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.domain.client.Shop;
@@ -24,13 +23,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
- * The type When create a shop test shop dAO create shop.
+ * The type When create a shop test shop dAO create shop. Need to make a cyclic chain link to allow for creation of shop
+ * or will run into issues
+ *
  * @author Rono, Ankur Bhardwaj
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
@@ -77,52 +76,11 @@ public class WhenCreateAShopTestShopDAOCreateShop {
     @BeforeTransaction
     public void setUp( ) throws Exception {
 
-        dummyShop = new Shop( );
-        dummyItem = new Item( );
+        dummyShop = TestDummyDomainObjectGenerator.getTestShopDomainObject( );
 
-//        dummyItem.setItemId( TestConstants.MINUS_ONE );
-        dummyItem.setItemName( TestConstants.TEST_VALUE );
-        dummyItem.setItemPriceCurrency( TestConstants.TEST_PRICE_CURRENCY );
-        dummyItem.setItemType( TestConstants.TEST_VALUE );
-        dummyItem.setItemSubType( TestConstants.TEST_ITEM_TYPE );
-        dummyItem.setBoughtFrom( TestConstants.TEST_BROUGHT_FROM );
-
-        dummyItem.setItemPrice( ( double ) TestConstants.THREE );
-        dummyItem.setWeight( TestConstants.TEST_WEIGHT );
-        dummyItem.setQuantity( TestConstants.TEST_QUANTITY );
-
-        dummyItem.setQuantityType( QuantityType.UNIT.toString( ) );
-        dummyItem.setWeightedUnit( WeightedUnit.POUND.toString( ) );
-
-        dummyItem.setCreatedDate( new Date( ) );
-        dummyItem.setBoughtDate( new Date( ) );
-
-//        dummyShop.setShopId( TestConstants.MINUS_ONE );
-        dummyShop.setShopOwnId( TestConstants.TEST_OWN_ID );
-        dummyShop.setShopName( TestConstants.TEST_NAME );
-        dummyShop.setShopWebLink( TestConstants.TEST_WEB_LINK );
-
-        dummyWorkingHour = new WorkingHour( );
-//        dummyWorkingHour.setWorkingHourId( TestConstants.MINUS_ONE );
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( TestConstants.TEST_TIME_FORMAT );
-
-        Date time = simpleDateFormat.parse( TestConstants.TEST_START_TIME );
-        dummyWorkingHour.setStartTime( time );
-        time = simpleDateFormat.parse( TestConstants.TEST_END_TIME );
-        dummyWorkingHour.setEndTime( time );
-        dummyWorkingHour.setDay( TestConstants.TEST_DAY );
-        dummyWorkingHour.setHoliday( TestConstants.TEST_IS_HOLIDAY );
-        dummyWorkingHour.setOffline( TestConstants.TEST_IS_CLOSED );
-        dummyWorkingHour.setWeekend( TestConstants.TEST_IS_WEEKEND );
-
-        dummyAddress = new Address( );
-//        dummyAddress.setAddressId( TestConstants.MINUS_ONE );
-        dummyAddress.setAddress1( TestConstants.TEST );
-        dummyAddress.setAddress2( TestConstants.TEST );
-        dummyAddress.setZipCode( TestConstants.TEST_ZIPCODE );
-        dummyAddress.setCity( TestConstants.TEST_CITY );
-        dummyAddress.setDistrict( TestConstants.TEST_DISTRICT );
-        dummyAddress.setState( TestConstants.TEST_STATE );
+        dummyItem = dummyShop.getItems( ).get( TestConstants.ZERO );
+        dummyWorkingHour = dummyShop.getWorkingHours( ).get( TestConstants.ZERO );
+        dummyAddress = dummyShop.getAddress( );
 
     }
 
@@ -232,15 +190,9 @@ public class WhenCreateAShopTestShopDAOCreateShop {
 
         logger.debug( "Starting test for CreateShopWithoutAnyItems" );
 
-        // set shop inside address and vice versa for making them connected/related
-        dummyShop.setAddress( dummyAddress );
-        dummyAddress.setShopAddress( dummyShop );
-
-        // set shop to each working hour and set the list of WHours for making them connected/related
-        List< WorkingHour > workingHours = new ArrayList<>( );
-        workingHours.add( dummyWorkingHour );
-        dummyShop.setWorkingHours( workingHours );
+        dummyShop.setItems( null );
         dummyWorkingHour.setShopWorkingHour( dummyShop );
+        dummyAddress.setShopAddress( dummyShop );
 
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
@@ -302,20 +254,47 @@ public class WhenCreateAShopTestShopDAOCreateShop {
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRES_NEW )
+    public void testCreateShopWithAddressNull( ) throws Exception {
+
+        logger.debug( "Starting test for CreateShopWithAddressNull" );
+
+        dummyShop.setAddress( null );
+        dummyWorkingHour.setShopWorkingHour( dummyShop );
+        dummyItem.setShopItem( dummyShop );
+
+        DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
+        try {
+            shopDAOResponse = shopDAOImpl.createShop( dummyShop, TestConstants.IS_ERROR );
+        } catch ( Exception exception ) {
+            logger.error( "Failed to test createShop() ", exception );
+            Assert.assertTrue( TestConstants.falseMessage, exception instanceof HibernateException );
+        }
+        // Test shopDAOResponse
+        Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
+        Assert.assertTrue( TestConstants.falseMessage, shopDAOResponse.isCreate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, shopDAOResponse.isRequestSuccess( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getResults( ) );
+
+        // Test ErrorContainer
+        Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
+
+        logger.debug( "Finishing test for CreateShopWithAddressNull" );
+    }
+
+    /**
+     * Test create shop without any address.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    @Rollback( value = true )
+    @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testCreateShopWithoutAnyAddress( ) throws Exception {
 
         logger.debug( "Starting test for CreateShopWithoutAnyAddress" );
 
-        // set shop to each working hour and set the list of WHours for making them connected/related
-        List< WorkingHour > workingHours = new ArrayList<>( );
-        workingHours.add( dummyWorkingHour );
-        dummyShop.setWorkingHours( workingHours );
+        dummyShop.setAddress( new Address( ) );
         dummyWorkingHour.setShopWorkingHour( dummyShop );
-
-        // set shop to each items and set the list of items for making them connected/related
-        List< Item > items = new ArrayList<>( );
-        items.add( dummyItem );
-        dummyShop.setItems( items );
         dummyItem.setShopItem( dummyShop );
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
@@ -349,21 +328,16 @@ public class WhenCreateAShopTestShopDAOCreateShop {
 
         logger.debug( "Starting test for CreateShopWithoutAnyWorkingHour" );
 
-        // set shop inside address and vice versa for making them connected/related
-        dummyShop.setAddress( dummyAddress );
-        dummyAddress.setShopAddress( dummyShop );
+        dummyShop.setWorkingHours( null );
 
-        // set shop to each items and set the list of items for making them connected/related
-        List< Item > items = new ArrayList<>( );
-        items.add( dummyItem );
-        dummyShop.setItems( items );
+        dummyAddress.setShopAddress( dummyShop );
         dummyItem.setShopItem( dummyShop );
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         try {
             shopDAOResponse = shopDAOImpl.createShop( dummyShop, TestConstants.IS_ERROR );
-        } catch ( HibernateException e ) {
-            logger.error( "Failed to test createShop() ", e );
+        } catch ( HibernateException exception ) {
+            logger.error( "Failed to test createShop() ", exception );
             Assert.fail( "Create Shop with new dummy item and working Hour failed" );
         }
         // Test shopDAOResponse
