@@ -36,8 +36,8 @@
             and without the email secure properties file these config files
             will not load
             -->
-            <!--classpath*:/config/email-config.xml-->
-            <!--classpath*:/config/scheduler-config.xml-->
+            classpath*:/config/email-config.xml
+            classpath*:/config/scheduler-config.xml
         </param-value>
     </context-param>
     <!--location for login credentials-->
