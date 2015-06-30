@@ -1,7 +1,7 @@
-package com.mana.innovative.service;
+package com.mana.innovative.service.client;
 
 import com.mana.innovative.dto.client.payload.ItemsPayload;
-import com.mana.innovative.service.client.ItemsService;
+import com.mana.innovative.service.TestDummyDTOObjectGenerator;
 import com.mana.innovative.service.client.container.ItemResponseContainer;
 import org.junit.After;
 import org.junit.Assert;
@@ -30,12 +30,12 @@ import javax.ws.rs.core.Response.Status;
 @ContextConfiguration( locations = { "/service-config-test.xml", "/db-config-test.xml" } )
 @TransactionConfiguration
 @Transactional
-public class WhenItemServiceTestGetItems {
+public class WhenItemsServiceThenTestGetItems {
 
     /**
      * The constant logger.
      */
-    public static final Logger logger = LoggerFactory.getLogger( WhenItemServiceTestGetItems.class );
+    public static final Logger logger = LoggerFactory.getLogger( WhenItemsServiceThenTestGetItems.class );
 
     /**
      * The Items service impl.
@@ -62,7 +62,7 @@ public class WhenItemServiceTestGetItems {
         Mockito.when( itemsServiceImpl.getItems( false ) ).thenReturn( response );
         Mockito.when( itemResponseContainer.getPayload( ) ).thenReturn( itemsPayload );
         Mockito.when( itemResponseContainer.getCount( ) ).thenReturn( 1 );
-        Mockito.when( itemsPayload.getItems( ) ).thenReturn( TestDummyDTOObjectGenerator.getTestItemDTOList( ) );
+        Mockito.when( itemsPayload.getItems( ) ).thenReturn( TestDummyDTOObjectGenerator.getTestItemDTOList() );
         Mockito.when( itemsPayload.getTotalCount( ) ).thenReturn( TestDummyDTOObjectGenerator.getTestItemDTOList( ).size( ) );
     }
 
