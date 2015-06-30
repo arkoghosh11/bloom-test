@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService {
         }
         try {
             userResponseContainer = UserResponseBuilder.build( userDAOResponse, requestParams.isError( ) );
-            response = Response.status( Response.Status.OK ).entity( userResponseContainer ).build( );
+            response = Response.status( Response.Status.CREATED ).entity( userResponseContainer ).build( );
             return response;
 
         } catch ( Exception exception ) {

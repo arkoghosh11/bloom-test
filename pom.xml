@@ -15,7 +15,7 @@
         <target.compiler.version>1.7</target.compiler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <targetJDK>${target.compiler.version}</targetJDK>
-        <spring.version>3.2.1.RELEASE</spring.version>
+        <spring.version>4.0.2.RELEASE</spring.version>
         <spring.batch.version>2.2.0.RELEASE</spring.batch.version>
         <hibernate.version>4.2.0.Final</hibernate.version>
         <jersey.version>1.17.1</jersey.version>

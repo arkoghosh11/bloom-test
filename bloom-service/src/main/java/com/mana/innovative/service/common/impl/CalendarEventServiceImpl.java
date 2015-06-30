@@ -161,6 +161,7 @@ public class CalendarEventServiceImpl implements CalendarEventService {
     public Response createCalendarEvent( CalendarEvent calendarEvent,
                                          RequestParams requestParams ) {
 
+        //todo implement method
         if ( calendarEvent != null ) {
             com.mana.innovative.domain.common.CalendarEvent calendarEventDomain = new com.mana.innovative.domain.common.CalendarEvent( );
             calendarEventDAO.createCalendarEvent( calendarEventDomain,

@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import java.util.List;
 
 /**
@@ -84,7 +85,7 @@ public class ItemServiceImpl implements ItemService {
         }
         try {
             itemResponseContainer = ItemResponseBuilder.build( itemDAOResponse, isError );
-            response = Response.status( Response.Status.OK ).entity( itemResponseContainer ).build( );
+            response = Response.status( Status.CREATED ).entity( itemResponseContainer ).build( );
             return response;
 
         } catch ( Exception exception ) {

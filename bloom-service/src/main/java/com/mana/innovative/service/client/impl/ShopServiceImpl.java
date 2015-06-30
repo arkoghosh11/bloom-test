@@ -137,7 +137,7 @@ public class ShopServiceImpl implements ShopService {
         }
         try {
             shopResponseContainer = ShopResponseBuilder.build( shopDAOResponse, isError );
-            response = Response.status( Response.Status.OK ).entity( shopResponseContainer ).build( );
+            response = Response.status( Response.Status.CREATED ).entity( shopResponseContainer ).build( );
             return response;
 
         } catch ( Exception exception ) {

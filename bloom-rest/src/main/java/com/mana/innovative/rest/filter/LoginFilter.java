@@ -3,15 +3,11 @@ package com.mana.innovative.rest.filter;
 import com.mana.innovative.authentication.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -45,12 +41,13 @@ public class LoginFilter implements javax.servlet.Filter {
      */
     public void init( FilterConfig filterConfig ) throws ServletException {
 
-        ServletContext servletContext = filterConfig.getServletContext( );
-        WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext( servletContext );
-
-        AutowireCapableBeanFactory autowireCapableBeanFactory = webApplicationContext.getAutowireCapableBeanFactory( );
-        String beanName = servletContext.getInitParameter( "lService" );
-        autowireCapableBeanFactory.configureBean( this, beanName );
+//        ServletContext servletContext = filterConfig.getServletContext( );
+//        WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext( servletContext );
+//
+//        AutowireCapableBeanFactory autowireCapableBeanFactory = webApplicationContext.getAutowireCapableBeanFactory( );
+//        String beanName = servletContext.getInitParameter( "lService" );
+        loginService = new LoginService( );
+//        autowireCapableBeanFactory.configureBean( this, beanName );
     }
 
     /**

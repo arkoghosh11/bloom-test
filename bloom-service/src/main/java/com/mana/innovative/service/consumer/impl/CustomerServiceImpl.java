@@ -133,7 +133,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
         try {
             customerResponseContainer = CustomerResponseBuilder.build( customerDAOResponse, requestParams.isError( ) );
-            response = Response.status( Response.Status.OK ).entity( customerResponseContainer ).build( );
+            response = Response.status( Response.Status.CREATED ).entity( customerResponseContainer ).build( );
             return response;
 
         } catch ( Exception exception ) {
