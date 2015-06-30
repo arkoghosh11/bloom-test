@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,8 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 /**
  * Created by alex1 on 1/23/2015. This is a domain class
@@ -39,8 +40,10 @@ public class WhenItemServiceTestGetItems {
     /**
      * The Items service impl.
      */
-    @Resource
+
     private ItemsService itemsServiceImpl;
+    private ItemResponseContainer itemResponseContainer;
+    private ItemsPayload itemsPayload;
 
     /**
      * Sets up.
@@ -49,6 +52,18 @@ public class WhenItemServiceTestGetItems {
     public void setUp( ) {
 
         logger.info( "Initiating ItemService Test" );
+        itemsServiceImpl = Mockito.mock( ItemsService.class );
+
+        itemResponseContainer = Mockito.mock( ItemResponseContainer.class );
+        itemsPayload = Mockito.mock( ItemsPayload.class );
+
+        Response response = Response.status( Status.OK ).entity( itemResponseContainer ).build( );
+
+        Mockito.when( itemsServiceImpl.getItems( false ) ).thenReturn( response );
+        Mockito.when( itemResponseContainer.getPayload( ) ).thenReturn( itemsPayload );
+        Mockito.when( itemResponseContainer.getCount( ) ).thenReturn( 1 );
+        Mockito.when( itemsPayload.getItems( ) ).thenReturn( TestDummyDTOObjectGenerator.getTestItemDTOList( ) );
+        Mockito.when( itemsPayload.getTotalCount( ) ).thenReturn( TestDummyDTOObjectGenerator.getTestItemDTOList( ).size( ) );
     }
 
     /**
@@ -65,16 +80,16 @@ public class WhenItemServiceTestGetItems {
         Assert.assertNotNull( response );
         Assert.assertNotNull( response.getEntity( ) );
         logger.info( "Testing ItemResponseContainer GetItems method" );
-        ItemResponseContainer< ItemsPayload > itemResponseContainer = ( ItemResponseContainer< ItemsPayload > ) response
-                .getEntity( );
+        itemResponseContainer = ( ItemResponseContainer ) response.getEntity( );
         Assert.assertNotNull( itemResponseContainer.getPayload( ) );
         Assert.assertTrue( itemResponseContainer.getCount( ) > 0 );
 
         logger.info( "Testing ItemsPayload GetItems method" );
-        ItemsPayload itemsPayload = itemResponseContainer.getPayload( );
+        itemsPayload = ( ItemsPayload ) itemResponseContainer.getPayload( );
         Assert.assertNotNull( itemsPayload.getItems( ) );
-        Assert.assertTrue( itemsPayload.getItems( ).size( ) > 1 );
+        Assert.assertTrue( itemsPayload.getItems( ).size( ) > 0 );
     }
+
 
     /**
      * Close void.
