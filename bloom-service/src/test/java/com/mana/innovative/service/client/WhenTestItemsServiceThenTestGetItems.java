@@ -30,12 +30,12 @@ import javax.ws.rs.core.Response.Status;
 @ContextConfiguration( locations = { "/service-config-test.xml", "/db-config-test.xml" } )
 @TransactionConfiguration
 @Transactional
-public class WhenItemsServiceThenTestGetItems {
+public class WhenTestItemsServiceThenTestGetItems {
 
     /**
      * The constant logger.
      */
-    public static final Logger logger = LoggerFactory.getLogger( WhenItemsServiceThenTestGetItems.class );
+    public static final Logger logger = LoggerFactory.getLogger( WhenTestItemsServiceThenTestGetItems.class );
 
     /**
      * The Items service impl.
