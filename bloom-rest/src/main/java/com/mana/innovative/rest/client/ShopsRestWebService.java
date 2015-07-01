@@ -20,8 +20,8 @@ import javax.ws.rs.core.Response;
 /**
  * The type Shops rest web service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Component
@@ -43,7 +43,6 @@ public class ShopsRestWebService {
      * Gets shops.
      *
      * @param isError the is error
-     *
      * @return the shops
      */
     @GET
@@ -67,9 +66,8 @@ public class ShopsRestWebService {
     /**
      * Delete shops.
      *
-     * @param isError     the is error
+     * @param isError the is error
      * @param isDeleteAll the is delete all
-     *
      * @return the response
      */
     @DELETE

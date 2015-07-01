@@ -14,11 +14,14 @@ import java.util.List;
  * Created by Bloom/Rono on 5/14/2015 7:25 PM. This class is PrivilegeDomainDTOConverter
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 public class PrivilegeDomainDTOConverter {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( PrivilegeDomainDTOConverter.class );
 
     /**
@@ -29,9 +32,8 @@ public class PrivilegeDomainDTOConverter {
     /**
      * Gets converted privilege dTO from privilege domain.
      *
-     * @param privilegeDTO    the privilege dTO
+     * @param privilegeDTO the privilege dTO
      * @param privilegeDomain the privilege domain
-     *
      * @return the converted privilege dTO from privilege domain
      */
     public static Privilege getConvertedDTOFromDomain( Privilege privilegeDTO,
@@ -60,7 +62,6 @@ public class PrivilegeDomainDTOConverter {
      * Gets converted privilege dTO list.
      *
      * @param privilegeDomainList the privilege domain list
-     *
      * @return the converted privilege dTO list
      */
     public static List< Privilege > getConvertedListDTOFromDomain(
@@ -80,8 +81,7 @@ public class PrivilegeDomainDTOConverter {
      * Gets converted privilege domain from privilege dTO.
      *
      * @param privilegeDomain the privilege domain
-     * @param privilegeDTO    the privilege dTO
-     *
+     * @param privilegeDTO the privilege dTO
      * @return the converted privilege domain from privilege dTO
      */
     public static com.mana.innovative.domain.consumer.Privilege getConvertedDomainFromDTO(
@@ -128,7 +128,6 @@ public class PrivilegeDomainDTOConverter {
      * Gets converted privilege domain list from privilege dTO list.
      *
      * @param privilegeDTOList the privilege dTO list
-     *
      * @return the converted privilege domain list from privilege dTO list
      */
     public static List< com.mana.innovative.domain.consumer.Privilege > getConvertedListDomainFromDTO(

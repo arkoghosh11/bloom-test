@@ -17,8 +17,8 @@ import java.util.Objects;
 /**
  * Created by Bloom/Rono on 5/14/2015 6:45 PM. This class is Privileges
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Entity
@@ -176,7 +176,6 @@ public class Privilege {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

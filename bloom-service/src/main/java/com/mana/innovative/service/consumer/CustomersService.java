@@ -11,8 +11,8 @@ import java.util.List;
  * <p/>
  * Date: 10/25/12 Time: 1:13 PM
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  * @since: jdk 1.7
  */
@@ -24,7 +24,6 @@ public interface CustomersService {
      * Gets all customers.
      *
      * @param requestParams the is error
-     *
      * @return the all customers
      */
     Response getAllCustomers( RequestParams requestParams );
@@ -32,9 +31,8 @@ public interface CustomersService {
     /**
      * Delete customers.
      *
-     * @param customerIds   the customer ids
+     * @param customerIds the customer ids
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response deleteCustomers( List< Long > customerIds, RequestParams requestParams );

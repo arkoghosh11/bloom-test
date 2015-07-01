@@ -16,8 +16,9 @@ import org.springframework.web.context.request.RequestContextListener;
 
 /**
  * The type Rest test.
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ *
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class RestTest extends JerseyTest {

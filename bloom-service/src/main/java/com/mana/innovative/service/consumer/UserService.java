@@ -13,8 +13,8 @@ import javax.ws.rs.core.Response;
 /**
  * The interface User service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -23,9 +23,8 @@ public interface UserService {
     /**
      * Gets user.
      *
-     * @param userId        the user id
+     * @param userId the user id
      * @param requestParams the request params
-     *
      * @return the user
      */
     Response getUserByUserId( Long userId, RequestParams requestParams );
@@ -33,9 +32,8 @@ public interface UserService {
     /**
      * Create user.
      *
-     * @param user          the user
+     * @param user the user
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response createUser( User user, RequestParams requestParams );
@@ -43,9 +41,8 @@ public interface UserService {
     /**
      * Update user.
      *
-     * @param user          the user
+     * @param user the user
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response updateUser( User user, RequestParams requestParams );
@@ -53,9 +50,8 @@ public interface UserService {
     /**
      * Delete user.
      *
-     * @param userId        the user id
+     * @param userId the user id
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response deleteUserByUserId( Long userId, RequestParams requestParams );

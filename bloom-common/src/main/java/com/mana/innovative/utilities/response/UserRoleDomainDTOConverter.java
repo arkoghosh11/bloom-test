@@ -14,11 +14,14 @@ import java.util.List;
  * Created by Bloom/Rono on 5/14/2015 7:24 PM. This class is UserRoleDomainDTOConverter
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 public class UserRoleDomainDTOConverter {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( UserRoleDomainDTOConverter.class );
 
     /**
@@ -29,9 +32,8 @@ public class UserRoleDomainDTOConverter {
     /**
      * Gets converted userRole dTO from userRole domain.
      *
-     * @param userRoleDTO    the userRole dTO
+     * @param userRoleDTO the userRole dTO
      * @param userRoleDomain the userRole domain
-     *
      * @return the converted userRole dTO from userRole domain
      */
     public static UserRole getConvertedDTOFromDomain( UserRole userRoleDTO,
@@ -68,7 +70,6 @@ public class UserRoleDomainDTOConverter {
      * Gets converted userRole dTO list.
      *
      * @param userRoleDomainList the userRole domain list
-     *
      * @return the converted userRole dTO list
      */
     public static List< UserRole > getConvertedListDTOFromDomain(
@@ -88,8 +89,7 @@ public class UserRoleDomainDTOConverter {
      * Gets converted userRole domain from userRole dTO.
      *
      * @param userRoleDomain the userRole domain
-     * @param userRoleDTO    the userRole dTO
-     *
+     * @param userRoleDTO the userRole dTO
      * @return the converted userRole domain from userRole dTO
      */
     public static com.mana.innovative.domain.consumer.UserRole getConvertedDomainFromDTO(
@@ -150,7 +150,6 @@ public class UserRoleDomainDTOConverter {
      * Gets converted userRole domain list from userRole dTO list.
      *
      * @param userRoleDTOList the userRole dTO list
-     *
      * @return the converted userRole domain list from userRole dTO list
      */
     public static List< com.mana.innovative.domain.consumer.UserRole > getConvertedListDomainFromDTO(

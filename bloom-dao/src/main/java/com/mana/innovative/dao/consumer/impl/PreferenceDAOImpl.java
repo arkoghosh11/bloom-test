@@ -22,8 +22,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 5/2/2015 5:36 PM. This class is PreferenceDAOImpl
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository
@@ -39,9 +39,8 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Create preference.
      *
-     * @param preference    the preference
+     * @param preference the preference
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -94,7 +93,6 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
      * Gets preferences.
      *
      * @param requestParams the request params
-     *
      * @return the preferences
      */
     @SuppressWarnings( "unchecked" )
@@ -144,9 +142,8 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Gets preference.
      *
-     * @param preferenceId  the preference id
+     * @param preferenceId the preference id
      * @param requestParams the request params
-     *
      * @return the preference
      */
     @Override
@@ -199,9 +196,8 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Update preference.
      *
-     * @param preference    the preference
+     * @param preference the preference
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -251,9 +247,8 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
     /**
      * Delete preference.
      *
-     * @param preferenceId  the preference id
+     * @param preferenceId the preference id
      * @param requestParams the request params
-     *
      * @return the boolean
      */
     @Override
@@ -299,6 +294,14 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
         return preferenceDAOResponse;
     }
 
+    /**
+     * Delete preferences by preference ids.
+     *
+     * @param preferenceIds the preference ids
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Preference > deletePreferencesByPreferenceIds( final List< Long > preferenceIds, final RequestParams requestParams ) {
@@ -343,7 +346,6 @@ public class PreferenceDAOImpl extends BasicDAO implements PreferenceDAO {
      * Delete all preferences.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override

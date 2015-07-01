@@ -30,8 +30,8 @@ import static org.junit.Assert.fail;
 /**
  * Deleted by Bloom/Rono on 5/4/2015 3:07 PM. This class WhenDeleteCardThenTestCardDAODeleteMethods is a test class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )

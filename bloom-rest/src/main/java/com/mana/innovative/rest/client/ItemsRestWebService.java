@@ -20,8 +20,8 @@ import javax.ws.rs.core.Response;
 /**
  * The type Items rest web service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Component
@@ -44,7 +44,6 @@ public class ItemsRestWebService {
      * Gets items.
      *
      * @param isError the is error
-     *
      * @return the items
      */
     @GET
@@ -68,9 +67,8 @@ public class ItemsRestWebService {
     /**
      * Delete items.
      *
-     * @param isError     the is error
+     * @param isError the is error
      * @param isDeleteAll the is delete all
-     *
      * @return the response
      */
     @DELETE

@@ -21,8 +21,8 @@ import java.util.List;
  * Created by Bloom/Rono on 4/30/2015 7:46 PM. This class WhenSidebarConversionThenTestSiderbarConverterDomainDTOMethods
  * is a test class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )

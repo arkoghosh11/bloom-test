@@ -11,8 +11,8 @@ import java.util.Objects;
 /**
  * The type Phone. Created by Bloom/Rono on Date: 10/22/12 Time: 11:14 AM
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @XmlRootElement( name = "phone" )
@@ -195,7 +195,6 @@ public class Phone {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

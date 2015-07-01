@@ -20,8 +20,8 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Rono on 2/26/2015. This is a class for .. todo
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class WhenItemsRestWebServiceTestGetItems extends RestTest {

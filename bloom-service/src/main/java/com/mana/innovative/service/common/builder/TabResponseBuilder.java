@@ -39,8 +39,7 @@ public class TabResponseBuilder {
      * Build tab response container.
      *
      * @param tabDAOResponse the tab dAO response
-     * @param isError        the is error
-     *
+     * @param isError the is error
      * @return Returns a response object for tabs
      */
     public static TabResponseContainer< TabsPayload > build( DAOResponse< com.mana.innovative.domain.common.Tab > tabDAOResponse, boolean isError ) {
@@ -93,10 +92,9 @@ public class TabResponseBuilder {
     /**
      * Build error.
      *
-     * @param location  the location of the error
-     * @param isError   the is error
+     * @param location the location of the error
+     * @param isError the is error
      * @param exception the exception
-     *
      * @return the tab response container
      */
     public static TabResponseContainer< TabsPayload > buildError( String location, boolean isError,

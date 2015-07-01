@@ -26,6 +26,9 @@ import javax.annotation.Resource;
 
 /**
  * Created by Bloom/Rono on 5/15/2015 12:22 PM. This class WhenCreateUserRoleThenTestUserRoleDAOMethods is a test class
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -33,6 +36,9 @@ import javax.annotation.Resource;
 @Transactional   // If required
 public class WhenCreateUserRoleThenTestUserRoleDAOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenCreateUserRoleThenTestUserRoleDAOMethods.class );
 
     /**

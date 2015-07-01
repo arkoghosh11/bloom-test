@@ -25,8 +25,8 @@ import java.util.List;
 /**
  * The type Shop service impl.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -50,9 +50,8 @@ public class ShopServiceImpl implements ShopService {
     /**
      * Gets shopDTO.
      *
-     * @param shopId  the shopDTO id
+     * @param shopId the shopDTO id
      * @param isError the is error
-     *
      * @return the shopDTO
      */
     @Override
@@ -104,7 +103,6 @@ public class ShopServiceImpl implements ShopService {
      *
      * @param shopDTO the shop dTO
      * @param isError the is error
-     *
      * @return the response
      */
     @Override
@@ -157,7 +155,6 @@ public class ShopServiceImpl implements ShopService {
      *
      * @param shopDTO the shop
      * @param isError the is error
-     *
      * @return the response
      */
     @Override
@@ -206,9 +203,8 @@ public class ShopServiceImpl implements ShopService {
     /**
      * This method is to Delete an shop via shopId only.
      *
-     * @param shopId  the shop id
+     * @param shopId the shop id
      * @param isError the is error
-     *
      * @return the response
      */
     @Override
@@ -247,7 +243,6 @@ public class ShopServiceImpl implements ShopService {
      *
      * @param shopIds the shop ids
      * @param isError the is error
-     *
      * @return the response
      */
     @Override

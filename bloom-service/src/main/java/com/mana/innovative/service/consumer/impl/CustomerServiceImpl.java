@@ -25,8 +25,8 @@ import javax.ws.rs.core.Response;
 /**
  * Created by Bloom/Rono on 4/13/2015. This class is CustomerServiceImpl
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -46,9 +46,8 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * Gets single customer details.
      *
-     * @param customerId    the customer id
+     * @param customerId the customer id
      * @param requestParams the request params
-     *
      * @return the single customer details
      */
     @Override
@@ -96,9 +95,8 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * Create customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override
@@ -148,9 +146,8 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * Update customer.
      *
-     * @param customerDTO   the customer
+     * @param customerDTO the customer
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override
@@ -195,9 +192,8 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * Delete specific customer.
      *
-     * @param customerId    the customer id
+     * @param customerId the customer id
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override

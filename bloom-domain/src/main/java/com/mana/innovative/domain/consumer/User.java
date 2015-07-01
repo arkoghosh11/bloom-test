@@ -80,6 +80,9 @@ public class User {
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
+    /**
+     * The User role.
+     */
     @ManyToOne( cascade = { CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH } )
     @JoinColumn( name = "user_role_id", referencedColumnName = "user_role_id" )
     private UserRole userRole;
@@ -215,7 +218,6 @@ public class User {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

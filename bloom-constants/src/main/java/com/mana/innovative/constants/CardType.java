@@ -3,8 +3,8 @@ package com.mana.innovative.constants;
 /**
  * Created by Bloom/Rono on 4/27/2015 5:50 PM. This class is CardType
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public enum CardType {

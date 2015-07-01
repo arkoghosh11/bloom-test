@@ -118,7 +118,6 @@ public class Person extends User {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

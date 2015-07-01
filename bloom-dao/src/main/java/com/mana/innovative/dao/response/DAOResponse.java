@@ -10,10 +10,9 @@ import java.util.List;
 /**
  * The type DAO response.
  *
- * @param <T> the type parameter
- *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @param <T>   the type parameter
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class DAOResponse < T > {
@@ -69,7 +68,7 @@ public class DAOResponse < T > {
      * Sets error.
      *
      * @param location the location
-     * @param e        the e
+     * @param e the e
      */
     public void setError( final String location, final Exception e ) {
 

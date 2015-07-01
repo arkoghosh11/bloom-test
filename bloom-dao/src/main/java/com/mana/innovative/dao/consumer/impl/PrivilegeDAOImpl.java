@@ -23,20 +23,22 @@ import java.util.List;
  * Created by Bloom/Rono on 5/15/2015 12:38 AM. This class is PrivilegeDAOImpl
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Repository( value = "privilegeDAO" )
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( PrivilegeDAOImpl.class );
 
     /**
      * Gets privileges.
      *
      * @param requestParams the request params
-     *
      * @return the privileges
      */
     @SuppressWarnings( "unchecked" )
@@ -82,9 +84,8 @@ public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
     /**
      * Gets privilege.
      *
-     * @param privilegeId   the privilege id
+     * @param privilegeId the privilege id
      * @param requestParams the request params
-     *
      * @return the privilege
      */
     @Override
@@ -132,9 +133,8 @@ public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
     /**
      * Create privilege.
      *
-     * @param privilege     the privilege
+     * @param privilege the privilege
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -182,9 +182,8 @@ public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
     /**
      * Update privilege.
      *
-     * @param privilege     the privilege
+     * @param privilege the privilege
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -230,9 +229,8 @@ public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
     /**
      * Delete privilege.
      *
-     * @param privilegeId   the privilege id
+     * @param privilegeId the privilege id
      * @param requestParams the request params
-     *
      * @return the boolean
      */
     @Override
@@ -279,7 +277,6 @@ public class PrivilegeDAOImpl extends BasicDAO implements PrivilegeDAO {
      * Delete all privileges.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override

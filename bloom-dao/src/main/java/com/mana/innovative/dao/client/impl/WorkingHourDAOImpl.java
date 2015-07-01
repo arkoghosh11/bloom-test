@@ -23,8 +23,8 @@ import java.util.List;
 /**
  * The type Working hour dAO impl.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository
@@ -40,8 +40,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
      * Gets workingHour by workingHour id.
      *
      * @param workingHourId the workingHour id
-     * @param isError       the is error
-     *
+     * @param isError the is error
      * @return the workingHour by workingHour id
      */
     @SuppressWarnings( "unchecked" )
@@ -89,8 +88,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
      * This method is to retrieve all the workingHours values from the DB
      *
      * @param isError the is error
-     *
-     * @return List<WorkingHour> </> Return a list of
+     * @return List<WorkingHour>   </> Return a list of
      */
     @SuppressWarnings( "unchecked" )
     @Override
@@ -129,8 +127,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
      * Delete working hour by working hr ids.
      *
      * @param workingHourId the working hour id
-     * @param isError       the is error
-     *
+     * @param isError the is error
      * @return the dAO response
      */
     @Override
@@ -174,8 +171,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
      * Delete working hours by working hr ids.
      *
      * @param workingHourIds the working hour ids
-     * @param isError        the is error
-     *
+     * @param isError the is error
      * @return the dAO response
      */
     @Override
@@ -217,8 +213,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
      * Delete all working hours.
      *
      * @param deleteAllWorkingHrs the delete all working hrs
-     * @param isError             the is error
-     *
+     * @param isError the is error
      * @return the dAO response
      */
     @Override
@@ -263,8 +258,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
      * Create dAO response.
      *
      * @param workingHour the working hour
-     * @param isError     the is error
-     *
+     * @param isError the is error
      * @return the dAO response
      */
     @Override
@@ -308,8 +302,7 @@ public class WorkingHourDAOImpl extends BasicDAO implements WorkingHourDAO {
      * Update workingHour.
      *
      * @param workingHour the workingHour
-     * @param isError     the is error
-     *
+     * @param isError the is error
      * @return the dAO response
      */
     @SuppressWarnings( "unchecked" )

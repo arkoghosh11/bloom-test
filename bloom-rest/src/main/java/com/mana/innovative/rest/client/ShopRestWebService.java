@@ -31,8 +31,8 @@ import java.util.List;
 /**
  * The type Shop rest web service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Component
@@ -65,9 +65,8 @@ public class ShopRestWebService {
     /**
      * Gets shops.
      *
-     * @param shopId  the shop id
+     * @param shopId the shop id
      * @param isError the is error
-     *
      * @return the shops
      */
     @GET
@@ -98,7 +97,6 @@ public class ShopRestWebService {
      *
      * @param shopDTO the shop dTO
      * @param isError the is error
-     *
      * @return the response
      */
     @POST
@@ -124,10 +122,9 @@ public class ShopRestWebService {
     /**
      * Update an shop.
      *
-     * @param shopId  the shop id
+     * @param shopId the shop id
      * @param shopDTO the shop dTO
      * @param isError the is error
-     *
      * @return the response
      */
     @PUT
@@ -157,9 +154,8 @@ public class ShopRestWebService {
     /**
      * Delete an shop.
      *
-     * @param shopId  the shop id
+     * @param shopId the shop id
      * @param isError the is error
-     *
      * @return the response
      */
     @DELETE
@@ -190,7 +186,6 @@ public class ShopRestWebService {
      *
      * @param shopIds the shop ids
      * @param isError the is error
-     *
      * @return the response
      */
     @DELETE

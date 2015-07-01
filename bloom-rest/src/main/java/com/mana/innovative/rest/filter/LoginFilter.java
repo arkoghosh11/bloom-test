@@ -17,8 +17,8 @@ import java.io.PrintWriter;
 /**
  * The type Login filter.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 //@javax.servlet.annotation.WebFilter (filterName = "loginFilter")
@@ -36,7 +36,6 @@ public class LoginFilter implements javax.servlet.Filter {
      * Init void.
      *
      * @param filterConfig the filter config
-     *
      * @throws ServletException the servlet exception
      */
     public void init( FilterConfig filterConfig ) throws ServletException {
@@ -53,12 +52,11 @@ public class LoginFilter implements javax.servlet.Filter {
     /**
      * Do filter.
      *
-     * @param request  the request
+     * @param request the request
      * @param response the response
-     * @param chain    the chain
-     *
+     * @param chain the chain
      * @throws ServletException the servlet exception
-     * @throws IOException      the iO exception
+     * @throws ServletException the servlet exception
      */
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain ) throws ServletException, IOException {
 

@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/23/2015. This class is SidebarDomainDTOConverter
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class SidebarDomainDTOConverter {
@@ -36,9 +36,8 @@ public class SidebarDomainDTOConverter {
     /**
      * Gets converted sidebarType dTO from sidebarType domain.
      *
-     * @param sidebarTypeDTO    the sidebarType dTO
+     * @param sidebarTypeDTO the sidebarType dTO
      * @param sidebarTypeDomain the sidebarType domain
-     *
      * @return the converted sidebarType dTO from sidebarType domain
      */
     public static SidebarType getConvertedDTOFromDomain( SidebarType sidebarTypeDTO, com.mana.innovative.domain.common.SidebarType sidebarTypeDomain ) {
@@ -75,7 +74,6 @@ public class SidebarDomainDTOConverter {
      * Gets converted sidebarType dTO list.
      *
      * @param sidebarTypeDomainList the sidebarType domain list
-     *
      * @return the converted sidebarType dTO list
      */
     public static List< SidebarType > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.common.SidebarType > sidebarTypeDomainList ) {
@@ -94,8 +92,7 @@ public class SidebarDomainDTOConverter {
      * Gets converted sidebarType domain from sidebarType dTO.
      *
      * @param sidebarTypeDomain the sidebarType domain
-     * @param sidebarTypeDTO    the sidebarType dTO
-     *
+     * @param sidebarTypeDTO the sidebarType dTO
      * @return the converted sidebarType domain from sidebarType dTO
      */
     public static com.mana.innovative.domain.common.SidebarType getConvertedDomainFromDTO( com.mana.innovative.domain.common.SidebarType sidebarTypeDomain, SidebarType sidebarTypeDTO ) {
@@ -151,7 +148,6 @@ public class SidebarDomainDTOConverter {
      * Gets converted sidebarType domain list from sidebarType dTO list.
      *
      * @param sidebarTypeDTOList the sidebarType dTO list
-     *
      * @return the converted sidebarType domain list from sidebarType dTO list
      */
     public static List< com.mana.innovative.domain.common.SidebarType > getConvertedListDomainFromDTO( List< SidebarType > sidebarTypeDTOList ) {

@@ -3,8 +3,8 @@ package com.mana.innovative.constants;
 /**
  * The type Test constants.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class TestConstants {
@@ -47,6 +47,9 @@ public class TestConstants {
      */
     public static final long TEST_OWN_ID = 1111L;
 
+    /**
+     * The constant DEFAULT.
+     */
     public static final String DEFAULT = "default";
 
     /**
@@ -268,7 +271,13 @@ public class TestConstants {
      * The constant FAIL_MESSAGE.
      */
     public static final String FAIL_MESSAGE = "Failed due to expected and actual results being different";
+    /**
+     * The constant DEFAULT_USER_ROLE_NAME.
+     */
     public static final String DEFAULT_USER_ROLE_NAME = "anonymous";
+    /**
+     * The constant DEFAULT_USER_ROLE_ID.
+     */
     public static final int DEFAULT_USER_ROLE_ID = ONE;
 
     /**

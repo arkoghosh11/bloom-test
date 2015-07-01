@@ -22,8 +22,8 @@ import java.util.List;
  * <p/>
  * Created by Bloom/Rono on 04/29/2015 14:08 PM.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )

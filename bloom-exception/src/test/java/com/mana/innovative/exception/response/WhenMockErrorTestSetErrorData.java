@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by alex1 on 1/28/2015. This is a domain class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = MockitoJUnitRunner.class )
@@ -63,6 +63,9 @@ public class WhenMockErrorTestSetErrorData {
 
     }
 
+    /**
+     * Tear down.
+     */
     @After
     public void tearDown( ) {
 

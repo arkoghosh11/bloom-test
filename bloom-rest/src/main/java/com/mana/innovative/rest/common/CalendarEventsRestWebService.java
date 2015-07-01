@@ -22,8 +22,8 @@ import java.util.List;
 /**
  * The type Calendar events rest web service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Component
@@ -45,7 +45,6 @@ public class CalendarEventsRestWebService {
      * Gets all events.
      *
      * @param isError the is error
-     *
      * @return the all events
      */
     @GET
@@ -80,8 +79,7 @@ public class CalendarEventsRestWebService {
      * Delete events.
      *
      * @param calendarEventIds the calendar event ids
-     * @param isError          the is error
-     *
+     * @param isError the is error
      * @return the response
      */
     @DELETE

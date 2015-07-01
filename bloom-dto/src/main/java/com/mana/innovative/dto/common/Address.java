@@ -7,8 +7,8 @@ import java.util.Objects;
 /**
  * The type Address.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @XmlRootElement( name = "address" )
@@ -189,7 +189,6 @@ public class Address {
      * Gets location.
      *
      * @param o the o
-     *
      * @return the location
      */
 //    @XmlElement(name = "location")

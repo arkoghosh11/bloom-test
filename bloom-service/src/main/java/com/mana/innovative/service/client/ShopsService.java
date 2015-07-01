@@ -10,8 +10,8 @@ import javax.ws.rs.core.Response;
 /**
  * The interface Shops service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -21,7 +21,6 @@ public interface ShopsService {
      * Gets shops.
      *
      * @param isError the is error
-     *
      * @return the shops
      */
     Response getShops( boolean isError );
@@ -29,9 +28,8 @@ public interface ShopsService {
     /**
      * Delete all shops.
      *
-     * @param isError        the is error
+     * @param isError the is error
      * @param deleteAllShops the delete all shops
-     *
      * @return the response
      */
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )

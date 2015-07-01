@@ -19,8 +19,8 @@ import javax.annotation.Resource;
 /**
  * Created by Bloom on 1/30/2015 : 12:20 AM todo This class is for ...
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )

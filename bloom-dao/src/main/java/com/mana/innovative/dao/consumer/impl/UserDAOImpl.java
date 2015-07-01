@@ -24,8 +24,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/10/2015. This class is UserDAOImpl
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository( value = "userDAO" )
@@ -48,7 +48,6 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
      * This method is to create a user
      *
      * @param requestParams the request params
-     *
      * @return boolean Return a boolean value to indicate if user creation passed or failed
      */
     @SuppressWarnings( "unchecked" )
@@ -96,9 +95,8 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     /**
      * Gets user by user id.
      *
-     * @param userId        the user id
+     * @param userId the user id
      * @param requestParams the request params
-     *
      * @return the user by user id
      */
     @SuppressWarnings( "unchecked" )
@@ -148,9 +146,8 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     /**
      * This method is to create a user
      *
-     * @param user          the user
+     * @param user the user
      * @param requestParams the request params
-     *
      * @return boolean Return a boolean value to indicate if user creation passed or failed
      */
     @Override
@@ -197,9 +194,8 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     /**
      * Update user.
      *
-     * @param user          the user
+     * @param user the user
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -244,12 +240,63 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     }
 
     /**
+     * Delete user by user id.
+     *
+     * @param userId the user id
+     * @param requestParams the request params
+     * @param entityName Optional Param only to be set by subclass to the query works without issues
+     * @return the dAO response
+     */
+    @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< User > deleteUserByUserId( long userId, RequestParams requestParams, String entityName ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteUserByUserId()";
+
+        logger.debug( "Starting " + location );
+        DAOResponse< User > userDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        entityName = entityName != null ? entityName : "User";
+        userDAOResponse.setDelete( Boolean.TRUE );
+
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.createQuery( "delete  from " + entityName + " where userId=:userId" );
+            query.setParameter( "userId", userId );
+            int count = query.executeUpdate( );
+
+            this.closeDBTransaction( );
+
+            userDAOResponse.setRequestSuccess( Boolean.TRUE );
+            userDAOResponse.setCount( count );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error( "Failed while deleting data from users table", exception );
+            userDAOResponse.setRequestSuccess( Boolean.FALSE );
+            userDAOResponse.setCount( DAOConstants.ZERO );
+
+            if ( requestParams.isError( ) ) {
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        userDAOResponse.setDelete( Boolean.TRUE );
+        userDAOResponse.setResults( null );
+        userDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+        return userDAOResponse;
+    }
+
+    /**
      * Delete users by user ids.
      *
-     * @param userIds       the user ids
+     * @param userIds the user ids
      * @param requestParams the request params
-     * @param entityName    the entity name
-     *
+     * @param entityName the entity name
      * @return the dAO response
      */
     @Override
@@ -298,65 +345,10 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
     }
 
     /**
-     * Delete user by user id.
-     *
-     * @param userId        the user id
-     * @param requestParams the request params
-     * @param entityName    Optional Param only to be set by subclass to the query works without issues
-     *
-     * @return the dAO response
-     */
-    @Override
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< User > deleteUserByUserId( long userId, RequestParams requestParams, String entityName ) {
-
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteUserByUserId()";
-
-        logger.debug( "Starting " + location );
-        DAOResponse< User > userDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
-        entityName = entityName != null ? entityName : "User";
-        userDAOResponse.setDelete( Boolean.TRUE );
-
-        try {
-            this.openDBTransaction( );
-
-            Query query = session.createQuery( "delete  from " + entityName + " where userId=:userId" );
-            query.setParameter( "userId", userId );
-            int count = query.executeUpdate( );
-
-            this.closeDBTransaction( );
-
-            userDAOResponse.setRequestSuccess( Boolean.TRUE );
-            userDAOResponse.setCount( count );
-
-        } catch ( HibernateException exception ) {
-
-            this.handleExceptions( exception );
-            logger.error( "Failed while deleting data from users table", exception );
-            userDAOResponse.setRequestSuccess( Boolean.FALSE );
-            userDAOResponse.setCount( DAOConstants.ZERO );
-
-            if ( requestParams.isError( ) ) {
-                errorContainer = fillErrorContainer( location, exception );
-            }
-        }
-
-        userDAOResponse.setDelete( Boolean.TRUE );
-        userDAOResponse.setResults( null );
-        userDAOResponse.setErrorContainer( errorContainer );
-
-        logger.debug( "Finishing " + location );
-        return userDAOResponse;
-    }
-
-    /**
      * Delete users.
      *
-     * @param userIds       the user ids
      * @param requestParams the request params
-     * @param tableName     the table name
-     *
+     * @param tableName the table name
      * @return the dAO response
      */
     @Override

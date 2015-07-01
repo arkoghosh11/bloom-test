@@ -21,8 +21,8 @@ import java.util.Objects;
 /**
  * Created by Bloom/Rono on 5/13/2015 11:20 AM. This class is UserRole
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Entity
@@ -70,6 +70,9 @@ public class UserRole {
     @OneToMany( orphanRemoval = true, mappedBy = "userRole", cascade = { CascadeType.ALL } )
     private List< User > users;
 
+    /**
+     * The Privileges.
+     */
     @ManyToMany( cascade = CascadeType.ALL )
     @JoinTable( name = "user_role_privilege", joinColumns = @JoinColumn( name = "user_role_id", referencedColumnName =
             "user_role_id" ), inverseJoinColumns = @JoinColumn( name = "privilege_id", referencedColumnName =
@@ -186,14 +189,31 @@ public class UserRole {
         this.users = users;
     }
 
+    /**
+     * Gets privileges.
+     *
+     * @return the privileges
+     */
     public List< Privilege > getPrivileges( ) {
         return privileges;
     }
 
+    /**
+     * Sets privileges.
+     *
+     * @param privilegeList the privilege list
+     */
     public void setPrivileges( final List< Privilege > privilegeList ) {
         this.privileges = privilegeList;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;

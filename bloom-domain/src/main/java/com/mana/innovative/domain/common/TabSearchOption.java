@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA. This class is for advanced searching of {@link Tab} from DB {@code searchParams,
- * searchConditions, searchOrder, searchMatchType }* searchParams is for the columns to be search against for values
+ * searchConditions, searchOrder, searchMatchType }*** searchParams is for the columns to be search against for values
  * entered by user in DB searchConditions is for applying conditions to each pram above for the column search in DB
  * search Order is the column types on which to add a order to. Order possible is (ASC,DESC, none) searchMatchType is
  * match applied to to a specified column with whichever match the user desires like a user may enter a few letter and
@@ -19,8 +19,8 @@ import java.util.Map;
  * Note This class will be replaced by a generic searching class for any Concrete Domain class searching IMP this class
  * is not  thread safe
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright Date : 10/2/12 Time: 3:35 PM
  * @since: jdk 1.7
  */

@@ -29,8 +29,8 @@ import javax.annotation.Resource;
  * Created by Bloom/Rono on 5/1/2015 2:02 AM. This class WhenCreateCustomerThenTestCustomerDAOGetMethods is a test
  * class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
@@ -59,6 +59,9 @@ public class WhenCreateCustomerThenTestCustomerDAOCreateMethods {
     @Resource
     private CustomerDAO customerDAO;
 
+    /**
+     * The User role dAO.
+     */
     @Resource
     private UserRoleDAO userRoleDAO;
 

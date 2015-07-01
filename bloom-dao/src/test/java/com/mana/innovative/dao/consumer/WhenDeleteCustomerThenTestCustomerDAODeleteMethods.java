@@ -30,6 +30,9 @@ import static org.junit.Assert.fail;
 /**
  * Created by Bloom/Rono on 5/15/2015 11:26 PM. This class WhenDeleteCustomerThenTestCustomerDAODeleteMethods is a test
  * class
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -37,6 +40,9 @@ import static org.junit.Assert.fail;
 @Transactional   // If required
 public class WhenDeleteCustomerThenTestCustomerDAODeleteMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenDeleteCustomerThenTestCustomerDAODeleteMethods.class );
 
     /**

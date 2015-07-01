@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -19,7 +18,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 /**
  * The type Users rest web service.
@@ -49,7 +47,6 @@ public class UsersRestWebService {
      * This method is for HTTP GET response for getting
      *
      * @param isError the is error
-     *
      * @return A response object
      */
     @GET
@@ -66,7 +63,6 @@ public class UsersRestWebService {
      * Delete users.
      *
      * @param isError the is error
-     *
      * @return the response
      */
     @DELETE

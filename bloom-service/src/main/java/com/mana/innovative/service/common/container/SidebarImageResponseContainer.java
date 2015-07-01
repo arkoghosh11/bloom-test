@@ -10,10 +10,9 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 /**
  * The type Sidebar image response container.
  *
- * @param <T> the type parameter
- *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @param <T>   the type parameter
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @XmlRootElement()

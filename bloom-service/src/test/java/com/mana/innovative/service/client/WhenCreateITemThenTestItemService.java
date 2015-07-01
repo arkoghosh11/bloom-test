@@ -24,8 +24,8 @@ import javax.ws.rs.core.Response.Status;
 /**
  * Created by Bloom/Rono on 6/30/2015 6:19 PM. This class WhenCreateITemThenTestItemService is a test class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )

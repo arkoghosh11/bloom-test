@@ -7,8 +7,8 @@ import java.util.Objects;
 /**
  * The type Working hour.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @XmlRootElement( name = "working_hour" )
@@ -183,7 +183,6 @@ public class WorkingHour {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

@@ -19,8 +19,8 @@ import java.util.List;
 /**
  * The type Item response builder.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class ItemResponseBuilder {
@@ -34,8 +34,7 @@ public class ItemResponseBuilder {
      * Build item response container.
      *
      * @param itemDAOResponse the item dAO response
-     * @param isError         the is error
-     *
+     * @param isError the is error
      * @return the item response container
      */
     public static ItemResponseContainer< ItemsPayload > build( DAOResponse< com.mana.innovative.domain.client.Item > itemDAOResponse,
@@ -90,10 +89,9 @@ public class ItemResponseBuilder {
     /**
      * Build error.
      *
-     * @param location  the location of the error
-     * @param isError   the is error
+     * @param location the location of the error
+     * @param isError the is error
      * @param exception the exception
-     *
      * @return the item response container
      */
     public static ItemResponseContainer< ItemsPayload > buildError( String location, boolean isError,

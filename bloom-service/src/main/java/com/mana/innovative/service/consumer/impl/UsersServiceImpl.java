@@ -27,8 +27,8 @@ import javax.ws.rs.core.Response;
 /**
  * The type Users service impl.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -49,7 +49,6 @@ public class UsersServiceImpl implements UsersService {
      * Gets all users.
      *
      * @param requestParams the request params
-     *
      * @return the all users
      */
     @Override
@@ -95,7 +94,6 @@ public class UsersServiceImpl implements UsersService {
      * Delete users.
      *
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override

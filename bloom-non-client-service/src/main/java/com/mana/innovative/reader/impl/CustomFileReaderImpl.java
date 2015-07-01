@@ -14,8 +14,8 @@ import java.io.File;
 /**
  * Created by Bloom/Rono on 4/17/2015. This class is CustomFileReaderImpl
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service( value = "customFileReaderImpl" )
@@ -30,7 +30,6 @@ public class CustomFileReaderImpl implements CustomSpecificFileReader< ItemsPayl
      * Read excel file reader.
      *
      * @param file the file
-     *
      * @return the items payload
      */
     @Override
@@ -46,7 +45,6 @@ public class CustomFileReaderImpl implements CustomSpecificFileReader< ItemsPayl
      * Read xML file.
      *
      * @param file the file
-     *
      * @return the items payload
      */
     @Override

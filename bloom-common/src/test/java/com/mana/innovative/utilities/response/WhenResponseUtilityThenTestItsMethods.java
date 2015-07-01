@@ -15,8 +15,8 @@ import javax.ws.rs.core.Response;
 /**
  * Created by Bloom/Rono on 5/1/2015 1:31 AM. This class WhenResponseUtilityThenTestItsMethods is a test class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )

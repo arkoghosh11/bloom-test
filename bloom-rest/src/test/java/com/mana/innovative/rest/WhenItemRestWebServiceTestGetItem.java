@@ -22,8 +22,9 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Bloom on 2/26/2015 : 11:25 PM
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ *
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class WhenItemRestWebServiceTestGetItem extends RestTest {

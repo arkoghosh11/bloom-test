@@ -32,8 +32,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 3/7/2015. This class is for ..
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class TestDummyDomainObjectGenerator {
@@ -161,7 +161,6 @@ public class TestDummyDomainObjectGenerator {
      * Gets test address Domain ZERO ID object.
      *
      * @param address the address
-     *
      * @return the test address Domain ZERO ID object
      */
     public static Address setTestAddressDomainZEROIDObject( final Address address ) {

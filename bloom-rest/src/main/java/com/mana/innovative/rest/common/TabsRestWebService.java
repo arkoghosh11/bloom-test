@@ -59,7 +59,6 @@ public class TabsRestWebService {
      * This method is for giving service for url /rest/tabs with all the tabs data as a {@link List<Tab></>}
      *
      * @param isError the is error
-     *
      * @return A response object containing all of the tabs within the Database
      */
     @GET
@@ -78,9 +77,8 @@ public class TabsRestWebService {
     /**
      * Delete tabs.
      *
-     * @param tabIds  the tab ids
+     * @param tabIds the tab ids
      * @param isError the is error
-     *
      * @return the response
      */
     @DELETE

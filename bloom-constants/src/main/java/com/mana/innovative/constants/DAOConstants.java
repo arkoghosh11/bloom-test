@@ -3,8 +3,8 @@ package com.mana.innovative.constants;
 /**
  * The type DAO constants.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public final class DAOConstants {
@@ -86,8 +86,17 @@ public final class DAOConstants {
      * The constant EMPTY_STRING.
      */
     public static final String EMPTY_STRING = "";
+    /**
+     * The constant DEFAULT_PRIVILEGE.
+     */
     public static final int DEFAULT_PRIVILEGE = 3;
+    /**
+     * The constant DEFAULT_USER_ROLE.
+     */
     public static final int DEFAULT_USER_ROLE = 1;
+    /**
+     * The constant DEFAULT_USER_ROLE_NAME.
+     */
     public static final String DEFAULT_USER_ROLE_NAME = "anonymous";
 
 
@@ -95,7 +104,6 @@ public final class DAOConstants {
      * To string from number.
      *
      * @param number the number
-     *
      * @return the string
      */
     public static String toStringFromNumber( final int number ) {
@@ -108,7 +116,6 @@ public final class DAOConstants {
      * To number from string.
      *
      * @param number the number
-     *
      * @return the integer
      */
     public static Integer toNumberFromString( final String number ) {

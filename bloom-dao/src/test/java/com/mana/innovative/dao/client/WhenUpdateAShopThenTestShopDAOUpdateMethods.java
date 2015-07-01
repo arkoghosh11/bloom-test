@@ -31,7 +31,10 @@ import java.util.List;
  *
  * @author Rono, Ankur Bhardwaj
  * @ RunWith(value = SpringJUnit4ClassRunner.class | MockitoWithJunitRunner.Class) @ ContextConfiguration(location
- * {"loc1"."loc2"}) @ TransactionConfiguration <--- Only If required @ Transactional <--- Only If required
+ *{
+ *"loc1"."loc2"
+ *}
+ *) @ TransactionConfiguration <--- Only If required @ Transactional <--- Only If required
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */

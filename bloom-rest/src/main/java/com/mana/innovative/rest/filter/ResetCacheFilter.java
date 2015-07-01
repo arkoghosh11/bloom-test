@@ -17,8 +17,8 @@ import java.io.IOException;
 /**
  * Created by Bloom/Rono on 5/6/2015 9:55 PM. This class is ResetCacheFilter
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Component
@@ -41,7 +41,6 @@ public class ResetCacheFilter implements Filter {
      * ServletException <li>Does not return within a time period defined by the web container </ol>
      *
      * @param filterConfig the filter config
-     *
      * @throws ServletException the servlet exception
      */
     @Override
@@ -71,12 +70,11 @@ public class ResetCacheFilter implements Filter {
      * next entity in the filter chain to block the request processing </ul> <li>Directly set headers on the response
      * after invocation of the next entity in the filter chain. </ol>
      *
-     * @param request  the request
+     * @param request the request
      * @param response the response
-     * @param chain    the chain
-     *
-     * @throws IOException      the iO exception
-     * @throws ServletException the servlet exception
+     * @param chain the chain
+     * @throws IOException the iO exception
+     * @throws IOException the iO exception
      */
     @Override
     public void doFilter( final ServletRequest request, final ServletResponse response, final FilterChain chain )
@@ -99,7 +97,8 @@ public class ResetCacheFilter implements Filter {
      * <p/>
      * <p/>
      * This method gives the filter an opportunity to clean up any resources that are being held (for example, memory,
-     * file handles, threads) and make sure that any persistent state is synchronized with the filter's current state in
+     * file handles, threads) and make sure that any persistent state is synchronized with the filter's current state
+     * in
      * memory.
      */
     @Override

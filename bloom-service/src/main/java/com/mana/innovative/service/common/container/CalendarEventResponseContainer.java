@@ -9,8 +9,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 /**
  * Created by IntelliJ IDEA.
  *
- * @param <T> the type parameter Created by Bloom/Rono on $date $time.
- *
+ * @param <T>   the type parameter Created by Bloom/Rono on $date $time.
  * @author Bloom Date: 1/2/13 Time: 4:23 PM
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright

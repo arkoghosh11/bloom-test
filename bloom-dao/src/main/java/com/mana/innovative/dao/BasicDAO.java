@@ -30,8 +30,8 @@ import java.util.Map;
 /**
  * The type Basic dAO.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class BasicDAO {
@@ -110,9 +110,8 @@ public class BasicDAO {
     /**
      * Fill error container.
      *
-     * @param location  the location
+     * @param location the location
      * @param exception the exception
-     *
      * @return the error container
      */
     protected ErrorContainer fillErrorContainer( String location, Exception exception ) {
@@ -129,9 +128,8 @@ public class BasicDAO {
      * Gets item by search params.
      *
      * @param itemSearchOption the item search option
-     * @param maxResults       the max results
-     * @param startLimit       the start limit
-     *
+     * @param maxResults the max results
+     * @param startLimit the start limit
      * @return the item by search params
      */
     @SuppressWarnings( "rawtypes" )
@@ -161,7 +159,6 @@ public class BasicDAO {
      * This method is to create a detached criteria
      *
      * @param itemSearchOption the item search option
-     *
      * @return A detached criteria object
      */
     private DetachedCriteria getDetachedCriteriaBySearchParams( ItemSearchOption itemSearchOption ) {
@@ -194,11 +191,10 @@ public class BasicDAO {
     /**
      * Add condition params.
      *
-     * @param detachedCriteria      the detached criteria
+     * @param detachedCriteria the detached criteria
      * @param searchConditionParams the search condition params
-     * @param searchConditions      the search conditions
-     * @param keys                  the keys
-     *
+     * @param searchConditions the search conditions
+     * @param keys the keys
      * @return the detached criteria
      */
     public DetachedCriteria addConditionParams( DetachedCriteria detachedCriteria,
@@ -224,9 +220,8 @@ public class BasicDAO {
      * This method is for adding order param like ASC or DESC to the given result set
      *
      * @param detachedCriteria the detached criteria
-     * @param searchOrders     the search orders
-     * @param keys             the keys
-     *
+     * @param searchOrders the search orders
+     * @param keys the keys
      * @return return the detached criteria with the added params and keys for searching
      */
     private DetachedCriteria addOrderParams( DetachedCriteria detachedCriteria, List< Map< String, String > > searchOrders,
@@ -245,11 +240,10 @@ public class BasicDAO {
      * Add match type params.
      *
      * @param detachedCriteria the detached criteria
-     * @param searchParams     the search params
+     * @param searchParams the search params
      * @param searchMatchTypes the search match types
      * @param searchConditions the search conditions
-     * @param keys             the keys
-     *
+     * @param keys the keys
      * @return the detached criteria
      */
     public DetachedCriteria addMatchTypeParams( DetachedCriteria detachedCriteria,
@@ -280,7 +274,6 @@ public class BasicDAO {
      * This method is for getting the keys for searching
      *
      * @param searchConditions A list of type Map of type
-     *
      * @return A list of type String
      */
     private List< String > getKeysForSearch( final List< Map< String, String > > searchConditions ) {
@@ -300,7 +293,7 @@ public class BasicDAO {
     /**
      * Update shop values.
      *
-     * @param shop   the shop
+     * @param shop the shop
      * @param dbShop the db shop
      */
     protected void updateShopValues( final Shop shop, final Shop dbShop ) {
@@ -318,7 +311,7 @@ public class BasicDAO {
     /**
      * Update shop items.
      *
-     * @param items   the items
+     * @param items the items
      * @param dbItems the db items
      */
     protected void updateShopItems( final List< Item > items, final List< Item > dbItems ) {
@@ -334,7 +327,7 @@ public class BasicDAO {
     /**
      * Update shop item.
      *
-     * @param item   the item
+     * @param item the item
      * @param dbItem the db item
      */
     protected void updateShopItem( final Item item, final Item dbItem ) {
@@ -371,7 +364,7 @@ public class BasicDAO {
     /**
      * Update shop working hours.
      *
-     * @param workingHours   the working hours
+     * @param workingHours the working hours
      * @param dbWorkingHours the db working hours
      */
     protected void updateShopWorkingHours( final List< WorkingHour > workingHours, final List< WorkingHour > dbWorkingHours ) {
@@ -388,7 +381,7 @@ public class BasicDAO {
     /**
      * Update shop working hour.
      *
-     * @param workingHour   the working hour
+     * @param workingHour the working hour
      * @param dbWorkingHour the db working hour
      */
     protected void updateShopWorkingHour( final WorkingHour workingHour, final WorkingHour dbWorkingHour ) {
@@ -413,7 +406,7 @@ public class BasicDAO {
     /**
      * Update shop address.
      *
-     * @param address   the address
+     * @param address the address
      * @param dbAddress the db address
      */
     protected void updateShopAddress( final Address address, final Address dbAddress ) {

@@ -23,8 +23,8 @@ import java.util.List;
 /**
  * The type Customer dAO impl.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository( value = "customerDAO" )
@@ -66,9 +66,8 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Create customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -112,7 +111,6 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
      * Gets customers.
      *
      * @param requestParams the request params
-     *
      * @return the customers
      */
     @SuppressWarnings( "unchecked" )
@@ -157,9 +155,8 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Gets customer.
      *
-     * @param customerId    the customer id
+     * @param customerId the customer id
      * @param requestParams the request params
-     *
      * @return the customer
      */
     @Override
@@ -207,9 +204,8 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Update customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     // @SuppressWarnings( "unchecked" )
@@ -258,9 +254,8 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
     /**
      * Delete customer.
      *
-     * @param customerId    the customer id
+     * @param customerId the customer id
      * @param requestParams the request params
-     *
      * @return the boolean
      */
     @Override
@@ -286,6 +281,14 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
         return customerDAOResponse;
     }
 
+    /**
+     * Delete customers by user ids.
+     *
+     * @param userIds       the user ids
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Customer > deleteCustomersByUserIds( final List< Long > userIds, final RequestParams requestParams ) {
@@ -308,6 +311,12 @@ public class CustomerDAOImpl extends UserDAOImpl implements CustomerDAO {
         return customerDAOResponse;
     }
 
+    /**
+     * Delete all customers.
+     *
+     * @param requestParams the request params
+     * @return the dAO response
+     */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
     public DAOResponse< Customer > deleteAllCustomers( final RequestParams requestParams ) {

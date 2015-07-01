@@ -11,8 +11,8 @@ import java.util.Date;
 /**
  * The type Date format adapter.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class DateFormatAdapter extends XmlAdapter< String, Date > {
@@ -31,10 +31,9 @@ public class DateFormatAdapter extends XmlAdapter< String, Date > {
      * Convert a value type to a bound type.
      *
      * @param stringDate The value to be converted. Can be null.
-     *
      * @return the date
-     *
-     * @throws Exception if there's an error during the conversion. The caller is responsible for reporting the error to
+     * @throws Exception if there's an error during the conversion. The caller is responsible for reporting the error
+     *                   to
      *                   the user through .
      */
     @Override
@@ -48,10 +47,9 @@ public class DateFormatAdapter extends XmlAdapter< String, Date > {
      * Convert a bound type to a value type.
      *
      * @param date The value to be converted. Can be null.
-     *
      * @return the string
-     *
-     * @throws Exception if there's an error during the conversion. The caller is responsible for reporting the error to
+     * @throws Exception if there's an error during the conversion. The caller is responsible for reporting the error
+     *                   to
      *                   the user through .
      */
     @Override

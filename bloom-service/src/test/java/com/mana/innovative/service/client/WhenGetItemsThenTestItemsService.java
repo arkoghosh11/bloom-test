@@ -22,27 +22,33 @@ import javax.ws.rs.core.Response.Status;
 /**
  * Created by alex1 on 1/23/2015. This is a domain class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/service-config-test.xml", "/db-config-test.xml" } )
 @TransactionConfiguration
 @Transactional
-public class WhenTestItemsServiceThenTestGetItems {
+public class WhenGetItemsThenTestItemsService {
 
     /**
      * The constant logger.
      */
-    public static final Logger logger = LoggerFactory.getLogger( WhenTestItemsServiceThenTestGetItems.class );
+    public static final Logger logger = LoggerFactory.getLogger( WhenGetItemsThenTestItemsService.class );
 
     /**
      * The Items service impl.
      */
 
     private ItemsService itemsServiceImpl;
+    /**
+     * The Item response container.
+     */
     private ItemResponseContainer itemResponseContainer;
+    /**
+     * The Items payload.
+     */
     private ItemsPayload itemsPayload;
 
     /**
@@ -62,7 +68,7 @@ public class WhenTestItemsServiceThenTestGetItems {
         Mockito.when( itemsServiceImpl.getItems( false ) ).thenReturn( response );
         Mockito.when( itemResponseContainer.getPayload( ) ).thenReturn( itemsPayload );
         Mockito.when( itemResponseContainer.getCount( ) ).thenReturn( 1 );
-        Mockito.when( itemsPayload.getItems( ) ).thenReturn( TestDummyDTOObjectGenerator.getTestItemDTOList() );
+        Mockito.when( itemsPayload.getItems( ) ).thenReturn( TestDummyDTOObjectGenerator.getTestItemDTOList( ) );
         Mockito.when( itemsPayload.getTotalCount( ) ).thenReturn( TestDummyDTOObjectGenerator.getTestItemDTOList( ).size( ) );
     }
 

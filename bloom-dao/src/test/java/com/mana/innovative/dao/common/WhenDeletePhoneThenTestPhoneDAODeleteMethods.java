@@ -29,6 +29,9 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 5/15/2015 7:33 PM. This class WhenDeletePhoneThenTestPhoneDAODeleteMethods is a test class
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -36,6 +39,9 @@ import java.util.List;
 //@Transactional   // If required
 public class WhenDeletePhoneThenTestPhoneDAODeleteMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenDeletePhoneThenTestPhoneDAODeleteMethods.class );
 
     /**
@@ -49,6 +55,9 @@ public class WhenDeletePhoneThenTestPhoneDAODeleteMethods {
     @Resource
     private SessionFactory sessionFactory;
 
+    /**
+     * The Request params.
+     */
     private RequestParams requestParams;
 
     /**

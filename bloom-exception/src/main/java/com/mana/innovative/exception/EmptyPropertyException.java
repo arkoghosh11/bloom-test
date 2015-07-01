@@ -3,14 +3,14 @@ package com.mana.innovative.exception;
 /**
  * Created by Bloom/Rono on 4/14/2015. This class is EmptyPropertyException
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class EmptyPropertyException extends Exception {
 
     /**
-     *
+     * The constant serialVersionUID.
      */
     private static final long serialVersionUID = 3009234819814022974L;
     /**

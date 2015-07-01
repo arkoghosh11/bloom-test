@@ -24,8 +24,8 @@ import java.util.List;
 /**
  * The type Address dAO impl.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository
@@ -40,9 +40,8 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Gets address by address id.
      *
-     * @param addressId     the address id
+     * @param addressId the address id
      * @param requestParams the request params
-     *
      * @return the address by address id
      */
     @SuppressWarnings( "unchecked" )
@@ -89,8 +88,7 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
      * This method is to retrieve all the address values from the DB
      *
      * @param requestParams the request params
-     *
-     * @return List<Address>  </> Return a list of
+     * @return List<Address>    </> Return a list of
      */
     @SuppressWarnings( "unchecked" )
     @Override
@@ -128,9 +126,8 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Delete working hour by working hr ids.
      *
-     * @param addressId     the working hour id
+     * @param addressId the working hour id
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -170,9 +167,8 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Delete working hours by working hr ids.
      *
-     * @param addressIds    the working hour ids
+     * @param addressIds the working hour ids
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -212,7 +208,6 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
      * Delete all address.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -256,9 +251,8 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Create address.
      *
-     * @param address       the address
+     * @param address the address
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -300,9 +294,8 @@ public class AddressDAOImpl extends BasicDAO implements AddressDAO {
     /**
      * Update address.
      *
-     * @param address       the address
+     * @param address the address
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @SuppressWarnings( "unchecked" )

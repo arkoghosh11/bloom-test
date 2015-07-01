@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/23/2015. This class is PhoneDomainDTOConverter
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class PhoneDomainDTOConverter {
@@ -36,9 +36,8 @@ public class PhoneDomainDTOConverter {
     /**
      * Gets converted phone dTO from phone domain.
      *
-     * @param phoneDTO    the phone dTO
+     * @param phoneDTO the phone dTO
      * @param phoneDomain the phone domain
-     *
      * @return the converted phone dTO from phone domain
      */
     public static Phone getConvertedDTOFromDomain( Phone phoneDTO, com.mana.innovative.domain.common.Phone phoneDomain ) {
@@ -74,7 +73,6 @@ public class PhoneDomainDTOConverter {
      * Gets converted phone dTO list.
      *
      * @param phoneDomainList the phones
-     *
      * @return the converted phone dTO list
      */
     public static List< com.mana.innovative.dto.common.Phone > getConvertedListDTOFromDomain( List< com.mana
@@ -92,8 +90,7 @@ public class PhoneDomainDTOConverter {
      * Gets converted phone domain from phone dTO.
      *
      * @param phoneDomain the phone domain
-     * @param phoneDTO    the phone dTO
-     *
+     * @param phoneDTO the phone dTO
      * @return the converted phone domain from phone dTO
      */
     public static com.mana.innovative.domain.common.Phone getConvertedDomainFromDTO( com.mana.innovative.domain.common.Phone phoneDomain, final Phone phoneDTO ) {
@@ -160,7 +157,6 @@ public class PhoneDomainDTOConverter {
      * Gets converted phone domain list from phone dTO list.
      *
      * @param phoneDTOList the phone dTO list
-     *
      * @return the converted phone domain list from phone dTO list
      */
     public static List< com.mana.innovative.domain.common.Phone > getConvertedListDomainFromDTO( List< Phone >

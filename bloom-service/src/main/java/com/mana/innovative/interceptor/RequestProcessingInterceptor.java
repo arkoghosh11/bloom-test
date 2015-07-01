@@ -13,14 +13,28 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Bloom/Rono on 6/7/2015 10:09 PM. This class is RequestProcessingInterceptor
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Component
 public class RequestProcessingInterceptor extends HandlerInterceptorAdapter {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( RequestProcessingInterceptor.class );
 
+    /**
+     * Pre handle.
+     *
+     * @param request  the request
+     * @param response the response
+     * @param handler  the handler
+     *
+     * @return the boolean
+     *
+     * @throws Exception the exception
+     */
     @Override
     public boolean preHandle( HttpServletRequest request,
                               HttpServletResponse response, Object handler ) throws Exception {
@@ -32,6 +46,15 @@ public class RequestProcessingInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
+    /**
+     * Post handle.
+     *
+     * @param request the request
+     * @param response the response
+     * @param handler the handler
+     * @param modelAndView the model and view
+     * @throws Exception the exception
+     */
     @Override
     public void postHandle( HttpServletRequest request,
                             HttpServletResponse response, Object handler,
@@ -41,6 +64,15 @@ public class RequestProcessingInterceptor extends HandlerInterceptorAdapter {
         //we can add attributes in the modelAndView and use that in the view page
     }
 
+    /**
+     * After completion.
+     *
+     * @param request the request
+     * @param response the response
+     * @param handler the handler
+     * @param ex the ex
+     * @throws Exception the exception
+     */
     @Override
     public void afterCompletion( HttpServletRequest request,
                                  HttpServletResponse response, Object handler, Exception ex )

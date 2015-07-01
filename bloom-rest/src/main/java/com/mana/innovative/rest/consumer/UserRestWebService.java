@@ -27,8 +27,8 @@ import javax.ws.rs.core.Response;
 /**
  * The type User service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Component
@@ -49,9 +49,8 @@ public class UserRestWebService {
     /**
      * Gets single user details.
      *
-     * @param userId  the user id
+     * @param userId the user id
      * @param isError the is error
-     *
      * @return the single user details
      */
     @GET
@@ -71,9 +70,8 @@ public class UserRestWebService {
     /**
      * Create new user.
      *
-     * @param user    the user
+     * @param user the user
      * @param isError the is error
-     *
      * @return the response
      */
     @POST
@@ -93,10 +91,9 @@ public class UserRestWebService {
     /**
      * Update specific user details.
      *
-     * @param user    the user
-     * @param userId  the user id
+     * @param user the user
+     * @param userId the user id
      * @param isError the is error
-     *
      * @return the response
      */
     @PUT
@@ -118,9 +115,8 @@ public class UserRestWebService {
     /**
      * Delete specific user.
      *
-     * @param userId  the user id
+     * @param userId the user id
      * @param isError the is error
-     *
      * @return the response
      */
     @DELETE

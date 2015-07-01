@@ -14,8 +14,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/23/2015. This class is CardDomainDTOConverter
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class CardDomainDTOConverter {
@@ -46,9 +46,8 @@ public class CardDomainDTOConverter {
     /**
      * Gets converted card dTO from card domain.
      *
-     * @param cardDTO    the card dTO
+     * @param cardDTO the card dTO
      * @param cardDomain the card domain
-     *
      * @return the converted card dTO from card domain
      */
     public static Card getConvertedDTOFromDomain( Card cardDTO, com.mana.innovative.domain.consumer.Card cardDomain ) {
@@ -84,7 +83,6 @@ public class CardDomainDTOConverter {
      * Gets converted card dTO list.
      *
      * @param cardDomainList the card domain list
-     *
      * @return the converted card dTO list
      */
     public static List< com.mana.innovative.dto.consumer.Card > getConvertedListDTOFromDomain( List< com.mana
@@ -102,8 +100,7 @@ public class CardDomainDTOConverter {
      * Gets converted card domain from card dTO.
      *
      * @param cardDomain the card domain
-     * @param cardDTO    the card dTO
-     *
+     * @param cardDTO the card dTO
      * @return the converted card domain from card dTO
      */
     public static com.mana.innovative.domain.consumer.Card getConvertedDomainFromDTO( com
@@ -172,7 +169,6 @@ public class CardDomainDTOConverter {
      * Gets converted card domain list from card dTO list.
      *
      * @param cardDTOList the card dTO list
-     *
      * @return the converted card domain list from card dTO list
      */
     public static List< com.mana.innovative.domain.consumer.Card > getConvertedListDomainFromDTO( List< Card >
@@ -191,7 +187,6 @@ public class CardDomainDTOConverter {
      * Is valid issue expiry date.
      *
      * @param issuedDate the date format
-     *
      * @return the boolean
      */
     public static boolean isValidCardIssueDate( String issuedDate ) {
@@ -222,7 +217,6 @@ public class CardDomainDTOConverter {
      * Is valid card number format.
      *
      * @param cardNumber the card number
-     *
      * @return the boolean
      */
     public static boolean isValidCardNumber( String cardNumber ) {
@@ -249,7 +243,6 @@ public class CardDomainDTOConverter {
      * Gets sum of digits.
      *
      * @param number the number
-     *
      * @return the sum of digits
      */
     public static int getSumOfDigits( int number ) {

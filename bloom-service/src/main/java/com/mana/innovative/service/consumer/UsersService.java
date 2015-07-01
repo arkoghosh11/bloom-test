@@ -7,13 +7,12 @@ import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 /**
  * The interface Users service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -23,7 +22,6 @@ public interface UsersService {
      * Gets all users.
      *
      * @param requestParams the request params
-     *
      * @return the all users
      */
     Response getAllUsers( RequestParams requestParams );
@@ -32,7 +30,6 @@ public interface UsersService {
      * Delete users.
      *
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response deleteAllUsers( RequestParams requestParams );

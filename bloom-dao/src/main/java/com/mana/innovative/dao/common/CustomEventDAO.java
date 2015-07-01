@@ -10,8 +10,8 @@ import java.util.Date;
 /**
  * Created by Bloom/Rono on 4/14/2015. This class is CustomEventDAO
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository
@@ -22,7 +22,6 @@ public interface CustomEventDAO {
      *
      * @param customEventId the custom event id
      * @param requestParams the request params
-     *
      * @return the event by id
      */
     DAOResponse< CustomEvent > getEventById( long customEventId, RequestParams requestParams );
@@ -30,9 +29,8 @@ public interface CustomEventDAO {
     /**
      * Gets events by date.
      *
-     * @param eventDate     the event date
+     * @param eventDate the event date
      * @param requestParams the request params
-     *
      * @return the events by date
      */
     DAOResponse< CustomEvent > getEventsByDate( Date eventDate, RequestParams requestParams );
@@ -40,9 +38,8 @@ public interface CustomEventDAO {
     /**
      * Gets events by event name.
      *
-     * @param eventName     the event name
+     * @param eventName the event name
      * @param requestParams the request params
-     *
      * @return the events by event name
      */
     DAOResponse< CustomEvent > getEventsByEventName( String eventName, RequestParams requestParams );
@@ -51,7 +48,6 @@ public interface CustomEventDAO {
      * Gets all events.
      *
      * @param requestParams the request params
-     *
      * @return the all events
      */
     DAOResponse< CustomEvent > getAllEvents( RequestParams requestParams );
@@ -59,9 +55,8 @@ public interface CustomEventDAO {
     /**
      * Update event.
      *
-     * @param customEvent   the custom event
+     * @param customEvent the custom event
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< CustomEvent > updateEvent( CustomEvent customEvent, RequestParams requestParams );
@@ -69,9 +64,8 @@ public interface CustomEventDAO {
     /**
      * Enable event scheduler for date.
      *
-     * @param date          the date
+     * @param date the date
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< CustomEvent > enableEventSchedulerForDate( Date date, RequestParams requestParams );
@@ -79,9 +73,8 @@ public interface CustomEventDAO {
     /**
      * Disable event scheduler for date.
      *
-     * @param date          the date
+     * @param date the date
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< CustomEvent > disableEventSchedulerForDate( Date date, RequestParams requestParams );
@@ -90,9 +83,8 @@ public interface CustomEventDAO {
      * Gets events by date range.
      *
      * @param eventStartTime the event start time
-     * @param eventEndTime   the event end time
-     * @param requestParams  the request params
-     *
+     * @param eventEndTime the event end time
+     * @param requestParams the request params
      * @return the events by date range
      */
     DAOResponse< CustomEvent > getEventsByDateRange( Date eventStartTime, Date eventEndTime, RequestParams requestParams );

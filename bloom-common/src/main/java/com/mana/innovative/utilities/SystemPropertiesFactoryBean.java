@@ -11,8 +11,8 @@ import java.util.Properties;
 /**
  * The type System properties factory bean.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class SystemPropertiesFactoryBean extends PropertiesFactoryBean {
@@ -40,7 +40,6 @@ public class SystemPropertiesFactoryBean extends PropertiesFactoryBean {
      * Create properties.
      *
      * @return the properties
-     *
      * @throws IOException the iO exception
      */
     @Override

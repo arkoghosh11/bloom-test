@@ -9,8 +9,8 @@ import javax.ws.rs.core.Response;
 /**
  * Created by Bloom/Rono on 4/13/2015. This class is CustomerService
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -19,9 +19,8 @@ public interface CustomerService {
     /**
      * Gets customer by user id.
      *
-     * @param customerId    the customer id
+     * @param customerId the customer id
      * @param requestParams the request params
-     *
      * @return the customer by user id
      */
     Response getCustomerByUserId( Long customerId, RequestParams requestParams );
@@ -29,9 +28,8 @@ public interface CustomerService {
     /**
      * Create customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response createCustomer( Customer customer, RequestParams requestParams );
@@ -39,9 +37,8 @@ public interface CustomerService {
     /**
      * Update customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response updateCustomer( Customer customer, RequestParams requestParams );
@@ -49,9 +46,8 @@ public interface CustomerService {
     /**
      * Delete customer by user id.
      *
-     * @param customerId    the customer id
+     * @param customerId the customer id
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response deleteCustomerByUserId( Long customerId, RequestParams requestParams );

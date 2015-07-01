@@ -3,14 +3,14 @@ package com.mana.innovative.exception;
 /**
  * The type Item size exceeded exception.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class ItemSizeExceededException extends Exception {
 
     /**
-     *
+     * The constant serialVersionUID.
      */
     private static final long serialVersionUID = 7088044909373562430L;
     /**

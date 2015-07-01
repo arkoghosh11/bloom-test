@@ -7,17 +7,17 @@ import java.util.Map;
 /**
  * The type System properties value loader.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class SystemPropertiesValueLoader extends SystemEnvironmentPropertySource {
 
     /**
      * Create a new {@code SystemEnvironmentPropertySource} with the given name and delegating to the given {@code
-     * MapPropertySource}.
+     * MapPropertySource}**.
      *
-     * @param name   the name
+     * @param name the name
      * @param source the source
      */
     public SystemPropertiesValueLoader( String name, Map< String, Object > source ) {

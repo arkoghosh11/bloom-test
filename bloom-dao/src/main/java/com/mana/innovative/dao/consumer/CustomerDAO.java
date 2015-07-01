@@ -12,8 +12,8 @@ import java.util.List;
  * <p/>
  * This interface is CustomerDAO
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository
@@ -22,9 +22,8 @@ public interface CustomerDAO {
     /**
      * Create customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Customer > createCustomer( Customer customer, RequestParams requestParams );
@@ -33,7 +32,6 @@ public interface CustomerDAO {
      * Gets customers.
      *
      * @param requestParams the request params
-     *
      * @return the customers
      */
     DAOResponse< Customer > getCustomers( RequestParams requestParams );
@@ -41,9 +39,8 @@ public interface CustomerDAO {
     /**
      * Gets customer.
      *
-     * @param userId        the customer id
+     * @param userId the customer id
      * @param requestParams the request params
-     *
      * @return the customer
      */
     DAOResponse< Customer > getCustomerByUserId( long userId, RequestParams requestParams );
@@ -51,9 +48,8 @@ public interface CustomerDAO {
     /**
      * Update customer.
      *
-     * @param customer      the customer
+     * @param customer the customer
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Customer > updateCustomer( Customer customer, RequestParams requestParams );
@@ -61,9 +57,8 @@ public interface CustomerDAO {
     /**
      * Delete customer by user id.
      *
-     * @param userId        the customer id
+     * @param userId the customer id
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Customer > deleteCustomerByUserId( long userId, RequestParams requestParams );
@@ -71,9 +66,8 @@ public interface CustomerDAO {
     /**
      * Delete customers by user ids.
      *
-     * @param userIds       the customer ids
+     * @param userIds the customer ids
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Customer > deleteCustomersByUserIds( List< Long > userIds, RequestParams requestParams );
@@ -82,7 +76,6 @@ public interface CustomerDAO {
      * Delete all customers.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Customer > deleteAllCustomers( RequestParams requestParams );

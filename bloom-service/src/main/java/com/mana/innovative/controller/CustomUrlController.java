@@ -16,15 +16,26 @@ import java.util.Locale;
  * Created by Bloom/Rono on 6/7/2015 9:58 PM. This class is CustomUrlController
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Controller( value = "customUrlController" )
 @RequestMapping( value = "/home" )
 public class CustomUrlController {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( CustomUrlController.class );
 
+    /**
+     * Home string.
+     *
+     * @param locale the locale
+     * @param model  the model
+     *
+     * @return the string
+     */
     @RequestMapping( method = RequestMethod.GET )
     public String home( Locale locale, Model model ) {
         logger.info( "Welcome home! The client locale is {}.", locale );
@@ -44,6 +55,11 @@ public class CustomUrlController {
         return "home";
     }
 
+    /**
+     * Fallback method.
+     *
+     * @return the string
+     */
     @RequestMapping( "*" )
     @ResponseBody
     public String fallbackMethod( ) {

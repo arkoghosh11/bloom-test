@@ -27,8 +27,8 @@ import javax.ws.rs.core.Response;
 /**
  * The type User service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -48,9 +48,8 @@ public class UserServiceImpl implements UserService {
     /**
      * Gets single user details.
      *
-     * @param userId        the user id
+     * @param userId the user id
      * @param requestParams the request params
-     *
      * @return the single user details
      */
     @Override
@@ -98,9 +97,8 @@ public class UserServiceImpl implements UserService {
     /**
      * Create user.
      *
-     * @param user          the user
+     * @param user the user
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override
@@ -150,9 +148,8 @@ public class UserServiceImpl implements UserService {
     /**
      * Update user.
      *
-     * @param userDTO       the user
+     * @param userDTO the user
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override
@@ -197,9 +194,8 @@ public class UserServiceImpl implements UserService {
     /**
      * Delete specific user.
      *
-     * @param userId        the user id
+     * @param userId the user id
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override

@@ -25,8 +25,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 5/3/2015 12:06 AM. This class WhenGetTabThenTestTabDAOMethods is a test class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )

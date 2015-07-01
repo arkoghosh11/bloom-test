@@ -27,8 +27,8 @@ import java.util.List;
  * Created by Bloom/Rono on 5/2/2015 6:18 PM. This class WhenGetCreditCardDAOThenTestGetCreditCardGetMethods is a test
  * class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )

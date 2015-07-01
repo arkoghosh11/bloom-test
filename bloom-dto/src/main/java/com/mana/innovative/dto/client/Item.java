@@ -11,8 +11,8 @@ import java.util.Objects;
 /**
  * The type Item.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @XmlRootElement( name = "item", namespace = "http://localhost:8080/bloom-test/rest/items" )
@@ -313,7 +313,6 @@ public class Item {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

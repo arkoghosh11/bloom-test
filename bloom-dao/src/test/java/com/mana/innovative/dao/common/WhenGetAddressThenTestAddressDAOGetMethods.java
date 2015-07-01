@@ -22,8 +22,8 @@ import java.util.List;
 /**
  * This class is a test class for testing class todo...
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
@@ -46,6 +46,9 @@ public class WhenGetAddressThenTestAddressDAOGetMethods {
     @Resource
     private AddressDAO addressDAO;
 
+    /**
+     * The Request params.
+     */
     private RequestParams requestParams;
 
     /**

@@ -23,13 +23,16 @@ import java.util.List;
  * Created by Bloom/Rono on 5/15/2015 12:32 AM. This class is UserRoleDAOImpl
  *
  * @author Rono, Ankur Bhardwaj
- * @email arkoghosh@hotmail.com, meankur1@gmail.com
+ * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
 @Repository( value = "userRoleDAO" )
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
 public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory
             .getLogger( UserRoleDAOImpl.class );
 
@@ -37,7 +40,6 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
      * Gets userRoles.
      *
      * @param requestParams the request params
-     *
      * @return the userRoles
      */
     @SuppressWarnings( "unchecked" )
@@ -87,9 +89,8 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
     /**
      * Gets userRole.
      *
-     * @param userRoleId    the userRole id
+     * @param userRoleId the userRole id
      * @param requestParams the request params
-     *
      * @return the userRole
      */
     @Override
@@ -142,9 +143,8 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
     /**
      * Create userRole.
      *
-     * @param userRole      the userRole
+     * @param userRole the userRole
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -196,9 +196,8 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
     /**
      * Update userRole.
      *
-     * @param userRole      the userRole
+     * @param userRole the userRole
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -248,9 +247,8 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
     /**
      * Delete userRole.
      *
-     * @param userRoleId    the userRole id
+     * @param userRoleId the userRole id
      * @param requestParams the request params
-     *
      * @return the boolean
      */
     @Override
@@ -302,7 +300,6 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
      * Delete all userRoles.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override

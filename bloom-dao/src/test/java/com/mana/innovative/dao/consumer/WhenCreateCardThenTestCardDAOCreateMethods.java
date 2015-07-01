@@ -27,8 +27,8 @@ import javax.annotation.Resource;
 /**
  * Created by Bloom/Rono on 5/4/2015 3:07 PM. This class WhenCreateCardThenTestCardDAOCreateMethods is a test class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )

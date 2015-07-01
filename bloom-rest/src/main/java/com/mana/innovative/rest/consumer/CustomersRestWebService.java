@@ -30,8 +30,8 @@ import java.util.List;
  * <p/>
  * Created by Bloom/Rono on $date $time.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Component
@@ -51,10 +51,9 @@ public class CustomersRestWebService {
 
     /**
      * This method is for giving service for url /rest/tabs with all the tabs data as a {@link List < com
-     * .mana.domain.Tab ></>}*
+     * .mana.domain.Tab ></>}***
      *
      * @param isError the is error
-     *
      * @return A response object containing all of the tabs within the Database
      */
     @GET
@@ -71,8 +70,7 @@ public class CustomersRestWebService {
      * Delete customers.
      *
      * @param customerIds the customer ids
-     * @param isError     the is error
-     *
+     * @param isError the is error
      * @return the response
      */
     @DELETE

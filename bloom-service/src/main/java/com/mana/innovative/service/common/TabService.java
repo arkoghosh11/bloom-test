@@ -24,9 +24,8 @@ public interface TabService {
     /**
      * Gets tab.
      *
-     * @param tabId         the tab id
+     * @param tabId the tab id
      * @param requestParams the request params
-     *
      * @return the tab
      */
     Response getTab( Integer tabId, RequestParams requestParams );
@@ -34,9 +33,8 @@ public interface TabService {
     /**
      * Update tab.
      *
-     * @param tab           the tab
+     * @param tab the tab
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response updateTab( Tab tab, RequestParams requestParams );
@@ -45,9 +43,8 @@ public interface TabService {
     /**
      * Delete tab.
      *
-     * @param tabId         the tab id
+     * @param tabId the tab id
      * @param requestParams the request params
-     *
      * @return the response
      */
 
@@ -57,9 +54,8 @@ public interface TabService {
     /**
      * Create tab.
      *
-     * @param tab           the tab
+     * @param tab the tab
      * @param requestParams the request params
-     *
      * @return the response
      */
 

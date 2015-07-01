@@ -22,8 +22,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 5/2/2015 5:37 PM. This class is CardDAOImpl
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository( value = "cardDAO" )
@@ -38,9 +38,8 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     /**
      * Create card.
      *
-     * @param card          the card
+     * @param card the card
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -87,7 +86,6 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
      * Gets cards.
      *
      * @param requestParams the request params
-     *
      * @return the cards
      */
     @SuppressWarnings( "unchecked" )
@@ -134,9 +132,8 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     /**
      * Gets card.
      *
-     * @param cardId        the card id
+     * @param cardId the card id
      * @param requestParams the request params
-     *
      * @return the card
      */
     @Override
@@ -182,9 +179,8 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     /**
      * Update card.
      *
-     * @param card          the card
+     * @param card the card
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -220,6 +216,55 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
         cardDAOResponse.setErrorContainer( errorContainer );
         cardDAOResponse.setCount( cardList.size( ) );
         cardDAOResponse.setResults( cardList );
+        logger.debug( "Finishing " + location );
+        return cardDAOResponse;
+    }
+
+    /**
+     * Delete card.
+     *
+     * @param cardId the card id
+     * @param requestParams the request params
+     * @return the boolean
+     */
+    @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< Card > deleteCardByCardId( long cardId, RequestParams requestParams ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteCardByCardId()";
+        logger.debug( "Starting " + location );
+        DAOResponse< Card > cardDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.createQuery( "delete  from Card where cardId=:cardId" );
+            query.setParameter( "cardId", cardId );
+            int count = query.executeUpdate( );
+
+            this.closeDBTransaction( );
+
+            cardDAOResponse.setRequestSuccess( Boolean.TRUE );
+            cardDAOResponse.setCount( count );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error( "Failed while deleting data from cards table", exception );
+            cardDAOResponse.setRequestSuccess( Boolean.FALSE );
+            cardDAOResponse.setCount( DAOConstants.ZERO );
+
+            if ( requestParams.isError( ) ) {
+
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        cardDAOResponse.setErrorContainer( errorContainer );
+        cardDAOResponse.setDelete( Boolean.TRUE );
+        cardDAOResponse.setResults( null );
+
         logger.debug( "Finishing " + location );
         return cardDAOResponse;
     }
@@ -274,60 +319,9 @@ public class CardDAOImpl extends BasicDAO implements CardDAO {
     }
 
     /**
-     * Delete card.
-     *
-     * @param cardId        the card id
-     * @param requestParams the request params
-     *
-     * @return the boolean
-     */
-    @Override
-    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Card > deleteCardByCardId( long cardId, RequestParams requestParams ) {
-
-        String location = this.getClass( ).getCanonicalName( ) + "#deleteCardByCardId()";
-        logger.debug( "Starting " + location );
-        DAOResponse< Card > cardDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
-
-        try {
-            this.openDBTransaction( );
-
-            Query query = session.createQuery( "delete  from Card where cardId=:cardId" );
-            query.setParameter( "cardId", cardId );
-            int count = query.executeUpdate( );
-
-            this.closeDBTransaction( );
-
-            cardDAOResponse.setRequestSuccess( Boolean.TRUE );
-            cardDAOResponse.setCount( count );
-
-        } catch ( HibernateException exception ) {
-
-            this.handleExceptions( exception );
-            logger.error( "Failed while deleting data from cards table", exception );
-            cardDAOResponse.setRequestSuccess( Boolean.FALSE );
-            cardDAOResponse.setCount( DAOConstants.ZERO );
-
-            if ( requestParams.isError( ) ) {
-
-                errorContainer = fillErrorContainer( location, exception );
-            }
-        }
-
-        cardDAOResponse.setErrorContainer( errorContainer );
-        cardDAOResponse.setDelete( Boolean.TRUE );
-        cardDAOResponse.setResults( null );
-
-        logger.debug( "Finishing " + location );
-        return cardDAOResponse;
-    }
-
-    /**
      * Delete all cards.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override

@@ -30,14 +30,15 @@ import java.util.List;
 
 /**
  * The type When delete item then test item dAO delete methods. </p> Created by bloom on 1/28/2015. This class is for
- * testing given {@link ItemDAO#deleteItemsByItemIds(List, boolean)} & {@link ItemDAO#deleteItemByItemId(long, boolean)}
+ * testing given {@link ItemDAO#deleteItemsByItemIds(List, boolean)} & {@link ItemDAO#deleteItemByItemId(long,
+ * boolean)}**
  * &{@link ItemDAO#deleteAllItems(boolean, boolean)}
  * <p/>
  * Please uncomment the following lines to enable Spring Integration Test the 2nd line requires location on Context
  * Config Files for beans and properties extra, the 1st one is to enable Spring for the Class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )

@@ -24,8 +24,8 @@ import javax.ws.rs.core.Response.Status;
 /**
  * The type Tab service impl.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -45,9 +45,8 @@ public class TabServiceImpl implements TabService {
     /**
      * Gets tab.
      *
-     * @param tabId         the tab id
+     * @param tabId the tab id
      * @param requestParams the request params
-     *
      * @return the tab
      */
     @Override
@@ -63,9 +62,8 @@ public class TabServiceImpl implements TabService {
     /**
      * Update tab.
      *
-     * @param tabDTO        the tab
+     * @param tabDTO the tab
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override
@@ -80,9 +78,8 @@ public class TabServiceImpl implements TabService {
     /**
      * Delete tab.
      *
-     * @param tabId         the tab id
+     * @param tabId the tab id
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override
@@ -95,9 +92,8 @@ public class TabServiceImpl implements TabService {
     /**
      * Create tab.
      *
-     * @param tab           the tab
+     * @param tab the tab
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override

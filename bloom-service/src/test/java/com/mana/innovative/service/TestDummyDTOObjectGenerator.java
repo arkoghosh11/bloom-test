@@ -33,8 +33,8 @@ import java.util.List;
  * <p/>
  * Created by Bloom/Rono on 04/29/2015 14:08 PM..
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class TestDummyDTOObjectGenerator {
@@ -126,6 +126,11 @@ public class TestDummyDTOObjectGenerator {
         return dummyItem;
     }
 
+    /**
+     * Gets test item dTO list.
+     *
+     * @return the test item dTO list
+     */
     public static List< Item > getTestItemDTOList( ) {
 
         final Item dummyItem = new Item( );
@@ -180,7 +185,6 @@ public class TestDummyDTOObjectGenerator {
      * Gets test address DTO ZERO ID object.
      *
      * @param address the address
-     *
      * @return the test address DTO ZERO ID object
      */
     public static Address setTestAddressDTOZEROIDObject( final Address address ) {

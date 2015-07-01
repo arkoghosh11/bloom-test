@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 5/2/2015 5:28 PM. This class is PreferenceDAO
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository
@@ -20,9 +20,8 @@ public interface PreferenceDAO {
     /**
      * Create preference.
      *
-     * @param preference    the preference
+     * @param preference the preference
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Preference > createPreference( Preference preference, RequestParams requestParams );
@@ -31,7 +30,6 @@ public interface PreferenceDAO {
      * Gets preferences.
      *
      * @param requestParams the request params
-     *
      * @return the preferences
      */
     DAOResponse< Preference > getPreferences( RequestParams requestParams );
@@ -39,9 +37,8 @@ public interface PreferenceDAO {
     /**
      * Gets preference.
      *
-     * @param preferenceId  the preference id
+     * @param preferenceId the preference id
      * @param requestParams the request params
-     *
      * @return the preference
      */
     DAOResponse< Preference > getPreferenceByPreferenceId( long preferenceId, RequestParams requestParams );
@@ -49,9 +46,8 @@ public interface PreferenceDAO {
     /**
      * Update preference.
      *
-     * @param preference    the preference
+     * @param preference the preference
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Preference > updatePreference( Preference preference, RequestParams requestParams );
@@ -59,9 +55,8 @@ public interface PreferenceDAO {
     /**
      * Delete preference by preference id.
      *
-     * @param preferenceId  the preference id
+     * @param preferenceId the preference id
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Preference > deletePreferenceByPreferenceId( long preferenceId, RequestParams requestParams );
@@ -79,7 +74,6 @@ public interface PreferenceDAO {
      * Delete all preferences.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Preference > deleteAllPreferences( RequestParams requestParams );

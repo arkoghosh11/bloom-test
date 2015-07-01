@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 5/2/2015 5:27 PM. This interface is PhoneDAO
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository
@@ -20,9 +20,8 @@ public interface PhoneDAO {
     /**
      * Create phone.
      *
-     * @param phone         the phone
+     * @param phone the phone
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Phone > createPhone( Phone phone, RequestParams requestParams );
@@ -31,7 +30,6 @@ public interface PhoneDAO {
      * Gets phones.
      *
      * @param requestParams the request params
-     *
      * @return the phones
      */
     DAOResponse< Phone > getPhones( RequestParams requestParams );
@@ -39,9 +37,8 @@ public interface PhoneDAO {
     /**
      * Gets phone.
      *
-     * @param phoneId       the phone id
+     * @param phoneId the phone id
      * @param requestParams the request params
-     *
      * @return the phone
      */
     DAOResponse< Phone > getPhone( long phoneId, RequestParams requestParams );
@@ -49,9 +46,8 @@ public interface PhoneDAO {
     /**
      * Update phone.
      *
-     * @param phone         the phone
+     * @param phone the phone
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Phone > updatePhone( Phone phone, RequestParams requestParams );
@@ -59,9 +55,8 @@ public interface PhoneDAO {
     /**
      * Delete phone by phone id.
      *
-     * @param phoneId       the phone id
+     * @param phoneId the phone id
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Phone > deletePhoneByPhoneId( Long phoneId, RequestParams requestParams );
@@ -69,9 +64,8 @@ public interface PhoneDAO {
     /**
      * Delete phones.
      *
-     * @param phoneIds      the phone ids
+     * @param phoneIds the phone ids
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Phone > deletePhonesByPhoneIds( List< Long > phoneIds, RequestParams requestParams );
@@ -80,7 +74,6 @@ public interface PhoneDAO {
      * Delete all phones.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     DAOResponse< Phone > deleteAllPhones( RequestParams requestParams );

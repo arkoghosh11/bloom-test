@@ -3,15 +3,15 @@ package com.mana.innovative.exception;
 /**
  * Created by IntelliJ IDEA.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright Date : 10/3/12 Time: 11:14 AM
  * @since: jdk 1.7
  */
 public class IllegalArgumentValueException extends RuntimeException {
 
     /**
-     *
+     * The constant serialVersionUID.
      */
     private static final long serialVersionUID = -7145437185646248528L;
     /**

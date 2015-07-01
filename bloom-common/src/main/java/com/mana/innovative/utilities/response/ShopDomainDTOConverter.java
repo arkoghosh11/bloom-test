@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * The type Shop domain dTO converter.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class ShopDomainDTOConverter {
@@ -34,9 +34,8 @@ public class ShopDomainDTOConverter {
     /**
      * Gets converted shop dTO from shop domain.
      *
-     * @param shopDTO    the shop dTO
+     * @param shopDTO the shop dTO
      * @param shopDomain the shop
-     *
      * @return the converted shop dTO from shop domain
      */
     public static Shop getConvertedDTOFromDomain( Shop shopDTO,
@@ -87,7 +86,6 @@ public class ShopDomainDTOConverter {
      * Gets converted shop dTO list.
      *
      * @param shops the shops
-     *
      * @return the converted shop dTO list
      */
     public static List< Shop > getConvertedListDTOFromDomain(
@@ -107,8 +105,7 @@ public class ShopDomainDTOConverter {
      * Gets converted shop domain from shop dTO.
      *
      * @param shopDomain the shop domain
-     * @param shopDTO    the shop dTO
-     *
+     * @param shopDTO the shop dTO
      * @return the converted shop domain from shop dTO
      */
     public static com.mana.innovative.domain.client.Shop getConvertedDomainFromDTO(
@@ -182,7 +179,6 @@ public class ShopDomainDTOConverter {
      * Gets converted shop domain list from shop dTO list.
      *
      * @param shopDTOList the shop dTO list
-     *
      * @return the converted shop domain list from shop dTO list
      */
     public static List< com.mana.innovative.domain.client.Shop > getConvertedListDomainFromDTO(

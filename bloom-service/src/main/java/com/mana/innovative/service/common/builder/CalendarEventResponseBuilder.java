@@ -35,8 +35,7 @@ public class CalendarEventResponseBuilder {
      * Build calendarEvent response container.
      *
      * @param calendarEventDAOResponse the calendarEvent dAO response
-     * @param isError                  the is error
-     *
+     * @param isError the is error
      * @return Returns a response object for calendarEvents
      */
     public static CalendarEventResponseContainer< CalendarEventsPayload > build( DAOResponse< com.mana.innovative.domain.common.CalendarEvent >
@@ -91,10 +90,9 @@ public class CalendarEventResponseBuilder {
     /**
      * Build error.
      *
-     * @param location  the location of the error
-     * @param isError   the is error
+     * @param location the location of the error
+     * @param isError the is error
      * @param exception the exception
-     *
      * @return the calendarEvent response container
      */
     public static CalendarEventResponseContainer< CalendarEventsPayload > buildError( String location, boolean isError,

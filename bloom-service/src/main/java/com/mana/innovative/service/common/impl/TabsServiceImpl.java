@@ -27,8 +27,8 @@ import java.util.List;
 /**
  * The type Tabs service impl.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -49,7 +49,6 @@ public class TabsServiceImpl implements TabsService {
      * Gets all tabs.
      *
      * @param requestParams the request params
-     *
      * @return the all tabs
      */
     @Override
@@ -77,9 +76,8 @@ public class TabsServiceImpl implements TabsService {
     /**
      * Delete tabs.
      *
-     * @param tabIds        the tab ids
+     * @param tabIds the tab ids
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override

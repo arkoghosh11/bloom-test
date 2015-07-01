@@ -7,8 +7,8 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  * The type Error.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @XmlRootElement( name = "error" )
@@ -51,7 +51,7 @@ public class Error {
      * Instantiates a new Error.
      *
      * @param errorLocation the error location
-     * @param throwable     the throwable
+     * @param throwable the throwable
      */
     public Error( String errorLocation, Throwable throwable ) {
 

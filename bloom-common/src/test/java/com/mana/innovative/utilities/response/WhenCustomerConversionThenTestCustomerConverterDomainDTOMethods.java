@@ -25,8 +25,8 @@ import java.util.List;
  * <p/>
  * Created by Bloom/Rono on $date $time.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )

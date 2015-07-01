@@ -33,10 +33,9 @@ public class SidebarRestWebService {
     /**
      * Gets sidebar by type.
      *
-     * @param type    the type
-     * @param id      the id
+     * @param type the type
+     * @param id the id
      * @param uriInfo the uri info
-     *
      * @return the sidebar by type
      */
     @GET

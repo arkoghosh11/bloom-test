@@ -25,8 +25,8 @@ import static org.junit.Assert.fail;
  * Created by Bloom/Rono on 4/29/2015 2:16 PM. This class WhenCreditCardConversionThenTestCCConverterMethods is a test
  * class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = BlockJUnit4ClassRunner.class )

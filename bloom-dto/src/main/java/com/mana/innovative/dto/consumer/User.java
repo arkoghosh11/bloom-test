@@ -10,8 +10,8 @@ import java.util.Objects;
 /**
  * The type User.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @XmlRootElement( name = "user", namespace = "http://localhost/rest/Bloom/user" )
@@ -37,6 +37,9 @@ public class User {
      */
     private String email;
 
+    /**
+     * The User role.
+     */
     private UserRole userRole;
 
     //    Note getters and setters start from here
@@ -117,11 +120,21 @@ public class User {
         this.email = email;
     }
 
+    /**
+     * Gets user role.
+     *
+     * @return the user role
+     */
     @XmlElement( name = "user_role" )
     public UserRole getUserRole( ) {
         return userRole;
     }
 
+    /**
+     * Sets user role.
+     *
+     * @param userRole the user role
+     */
     public void setUserRole( final UserRole userRole ) {
         this.userRole = userRole;
     }
@@ -130,7 +143,6 @@ public class User {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

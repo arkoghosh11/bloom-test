@@ -30,8 +30,8 @@ import javax.ws.rs.core.Response.Status;
 /**
  * The type Tab rest web service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Component
@@ -53,9 +53,8 @@ public class TabRestWebService {
     /**
      * Gets tab.
      *
-     * @param tabId   the tab id
+     * @param tabId the tab id
      * @param isError the is error
-     *
      * @return the tab
      */
     @GET
@@ -74,10 +73,9 @@ public class TabRestWebService {
     /**
      * Update tab.
      *
-     * @param tab     the tab
-     * @param tabId   the tab id
+     * @param tab the tab
+     * @param tabId the tab id
      * @param isError the is error
-     *
      * @return the response
      */
     @PUT
@@ -96,9 +94,8 @@ public class TabRestWebService {
     /**
      * Delete tab.
      *
-     * @param tabId   the tab id
+     * @param tabId the tab id
      * @param isError the is error
-     *
      * @return the response
      */
     @DELETE
@@ -114,9 +111,8 @@ public class TabRestWebService {
     /**
      * Create tab.
      *
-     * @param tab     the tab
+     * @param tab the tab
      * @param isError the is error
-     *
      * @return the response
      */
     @POST

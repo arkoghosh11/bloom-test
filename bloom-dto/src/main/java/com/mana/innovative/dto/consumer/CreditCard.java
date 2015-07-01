@@ -9,8 +9,8 @@ import java.util.Objects;
 /**
  * The type Credit card.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @XmlRootElement( name = "credit_card" )
@@ -148,7 +148,6 @@ public class CreditCard extends Card {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

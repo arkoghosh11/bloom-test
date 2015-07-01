@@ -3,8 +3,8 @@ package com.mana.innovative.exception;
 /**
  * Created by Bloom/Rono on 4/14/2015. This class is ListEmptyException
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class ListEmptyException extends RuntimeException {
@@ -12,7 +12,7 @@ public class ListEmptyException extends RuntimeException {
     // private static final Logger logger = Logger.getLogger( ListEmptyException.class );
 
     /**
-     *
+     * The constant serialVersionUID.
      */
     private static final long serialVersionUID = -4617909591581505624L;
     /**

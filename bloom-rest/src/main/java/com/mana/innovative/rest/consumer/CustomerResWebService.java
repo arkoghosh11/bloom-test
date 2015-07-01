@@ -24,8 +24,8 @@ import javax.ws.rs.core.Response;
 /**
  * Created by Bloom/Rono on 5/3/2015 3:29 AM. This class is CustomerResWebService
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Component
@@ -47,8 +47,7 @@ public class CustomerResWebService {
      * Gets single customer details.
      *
      * @param customerId the customer id
-     * @param isError    the is error
-     *
+     * @param isError the is error
      * @return the single customer details
      */
     @GET
@@ -69,8 +68,7 @@ public class CustomerResWebService {
      * Create new customer.
      *
      * @param customer the customer
-     * @param isError  the is error
-     *
+     * @param isError the is error
      * @return the response
      */
     @POST
@@ -90,10 +88,9 @@ public class CustomerResWebService {
     /**
      * Update specific customer details.
      *
-     * @param customer   the customer
+     * @param customer the customer
      * @param customerId the customer id
-     * @param isError    the is error
-     *
+     * @param isError the is error
      * @return the response
      */
     @PUT
@@ -116,8 +113,7 @@ public class CustomerResWebService {
      * Delete specific customer.
      *
      * @param customerId the customer id
-     * @param isError    the is error
-     *
+     * @param isError the is error
      * @return the response
      */
     @DELETE

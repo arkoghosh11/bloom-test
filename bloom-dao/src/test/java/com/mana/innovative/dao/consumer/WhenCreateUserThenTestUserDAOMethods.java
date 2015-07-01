@@ -28,8 +28,8 @@ import javax.annotation.Resource;
 /**
  * Created by Bloom/Rono on 5/4/2015 8:22 PM. This class WhenCreateUserThenTestUserDAOMethods is a test class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
@@ -59,6 +59,9 @@ public class WhenCreateUserThenTestUserDAOMethods {
     @Resource
     private UserDAO userDAO;
 
+    /**
+     * The User role dAO.
+     */
     @Resource
     private UserRoleDAO userRoleDAO;
 

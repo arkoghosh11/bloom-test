@@ -24,11 +24,10 @@ import java.util.Date;
 /**
  * Created by Bloom/Rono on 4/17/2015. This class is CustomDatabaseServiceImpl
  *
- * @param <T> the type parameter
- * @param <E> the type parameter Created by Bloom/Rono on $date $time.
- *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @param <T>   the type parameter
+ * @param <E>   the type parameter Created by Bloom/Rono on $date $time.
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -60,7 +59,6 @@ public class CustomDatabaseServiceImpl < T, E > implements CustomDatabaseService
      * Read data.
      *
      * @param e the e
-     *
      * @return the t
      */
     @SuppressWarnings( "unchecked" )
@@ -103,7 +101,6 @@ public class CustomDatabaseServiceImpl < T, E > implements CustomDatabaseService
      * Create data.
      *
      * @param t the t
-     *
      * @return the boolean
      */
     @Override
@@ -130,9 +127,8 @@ public class CustomDatabaseServiceImpl < T, E > implements CustomDatabaseService
     /**
      * Update data.
      *
-     * @param e           the e
+     * @param e the e
      * @param isScheduler the is scheduler
-     *
      * @return the boolean
      */
     @Override

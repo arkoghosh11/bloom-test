@@ -11,8 +11,8 @@ import java.util.Objects;
 /**
  * The type Shop.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @XmlRootElement( name = "shop", namespace = "http://localhost:8080/bloom-test/rest/shops" )
@@ -189,7 +189,6 @@ public class Shop {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

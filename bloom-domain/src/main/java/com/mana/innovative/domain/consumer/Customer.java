@@ -207,7 +207,6 @@ public class Customer extends User {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

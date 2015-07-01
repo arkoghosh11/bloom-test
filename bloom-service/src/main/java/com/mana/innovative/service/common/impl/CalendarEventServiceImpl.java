@@ -50,9 +50,10 @@ public class CalendarEventServiceImpl implements CalendarEventService {
     /**
      * Gets calendar event.
      *
-     * @param calendarEventId { Integer }
-     * @param requestParams   the request params
-     *
+     * @param calendarEventId {
+     * Integer
+     *}
+     * @param requestParams the request params
      * @return Response calendar event
      */
     @Override
@@ -98,7 +99,6 @@ public class CalendarEventServiceImpl implements CalendarEventService {
      * Gets calendar event by date limits.
      *
      * @param requestParams the request params
-     *
      * @return the calendar event by date limits
      */
     @Override
@@ -153,7 +153,6 @@ public class CalendarEventServiceImpl implements CalendarEventService {
      *
      * @param calendarEvent the calendar event
      * @param requestParams the request params
-     *
      * @return the response
      */
     @Override

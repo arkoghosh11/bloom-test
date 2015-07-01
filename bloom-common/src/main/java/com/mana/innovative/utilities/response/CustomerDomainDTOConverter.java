@@ -16,8 +16,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/23/2015. This class is CustomerDomainDTOConverter
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class CustomerDomainDTOConverter {
@@ -31,9 +31,8 @@ public class CustomerDomainDTOConverter {
     /**
      * Gets converted customer dTO from customer domain.
      *
-     * @param customerDTO    the customer dTO
+     * @param customerDTO the customer dTO
      * @param customerDomain the customer domain
-     *
      * @return the converted customer dTO from customer domain
      */
     public static Customer getConvertedDTOFromDomain( Customer customerDTO, com.mana.innovative.domain.consumer.Customer customerDomain ) {
@@ -93,7 +92,6 @@ public class CustomerDomainDTOConverter {
      * Gets converted customer dTO list.
      *
      * @param customers the customers
-     *
      * @return the converted customer dTO list
      */
     public static List< Customer > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.consumer.Customer > customers ) {
@@ -112,8 +110,7 @@ public class CustomerDomainDTOConverter {
      * Gets converted customer domain from customer dTO.
      *
      * @param customerDomain the customer domain
-     * @param customerDTO    the customer dTO
-     *
+     * @param customerDTO the customer dTO
      * @return the converted customer domain from customer dTO
      */
     public static com.mana.innovative.domain.consumer.Customer getConvertedDomainFromDTO( com.mana.innovative.domain.consumer.Customer customerDomain, Customer customerDTO ) {
@@ -179,7 +176,6 @@ public class CustomerDomainDTOConverter {
      * Gets converted customer domain list from customer dTO list.
      *
      * @param customerDTOList the customer dTO list
-     *
      * @return the converted customer domain list from customer dTO list
      */
     public static List< com.mana.innovative.domain.consumer.Customer > getConvertedListDomainFromDTO( List< Customer > customerDTOList ) {

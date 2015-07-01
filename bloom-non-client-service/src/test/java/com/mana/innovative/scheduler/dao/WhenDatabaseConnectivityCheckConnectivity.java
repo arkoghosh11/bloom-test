@@ -21,8 +21,8 @@ import java.util.Properties;
 /**
  * Created by alex1 on 1/23/2015. This is a domain class
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = JUnit4.class )
@@ -88,9 +88,8 @@ public class WhenDatabaseConnectivityCheckConnectivity {
      *
      * @param user the user
      * @param pass the pass
-     *
      * @throws ClassNotFoundException the class not found exception
-     * @throws ClassNotFoundException the sQL exception
+     * @throws ClassNotFoundException the class not found exception
      */
     private void getConnection( String user, String pass ) throws ClassNotFoundException, SQLException {
 
@@ -105,7 +104,7 @@ public class WhenDatabaseConnectivityCheckConnectivity {
     /**
      * Load database properties.
      *
-     * @return exception
+     * @return exception exception
      */
     private Exception loadDatabaseProperties( ) {
 

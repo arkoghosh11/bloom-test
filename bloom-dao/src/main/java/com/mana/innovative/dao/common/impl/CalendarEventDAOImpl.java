@@ -28,8 +28,8 @@ import java.util.List;
 /**
  * The type Calendar event dAO impl.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Repository( value = "calendarEventDAO" )
@@ -51,7 +51,6 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      * Gets calendar events.
      *
      * @param requestParams the request params
-     *
      * @return the calendar events
      */
     @SuppressWarnings( "unchecked" )
@@ -96,10 +95,9 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
     /**
      * Gets calendar events by date limits.
      *
-     * @param startDate     the start date
-     * @param endDate       the end date
+     * @param startDate the start date
+     * @param endDate the end date
      * @param requestParams the request params
-     *
      * @return the calendar events by date limits
      */
     @SuppressWarnings( "unchecked" )
@@ -147,9 +145,8 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
     /**
      * Gets calendar event by event id.
      *
-     * @param eventId       the event id
+     * @param eventId the event id
      * @param requestParams the request params
-     *
      * @return the calendar event by event id
      */
     @SuppressWarnings( "unchecked" )
@@ -201,7 +198,6 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      *
      * @param calendarEvent the calendar event
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -251,7 +247,6 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      *
      * @param calendarEvent the calendar event
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override
@@ -297,8 +292,7 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      * Delete calendar event by event id.
      *
      * @param calendarEventId the calendar event id
-     * @param requestParams   the request params
-     *
+     * @param requestParams the request params
      * @return the dAO response
      */
     @Override
@@ -347,8 +341,7 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      * Delete calendar events.
      *
      * @param calendarEventIds the calendar event ids
-     * @param requestParams    the request params
-     *
+     * @param requestParams the request params
      * @return the dAO response
      */
     @Override
@@ -397,7 +390,6 @@ public class CalendarEventDAOImpl extends BasicDAO implements CalendarEventDAO {
      * Delete all calendar events.
      *
      * @param requestParams the request params
-     *
      * @return the dAO response
      */
     @Override

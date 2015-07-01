@@ -21,7 +21,10 @@ import javax.ws.rs.core.Response;
  *
  * @author Rono, Ankur Bhardwaj
  * @ RunWith(value = SpringJUnit4ClassRunner.class | MockitoWithJunitRunner.Class) @ ContextConfiguration(location
- * {"loc1"."loc2"})
+ *{
+ *"loc1"."loc2"
+ *}
+ *)
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */

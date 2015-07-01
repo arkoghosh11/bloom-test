@@ -24,8 +24,8 @@ import javax.ws.rs.core.Response;
 /**
  * The type Shops service impl.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -46,7 +46,6 @@ public class ShopsServiceImpl implements ShopsService {
      * Gets shops.
      *
      * @param isError the is error
-     *
      * @return the shops
      */
     @Cacheable( value = ServiceConstants.SHOPS_CACHE, key = ServiceConstants.KEY_NAME )
@@ -82,9 +81,8 @@ public class ShopsServiceImpl implements ShopsService {
     /**
      * Delete all shops.
      *
-     * @param isError        the is error
+     * @param isError the is error
      * @param deleteAllShops the delete all shops
-     *
      * @return the response
      */
     @Override

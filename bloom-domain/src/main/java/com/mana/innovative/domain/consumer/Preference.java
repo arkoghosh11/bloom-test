@@ -184,7 +184,6 @@ public class Preference {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

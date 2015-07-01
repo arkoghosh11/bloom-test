@@ -194,7 +194,6 @@ public class PhoneTechnicalDetail {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

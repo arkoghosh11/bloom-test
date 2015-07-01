@@ -12,8 +12,8 @@ import java.util.Collection;
 /**
  * Created by IntelliJ IDEA.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright Date : 10/2/12 Time: 9:58 AM
  * @since: jdk 1.7
  */
@@ -71,7 +71,6 @@ public class QueryUtil {
      * @param property the property
      * @param minValue the min value
      * @param maxValue the max value
-     *
      * @return the criteria
      */
     public Criteria addBetweenRestriction( Criteria criteria, String property, String minValue, String maxValue ) {
@@ -95,9 +94,8 @@ public class QueryUtil {
      * Gets added restriction.
      *
      * @param property the property
-     * @param value    the value
+     * @param value the value
      * @param operator the operator
-     *
      * @return the added restriction
      */
     public Criterion getAddedRestriction( String property, Object value, String operator ) {
@@ -122,11 +120,10 @@ public class QueryUtil {
     /**
      * Gets added restriction.
      *
-     * @param property  the property
-     * @param value     the value
-     * @param operator  the operator
+     * @param property the property
+     * @param value the value
+     * @param operator the operator
      * @param matchType the match type
-     *
      * @return the added restriction
      */
     public Criterion getAddedRestriction( String property, Object value, String operator, String matchType ) {
@@ -153,8 +150,7 @@ public class QueryUtil {
      * Add in restriction.
      *
      * @param property the property
-     * @param values   the values
-     *
+     * @param values the values
      * @return the criterion
      */
     public Criterion addInRestriction( String property, Collection values ) {
@@ -167,7 +163,6 @@ public class QueryUtil {
      *
      * @param criteria the criteria
      * @param maxLimit the max limit
-     *
      * @return the criteria
      */
     public Criteria limitMaxResultsPerCall( Criteria criteria, int maxLimit ) {
@@ -178,9 +173,8 @@ public class QueryUtil {
     /**
      * Starting limit.
      *
-     * @param criteria   the criteria
+     * @param criteria the criteria
      * @param startLimit the start limit
-     *
      * @return the criteria
      */
     public Criteria startingLimit( Criteria criteria, int startLimit ) {
@@ -192,7 +186,6 @@ public class QueryUtil {
      *
      * @param property the property
      * @param ordering the ordering
-     *
      * @return the created order
      */
     public Order getCreatedOrder( final String property, final String ordering ) {

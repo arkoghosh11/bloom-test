@@ -243,7 +243,6 @@ public class SidebarType {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

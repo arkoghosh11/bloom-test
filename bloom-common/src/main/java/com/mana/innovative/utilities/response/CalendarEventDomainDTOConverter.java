@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * Created by Bloom/Rono on 4/23/2015. This class is CalendarEventDomainDTOConverter
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class CalendarEventDomainDTOConverter {
@@ -36,9 +36,8 @@ public class CalendarEventDomainDTOConverter {
     /**
      * Gets converted calendarEvent dTO from calendarEvent domain.
      *
-     * @param calendarEventDTO    the calendarEvent dTO
+     * @param calendarEventDTO the calendarEvent dTO
      * @param calendarEventDomain the calendarEvent domain
-     *
      * @return the converted calendarEvent dTO from calendarEvent domain
      */
     public static CalendarEvent getConvertedDTOFromDomain( CalendarEvent calendarEventDTO, com.mana.innovative.domain.common.CalendarEvent calendarEventDomain ) {
@@ -70,7 +69,6 @@ public class CalendarEventDomainDTOConverter {
      * Gets converted calendarEvent dTO list.
      *
      * @param calendarEventDomainList the calendarEvent domain list
-     *
      * @return the converted calendarEvent dTO list
      */
     public static List< CalendarEvent > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.common.CalendarEvent > calendarEventDomainList ) {
@@ -89,8 +87,7 @@ public class CalendarEventDomainDTOConverter {
      * Gets converted calendarEvent domain from calendarEvent dTO.
      *
      * @param calendarEventDomain the calendarEvent domain
-     * @param calendarEventDTO    the calendarEvent dTO
-     *
+     * @param calendarEventDTO the calendarEvent dTO
      * @return the converted calendarEvent domain from calendarEvent dTO
      */
     public static com.mana.innovative.domain.common.CalendarEvent getConvertedDomainFromDTO( com.mana.innovative.domain.common.CalendarEvent calendarEventDomain, CalendarEvent calendarEventDTO ) {
@@ -153,7 +150,6 @@ public class CalendarEventDomainDTOConverter {
      * Gets converted calendarEvent domain list from calendarEvent dTO list.
      *
      * @param calendarEventDTOList the calendarEvent dTO list
-     *
      * @return the converted calendarEvent domain list from calendarEvent dTO list
      */
     public static List< com.mana.innovative.domain.common.CalendarEvent > getConvertedListDomainFromDTO( List< CalendarEvent > calendarEventDTOList ) {

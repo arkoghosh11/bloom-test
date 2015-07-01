@@ -32,8 +32,8 @@ import java.util.List;
 /**
  * The type Item rest web service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma, vsssadik@gmail.com
  * @Copyright
  */
 @Component
@@ -64,9 +64,8 @@ public class ItemRestWebService {
     /**
      * Gets items.
      *
-     * @param itemId  the item id
+     * @param itemId the item id
      * @param isError the is error
-     *
      * @return the items
      */
     @GET
@@ -100,7 +99,6 @@ public class ItemRestWebService {
      *
      * @param itemDTO the item dTO
      * @param isError the is error
-     *
      * @return the response
      */
     @POST
@@ -125,10 +123,9 @@ public class ItemRestWebService {
     /**
      * Update an item.
      *
-     * @param itemId  the item id
+     * @param itemId the item id
      * @param itemDTO the item dTO
      * @param isError the is error
-     *
      * @return the response
      */
     @PUT
@@ -158,9 +155,8 @@ public class ItemRestWebService {
     /**
      * Delete an item.
      *
-     * @param itemId  the item id
+     * @param itemId the item id
      * @param isError the is error
-     *
      * @return the response
      */
     @DELETE
@@ -191,7 +187,6 @@ public class ItemRestWebService {
      *
      * @param itemIds the item ids
      * @param isError the is error
-     *
      * @return the response
      */
     @DELETE

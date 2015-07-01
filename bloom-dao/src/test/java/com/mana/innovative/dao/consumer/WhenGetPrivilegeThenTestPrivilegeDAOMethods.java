@@ -24,6 +24,9 @@ import java.util.List;
 
 /**
  * Created by Bloom/Rono on 5/15/2015 12:20 PM. This class WhenGetPrivilegeThenTestPrivilegeDAOMethods is a test class
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
+ * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
@@ -31,6 +34,9 @@ import java.util.List;
 @Transactional   // If required
 public class WhenGetPrivilegeThenTestPrivilegeDAOMethods {
 
+    /**
+     * The constant logger.
+     */
     private static final Logger logger = LoggerFactory.getLogger( WhenGetPrivilegeThenTestPrivilegeDAOMethods.class );
 
     /**

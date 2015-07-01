@@ -9,8 +9,8 @@ import java.util.Scanner;
 /**
  * The type Property variable parser.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class PropertyVariableParser {
@@ -23,8 +23,10 @@ public class PropertyVariableParser {
     /**
      * Replaces variables with the pattern ${aSystemPropertyValue}.
      *
-     * @param propertyValue a string with the pattern $ { ASystem.property.value }
-     *
+     * @param propertyValue a string with the pattern $
+     *{
+     * ASystem.property.value
+     *}
      * @return replacement of propertyValue with the value of System.getEnv(propertyValue);
      */
     public String replaceVariables( String propertyValue ) {

@@ -253,7 +253,6 @@ public class CalendarEvent {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override

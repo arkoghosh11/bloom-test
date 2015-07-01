@@ -27,11 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type When create a shop test shop dAO create shop. Need to make a cyclic chain link to allow for creation of shop
+ * The type When create a shop test shop dAO create shop. Need to make a cyclic chain link to allow for creation of
+ * shop
  * or will run into issues
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )

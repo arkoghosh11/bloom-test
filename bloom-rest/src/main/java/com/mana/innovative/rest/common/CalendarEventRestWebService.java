@@ -48,11 +48,16 @@ public class CalendarEventRestWebService {
     /**
      * Gets calendar events.
      *
-     * @param startDate {String }
-     * @param endDate   {String }
-     * @param isError   the is error
-     *
-     * @return { Response }
+     * @param startDate {
+     *String
+     *}
+     * @param endDate {
+     *String
+     *}
+     * @param isError the is error
+     * @return  {
+     * Response
+     *}
      */
     @GET
     @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
@@ -75,9 +80,10 @@ public class CalendarEventRestWebService {
     /**
      * Gets calendar event.
      *
-     * @param calendarEventId { Integer }
-     * @param isError         the is error
-     *
+     * @param calendarEventId {
+     * Integer
+     *}
+     * @param isError the is error
      * @return Response calendar event
      */
     @GET
@@ -95,8 +101,7 @@ public class CalendarEventRestWebService {
      * Create calendar event.
      *
      * @param calendarEvent the calendar event
-     * @param isError       the is error
-     *
+     * @param isError the is error
      * @return the response
      */
     @POST

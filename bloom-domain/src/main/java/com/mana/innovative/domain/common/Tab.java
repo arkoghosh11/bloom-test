@@ -153,7 +153,6 @@ public class Tab {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override
@@ -170,7 +169,6 @@ public class Tab {
      * Clone object.
      *
      * @return the object
-     *
      * @throws CloneNotSupportedException the clone not supported exception
      */
     public Object clone( ) throws CloneNotSupportedException {

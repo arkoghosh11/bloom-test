@@ -19,8 +19,8 @@ import java.util.List;
 /**
  * The type Shop response builder.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 public class ShopResponseBuilder {
@@ -35,8 +35,7 @@ public class ShopResponseBuilder {
      * Build shop response container.
      *
      * @param shopDAOResponse the shop dAO response
-     * @param isError         the is error
-     *
+     * @param isError the is error
      * @return the shop response container
      */
     public static ShopResponseContainer< ShopsPayload > build( DAOResponse< Shop > shopDAOResponse, boolean isError ) {
@@ -90,10 +89,9 @@ public class ShopResponseBuilder {
     /**
      * Build error.
      *
-     * @param location  the location
-     * @param isError   the is error
+     * @param location the location
+     * @param isError the is error
      * @param exception the exception
-     *
      * @return the shop response container
      */
     public static ShopResponseContainer< ShopsPayload > buildError( String location, final boolean isError, Exception

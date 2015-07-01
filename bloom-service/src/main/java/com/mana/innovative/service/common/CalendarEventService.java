@@ -9,8 +9,8 @@ import javax.ws.rs.core.Response;
 /**
  * The interface Calendar event service.
  *
- * @author Rono, Ankur Bhardwaj
- * @email arkoghosh @hotmail.com, meankur1@gmail.com
+ * @author Rono, AB, Vadim Servetnik
+ * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
 @Service
@@ -19,9 +19,10 @@ public interface CalendarEventService {
     /**
      * Gets calendar event.
      *
-     * @param calendarEventId { Integer }
-     * @param requestParams   the request params
-     *
+     * @param calendarEventId {
+     * Integer
+     *}
+     * @param requestParams the request params
      * @return Response calendar event
      */
     Response getCalendarEvent( Long calendarEventId, RequestParams requestParams );
@@ -30,7 +31,6 @@ public interface CalendarEventService {
      * Gets calendar event by date limits.
      *
      * @param requestParams the request params
-     *
      * @return the calendar event by date limits
      */
     Response getCalendarEventByDateLimits( RequestParams requestParams );
@@ -40,7 +40,6 @@ public interface CalendarEventService {
      *
      * @param calendarEvent the calendar event
      * @param requestParams the request params
-     *
      * @return the response
      */
     Response createCalendarEvent( CalendarEvent calendarEvent, RequestParams requestParams );

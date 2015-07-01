@@ -173,7 +173,6 @@ public class CreditCard extends Card {
      * Equals boolean.
      *
      * @param o the o
-     *
      * @return the boolean
      */
     @Override
