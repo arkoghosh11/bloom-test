@@ -34,12 +34,12 @@ import javax.annotation.Resource;
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
 @TransactionConfiguration( defaultRollback = true ) // If required
 @Transactional   // If required
-public class WhenCreateUserRoleThenTestUserRoleDAOMethods {
+public class WhenCreateUserRoleThenTestUserRoleDAOCreateMethods {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( WhenCreateUserRoleThenTestUserRoleDAOMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenCreateUserRoleThenTestUserRoleDAOCreateMethods.class );
 
     /**
      * The Dummy userRole.

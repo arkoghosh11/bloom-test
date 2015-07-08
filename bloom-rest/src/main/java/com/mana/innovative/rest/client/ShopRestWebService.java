@@ -4,6 +4,7 @@ import com.mana.innovative.authentication.LoginService;
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dto.client.Shop;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.client.ShopService;
 import com.mana.innovative.utilities.response.ResponseUtility;
 import org.slf4j.Logger;
@@ -65,8 +66,9 @@ public class ShopRestWebService {
     /**
      * Gets shops.
      *
-     * @param shopId the shop id
+     * @param shopId  the shop id
      * @param isError the is error
+     *
      * @return the shops
      */
     @GET
@@ -80,8 +82,10 @@ public class ShopRestWebService {
             return ResponseUtility.unauthorizedAccess( null );
         }
         Response response;
+        RequestParams requestParams = new RequestParams( );
+        requestParams.setIsError( isError );
         try {
-            response = shopServiceImpl.getShopByShopId( shopId, isError );
+            response = shopServiceImpl.getShopByShopId( shopId, requestParams );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );
@@ -97,6 +101,7 @@ public class ShopRestWebService {
      *
      * @param shopDTO the shop dTO
      * @param isError the is error
+     *
      * @return the response
      */
     @POST
@@ -108,7 +113,9 @@ public class ShopRestWebService {
         Response response;
 
         try {
-            response = shopServiceImpl.createShop( shopDTO, isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            response = shopServiceImpl.createShop( shopDTO, requestParams );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );
@@ -122,9 +129,10 @@ public class ShopRestWebService {
     /**
      * Update an shop.
      *
-     * @param shopId the shop id
+     * @param shopId  the shop id
      * @param shopDTO the shop dTO
      * @param isError the is error
+     *
      * @return the response
      */
     @PUT
@@ -140,7 +148,9 @@ public class ShopRestWebService {
             return ResponseUtility.badRequest( "shop id is less than 0" );
         }
         try {
-            response = shopServiceImpl.updateShop( shopDTO, isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            response = shopServiceImpl.updateShop( shopDTO, requestParams );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );
@@ -154,8 +164,9 @@ public class ShopRestWebService {
     /**
      * Delete an shop.
      *
-     * @param shopId the shop id
+     * @param shopId  the shop id
      * @param isError the is error
+     *
      * @return the response
      */
     @DELETE
@@ -170,7 +181,9 @@ public class ShopRestWebService {
             return ResponseUtility.badRequest( "shop id is less than 0" );
         }
         try {
-            response = shopServiceImpl.deleteShopByShopId( shopId, isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            response = shopServiceImpl.deleteShopByShopId( shopId, requestParams );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );
@@ -186,6 +199,7 @@ public class ShopRestWebService {
      *
      * @param shopIds the shop ids
      * @param isError the is error
+     *
      * @return the response
      */
     @DELETE
@@ -198,7 +212,9 @@ public class ShopRestWebService {
         Response response;
 
         try {
-            response = shopServiceImpl.deleteShopsByShopIds( shopIds, isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            response = shopServiceImpl.deleteShopsByShopIds( shopIds, requestParams );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );

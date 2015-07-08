@@ -5,6 +5,7 @@ import com.mana.innovative.dao.BasicDAO;
 import com.mana.innovative.dao.client.ShopDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Shop;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
@@ -40,20 +41,20 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      * Gets shop by shop id.
      *
      * @param shopId the shop id
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the shop by shop id
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( readOnly = true, propagation = Propagation.SUPPORTS, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Shop > getShopByShopId( long shopId, boolean isError ) {
+    public DAOResponse< Shop > getShopByShopId( long shopId, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getShopByShopId()";
         logger.debug( "Starting " + location );
 
         List< Shop > shops = null;
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -70,7 +71,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Error occurred while trying to fetch data from shops table " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }
@@ -84,20 +85,20 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
     /**
      * This method is to retrieve all the shops values from the DB
      *
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the shops
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( readOnly = true, propagation = Propagation.SUPPORTS, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Shop > getShops( boolean isError ) {
+    public DAOResponse< Shop > getShops( RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getShops()";
         logger.debug( "Starting " + location );
         List< Shop > shops = null;
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         ErrorContainer errorContainer = null;
-        if ( isError ) {
+        if ( requestParams.isError( ) ) {
             errorContainer = new ErrorContainer( );
         }
         try {
@@ -110,7 +111,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Error occurred while trying to fetch data from shops table " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }
@@ -125,12 +126,12 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      * Create shop.
      *
      * @param shop the shop
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Shop > createShop( final Shop shop, boolean isError ) {
+    public DAOResponse< Shop > createShop( final Shop shop, RequestParams requestParams ) {
 
         if ( shop == null ) {
             throw new NullPointerException( "Creation object Shop is null" );
@@ -139,7 +140,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
         logger.debug( "Starting " + location );
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         shopDAOResponse.setCreate( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
         List< Shop > shops = new ArrayList<>( );
         try {
             this.openDBTransaction( );
@@ -155,7 +156,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
             }
             shopDAOResponse.setRequestSuccess( Boolean.FALSE );
             logger.error( "Failed to create shop", exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }
@@ -170,13 +171,13 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      * Update shop.
      *
      * @param shop the shop
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< Shop > updateShop( final Shop shop, boolean isError ) {
+    public DAOResponse< Shop > updateShop( final Shop shop, RequestParams requestParams ) {
 
         if ( shop == null ) {
             throw new NullPointerException( "Update object Shop is null" );
@@ -186,7 +187,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         shopDAOResponse.setUpdate( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
         List< Shop > shops = null;
 
         try {
@@ -216,7 +217,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Failed to update shop", exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }
@@ -231,19 +232,19 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      * Delete shop by shop id.
      *
      * @param shopId the shop id
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< Shop > deleteShopByShopId( final long shopId, final boolean isError ) {
+    public DAOResponse< Shop > deleteShopByShopId( final long shopId, final RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteShopByShopId()";
         logger.debug( "Starting " + location );
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         shopDAOResponse.setDelete( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -257,7 +258,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Failed to delete shop", exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }
@@ -271,19 +272,19 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
      * Delete shops by shop ids.
      *
      * @param shopIds the shop ids
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< Shop > deleteShopsByShopIds( final List< Long > shopIds, final boolean isError ) {
+    public DAOResponse< Shop > deleteShopsByShopIds( final List< Long > shopIds, final RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteShopsByShopIds()";
         logger.debug( "Starting " + location );
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         shopDAOResponse.setDelete( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -298,7 +299,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Failed to delete shops with given ids " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
             shopDAOResponse.setRequestSuccess( false );
@@ -312,23 +313,22 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
     /**
      * Delete all shops.
      *
-     * @param deleteAllShops the delete all shops
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Shop > deleteAllShops( final boolean deleteAllShops, final boolean isError ) {
+    public DAOResponse< Shop > deleteAllShops( final RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteShopsByShopIds()";
         logger.debug( "Starting " + location );
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
         shopDAOResponse.setDelete( true );
         shopDAOResponse.setCount( DAOConstants.ZERO );
 
-        if ( deleteAllShops ) {
+        if ( requestParams.isDeleteAll( ) ) {
             try {
                 this.openDBTransaction( );
                 // Note: Will delete all Shop class rows stored in DB will also delete joined classes items and
@@ -343,7 +343,7 @@ public class ShopDAOImpl extends BasicDAO implements ShopDAO {
                     this.handleExceptions( ( HibernateException ) exception );
                 }
                 logger.error( "Error occurred while trying to delete all shops " + location, exception );
-                if ( isError ) {
+                if ( requestParams.isError( ) ) {
                     errorContainer = this.fillErrorContainer( location, exception );
                 }
                 shopDAOResponse.setRequestSuccess( false );

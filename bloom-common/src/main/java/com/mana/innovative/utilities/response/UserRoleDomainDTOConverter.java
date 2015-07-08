@@ -54,9 +54,11 @@ public class UserRoleDomainDTOConverter {
         if ( !StringUtils.isEmpty( userRoleDomain.getUserRoleName( ) ) ) {
             userRoleDTO.setUserRoleName( userRoleDomain.getUserRoleName( ) );
         }
-        if ( userRoleDomain.isActive( ) ) {
-            userRoleDTO.setIsActive( userRoleDomain.isActive( ) );
-        }
+
+        userRoleDTO.setIsActive( userRoleDomain.isActive( ) );
+        userRoleDTO.setIsExpired( userRoleDomain.isExpired( ) );
+        userRoleDTO.setIsLocked( userRoleDomain.isLocked( ) );
+
         if ( userRoleDomain.getPrivileges( ) != null ) {
             userRoleDTO.setPrivileges( PrivilegeDomainDTOConverter.getConvertedListDTOFromDomain( userRoleDomain
                     .getPrivileges( ) ) );
@@ -120,6 +122,8 @@ public class UserRoleDomainDTOConverter {
         if ( !userRoleDTO.isActive( ) ) {
             logger.warn( "Deprecated user role used for login " );
         }
+        userRoleDomain.setIsExpired( userRoleDTO.isExpired( ) );
+        userRoleDomain.setIsLocked( userRoleDTO.isLocked( ) );
 
         // Note might need to check role and privilege validation here
         if ( userRoleDTO.getUserRoleId( ) != null && userRoleDTO.getUserRoleId( ) > ZERO ) {

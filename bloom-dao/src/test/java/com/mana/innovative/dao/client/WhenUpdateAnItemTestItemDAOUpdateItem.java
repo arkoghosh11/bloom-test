@@ -4,6 +4,7 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.domain.client.Shop;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -67,6 +68,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
      * The Dummy item.
      */
     private Item dummyItem;
+    private RequestParams requestParams;
 
     /**
      * Sets up.
@@ -77,6 +79,10 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
     public void setUp( ) throws Exception {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
+
+        requestParams = new RequestParams( );
+        requestParams.setIsError( TestConstants.IS_ERROR );
+
         dummyItem = new Item( );
         dummyItem.setItemId( id );
         // dummyItem.setItemName(TestConstants.TEST_VALUE);
@@ -110,7 +116,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
         dummyItem.setItemName( TestConstants.UPDATED_TEST_VALUE );
         dummyItem.setItemPriceCurrency( TestConstants.UPDATED_TEST_VALUE );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( id, TestConstants.IS_ERROR );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( id, requestParams );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
         // check shopDAOResponse
@@ -120,7 +126,7 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
 
         dummyItem.setShopItem( shopDAOResponse.getResults( ).get( TestConstants.ZERO ) );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.updateItem( dummyItem, TestConstants.IS_ERROR );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.updateItem( dummyItem, requestParams );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
 
@@ -156,7 +162,8 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
         dummyItem.setItemName( TestConstants.UPDATED_TEST_VALUE );
         dummyItem.setItemPriceCurrency( TestConstants.UPDATED_TEST_VALUE );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( id, TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( id, requestParams );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getErrorContainer( ) );
         Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ).getCurrentError( ) );
@@ -169,7 +176,9 @@ public class WhenUpdateAnItemTestItemDAOUpdateItem {
         Assert.assertFalse( shopDAOResponse.getResults( ).isEmpty( ) );
 
         dummyItem.setShopItem( shopDAOResponse.getResults( ).get( TestConstants.ZERO ) );
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.updateItem( dummyItem, TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.updateItem( dummyItem, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
 
         // check ErrorContainer

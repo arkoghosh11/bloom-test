@@ -4,6 +4,7 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.client.impl.ShopDAOImpl;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Shop;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -24,7 +25,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * This class is for testing given {@link ShopDAOImpl#updateShop(Shop, boolean)}
+ * This class is for testing given {@link ShopDAOImpl#updateShop(Shop, RequestParams)}
  * <p/>
  * Please uncomment the following lines to enable Spring Integration Test the 2nd line requires location on Context
  * Config Files for beans and properties extra, the 1st one is to enable Spring for the Class
@@ -68,6 +69,8 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
      */
     private Shop dummyShop;
 
+    private RequestParams requestParams;
+
     /**
      * This method is to initialize Objects and configuration files before testing test method
      *
@@ -77,6 +80,10 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
     public void setUp( ) throws Exception {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
+
+        requestParams = new RequestParams( );
+        requestParams.setIsError( TestConstants.IS_ERROR );
+
         dummyShop = new Shop( );
         dummyShop.setShopId( id );
         // dummyShop.setShopName(TestConstants.TEST_VALUE);
@@ -116,7 +123,7 @@ public class WhenUpdateAShopThenTestShopDAOUpdateMethods {
 
         // dummyShop.setShopShop( shopDAOResponse.getResults( ).get( TestConstants.ZERO ) );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.updateShop( dummyShop, TestConstants.IS_ERROR );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.updateShop( dummyShop, requestParams );
 
         Assert.assertTrue( TestConstants.falseMessage, shopDAOResponse.isRequestSuccess( ) );
         Assert.assertTrue( TestConstants.falseMessage, shopDAOResponse.isUpdate( ) );

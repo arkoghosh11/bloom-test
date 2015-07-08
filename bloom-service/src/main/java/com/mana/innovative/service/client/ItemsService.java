@@ -1,5 +1,6 @@
 package com.mana.innovative.service.client;
 
+import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
@@ -17,17 +18,16 @@ public interface ItemsService {
     /**
      * Gets items.
      *
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the items
      */
-    Response getItems( boolean isError );
+    Response getItems( RequestParams requestParams );
 
     /**
      * Delete all items.
      *
-     * @param isError the is error
-     * @param deleteAllItems the delete all items
+     * @param requestParams the request params
      * @return the response
      */
-    Response deleteAllItems( boolean isError, boolean deleteAllItems );
+    Response deleteAllItems( RequestParams requestParams );
 }

@@ -5,6 +5,7 @@ import com.mana.innovative.dao.BasicDAO;
 import com.mana.innovative.dao.client.ItemDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
@@ -60,22 +61,21 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     /**
      * Delete all items.
      *
-     * @param deleteAllItems the delete all items
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
 /* IMP DELETE Functions */
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< Item > deleteAllItems( final boolean deleteAllItems, final boolean isError ) {
+    public DAOResponse< Item > deleteAllItems( final RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteAllItems()";
         logger.debug( "Starting " + location );
         DAOResponse< Item > itemDAOResponse = new DAOResponse<>( );
         itemDAOResponse.setDelete( true );
         itemDAOResponse.setCount( DAOConstants.ZERO );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
-        if ( deleteAllItems ) {
+        if ( requestParams.isDeleteAll( ) ) {
             try {
                 this.openDBTransaction( );
                 // Note: Will delete all Item class rows stored in DB will not delete anything from shop class
@@ -90,7 +90,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
                     this.handleExceptions( ( HibernateException ) exception );
                 }
                 logger.error( "Error occurred while trying to clear items table " + location, exception );
-                if ( isError ) {
+                if ( requestParams.isError( ) ) {
                     errorContainer = this.fillErrorContainer( location, exception );
                 }
                 itemDAOResponse.setRequestSuccess( false );
@@ -107,18 +107,18 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
      * Delete item by item id.
      *
      * @param itemId the item id
-     * @param isError the is error
+     * @param requestParams the request params
      * @return Returns a boolean value to indicate a successful deletion
      */
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< Item > deleteItemByItemId( long itemId, boolean isError ) {
+    public DAOResponse< Item > deleteItemByItemId( long itemId, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#" + "deleteItemByItemId()";
         logger.debug( "Starting " + location );
 
         DAOResponse< Item > itemDAOResponse = new DAOResponse<>( );
         itemDAOResponse.setDelete( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -133,7 +133,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Error occurred while trying to delete an item " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
             itemDAOResponse.setRequestSuccess( false );
@@ -149,18 +149,18 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
      * Delete items by item ids.
      *
      * @param itemIds the item ids
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.REPEATABLE_READ )
-    public DAOResponse< Item > deleteItemsByItemIds( List< Long > itemIds, boolean isError ) {
+    public DAOResponse< Item > deleteItemsByItemIds( List< Long > itemIds, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#" + "deleteItemsByItemIds()";
         logger.debug( "Starting " + location );
         DAOResponse< Item > itemDAOResponse = new DAOResponse<>( );
         itemDAOResponse.setDelete( true );
         itemDAOResponse.setCount( DAOConstants.ZERO );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -175,7 +175,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Error occurred while trying to delete items " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
             itemDAOResponse.setRequestSuccess( false );
@@ -192,20 +192,20 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
      * This method is to update the DB with the persistence layer to keep the Item value synced
      *
      * @param item the item
-     * @param isError the is error
+     * @param requestParams the request params
      * @return Returns a boolean value to indicate a successful update
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.NESTED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Item > updateItem( Item item, boolean isError ) {
+    public DAOResponse< Item > updateItem( Item item, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "updateItem()";
         logger.debug( "Starting " + location );
         List< Item > items = new ArrayList<>( );
         DAOResponse< Item > itemDAOResponse = new DAOResponse<>( );
         itemDAOResponse.setUpdate( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             if ( item.getItemId( ) < 1 ) {
@@ -236,7 +236,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Error occurred while trying to update an item " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
             itemDAOResponse.setRequestSuccess( Boolean.FALSE );
@@ -256,19 +256,19 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
      * This method is to create a Item object and save it in the DB
      *
      * @param item the item
-     * @param isError the is error
+     * @param requestParams the request params
      * @return Returns a boolean value to indicate a successful creation
      */
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE )
-    public DAOResponse< Item > createItem( Item item, Boolean isError ) {
+    public DAOResponse< Item > createItem( Item item, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "createItem()";
         logger.debug( "Starting " + location );
         List< Item > items = new ArrayList<>( );
         DAOResponse< Item > itemDAOResponse = new DAOResponse<>( );
         itemDAOResponse.setCreate( true );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -284,7 +284,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Error occurred while trying to create an item " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
             itemDAOResponse.setRequestSuccess( Boolean.FALSE );
@@ -301,20 +301,20 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
      * Gets item by item id.
      *
      * @param itemId the item id
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the item by item id
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Item > getItemByItemId( long itemId, boolean isError ) {
+    public DAOResponse< Item > getItemByItemId( long itemId, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getItemByItemId()";
         logger.debug( "Starting " + location );
 
         List< Item > items = null;
         DAOResponse< Item > itemDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -332,7 +332,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
                 this.handleExceptions( ( HibernateException ) exception );
             }
             logger.error( "Error occurred while trying to fetch data from items table " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }
@@ -348,20 +348,20 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
     /**
      * This method is to retrieve all the items values from the DB
      *
-     * @param isError the is error
-     * @return List<Item>   </> Return a list of
+     * @param requestParams the request params
+     * @return List<Item>    </> Return a list of
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-    public DAOResponse< Item > getItems( boolean isError ) {
+    public DAOResponse< Item > getItems( RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getItems()";
         logger.debug( "Starting " + location );
 
         List< Item > items = null;
         DAOResponse< Item > itemDAOResponse = new DAOResponse<>( );
-        ErrorContainer errorContainer = !isError ? null : new ErrorContainer( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
 
         try {
             this.openDBTransaction( );
@@ -370,7 +370,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
         } catch ( HibernateException exception ) {
             this.handleExceptions( exception );
             logger.error( "Error occurred while trying to fetch data from items table " + location, exception );
-            if ( isError ) {
+            if ( requestParams.isError( ) ) {
                 errorContainer = this.fillErrorContainer( location, exception );
             }
         }

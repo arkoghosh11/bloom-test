@@ -6,6 +6,7 @@ import com.mana.innovative.dao.client.ItemDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.dto.client.payload.ItemsPayload;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.client.ItemsService;
 import com.mana.innovative.service.client.builder.ItemResponseBuilder;
 import com.mana.innovative.service.client.container.ItemResponseContainer;
@@ -46,36 +47,37 @@ public class ItemsServiceImpl implements ItemsService {
     /**
      * Gets items.
      *
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the items
      */
+    @Override
     @Cacheable( value = ServiceConstants.ITEMS_CACHE, key = ServiceConstants.KEY_NAME )
     @Transactional( propagation = Propagation.REQUIRED, readOnly = true )
-    public Response getItems( boolean isError ) {
+    public Response getItems( RequestParams requestParams ) {
 
         logger.debug( "Initiating getItems() , itemDAO injected successfully" );
         DAOResponse< Item > itemDAOResponse;
         final String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getItems()";
         ItemResponseContainer< ItemsPayload > itemResponseContainer;
         try {
-            itemDAOResponse = itemDAOImpl.getItems( isError );
+            itemDAOResponse = itemDAOImpl.getItems( requestParams );
         } catch ( Exception e ) {
             if ( e instanceof HibernateException ) {
                 logger.error( "Hibernate Exception occurred while trying fetch data from DB " + location, e );
             } else
                 logger.error( "Exception occurred in" + location, e );
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, requestParams.isError( ), e );
             return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
 
         }
         try {
 
-            itemResponseContainer = ItemResponseBuilder.build( itemDAOResponse, isError );
+            itemResponseContainer = ItemResponseBuilder.build( itemDAOResponse, requestParams.isError( ) );
             return Response.status( Response.Status.OK ).entity( itemResponseContainer ).build( );
 
 
         } catch ( Exception e ) {
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, requestParams.isError( ), e );
             return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
 
         } finally {
@@ -86,35 +88,34 @@ public class ItemsServiceImpl implements ItemsService {
     /**
      * Delete all items.
      *
-     * @param isError the is error
-     * @param deleteAllItems the delete all items
+     * @param requestParams the request params
      * @return the response
      */
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
-    public Response deleteAllItems( boolean isError, boolean deleteAllItems ) {
+    public Response deleteAllItems( RequestParams requestParams ) {
 
         logger.debug( "Initiating deleteAllItems() , itemDAO injected successfully" );
         final String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "deleteAllItems()";
         ItemResponseContainer< ItemsPayload > itemResponseContainer;
         DAOResponse< Item > itemDAOResponse;
         try {
-            itemDAOResponse = itemDAOImpl.deleteAllItems( deleteAllItems, isError );
+            itemDAOResponse = itemDAOImpl.deleteAllItems( requestParams );
         } catch ( Exception e ) {
             if ( e instanceof HibernateException ) {
                 logger.error( "Hibernate Exception occurred while trying fetch data from DB " + location, e );
             } else
                 logger.error( "Exception occurred in" + location, e );
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, requestParams.isError( ), e );
             return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
 
         }
         try {
 
-            itemResponseContainer = ItemResponseBuilder.build( itemDAOResponse, isError );
+            itemResponseContainer = ItemResponseBuilder.build( itemDAOResponse, requestParams.isError( ) );
             return Response.status( Response.Status.OK ).entity( itemResponseContainer ).build( );
 
         } catch ( Exception e ) {
-            itemResponseContainer = ItemResponseBuilder.buildError( location, isError, e );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, requestParams.isError( ), e );
             return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
         } finally {
             logger.debug( "Response sent Successfully from getItems()" );

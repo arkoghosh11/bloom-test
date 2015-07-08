@@ -2,6 +2,7 @@ package com.mana.innovative.dao.client;
 
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Shop;
+import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,62 +21,61 @@ public interface ShopDAO {
      * Gets shop by shop id.
      *
      * @param shopId the shop id
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the shop by shop id
      */
-    DAOResponse< Shop > getShopByShopId( long shopId, boolean isError );
+    DAOResponse< Shop > getShopByShopId( long shopId, RequestParams requestParams );
 
     /**
      * Gets shops.
      *
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the shops
      */
-    DAOResponse< Shop > getShops( boolean isError );
+    DAOResponse< Shop > getShops( RequestParams requestParams );
 
     /**
      * Create shop.
      *
      * @param shop the shop
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
-    DAOResponse< Shop > createShop( Shop shop, boolean isError );
+    DAOResponse< Shop > createShop( Shop shop, RequestParams requestParams );
 
     /**
      * Update shop.
      *
      * @param shop the shop
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
-    DAOResponse< Shop > updateShop( Shop shop, boolean isError );
+    DAOResponse< Shop > updateShop( Shop shop, RequestParams requestParams );
 
     /**
      * Delete shop by shop id.
      *
      * @param shopId the shop id
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
-    DAOResponse< Shop > deleteShopByShopId( long shopId, boolean isError );
+    DAOResponse< Shop > deleteShopByShopId( long shopId, RequestParams requestParams );
 
     /**
      * Delete shops by shop ids.
      *
      * @param shopIds the shop ids
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
 //@Transactional( propagation = Propagation.REQUIRES_NEW )
-    DAOResponse< Shop > deleteShopsByShopIds( List< Long > shopIds, boolean isError );
+    DAOResponse< Shop > deleteShopsByShopIds( List< Long > shopIds, RequestParams requestParams );
 
     /**
      * Delete all shops.
      *
-     * @param deleteAllShops the delete all shops
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
-    DAOResponse< Shop > deleteAllShops( boolean deleteAllShops, boolean isError );
+    DAOResponse< Shop > deleteAllShops( RequestParams requestParams );
 }

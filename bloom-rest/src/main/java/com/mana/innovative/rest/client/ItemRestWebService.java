@@ -4,6 +4,7 @@ import com.mana.innovative.authentication.LoginService;
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dto.client.Item;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.client.ItemService;
 import com.mana.innovative.utilities.response.ResponseUtility;
 import org.slf4j.Logger;
@@ -82,8 +83,11 @@ public class ItemRestWebService {
 //        }
 
         Response response;
+
         try {
-            response = itemServiceImpl.getItemByItemId( itemId, isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            response = itemServiceImpl.getItemByItemId( itemId, requestParams );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );
@@ -109,7 +113,9 @@ public class ItemRestWebService {
 
         Response response;
         try {
-            response = itemServiceImpl.createItem( itemDTO, isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            response = itemServiceImpl.createItem( itemDTO, requestParams );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );
@@ -141,7 +147,9 @@ public class ItemRestWebService {
             return ResponseUtility.badRequest( "item id is less than 0" );
         }
         try {
-            response = itemServiceImpl.updateItem( itemDTO, isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            response = itemServiceImpl.updateItem( itemDTO, requestParams );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );
@@ -171,7 +179,9 @@ public class ItemRestWebService {
             return ResponseUtility.badRequest( "item id is less than 0" );
         }
         try {
-            response = itemServiceImpl.deleteItemByItemId( itemId, isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            response = itemServiceImpl.deleteItemByItemId( itemId, requestParams );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );
@@ -198,7 +208,9 @@ public class ItemRestWebService {
 
         Response response;
         try {
-            response = itemServiceImpl.deleteItemsByItemIds( itemIds, isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            response = itemServiceImpl.deleteItemsByItemIds( itemIds, requestParams );
         } catch ( Exception exception ) {
 
             response = ResponseUtility.internalServerErrorMsg( null );

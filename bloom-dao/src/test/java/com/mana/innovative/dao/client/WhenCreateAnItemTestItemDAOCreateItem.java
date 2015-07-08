@@ -6,6 +6,7 @@ import com.mana.innovative.constants.WeightedUnit;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.domain.client.Shop;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -64,6 +65,8 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
     @Resource
     private SessionFactory sessionFactory;
 
+    private RequestParams requestParams;
+
     /**
      * The Dummy item.
      */
@@ -78,6 +81,9 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
     public void setUp( ) throws Exception {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
+
+        requestParams = new RequestParams( );
+        requestParams.setIsError( TestConstants.IS_ERROR );
 
         dummyItem = new Item( );
         dummyItem.setItemId( TestConstants.MINUS_ONE );
@@ -118,16 +124,16 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         logger.debug( "Starting test for ItemDAOCreateWithoutException" );
         DAOResponse< Item > itemDAOResponse;
         DAOResponse< Shop > shopDAOResponse;
-        itemDAOResponse = itemDAOImpl.getItemByItemId( dummyItem.getItemId( ), TestConstants.IS_ERROR );
+        itemDAOResponse = itemDAOImpl.getItemByItemId( dummyItem.getItemId( ), requestParams );
 
         Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.getResults( ).isEmpty( ) );
-        shopDAOResponse = shopDAOImpl.getShopByShopId( TestConstants.ZERO, TestConstants.IS_ERROR );
+        shopDAOResponse = shopDAOImpl.getShopByShopId( TestConstants.ZERO, requestParams );
 
         Assert.assertFalse( TestConstants.trueMessage, shopDAOResponse.getResults( ).isEmpty( ) );
         Shop shop = shopDAOResponse.getResults( ).get( TestConstants.ZERO );
         Assert.assertNotNull( shop );
         dummyItem.setShopItem( shop );
-        itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR );
+        itemDAOResponse = itemDAOImpl.createItem( dummyItem, requestParams );
 
         // Test itemDAOResponse
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
@@ -160,7 +166,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         DAOResponse< Item > itemDAOResponse;
         dummyItem = new Item( );
 
-        itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR );
+        itemDAOResponse = itemDAOImpl.createItem( dummyItem, requestParams );
 
         // Test WorkingHourDAOResponse
         Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isCreate( ) );
@@ -188,8 +194,8 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         logger.debug( "Starting test for ItemDAOCreateThrowsExceptionNErrorContainer" );
         DAOResponse< Item > itemDAOResponse;
         dummyItem = new Item( );
-
-        itemDAOResponse = itemDAOImpl.createItem( dummyItem, TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        itemDAOResponse = itemDAOImpl.createItem( dummyItem, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // Test Error Container

@@ -4,6 +4,7 @@ import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -29,12 +30,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type When delete item then test item dAO delete methods. </p> Created by bloom on 1/28/2015. This class is for
- * testing given {@link ItemDAO#deleteItemsByItemIds(List, boolean)} & {@link ItemDAO#deleteItemByItemId(long,
- * boolean)}**
- * &{@link ItemDAO#deleteAllItems(boolean, boolean)}
+ * The type When delete item then test item dAO delete methods.
+ * </p> Created by bloom on 1/28/2015. This class is for
+ * testing given {@link ItemDAO#deleteItemsByItemIds(List, RequestParams)}
+ * & {@link ItemDAO#deleteItemByItemId(long, RequestParams)}**
+ * &{@link ItemDAO#deleteAllItems(RequestParams)}
  * <p/>
- * Please uncomment the following lines to enable Spring Integration Test the 2nd line requires location on Context
+ * Please uncomment the following lines to enable Spring Integration Test
+ * the 2nd line requires location on Context
  * Config Files for beans and properties extra, the 1st one is to enable Spring for the Class
  *
  * @author Rono, AB, Vadim Servetnik
@@ -73,6 +76,8 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
      */
     private List< Long > itemIds;
 
+    private RequestParams requestParams;
+
     /**
      * This method is to initialize Objects and configuration files before testing test method
      *
@@ -83,6 +88,11 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
     public void setUp( ) throws Exception {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
+
+        requestParams = new RequestParams( );
+        requestParams.setIsError( TestConstants.IS_ERROR );
+        requestParams.setIsError( TestConstants.IS_DELETE_ALL );
+
         itemId = TestConstants.TEST_ID;
         itemIds = new ArrayList<>( );
         itemIds.add( ( long ) TestConstants.ZERO );
@@ -110,8 +120,9 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllItemsWithErrorEnabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL,
-                TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
@@ -140,8 +151,7 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllItemsWithErrorDisabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL,
-                TestConstants.IS_ERROR );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
@@ -166,8 +176,10 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllItemsWithDeleteAllTrueWithErrorEnabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL_TRUE,
-                TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsDeleteAll( TestConstants.IS_DELETE_ALL_TRUE );
+
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
@@ -195,8 +207,8 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllItemsWithDeleteAllTrueWithErrorDisabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( TestConstants.IS_DELETE_ALL_TRUE,
-                TestConstants.IS_ERROR );
+        requestParams.setIsDeleteAll( TestConstants.IS_DELETE_ALL_TRUE );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteAllItems( requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
@@ -221,7 +233,8 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteItemByItemIdWithErrorEnabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemByItemId( itemId, TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemByItemId( itemId, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
@@ -250,7 +263,7 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteItemByItemIdWithErrorDisabled" );
 
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemByItemId( itemId, TestConstants.IS_ERROR );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemByItemId( itemId, requestParams );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
 
@@ -274,7 +287,8 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
     public void testDeleteItemsByItemIdsWithErrorDisabled( ) throws Exception {
 
         logger.debug( "Starting test for DeleteItemsByItemIdsWithErrorDisabled" );
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemsByItemIds( itemIds, TestConstants.IS_ERROR );
+
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemsByItemIds( itemIds, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
 
         // check ErrorContainer
@@ -299,7 +313,9 @@ public class WhenDeleteItemThenTestItemDAODeleteMethods {
     public void testDeleteItemsByItemIdsWithErrorEnabled( ) throws Exception {
 
         logger.debug( "Starting test for DeleteItemsByItemIdsWithErrorEnabled" );
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemsByItemIds( itemIds, TestConstants.IS_ERROR_TRUE );
+
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.deleteItemsByItemIds( itemIds, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
 
         // check ErrorContainer

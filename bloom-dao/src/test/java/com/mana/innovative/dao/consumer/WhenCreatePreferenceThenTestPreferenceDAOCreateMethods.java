@@ -36,12 +36,12 @@ import javax.annotation.Resource;
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
 @TransactionConfiguration( defaultRollback = true ) // If required
 @Transactional   // If required
-public class WhenCreatePreferenceThenTestPreferenceDAOMethods {
+public class WhenCreatePreferenceThenTestPreferenceDAOCreateMethods {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( WhenCreatePreferenceThenTestPreferenceDAOMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenCreatePreferenceThenTestPreferenceDAOCreateMethods.class );
 
     /**
      * The Dummy preference.

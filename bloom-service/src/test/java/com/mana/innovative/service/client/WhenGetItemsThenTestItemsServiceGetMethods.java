@@ -1,6 +1,7 @@
 package com.mana.innovative.service.client;
 
 import com.mana.innovative.dto.client.payload.ItemsPayload;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.TestDummyDTOObjectGenerator;
 import com.mana.innovative.service.client.container.ItemResponseContainer;
 import org.junit.After;
@@ -30,12 +31,12 @@ import javax.ws.rs.core.Response.Status;
 @ContextConfiguration( locations = { "/service-config-test.xml", "/db-config-test.xml" } )
 @TransactionConfiguration
 @Transactional
-public class WhenGetItemsThenTestItemsService {
+public class WhenGetItemsThenTestItemsServiceGetMethods {
 
     /**
      * The constant logger.
      */
-    public static final Logger logger = LoggerFactory.getLogger( WhenGetItemsThenTestItemsService.class );
+    public static final Logger logger = LoggerFactory.getLogger( WhenGetItemsThenTestItemsServiceGetMethods.class );
 
     /**
      * The Items service impl.
@@ -51,6 +52,8 @@ public class WhenGetItemsThenTestItemsService {
      */
     private ItemsPayload itemsPayload;
 
+    private RequestParams requestParams;
+
     /**
      * Sets up.
      */
@@ -62,10 +65,11 @@ public class WhenGetItemsThenTestItemsService {
 
         itemResponseContainer = Mockito.mock( ItemResponseContainer.class );
         itemsPayload = Mockito.mock( ItemsPayload.class );
+        requestParams = Mockito.mock( RequestParams.class );
 
         Response response = Response.status( Status.OK ).entity( itemResponseContainer ).build( );
 
-        Mockito.when( itemsServiceImpl.getItems( false ) ).thenReturn( response );
+        Mockito.when( itemsServiceImpl.getItems( requestParams ) ).thenReturn( response );
         Mockito.when( itemResponseContainer.getPayload( ) ).thenReturn( itemsPayload );
         Mockito.when( itemResponseContainer.getCount( ) ).thenReturn( 1 );
         Mockito.when( itemsPayload.getItems( ) ).thenReturn( TestDummyDTOObjectGenerator.getTestItemDTOList( ) );
@@ -81,7 +85,7 @@ public class WhenGetItemsThenTestItemsService {
 
         logger.info( "Testing ItemService GetItems method" );
 
-        Response response = itemsServiceImpl.getItems( false );
+        Response response = itemsServiceImpl.getItems( requestParams );
 
         Assert.assertNotNull( response );
         Assert.assertNotNull( response.getEntity( ) );

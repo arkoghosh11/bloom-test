@@ -1,6 +1,7 @@
 package com.mana.innovative.rest.client;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.client.ItemsService;
 import com.mana.innovative.utilities.response.ResponseUtility;
 import org.slf4j.Logger;
@@ -44,6 +45,7 @@ public class ItemsRestWebService {
      * Gets items.
      *
      * @param isError the is error
+     *
      * @return the items
      */
     @GET
@@ -53,9 +55,10 @@ public class ItemsRestWebService {
 
 //        boolean isAuthenticated = loginService.verifyLogin(httpSession);
 //        if (!isAuthenticated) return ResponseUtility.unauthorizedAccess();
-
         try {
-            return itemsServiceImpl.getItems( isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            return itemsServiceImpl.getItems( requestParams );
         } catch ( Exception exception ) {
             logger.error( " Failed to retrieve Items" + exception );
             return ResponseUtility.internalServerErrorMsg( null );
@@ -67,8 +70,9 @@ public class ItemsRestWebService {
     /**
      * Delete items.
      *
-     * @param isError the is error
+     * @param isError     the is error
      * @param isDeleteAll the is delete all
+     *
      * @return the response
      */
     @DELETE
@@ -77,7 +81,9 @@ public class ItemsRestWebService {
                                          isError, @QueryParam( value = "is_delete_all" ) boolean isDeleteAll ) {
         //return ResponseUtility.forbiddenRequest( null );
         try {
-            return itemsServiceImpl.deleteAllItems( isError, isDeleteAll );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            return itemsServiceImpl.deleteAllItems( requestParams );
         } catch ( Exception exception ) {
             logger.error( " Failed to delete All Items" + exception );
             return ResponseUtility.internalServerErrorMsg( null );

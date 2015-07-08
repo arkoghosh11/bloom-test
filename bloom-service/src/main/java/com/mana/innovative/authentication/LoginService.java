@@ -3,12 +3,17 @@ package com.mana.innovative.authentication;/**
  */
 
 import com.mana.innovative.constants.ServiceConstants;
+import com.mana.innovative.service.consumer.UserRoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,7 +33,7 @@ import java.util.Properties;
  */
 @Service
 @Qualifier
-public class LoginService {
+public class LoginService implements UserDetailsService {
 
     /**
      * The constant logger.
@@ -40,6 +45,9 @@ public class LoginService {
      */
     @Value( value = "${bloom-service.loginVariable}" )
     private String loginParameterNameForSession;
+
+    @Resource
+    private UserRoleService userRoleService;
 
     /**
      * Do login.
@@ -143,5 +151,25 @@ public class LoginService {
             isAuthenticated = ( Boolean ) httpSession.getAttribute( loginParameterNameForSession );
         }
         return isAuthenticated != null && isAuthenticated;
+    }
+
+    /**
+     * Locates the user based on the username. In the actual implementation, the search may possibly be case
+     * sensitive, or case insensitive depending on how the implementation instance is configured. In this case, the
+     * <code>UserDetails</code> object that comes back may have a username that is of a different case than what was
+     * actually requested..
+     *
+     * @param username the username identifying the user whose data is required.
+     *
+     * @return a fully populated user record (never <code>null</code>)
+     *
+     * @throws UsernameNotFoundException if the user could not be found or the user has no GrantedAuthority
+     */
+    @Override
+    public UserDetails loadUserByUsername( final String username ) throws UsernameNotFoundException {
+        String location = this.getClass( ).getCanonicalName( ) + "#()";
+        logger.debug( "Starting " + location );
+        logger.debug( "Finishing " + location );
+        return null;
     }
 }

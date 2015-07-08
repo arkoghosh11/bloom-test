@@ -32,12 +32,12 @@ import java.util.List;
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
 //@TransactionConfiguration // If required
 @Transactional   // If required
-public class WhenGetPrivilegeThenTestPrivilegeDAOMethods {
+public class WhenGetPrivilegeThenTestPrivilegeDAOGetMethods {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( WhenGetPrivilegeThenTestPrivilegeDAOMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenGetPrivilegeThenTestPrivilegeDAOGetMethods.class );
 
     /**
      * The Privilege dAO.

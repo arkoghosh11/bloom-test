@@ -5,6 +5,7 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -48,6 +49,7 @@ public class WhenGetItemThenTestItemDAOGetMethods {
      * The Default item.
      */
     private Item defaultItem;
+    private RequestParams requestParams;
 
     /**
      * The Item dAO impl.
@@ -63,6 +65,9 @@ public class WhenGetItemThenTestItemDAOGetMethods {
     public void setUp( ) {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
+        requestParams = new RequestParams( );
+        requestParams.setIsError( TestConstants.IS_ERROR );
+
         defaultItem = new Item( );
         defaultItem.setItemId( TestConstants.ZERO );
         defaultItem.setItemName( TestConstants.DEFAULT_ITEM_NAME );
@@ -110,7 +115,8 @@ public class WhenGetItemThenTestItemDAOGetMethods {
 
         logger.debug( "Starting testItemDAOGetItemNyItemIdWithErrorDisabled" );
         Item item;
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItemByItemId( TestConstants.ZERO, TestConstants.IS_ERROR );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl
+                .getItemByItemId( TestConstants.ZERO, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // test error container
@@ -151,7 +157,7 @@ public class WhenGetItemThenTestItemDAOGetMethods {
     public void testItemDAOReadWithErrorDisabled( ) {
 
         logger.debug( "Starting testItemDAOReadWithErrorDisabled" );
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItems( TestConstants.IS_ERROR );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItems( requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // test error container
@@ -180,8 +186,8 @@ public class WhenGetItemThenTestItemDAOGetMethods {
 
         logger.debug( "Starting testItemDAOGetItemNyItemIdWithErrorEnabled" );
         Item item;
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItemByItemId( TestConstants.ZERO, TestConstants.IS_ERROR_TRUE );
-
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItemByItemId( TestConstants.ZERO, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
 
         // test error container
@@ -226,7 +232,8 @@ public class WhenGetItemThenTestItemDAOGetMethods {
     public void testItemDAOReadWithErrorEnabled( ) {
 
         logger.debug( "Starting testItemDAOReadWithErrorEnabled" );
-        DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItems( TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItems( requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
         // test error container

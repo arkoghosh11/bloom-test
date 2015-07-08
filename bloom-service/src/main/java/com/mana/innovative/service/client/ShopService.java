@@ -1,6 +1,7 @@
 package com.mana.innovative.service.client;
 
 import com.mana.innovative.dto.client.Shop;
+import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.Response;
@@ -20,44 +21,44 @@ public interface ShopService {
      * Gets shopDTO.
      *
      * @param shopId the shopDTO id
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the shopDTO
      */
-    Response getShopByShopId( long shopId, boolean isError );
+    Response getShopByShopId( long shopId, RequestParams requestParams );
 
     /**
      * Create shopDTO.
      *
      * @param shopDTO the shopDTO
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the response
      */
-    Response createShop( Shop shopDTO, boolean isError );
+    Response createShop( Shop shopDTO, RequestParams requestParams );
 
     /**
      * Update shopDTO.
      *
      * @param shopDTO the shopDTO
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the response
      */
-    Response updateShop( Shop shopDTO, boolean isError );
+    Response updateShop( Shop shopDTO, RequestParams requestParams );
 
     /**
      * Delete shop by shop id.
      *
      * @param shopId the shop id
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the response
      */
-    Response deleteShopByShopId( Long shopId, boolean isError );
+    Response deleteShopByShopId( Long shopId, RequestParams requestParams );
 
     /**
      * Delete shops by shop ids.
      *
      * @param shopIds the shop ids
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the response
      */
-    Response deleteShopsByShopIds( List< Long > shopIds, boolean isError );
+    Response deleteShopsByShopIds( List< Long > shopIds, RequestParams requestParams );
 }

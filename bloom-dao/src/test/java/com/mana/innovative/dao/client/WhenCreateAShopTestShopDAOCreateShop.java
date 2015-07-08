@@ -7,6 +7,7 @@ import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.domain.client.Shop;
 import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.domain.common.Address;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.hibernate.HibernateException;
 import org.junit.Before;
@@ -68,6 +69,8 @@ public class WhenCreateAShopTestShopDAOCreateShop {
      */
     private WorkingHour dummyWorkingHour;
 
+    private RequestParams requestParams;
+
     /**
      * Sets up.
      *
@@ -78,6 +81,9 @@ public class WhenCreateAShopTestShopDAOCreateShop {
     public void setUp( ) throws Exception {
 
         dummyShop = TestDummyDomainObjectGenerator.getTestShopDomainObject( );
+
+        requestParams = new RequestParams( );
+        requestParams.setIsError( TestConstants.IS_ERROR );
 
         dummyItem = dummyShop.getItems( ).get( TestConstants.ZERO );
         dummyWorkingHour = dummyShop.getWorkingHours( ).get( TestConstants.ZERO );
@@ -115,7 +121,7 @@ public class WhenCreateAShopTestShopDAOCreateShop {
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         try {
-            shopDAOResponse = shopDAOImpl.createShop( dummyShop, TestConstants.IS_ERROR );
+            shopDAOResponse = shopDAOImpl.createShop( dummyShop, requestParams );
         } catch ( HibernateException e ) {
             logger.error( "Failed to test createShop() ", e );
             Assert.fail( "Create Shop with new dummy item, working Hour and address failed" );
@@ -198,7 +204,7 @@ public class WhenCreateAShopTestShopDAOCreateShop {
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         try {
-            shopDAOResponse = shopDAOImpl.createShop( dummyShop, TestConstants.IS_ERROR );
+            shopDAOResponse = shopDAOImpl.createShop( dummyShop, requestParams );
         } catch ( HibernateException exception ) {
             logger.error( "Failed to test createShop() ", exception );
             Assert.fail( "Create Shop with new dummy working Hour and address failed" );
@@ -265,7 +271,7 @@ public class WhenCreateAShopTestShopDAOCreateShop {
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         try {
-            shopDAOResponse = shopDAOImpl.createShop( dummyShop, TestConstants.IS_ERROR );
+            shopDAOResponse = shopDAOImpl.createShop( dummyShop, requestParams );
         } catch ( Exception exception ) {
             logger.error( "Failed to test createShop() ", exception );
             Assert.assertTrue( TestConstants.falseMessage, exception instanceof HibernateException );
@@ -300,7 +306,7 @@ public class WhenCreateAShopTestShopDAOCreateShop {
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         try {
-            shopDAOResponse = shopDAOImpl.createShop( dummyShop, TestConstants.IS_ERROR );
+            shopDAOResponse = shopDAOImpl.createShop( dummyShop, requestParams );
         } catch ( Exception exception ) {
             logger.error( "Failed to test createShop() ", exception );
             Assert.assertTrue( TestConstants.falseMessage, exception instanceof HibernateException );
@@ -336,7 +342,7 @@ public class WhenCreateAShopTestShopDAOCreateShop {
 
         DAOResponse< Shop > shopDAOResponse = new DAOResponse<>( );
         try {
-            shopDAOResponse = shopDAOImpl.createShop( dummyShop, TestConstants.IS_ERROR );
+            shopDAOResponse = shopDAOImpl.createShop( dummyShop, requestParams );
         } catch ( HibernateException exception ) {
             logger.error( "Failed to test createShop() ", exception );
             Assert.fail( "Create Shop with new dummy item and working Hour failed" );

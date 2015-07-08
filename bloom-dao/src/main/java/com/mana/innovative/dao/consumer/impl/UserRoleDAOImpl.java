@@ -140,6 +140,54 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
         return userRoleDAOResponse;
     }
 
+    @Override
+    @SuppressWarnings( "unchecked" )
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
+    public DAOResponse< UserRole > getUserRoleByUserRoleName( final String userRoleName, final RequestParams requestParams ) {
+        String location = this.getClass( ).getCanonicalName( )
+                + "#getUserRoleByUserRoleName()";
+
+        logger.debug( "Starting " + location );
+        DAOResponse< UserRole > userRoleDAOResponse = new DAOResponse<>( );
+        List< UserRole > userRoleList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
+                : null;
+        try {
+            this.openDBTransaction( );
+
+            Query query = session
+                    .createQuery( "from UserRole where userRoleName=:userRoleName" );
+            query.setParameter( "userRoleName", userRoleName );
+//            UserRole userRole = ( UserRole ) query.uniqueResult( );
+            userRoleList = query.list( );
+
+            this.closeDBTransaction( );
+//            userRoleList.add( userRole );
+            userRoleDAOResponse.setRequestSuccess( Boolean.TRUE );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error(
+                    "Failed while getting data from userRoles table for userRoles ",
+                    exception );
+            userRoleDAOResponse.setRequestSuccess( Boolean.FALSE );
+
+            if ( requestParams.isError( ) ) {
+
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        userRoleDAOResponse.setCount( userRoleList.size( ) );
+        userRoleDAOResponse.setResults( userRoleList );
+        userRoleDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+
+        return userRoleDAOResponse;
+    }
+
     /**
      * Create userRole.
      *

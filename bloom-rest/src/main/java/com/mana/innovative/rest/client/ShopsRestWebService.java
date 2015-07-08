@@ -1,6 +1,7 @@
 package com.mana.innovative.rest.client;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.client.ShopsService;
 import com.mana.innovative.utilities.response.ResponseUtility;
 import org.slf4j.Logger;
@@ -43,6 +44,7 @@ public class ShopsRestWebService {
      * Gets shops.
      *
      * @param isError the is error
+     *
      * @return the shops
      */
     @GET
@@ -54,7 +56,9 @@ public class ShopsRestWebService {
 //        if (!isAuthenticated) return ResponseUtility.unauthorizedAccess();
 
         try {
-            return shopsServiceImpl.getShops( isError );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            return shopsServiceImpl.getShops( requestParams );
         } catch ( Exception exception ) {
             logger.error( " Failed to retrieve Shops" + exception );
             return ResponseUtility.internalServerErrorMsg( null );
@@ -66,8 +70,9 @@ public class ShopsRestWebService {
     /**
      * Delete shops.
      *
-     * @param isError the is error
+     * @param isError     the is error
      * @param isDeleteAll the is delete all
+     *
      * @return the response
      */
     @DELETE
@@ -76,7 +81,10 @@ public class ShopsRestWebService {
                                          isError, @QueryParam( value = "is_delete_all" ) boolean isDeleteAll ) {
         //return ResponseUtility.forbiddenRequest( null );
         try {
-            return shopsServiceImpl.deleteAllShops( isError, isDeleteAll );
+            RequestParams requestParams = new RequestParams( );
+            requestParams.setIsError( isError );
+            requestParams.setIsDeleteAll( isDeleteAll );
+            return shopsServiceImpl.deleteAllShops( requestParams );
         } catch ( Exception exception ) {
             logger.error( " Failed to delete All Shops" + exception );
             return ResponseUtility.internalServerErrorMsg( null );

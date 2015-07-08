@@ -19,6 +19,7 @@ public interface UserRoleDAO {
      * This method is to create a userRole
      *
      * @param requestParams the request params
+     *
      * @return boolean Return a boolean value to indicate if userRole creation passed or failed
      */
     DAOResponse< UserRole > getUserRoles( RequestParams requestParams );
@@ -26,17 +27,29 @@ public interface UserRoleDAO {
     /**
      * Gets userRole by userRole id.
      *
-     * @param userRoleId the userRole id
+     * @param userRoleId    the userRole id
      * @param requestParams the request params
+     *
      * @return the userRole by userRole id
      */
     DAOResponse< UserRole > getUserRoleByUserRoleId( int userRoleId, RequestParams requestParams );
 
     /**
+     * Gets user role by user role name.
+     *
+     * @param userName      the user name
+     * @param requestParams the request params
+     *
+     * @return the user role by user role name
+     */
+    DAOResponse< UserRole > getUserRoleByUserRoleName( String userName, RequestParams requestParams );
+
+    /**
      * This method is to create a userRole
      *
-     * @param userRole the userRole
+     * @param userRole      the userRole
      * @param requestParams the request params
+     *
      * @return boolean Return a boolean value to indicate if userRole creation passed or failed
      */
     DAOResponse< UserRole > createUserRole( UserRole userRole, RequestParams requestParams );
@@ -44,8 +57,9 @@ public interface UserRoleDAO {
     /**
      * Update userRole.
      *
-     * @param userRole the userRole
+     * @param userRole      the userRole
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< UserRole > updateUserRole( UserRole userRole, RequestParams requestParams );
@@ -54,8 +68,9 @@ public interface UserRoleDAO {
     /**
      * Delete userRole.
      *
-     * @param userRoleId the userRole id
+     * @param userRoleId    the userRole id
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< UserRole > deleteUserRoleByUserRoleId( int userRoleId, RequestParams requestParams );
@@ -64,6 +79,7 @@ public interface UserRoleDAO {
      * Delete userRoles.
      *
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     DAOResponse< UserRole > deleteAllUserRoles( RequestParams requestParams );

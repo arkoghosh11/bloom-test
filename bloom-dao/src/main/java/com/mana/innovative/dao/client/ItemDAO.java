@@ -2,6 +2,7 @@ package com.mana.innovative.dao.client;
 
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,29 +20,28 @@ public interface ItemDAO {
     /**
      * Delete all items.
      *
-     * @param deleteAllItems the delete all items
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
-    DAOResponse< Item > deleteAllItems( final boolean deleteAllItems, final boolean isError );
+    DAOResponse< Item > deleteAllItems( RequestParams requestParams );
 
     /**
      * Delete item by item id.
      *
      * @param itemId the item id
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
-    DAOResponse< Item > deleteItemByItemId( long itemId, boolean isError );
+    DAOResponse< Item > deleteItemByItemId( long itemId, RequestParams requestParams );
 
     /**
      * Delete items by item ids.
      *
      * @param itemIds the item ids
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
-    DAOResponse< Item > deleteItemsByItemIds( List< Long > itemIds, boolean isError );
+    DAOResponse< Item > deleteItemsByItemIds( List< Long > itemIds, RequestParams requestParams );
 
     /* IMP UPDATE Functions */
 
@@ -49,10 +49,10 @@ public interface ItemDAO {
      * Update item.
      *
      * @param item the item
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
-    DAOResponse< Item > updateItem( Item item, boolean isError );
+    DAOResponse< Item > updateItem( Item item, RequestParams requestParams );
 
     /* IMP CREATE Functions */
 
@@ -60,25 +60,25 @@ public interface ItemDAO {
      * Create item.
      *
      * @param item the item
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the dAO response
      */
-    DAOResponse< Item > createItem( Item item, Boolean isError );
+    DAOResponse< Item > createItem( Item item, RequestParams requestParams );
 
     /**
      * Gets item by item id.
      *
      * @param itemId the item id
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the item by item id
      */
-    DAOResponse< Item > getItemByItemId( long itemId, boolean isError );
+    DAOResponse< Item > getItemByItemId( long itemId, RequestParams requestParams );
 
     /**
      * Gets items.
      *
-     * @param isError the is error
+     * @param requestParams the request params
      * @return the items
      */
-    DAOResponse< Item > getItems( boolean isError );
+    DAOResponse< Item > getItems( RequestParams requestParams );
 }

@@ -45,9 +45,21 @@ public class UserRole {
     private boolean isActive;
 
     /**
+     * The Is expired.
+     */
+    @Column( name = "is_expired" )
+    private boolean isExpired;
+
+    /**
+     * The Is locked.
+     */
+    @Column( name = "is_locked" )
+    private boolean isLocked;
+
+    /**
      * The User role name.
      */
-    @Column( name = "user_role_name", columnDefinition = "varchar", length = 20 )
+    @Column( name = "user_role_name", columnDefinition = "varchar", length = 20, unique = true )
     private String userRoleName;
 
     /**
@@ -115,6 +127,42 @@ public class UserRole {
      */
     public void setIsActive( final boolean isActive ) {
         this.isActive = isActive;
+    }
+
+    /**
+     * Is expired.
+     *
+     * @return the boolean
+     */
+    public boolean isExpired( ) {
+        return isExpired;
+    }
+
+    /**
+     * Sets is expired.
+     *
+     * @param isExpired the is expired
+     */
+    public void setIsExpired( final boolean isExpired ) {
+        this.isExpired = isExpired;
+    }
+
+    /**
+     * Is locked.
+     *
+     * @return the boolean
+     */
+    public boolean isLocked( ) {
+        return isLocked;
+    }
+
+    /**
+     * Sets is locked.
+     *
+     * @param isLocked the is locked
+     */
+    public void setIsLocked( final boolean isLocked ) {
+        this.isLocked = isLocked;
     }
 
     /**
@@ -207,13 +255,6 @@ public class UserRole {
         this.privileges = privilegeList;
     }
 
-    /**
-     * Equals boolean.
-     *
-     * @param o the o
-     *
-     * @return the boolean
-     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -221,9 +262,13 @@ public class UserRole {
         UserRole userRole = ( UserRole ) o;
         return Objects.equals( getUserRoleId( ), userRole.getUserRoleId( ) ) &&
                 Objects.equals( isActive( ), userRole.isActive( ) ) &&
+                Objects.equals( isExpired( ), userRole.isExpired( ) ) &&
+                Objects.equals( isLocked( ), userRole.isLocked( ) ) &&
                 Objects.equals( getUserRoleName( ), userRole.getUserRoleName( ) ) &&
+                Objects.equals( getUsers( ), userRole.getUsers( ) ) &&
                 Objects.equals( getPrivileges( ), userRole.getPrivileges( ) );
     }
+
 
     /**
      * To string.
@@ -235,10 +280,13 @@ public class UserRole {
         return "UserRole {" +
                 " userRoleId=" + userRoleId +
                 ", isActive=" + isActive +
+                ", isExpired=" + isExpired +
+                ", isLocked=" + isLocked +
                 ", userRoleName= " + userRoleName +
                 ", createdDate=" + createdDate +
                 ", updatedDate=" + updatedDate +
-                ", privilegeList=" + privileges +
+                ", users=" + users +
+                ", privileges=" + privileges +
                 '}';
     }
 }

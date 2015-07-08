@@ -1,7 +1,8 @@
-package com.mana.innovative.service;
+package com.mana.innovative.service.client;
 
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.client.impl.ItemsServiceImpl;
 import org.junit.After;
 import org.junit.Before;
@@ -47,7 +48,7 @@ public class WhenItemsServiceTestSpringTransactional {
     public void setUp( ) throws Exception {
 
         DAOResponse< Item > itemDAOResponse = Mockito.mock( DAOResponse.class );
-        Mockito.when( itemsServiceImpl.getItems( Mockito.anyBoolean( ) ) ).thenReturn(
+        Mockito.when( itemsServiceImpl.getItems( Mockito.any( RequestParams.class ) ) ).thenReturn(
                 Response.ok( ).entity( itemDAOResponse ).build( ) );
     }
 

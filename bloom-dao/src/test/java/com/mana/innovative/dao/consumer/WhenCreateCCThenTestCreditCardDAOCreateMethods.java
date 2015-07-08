@@ -35,12 +35,12 @@ import javax.annotation.Resource;
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
 @TransactionConfiguration( defaultRollback = true ) // If required
 @Transactional   // If required
-public class WhenCreateCCThenTestCreditCardDAOMethods {
+public class WhenCreateCCThenTestCreditCardDAOCreateMethods {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( WhenCreateCCThenTestCreditCardDAOMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenCreateCCThenTestCreditCardDAOCreateMethods.class );
 
     /**
      * The Dummy credit card.

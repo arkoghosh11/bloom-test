@@ -4,6 +4,7 @@ import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Shop;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -58,6 +59,8 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
     @Resource
     private SessionFactory sessionFactory;
 
+    private RequestParams requestParams;
+
     /**
      * Sets up method is to initialize Objects and configuration files before testing test method
      *
@@ -68,6 +71,9 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
     public void setUp( ) throws Exception {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
+        requestParams = new RequestParams( );
+        requestParams.setIsError( TestConstants.IS_ERROR );
+        requestParams.setIsError( TestConstants.IS_DELETE_ALL );
     }
 
     /**
@@ -91,8 +97,8 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllShopsWithErrorEnabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL,
-                TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -121,8 +127,7 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllShopsWithErrorDisabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL,
-                TestConstants.IS_ERROR );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -147,8 +152,10 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllShopsWithDeleteAllTrueWithErrorEnabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL_TRUE,
-                TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsDeleteAll( TestConstants.IS_DELETE_ALL_TRUE );
+
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -176,8 +183,8 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteAllShopsWithDeleteAllTrueWithErrorDisabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( TestConstants.IS_DELETE_ALL_TRUE,
-                TestConstants.IS_ERROR );
+        requestParams.setIsDeleteAll( TestConstants.IS_DELETE_ALL_TRUE );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteAllShops( requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -202,8 +209,8 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteShopByShopIdWithErrorEnabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteShopByShopId( TestConstants.ZERO,
-                TestConstants.IS_ERROR_TRUE );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteShopByShopId( TestConstants.ZERO, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // check ErrorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -232,7 +239,7 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
 
         logger.debug( "Starting test for DeleteShopByShopIdWithErrorDisabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteShopByShopId( TestConstants.ZERO, TestConstants.IS_ERROR );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteShopByShopId( TestConstants.ZERO, requestParams );
         // check ErrorContainer
         Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
 
@@ -256,10 +263,12 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
     public void testDeleteShopsWithErrorDisabled( ) throws Exception {
 
         logger.debug( "Starting test for DeleteShopsWithErrorDisabled" );
+
         List< Long > shopIds = new ArrayList<>( );
         shopIds.add( ( long ) TestConstants.ZERO );
         shopIds.add( ( long ) TestConstants.ONE );
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteShopsByShopIds( shopIds, TestConstants.IS_ERROR );
+
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteShopsByShopIds( shopIds, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
 
         // check ErrorContainer
@@ -282,10 +291,13 @@ public class WhenDeleteShopThenTestShopDAODeleteMethods {
     public void testDeleteShopsWithErrorEnabled( ) throws Exception {
 
         logger.debug( "Starting test for DeleteShopsWithErrorEnabled" );
+
         List< Long > shopIds = new ArrayList<>( );
         shopIds.add( ( long ) TestConstants.ZERO );
         shopIds.add( ( long ) TestConstants.ONE );
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteShopsByShopIds( shopIds, TestConstants.IS_ERROR_TRUE );
+
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.deleteShopsByShopIds( shopIds, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
 
         // check ErrorContainer

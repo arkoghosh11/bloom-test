@@ -29,6 +29,9 @@ public class UserRole {
      */
     private boolean isActive;
 
+    private boolean isExpired;
+    private boolean isLocked;
+
     /**
      * The Privileges.
      */
@@ -89,6 +92,42 @@ public class UserRole {
      */
     public void setIsActive( final boolean isActive ) {
         this.isActive = isActive;
+    }
+
+    /**
+     * Is expired.
+     *
+     * @return the boolean
+     */
+    public boolean isExpired( ) {
+        return isExpired;
+    }
+
+    /**
+     * Sets is expired.
+     *
+     * @param isExpired the is expired
+     */
+    public void setIsExpired( final boolean isExpired ) {
+        this.isExpired = isExpired;
+    }
+
+    /**
+     * Is locked.
+     *
+     * @return the boolean
+     */
+    public boolean isLocked( ) {
+        return isLocked;
+    }
+
+    /**
+     * Sets is locked.
+     *
+     * @param isLocked the is locked
+     */
+    public void setIsLocked( final boolean isLocked ) {
+        this.isLocked = isLocked;
     }
 
     /**

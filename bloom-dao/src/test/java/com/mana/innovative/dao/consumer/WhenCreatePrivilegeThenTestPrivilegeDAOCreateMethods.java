@@ -35,12 +35,12 @@ import javax.annotation.Resource;
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
 @TransactionConfiguration( defaultRollback = true ) // If required
 @Transactional   // If required
-public class WhenCreatePrivilegeThenTestPrivilegeDAOMethods {
+public class WhenCreatePrivilegeThenTestPrivilegeDAOCreateMethods {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( WhenCreatePrivilegeThenTestPrivilegeDAOMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenCreatePrivilegeThenTestPrivilegeDAOCreateMethods.class );
 
     /**
      * The Dummy privilege.

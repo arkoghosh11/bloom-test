@@ -32,12 +32,12 @@ import java.util.List;
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } ) // "" <- <add location file>
 //@TransactionConfiguration // If required
 @Transactional   // If required
-public class WhenGetUserRoleThenTestUserRoleDAOMethods {
+public class WhenGetUserRoleThenTestUserRoleDAOGetMethods {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( WhenGetUserRoleThenTestUserRoleDAOMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenGetUserRoleThenTestUserRoleDAOGetMethods.class );
 
     /**
      * The UserRole dAO.
@@ -100,6 +100,14 @@ public class WhenGetUserRoleThenTestUserRoleDAOMethods {
 
         for ( UserRole userRole : userRoles ) {
             Assert.assertNotNull( TestConstants.nullMessage, userRole );
+            Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleName( ) );
+            Assert.assertFalse( TestConstants.trueMessage, userRole.getUserRoleId( ) < 0 );
+
+            if ( userRole.getUserRoleName( ).equals( "default" ) ) {
+                Assert.assertFalse( TestConstants.trueMessage, userRole.isActive( ) );
+            }
+            Assert.assertFalse( TestConstants.trueMessage, userRole.isLocked( ) );
+            Assert.assertFalse( TestConstants.trueMessage, userRole.isExpired( ) );
         }
 
         logger.debug( "Finishing test for GetUserRolesWithErrorDisabled" );
@@ -112,9 +120,9 @@ public class WhenGetUserRoleThenTestUserRoleDAOMethods {
      */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
-    public void testGetUserRoleWithErrorDisabled( ) throws Exception {
+    public void GetUserRoleByUserRoleIdWithErrorDisabled( ) throws Exception {
 
-        logger.debug( "Starting test for GetUserRoleWithErrorDisabled" );
+        logger.debug( "Starting test for GetUserRoleByUserRoleIdWithErrorDisabled" );
 
         requestParams.setIsError( TestConstants.IS_ERROR );
         DAOResponse< UserRole > userRoleDAOResponse = userRoleDAO.getUserRoleByUserRoleId( TestConstants.ONE,
@@ -138,8 +146,11 @@ public class WhenGetUserRoleThenTestUserRoleDAOMethods {
 
         Assert.assertNotNull( TestConstants.nullMessage, userRole );
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleId( ) );
-        Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleId( ) );
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleName( ) );
+
+        Assert.assertTrue( TestConstants.falseMessage, userRole.isActive( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRole.isLocked( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRole.isExpired( ) );
 
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getPrivileges( ) );
         Assert.assertFalse( TestConstants.trueMessage, userRole.getPrivileges( ).isEmpty( ) );
@@ -147,7 +158,7 @@ public class WhenGetUserRoleThenTestUserRoleDAOMethods {
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getCreatedDate( ) );
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getUpdatedDate( ) );
 
-        logger.debug( "Finishing test for GetUserRoleWithErrorDisabled" );
+        logger.debug( "Finishing test for GetUserRoleByUserRoleIdWithErrorDisabled" );
     }
 
     /**
@@ -182,7 +193,17 @@ public class WhenGetUserRoleThenTestUserRoleDAOMethods {
         Assert.assertEquals( TestConstants.notEqualsMessage, userRoleDAOResponse.getCount( ), userRoles.size( ) );
 
         for ( UserRole userRole : userRoles ) {
+
             Assert.assertNotNull( TestConstants.nullMessage, userRole );
+            Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleName( ) );
+            Assert.assertFalse( TestConstants.trueMessage, userRole.getUserRoleId( ) < 0 );
+
+            if ( userRole.getUserRoleName( ).equals( "default" ) ) {
+                Assert.assertFalse( TestConstants.trueMessage, userRole.isActive( ) );
+            }
+            Assert.assertFalse( TestConstants.trueMessage, userRole.isLocked( ) );
+            Assert.assertFalse( TestConstants.trueMessage, userRole.isExpired( ) );
+
         }
 
         logger.debug( "Finishing test for GetUserRolesWithErrorEnabled" );
@@ -195,9 +216,9 @@ public class WhenGetUserRoleThenTestUserRoleDAOMethods {
      */
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
-    public void testGetUserRoleWithErrorEnabled( ) throws Exception {
+    public void testGetUserRoleByUserRoleIdWithErrorEnabled( ) throws Exception {
 
-        logger.debug( "Starting test for GetUserRoleWithErrorEnabled" );
+        logger.debug( "Starting test for GetUserRoleByUserRoleIdWithErrorEnabled" );
 
         requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
         DAOResponse< UserRole > userRoleDAOResponse = userRoleDAO.getUserRoleByUserRoleId( TestConstants.ONE,
@@ -227,8 +248,11 @@ public class WhenGetUserRoleThenTestUserRoleDAOMethods {
 
         Assert.assertNotNull( TestConstants.nullMessage, userRole );
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleId( ) );
-        Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleId( ) );
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleName( ) );
+
+        Assert.assertTrue( TestConstants.falseMessage, userRole.isActive( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRole.isLocked( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRole.isExpired( ) );
 
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getPrivileges( ) );
         Assert.assertFalse( TestConstants.trueMessage, userRole.getPrivileges( ).isEmpty( ) );
@@ -236,6 +260,113 @@ public class WhenGetUserRoleThenTestUserRoleDAOMethods {
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getCreatedDate( ) );
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getUpdatedDate( ) );
 
-        logger.debug( "Finishing test for GetUserRoleWithErrorEnabled" );
+        logger.debug( "Finishing test for GetUserRoleByUserRoleIdWithErrorEnabled" );
+    }
+
+    /**
+     * Test get userRole with error enabled.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
+    public void testGetUserRoleByUserRoleNameWithErrorDisabled( ) throws Exception {
+
+        logger.debug( "Starting test for GetUserRoleByUserRoleNameWithErrorDisabled" );
+
+        DAOResponse< UserRole > userRoleDAOResponse = userRoleDAO
+                .getUserRoleByUserRoleName( TestConstants.DEFAULT_USER_ROLE_NAME, requestParams );
+
+        Assert.assertNotNull( TestConstants.nullMessage, userRoleDAOResponse );
+
+        // test error container
+        Assert.assertNull( TestConstants.notNullMessage, userRoleDAOResponse.getErrorContainer( ) );
+
+        // test result object
+        Assert.assertNotNull( TestConstants.nullMessage, userRoleDAOResponse.getResults( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRoleDAOResponse.getResults( ).isEmpty( ) );
+
+        // userRole list and its size with DAOResponse<T> class count
+        List< UserRole > userRoles = userRoleDAOResponse.getResults( );
+
+        Assert.assertNotNull( TestConstants.nullMessage, userRoles );
+        Assert.assertFalse( TestConstants.trueMessage, userRoles.isEmpty( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, userRoleDAOResponse.getCount( ), userRoles.size( ) );
+        Assert.assertEquals( TestConstants.ONE, userRoles.size( ) );
+
+        // test userRole
+        UserRole userRole = userRoles.get( TestConstants.ZERO );
+
+        Assert.assertNotNull( TestConstants.nullMessage, userRole );
+        Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleId( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleName( ) );
+
+        Assert.assertTrue( TestConstants.falseMessage, userRole.isActive( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRole.isLocked( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRole.isExpired( ) );
+
+        Assert.assertNotNull( TestConstants.nullMessage, userRole.getPrivileges( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRole.getPrivileges( ).isEmpty( ) );
+
+        Assert.assertNotNull( TestConstants.nullMessage, userRole.getCreatedDate( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, userRole.getUpdatedDate( ) );
+
+        logger.debug( "Finishing test for GetUserRoleByUserRoleNameWithErrorDisabled" );
+    }
+
+    /**
+     * Test get userRole with error enabled.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
+    public void testGetUserRoleByUserRoleNameWithErrorEnabled( ) throws Exception {
+
+        logger.debug( "Starting test for GetUserRoleByUserRoleIdWithErrorEnabled" );
+
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+
+        DAOResponse< UserRole > userRoleDAOResponse = userRoleDAO
+                .getUserRoleByUserRoleName( TestConstants.DEFAULT_USER_ROLE_NAME, requestParams );
+
+
+        Assert.assertNotNull( TestConstants.nullMessage, userRoleDAOResponse );
+
+        // test error container
+        Assert.assertNotNull( TestConstants.nullMessage, userRoleDAOResponse.getErrorContainer( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, userRoleDAOResponse.getErrorContainer( ).getErrors( ) );
+        Assert.assertTrue( TestConstants.falseMessage, userRoleDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+
+        // test result object
+        Assert.assertNotNull( TestConstants.nullMessage, userRoleDAOResponse.getResults( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRoleDAOResponse.getResults( ).isEmpty( ) );
+
+        // userRole list and its size with DAOResponse<T> class count
+        List< UserRole > userRoles = userRoleDAOResponse.getResults( );
+
+        Assert.assertNotNull( TestConstants.nullMessage, userRoles );
+        Assert.assertFalse( TestConstants.trueMessage, userRoles.isEmpty( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, userRoleDAOResponse.getCount( ), userRoles.size( ) );
+        Assert.assertEquals( TestConstants.ONE, userRoles.size( ) );
+
+        // test userRole
+        UserRole userRole = userRoles.get( TestConstants.ZERO );
+
+        Assert.assertNotNull( TestConstants.nullMessage, userRole );
+        Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleId( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleName( ) );
+
+        Assert.assertTrue( TestConstants.falseMessage, userRole.isActive( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRole.isLocked( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRole.isExpired( ) );
+
+        Assert.assertNotNull( TestConstants.nullMessage, userRole.getPrivileges( ) );
+        Assert.assertFalse( TestConstants.trueMessage, userRole.getPrivileges( ).isEmpty( ) );
+
+        Assert.assertNotNull( TestConstants.nullMessage, userRole.getCreatedDate( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, userRole.getUpdatedDate( ) );
+
+        logger.debug( "Finishing test for GetUserRoleByUserRoleIdWithErrorEnabled" );
     }
 }

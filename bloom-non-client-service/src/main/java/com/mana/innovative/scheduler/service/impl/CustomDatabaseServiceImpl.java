@@ -24,8 +24,9 @@ import java.util.Date;
 /**
  * Created by Bloom/Rono on 4/17/2015. This class is CustomDatabaseServiceImpl
  *
- * @param <T>   the type parameter
- * @param <E>   the type parameter Created by Bloom/Rono on $date $time.
+ * @param <T> the type parameter
+ * @param <E> the type parameter Created by Bloom/Rono on $date $time.
+ *
  * @author Rono, AB, Vadim Servetnik
  * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
@@ -59,6 +60,7 @@ public class CustomDatabaseServiceImpl < T, E > implements CustomDatabaseService
      * Read data.
      *
      * @param e the e
+     *
      * @return the t
      */
     @SuppressWarnings( "unchecked" )
@@ -101,6 +103,7 @@ public class CustomDatabaseServiceImpl < T, E > implements CustomDatabaseService
      * Create data.
      *
      * @param t the t
+     *
      * @return the boolean
      */
     @Override
@@ -108,14 +111,17 @@ public class CustomDatabaseServiceImpl < T, E > implements CustomDatabaseService
     public boolean createData( final T t ) {
         String location = this.getClass( ).getCanonicalName( ) + "#()";
         logger.debug( "Starting " + location );
+
+        RequestParams requestParams = new RequestParams( );
+        requestParams.setIsError( Boolean.TRUE );
         try {
             if ( t instanceof Item ) {
                 Item item = ( Item ) t;
-                itemDAO.createItem( item, Boolean.TRUE );
+                itemDAO.createItem( item, requestParams );
             }
             if ( t instanceof Shop ) {
                 Shop shop = ( Shop ) t;
-                shopDAO.createShop( shop, Boolean.TRUE );
+                shopDAO.createShop( shop, requestParams );
             }
         } catch ( Exception exception ) {
             logger.error( "Failed while trying to save into Database", exception );
@@ -127,8 +133,9 @@ public class CustomDatabaseServiceImpl < T, E > implements CustomDatabaseService
     /**
      * Update data.
      *
-     * @param e the e
+     * @param e           the e
      * @param isScheduler the is scheduler
+     *
      * @return the boolean
      */
     @Override

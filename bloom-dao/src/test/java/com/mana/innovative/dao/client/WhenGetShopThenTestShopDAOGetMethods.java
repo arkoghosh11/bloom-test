@@ -3,6 +3,7 @@ package com.mana.innovative.dao.client;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Shop;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -46,6 +47,8 @@ public class WhenGetShopThenTestShopDAOGetMethods {
     @Resource
     private ShopDAO shopDAOImpl;
 
+    private RequestParams requestParams;
+
     /**
      * Sets up.
      *
@@ -56,6 +59,9 @@ public class WhenGetShopThenTestShopDAOGetMethods {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
         shopId = ( long ) TestConstants.ONE;
+
+        requestParams = new RequestParams( );
+        requestParams.setIsError( TestConstants.IS_ERROR );
     }
 
     /**
@@ -79,7 +85,9 @@ public class WhenGetShopThenTestShopDAOGetMethods {
     public void testGetShopByShopIdWithErrorEnabled( ) throws Exception {
 
         logger.debug( "Starting test for GetShopByShopIdWithErrorEnabled" );
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( shopId, TestConstants.IS_ERROR_TRUE );
+
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( shopId, requestParams );
 
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         // test Error Container
@@ -126,7 +134,9 @@ public class WhenGetShopThenTestShopDAOGetMethods {
     public void testGetShopsWithErrorEnabled( ) throws Exception {
 
         logger.debug( "Starting test for GetShopsWithErrorEnabled" );
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShops( TestConstants.IS_ERROR_TRUE );
+
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShops( requestParams );
 
         // test DAO Response errorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
@@ -158,7 +168,7 @@ public class WhenGetShopThenTestShopDAOGetMethods {
 
         logger.debug( "Starting test for GetShopByShopIdWithErrorDisabled" );
 
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( shopId, TestConstants.IS_ERROR );
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( shopId, requestParams );
         // test errorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );
         Assert.assertNull( TestConstants.notNullMessage, shopDAOResponse.getErrorContainer( ) );
@@ -201,7 +211,8 @@ public class WhenGetShopThenTestShopDAOGetMethods {
     public void testGetShopsWithErrorDisabled( ) throws Exception {
 
         logger.debug( "Starting test for GetShopsWithErrorDisabled" );
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShops( TestConstants.IS_ERROR );
+
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShops( requestParams );
 
         // test errorContainer
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse );

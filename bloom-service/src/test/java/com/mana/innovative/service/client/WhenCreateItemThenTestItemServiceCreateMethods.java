@@ -3,6 +3,7 @@ package com.mana.innovative.service.client;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dto.client.Item;
 import com.mana.innovative.dto.client.payload.ItemsPayload;
+import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.TestDummyDTOObjectGenerator;
 import com.mana.innovative.service.client.container.ItemResponseContainer;
 import org.junit.After;
@@ -32,12 +33,12 @@ import javax.ws.rs.core.Response.Status;
 @ContextConfiguration( locations = { "/service-config-test.xml", "/db-config-test.xml" } )
 @TransactionConfiguration
 @Transactional
-public class WhenCreateITemThenTestItemService {
+public class WhenCreateItemThenTestItemServiceCreateMethods {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory.getLogger( WhenCreateITemThenTestItemService.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenCreateItemThenTestItemServiceCreateMethods.class );
 
     /**
      * The Items service impl.
@@ -51,6 +52,8 @@ public class WhenCreateITemThenTestItemService {
      * The Items payload.
      */
     private ItemsPayload itemsPayload;
+
+    private RequestParams requestParams;
 
     /**
      * The Mock item.
@@ -72,10 +75,11 @@ public class WhenCreateITemThenTestItemService {
         itemResponseContainer = Mockito.mock( ItemResponseContainer.class );
         itemsPayload = Mockito.mock( ItemsPayload.class );
         mockItem = Mockito.mock( Item.class );
+        requestParams = Mockito.mock( RequestParams.class );
 
         Response response = Response.status( Status.OK ).entity( itemResponseContainer ).build( );
 
-        Mockito.when( itemServiceImpl.createItem( mockItem, false ) ).thenReturn( response );
+        Mockito.when( itemServiceImpl.createItem( mockItem, requestParams ) ).thenReturn( response );
         Mockito.when( itemResponseContainer.getPayload( ) ).thenReturn( itemsPayload );
         Mockito.when( itemResponseContainer.getCount( ) ).thenReturn( 1 );
         Mockito.when( itemsPayload.getItems( ) ).thenReturn( TestDummyDTOObjectGenerator.getTestItemDTOList( ) );
@@ -107,20 +111,27 @@ public class WhenCreateITemThenTestItemService {
         logger.debug( "Starting test for CreateItem" );
         logger.info( "Testing ItemService GetItems method" );
 
-        Response response = itemServiceImpl.createItem( mockItem, false );
+        Response response = itemServiceImpl.createItem( mockItem, requestParams );
 
         Assert.assertNotNull( response );
-//        Assert.assertNotNull( response.getEntity( ) );
-//        logger.info( "Testing ItemResponseContainer GetItems method" );
-//        ItemResponseContainer< ItemsPayload > itemResponseContainer
-//                = ( ItemResponseContainer< ItemsPayload > ) response.getEntity( );
-//        Assert.assertNotNull( itemResponseContainer.getPayload( ) );
-//        Assert.assertTrue( itemResponseContainer.getCount( ) > 0 );
-//
-//        logger.info( "Testing ItemsPayload GetItems method" );
-//        ItemsPayload itemsPayload = itemResponseContainer.getPayload( );
-//        Assert.assertNotNull( itemsPayload.getItems( ) );
-//        Assert.assertTrue( itemsPayload.getItems( ).size( ) > 1 );
+        Assert.assertNotNull( response.getEntity( ) );
+        logger.info( "Testing ItemResponseContainer CreateItems method" );
+        ItemResponseContainer< ItemsPayload > itemResponseContainer
+                = ( ItemResponseContainer< ItemsPayload > ) response.getEntity( );
+
+        Assert.assertNotNull( itemResponseContainer.getPayload( ) );
+        Assert.assertTrue( itemResponseContainer.getCount( ) > 0 );
+
+        Mockito.verify( itemResponseContainer, Mockito.times( 1 ) ).getPayload( );
+        Mockito.verify( itemResponseContainer, Mockito.times( 1 ) ).getCount( );
+        logger.info( "Testing ItemsPayload GetItems method" );
+        ItemsPayload itemsPayload = itemResponseContainer.getPayload( );
+
+        Mockito.verify( itemResponseContainer, Mockito.times( 2 ) ).getPayload( );
+
+        Assert.assertNotNull( itemsPayload.getItems( ) );
+        Assert.assertTrue( itemsPayload.getItems( ).size( ) > 0 );
+        Assert.assertEquals( this.itemsPayload, itemsPayload );
 
         logger.debug( "Finishing test for CreateItem" );
     }

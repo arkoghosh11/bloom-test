@@ -566,8 +566,10 @@ public class TestDummyDomainObjectGenerator {
         UserRole userRole = new UserRole( );
 
 //        userRole.setUserRoleId( TestConstants.ZERO );
-        userRole.setUserRoleName( TestConstants.DEFAULT );
-        userRole.setIsActive( TestConstants.TEST_FALSE );
+        userRole.setUserRoleName( TestConstants.DEFAULT + TestConstants.ONE );
+        userRole.setIsActive( TestConstants.TEST_TRUE );
+        userRole.setIsExpired( TestConstants.TEST_FALSE );
+        userRole.setIsLocked( TestConstants.TEST_FALSE );
         userRole.setPrivileges( getNCreatePrivilegeDomainList( ) );
 
         return userRole;

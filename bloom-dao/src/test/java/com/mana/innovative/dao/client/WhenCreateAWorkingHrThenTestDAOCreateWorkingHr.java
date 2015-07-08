@@ -4,6 +4,7 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Shop;
 import com.mana.innovative.domain.client.WorkingHour;
+import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
@@ -67,7 +68,10 @@ public class WhenCreateAWorkingHrThenTestDAOCreateWorkingHr {
     public void setUp( ) throws Exception {
 
         logger.debug( TestConstants.setUpMethodLoggerMsg );
-        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( TestConstants.TEST_ID, TestConstants.IS_ERROR_TRUE );
+        RequestParams requestParams = new RequestParams( );
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+
+        DAOResponse< Shop > shopDAOResponse = shopDAOImpl.getShopByShopId( TestConstants.TEST_ID, requestParams );
         Assert.assertNotNull( TestConstants.nullMessage, shopDAOResponse.getResults( ) );
         Assert.assertFalse( TestConstants.trueMessage, shopDAOResponse.getResults( ).isEmpty( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.ONE, shopDAOResponse.getResults( ).size( ) );
