@@ -185,7 +185,8 @@
             <version>${jersey.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- Spring -->
+        <!-- IMP Spring dependency-->
+        <!-- Note ${spring.version} for spring artifact version -->
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -207,6 +208,12 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>${cglib.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -214,6 +221,38 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Note new jspx easy library -->
+        <!-- IMP {@link http://jspx-bay.sourceforge.net/} Credit to the people here for developing this open source awesome library-->
+        <dependency>
+            <groupId>org.bay.jspx</groupId>
+            <artifactId>easy-jspx</artifactId>
+            <version>${easyjspx.version}</version>
+        </dependency>
+
+        <!-- Note easy JSPX dependant libraries-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${apache-poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${apache-commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-jexl</artifactId>
+            <version>${apache-commons-jexl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${apache-commons-filupload.version}</version>
+        </dependency>
+
+        <!-- Note cache artifact fro working with spring for caching the webservices-->
 
         <dependency>
             <groupId>net.sf.ehcache</groupId>

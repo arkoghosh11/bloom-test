@@ -1,5 +1,6 @@
 package com.mana.innovative.rest.filter;
 
+import com.mana.innovative.constants.ServiceConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
@@ -82,7 +83,12 @@ public class ResetCacheFilter implements Filter {
 
         // String location = this.getClass().getCanonicalName() + "#doFilter()";
         // logger.debug( "Starting " + location );
-        chain.doFilter( request, response );
+
+        try {
+            chain.doFilter( request, response );
+        } catch ( Exception exception ) {
+            logger.error( "Exception occurred", exception );
+        }
         // logger.debug( "Finishing " + location );
 
     }
@@ -114,8 +120,8 @@ public class ResetCacheFilter implements Filter {
      * Flush all caches.
      */
     @Caching( evict = {
-            // @CacheEvict(value="itemsCache", allEntries=true),
-            @CacheEvict( value = "shopsCache", allEntries = true ) } )
+            @CacheEvict( value = ServiceConstants.ITEMS_CACHE, allEntries = true ),
+            @CacheEvict( value = ServiceConstants.SHOPS_CACHE, allEntries = true ) } )
     private void flushAllCaches( ) {
 
         logger.warn( "***** All caches have been completely flushed ****** " );

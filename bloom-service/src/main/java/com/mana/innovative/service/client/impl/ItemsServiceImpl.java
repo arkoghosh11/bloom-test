@@ -61,12 +61,12 @@ public class ItemsServiceImpl implements ItemsService {
         ItemResponseContainer< ItemsPayload > itemResponseContainer;
         try {
             itemDAOResponse = itemDAOImpl.getItems( requestParams );
-        } catch ( Exception e ) {
-            if ( e instanceof HibernateException ) {
-                logger.error( "Hibernate Exception occurred while trying fetch data from DB " + location, e );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                logger.error( "Hibernate Exception occurred while trying fetch data from DB " + location, exception );
             } else
-                logger.error( "Exception occurred in" + location, e );
-            itemResponseContainer = ItemResponseBuilder.buildError( location, requestParams.isError( ), e );
+                logger.error( "Exception occurred in" + location, exception );
+            itemResponseContainer = ItemResponseBuilder.buildError( location, requestParams.isError( ), exception );
             return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
 
         }
@@ -76,8 +76,8 @@ public class ItemsServiceImpl implements ItemsService {
             return Response.status( Response.Status.OK ).entity( itemResponseContainer ).build( );
 
 
-        } catch ( Exception e ) {
-            itemResponseContainer = ItemResponseBuilder.buildError( location, requestParams.isError( ), e );
+        } catch ( Exception exception ) {
+            itemResponseContainer = ItemResponseBuilder.buildError( location, requestParams.isError( ), exception );
             return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( itemResponseContainer ).build( );
 
         } finally {

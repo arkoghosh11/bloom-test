@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   * @author Rono, AB, Vadim Servetnik
- * @Copyright
+  * @Copyright
 -->
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
@@ -32,16 +32,18 @@
         <param-name>spring.profiles.active</param-name>
         <param-value>dev</param-value>
     </context-param>
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath*:/web_config.xml
             classpath*:/config/db_config.xml
             classpath*:/config/service_config.xml
+            classpath*:/config/spring-security-config.xml
             <!-- Note disabled bottom config files as scheduler is tied to email
-            and without the email secure properties file these config files
-            will not load
-            -->
+                 and without the email secure properties file these config files
+                 will not load
+                 -->
             <!--classpath*:/config/email-config.xml-->
             <!--classpath*:/config/scheduler-config.xml-->
         </param-value>
@@ -51,6 +53,7 @@
         <param-name>lService</param-name>
         <param-value>loginService</param-value>
     </context-param>
+
     <!--@Note listener classes by Spring to instantiate Spring Application Context -->
 
     <listener>
@@ -61,6 +64,7 @@
             org.springframework.web.context.request.RequestContextListener
         </listener-class>
     </listener>
+
     <!--@Note Filter class for Authentication -->
     <filter>
         <filter-name>Login Filter</filter-name>
@@ -80,7 +84,7 @@
     <filter-mapping>
         <filter-name>Cache Filter</filter-name>
         <servlet-name>Jersey REST Service</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/rest/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
@@ -112,6 +116,24 @@
     <servlet-mapping>
         <servlet-name>mvc_config</servlet-name>
         <url-pattern>/view/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- @Note Jspx2 Servlet handler for possessing application requests -->
+    <servlet>
+        <servlet-name>JspxHandler</servlet-name>
+        <servlet-class>eg.java.net.web.jspx.engine.RequestHandler</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JspxHandler</servlet-name>
+        <url-pattern>*.jspx</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ResourceHandler</servlet-name>
+        <servlet-class>eg.java.net.web.jspx.engine.ResourceHandler</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResourceHandler</servlet-name>
+        <url-pattern>/jspxEmbeddedResources/*</url-pattern>
     </servlet-mapping>
 
     <session-config>

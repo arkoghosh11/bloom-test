@@ -12,7 +12,7 @@
     <title>Show Error Page</title>
 </head>
 <body>
-<h1>Opps...</h1>
+<h1>Oops...</h1>
 <table width="100%" border="1">
     <tr valign="top">
         <td width="40%"><b>Error:</b></td>

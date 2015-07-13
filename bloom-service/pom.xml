@@ -94,7 +94,7 @@
             <artifactId>jersey-server</artifactId>
             <version>${jersey.version}</version>
         </dependency>
-
+        <!--Note Servlet artifacts -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -106,6 +106,42 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${jspapi.version}</version>
+        </dependency>
+
+        <!-- Note new jspx easy library -->
+        <!-- IMP {@link http://jspx-bay.sourceforge.net/} Credit to the people here for developing this open source awesome library-->
+        <dependency>
+            <groupId>org.bay.jspx</groupId>
+            <artifactId>easy-jspx</artifactId>
+            <version>${easyjspx.version}</version>
+        </dependency>
+
+        <!-- Note easy JSPX dependant libraries-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${apache-poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${apache-commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-jexl</artifactId>
+            <version>${apache-commons-jexl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${apache-commons-filupload.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -21,7 +21,7 @@
     <!-- Enables the Spring MVC @Controller programming model -->
 
     <!--@Note Used for using annotation driven -->
-    <annotation-driven/>
+    <!--<annotation-driven/>-->
     <context:component-scan base-package="com.mana.innovative.controller,
     com.mana.innovative.interceptor"/>
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving

@@ -39,7 +39,7 @@ public class ItemsRestWebService {
      * The Items service impl.
      */
     @Resource
-    ItemsService itemsServiceImpl;
+    ItemsService itemsService;
 
     /**
      * Gets items.
@@ -58,7 +58,8 @@ public class ItemsRestWebService {
         try {
             RequestParams requestParams = new RequestParams( );
             requestParams.setIsError( isError );
-            return itemsServiceImpl.getItems( requestParams );
+            logger.info( "items Service " + itemsService );
+            return itemsService.getItems( requestParams );
         } catch ( Exception exception ) {
             logger.error( " Failed to retrieve Items" + exception );
             return ResponseUtility.internalServerErrorMsg( null );
@@ -83,7 +84,7 @@ public class ItemsRestWebService {
         try {
             RequestParams requestParams = new RequestParams( );
             requestParams.setIsError( isError );
-            return itemsServiceImpl.deleteAllItems( requestParams );
+            return itemsService.deleteAllItems( requestParams );
         } catch ( Exception exception ) {
             logger.error( " Failed to delete All Items" + exception );
             return ResponseUtility.internalServerErrorMsg( null );
