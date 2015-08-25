@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.GenericServlet;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -28,6 +29,10 @@ import javax.servlet.http.HttpServletRequest;
 public class CustomLoginController {
 
     private static final Logger logger = LoggerFactory.getLogger( CustomLoginController.class );
+
+    public static void main( String ar[] ) {
+        GenericServlet gs;
+    }
 
     @RequestMapping( value = { "/", "/welcome**" }, method = RequestMethod.GET )
     public ModelAndView defaultPage( ) {
@@ -89,7 +94,7 @@ public class CustomLoginController {
 
     // for 403 access denied page
     @RequestMapping( value = "/403", method = RequestMethod.GET )
-    public ModelAndView accesssDenied( ) {
+    public ModelAndView accessDenied( ) {
 
         ModelAndView model = new ModelAndView( );
 
