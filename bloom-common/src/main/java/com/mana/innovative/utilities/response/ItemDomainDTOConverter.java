@@ -1,6 +1,7 @@
 package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dto.client.Item;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import org.slf4j.Logger;
@@ -32,8 +33,9 @@ public class ItemDomainDTOConverter {
     /**
      * Gets converted item dTO from item domain.
      *
-     * @param itemDTO the item dTO
+     * @param itemDTO    the item dTO
      * @param itemDomain the item domain
+     *
      * @return the converted item dTO from item domain
      */
     public static Item getConvertedDTOFromDomain( Item itemDTO, com.mana.innovative.domain.client.Item itemDomain ) {
@@ -53,7 +55,18 @@ public class ItemDomainDTOConverter {
         }
         if ( !StringUtils.isEmpty( itemDomain.getItemName( ) ) ) {
             itemDTO.setItemName( itemDomain.getItemName( ) );
+        } else {
+            logger.warn( "Item Name was empty" );
+            itemDTO.setItemName( ServiceConstants.EMPTY );
+
         }
+
+        if ( !StringUtils.isEmpty( itemDomain.getItemDescription( ) ) ) {
+            itemDTO.setItemDescription( itemDomain.getItemDescription( ) );
+        } else {
+            itemDTO.setItemDescription( ServiceConstants.DEFAULT_SHOP_DESCRIPTION );
+        }
+
         if ( itemDomain.getItemPrice( ) != null ) {
             itemDTO.setItemPrice( itemDomain.getItemPrice( ) );
         }
@@ -90,6 +103,16 @@ public class ItemDomainDTOConverter {
             itemDTO.setWeightedUnit( itemDomain.getWeightedUnit( ) );
         }
 //            item.setShopItem();
+        if ( itemDomain.getItemDiscountList( ) != null ) {
+            itemDTO.setItemDiscountList( ItemDiscountDomainDTOConverter.getConvertedListDTOFromDomain( itemDomain
+                    .getItemDiscountList( ) ) );
+        }
+
+        if ( itemDomain.getItemImageList( ) != null ) {
+            itemDTO.setItemImageList( ItemImageDomainDTOConverter.getConvertedListDTOFromDomain( itemDomain
+                    .getItemImageList( ) ) );
+        }
+
         return itemDTO;
     }
 
@@ -97,6 +120,7 @@ public class ItemDomainDTOConverter {
      * Gets converted item dTO list.
      *
      * @param items the items
+     *
      * @return the converted item dTO list
      */
     public static List< Item > getConvertedListDTOFromDomain( List< com.mana.innovative.domain.client.Item > items ) {
@@ -115,7 +139,8 @@ public class ItemDomainDTOConverter {
      * Gets converted item domain from item dTO.
      *
      * @param itemDomain the item domain
-     * @param itemDTO the item dTO
+     * @param itemDTO    the item dTO
+     *
      * @return the converted item domain from item dTO
      */
     public static com.mana.innovative.domain.client.Item getConvertedDomainFromDTO( com.mana.innovative.domain.client.Item itemDomain, Item itemDTO ) {
@@ -141,6 +166,13 @@ public class ItemDomainDTOConverter {
             flag = true;
             stringBuilder.append( " ItemName," );
         }
+        if ( !StringUtils.isEmpty( itemDTO.getItemDescription( ) ) ) {
+            itemDomain.setItemDescription( itemDTO.getItemDescription( ) );
+        } else {
+            itemDomain.setItemDescription( ServiceConstants.DEFAULT_ITEM_DESCRIPTION );
+            logger.warn( "Item Description not provided, setting default Description" );
+        }
+
         if ( itemDTO.getItemPrice( ) != null && itemDTO.getItemPrice( ) > ZERO ) {
             itemDomain.setItemPrice( itemDTO.getItemPrice( ) );
         } else {
@@ -202,6 +234,28 @@ public class ItemDomainDTOConverter {
             flag = true;
             stringBuilder.append( " WeightedUnit," );
         }
+
+        try {
+            if ( itemDTO.getItemDiscountList( ) != null ) {
+                itemDomain.setItemDiscountList( ItemDiscountDomainDTOConverter.getConvertedListDomainFromDTO( itemDTO
+                        .getItemDiscountList( ) ) );
+            }
+
+        } catch ( IllegalArgumentValueException exception ) {
+            flag = true;
+            stringBuilder.append( exception.getMessage( ) );
+        }
+        try {
+            if ( itemDTO.getItemImageList( ) != null ) {
+                itemDomain.setItemImageList( ItemImageDomainDTOConverter.getConvertedListDomainFromDTO( itemDTO
+                        .getItemImageList( ) ) );
+            }
+
+        } catch ( IllegalArgumentValueException exception ) {
+            flag = true;
+            stringBuilder.append( exception.getMessage( ) );
+        }
+
 //            item.setShopItem();
         if ( flag ) {
             logger.error( stringBuilder.toString( ) );
@@ -215,6 +269,7 @@ public class ItemDomainDTOConverter {
      * Gets converted item domain list from item dTO list.
      *
      * @param itemDTOList the item dTO list
+     *
      * @return the converted item domain list from item dTO list
      */
     public static List< com.mana.innovative.domain.client.Item > getConvertedListDomainFromDTO( List< Item > itemDTOList ) {

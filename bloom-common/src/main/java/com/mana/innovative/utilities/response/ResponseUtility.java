@@ -1,7 +1,4 @@
-package com.mana.innovative.utilities.response;/**
- * Created by alex1 on 1/29/2015. This is a class for .. todo
- */
-
+package com.mana.innovative.utilities.response;
 import javax.ws.rs.core.Response;
 
 /**

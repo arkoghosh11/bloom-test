@@ -3,8 +3,11 @@ package com.mana.innovative.dao.client;
 import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
+import com.mana.innovative.dao.TestDummyDomainObjectGenerator;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.domain.client.ItemDiscount;
+import com.mana.innovative.domain.client.ItemImage;
 import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.junit.After;
@@ -26,6 +29,7 @@ import javax.annotation.Resource;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -72,6 +76,7 @@ public class WhenGetItemThenTestItemDAOGetMethods {
         defaultItem.setItemId( TestConstants.ZERO );
         defaultItem.setItemName( TestConstants.DEFAULT_ITEM_NAME );
         defaultItem.setItemPrice( TestConstants.DEFAULT_PRICE );
+        defaultItem.setItemDescription( TestConstants.DEFAULT_DESCRIPTION );
         defaultItem.setItemPriceCurrency( TestConstants.DEFAULT_ITEM_PRICE_CURRENCY );
         defaultItem.setItemType( TestConstants.DEFAULT_ITEM_TYPE );
         defaultItem.setItemSubType( TestConstants.DEFAULT_ITEM_SUB_TYPE );
@@ -84,11 +89,17 @@ public class WhenGetItemThenTestItemDAOGetMethods {
         defaultItem.setWeightedUnit( WeightedUnit.KG.toString( ) );
 
         DateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+        defaultItem.setItemDiscountList( new ArrayList< ItemDiscount >( ) );
+        defaultItem.setItemImageList( new ArrayList< ItemImage >( ) );
+
+        defaultItem.getItemDiscountList( ).add( TestDummyDomainObjectGenerator.getTestItemDiscountDomainObject( ) );
+        defaultItem.getItemImageList( ).add( TestDummyDomainObjectGenerator.getTestItemImageDomainObject( 0 ) );
+        defaultItem.getItemImageList( ).get( 0 ).setItemImageId( 0 );
 
         try {
-            defaultItem.setCreatedDate( dateFormat.parse( "2015-01-23 17:22:12" ) );
-            defaultItem.setUpdatedDate( dateFormat.parse( "2015-01-28 21:05:16" ) );
-            defaultItem.setBoughtDate( dateFormat.parse( "2015-02-25 01:00:00" ) );
+            defaultItem.setCreatedDate( dateFormat.parse( TestConstants.DEFAULT_CREATED_DATE ) );
+            defaultItem.setUpdatedDate( dateFormat.parse( TestConstants.DEFAULT_UPDATED_DATE ) );
+            defaultItem.setBoughtDate( dateFormat.parse( TestConstants.DEFAULT_BOUGHT_DATE ) );
 
         } catch ( ParseException e ) {
             logger.error( "Failed to initialize objects before testing", e );

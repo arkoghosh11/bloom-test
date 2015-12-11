@@ -5,7 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.runners.BlockJUnit4ClassRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,7 @@ import java.util.Properties;
  * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
-@RunWith( value = JUnit4.class )
+@RunWith( value = BlockJUnit4ClassRunner.class )
 public class WhenDatabaseConnectivityCheckConnectivity {
 
     /**

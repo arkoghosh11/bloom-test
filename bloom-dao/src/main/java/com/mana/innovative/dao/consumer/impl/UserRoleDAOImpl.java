@@ -4,6 +4,7 @@ import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dao.BasicDAO;
 import com.mana.innovative.dao.consumer.UserRoleDAO;
 import com.mana.innovative.dao.response.DAOResponse;
+import com.mana.innovative.domain.consumer.User;
 import com.mana.innovative.domain.consumer.UserRole;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.exception.response.ErrorContainer;
@@ -40,6 +41,7 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
      * Gets userRoles.
      *
      * @param requestParams the request params
+     *
      * @return the userRoles
      */
     @SuppressWarnings( "unchecked" )
@@ -89,8 +91,9 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
     /**
      * Gets userRole.
      *
-     * @param userRoleId the userRole id
+     * @param userRoleId    the userRole id
      * @param requestParams the request params
+     *
      * @return the userRole
      */
     @Override
@@ -103,13 +106,11 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
         logger.debug( "Starting " + location );
         DAOResponse< UserRole > userRoleDAOResponse = new DAOResponse<>( );
         List< UserRole > userRoleList = new ArrayList<>( );
-        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( )
-                : null;
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
         try {
             this.openDBTransaction( );
 
-            Query query = session
-                    .createQuery( "from UserRole where userRoleId=:userRoleId" );
+            Query query = session.createQuery( "from UserRole where userRoleId=:userRoleId" );
             query.setParameter( "userRoleId", userRoleId );
             UserRole userRole = ( UserRole ) query.uniqueResult( );
 
@@ -191,8 +192,9 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
     /**
      * Create userRole.
      *
-     * @param userRole the userRole
+     * @param userRole      the userRole
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -244,8 +246,9 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
     /**
      * Update userRole.
      *
-     * @param userRole the userRole
+     * @param userRole      the userRole
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -295,8 +298,9 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
     /**
      * Delete userRole.
      *
-     * @param userRoleId the userRole id
+     * @param userRoleId    the userRole id
      * @param requestParams the request params
+     *
      * @return the boolean
      */
     @Override
@@ -348,6 +352,7 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
      * Delete all userRoles.
      *
      * @param requestParams the request params
+     *
      * @return the dAO response
      */
     @Override
@@ -393,6 +398,49 @@ public class UserRoleDAOImpl extends BasicDAO implements UserRoleDAO {
         userRoleDAOResponse.setResults( null );
         userRoleDAOResponse.setErrorContainer( errorContainer );
 
+        logger.debug( "Finishing " + location );
+        return userRoleDAOResponse;
+    }
+
+    @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+    public DAOResponse< UserRole > getUserRoleByUserId( final Long userId, final RequestParams requestParams ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#getUserRoleByUserId()";
+        logger.debug( "Starting " + location );
+        DAOResponse< UserRole > userRoleDAOResponse = new DAOResponse<>( );
+        List< UserRole > userRoleList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.createQuery( "from User where userId=:userId" );
+            query.setParameter( "userId", userId );
+            User userDomain = ( User ) query.uniqueResult( );
+            UserRole userRole = userDomain != null ? userDomain.getUserRole( ) : null;
+
+            this.closeDBTransaction( );
+            if ( userRole == null && userDomain != null ) {
+                logger.warn( "No user role was found for user with id " + userId );
+            }
+            userRoleList.add( userRole );
+            userRoleDAOResponse.setRequestSuccess( Boolean.TRUE );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error( "Failed while getting data from userRoles table for userRoles ", exception );
+            userRoleDAOResponse.setRequestSuccess( Boolean.FALSE );
+
+            if ( requestParams.isError( ) ) {
+
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        userRoleDAOResponse.setCount( userRoleList.size( ) );
+        userRoleDAOResponse.setResults( userRoleList );
+        userRoleDAOResponse.setErrorContainer( errorContainer );
         logger.debug( "Finishing " + location );
         return userRoleDAOResponse;
     }

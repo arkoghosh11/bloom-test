@@ -25,7 +25,8 @@ import javax.servlet.http.HttpServletRequest;
  * @email arkoghosh@hotmail.com, meankur1@gmail.com
  * @Copyright
  */
-@Controller( value = "/login" )
+@Controller( value = "customLoginController" )
+@RequestMapping( "/hello" )
 public class CustomLoginController {
 
     private static final Logger logger = LoggerFactory.getLogger( CustomLoginController.class );
@@ -93,7 +94,7 @@ public class CustomLoginController {
     }
 
     // for 403 access denied page
-    @RequestMapping( value = "/403", method = RequestMethod.GET )
+    @RequestMapping( value = "/error", method = RequestMethod.GET )
     public ModelAndView accessDenied( ) {
 
         ModelAndView model = new ModelAndView( );
@@ -102,13 +103,13 @@ public class CustomLoginController {
         Authentication auth = SecurityContextHolder.getContext( ).getAuthentication( );
         if ( !( auth instanceof AnonymousAuthenticationToken ) ) {
             UserDetails userDetail = ( UserDetails ) auth.getPrincipal( );
-            System.out.println( userDetail );
+            System.out.println( "********* " + userDetail );
 
             model.addObject( "username", userDetail.getUsername( ) );
 
         }
 
-        model.setViewName( "403" );
+        model.setViewName( "error" );
         return model;
 
     }

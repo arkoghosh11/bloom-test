@@ -222,7 +222,7 @@ public class WhenUserRoleConversionThenTestUserRoleConverterDomainDTOMethods {
 
         Assert.assertNotNull( TestConstants.nullMessage, userRoleDomain2 );
         Assert.assertTrue( TestConstants.falseMessage, userRoleDomain2.isActive( ) );
-        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.DEFAULT_USER_ROLE_NAME, userRoleDomain2.getUserRoleName
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.DEFAULT_USED_USER_ROLE_NAME, userRoleDomain2.getUserRoleName
                 ( ) );
         Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.DEFAULT_USER_ROLE_ID, userRoleDomain2
                 .getUserRoleId( ) );

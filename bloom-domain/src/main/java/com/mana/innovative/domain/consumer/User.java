@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import java.util.Date;
 import java.util.Objects;
 
@@ -34,7 +35,7 @@ import java.util.Objects;
  * @Copyright
  */
 @Entity
-@Table( name = "users" )
+@Table( name = "users", uniqueConstraints = @UniqueConstraint( columnNames = { "user_name", "email" } ) )
 @Inheritance( strategy = InheritanceType.SINGLE_TABLE )
 @DiscriminatorColumn( name = "discriminator", discriminatorType = DiscriminatorType.STRING )
 @DiscriminatorValue( "User" )

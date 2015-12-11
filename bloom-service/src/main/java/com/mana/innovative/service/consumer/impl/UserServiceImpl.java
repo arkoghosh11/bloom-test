@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
@@ -48,8 +49,9 @@ public class UserServiceImpl implements UserService {
     /**
      * Gets single user details.
      *
-     * @param userId the user id
+     * @param userId        the user id
      * @param requestParams the request params
+     *
      * @return the single user details
      */
     @Override
@@ -97,8 +99,9 @@ public class UserServiceImpl implements UserService {
     /**
      * Create user.
      *
-     * @param user the user
+     * @param user          the user
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override
@@ -148,8 +151,9 @@ public class UserServiceImpl implements UserService {
     /**
      * Update user.
      *
-     * @param userDTO the user
+     * @param userDTO       the user
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override
@@ -194,8 +198,9 @@ public class UserServiceImpl implements UserService {
     /**
      * Delete specific user.
      *
-     * @param userId the user id
+     * @param userId        the user id
      * @param requestParams the request params
+     *
      * @return the response
      */
     @Override
@@ -208,7 +213,7 @@ public class UserServiceImpl implements UserService {
 
         if ( userId < 1 ) {
             userResponseContainer = UserResponseBuilder.buildError( location, requestParams.isError( ),
-                    new IllegalArgumentValueException( ", UserId is required for deleting an User" ) );
+                    new IllegalArgumentValueException( " UserId is required for deleting an User" ) );
             return Response.status( Response.Status.BAD_REQUEST ).entity( userResponseContainer ).build( );
         }
         DAOResponse< com.mana.innovative.domain.consumer.User > userDAOResponse;
@@ -226,6 +231,45 @@ public class UserServiceImpl implements UserService {
         userResponseContainer = UserResponseBuilder.build( userDAOResponse, requestParams.isError( ) );
 
         logger.debug( " Response for deleteUserByUserId generated successfully from Service Level" );
+        return Response.ok( ).entity( userResponseContainer ).build( );
+    }
+
+    /**
+     * Find user by user name.
+     *
+     * @param userName      the user name
+     * @param requestParams the request params
+     *
+     * @return the response
+     */
+    @Override
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
+    public Response findUserByUserName( final String userName, final RequestParams requestParams ) {
+
+        logger.debug( "Initiating deleteUserByUserId for incoming user, userDAO injected successfully" );
+        String location = this.getClass( ).getCanonicalName( ) + "#deleteUserByUserId()";
+        UserResponseContainer< UsersPayload > userResponseContainer;
+
+        if ( StringUtils.isEmpty( userName ) ) {
+            userResponseContainer = UserResponseBuilder.buildError( location, requestParams.isError( ),
+                    new IllegalArgumentValueException( " UserName is required for finding a User" ) );
+            return Response.status( Response.Status.BAD_REQUEST ).entity( userResponseContainer ).build( );
+        }
+        DAOResponse< com.mana.innovative.domain.consumer.User > userDAOResponse;
+        try {
+            userDAOResponse = userDAO.findUserByUserName( userName, requestParams );
+        } catch ( Exception exception ) {
+            if ( exception instanceof HibernateException ) {
+                logger.error( "Hibernate Exception occurred while trying to send data to DB " + location, exception );
+            } else
+                logger.error( "Exception occurred in" + location, exception );
+
+            userResponseContainer = UserResponseBuilder.buildError( location, requestParams.isError( ), exception );
+            return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( userResponseContainer ).build( );
+        }
+        userResponseContainer = UserResponseBuilder.build( userDAOResponse, requestParams.isError( ) );
+
+        logger.debug( " Response for findUserByUserName generated successfully from Service Level" );
         return Response.ok( ).entity( userResponseContainer ).build( );
     }
 }

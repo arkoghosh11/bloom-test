@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.annotation.Resource;
 
@@ -28,34 +27,48 @@ import javax.annotation.Resource;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger( SpringSecurityConfig.class );
+
     @Resource
     private LoginService loginService;
 
-    @Bean( name = "springSecurityFilterChain" )
-    public DelegatingFilterProxy getDelegatingFilterProxy( ) {
-        return new DelegatingFilterProxy( );
-    }
+//    @Resource
+//    private DriverManagerDataSource dataSource;
+
+//    @Bean( name = "springSecurityFilterChain" )
+//    public DelegatingFilterProxy getDelegatingFilterProxy( ) {
+//        return new DelegatingFilterProxy( );
+//    }
 
     @Resource
-    public void configureGlobal( AuthenticationManagerBuilder auth ) throws Exception {
+    public void configAuthentication( AuthenticationManagerBuilder auth ) throws Exception {
+//        auth.jdbcAuthentication().dataSource(dataSource)
+//                .usersByUsernameQuery(
+//                        "select username,password, enabled from users1 where username=?")
+//                .authoritiesByUsernameQuery(
+//                        "select username, role from user_roles1 where username=?");
+        logger.debug( "Starting SpringSecurityConfig#configAuthentication" );
         auth.userDetailsService( loginService ).passwordEncoder( getPasswordEncoder( ) );
+        logger.debug( "Finishing SpringSecurityConfig#configAuthentication" );
     }
 
     @Override
     protected void configure( HttpSecurity http ) throws Exception {
 
-        http.authorizeRequests( ).antMatchers( "view/admin/**" )
+        logger.debug( "Starting SpringSecurityConfig#configure" );
+        http.authorizeRequests( ).antMatchers( "/view/hello/admin", "/view/hello/admin/**" )
                 .access( "hasRole('ROLE_ADMIN')" ).and( ).formLogin( )
-                .loginPage( "/login" ).failureUrl( "/login?error" )
+                .loginPage( "/view/hello/login" ).failureUrl( "/view/hello/login?error" )
                 .usernameParameter( "username" )
                 .passwordParameter( "password" )
-                .and( ).logout( ).logoutSuccessUrl( "/login?logout" )
-                .and( ).csrf( )
-                .and( ).exceptionHandling( ).accessDeniedPage( "/error" );
+                .and( ).logout( ).logoutSuccessUrl( "/view/hello/login?logout" )
+                .and( ).exceptionHandling( ).accessDeniedPage( "/view/hello/error" )
+                .and( ).csrf( );
+        logger.debug( "Finishing SpringSecurityConfig#configure" );
     }
 
     @Bean
     public PasswordEncoder getPasswordEncoder( ) {
         return new BCryptPasswordEncoder( );
     }
+
 }

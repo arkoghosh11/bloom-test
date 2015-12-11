@@ -301,7 +301,7 @@ public class WhenGetUserRoleThenTestUserRoleDAOGetMethods {
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleId( ) );
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleName( ) );
 
-        Assert.assertTrue( TestConstants.falseMessage, userRole.isActive( ) );
+        Assert.assertTrue( TestConstants.falseMessage, !userRole.isActive( ) );
         Assert.assertFalse( TestConstants.trueMessage, userRole.isLocked( ) );
         Assert.assertFalse( TestConstants.trueMessage, userRole.isExpired( ) );
 
@@ -357,7 +357,7 @@ public class WhenGetUserRoleThenTestUserRoleDAOGetMethods {
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleId( ) );
         Assert.assertNotNull( TestConstants.nullMessage, userRole.getUserRoleName( ) );
 
-        Assert.assertTrue( TestConstants.falseMessage, userRole.isActive( ) );
+        Assert.assertTrue( TestConstants.falseMessage, !userRole.isActive( ) );
         Assert.assertFalse( TestConstants.trueMessage, userRole.isLocked( ) );
         Assert.assertFalse( TestConstants.trueMessage, userRole.isExpired( ) );
 

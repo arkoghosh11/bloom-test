@@ -65,6 +65,16 @@
         </listener-class>
     </listener>
 
+    <!-- @Note Spring Security filter configuration -->
+    <!--<filter>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<servlet-name>mvc_config</servlet-name>-->
+    <!--<url-pattern>/view/*</url-pattern>-->
+    <!--</filter-mapping>-->
     <!--@Note Filter class for Authentication -->
     <filter>
         <filter-name>Login Filter</filter-name>
@@ -107,16 +117,16 @@
     </servlet-mapping>
 
     <!-- @Note Spring MVC for possessing application requests -->
-    <servlet>
-        <servlet-name>mvc_config</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <!--<servlet>-->
+    <!--<servlet-name>mvc_config</servlet-name>-->
+    <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+    <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>mvc_config</servlet-name>
-        <url-pattern>/view/*</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>mvc_config</servlet-name>-->
+    <!--<url-pattern>/view/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!-- @Note Jspx2 Servlet handler for possessing application requests -->
     <servlet>
@@ -140,6 +150,19 @@
         <session-timeout>30</session-timeout>
     </session-config>
 
+    <!--  Note web.xml security config this is the least security, need to switch to spring web security
+          IMP web.xml security security feature
+     -->
+    <security-constraint>
+        <display-name>Bloom</display-name>
+        <web-resource-collection>
+            <web-resource-name>bloom</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
     <!-- @Note SOAP Web Services -->
     <!-- IMP for the moment not implementing soap, but for future simple Soap Configuration below-->
     <!--<servlet>-->

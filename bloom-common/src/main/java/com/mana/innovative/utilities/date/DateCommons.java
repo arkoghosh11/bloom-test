@@ -32,6 +32,7 @@ public class DateCommons {
      * Gets start date time.
      *
      * @param eventDate the event date
+     *
      * @return the start date time
      */
     public static Date getStartDateTime( final Date eventDate ) {
@@ -46,6 +47,7 @@ public class DateCommons {
      * Gets end date time.
      *
      * @param eventDate the event date
+     *
      * @return the end date time
      */
     public static Date getEndDateTime( final Date eventDate ) {
@@ -60,8 +62,9 @@ public class DateCommons {
     /**
      * Create n get custom calendar.
      *
-     * @param date the date
+     * @param date      the date
      * @param minsNSecs the mins n secs
+     *
      * @return the calendar
      */
     private static Calendar createNGetCustomCalendar( Date date, int minsNSecs ) {
@@ -77,6 +80,7 @@ public class DateCommons {
      * Update date to prev hour. Complex method for return the date taht was 1 hour before the date passed in
      *
      * @param eventDate the event date
+     *
      * @return the date
      */
     public static Date updateDateToPrevHour( final Date eventDate ) {
@@ -118,6 +122,25 @@ public class DateCommons {
      * Gets date from date string.
      *
      * @param dateString the date string
+     *
+     * @return the date from date string
+     */
+    public static Date getDateFromDateString( String dateString, String dateFormat ) {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat( dateFormat != null ? dateFormat : DateCommons.dateFormat );
+        try {
+            return simpleDateFormat.parse( dateString );
+        } catch ( ParseException exception ) {
+            logger.error( "Exception occurred while parsing date", exception );
+            return null;
+        }
+    }
+
+    /**
+     * Gets date from date string.
+     *
+     * @param dateString the date string
+     *
      * @return the date from date string
      */
     public static Date getDateFromDateString( String dateString ) {
@@ -135,6 +158,7 @@ public class DateCommons {
      * Gets date string from date.
      *
      * @param date the date
+     *
      * @return the date string from date
      */
     public static String getDateStringFromDate( Date date ) {

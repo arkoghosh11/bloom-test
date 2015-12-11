@@ -70,7 +70,6 @@ public class TabsRestWebService {
         requestParams.setIsError( isError );
         Response response = tabsService.getAllTabs( requestParams );
         logger.debug( "Finishing response for #getAllTabs()" );
-
         return response;
     }
 

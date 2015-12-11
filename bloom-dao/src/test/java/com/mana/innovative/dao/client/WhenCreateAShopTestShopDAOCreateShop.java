@@ -4,6 +4,8 @@ import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.dao.TestDummyDomainObjectGenerator;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.domain.client.ItemDiscount;
+import com.mana.innovative.domain.client.ItemImage;
 import com.mana.innovative.domain.client.Shop;
 import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.domain.common.Address;
@@ -81,11 +83,17 @@ public class WhenCreateAShopTestShopDAOCreateShop {
     public void setUp( ) throws Exception {
 
         dummyShop = TestDummyDomainObjectGenerator.getTestShopDomainObject( );
-
+        dummyShop.setShopOwnId( -1111L );
         requestParams = new RequestParams( );
         requestParams.setIsError( TestConstants.IS_ERROR );
 
         dummyItem = dummyShop.getItems( ).get( TestConstants.ZERO );
+        dummyItem.setItemDiscountList( new ArrayList< ItemDiscount >( ) );
+        dummyItem.getItemDiscountList( ).add( TestDummyDomainObjectGenerator.getTestItemDiscountDomainObject( ) );
+        dummyItem.setItemImageList( new ArrayList< ItemImage >( ) );
+        dummyItem.getItemImageList( )
+                .add( TestDummyDomainObjectGenerator.getTestItemImageDomainObject( TestConstants.ZERO ) );
+
         dummyWorkingHour = dummyShop.getWorkingHours( ).get( TestConstants.ZERO );
         dummyAddress = dummyShop.getAddress( );
 

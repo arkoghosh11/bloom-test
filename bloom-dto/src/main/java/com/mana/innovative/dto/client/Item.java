@@ -3,9 +3,11 @@ package com.mana.innovative.dto.client;
 import com.mana.innovative.dto.adapter.DateFormatAdapter;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -43,6 +45,12 @@ public class Item {
      * The Item name.
      */
     private String itemName;
+
+    /**
+     * The Item Description.
+     */
+    private String itemDescription;
+
     /**
      * The Item type.
      */
@@ -68,6 +76,17 @@ public class Item {
      * The Bought date.
      */
     private Date boughtDate;
+
+    /**
+     * The Item image list.
+     */
+    private List< ItemImage > itemImageList;
+
+    /**
+     * The Item discount list.
+     */
+    private List< ItemDiscount > itemDiscountList;
+
 
     /**
      * Gets item id.
@@ -151,6 +170,15 @@ public class Item {
     public void setItemName( String itemName ) {
 
         this.itemName = itemName;
+    }
+
+    @XmlElement( name = "item_description", defaultValue = "Not Available" )
+    public String getItemDescription( ) {
+        return itemDescription;
+    }
+
+    public void setItemDescription( final String itemDescription ) {
+        this.itemDescription = itemDescription;
     }
 
     /**
@@ -308,13 +336,26 @@ public class Item {
         this.weightedUnit = weightedUnit;
     }
 
+    @XmlElementWrapper( name = "item_images" )
+    @XmlElement( name = "item_image", nillable = true )
+    public List< ItemImage > getItemImageList( ) {
+        return itemImageList;
+    }
 
-    /**
-     * Equals boolean.
-     *
-     * @param o the o
-     * @return the boolean
-     */
+    public void setItemImageList( final List< ItemImage > itemImageList ) {
+        this.itemImageList = itemImageList;
+    }
+
+    @XmlElementWrapper( name = "item_discounts" )
+    @XmlElement( name = "item_discount", nillable = true )
+    public List< ItemDiscount > getItemDiscountList( ) {
+        return itemDiscountList;
+    }
+
+    public void setItemDiscountList( final List< ItemDiscount > itemDiscountList ) {
+        this.itemDiscountList = itemDiscountList;
+    }
+
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -326,12 +367,15 @@ public class Item {
                 Objects.equals( getWeight( ), item.getWeight( ) ) &&
                 Objects.equals( getItemPriceCurrency( ), item.getItemPriceCurrency( ) ) &&
                 Objects.equals( getItemName( ), item.getItemName( ) ) &&
+                Objects.equals( getItemDescription( ), item.getItemDescription( ) ) &&
                 Objects.equals( getItemType( ), item.getItemType( ) ) &&
                 Objects.equals( getItemSubType( ), item.getItemSubType( ) ) &&
                 Objects.equals( getBoughtFrom( ), item.getBoughtFrom( ) ) &&
                 Objects.equals( getQuantityType( ), item.getQuantityType( ) ) &&
                 Objects.equals( getWeightedUnit( ), item.getWeightedUnit( ) ) &&
-                Objects.equals( getBoughtDate( ), item.getBoughtDate( ) );
+                Objects.equals( getBoughtDate( ), item.getBoughtDate( ) ) &&
+                Objects.equals( getItemImageList( ), item.getItemImageList( ) ) &&
+                Objects.equals( getItemDiscountList( ), item.getItemDiscountList( ) );
     }
 
     /**
@@ -350,12 +394,15 @@ public class Item {
                 ", weight=" + weight +
                 ", itemPriceCurrency='" + itemPriceCurrency + '\'' +
                 ", itemName='" + itemName + '\'' +
+                ", itemDescription='" + itemDescription + '\'' +
                 ", itemType='" + itemType + '\'' +
                 ", itemSubType='" + itemSubType + '\'' +
                 ", boughtFrom='" + boughtFrom + '\'' +
                 ", quantityType='" + quantityType + '\'' +
                 ", weightedUnit='" + weightedUnit + '\'' +
                 ", boughtDate=" + boughtDate +
+                ", itemImageList=" + itemImageList +
+                ", itemDiscountList=" + itemDiscountList +
                 '}';
     }
 }

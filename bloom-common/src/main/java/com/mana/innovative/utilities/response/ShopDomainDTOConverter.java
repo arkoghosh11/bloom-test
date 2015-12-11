@@ -1,6 +1,7 @@
 package com.mana.innovative.utilities.response;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dto.client.Shop;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import org.slf4j.Logger;
@@ -57,6 +58,15 @@ public class ShopDomainDTOConverter {
 
         if ( !StringUtils.isEmpty( shopDomain.getShopName( ) ) ) {
             shopDTO.setShopName( shopDomain.getShopName( ) );
+        } else {
+            logger.warn( "Shop Name was empty" );
+            shopDTO.setShopName( ServiceConstants.EMPTY );
+        }
+
+        if ( !StringUtils.isEmpty( shopDomain.getShopDescription( ) ) ) {
+            shopDTO.setShopDescription( shopDomain.getShopDescription( ) );
+        } else {
+            shopDTO.setShopDescription( ServiceConstants.DEFAULT_SHOP_DESCRIPTION );
         }
         if ( shopDomain.getShopOwnId( ) != null )
             shopDTO.setShopOwnId( shopDomain.getShopOwnId( ) );
@@ -137,6 +147,15 @@ public class ShopDomainDTOConverter {
             flag = true;
             stringBuilder.append( " ShopName," );
         }
+
+        if ( !StringUtils.isEmpty( shopDTO.getShopDescription( ) ) ) {
+            shopDomain.setShopDescription( shopDTO.getShopDescription( ) );
+        } else {
+            shopDomain.setShopDescription( ServiceConstants.DEFAULT_SHOP_DESCRIPTION );
+            logger.warn( "Shop Description not provided, setting default Description" );
+        }
+
+
         if ( !StringUtils.isEmpty( shopDTO.getShopWebLink( ) ) ) {
             shopDomain.setShopWebLink( shopDTO.getShopWebLink( ) );
         } else {

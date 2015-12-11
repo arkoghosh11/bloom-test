@@ -397,4 +397,55 @@ public class UserDAOImpl extends BasicDAO implements UserDAO {
         return userDAOResponse;
     }
 
+
+    /**
+     * Find user by user name.
+     *
+     * @param userName      the user name
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
+    @SuppressWarnings( "unchecked" )
+    @Override
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
+    public DAOResponse< User > findUserByUserName( final String userName, final RequestParams requestParams ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + "#getUsers()";
+
+        logger.debug( "Starting " + location );
+        DAOResponse< User > userDAOResponse = new DAOResponse<>( );
+        List< User > userList = new ArrayList<>( );
+        ErrorContainer errorContainer = requestParams.isError( ) ? new ErrorContainer( ) : null;
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.createQuery( "from User where userName=:userName" );
+            query.setParameter( "userName", userName );
+            User user = ( User ) query.uniqueResult( );
+
+            this.closeDBTransaction( );
+            userList.add( user );
+            userDAOResponse.setRequestSuccess( Boolean.TRUE );
+
+        } catch ( HibernateException exception ) {
+
+            this.handleExceptions( exception );
+            logger.error( "Failed while getting data from users table", exception );
+            userDAOResponse.setRequestSuccess( Boolean.FALSE );
+
+            if ( requestParams.isError( ) ) {
+
+                errorContainer = fillErrorContainer( location, exception );
+            }
+        }
+
+        userDAOResponse.setCount( userList.size( ) );
+        userDAOResponse.setResults( userList );
+        userDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+        return userDAOResponse;
+    }
+
 }

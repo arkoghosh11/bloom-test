@@ -31,6 +31,8 @@ public class Shop {
      * The Shop name.
      */
     private String shopName;
+
+    private String shopDescription;
     /**
      * The Shop web link.
      */
@@ -104,6 +106,15 @@ public class Shop {
      */
     public void setShopName( String shopName ) {
         this.shopName = shopName;
+    }
+
+    @XmlElement( name = "shop_description", defaultValue = "Not Available" )
+    public String getShopDescription( ) {
+        return shopDescription;
+    }
+
+    public void setShopDescription( final String shopDescription ) {
+        this.shopDescription = shopDescription;
     }
 
     /**

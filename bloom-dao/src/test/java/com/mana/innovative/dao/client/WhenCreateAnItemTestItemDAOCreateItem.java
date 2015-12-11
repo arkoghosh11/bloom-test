@@ -3,8 +3,11 @@ package com.mana.innovative.dao.client;
 import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
+import com.mana.innovative.dao.TestDummyDomainObjectGenerator;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.domain.client.ItemDiscount;
+import com.mana.innovative.domain.client.ItemImage;
 import com.mana.innovative.domain.client.Shop;
 import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
@@ -26,6 +29,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,6 +63,12 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
     @Resource
     private ShopDAO shopDAOImpl;
 
+    @Resource
+    private ItemDiscountDAO itemDiscountDAOImpl;
+
+    @Resource
+    private ItemImageDAO itemImageDAOImpl;
+
     /**
      * The Session factory.
      */
@@ -88,6 +98,7 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         dummyItem = new Item( );
         dummyItem.setItemId( TestConstants.MINUS_ONE );
         dummyItem.setItemName( TestConstants.TEST_VALUE );
+        dummyItem.setItemDescription( TestConstants.TEST_DESCRIPTION );
         dummyItem.setItemPriceCurrency( TestConstants.TEST_PRICE_CURRENCY );
         dummyItem.setItemType( TestConstants.TEST_VALUE );
         dummyItem.setItemSubType( TestConstants.TEST_ITEM_TYPE );
@@ -99,6 +110,17 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
 
         dummyItem.setQuantityType( QuantityType.UNIT.toString( ) );
         dummyItem.setWeightedUnit( WeightedUnit.POUND.toString( ) );
+
+        List< ItemDiscount > itemDiscountList = new ArrayList<>( );
+        List< ItemImage > itemImageList = new ArrayList<>( );
+
+        itemDiscountList.add( TestDummyDomainObjectGenerator.getTestItemDiscountDomainObject( ) );
+        itemImageList.add( TestDummyDomainObjectGenerator.getTestItemImageDomainObject( TestConstants.ZERO ) );
+
+        dummyItem.setItemImageList( itemImageList );
+//        itemImageList.get( TestConstants.ZERO ).setItemImageId( TestConstants.ONE );
+        dummyItem.setItemDiscountList( itemDiscountList );
+//        itemDiscountList.get( TestConstants.ZERO ).setItemDiscountId( TestConstants.ONE );
 
         dummyItem.setCreatedDate( new Date( ) );
         dummyItem.setBoughtDate( new Date( ) );
@@ -115,19 +137,34 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
 
     /**
      * Test item dAO create without exception.
+     * Note ItemDAOCreateWithExistingShopIDIIWithoutException ID = item discount, II = item image
      */
     @Test
     @Rollback( value = true )
     @Transactional( propagation = Propagation.REQUIRED )
-    public void testItemDAOCreateWithoutException( ) {
+    public void testItemDAOCreateWithExistingShopIDIIWithoutException( ) {
 
         logger.debug( "Starting test for ItemDAOCreateWithoutException" );
         DAOResponse< Item > itemDAOResponse;
         DAOResponse< Shop > shopDAOResponse;
+        DAOResponse< ItemDiscount > itemDiscountDAOResponse;
+        DAOResponse< ItemImage > itemImageDAOResponse;
+
         itemDAOResponse = itemDAOImpl.getItemByItemId( dummyItem.getItemId( ), requestParams );
 
         Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.getResults( ).isEmpty( ) );
         shopDAOResponse = shopDAOImpl.getShopByShopId( TestConstants.ZERO, requestParams );
+
+        itemImageDAOResponse = itemImageDAOImpl.getItemImageByItemImageId( TestConstants.ONE, requestParams );
+        itemDiscountDAOResponse = itemDiscountDAOImpl.getItemDiscountByItemDiscountId( TestConstants.ONE, requestParams );
+
+        Assert.assertNotNull( TestConstants.nullMessage, itemImageDAOResponse.getResults( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDiscountDAOResponse.getResults( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemImageDAOResponse.getResults( ).isEmpty( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDiscountDAOResponse.getResults( ).isEmpty( ) );
+
+        dummyItem.setItemImageList( itemImageDAOResponse.getResults( ) );
+        dummyItem.setItemDiscountList( itemDiscountDAOResponse.getResults( ) );
 
         Assert.assertFalse( TestConstants.trueMessage, shopDAOResponse.getResults( ).isEmpty( ) );
         Shop shop = shopDAOResponse.getResults( ).get( TestConstants.ZERO );
@@ -151,6 +188,55 @@ public class WhenCreateAnItemTestItemDAOCreateItem {
         Assert.assertEquals( "Value of Count is not One", TestConstants.ONE, itemDAOResponse.getCount( ) );
         logger.debug( "Finishing test for ItemDAOCreateWithoutException" );
 
+    }
+
+
+    @Test
+    public void testItemDAOCreateWithExistingShopOnlyNErrorContainer( ) throws Exception {
+
+        logger.debug( "Starting test for ItemDAOCreateWithExistingShopOnlyNErrorContainer" );
+        DAOResponse< Item > itemDAOResponse;
+        DAOResponse< Shop > shopDAOResponse;
+//        DAOResponse<ItemDiscount> itemDiscountDAOResponse;
+//        DAOResponse<ItemImage> itemImageDAOResponse;
+
+        itemDAOResponse = itemDAOImpl.getItemByItemId( dummyItem.getItemId( ), requestParams );
+
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.getResults( ).isEmpty( ) );
+        shopDAOResponse = shopDAOImpl.getShopByShopId( TestConstants.ZERO, requestParams );
+
+//        itemImageDAOResponse = itemImageDAOImpl.getItemImageByItemImageId( TestConstants.ONE, requestParams );
+//        itemDiscountDAOResponse = itemDiscountDAOImpl.getItemDiscountByItemDiscountId( TestConstants.ONE, requestParams );
+//
+//        Assert.assertNotNull( TestConstants.nullMessage, itemImageDAOResponse.getResults( ) );
+//        Assert.assertNotNull( TestConstants.nullMessage, itemDiscountDAOResponse.getResults( ) );
+//        Assert.assertFalse( TestConstants.trueMessage, itemImageDAOResponse.getResults( ).isEmpty( ) );
+//        Assert.assertFalse( TestConstants.trueMessage, itemDiscountDAOResponse.getResults( ).isEmpty( ) );
+//
+//        dummyItem.setItemImageList( itemImageDAOResponse.getResults() );
+//        dummyItem.setItemDiscountList( itemDiscountDAOResponse.getResults( ) );
+
+        Assert.assertFalse( TestConstants.trueMessage, shopDAOResponse.getResults( ).isEmpty( ) );
+        Shop shop = shopDAOResponse.getResults( ).get( TestConstants.ZERO );
+        Assert.assertNotNull( shop );
+        dummyItem.setShopItem( shop );
+        itemDAOResponse = itemDAOImpl.createItem( dummyItem, requestParams );
+
+        // Test itemDAOResponse
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
+
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isCreate( ) );
+        Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.isRequestSuccess( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isUpdate( ) );
+        Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.isDelete( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ).get( TestConstants.ZERO ) );
+
+        // Test ErrorContainer
+        Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ) );
+
+        Assert.assertEquals( "Value of Count is not One", TestConstants.ONE, itemDAOResponse.getCount( ) );
+        logger.debug( "Finishing test for ItemDAOCreateWithExistingShopOnlyNErrorContainer" );
     }
 
     /**

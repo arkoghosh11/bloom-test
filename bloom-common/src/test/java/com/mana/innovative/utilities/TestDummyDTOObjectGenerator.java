@@ -5,6 +5,8 @@ import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
 import com.mana.innovative.dto.client.Item;
+import com.mana.innovative.dto.client.ItemDiscount;
+import com.mana.innovative.dto.client.ItemImage;
 import com.mana.innovative.dto.client.Shop;
 import com.mana.innovative.dto.client.WorkingHour;
 import com.mana.innovative.dto.common.Address;
@@ -26,6 +28,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,6 +58,7 @@ public class TestDummyDTOObjectGenerator {
         shop.setShopId( TestConstants.TEST_ID );
         shop.setShopOwnId( TestConstants.TEST_OWN_ID );
         shop.setShopName( TestConstants.TEST_NAME );
+        shop.setShopDescription( TestConstants.TEST_DESCRIPTION );
         shop.setShopWebLink( TestConstants.TEST_WEB_LINK );
 
         // WorkingHour
@@ -99,31 +103,31 @@ public class TestDummyDTOObjectGenerator {
      */
     public static Item getTestItemDTOObject( ) {
 
-        final Item dummyItem = new Item( );
-        dummyItem.setItemId( TestConstants.TEST_ID );
-        dummyItem.setItemName( TestConstants.TEST_VALUE );
-        dummyItem.setItemPriceCurrency( TestConstants.TEST_PRICE_CURRENCY );
-        dummyItem.setItemType( TestConstants.TEST_VALUE );
-        dummyItem.setItemSubType( TestConstants.TEST_ITEM_TYPE );
-        dummyItem.setBoughtFrom( TestConstants.TEST_BROUGHT_FROM );
+        final Item item = new Item( );
+        item.setItemId( TestConstants.TEST_ID );
+        item.setItemName( TestConstants.TEST_VALUE );
+        item.setItemDescription( TestConstants.TEST_DESCRIPTION );
+        item.setItemPriceCurrency( TestConstants.TEST_PRICE_CURRENCY );
+        item.setItemType( TestConstants.TEST_VALUE );
+        item.setItemSubType( TestConstants.TEST_ITEM_TYPE );
+        item.setBoughtFrom( TestConstants.TEST_BROUGHT_FROM );
 
-        dummyItem.setItemPrice( ( double ) TestConstants.THREE );
-        dummyItem.setWeight( TestConstants.TEST_WEIGHT );
-        dummyItem.setQuantity( TestConstants.TEST_QUANTITY );
+        item.setItemPrice( ( double ) TestConstants.THREE );
+        item.setWeight( TestConstants.TEST_WEIGHT );
+        item.setQuantity( TestConstants.TEST_QUANTITY );
 
-        dummyItem.setQuantityType( QuantityType.UNIT.toString( ) );
-        dummyItem.setWeightedUnit( WeightedUnit.POUND.toString( ) );
+        item.setQuantityType( QuantityType.UNIT.toString( ) );
+        item.setWeightedUnit( WeightedUnit.POUND.toString( ) );
 
         DateFormat dateFormat = new SimpleDateFormat( TestConstants.TEST_DATE_FORMAT );
 
         try {
-            dummyItem.setBoughtDate( dateFormat.parse( TestConstants.TEST_BOUGHT_DATE ) );
+            item.setBoughtDate( dateFormat.parse( TestConstants.TEST_BOUGHT_DATE ) );
         } catch ( ParseException exception ) {
             logger.debug( "Date Parse Exception", exception );
         }
 
-
-        return dummyItem;
+        return item;
     }
 
     /**
@@ -590,6 +594,70 @@ public class TestDummyDTOObjectGenerator {
     public static Privilege getTestPrivilegeDTOObject( ) {
 
         return getNCreatePrivilegeDTOList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test item discount dTO object.
+     *
+     * @return the test item discount dTO object
+     */
+    public static ItemDiscount getTestItemDiscountDTOObject( ) {
+
+        return getNCreateItemDiscountDTOList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets n create item discount dTO list.
+     *
+     * @return the created item discount dTO list
+     */
+    public static List< ItemDiscount > getNCreateItemDiscountDTOList( ) {
+
+        List< ItemDiscount > itemDiscountList = new ArrayList<>( );
+        ItemDiscount itemDiscount;
+        for ( int i = 1; i < 5; i++ ) {
+            itemDiscount = new ItemDiscount( );
+            itemDiscount.setItemDiscountId( i );
+            itemDiscount.setDiscountPercent( TestConstants.DEFAULT_ITEM_DISCOUNT_PERCENT );
+            itemDiscount.setDiscountType( TestConstants.DEFAULT_ITEM_DISCOUNT_TYPE + i );
+            itemDiscount.setUserRole( TestConstants.DEFAULT_USER_ROLE_NAME );
+            itemDiscount.setIsActive( i % 2 == 0 );
+            itemDiscount.setStartDate( new Date( ) );
+            itemDiscount.setEndDate( new Date( ) );
+
+            itemDiscountList.add( itemDiscount );
+        }
+        return itemDiscountList;
+    }
+
+    /**
+     * Gets test item image dTO object.
+     *
+     * @return the test item image dTO object
+     */
+    public static ItemImage getTestItemImageDTOObject( ) {
+        return getNCreateItemImageDTOList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets n create item image dTO list.
+     *
+     * @return the created item image dTO list
+     */
+    public static List< ItemImage > getNCreateItemImageDTOList( ) {
+        List< ItemImage > itemImageList = new ArrayList<>( );
+        ItemImage itemImage;
+        for ( int i = 1; i < 5; i++ ) {
+            itemImage = new ItemImage( );
+            itemImage.setItemImageId( i );
+            itemImage.setImageLocation( TestConstants.DEFAULT_IMAGE_LOCATION + i );
+            itemImage.setImagePriority( TestConstants.DEFAULT_IMAGE_PRIORITY );
+            itemImage.setImageHeight( TestConstants.DEFAULT_IMAGE_HEIGHT + i );
+            itemImage.setImageWidth( TestConstants.DEFAULT_IMAGE_WIDTH + i );
+
+            itemImageList.add( itemImage );
+        }
+        return itemImageList;
     }
 
 }

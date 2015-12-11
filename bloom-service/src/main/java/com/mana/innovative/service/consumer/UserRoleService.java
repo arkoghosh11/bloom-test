@@ -1,5 +1,6 @@
 package com.mana.innovative.service.consumer;
 
+import com.mana.innovative.dto.consumer.UserRole;
 import com.mana.innovative.dto.consumer.payload.UserRolesPayload;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.consumer.container.UserRoleResponseContainer;
@@ -18,10 +19,11 @@ public interface UserRoleService {
 
     UserRoleResponseContainer< UserRolesPayload > getUserRoleByUserName( String userName, RequestParams requestParams );
 
-    void getUserRoleByUserId( String userId, RequestParams requestParams );
+    UserRoleResponseContainer< UserRolesPayload > getUserRoles( RequestParams requestParams );
 
-    void addUserRoleByUserId( String userId, RequestParams requestParams );
+    UserRoleResponseContainer< UserRolesPayload > getUserRoleByUserId( Long userId, RequestParams requestParams );
 
-    void updateUserRoleByUserId( String userId, RequestParams requestParams );
+    void addUserRoleByUserId( UserRole userRole, RequestParams requestParams );
 
+    void updateUserRoleByUserId( UserRole userRole, RequestParams requestParams );
 }

@@ -274,11 +274,24 @@ public class TestConstants {
     /**
      * The constant DEFAULT_USER_ROLE_NAME.
      */
-    public static final String DEFAULT_USER_ROLE_NAME = "anonymous";
+    public static final String DEFAULT_USER_ROLE_NAME = "default";
+    public static final String DEFAULT_USED_USER_ROLE_NAME = "anonymous";
     /**
      * The constant DEFAULT_USER_ROLE_ID.
      */
     public static final int DEFAULT_USER_ROLE_ID = ONE;
+    public static final int DEFAULT_IMAGE_PRIORITY = ONE;
+    public static final double DEFAULT_ITEM_DISCOUNT_PERCENT = 10.5;
+    public static final String DEFAULT_ITEM_DISCOUNT_TYPE = "default_type";
+    public static final String DEFAULT_IMAGE_LOCATION = "D:/Properties/resources/images/default.png";
+    public static final String DEFAULT_DESCRIPTION = "None";
+    public static final String TEST_DESCRIPTION = DEFAULT_DESCRIPTION;
+    public static final double DEFAULT_IMAGE_HEIGHT = 10.1;
+    public static final double DEFAULT_IMAGE_WIDTH = 10.1;
+    public static final boolean DEFAULT_IS_ACTIVE = TEST_FALSE;
+    public static final String DEFAULT_BOUGHT_DATE = "2015-02-25 01:00:00";
+    public static final String DEFAULT_CREATED_DATE = "2015-01-23 17:22:12";
+    public static final String DEFAULT_UPDATED_DATE = "2015-01-28 21:05:16";
 
     /**
      * The constant setUpMethodLoggerMsg.

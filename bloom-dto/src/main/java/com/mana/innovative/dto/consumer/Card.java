@@ -1,5 +1,13 @@
 package com.mana.innovative.dto.consumer;
 
+import com.mana.innovative.constants.ServiceConstants;
+import org.hibernate.validator.constraints.CreditCardNumber;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
@@ -22,26 +30,37 @@ public class Card {
     /**
      * The First name.
      */
+    @NotNull
+    @Pattern( regexp = "[a-zA-Z]+", message = "Invalid FirstName" )
     private String firstName;
 
     /**
      * The Last name.
      */
+    @NotNull
+    @NotBlank
+    @NotEmpty
+    @Pattern( regexp = "[a-zA-Z]+", message = "Invalid LastName" )
     private String lastName;
 
     /**
      * The Card number.
      */
+    @NotNull
+    @CreditCardNumber
     private String cardNumber;
 
     /**
      * The Issue date.
      */
+    @NotNull
+    @Length( min = ServiceConstants.FIVE, max = ServiceConstants.SEVEN, message = "Invalid issue date length" )
     private String issueDate;
 
     /**
      * The Picture location.
      */
+    @NotNull
     private String pictureLocation;
 
     /**

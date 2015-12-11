@@ -39,7 +39,7 @@ public class RequestProcessingInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle( HttpServletRequest request,
                               HttpServletResponse response, Object handler ) throws Exception {
         long startTime = System.currentTimeMillis( );
-        logger.info( "Request URL::" + request.getRequestURL( ).toString( )
+        logger.info( "********* Request URL::" + request.getRequestURL( ).toString( )
                 + ":: Start Time=" + System.currentTimeMillis( ) );
         request.setAttribute( "startTime", startTime );
         //if returned false, we need to make sure 'response' is sent

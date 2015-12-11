@@ -5,6 +5,8 @@ import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.domain.client.ItemDiscount;
+import com.mana.innovative.domain.client.ItemImage;
 import com.mana.innovative.domain.client.Shop;
 import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.domain.common.Address;
@@ -19,6 +21,7 @@ import com.mana.innovative.domain.consumer.Preference;
 import com.mana.innovative.domain.consumer.Privilege;
 import com.mana.innovative.domain.consumer.User;
 import com.mana.innovative.domain.consumer.UserRole;
+import com.mana.innovative.utilities.date.DateCommons;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,6 +56,7 @@ public class TestDummyDomainObjectGenerator {
         Shop shop = new Shop( );
 //        shop.setShopId( TestConstants.TEST_ID );
         shop.setShopOwnId( TestConstants.TEST_OWN_ID );
+        shop.setShopDescription( TestConstants.TEST_DESCRIPTION );
         shop.setShopName( TestConstants.TEST_NAME );
         shop.setShopWebLink( TestConstants.TEST_WEB_LINK );
 
@@ -115,6 +119,7 @@ public class TestDummyDomainObjectGenerator {
         item.setItemName( TestConstants.TEST_VALUE );
         item.setItemPriceCurrency( TestConstants.TEST_PRICE_CURRENCY );
         item.setItemType( TestConstants.TEST_VALUE );
+        item.setItemDescription( TestConstants.TEST_DESCRIPTION );
         item.setItemSubType( TestConstants.TEST_ITEM_TYPE );
         item.setBoughtFrom( TestConstants.TEST_BROUGHT_FROM );
 
@@ -124,6 +129,15 @@ public class TestDummyDomainObjectGenerator {
 
         item.setQuantityType( QuantityType.UNIT.toString( ) );
         item.setWeightedUnit( WeightedUnit.POUND.toString( ) );
+
+        List< ItemDiscount > itemDiscountList = new ArrayList<>( );
+
+        itemDiscountList.add( getTestItemDiscountDomainObject( ) );
+        item.setItemDiscountList( itemDiscountList );
+
+        List< ItemImage > itemImageList = new ArrayList<>( );
+        itemImageList.add( getTestItemImageDomainObject( null ) );
+        item.setItemImageList( itemImageList );
 
         DateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 
@@ -161,6 +175,7 @@ public class TestDummyDomainObjectGenerator {
      * Gets test address Domain ZERO ID object.
      *
      * @param address the address
+     *
      * @return the test address Domain ZERO ID object
      */
     public static Address setTestAddressDomainZEROIDObject( final Address address ) {
@@ -604,5 +619,110 @@ public class TestDummyDomainObjectGenerator {
     public static Privilege getTestPrivilegeDomainObject( ) {
 
         return getNCreatePrivilegeDomainList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test shop Domain ZERO ID object.
+     *
+     * @param itemDiscount the ItemDiscount
+     *
+     * @return the test shop Domain ZERO ID object
+     */
+    public static ItemDiscount setTestItemDiscountDomainZEROIDObject( final ItemDiscount itemDiscount ) {
+
+        itemDiscount.setItemDiscountId( TestConstants.ZERO );
+        return itemDiscount;
+    }
+
+    /**
+     * Gets test item discount domain object.
+     *
+     * @return the test item discount domain object
+     */
+    public static ItemDiscount getTestItemDiscountDomainObject( ) {
+
+        ItemDiscount itemDiscount = new ItemDiscount( );
+        itemDiscount.setItemDiscountId( TestConstants.ZERO );
+        itemDiscount.setDiscountPercent( TestConstants.DEFAULT_ITEM_DISCOUNT_PERCENT );
+        itemDiscount.setDiscountType( TestConstants.DEFAULT_ITEM_DISCOUNT_TYPE );
+        itemDiscount.setUserRole( TestConstants.DEFAULT_USER_ROLE_NAME );
+        itemDiscount.setIsActive( TestConstants.DEFAULT_IS_ACTIVE );
+
+        try {
+            itemDiscount.setStartDate( DateCommons.getDateFromDateString( TestConstants.TEST_START_DATE, TestConstants.TEST_DATE_FORMAT ) );
+            itemDiscount.setEndDate( DateCommons.getDateFromDateString( TestConstants.TEST_END_DATE, TestConstants.TEST_DATE_FORMAT ) );
+        } catch ( Exception exception ) {
+            logger.debug( "Date Parse Exception", exception );
+        }
+        return itemDiscount;
+    }
+
+    /**
+     * Gets n create item discount domain list.
+     *
+     * @return the n create item discount domain list
+     */
+    public static List< ItemDiscount > getNCreateItemDiscountDomainList( ) {
+
+        List< ItemDiscount > itemDiscountList = new ArrayList<>( );
+        ItemDiscount itemDiscount;
+        for ( int i = 1; i < 5; i++ ) {
+            itemDiscount = new ItemDiscount( );
+            itemDiscount.setItemDiscountId( i );
+            itemDiscount.setDiscountPercent( TestConstants.DEFAULT_ITEM_DISCOUNT_PERCENT );
+            itemDiscount.setDiscountType( TestConstants.DEFAULT_ITEM_DISCOUNT_TYPE + i );
+            itemDiscount.setUserRole( TestConstants.DEFAULT_USER_ROLE_NAME );
+            itemDiscount.setIsActive( i % 2 == 0 );
+
+            DateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
+
+            try {
+                itemDiscount.setStartDate( dateFormat.parse( TestConstants.TEST_START_DATE ) );
+                itemDiscount.setEndDate( dateFormat.parse( TestConstants.TEST_END_DATE ) );
+            } catch ( ParseException exception ) {
+                logger.debug( "Date Parse Exception", exception );
+            }
+
+            itemDiscountList.add( itemDiscount );
+        }
+        return itemDiscountList;
+    }
+
+    /**
+     * Gets test item image domain object.
+     *
+     * @return the test item image domain object
+     */
+    public static ItemImage getTestItemImageDomainObject( Integer id ) {
+
+        ItemImage itemImage = new ItemImage( );
+        itemImage.setItemImageId( id == null ? TestConstants.MINUS_ONE : id );
+        itemImage.setImageLocation( id == null || id == 0 ? TestConstants.DEFAULT : TestConstants.DEFAULT_IMAGE_LOCATION );
+        itemImage.setImagePriority( id == null || id == 0 ? TestConstants.ZERO : TestConstants.DEFAULT_IMAGE_PRIORITY );
+        itemImage.setImageHeight( id == null || id == 0 ? TestConstants.ZERO : TestConstants.DEFAULT_IMAGE_HEIGHT );
+        itemImage.setImageWidth( id == null || id == 0 ? TestConstants.ZERO : TestConstants.DEFAULT_IMAGE_WIDTH );
+
+        return itemImage;
+    }
+
+    /**
+     * Gets n create item image domain list.
+     *
+     * @return the n create item image domain list
+     */
+    public static List< ItemImage > getNCreateItemImageDomainList( ) {
+        List< ItemImage > itemImageList = new ArrayList<>( );
+        ItemImage itemImage;
+        for ( int i = 1; i < 5; i++ ) {
+            itemImage = new ItemImage( );
+            itemImage.setItemImageId( i );
+            itemImage.setImageLocation( TestConstants.DEFAULT_IMAGE_LOCATION + i );
+            itemImage.setImagePriority( TestConstants.DEFAULT_IMAGE_PRIORITY );
+            itemImage.setImageHeight( TestConstants.DEFAULT_IMAGE_HEIGHT + i );
+            itemImage.setImageWidth( TestConstants.DEFAULT_IMAGE_WIDTH + i );
+
+            itemImageList.add( itemImage );
+        }
+        return itemImageList;
     }
 }

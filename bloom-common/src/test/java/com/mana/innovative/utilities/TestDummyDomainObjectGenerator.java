@@ -5,6 +5,8 @@ import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.domain.client.ItemDiscount;
+import com.mana.innovative.domain.client.ItemImage;
 import com.mana.innovative.domain.client.Shop;
 import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.domain.common.Address;
@@ -54,6 +56,7 @@ public class TestDummyDomainObjectGenerator {
         shop.setShopId( TestConstants.TEST_ID );
         shop.setShopOwnId( TestConstants.TEST_OWN_ID );
         shop.setShopName( TestConstants.TEST_NAME );
+        shop.setShopDescription( TestConstants.TEST_DESCRIPTION );
         shop.setShopWebLink( TestConstants.TEST_WEB_LINK );
 
         // WorkingHour
@@ -113,6 +116,7 @@ public class TestDummyDomainObjectGenerator {
         final Item item = new Item( );
         item.setItemId( TestConstants.TEST_ID );
         item.setItemName( TestConstants.TEST_VALUE );
+        item.setItemDescription( TestConstants.TEST_DESCRIPTION );
         item.setItemPriceCurrency( TestConstants.TEST_PRICE_CURRENCY );
         item.setItemType( TestConstants.TEST_VALUE );
         item.setItemSubType( TestConstants.TEST_ITEM_TYPE );
@@ -160,6 +164,7 @@ public class TestDummyDomainObjectGenerator {
      * Gets test shop Domain ZERO ID object.
      *
      * @param shop the shop
+     *
      * @return the test shop Domain ZERO ID object
      */
     public static Shop setTestShopDomainZEROIDObject( final Shop shop ) {
@@ -176,6 +181,7 @@ public class TestDummyDomainObjectGenerator {
      * Gets test address Domain ZERO ID object.
      *
      * @param address the address
+     *
      * @return the test address Domain ZERO ID object
      */
     public static Address setTestAddressDomainZEROIDObject( final Address address ) {
@@ -188,6 +194,7 @@ public class TestDummyDomainObjectGenerator {
      * Gets test item dTO ZERO ID object.
      *
      * @param item the item
+     *
      * @return the test item dTO ZERO ID object
      */
     public static Item setTestItemDomainZEROIDObject( final Item item ) {
@@ -200,6 +207,7 @@ public class TestDummyDomainObjectGenerator {
      * Gets test working hour Domain ZERO ID object.
      *
      * @param workingHour the working hour
+     *
      * @return the test working hour Domain ZERO ID object
      */
     public static WorkingHour setTestWorkingHourDomainZEROIDObject( final WorkingHour workingHour ) {
@@ -709,4 +717,93 @@ public class TestDummyDomainObjectGenerator {
         return getNCreatePrivilegeDomainList( ).get( TestConstants.ZERO );
     }
 
+    /**
+     * Gets test shop Domain ZERO ID object.
+     *
+     * @param itemDiscount the ItemDiscount
+     *
+     * @return the test shop Domain ZERO ID object
+     */
+    public static ItemDiscount setTestItemDiscountDomainZEROIDObject( final ItemDiscount itemDiscount ) {
+
+        itemDiscount.setItemDiscountId( TestConstants.ZERO );
+        return itemDiscount;
+    }
+
+    /**
+     * Gets test item discount domain object.
+     *
+     * @return the test item discount domain object
+     */
+    public static ItemDiscount getTestItemDiscountDomainObject( ) {
+
+        return getNCreateItemDiscountDomainList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets n create item discount domain list.
+     *
+     * @return the n create item discount domain list
+     */
+    public static List< ItemDiscount > getNCreateItemDiscountDomainList( ) {
+
+        List< ItemDiscount > itemDiscountList = new ArrayList<>( );
+        ItemDiscount itemDiscount;
+        for ( int i = 1; i < 5; i++ ) {
+            itemDiscount = new ItemDiscount( );
+            itemDiscount.setItemDiscountId( i );
+            itemDiscount.setDiscountPercent( TestConstants.DEFAULT_ITEM_DISCOUNT_PERCENT );
+            itemDiscount.setDiscountType( TestConstants.DEFAULT_ITEM_DISCOUNT_TYPE + i );
+            itemDiscount.setUserRole( TestConstants.DEFAULT_USER_ROLE_NAME );
+            itemDiscount.setIsActive( i % 2 == 0 );
+            itemDiscount.setStartDate( new Date( ) );
+            itemDiscount.setEndDate( new Date( ) );
+
+            itemDiscountList.add( itemDiscount );
+        }
+        return itemDiscountList;
+    }
+
+    /**
+     * Sets test item image domain Zero Id object.
+     *
+     * @param itemImageDomain the item image domain
+     *
+     * @return the test item image domain Zero Id object
+     */
+    public static ItemImage setTestItemImageDomainZEROIDObject( final ItemImage itemImageDomain ) {
+        itemImageDomain.setItemImageId( TestConstants.ZERO );
+        return itemImageDomain;
+    }
+
+    /**
+     * Gets test item image domain object.
+     *
+     * @return the test item image domain object
+     */
+    public static ItemImage getTestItemImageDomainObject( ) {
+
+        return getNCreateItemImageDomainList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets n create item image domain list.
+     *
+     * @return the n create item image domain list
+     */
+    public static List< ItemImage > getNCreateItemImageDomainList( ) {
+        List< ItemImage > itemImageList = new ArrayList<>( );
+        ItemImage itemImage;
+        for ( int i = 1; i < 5; i++ ) {
+            itemImage = new ItemImage( );
+            itemImage.setItemImageId( i );
+            itemImage.setImageLocation( TestConstants.DEFAULT_IMAGE_LOCATION + i );
+            itemImage.setImagePriority( TestConstants.DEFAULT_IMAGE_PRIORITY );
+            itemImage.setImageHeight( TestConstants.DEFAULT_IMAGE_HEIGHT + i );
+            itemImage.setImageWidth( TestConstants.DEFAULT_IMAGE_WIDTH + i );
+
+            itemImageList.add( itemImage );
+        }
+        return itemImageList;
+    }
 }

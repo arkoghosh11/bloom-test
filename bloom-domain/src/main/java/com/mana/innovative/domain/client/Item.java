@@ -8,10 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -22,46 +25,56 @@ import java.util.Objects;
  * @Copyright
  */
 @Entity
-@Table( name = "items" )
+@Table( name = "items",
+        uniqueConstraints = { @UniqueConstraint( name = "FK_items_shops_shop_id", columnNames = "shop_id" ) }
+)
 public class Item {
 
+    /* Image table <imageLocation, image_priority, item_id>, discount, description, size, size unit */
     /**
      * The Item id.
      */
-/* */
     @Id
-    @Column( name = "item_id", unique = true, updatable = false, nullable = false )
+    @Column( name = "item_id", nullable = false )
     @GeneratedValue( strategy = GenerationType.TABLE )
-//    @GeneratedValue (generator = "gen")
-//    @GenericGenerator (name = "gen", strategy = "foreign", parameters = { @Parameter (name = "property", value =
-//            "item") })
     private long itemId;
     /**
      * The Item price.
      */
+//    @NotNull
+//    @Size(min = 0, max=Integer.MAX_VALUE, message =" Value not within limit")
     @Column( name = "item_price" )
     private Double itemPrice;
+
     /**
      * The Quantity.
      */
+//    @NotNull
+//    @Size(min = 0, max=Integer.MAX_VALUE, message =" Value not within limit")
     @Column( name = "quantity" )
     private Double quantity;
+
     /**
      * The Weight.
      */
+//    @NotNull
+//    @Size(min = 0, max=Integer.MAX_VALUE, message =" Value not within limit")
     @Column( name = "weight" )
     private Double weight;
 
     /**
      * The Item price currency.
      */
+//    @NotNull
     @Column( name = "item_price_currency" )
     private String itemPriceCurrency;
     /**
      * The Item name.
      */
+
     @Column( name = "item_name" )
     private String itemName;
+
     /**
      * The Item type.
      */
@@ -72,11 +85,16 @@ public class Item {
      */
     @Column( name = "item_sub_type" )
     private String itemSubType;
+
+    @Column( name = "item_description" )
+    private String itemDescription;
+
     /**
      * The Bought from.
      */
     @Column( name = "bought_from" )
     private String boughtFrom;
+
     /**
      * The Quantity type.
      */
@@ -94,6 +112,7 @@ public class Item {
     @Column( name = "bought_date" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date boughtDate;
+
     /**
      * The Created date.
      */
@@ -106,6 +125,12 @@ public class Item {
     @Column( name = "updated_date" )
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
+
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "item" )
+    private List< ItemImage > itemImageList;
+
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "item" )
+    private List< ItemDiscount > itemDiscountList;
 
     /**
      * The Shop item.
@@ -381,6 +406,29 @@ public class Item {
         this.updatedDate = updatedDate;
     }
 
+    public String getItemDescription( ) {
+        return itemDescription;
+    }
+
+    public void setItemDescription( final String itemDescription ) {
+        this.itemDescription = itemDescription;
+    }
+
+    public List< ItemImage > getItemImageList( ) {
+        return itemImageList;
+    }
+
+    public void setItemImageList( final List< ItemImage > itemImageList ) {
+        this.itemImageList = itemImageList;
+    }
+
+    public List< ItemDiscount > getItemDiscountList( ) {
+        return itemDiscountList;
+    }
+
+    public void setItemDiscountList( final List< ItemDiscount > itemDiscount ) {
+        this.itemDiscountList = itemDiscount;
+    }
 
     /**
      * Gets shop item.
@@ -400,12 +448,6 @@ public class Item {
         this.shopItem = shopItem;
     }
 
-    /**
-     * Equals boolean.
-     *
-     * @param o the o
-     * @return the boolean
-     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -419,11 +461,15 @@ public class Item {
                 Objects.equals( getItemName( ), item.getItemName( ) ) &&
                 Objects.equals( getItemType( ), item.getItemType( ) ) &&
                 Objects.equals( getItemSubType( ), item.getItemSubType( ) ) &&
+                Objects.equals( getItemDescription( ), item.getItemDescription( ) ) &&
                 Objects.equals( getBoughtFrom( ), item.getBoughtFrom( ) ) &&
                 Objects.equals( getQuantityType( ), item.getQuantityType( ) ) &&
                 Objects.equals( getWeightedUnit( ), item.getWeightedUnit( ) ) &&
-                Objects.equals( getBoughtDate( ), item.getBoughtDate( ) );
+                Objects.equals( getBoughtDate( ), item.getBoughtDate( ) ) &&
+                Objects.equals( getItemImageList( ), item.getItemImageList( ) ) &&
+                Objects.equals( getItemDiscountList( ), item.getItemDiscountList( ) );
     }
+
 
     /**
      * Returns a string representation of the object. In general, the {@code toString} method returns a string that
@@ -443,12 +489,15 @@ public class Item {
                 ", itemName='" + itemName + '\'' +
                 ", itemType='" + itemType + '\'' +
                 ", itemSubType='" + itemSubType + '\'' +
+                ", itemDescription='" + itemDescription + '\'' +
                 ", boughtFrom='" + boughtFrom + '\'' +
                 ", quantityType='" + quantityType + '\'' +
                 ", weightedUnit='" + weightedUnit + '\'' +
                 ", boughtDate=" + boughtDate +
                 ", createdDate=" + createdDate +
                 ", updatedDate=" + updatedDate +
+                ", itemImageList=" + itemImageList +
+                ", itemDiscount=" + itemDiscountList +
                 '}';
     }
 

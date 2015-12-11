@@ -55,4 +55,14 @@ public interface UserService {
      * @return the response
      */
     Response deleteUserByUserId( Long userId, RequestParams requestParams );
+
+    /**
+     * Find user by user name.
+     *
+     * @param userName      the user name
+     * @param requestParams the request params
+     *
+     * @return the response
+     */
+    Response findUserByUserName( String userName, RequestParams requestParams );
 }

@@ -252,7 +252,7 @@
             <version>${apache-commons-filupload.version}</version>
         </dependency>
 
-        <!-- Note cache artifact fro working with spring for caching the webservices-->
+        <!-- Note cache artifact for working with spring for caching the webservices-->
 
         <dependency>
             <groupId>net.sf.ehcache</groupId>

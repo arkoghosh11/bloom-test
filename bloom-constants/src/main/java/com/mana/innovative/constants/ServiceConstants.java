@@ -59,7 +59,15 @@ public class ServiceConstants {
     public static final String SIDEBAR_CACHE = "sidebar_cache";
 
     /**
-     * The constant KEY_NAME.
+     * The constant KEY_NAME. Note Used by ehcache manager configuration
      */
     public static final String KEY_NAME = "#root.method.name";
+
+    public static final String DEFAULT_ITEM_DESCRIPTION = "Not Available";
+    public static final String DEFAULT_SHOP_DESCRIPTION = "Not Available";
+    public static final String EMPTY = "Empty";
+    public static final int THREE = 3;
+    public static final int FOUR = 4;
+    public static final int FIVE = 5;
+    public static final int SEVEN = 7;
 }

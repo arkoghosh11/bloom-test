@@ -1,5 +1,8 @@
 package com.mana.innovative.dto.consumer;
 
+import com.mana.innovative.constants.ServiceConstants;
+
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -35,6 +38,7 @@ public class CreditCard extends Card {
     /**
      * The CVV.
      */
+    @Size( min = ServiceConstants.THREE, max = ServiceConstants.FOUR, message = "Invalid CVV value dize" )
     private String CVV;
 
     /**

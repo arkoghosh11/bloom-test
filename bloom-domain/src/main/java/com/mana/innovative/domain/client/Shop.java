@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -26,9 +27,13 @@ import java.util.Objects;
  * @Copyright
  */
 @Entity
-@Table( name = "shops" )
+@Table( name = "shops",
+        uniqueConstraints = {
+                @UniqueConstraint( name = "UK_shop_main_id", columnNames = "shop_main_id" ),
+                @UniqueConstraint( name = "FK_shops_address_address_id", columnNames = "address_id" )
+        } )
 public class Shop {
-
+    /* shop description */
     /**
      * The Shop id.
      */
@@ -41,11 +46,15 @@ public class Shop {
      */
     @Column( name = "shop_main_id", unique = true, nullable = false )
     private Long shopOwnId;
+
     /**
      * The Shop name.
      */
     @Column( name = "shop_name" )
     private String shopName;
+
+    @Column( name = "shop_description" )
+    private String shopDescription;
     /**
      * The Shop web link.
      */
@@ -56,7 +65,7 @@ public class Shop {
      * The Address.
      */
     @OneToOne( cascade = CascadeType.ALL )
-    @JoinColumn( name = "address_id", nullable = false )
+    @JoinColumn( name = "address_id", nullable = false, unique = true )
     private Address address;
     /**
      * The Working hours.
@@ -134,6 +143,14 @@ public class Shop {
      */
     public void setShopName( String shop_name ) {
         this.shopName = shop_name;
+    }
+
+    public String getShopDescription( ) {
+        return shopDescription;
+    }
+
+    public void setShopDescription( final String shopDescription ) {
+        this.shopDescription = shopDescription;
     }
 
     /**
@@ -258,6 +275,7 @@ public class Shop {
         return Objects.equals( getShopId( ), shop.getShopId( ) ) &&
                 Objects.equals( getShopOwnId( ), shop.getShopOwnId( ) ) &&
                 Objects.equals( getShopName( ), shop.getShopName( ) ) &&
+                Objects.equals( getShopDescription( ), shop.getShopDescription( ) ) &&
                 Objects.equals( getShopWebLink( ), shop.getShopWebLink( ) ) &&
                 Objects.equals( getAddress( ), shop.getAddress( ) ) &&
                 Objects.equals( getWorkingHours( ), shop.getWorkingHours( ) ) &&
@@ -275,9 +293,10 @@ public class Shop {
     @Override
     public String toString( ) {
         return "Shop{" +
-                "shop_id=" + shopId +
-                ", shop_own_id=" + shopOwnId +
-                ", shop_name='" + shopName + '\'' +
+                "shopId=" + shopId +
+                ", shopOwnId=" + shopOwnId +
+                ", shopName='" + shopName + '\'' +
+                ", shopDescription='" + shopDescription + '\'' +
                 ", shopWebLink='" + shopWebLink + '\'' +
                 ", address=" + address +
                 ", workingHours=" + workingHours +

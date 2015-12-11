@@ -89,4 +89,14 @@ public interface UserDAO {
      * @return the dAO response
      */
     DAOResponse< User > deleteAllUsers( RequestParams requestParams, String tableName );
+
+    /**
+     * Find user by user name.
+     *
+     * @param userName      the user name
+     * @param requestParams the request params
+     *
+     * @return the dAO response
+     */
+    DAOResponse< User > findUserByUserName( String userName, RequestParams requestParams );
 }

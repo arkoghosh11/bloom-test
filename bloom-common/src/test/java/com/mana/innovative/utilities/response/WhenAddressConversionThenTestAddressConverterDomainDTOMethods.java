@@ -211,4 +211,9 @@ public class WhenAddressConversionThenTestAddressConverterDomainDTOMethods {
         Assert.assertNotNull( TestConstants.nullMessage, nullPointerException );
         logger.debug( "Finishing test GetConvertedDTOFromDomainForError" );
     }
+
+    @Test
+    public void test1( ) {
+        System.out.println( "FUTURES PRICES IN SUPPLY ANALYSIS: ARE INSTRUMENTAL VARIABLES NECESSARY?".toLowerCase( ) );
+    }
 }

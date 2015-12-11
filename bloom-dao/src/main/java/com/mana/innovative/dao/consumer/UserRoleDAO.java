@@ -84,4 +84,13 @@ public interface UserRoleDAO {
      */
     DAOResponse< UserRole > deleteAllUserRoles( RequestParams requestParams );
 
+    /**
+     * Gets user role by user id.
+     *
+     * @param userId        the user id
+     * @param requestParams the request params
+     *
+     * @return the user role by user id
+     */
+    DAOResponse< UserRole > getUserRoleByUserId( Long userId, RequestParams requestParams );
 }

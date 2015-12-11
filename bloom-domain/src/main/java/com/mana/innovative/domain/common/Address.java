@@ -33,7 +33,7 @@ public class Address {
      * The Address id.
      */
     @Id
-    @Column( name = "address_id", nullable = false )
+    @Column( name = "address_id" )
     @GeneratedValue( strategy = GenerationType.TABLE )
     private long addressId;
 
@@ -81,13 +81,15 @@ public class Address {
     /**
      * The Shop address.
      */
-    @OneToOne( orphanRemoval = true, cascade = { CascadeType.ALL }, mappedBy = "address" )
+    @OneToOne( orphanRemoval = true, cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy =
+            "address" )
     private Shop shopAddress;
 
     /**
      * The Customer address.
      */
-    @ManyToMany( cascade = { CascadeType.ALL }, mappedBy = "shippingAddress" )
+    @ManyToMany( cascade = { CascadeType.MERGE, CascadeType.REMOVE, CascadeType.PERSIST }, mappedBy =
+            "shippingAddress" )
     private List< Customer > customerAddress;
 
     /**
@@ -326,6 +328,7 @@ public class Address {
      * Equals boolean.
      *
      * @param o the o
+     *
      * @return the boolean
      */
     @Override

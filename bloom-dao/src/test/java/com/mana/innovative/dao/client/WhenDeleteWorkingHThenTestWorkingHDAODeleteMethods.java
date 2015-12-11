@@ -19,7 +19,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.BeforeTransaction;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,18 +36,15 @@ import java.util.List;
  */
 @RunWith( value = SpringJUnit4ClassRunner.class )
 @ContextConfiguration( locations = { "/dbConfig-test.xml" } )
-// "" <- <add location file>
-@TransactionConfiguration
-// If required
-@Transactional
+// "" <- <add location file> TransactionConfiguration
+// If required @Transactional
 // If required
 public class WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods {
 
     /**
      * The constant logger.
      */
-    private static final Logger logger = LoggerFactory
-            .getLogger( WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods.class );
+    private static final Logger logger = LoggerFactory.getLogger( WhenDeleteWorkingHThenTestWorkingHDAODeleteMethods.class );
 
     /**
      * The Working hour dAO impl.

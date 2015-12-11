@@ -195,14 +195,15 @@ public class CustomSchedulerImpl implements CustomScheduler {
             if ( !runNow ) {
                 logger.debug( "cannot run event with Date: " + customEvent.getEventDate( ) );
             }
-            EmailContents emailContents = new EmailContents( );
-            emailContents.setReceiver( customEvent.getReceivers( ) );
-            emailContents.setCcReceiver( customEvent.getCcReceivers( ) );
-            emailContents.setBccReceiver( customEvent.getBccReceivers( ) );
-            emailContents.setSubject( customEvent.getSubject( ) );
-            emailContents.setBody( customEvent.getBody( ) );
 
             if ( runNow ) {
+                EmailContents emailContents = new EmailContents( );
+                emailContents.setReceiver( customEvent.getReceivers( ) );
+                emailContents.setCcReceiver( customEvent.getCcReceivers( ) );
+                emailContents.setBccReceiver( customEvent.getBccReceivers( ) );
+                emailContents.setSubject( customEvent.getSubject( ) );
+                emailContents.setBody( customEvent.getBody( ) );
+
                 eventDates.add( customEvent.getEventDate( ) );
                 if ( !StringUtils.isEmpty( customEvent.getAttachmentLocation( ) ) && customEvent.isAttachment( ) ) {
 
