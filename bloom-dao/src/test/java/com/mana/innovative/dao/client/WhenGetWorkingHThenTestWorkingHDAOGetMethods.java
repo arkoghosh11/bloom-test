@@ -1,9 +1,9 @@
 package com.mana.innovative.dao.client;
 
 import com.mana.innovative.constants.TestConstants;
+import com.mana.innovative.converter.response.WorkingHourDomainDTOConverter;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.WorkingHour;
-import com.mana.innovative.utilities.response.WorkingHourDomainDTOConverter;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;

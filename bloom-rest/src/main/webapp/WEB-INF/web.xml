@@ -39,7 +39,7 @@
             classpath*:/web_config.xml
             classpath*:/config/db_config.xml
             classpath*:/config/service_config.xml
-            classpath*:/config/spring-security-config.xml
+            <!--classpath*:/config/spring-security-config.xml-->
             <!-- Note disabled bottom config files as scheduler is tied to email
                  and without the email secure properties file these config files
                  will not load
@@ -49,10 +49,10 @@
         </param-value>
     </context-param>
     <!-- Note location for login credentials-->
-    <context-param>
-        <param-name>lService</param-name>
-        <param-value>loginService</param-value>
-    </context-param>
+    <!--<context-param>-->
+    <!--<param-name>lService</param-name>-->
+    <!--<param-value>loginService</param-value>-->
+    <!--</context-param>-->
 
     <!--@Note listener classes by Spring to instantiate Spring Application Context -->
 
@@ -72,27 +72,39 @@
     <!--</filter>-->
     <!--<filter-mapping>-->
     <!--<filter-name>springSecurityFilterChain</filter-name>-->
-    <!--<servlet-name>mvc_config</servlet-name>-->
+    <!--<servlet-name>Jersey REST Service</servlet-name>-->
     <!--<url-pattern>/view/*</url-pattern>-->
     <!--</filter-mapping>-->
     <!--@Note Filter class for Authentication -->
-    <filter>
-        <filter-name>Login Filter</filter-name>
-        <filter-class>com.mana.innovative.rest.filter.LoginFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>Login Filter</filter-name>
-        <servlet-name>Jersey REST Service</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
+    <!--<filter>-->
+    <!--<filter-name>Login Filter</filter-name>-->
+    <!--<filter-class>com.mana.innovative.rest.filter.LoginFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>Login Filter</filter-name>-->
+    <!--<servlet-name>Jersey REST Service</servlet-name>-->
+    <!--<url-pattern>/rest/*</url-pattern>-->
+    <!--<dispatcher>REQUEST</dispatcher>-->
+    <!--</filter-mapping>-->
+
+    <!--<filter>-->
+    <!--<filter-name>Cache Filter</filter-name>-->
+    <!--<filter-class>com.mana.innovative.rest.filter.ResetCacheFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>Cache Filter</filter-name>-->
+    <!--<servlet-name>Jersey REST Service</servlet-name>-->
+    <!--<url-pattern>/rest/*</url-pattern>-->
+    <!--<dispatcher>REQUEST</dispatcher>-->
+    <!--</filter-mapping>-->
 
     <filter>
-        <filter-name>Cache Filter</filter-name>
-        <filter-class>com.mana.innovative.rest.filter.ResetCacheFilter</filter-class>
+        <filter-name>CORSFilter</filter-name>
+        <filter-class>com.mana.innovative.rest.filter.CORSFilter</filter-class>
     </filter>
+
     <filter-mapping>
-        <filter-name>Cache Filter</filter-name>
+        <filter-name>CORSFilter</filter-name>
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/rest/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
@@ -109,6 +121,11 @@
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>com.mana.innovative.rest;</param-value>
         </init-param>
+        <!-- @Note to remove info logs for grammar issues-->
+        <!--<init-param>-->
+        <!--<param-name>com.sun.jersey.config.feature.DisableWADL</param-name>-->
+        <!--<param-value>true</param-value>-->
+        <!--</init-param>-->
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -127,24 +144,6 @@
     <!--<servlet-name>mvc_config</servlet-name>-->
     <!--<url-pattern>/view/*</url-pattern>-->
     <!--</servlet-mapping>-->
-
-    <!-- @Note Jspx2 Servlet handler for possessing application requests -->
-    <servlet>
-        <servlet-name>JspxHandler</servlet-name>
-        <servlet-class>eg.java.net.web.jspx.engine.RequestHandler</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>JspxHandler</servlet-name>
-        <url-pattern>*.jspx</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResourceHandler</servlet-name>
-        <servlet-class>eg.java.net.web.jspx.engine.ResourceHandler</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResourceHandler</servlet-name>
-        <url-pattern>/jspxEmbeddedResources/*</url-pattern>
-    </servlet-mapping>
 
     <session-config>
         <session-timeout>30</session-timeout>

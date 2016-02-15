@@ -6,26 +6,18 @@ import com.mana.innovative.domain.client.Shop;
 import com.mana.innovative.domain.client.WorkingHour;
 import com.mana.innovative.domain.common.Address;
 import com.mana.innovative.exception.IllegalArgumentValueException;
-import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
-import com.mana.innovative.logic.ItemSearchOption;
 import com.mana.innovative.logic.QueryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * The type Basic dAO.
@@ -120,174 +112,6 @@ public class BasicDAO {
         ErrorContainer errorContainer = new ErrorContainer( );
         errorContainer.addError( new com.mana.innovative.exception.response.Error( location, exception ) );
         return errorContainer;
-    }
-
-    /* IMP Get Functions 1st one is special Search by Param Function */
-
-    /**
-     * Gets item by search params.
-     *
-     * @param itemSearchOption the item search option
-     * @param maxResults the max results
-     * @param startLimit the start limit
-     * @return the item by search params
-     */
-    @SuppressWarnings( "rawtypes" )
-    @Transactional( readOnly = true, propagation = Propagation.NESTED, isolation = Isolation.READ_COMMITTED )
-    public List getItemBySearchParams( ItemSearchOption itemSearchOption, int maxResults, int startLimit ) {
-
-        List itemList = null;
-        try {
-            this.openDBTransaction( );
-
-            DetachedCriteria detachedCriteria = this.getDetachedCriteriaBySearchParams( itemSearchOption );
-
-            itemList = detachedCriteria.getExecutableCriteria( session ).list( );
-
-            this.closeDBTransaction( );
-            // transaction.commit();
-        } catch ( HibernateException exception ) {
-            this.handleExceptions( exception );
-            logger.error( "Exception occurred while trying to search " + itemSearchOption.toString( ) );
-        }
-        return ( ( ( itemList != null ) && ( itemList.size( ) > DAOConstants.ZERO ) ) ) ? itemList : null;
-    }
-
-    /* IMP Functions private used for the search function */
-
-    /**
-     * This method is to create a detached criteria
-     *
-     * @param itemSearchOption the item search option
-     * @return A detached criteria object
-     */
-    private DetachedCriteria getDetachedCriteriaBySearchParams( ItemSearchOption itemSearchOption ) {
-
-        List< Map< String, Object > > searchConditionParams = itemSearchOption.getSearchConditionParams( );
-        List< Map< String, String > > searchOrderWithParams = itemSearchOption.getSearchOrderWithParams( );
-        List< Map< String, Object > > searchMatchTypeParams = itemSearchOption.getSearchMatchTypeParams( );
-
-        List< Map< String, String > > searchConditions = itemSearchOption.getSearchConditions( );
-        List< Map< String, String > > searchMatchType = itemSearchOption.getSearchMatchType( );
-        List< String > keys;
-        DetachedCriteria detachedCriteria = DetachedCriteria.forClass( Item.class );
-
-        if ( searchMatchType.isEmpty( ) ) {
-            keys = this.getKeysForSearch( searchConditions );
-            detachedCriteria = this.addConditionParams( detachedCriteria, searchConditionParams, searchConditions, keys );
-        }
-        if ( !searchOrderWithParams.isEmpty( ) ) {
-            keys = this.getKeysForSearch( searchOrderWithParams );
-            detachedCriteria = this.addOrderParams( detachedCriteria, searchOrderWithParams, keys );
-        }
-        if ( !searchMatchType.isEmpty( ) ) {
-            keys = this.getKeysForSearch( searchMatchType );
-            detachedCriteria = this.addMatchTypeParams( detachedCriteria, searchMatchTypeParams, searchMatchType,
-                    searchConditions, keys );
-        }
-        return detachedCriteria;
-    }
-
-    /**
-     * Add condition params.
-     *
-     * @param detachedCriteria the detached criteria
-     * @param searchConditionParams the search condition params
-     * @param searchConditions the search conditions
-     * @param keys the keys
-     * @return the detached criteria
-     */
-    public DetachedCriteria addConditionParams( DetachedCriteria detachedCriteria,
-                                                List< Map< String, Object > > searchConditionParams, List< Map< String, String > > searchConditions,
-                                                List< String > keys ) {
-
-        for ( int i = DAOConstants.ZERO; i < searchConditions.size( )
-                && searchConditionParams.size( ) == searchConditions.size( ); i++ ) {
-
-            // get condition value from Map with key
-            String condition = searchConditions.get( i ).get( keys.get( i ) );
-            // get value of class property from map to query the DB
-            Object value = searchConditionParams.get( i ).get( keys.get( i ) );
-            // add SQL restrictions
-            detachedCriteria.add( queryUtil.getAddedRestriction( keys.get( i ), value, condition ) );
-        }
-        return detachedCriteria;
-    }
-
-    // @SuppressWarnings(value = "unchecked")
-
-    /**
-     * This method is for adding order param like ASC or DESC to the given result set
-     *
-     * @param detachedCriteria the detached criteria
-     * @param searchOrders the search orders
-     * @param keys the keys
-     * @return return the detached criteria with the added params and keys for searching
-     */
-    private DetachedCriteria addOrderParams( DetachedCriteria detachedCriteria, List< Map< String, String > > searchOrders,
-                                             List< String > keys ) {
-
-        for ( int i = DAOConstants.ZERO; i < searchOrders.size( ); i++ ) {
-            String ordering = searchOrders.get( i ).get( keys.get( i ) );
-            if ( ordering != null ) {
-                detachedCriteria.addOrder( queryUtil.getCreatedOrder( keys.get( i ), ordering ) );
-            }
-        }
-        return detachedCriteria;
-    }
-
-    /**
-     * Add match type params.
-     *
-     * @param detachedCriteria the detached criteria
-     * @param searchParams the search params
-     * @param searchMatchTypes the search match types
-     * @param searchConditions the search conditions
-     * @param keys the keys
-     * @return the detached criteria
-     */
-    public DetachedCriteria addMatchTypeParams( DetachedCriteria detachedCriteria,
-                                                List< Map< String, Object > > searchParams, List< Map< String, String > > searchMatchTypes,
-                                                List< Map< String, String > > searchConditions, List< String > keys ) {
-
-        System.out.println( searchParams + "\n" + searchParams.size( ) + " params " + searchParams.isEmpty( ) + " "
-                + "matchType " + "" + searchMatchTypes.isEmpty( ) + " conditions " + searchConditions.isEmpty( )
-                + " keys" + " " + keys.isEmpty( ) );
-        if ( searchParams.isEmpty( ) || searchConditions.isEmpty( ) || searchMatchTypes.isEmpty( ) || keys.isEmpty( ) ) {
-            throw new NullPointerException( "One of the Lists in parameters is Empty" );
-        }
-        for ( int i = DAOConstants.ZERO; i < searchMatchTypes.size( ); i++ ) {
-
-            // get condition value from Map with key
-            String operator = searchConditions.get( i ).get( keys.get( i ) );
-            // get value of class property from map to query the DB
-            Object value = searchParams.get( i ).get( keys.get( i ) );
-
-            String matchType = searchMatchTypes.get( i ).get( keys.get( i ) );
-
-            detachedCriteria.add( queryUtil.getAddedRestriction( keys.get( i ), value, operator, matchType ) );
-        }
-        return detachedCriteria;
-    }
-
-    /**
-     * This method is for getting the keys for searching
-     *
-     * @param searchConditions A list of type Map of type
-     * @return A list of type String
-     */
-    private List< String > getKeysForSearch( final List< Map< String, String > > searchConditions ) {
-
-        List< String > keys = new ArrayList< String >( );
-        for ( Map< String, String > searchCondition : searchConditions ) {
-            if ( searchCondition.size( ) != com.mana.innovative.constants.DAOConstants.ONE ) {
-                throw new IllegalSearchListSizeException( "Map Size must be ONE (1)" );
-            }
-            for ( Map.Entry< String, String > entry : searchCondition.entrySet( ) ) {
-                keys.add( entry.getKey( ) );
-            }
-        }
-        return keys;
     }
 
     /**

@@ -78,6 +78,13 @@ public class Item {
     private Date boughtDate;
 
     /**
+     * The Image count.
+     */
+    private int imageCount;
+
+    private String itemOrigin;
+
+    /**
      * The Item image list.
      */
     private List< ItemImage > itemImageList;
@@ -87,6 +94,7 @@ public class Item {
      */
     private List< ItemDiscount > itemDiscountList;
 
+    private List< Gemstone > gemstoneList;
 
     /**
      * Gets item id.
@@ -336,6 +344,25 @@ public class Item {
         this.weightedUnit = weightedUnit;
     }
 
+    /**
+     * Gets image count.
+     *
+     * @return the image count
+     */
+    @XmlElement( name = "image_count", defaultValue = "0", nillable = false )
+    public int getImageCount( ) {
+        return imageCount;
+    }
+
+    /**
+     * Sets image count.
+     *
+     * @param imageCount the image count
+     */
+    public void setImageCount( final int imageCount ) {
+        this.imageCount = imageCount;
+    }
+
     @XmlElementWrapper( name = "item_images" )
     @XmlElement( name = "item_image", nillable = true )
     public List< ItemImage > getItemImageList( ) {
@@ -354,6 +381,25 @@ public class Item {
 
     public void setItemDiscountList( final List< ItemDiscount > itemDiscountList ) {
         this.itemDiscountList = itemDiscountList;
+    }
+
+    @XmlElement( name = "item_origin", nillable = true )
+    public String getItemOrigin( ) {
+        return itemOrigin;
+    }
+
+    public void setItemOrigin( final String itemOrigin ) {
+        this.itemOrigin = itemOrigin;
+    }
+
+    @XmlElementWrapper( name = "gemstones" )
+    @XmlElement( name = "gemstone", nillable = true )
+    public List< Gemstone > getGemstoneList( ) {
+        return gemstoneList;
+    }
+
+    public void setGemstoneList( final List< Gemstone > gemstoneList ) {
+        this.gemstoneList = gemstoneList;
     }
 
     @Override
@@ -375,7 +421,10 @@ public class Item {
                 Objects.equals( getWeightedUnit( ), item.getWeightedUnit( ) ) &&
                 Objects.equals( getBoughtDate( ), item.getBoughtDate( ) ) &&
                 Objects.equals( getItemImageList( ), item.getItemImageList( ) ) &&
-                Objects.equals( getItemDiscountList( ), item.getItemDiscountList( ) );
+                Objects.equals( getItemDiscountList( ), item.getItemDiscountList( ) ) &&
+                Objects.equals( getGemstoneList( ), item.getGemstoneList( ) ) &&
+                Objects.equals( getItemOrigin( ), item.getItemOrigin( ) ) &&
+                Objects.equals( getImageCount( ), item.getImageCount( ) );
     }
 
     /**
@@ -401,6 +450,7 @@ public class Item {
                 ", quantityType='" + quantityType + '\'' +
                 ", weightedUnit='" + weightedUnit + '\'' +
                 ", boughtDate=" + boughtDate +
+                ", imageCount=" + imageCount +
                 ", itemImageList=" + itemImageList +
                 ", itemDiscountList=" + itemDiscountList +
                 '}';

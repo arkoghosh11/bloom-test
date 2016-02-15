@@ -65,9 +65,16 @@ public class ServiceConstants {
 
     public static final String DEFAULT_ITEM_DESCRIPTION = "Not Available";
     public static final String DEFAULT_SHOP_DESCRIPTION = "Not Available";
+    public static final String DEFAULT_GEMSTONE_DESCRIPTION = "Not Available";
     public static final String EMPTY = "Empty";
     public static final int THREE = 3;
     public static final int FOUR = 4;
     public static final int FIVE = 5;
     public static final int SEVEN = 7;
+    public static final String DEFAULT_ITEM_ORIGIN = "India";
+    public static final String DEFAULT_TAB_COLOR = "#00000";
+    public static final String DEFAULT_TAB_POSITION = "top";
+
+    public static final String UNDERSCORE = "_";
+    public static final String DOT = ".";
 }

@@ -59,19 +59,15 @@
             <version>1.0.0.m3</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.mana.innovative</groupId>
-            <artifactId>bloom-security</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.mana.innovative</groupId>-->
+        <!--<artifactId>bloom-security</artifactId>-->
+        <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>com.mana.innovative</groupId>
             <artifactId>bloom-service</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mana.innovative</groupId>
-            <artifactId>bloom-dao</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -224,11 +220,11 @@
 
         <!-- Note new jspx easy library -->
         <!-- IMP {@link http://jspx-bay.sourceforge.net/} Credit to the people here for developing this open source awesome library-->
-        <dependency>
-            <groupId>org.bay.jspx</groupId>
-            <artifactId>easy-jspx</artifactId>
-            <version>${easyjspx.version}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.bay.jspx</groupId>-->
+        <!--<artifactId>easy-jspx</artifactId>-->
+        <!--<version>${easyjspx.version}</version>-->
+        <!--</dependency>-->
 
         <!-- Note easy JSPX dependant libraries-->
         <dependency>
@@ -258,6 +254,12 @@
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
             <version>2.7.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3.1</version>
         </dependency>
 
 

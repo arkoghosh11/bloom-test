@@ -49,8 +49,9 @@ public class ShopRestWebService {
     /**
      * The Login service.
      */
-    @Resource // todo login service
-    private LoginService loginService;
+//    @Resource // todo login service
+    private LoginService loginService = new LoginService( );
+
     /**
      * The Shop service impl.
      */
@@ -78,9 +79,9 @@ public class ShopRestWebService {
     @DefaultValue( value = ServiceConstants.FALSE ) boolean isError ) {
 
         // IMP verify access for this method
-        if ( !loginService.checkLogin( httpServletRequest ) ) {
-            return ResponseUtility.unauthorizedAccess( null );
-        }
+//        if ( !loginService.checkLogin( httpServletRequest ) ) {
+//            return ResponseUtility.unauthorizedAccess( null );
+//        }
         Response response;
         RequestParams requestParams = new RequestParams( );
         requestParams.setIsError( isError );

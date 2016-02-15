@@ -2,6 +2,7 @@ package com.mana.innovative.dao.client;
 
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
+import com.mana.innovative.domain.common.SearchOption;
 import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Repository;
 
@@ -75,10 +76,30 @@ public interface ItemDAO {
     DAOResponse< Item > getItemByItemId( long itemId, RequestParams requestParams );
 
     /**
+     * Gets item by item name.
+     *
+     * @param itemName the item name
+     * @param requestParams the request params
+     *
+     * @return the item by item name
+     */
+    DAOResponse< Item > getItemByItemName( String itemName, RequestParams requestParams );
+
+    /**
      * Gets items.
      *
      * @param requestParams the request params
      * @return the items
      */
     DAOResponse< Item > getItems( RequestParams requestParams );
+
+    /**
+     * Gets item by search params.
+     *
+     * @param itemSearchOption the item search option
+     * @param requestParams the request params
+     *
+     * @return the item by search params
+     */
+    DAOResponse< Item > getItemsBySearchParams( SearchOption itemSearchOption, RequestParams requestParams );
 }

@@ -20,7 +20,8 @@ public class FileRenaming {
 
     public static void main( String args[] ) {
 
-        int choice = Integer.parseInt( JOptionPane.showInputDialog( null, "Enter 1 for file extension change, 2 for New Name" ) );
+        int choice = Integer.parseInt( JOptionPane.showInputDialog( null, "Enter 1 for file extension change, 2 for " +
+                "New Name, 3 for replacing old file name" ) );
 
         JFileChooser chooser = new JFileChooser( );
         chooser.setCurrentDirectory( new java.io.File( "." ) );
@@ -51,6 +52,11 @@ public class FileRenaming {
             newExtension = JOptionPane.showInputDialog( null, "Rename to", "Enter New File name to be used with list " +
                     "numbering of files to be renamed to" );
         }
+        if ( choice == 3 ) {
+            oldExtension = JOptionPane.showInputDialog( null, "Rename for ", "Enter Prepend of files to be replaced" );
+            newExtension = JOptionPane.showInputDialog( null, "Rename to", "Enter Prepend name to be" +
+                    " used with list numbering of files to be renamed to" );
+        }
         if ( oldExtension == null || newExtension == null ) {
             JOptionPane.showMessageDialog( null, "No rename parameters provided", "Alert!!!", JOptionPane.ERROR_MESSAGE );
             return;
@@ -62,6 +68,9 @@ public class FileRenaming {
         }
         if ( choice == 2 ) {
             fileRenaming.renameFileNameWithNewName( currentDirectory, newExtension );
+        }
+        if ( choice == 3 ) {
+            fileRenaming.renameFileNameWithNewNamePrepend( currentDirectory, oldExtension, newExtension );
         }
     }
 
@@ -110,6 +119,31 @@ public class FileRenaming {
                 String abstractFileName = file.getPath( );
                 abstractFileName = newName + i + abstractFileName.substring( abstractFileName.lastIndexOf( "." ),
                         abstractFileName.length( ) );
+                i++;
+                System.out.println( "newName is" + currentDirectory.getAbsolutePath( ) + "/" + abstractFileName );
+                boolean isRenamed = file.renameTo( new File( currentDirectory.getAbsolutePath( ) + "/" + abstractFileName
+                ) );
+                if ( !isRenamed ) {
+                    System.out.println( "Error occurred while renaming: " + abstractFileName );
+                }
+            }
+        }
+    }
+
+    public void renameFileNameWithNewNamePrepend( File currentDirectory, String oldName, String newName ) {
+
+        if ( !checkFile( currentDirectory ) ) {
+            return;
+        }
+        int i = 1;
+        File files[] = currentDirectory.listFiles( );
+        if ( files != null && files.length > 0 ) {
+            for ( File file : files ) {
+                if ( file == null || file.isDirectory( ) ) {
+                    continue;
+                }
+                String abstractFileName = file.getPath( );
+                abstractFileName = newName + i + abstractFileName.replace( oldName, newName );
                 i++;
                 System.out.println( "newName is" + currentDirectory.getAbsolutePath( ) + "/" + abstractFileName );
                 boolean isRenamed = file.renameTo( new File( currentDirectory.getAbsolutePath( ) + "/" + abstractFileName

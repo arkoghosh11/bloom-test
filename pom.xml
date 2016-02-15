@@ -37,6 +37,7 @@
         <module>bloom-constants</module>
         <module>bloom-exception</module>
         <module>bloom-common</module>
+        <module>bloom-converter</module>
         <module>bloom-domain</module>
         <module>bloom-dao</module>
         <module>bloom-non-client-service</module>
@@ -44,7 +45,7 @@
         <!--<module>bloom-aop</module>-->
         <module>bloom-service</module>
         <module>bloom-dto</module>
-        <module>bloom-security</module>
+        <!--<module>bloom-security/module>-->
     </modules>
 
     <dependencies>

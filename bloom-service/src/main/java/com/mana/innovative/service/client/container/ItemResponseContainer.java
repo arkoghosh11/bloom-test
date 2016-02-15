@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
-@XmlRootElement( name = "response", namespace = "http://localhost:8080/bloom-test/rest/" )
+@XmlRootElement( name = "response", namespace = "http://localhost:8443/bloom-test/rest/" )
 @XmlSeeAlso( value = { ItemsPayload.class, ResponseContainer.class } )
 public class ItemResponseContainer < T > extends ResponseContainer< T > {
 }

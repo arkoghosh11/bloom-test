@@ -41,184 +41,193 @@ import java.util.List;
 @Path( "/{item : (?i)item}" )//@Path ("/{items : (?i)items}")
 public class ItemRestWebService {
 
-    /**
-     * The constant logger.
-     */
-    private static final Logger logger = LoggerFactory.getLogger( ItemRestWebService.class );
+	/**
+	 * The constant logger.
+	 */
+	private static final Logger logger = LoggerFactory.getLogger( ItemRestWebService.class );
 
-    /**
-     * The Item service impl.
-     */
-    @Resource
-    ItemService itemServiceImpl;
-    /**
-     * The Login service.
-     */
-    @Resource // todo login service
-    private LoginService loginService;
-    /**
-     * The Http servlet request.
-     */
-    @Context
-    private HttpServletRequest httpServletRequest;
+	/**
+	 * The Item service impl.
+	 */
+	@Resource
+	ItemService itemServiceImpl;
+	/**
+	 * The Login service.
+	 */
+//    @Resource // todo login service
+	private LoginService loginService = new LoginService( );
+	/**
+	 * The Http servlet request.
+	 */
+	@Context
+	private HttpServletRequest httpServletRequest;
 
-    /**
-     * Gets items.
-     *
-     * @param itemId the item id
-     * @param isError the is error
-     * @return the items
-     */
-    @GET
-    @Path( "/{item_id}" )
-    @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response getItems( @PathParam( value = "item_id" ) long itemId, @QueryParam( value = "is_error" )
-    @DefaultValue( value = ServiceConstants.FALSE ) boolean isError ) {
+	/**
+	 * Gets items.
+	 *
+	 * @param itemIdName the item id
+	 * @param isError the is error
+	 *
+	 * @return the items
+	 */
+	@GET
+	@Path( "/{item_id}" )
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
+	public Response getItemByIdOrName( @PathParam( value = "item_id" ) String itemIdName, @QueryParam( value = "is_error" )
+	@DefaultValue( value = ServiceConstants.FALSE ) boolean isError ) {
 
-        System.out.println( "****** Item Service.********" );
-        // IMP verify access for this method, right now enabling this line will block all calls to this
-        // web service as login service is not implemented yet
+		System.out.println( "****** Item Service.********" );
+		// IMP verify access for this method, right now enabling this line will block all calls to this
+		// web service as login service is not implemented yet
 //        if ( !loginService.checkLogin( httpServletRequest ) ) {
 //            return ResponseUtility.unauthorizedAccess( null );
 //        }
 
-        Response response;
+		Response response = null;
 
-        try {
-            RequestParams requestParams = new RequestParams( );
-            requestParams.setIsError( isError );
-            response = itemServiceImpl.getItemByItemId( itemId, requestParams );
-        } catch ( Exception exception ) {
+		try {
+			RequestParams requestParams = new RequestParams( );
+			requestParams.setIsError( isError );
+			try {
+				long itemId = Integer.parseInt( itemIdName );
+				response = itemServiceImpl.getItemByItemId( itemId, requestParams );
+			} catch ( Exception exception ) {
+				response = itemServiceImpl.getItemByItemName( itemIdName, requestParams );
+			}
+		} catch ( Exception exception ) {
 
-            response = ResponseUtility.internalServerErrorMsg( null );
-            logger.error( "Exception occurred in ItemsService.getItems() Method", exception );
-        } finally {
-            logger.debug( " Response for getItemsByItemId sent Successfully " );
-        }
-        return response;
-    }
+			response = ResponseUtility.internalServerErrorMsg( null );
+			logger.error( "Exception occurred in ItemsService.getItems() Method", exception );
+		} finally {
+			logger.debug( " Response for getItemsByItemId sent Successfully " );
+		}
+		return response;
+	}
 
-    /**
-     * Create an item.
-     *
-     * @param itemDTO the item dTO
-     * @param isError the is error
-     * @return the response
-     */
-    @POST
-    @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response createAnItem( @NotNull Item itemDTO, @QueryParam( value = "is_error" )
-    @DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
+	/**
+	 * Create an item.
+	 *
+	 * @param itemDTO the item dTO
+	 * @param isError the is error
+	 *
+	 * @return the response
+	 */
+	@POST
+	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
+	public Response createAnItem( @NotNull Item itemDTO, @QueryParam( value = "is_error" )
+	@DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
 
-        Response response;
-        try {
-            RequestParams requestParams = new RequestParams( );
-            requestParams.setIsError( isError );
-            response = itemServiceImpl.createItem( itemDTO, requestParams );
-        } catch ( Exception exception ) {
+		Response response;
+		try {
+			RequestParams requestParams = new RequestParams( );
+			requestParams.setIsError( isError );
+			response = itemServiceImpl.createItem( itemDTO, requestParams );
+		} catch ( Exception exception ) {
 
-            response = ResponseUtility.internalServerErrorMsg( null );
-            logger.error( "Exception occurred in ItemsService.createItem() Method", exception );
-        } finally {
-            logger.debug( " Response for getItemsByItemId sent Successfully " );
-        }
-        return response;
-    }
+			response = ResponseUtility.internalServerErrorMsg( null );
+			logger.error( "Exception occurred in ItemsService.createItem() Method", exception );
+		} finally {
+			logger.debug( " Response for getItemsByItemId sent Successfully " );
+		}
+		return response;
+	}
 
-    /**
-     * Update an item.
-     *
-     * @param itemId the item id
-     * @param itemDTO the item dTO
-     * @param isError the is error
-     * @return the response
-     */
-    @PUT
-    @Path( "/{item_id}" )
-    @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response updateAnItem( @PathParam( "item_id" ) Long itemId, Item itemDTO, @QueryParam( value = "is_error" )
-    @DefaultValue( value = ServiceConstants.FALSE ) boolean isError ) {
+	/**
+	 * Update an item.
+	 *
+	 * @param itemId the item id
+	 * @param itemDTO the item dTO
+	 * @param isError the is error
+	 *
+	 * @return the response
+	 */
+	@PUT
+	@Path( "/{item_id}" )
+	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
+	public Response updateAnItem( @PathParam( "item_id" ) Long itemId, Item itemDTO, @QueryParam( value = "is_error" )
+	@DefaultValue( value = ServiceConstants.FALSE ) boolean isError ) {
 
-        Response response;
-        // check the item ID for validity
-        if ( itemId < 1 ) {
-            return ResponseUtility.badRequest( "item id is less than 0" );
-        }
-        try {
-            RequestParams requestParams = new RequestParams( );
-            requestParams.setIsError( isError );
-            response = itemServiceImpl.updateItem( itemDTO, requestParams );
-        } catch ( Exception exception ) {
+		Response response;
+		// check the item ID for validity
+		if ( itemId < 1 ) {
+			return ResponseUtility.badRequest( "item id is less than 0" );
+		}
+		try {
+			RequestParams requestParams = new RequestParams( );
+			requestParams.setIsError( isError );
+			response = itemServiceImpl.updateItem( itemDTO, requestParams );
+		} catch ( Exception exception ) {
 
-            response = ResponseUtility.internalServerErrorMsg( null );
-            logger.error( "Exception occurred in ItemsService.updateAnItem() Method", exception );
-        } finally {
-            logger.debug( " Response for updateAnItem sent Successfully " );
-        }
-        return response;
-    }
+			response = ResponseUtility.internalServerErrorMsg( null );
+			logger.error( "Exception occurred in ItemsService.updateAnItem() Method", exception );
+		} finally {
+			logger.debug( " Response for updateAnItem sent Successfully " );
+		}
+		return response;
+	}
 
-    /**
-     * Delete an item.
-     *
-     * @param itemId the item id
-     * @param isError the is error
-     * @return the response
-     */
-    @DELETE
-    @Path( "/{item_id}" )
-    @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response deleteAnItem( @PathParam( "item_id" ) Long itemId, @QueryParam( value = "is_error" )
-    @DefaultValue( value = ServiceConstants.FALSE ) boolean isError ) {
+	/**
+	 * Delete an item.
+	 *
+	 * @param itemId the item id
+	 * @param isError the is error
+	 *
+	 * @return the response
+	 */
+	@DELETE
+	@Path( "/{item_id}" )
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
+	public Response deleteAnItem( @PathParam( "item_id" ) Long itemId, @QueryParam( value = "is_error" )
+	@DefaultValue( value = ServiceConstants.FALSE ) boolean isError ) {
 
-        Response response;
-        // check the item ID for validity
-        if ( itemId < 1 ) {
-            return ResponseUtility.badRequest( "item id is less than 0" );
-        }
-        try {
-            RequestParams requestParams = new RequestParams( );
-            requestParams.setIsError( isError );
-            response = itemServiceImpl.deleteItemByItemId( itemId, requestParams );
-        } catch ( Exception exception ) {
+		Response response;
+		// check the item ID for validity
+		if ( itemId < 1 ) {
+			return ResponseUtility.badRequest( "item id is less than 0" );
+		}
+		try {
+			RequestParams requestParams = new RequestParams( );
+			requestParams.setIsError( isError );
+			response = itemServiceImpl.deleteItemByItemId( itemId, requestParams );
+		} catch ( Exception exception ) {
 
-            response = ResponseUtility.internalServerErrorMsg( null );
-            logger.error( "Exception occurred in ItemsService.getItems() Method", exception );
-        } finally {
-            logger.debug( " Response for getItemsByItemId sent Successfully " );
-        }
-        return response;
-    }
+			response = ResponseUtility.internalServerErrorMsg( null );
+			logger.error( "Exception occurred in ItemsService.getItems() Method", exception );
+		} finally {
+			logger.debug( " Response for getItemsByItemId sent Successfully " );
+		}
+		return response;
+	}
 
-    /**
-     * Delete items by item ids.
-     *
-     * @param itemIds the item ids
-     * @param isError the is error
-     * @return the response
-     */
-    @DELETE
-    @Path( "/ids" )
-    @Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response deleteItemsByItemIds( List< Long > itemIds, @QueryParam( value = "is_error" )
-    @DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
+	/**
+	 * Delete items by item ids.
+	 *
+	 * @param itemIds the item ids
+	 * @param isError the is error
+	 *
+	 * @return the response
+	 */
+	@DELETE
+	@Path( "/ids" )
+	@Consumes( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
+	public Response deleteItemsByItemIds( List< Long > itemIds, @QueryParam( value = "is_error" )
+	@DefaultValue( value = DAOConstants.FALSE ) boolean isError ) {
 
-        Response response;
-        try {
-            RequestParams requestParams = new RequestParams( );
-            requestParams.setIsError( isError );
-            response = itemServiceImpl.deleteItemsByItemIds( itemIds, requestParams );
-        } catch ( Exception exception ) {
+		Response response;
+		try {
+			RequestParams requestParams = new RequestParams( );
+			requestParams.setIsError( isError );
+			response = itemServiceImpl.deleteItemsByItemIds( itemIds, requestParams );
+		} catch ( Exception exception ) {
 
-            response = ResponseUtility.internalServerErrorMsg( null );
-            logger.error( "Exception occurred in ItemsService.getItems() Method", exception );
-        } finally {
-            logger.debug( " Response for getItemsByItemId sent Successfully " );
-        }
-        return response;
-    }
-
+			response = ResponseUtility.internalServerErrorMsg( null );
+			logger.error( "Exception occurred in ItemsService.getItems() Method", exception );
+		} finally {
+			logger.debug( " Response for getItemsByItemId sent Successfully " );
+		}
+		return response;
+	}
 }

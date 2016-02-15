@@ -3,6 +3,8 @@
  */
 package com.mana.innovative.rest.common;
 
+import com.mana.innovative.dto.common.Tab;
+import com.mana.innovative.dto.request.FilterSortParams;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.common.TabsService;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -59,6 +62,7 @@ public class TabsRestWebService {
      * This method is for giving service for url /rest/tabs with all the tabs data as a {@link List<Tab></>}
      *
      * @param isError the is error
+     *
      * @return A response object containing all of the tabs within the Database
      */
     @GET
@@ -74,10 +78,38 @@ public class TabsRestWebService {
     }
 
     /**
+     * This method is for giving service for url /rest/tabs with all the tabs data as a {@link
+     * List<com.mana.innovative.dto.common.Tab></>}
+     *
+     * @param isError the is error
+     *
+     * @return A response object containing all of the tabs within the Database
+     */
+
+    @POST
+    @Path( "/customFilter" )
+    @Consumes( { MediaType.APPLICATION_JSON } )
+    @Produces( { MediaType.APPLICATION_JSON } )
+    public Response getSearchedTabsByParams( FilterSortParams filterSortParams, @QueryParam( "is_error" ) @DefaultValue( "false" )
+    Boolean isError ) {
+
+        logger.debug( "Starting request for #getSearchedTabsByParams()" );
+//        logger.info( "Data received " + filterSortParams.getFilter().getKeyValueMap().values() );
+//        logger.info( "Data received " + filterSortParams.getSort().getKeyValueMap().values() );
+        RequestParams requestParams = new RequestParams( );
+        requestParams.setIsError( isError );
+        Response response = tabsService.getTabsSearchedByParams( filterSortParams, requestParams );
+//        Response response = Response.status( Status.ACCEPTED ).entity( "Success" ).build( );
+        logger.debug( "Finishing response for #getSearchedTabsByParams()" );
+        return response;
+    }
+
+    /**
      * Delete tabs.
      *
-     * @param tabIds the tab ids
+     * @param tabIds  the tab ids
      * @param isError the is error
+     *
      * @return the response
      */
     @DELETE

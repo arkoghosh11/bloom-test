@@ -4,6 +4,7 @@ import com.mana.innovative.constants.CardType;
 import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
+import com.mana.innovative.domain.client.Gemstone;
 import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.domain.client.ItemDiscount;
 import com.mana.innovative.domain.client.ItemImage;
@@ -129,6 +130,8 @@ public class TestDummyDomainObjectGenerator {
 
         item.setQuantityType( QuantityType.UNIT.toString( ) );
         item.setWeightedUnit( WeightedUnit.POUND.toString( ) );
+
+        item.setImageCount( TestConstants.TEST_IMAGE_COUNT );
 
         List< ItemDiscount > itemDiscountList = new ArrayList<>( );
 
@@ -288,6 +291,8 @@ public class TestDummyDomainObjectGenerator {
 //            tab.setTabId( i );
             tab.setTabContent( "Content " + i );
             tab.setTabName( "name " + i );
+            tab.setTabColor( "#00000 " + i );
+            tab.setTabPosition( "top " + i );
             tabList.add( tab );
         }
         return tabList;
@@ -724,5 +729,45 @@ public class TestDummyDomainObjectGenerator {
             itemImageList.add( itemImage );
         }
         return itemImageList;
+    }
+
+    /**
+     * Sets test item image domain Zero Id object.
+     *
+     * @param gemstoneDomain the item image domain
+     *
+     * @return the test item image domain Zero Id object
+     */
+    public static Gemstone setTestGemstoneDomainZEROIDObject( final Gemstone gemstoneDomain ) {
+        gemstoneDomain.setGemstoneId( TestConstants.ZERO );
+        return gemstoneDomain;
+    }
+
+    /**
+     * Gets test gemstone dTO object.
+     *
+     * @return the test gemstone dTO object
+     */
+    public static Gemstone getTestGemstoneDomainObject( ) {
+        return getNCreateGemstoneDomainList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets n create gemstone dTO list.
+     *
+     * @return the created gemstone dTO list
+     */
+    public static List< Gemstone > getNCreateGemstoneDomainList( ) {
+        List< Gemstone > gemstoneList = new ArrayList<>( );
+        Gemstone gemstone;
+        for ( int i = 1; i < 5; i++ ) {
+            gemstone = new Gemstone( );
+            gemstone.setGemstoneId( i );
+            gemstone.setGemstoneName( TestConstants.DEFAULT_GEM_NAME + i );
+            gemstone.setGemstoneDescription( TestConstants.DEFAULT_DESCRIPTION );
+
+            gemstoneList.add( gemstone );
+        }
+        return gemstoneList;
     }
 }

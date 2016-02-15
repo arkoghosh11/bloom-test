@@ -3,6 +3,7 @@
  */
 package com.mana.innovative.service.common.impl;
 
+import com.mana.innovative.converter.response.TabDomainDTOConverter;
 import com.mana.innovative.dao.common.TabDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.dto.common.Tab;
@@ -11,7 +12,6 @@ import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.common.TabService;
 import com.mana.innovative.service.common.builder.TabResponseBuilder;
 import com.mana.innovative.service.common.container.TabResponseContainer;
-import com.mana.innovative.utilities.response.TabDomainDTOConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

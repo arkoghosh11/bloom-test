@@ -3,13 +3,13 @@ package com.mana.innovative.service.common.builder;
 
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.ServiceConstants;
+import com.mana.innovative.converter.response.CalendarEventDomainDTOConverter;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.dto.common.payload.CalendarEventsPayload;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.response.Error;
 import com.mana.innovative.exception.response.ErrorContainer;
 import com.mana.innovative.service.common.container.CalendarEventResponseContainer;
-import com.mana.innovative.utilities.response.CalendarEventDomainDTOConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

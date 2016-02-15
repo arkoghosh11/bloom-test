@@ -2,8 +2,8 @@ package com.mana.innovative.dao.common;
 
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.common.Tab;
-import com.mana.innovative.domain.common.TabSearchOption;
 import com.mana.innovative.dto.request.RequestParams;
+import com.mana.innovative.logic.ItemSearchOption;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -57,11 +57,11 @@ public interface TabDAO {
     /**
      * Gets tab by search params.
      *
-     * @param tabSearchOption the tab search option
+     * @param searchOption the tab search option
      * @param requestParams the request params
      * @return the tab by search params
      */
-    DAOResponse< Tab > getTabBySearchParams( TabSearchOption tabSearchOption, RequestParams requestParams );
+    DAOResponse< Tab > getTabBySearchParams( ItemSearchOption searchOption, RequestParams requestParams );
 
     /**
      * Gets tab by tab id.

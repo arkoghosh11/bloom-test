@@ -98,6 +98,10 @@ public final class DAOConstants {
      * The constant DEFAULT_USER_ROLE_NAME.
      */
     public static final String DEFAULT_USER_ROLE_NAME = "anonymous";
+    /**
+     * The constant DEFAULT_GEM_DESCRIPTION.
+     */
+    public static final String DEFAULT_GEM_DESCRIPTION = "Not Available";
 
 
     /**

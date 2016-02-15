@@ -4,10 +4,10 @@ import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.dao.common.TabDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.common.Tab;
-import com.mana.innovative.domain.common.TabSearchOption;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.exception.IllegalItemSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
+import com.mana.innovative.logic.ItemSearchOption;
 import com.mana.innovative.logic.QueryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -309,14 +309,14 @@ public class TabDAOImpl implements TabDAO {
     /**
      * Gets tab by search params.
      *
-     * @param tabSearchOption the tab search option
+     * @param searchOption the tab search option
      * @param requestParams the request params
      * @return the tab by search params
      */
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Tab > getTabBySearchParams( TabSearchOption tabSearchOption, RequestParams requestParams ) {
+    public DAOResponse< Tab > getTabBySearchParams( ItemSearchOption searchOption, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#getTabBySearchParams()";
         List< Tab > tabList = new ArrayList<>( );
@@ -328,7 +328,7 @@ public class TabDAOImpl implements TabDAO {
         try {
             this.openDBTransaction( );
 
-            DetachedCriteria detachedCriteria = this.getDetachedCriteriaBySearchParams( tabSearchOption );
+            DetachedCriteria detachedCriteria = this.getDetachedCriteriaBySearchParams( searchOption );
 
             tabList = detachedCriteria.getExecutableCriteria( session ).list( );
             this.closeDBTransaction( );
@@ -445,6 +445,8 @@ public class TabDAOImpl implements TabDAO {
         return tabDAOResponse;
     }
 
+    // Note below methods are for making a search query on the database based on each field
+
     /**
      * Delete all tabs.
      *
@@ -496,22 +498,20 @@ public class TabDAOImpl implements TabDAO {
         return tabDAOResponse;
     }
 
-    // Note below methods are for making a search query on the database based on each field
-
     /**
      * This method is to create a detached criteria
      *
-     * @param tabSearchOption the tab search option
+     * @param searchOption the tab search option
      * @return A detached criteria object
      */
-    private DetachedCriteria getDetachedCriteriaBySearchParams( TabSearchOption tabSearchOption ) {
+    private DetachedCriteria getDetachedCriteriaBySearchParams( ItemSearchOption searchOption ) {
 
-        List< Map< String, Object > > searchConditionParams = tabSearchOption.getSearchConditionParams( );
-        List< Map< String, String > > searchOrderWithParams = tabSearchOption.getSearchOrderWithParams( );
-        List< Map< String, Object > > searchMatchTypeParams = tabSearchOption.getSearchMatchTypeParams( );
+        List< Map< String, Object > > searchConditionParams = searchOption.getSearchConditionParams( );
+        List< Map< String, String > > searchOrderWithParams = searchOption.getSearchOrderWithParams( );
+        List< Map< String, Object > > searchMatchTypeParams = searchOption.getSearchMatchTypeParams( );
 
-        List< Map< String, String > > searchConditions = tabSearchOption.getSearchConditions( );
-        List< Map< String, String > > searchMatchType = tabSearchOption.getSearchMatchType( );
+        List< Map< String, String > > searchConditions = searchOption.getSearchConditions( );
+        List< Map< String, String > > searchMatchType = searchOption.getSearchMatchType( );
         List< String > keys;
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass( Tab.class );
 

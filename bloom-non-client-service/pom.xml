@@ -14,13 +14,18 @@
 
         <dependency>
             <groupId>com.mana.innovative</groupId>
+            <artifactId>bloom-converter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mana.innovative</groupId>
             <artifactId>bloom-common</artifactId>
-            <version>1.0.RELEASE</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.mana.innovative</groupId>
             <artifactId>bloom-dao</artifactId>
-            <version>1.0.RELEASE</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

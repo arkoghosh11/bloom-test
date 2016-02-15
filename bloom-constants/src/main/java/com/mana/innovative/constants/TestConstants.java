@@ -184,7 +184,7 @@ public class TestConstants {
     /**
      * The constant TEST_WEB_LINK.
      */
-    public static final String TEST_WEB_LINK = TEST;
+    public static final String TEST_WEB_LINK = TEST + " data";
     /**
      * The constant TEST_DISTRICT.
      */
@@ -292,6 +292,16 @@ public class TestConstants {
     public static final String DEFAULT_BOUGHT_DATE = "2015-02-25 01:00:00";
     public static final String DEFAULT_CREATED_DATE = "2015-01-23 17:22:12";
     public static final String DEFAULT_UPDATED_DATE = "2015-01-28 21:05:16";
+    public static final int TEST_IMAGE_COUNT = 4;
+
+    public static final String DEFAULT_GEM_NAME = "default";
+    public static final String TEST_GEM_NAME = "test";
+
+    public static final String DEFAULT_ITEM_ORIGIN = "default";
+    public static final String TEST_ITEM_ORIGIN = "test";
+
+    public static final String TEST_GEM_DESCRIPTION = "test";
+    public static final String DEFAULT_GEM_DESCRIPTION = "default";
 
     /**
      * The constant setUpMethodLoggerMsg.

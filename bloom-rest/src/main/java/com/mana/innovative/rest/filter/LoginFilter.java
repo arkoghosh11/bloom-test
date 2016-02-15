@@ -1,9 +1,6 @@
 package com.mana.innovative.rest.filter;
 
 import com.mana.innovative.authentication.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -22,14 +19,14 @@ import java.io.PrintWriter;
  * @Copyright
  */
 //@javax.servlet.annotation.WebFilter (filterName = "loginFilter")
-@Component
+//@Component
 public class LoginFilter implements javax.servlet.Filter {
 
     /**
      * The Login service.
      */
-    @Autowired
-    @Qualifier
+//    @Autowired
+//    @Qualifier
     private LoginService loginService;
 
     /**
@@ -60,7 +57,7 @@ public class LoginFilter implements javax.servlet.Filter {
      */
     public void doFilter( ServletRequest request, ServletResponse response, FilterChain chain ) throws ServletException, IOException {
 
-        boolean valid = loginService.checkLogin( request );
+//        boolean valid = loginService.checkLogin( request );
         if ( true ) {
             chain.doFilter( request, response );
         } else {

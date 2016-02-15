@@ -90,5 +90,4 @@ public interface ItemDiscountDAO {
      */
     DAOResponse< ItemDiscount > getItemDiscounts( RequestParams requestParams );
 
-
 }

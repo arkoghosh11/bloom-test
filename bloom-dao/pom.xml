@@ -32,6 +32,16 @@
         </dependency>
         <dependency>
             <groupId>com.mana.innovative</groupId>
+            <artifactId>bloom-converter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mana.innovative</groupId>
+            <artifactId>bloom-dto</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mana.innovative</groupId>
             <artifactId>bloom-domain</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -4,7 +4,10 @@ import com.mana.innovative.constants.CardType;
 import com.mana.innovative.constants.QuantityType;
 import com.mana.innovative.constants.TestConstants;
 import com.mana.innovative.constants.WeightedUnit;
+import com.mana.innovative.dto.client.Gemstone;
 import com.mana.innovative.dto.client.Item;
+import com.mana.innovative.dto.client.ItemDiscount;
+import com.mana.innovative.dto.client.ItemImage;
 import com.mana.innovative.dto.client.Shop;
 import com.mana.innovative.dto.client.WorkingHour;
 import com.mana.innovative.dto.common.Address;
@@ -26,6 +29,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -625,6 +629,98 @@ public class TestDummyDTOObjectGenerator {
     public static Privilege getTestPrivilegeDTOObject( ) {
 
         return getNCreatePrivilegeDTOList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets test item discount dTO object.
+     *
+     * @return the test item discount dTO object
+     */
+    public static ItemDiscount getTestItemDiscountDTOObject( ) {
+
+        return getNCreateItemDiscountDTOList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets n create item discount dTO list.
+     *
+     * @return the created item discount dTO list
+     */
+    public static List< ItemDiscount > getNCreateItemDiscountDTOList( ) {
+
+        List< ItemDiscount > itemDiscountList = new ArrayList<>( );
+        ItemDiscount itemDiscount;
+        for ( int i = 1; i < 5; i++ ) {
+            itemDiscount = new ItemDiscount( );
+            itemDiscount.setItemDiscountId( i );
+            itemDiscount.setDiscountPercent( TestConstants.DEFAULT_ITEM_DISCOUNT_PERCENT );
+            itemDiscount.setDiscountType( TestConstants.DEFAULT_ITEM_DISCOUNT_TYPE + i );
+            itemDiscount.setUserRole( TestConstants.DEFAULT_USER_ROLE_NAME );
+            itemDiscount.setIsActive( i % 2 == 0 );
+            itemDiscount.setStartDate( new Date( ) );
+            itemDiscount.setEndDate( new Date( ) );
+
+            itemDiscountList.add( itemDiscount );
+        }
+        return itemDiscountList;
+    }
+
+    /**
+     * Gets test item image dTO object.
+     *
+     * @return the test item image dTO object
+     */
+    public static ItemImage getTestItemImageDTOObject( ) {
+        return getNCreateItemImageDTOList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets n create item image dTO list.
+     *
+     * @return the created item image dTO list
+     */
+    public static List< ItemImage > getNCreateItemImageDTOList( ) {
+        List< ItemImage > itemImageList = new ArrayList<>( );
+        ItemImage itemImage;
+        for ( int i = 1; i < 5; i++ ) {
+            itemImage = new ItemImage( );
+            itemImage.setItemImageId( i );
+            itemImage.setImageLocation( TestConstants.DEFAULT_IMAGE_LOCATION + i );
+            itemImage.setImagePriority( TestConstants.DEFAULT_IMAGE_PRIORITY );
+            itemImage.setImageHeight( TestConstants.DEFAULT_IMAGE_HEIGHT + i );
+            itemImage.setImageWidth( TestConstants.DEFAULT_IMAGE_WIDTH + i );
+
+            itemImageList.add( itemImage );
+        }
+        return itemImageList;
+    }
+
+    /**
+     * Gets test gemstone dTO object.
+     *
+     * @return the test gemstone dTO object
+     */
+    public static Gemstone getTestGemstoneDTOObject( ) {
+        return getNCreateGemstoneDTOList( ).get( TestConstants.ZERO );
+    }
+
+    /**
+     * Gets n create gemstone dTO list.
+     *
+     * @return the created gemstone dTO list
+     */
+    public static List< Gemstone > getNCreateGemstoneDTOList( ) {
+        List< Gemstone > gemstoneList = new ArrayList<>( );
+        Gemstone gemstone;
+        for ( int i = 1; i < 5; i++ ) {
+            gemstone = new Gemstone( );
+            gemstone.setGemstoneId( i );
+            gemstone.setGemstoneName( TestConstants.DEFAULT_GEM_NAME + i );
+            gemstone.setGemstoneDescription( TestConstants.DEFAULT_DESCRIPTION );
+
+            gemstoneList.add( gemstone );
+        }
+        return gemstoneList;
     }
 
 }

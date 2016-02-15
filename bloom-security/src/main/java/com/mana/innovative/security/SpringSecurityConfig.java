@@ -47,7 +47,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .authoritiesByUsernameQuery(
 //                        "select username, role from user_roles1 where username=?");
         logger.debug( "Starting SpringSecurityConfig#configAuthentication" );
-        auth.userDetailsService( loginService ).passwordEncoder( getPasswordEncoder( ) );
+        auth.userDetailsService( loginService ).passwordEncoder( getPasswordEncoder( ) );//todo fix this code later on
         logger.debug( "Finishing SpringSecurityConfig#configAuthentication" );
     }
 

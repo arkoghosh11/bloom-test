@@ -46,6 +46,12 @@ public class Tab {
     @Column( name = "tab_content" )
     private String tabContent;
 
+    @Column( name = "tab_color" )
+    private String tabColor;
+
+    @Column( name = "tab_position" )
+    private String tabPosition;
+
     /**
      * The Created date.
      */
@@ -113,6 +119,22 @@ public class Tab {
         this.tabContent = tabContent;
     }
 
+    public String getTabColor( ) {
+        return tabColor;
+    }
+
+    public void setTabColor( final String tabColor ) {
+        this.tabColor = tabColor;
+    }
+
+    public String getTabPosition( ) {
+        return tabPosition;
+    }
+
+    public void setTabPosition( final String tabPosition ) {
+        this.tabPosition = tabPosition;
+    }
+
     /**
      * Gets created date.
      *
@@ -162,7 +184,9 @@ public class Tab {
         Tab tab = ( Tab ) o;
         return Objects.equals( getTabId( ), tab.getTabId( ) ) &&
                 Objects.equals( getTabName( ), tab.getTabName( ) ) &&
-                Objects.equals( getTabContent( ), tab.getTabContent( ) );
+                Objects.equals( getTabContent( ), tab.getTabContent( ) ) &&
+                Objects.equals( getTabColor( ), tab.getTabColor( ) ) &&
+                Objects.equals( getTabPosition( ), tab.getTabPosition( ) );
     }
 
     /**
@@ -182,10 +206,14 @@ public class Tab {
      */
     @Override
     public String toString( ) {
-        return "Tab {" +
-                " tabId=" + tabId +
-                ", tabName= " + tabName +
-                ", tabContent= " + tabContent +
+        return "Tab{" +
+                "tabId=" + tabId +
+                ", tabName='" + tabName + '\'' +
+                ", tabContent='" + tabContent + '\'' +
+                ", tabColor='" + tabColor + '\'' +
+                ", tabPosition='" + tabPosition + '\'' +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
                 '}';
     }
 }

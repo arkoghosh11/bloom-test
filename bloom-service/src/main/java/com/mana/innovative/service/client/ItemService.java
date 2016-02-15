@@ -27,6 +27,16 @@ public interface ItemService {
     Response getItemByItemId( long itemID, RequestParams requestParams );
 
     /**
+     * Gets item by item name.
+     *
+     * @param itemName the item name
+     * @param requestParams the request params
+     *
+     * @return the item by item name
+     */
+    Response getItemByItemName( String itemName, RequestParams requestParams );
+
+    /**
      * Create item.
      *
      * @param itemDTO the item dTO

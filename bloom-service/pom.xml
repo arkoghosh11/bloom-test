@@ -24,7 +24,11 @@
             <version>1.7.3</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.mana.innovative</groupId>
+            <artifactId>bloom-converter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.mana.innovative</groupId>
             <artifactId>bloom-dao</artifactId>
@@ -53,22 +57,22 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-web</artifactId>-->
+        <!--<version>${spring.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-webmvc</artifactId>-->
+        <!--<version>${spring.version}</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring.security.version}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.security</groupId>-->
+        <!--<artifactId>spring-security-core</artifactId>-->
+        <!--<version>${spring.security.version}</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -114,11 +118,11 @@
 
         <!-- Note new jspx easy library -->
         <!-- IMP {@link http://jspx-bay.sourceforge.net/} Credit to the people here for developing this open source awesome library-->
-        <dependency>
-            <groupId>org.bay.jspx</groupId>
-            <artifactId>easy-jspx</artifactId>
-            <version>${easyjspx.version}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.bay.jspx</groupId>-->
+        <!--<artifactId>easy-jspx</artifactId>-->
+        <!--<version>${easyjspx.version}</version>-->
+        <!--</dependency>-->
 
         <!-- Note easy JSPX dependant libraries-->
         <dependency>

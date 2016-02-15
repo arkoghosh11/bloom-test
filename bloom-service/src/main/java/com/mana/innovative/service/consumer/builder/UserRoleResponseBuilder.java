@@ -2,6 +2,7 @@ package com.mana.innovative.service.consumer.builder;
 
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.ServiceConstants;
+import com.mana.innovative.converter.response.UserRoleDomainDTOConverter;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.consumer.UserRole;
 import com.mana.innovative.dto.consumer.payload.UserRolesPayload;
@@ -9,7 +10,6 @@ import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.response.Error;
 import com.mana.innovative.exception.response.ErrorContainer;
 import com.mana.innovative.service.consumer.container.UserRoleResponseContainer;
-import com.mana.innovative.utilities.response.UserRoleDomainDTOConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -3,8 +3,12 @@
  */
 package com.mana.innovative.service.common;
 
+import com.mana.innovative.dto.request.FilterSortParams;
 import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -28,6 +32,9 @@ public interface TabsService {
      * @return the all tabs
      */
     Response getAllTabs( RequestParams requestParams );
+
+    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
+    Response getTabsSearchedByParams( FilterSortParams searchParams, RequestParams requestParams );
 
     /**
      * Delete tabs.

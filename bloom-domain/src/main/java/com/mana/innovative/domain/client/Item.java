@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -68,10 +70,10 @@ public class Item {
 //    @NotNull
     @Column( name = "item_price_currency" )
     private String itemPriceCurrency;
+
     /**
      * The Item name.
      */
-
     @Column( name = "item_name" )
     private String itemName;
 
@@ -86,6 +88,9 @@ public class Item {
     @Column( name = "item_sub_type" )
     private String itemSubType;
 
+    /**
+     * The Item description.
+     */
     @Column( name = "item_description" )
     private String itemDescription;
 
@@ -114,6 +119,18 @@ public class Item {
     private Date boughtDate;
 
     /**
+     * The Item origin.
+     */
+    @Column( name = "item_origin" )
+    private String itemOrigin;
+
+    /**
+     * The Image count.
+     */
+    @Column( name = "image_count" )
+    private int imageCount;
+
+    /**
      * The Created date.
      */
     @Column( name = "created_date", updatable = false )
@@ -126,11 +143,27 @@ public class Item {
     @Temporal( value = TemporalType.TIMESTAMP )
     private Date updatedDate;
 
+    /**
+     * The Item image list.
+     */
     @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "item" )
     private List< ItemImage > itemImageList;
 
+    /**
+     * The Item discount list.
+     */
     @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "item" )
     private List< ItemDiscount > itemDiscountList;
+
+    /**
+     * The Gemstones.
+     */
+    @ManyToMany( cascade = { CascadeType.ALL } )
+    @JoinTable( name = "item_gemstones",
+            joinColumns = { @JoinColumn( name = "item_id", referencedColumnName = "item_id" ) },
+            inverseJoinColumns = { @JoinColumn( name = "gemstone_id" ) },
+            uniqueConstraints = { @UniqueConstraint( name = "item_gemstone_id", columnNames = { "item_id", "gemstone_id" } ) } )
+    private List< Gemstone > gemstoneList;
 
     /**
      * The Shop item.
@@ -367,6 +400,42 @@ public class Item {
     }
 
     /**
+     * Gets image count.
+     *
+     * @return the image count
+     */
+    public int getImageCount( ) {
+        return imageCount;
+    }
+
+    /**
+     * Sets image count.
+     *
+     * @param imageCount the image count
+     */
+    public void setImageCount( final int imageCount ) {
+        this.imageCount = imageCount;
+    }
+
+    /**
+     * Gets item origin.
+     *
+     * @return the item origin
+     */
+    public String getItemOrigin( ) {
+        return itemOrigin;
+    }
+
+    /**
+     * Sets item origin.
+     *
+     * @param item_origin the item origin
+     */
+    public void setItemOrigin( final String item_origin ) {
+        this.itemOrigin = item_origin;
+    }
+
+    /**
      * Gets created date.
      *
      * @return the created date
@@ -406,28 +475,76 @@ public class Item {
         this.updatedDate = updatedDate;
     }
 
+    /**
+     * Gets item description.
+     *
+     * @return the item description
+     */
     public String getItemDescription( ) {
         return itemDescription;
     }
 
+    /**
+     * Sets item description.
+     *
+     * @param itemDescription the item description
+     */
     public void setItemDescription( final String itemDescription ) {
         this.itemDescription = itemDescription;
     }
 
+    /**
+     * Gets item image list.
+     *
+     * @return the item image list
+     */
     public List< ItemImage > getItemImageList( ) {
         return itemImageList;
     }
 
+    /**
+     * Sets item image list.
+     *
+     * @param itemImageList the item image list
+     */
     public void setItemImageList( final List< ItemImage > itemImageList ) {
         this.itemImageList = itemImageList;
     }
 
+    /**
+     * Gets item discount list.
+     *
+     * @return the item discount list
+     */
     public List< ItemDiscount > getItemDiscountList( ) {
         return itemDiscountList;
     }
 
+    /**
+     * Sets item discount list.
+     *
+     * @param itemDiscount the item discount
+     */
     public void setItemDiscountList( final List< ItemDiscount > itemDiscount ) {
         this.itemDiscountList = itemDiscount;
+    }
+
+    /**
+     * Gets gemstones.
+     *
+     * @return the gemstones
+     */
+    public List< Gemstone > getGemstoneList( ) {
+        return gemstoneList;
+    }
+
+    /**
+     * Sets gemstones.
+     *
+     * @param gemstones the gemstones
+     */
+    public void setGemstoneList( final List< Gemstone > gemstones ) {
+        this.gemstoneList = gemstones;
     }
 
     /**
@@ -448,6 +565,13 @@ public class Item {
         this.shopItem = shopItem;
     }
 
+    /**
+     * Equals boolean.
+     *
+     * @param o the o
+     *
+     * @return the boolean
+     */
     @Override
     public boolean equals( final Object o ) {
         if ( this == o ) return true;
@@ -467,7 +591,10 @@ public class Item {
                 Objects.equals( getWeightedUnit( ), item.getWeightedUnit( ) ) &&
                 Objects.equals( getBoughtDate( ), item.getBoughtDate( ) ) &&
                 Objects.equals( getItemImageList( ), item.getItemImageList( ) ) &&
-                Objects.equals( getItemDiscountList( ), item.getItemDiscountList( ) );
+                Objects.equals( getItemDiscountList( ), item.getItemDiscountList( ) ) &&
+                Objects.equals( getGemstoneList( ), item.getGemstoneList( ) ) &&
+                Objects.equals( getItemOrigin( ), item.getItemOrigin( ) ) &&
+                Objects.equals( getImageCount( ), item.getImageCount( ) );
     }
 
 
@@ -494,10 +621,11 @@ public class Item {
                 ", quantityType='" + quantityType + '\'' +
                 ", weightedUnit='" + weightedUnit + '\'' +
                 ", boughtDate=" + boughtDate +
-                ", createdDate=" + createdDate +
-                ", updatedDate=" + updatedDate +
+                ", imageCount=" + imageCount +
                 ", itemImageList=" + itemImageList +
                 ", itemDiscount=" + itemDiscountList +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
                 '}';
     }
 

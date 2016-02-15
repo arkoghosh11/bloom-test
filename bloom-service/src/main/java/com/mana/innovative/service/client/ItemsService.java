@@ -1,5 +1,6 @@
 package com.mana.innovative.service.client;
 
+import com.mana.innovative.dto.request.FilterSortParams;
 import com.mana.innovative.dto.request.RequestParams;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,6 @@ public interface ItemsService {
      * @return the response
      */
     Response deleteAllItems( RequestParams requestParams );
+
+    Response getItemsSearchedByParams( FilterSortParams filterSortParams, RequestParams requestParams );
 }

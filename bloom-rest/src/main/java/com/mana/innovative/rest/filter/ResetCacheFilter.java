@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Caching;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -22,7 +21,7 @@ import java.io.IOException;
  * @email arkoghosh @hotmail.com, ma@gmail.com, vsssadik@gmail.com
  * @Copyright
  */
-@Component
+//@Component
 public class ResetCacheFilter implements Filter {
 
     /**
