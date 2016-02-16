@@ -96,33 +96,6 @@ public class ItemsServiceImpl implements ItemsService {
 	}
 
 	/**
-	 * Validate paging boolean.
-	 * This simple if else method is to validate all the valid and invalid paging conditions from service method
-	 *
-	 * @param requestParams the request params
-	 *
-	 * @return the boolean
-	 */
-	private boolean validatePaging( final RequestParams requestParams ) {
-		Long startLimit = requestParams.getStartLimit( ),
-				endLimit = requestParams.getEndLimit( );
-		Integer pageSize = requestParams.getPageSize( );
-
-		if ( startLimit == null && endLimit != null ) {
-			return false;
-		} else if ( startLimit == null & pageSize != null ) {
-			return false;
-		} else if ( startLimit != null && endLimit == null && pageSize == null ) {
-			return false;
-		} else if ( ( startLimit != null && startLimit < 0 ) ||
-				( endLimit != null && endLimit < 0 ) ||
-				( pageSize != null && pageSize < 0 ) ) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
 	 * Delete all items.
 	 *
 	 * @param requestParams the request params
@@ -160,32 +133,7 @@ public class ItemsServiceImpl implements ItemsService {
 		}
 	}
 
-	/**
-	 * Validate paging boolean.
-	 * This simple if else method is to validate all the valid and invalid paging conditions from service method
-	 *
-	 * @param requestParams the request params
-	 *
-	 * @return the boolean
-	 */
-	private boolean validatePaging( final RequestParams requestParams ) {
-		Long startLimit = requestParams.getStartLimit( ),
-				endLimit = requestParams.getEndLimit( );
-		Integer pageSize = requestParams.getPageSize( );
-
-		if ( startLimit == null && endLimit != null ) {
-			return false;
-		} else if ( startLimit == null & pageSize != null ) {
-			return false;
-		} else if ( startLimit != null && endLimit == null && pageSize == null ) {
-			return false;
-		} else if ( ( startLimit != null && startLimit < 0 ) ||
-				( endLimit != null && endLimit < 0 ) ||
-				( pageSize != null && pageSize < 0 ) ) {
-			return false;
-		}
-		return true;
-	}	@Override
+	@Override
 	@Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_UNCOMMITTED )
 	public Response getItemsSearchedByParams( final FilterSortParams searchParams, final RequestParams requestParams ) {
 
@@ -215,5 +163,32 @@ public class ItemsServiceImpl implements ItemsService {
 		logger.debug( " Finished #getItemsSearchedByParams() for itemsService" );
 		return response;
 
+	}
+
+	/**
+	 * Validate paging boolean.
+	 * This simple if else method is to validate all the valid and invalid paging conditions from service method
+	 *
+	 * @param requestParams the request params
+	 *
+	 * @return the boolean
+	 */
+	private boolean validatePaging( final RequestParams requestParams ) {
+		Long startLimit = requestParams.getStartLimit( ),
+				endLimit = requestParams.getEndLimit( );
+		Integer pageSize = requestParams.getPageSize( );
+
+		if ( startLimit == null && endLimit != null ) {
+			return false;
+		} else if ( startLimit == null & pageSize != null ) {
+			return false;
+		} else if ( startLimit != null && endLimit == null && pageSize == null ) {
+			return false;
+		} else if ( ( startLimit != null && startLimit < 0 ) ||
+				( endLimit != null && endLimit < 0 ) ||
+				( pageSize != null && pageSize < 0 ) ) {
+			return false;
+		}
+		return true;
 	}
 }
