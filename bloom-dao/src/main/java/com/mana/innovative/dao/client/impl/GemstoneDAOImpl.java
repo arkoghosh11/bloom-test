@@ -400,6 +400,7 @@ public class GemstoneDAOImpl extends BasicDAO implements GemstoneDAO {
 				query.setMaxResults( requestParams.getPageSize( ) );
 			}
 
+			gemstones = ( List< Gemstone > ) query.list( );
 			this.closeDBTransaction( );
 		} catch ( HibernateException exception ) {
 			this.handleExceptions( exception );
