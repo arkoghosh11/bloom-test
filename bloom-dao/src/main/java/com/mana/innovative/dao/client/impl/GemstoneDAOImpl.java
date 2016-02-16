@@ -390,7 +390,16 @@ public class GemstoneDAOImpl extends BasicDAO implements GemstoneDAO {
 		
 		try {
 			this.openDBTransaction( );
-			gemstones = ( List< Gemstone > ) session.createQuery( " from Gemstone" ).list( );
+
+			String tableName = "Gemstone";
+			Query query = session.createQuery( this.gePageQuery( requestParams, tableName ) );
+			// Note Page size cannot be negative and endlimit must be null for page size to be applied
+			// Note otherwise ignore it
+			if ( requestParams.getPageSize( ) != null && requestParams.getPageSize( ) > 0 && requestParams.getEndLimit( )
+					== null ) {
+				query.setMaxResults( requestParams.getPageSize( ) );
+			}
+
 			this.closeDBTransaction( );
 		} catch ( HibernateException exception ) {
 			this.handleExceptions( exception );

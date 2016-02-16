@@ -249,4 +249,28 @@ public class RequestParams {
     public void setPrivilegeType( final String privilegeType ) {
         this.privilegeType = privilegeType;
     }
+
+    /**
+     * Validate paging boolean.
+     *
+     * @return the boolean
+     */
+    public boolean validatePaging( ) {
+        Long startLimit = this.getStartLimit( ),
+                endLimit = this.getEndLimit( );
+        Integer pageSize = this.getPageSize( );
+
+        if ( startLimit == null && endLimit != null ) {
+            return false;
+        } else if ( startLimit == null & pageSize != null ) {
+            return false;
+        } else if ( startLimit != null && endLimit == null && pageSize == null ) {
+            return false;
+        } else if ( ( startLimit != null && startLimit < 0 ) ||
+                ( endLimit != null && endLimit < 0 ) ||
+                ( pageSize != null && pageSize < 0 ) ) {
+            return false;
+        }
+        return true;
+    }
 }

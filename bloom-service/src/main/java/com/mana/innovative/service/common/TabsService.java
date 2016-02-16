@@ -33,7 +33,14 @@ public interface TabsService {
      */
     Response getAllTabs( RequestParams requestParams );
 
-    @Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
+    /**
+     * Gets tabs searched by params.
+     *
+     * @param searchParams the search params
+     * @param requestParams the request params
+     *
+     * @return the tabs searched by params
+     */
     Response getTabsSearchedByParams( FilterSortParams searchParams, RequestParams requestParams );
 
     /**

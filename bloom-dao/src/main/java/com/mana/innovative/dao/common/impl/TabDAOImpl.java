@@ -1,17 +1,15 @@
 package com.mana.innovative.dao.common.impl;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.dao.BasicDAO;
 import com.mana.innovative.dao.common.TabDAO;
 import com.mana.innovative.dao.response.DAOResponse;
+import com.mana.innovative.domain.common.SearchOption;
 import com.mana.innovative.domain.common.Tab;
 import com.mana.innovative.dto.request.RequestParams;
-import com.mana.innovative.exception.IllegalItemSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
-import com.mana.innovative.logic.ItemSearchOption;
-import com.mana.innovative.logic.QueryUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
@@ -24,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Bloom/Rono on 4/10/2015. This class is TabDAOImpl
@@ -35,7 +32,7 @@ import java.util.Map;
  */
 @Repository
 @Transactional( propagation = Propagation.MANDATORY, isolation = Isolation.DEFAULT )
-public class TabDAOImpl implements TabDAO {
+public class TabDAOImpl extends BasicDAO implements TabDAO {
 
     /**
      * The constant logger.
@@ -43,78 +40,10 @@ public class TabDAOImpl implements TabDAO {
     private static final Logger logger = LoggerFactory.getLogger( TabDAOImpl.class );
 
     /**
-     * The Query util.
-     */
-    private QueryUtil queryUtil = new QueryUtil( );
-    /**
-     * The Session.
-     */
-    private Session session;
-
-    /**
      * The Session factory.
      */
     @Resource
     private SessionFactory sessionFactory;
-
-
-    /**
-     * Open dB transaction.
-     */
-    private void openDBTransaction( ) {
-
-        logger.debug( " Trying to open Hibernate DB Transaction " );
-        try {
-            if ( sessionFactory == null ) {
-                NullPointerException exception = new NullPointerException( "Session " + "Factory is Null" );
-                logger.error( "Session Factory inject is Null", exception );
-                throw exception;
-            }
-            session = sessionFactory.getCurrentSession( );
-//            Note Hib transaction vs spring Transaction
-//            transaction = session.beginTransaction();
-        } catch ( Exception exception ) {
-            logger.error( "Current Session error from Session Factory, either Transaction Manager Config issue " +
-                    "or no DB Connection ", exception );
-        }
-        logger.debug( "Hibernate DB Transaction Opened" );
-    }
-
-    /**
-     * Close dB transaction.
-     */
-    private void closeDBTransaction( ) {
-
-        logger.debug( "Trying to Flush Hibernate Transaction" );
-        if ( session != null ) {
-            session.flush( );
-        }
-        logger.debug( "Flushed Hibernate DB Transaction" );
-    }
-
-    /**
-     * Handle exceptions.
-     *
-     * @param exception the exception
-     */
-    private void handleExceptions( HibernateException exception ) {
-        logger.error( "Hibernate Exception occurred with \nmessage: " + exception.getMessage( ), exception );
-    }
-
-    /**
-     * Fill error container.
-     *
-     * @param location the location
-     * @param exception the exception
-     * @return the error container
-     */
-    private ErrorContainer fillErrorContainer( String location, Exception exception ) {
-
-        logger.debug( "**** Recording Error Container Object" );
-        ErrorContainer errorContainer = new ErrorContainer( );
-        errorContainer.addError( new com.mana.innovative.exception.response.Error( location, exception ) );
-        return errorContainer;
-    }
 
     /**
      * This method is to retrieve all the tabs values from the DB
@@ -136,7 +65,14 @@ public class TabDAOImpl implements TabDAO {
         try {
             this.openDBTransaction( );
 
-            Query query = session.createQuery( "from Tab" );
+            String tableName = "Tab";
+            Query query = session.createQuery( this.gePageQuery( requestParams, tableName ) );
+            // Note Page size cannot be negative and endlimit must be null for page size to be applied
+            // Note otherwise ignore it
+            if ( requestParams.getPageSize( ) != null && requestParams.getPageSize( ) > 0 && requestParams.getEndLimit( )
+                    == null ) {
+                query.setMaxResults( requestParams.getPageSize( ) );
+            }
             tabList = query.list( );
 
             this.closeDBTransaction( );
@@ -316,7 +252,7 @@ public class TabDAOImpl implements TabDAO {
     @SuppressWarnings( "unchecked" )
     @Override
     @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED )
-    public DAOResponse< Tab > getTabBySearchParams( ItemSearchOption searchOption, RequestParams requestParams ) {
+    public DAOResponse< Tab > getTabBySearchParams( SearchOption searchOption, RequestParams requestParams ) {
 
         String location = this.getClass( ).getCanonicalName( ) + "#getTabBySearchParams()";
         List< Tab > tabList = new ArrayList<>( );
@@ -504,134 +440,33 @@ public class TabDAOImpl implements TabDAO {
      * @param searchOption the tab search option
      * @return A detached criteria object
      */
-    private DetachedCriteria getDetachedCriteriaBySearchParams( ItemSearchOption searchOption ) {
+    private DetachedCriteria getDetachedCriteriaBySearchParams( SearchOption searchOption ) {
 
-        List< Map< String, Object > > searchConditionParams = searchOption.getSearchConditionParams( );
-        List< Map< String, String > > searchOrderWithParams = searchOption.getSearchOrderWithParams( );
-        List< Map< String, Object > > searchMatchTypeParams = searchOption.getSearchMatchTypeParams( );
+//        Map< String, Object > searchConditionParams = searchOption.getSearchConditionParams( );
+//        Map< String, String > searchOrderWithParams = searchOption.getSearchOrderWithParams( );
+//        Map< String, Object > searchMatchTypeParams = searchOption.getSearchMatchTypeParams( );
+//
+//        Map< String, String >  searchConditions = searchOption.getSearchConditions( );
+//        Map< String, String >  searchMatchType = searchOption.getSearchMatchType( );
+//        List< String > keys;
 
-        List< Map< String, String > > searchConditions = searchOption.getSearchConditions( );
-        List< Map< String, String > > searchMatchType = searchOption.getSearchMatchType( );
-        List< String > keys;
-        DetachedCriteria detachedCriteria = DetachedCriteria.forClass( Tab.class );
-
-        if ( searchMatchType.isEmpty( ) ) {
-            keys = this.getKeysForSearch( searchConditions );
-            detachedCriteria = this.addConditionParams( detachedCriteria, searchConditionParams, searchConditions,
-                    keys );
-        }
-        if ( !searchOrderWithParams.isEmpty( ) ) {
-            keys = this.getKeysForSearch( searchOrderWithParams );
-            detachedCriteria = this.addOrderParams( detachedCriteria, searchOrderWithParams, keys );
-        }
-        if ( !searchMatchType.isEmpty( ) ) {
-            keys = this.getKeysForSearch( searchMatchType );
-            detachedCriteria = this.addMatchTypeParams( detachedCriteria, searchMatchTypeParams, searchMatchType,
-                    searchConditions, keys );
-        }
-        return detachedCriteria;
+//        if ( searchMatchType.isEmpty( ) ) {
+//            keys = this.getKeysForSearch( searchConditions );
+//            detachedCriteria = this.addConditionParams( detachedCriteria, searchConditionParams, searchConditions,
+//                    keys );
+//        }
+//        if ( !searchOrderWithParams.isEmpty( ) ) {
+//            keys = this.getKeysForSearch( searchOrderWithParams );
+//            detachedCriteria = this.addOrderParams( detachedCriteria, searchOrderWithParams, keys );
+//        }
+//        if ( !searchMatchType.isEmpty( ) ) {
+//            keys = this.getKeysForSearch( searchMatchType );
+//            detachedCriteria = this.addMatchTypeParams( detachedCriteria, searchMatchTypeParams, searchMatchType,
+//                    searchConditions, keys );
+//        }
+        return DetachedCriteria.forClass( Tab.class );
     }
 
-    /**
-     * Add condition params.
-     *
-     * @param detachedCriteria the detached criteria
-     * @param searchConditionParams the search condition params
-     * @param searchConditions the search conditions
-     * @param keys the keys
-     * @return the detached criteria
-     */
-    private DetachedCriteria addConditionParams( DetachedCriteria detachedCriteria, List< Map< String,
-            Object > > searchConditionParams, List< Map< String, String > > searchConditions, List< String > keys ) {
-
-        for ( int i = 0; i < searchConditions.size( ) && searchConditionParams.size( ) == searchConditions.size( ); i++
-                ) {
-
-            // get condition value from Map with key
-            String condition = searchConditions.get( i ).get( keys.get( i ) );
-            // get value of class property from map to query the DB
-            Object value = searchConditionParams.get( i ).get( keys.get( i ) );
-            // add SQL restrictions
-            detachedCriteria.add( queryUtil.getAddedRestriction( keys.get( i ), value, condition ) );
-        }
-        return detachedCriteria;
-    }
-
-    /**
-     * Add order params.
-     *
-     * @param detachedCriteria the detached criteria
-     * @param searchOrders the search orders
-     * @param keys the keys
-     * @return the detached criteria
-     */
-    private DetachedCriteria addOrderParams( DetachedCriteria detachedCriteria, List< Map< String, String > > searchOrders,
-                                             List< String > keys ) {
-
-        for ( int i = 0; i < searchOrders.size( ); i++ ) {
-            String ordering = searchOrders.get( i ).get( keys.get( i ) );
-            if ( ordering != null ) {
-                detachedCriteria.addOrder( queryUtil.getCreatedOrder( keys.get( i ), ordering ) );
-            }
-        }
-        return detachedCriteria;
-    }
-
-    /**
-     * Add match type params.
-     *
-     * @param detachedCriteria the detached criteria
-     * @param searchParams the search params
-     * @param searchMatchTypes the search match types
-     * @param searchConditions the search conditions
-     * @param keys the keys
-     * @return the detached criteria
-     */
-    private DetachedCriteria addMatchTypeParams( DetachedCriteria detachedCriteria, List< Map< String,
-            Object > > searchParams, List< Map< String, String > > searchMatchTypes, List< Map< String,
-            String > > searchConditions, List< String > keys ) {
-
-        logger.debug( searchParams + "\n" + searchParams.size( )
-                + " params " + searchParams.isEmpty( )
-                + " matchType " + "" + searchMatchTypes.isEmpty( )
-                + " conditions " + searchConditions.isEmpty( )
-                + " keys " + keys.isEmpty( ) );
-        if ( searchParams.isEmpty( ) || searchConditions.isEmpty( ) || searchMatchTypes.isEmpty( ) || keys.isEmpty( ) ) {
-            throw new NullPointerException( "One of the Lists in parameters is Empty" );
-        }
-        for ( int i = 0; i < searchMatchTypes.size( ); i++ ) {
-
-            // get condition value from Map with key
-            String operator = searchConditions.get( i ).get( keys.get( i ) );
-            // get value of class property from map to query the DB
-            Object value = searchParams.get( i ).get( keys.get( i ) );
-
-            String matchType = searchMatchTypes.get( i ).get( keys.get( i ) );
-
-            detachedCriteria.add( queryUtil.getAddedRestriction( keys.get( i ), value, operator, matchType ) );
-        }
-        return detachedCriteria;
-    }
-
-    /**
-     * This method is for getting the keys for searching
-     *
-     * @param searchConditions A list of type Map of type
-     * @return A list of type String
-     */
-    private List< String > getKeysForSearch( final List< Map< String, String > > searchConditions ) {
-
-        List< String > keys = new ArrayList<>( );
-        for ( Map< String, String > searchCondition : searchConditions ) {
-            if ( searchCondition.size( ) != DAOConstants.ONE ) {
-                throw new IllegalItemSearchListSizeException( "Map Size must be ONE (1)" );
-            }
-            for ( Map.Entry< String, String > entry : searchCondition.entrySet( ) ) {
-                keys.add( entry.getKey( ) );
-            }
-        }
-        return keys;
-    }
 
     /**
      * Gets session factory.

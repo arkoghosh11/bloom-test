@@ -1,6 +1,7 @@
 package com.mana.innovative.dao.common;
 
 import com.mana.innovative.dao.response.DAOResponse;
+import com.mana.innovative.domain.common.SearchOption;
 import com.mana.innovative.domain.common.Tab;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.logic.ItemSearchOption;
@@ -61,7 +62,7 @@ public interface TabDAO {
      * @param requestParams the request params
      * @return the tab by search params
      */
-    DAOResponse< Tab > getTabBySearchParams( ItemSearchOption searchOption, RequestParams requestParams );
+    DAOResponse< Tab > getTabBySearchParams( SearchOption searchOption, RequestParams requestParams );
 
     /**
      * Gets tab by tab id.

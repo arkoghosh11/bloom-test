@@ -10,6 +10,7 @@ import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.client.GemstonesService;
 import com.mana.innovative.service.client.builder.GemstoneResponseBuilder;
 import com.mana.innovative.service.client.container.GemstoneResponseContainer;
+import com.mana.innovative.utilities.response.ResponseUtility;
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,6 +62,12 @@ public class GemstonesServiceImpl implements GemstonesService {
 		DAOResponse< Gemstone > gemstoneDAOResponse;
 		final String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getGemstones()";
 		GemstoneResponseContainer< GemstonesPayload > gemstoneResponseContainer;
+
+		if ( !requestParams.validatePaging( ) ) {
+			return ResponseUtility.badRequest( "Invalid page params provided either none or valid params are " +
+					"required" );
+		}
+
 		try {
 			gemstoneDAOResponse = gemstoneDAOImpl.getGemstones( requestParams );
 		} catch ( Exception exception ) {
@@ -123,5 +130,4 @@ public class GemstonesServiceImpl implements GemstonesService {
 			logger.debug( "Response sent Successfully from getGemstones()" );
 		}
 	}
-	
 }

@@ -1,6 +1,7 @@
 package com.mana.innovative.rest.client;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.service.client.GemstonesService;
 import com.mana.innovative.utilities.response.ResponseUtility;
@@ -38,12 +39,21 @@ public class GemStonesRestWebService {
 
 	@GET
 	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-	public Response getAllGemstones( @QueryParam( "is_error" ) @DefaultValue( "false" ) Boolean isError ) {
+	public Response getAllGemstones( @QueryParam( "is_error" ) @DefaultValue( value = ServiceConstants.FALSE ) Boolean
+											 isError,
+									 @QueryParam( value = "start_limit" ) Long startLimit,
+									 @QueryParam( value = "end_limit" ) Long endLimit,
+									 @QueryParam( value = "page_size" ) Integer pageSize ) {
 		//        boolean isAuthenticated = loginService.verifyLogin(httpSession);
 //        if (!isAuthenticated) return ResponseUtility.unauthorizedAccess();
 		try {
 			RequestParams requestParams = new RequestParams( );
 			requestParams.setIsError( isError );
+
+			requestParams.setStartLimit( startLimit );
+			requestParams.setEndLimit( endLimit );
+			requestParams.setPageSize( pageSize );
+
 			logger.info( "Gemstones Service " + gemstonesService );
 			return gemstonesService.getAllGemstones( requestParams );
 		} catch ( Exception exception ) {

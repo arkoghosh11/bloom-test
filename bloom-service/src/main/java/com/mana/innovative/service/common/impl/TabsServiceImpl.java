@@ -3,9 +3,12 @@
  */
 package com.mana.innovative.service.common.impl;
 
+import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.common.TabDAO;
 import com.mana.innovative.dao.response.DAOResponse;
+import com.mana.innovative.domain.common.SearchOption;
+import com.mana.innovative.domain.common.Tab;
 import com.mana.innovative.dto.common.payload.TabsPayload;
 import com.mana.innovative.dto.request.FilterSortParams;
 import com.mana.innovative.dto.request.RequestParams;
@@ -14,6 +17,7 @@ import com.mana.innovative.service.common.TabsService;
 import com.mana.innovative.service.common.builder.TabResponseBuilder;
 import com.mana.innovative.service.common.container.TabResponseContainer;
 import com.mana.innovative.utilities.response.ResponseUtility;
+import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
@@ -59,21 +63,45 @@ public class TabsServiceImpl implements TabsService {
 	@Transactional( propagation = Propagation.REQUIRES_NEW, isolation = Isolation.DEFAULT )
 	public Response getAllTabs( RequestParams requestParams ) {
 
-		log.debug( " Executing #getAllTabs for tabsService " );
-		Response response;
+		log.debug( "Initiating getAllTabs() , tabDAO injected successfully" );
+		final String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getAllTabs()";
+
 		TabResponseContainer< TabsPayload > tabResponseContainer;
+		DAOResponse< Tab > tabDAOResponse;
+
+		if ( !requestParams.validatePaging( ) ) {
+			return ResponseUtility.badRequest( "Invalid page params provided either none or valid params are " +
+					"required" );
+		}
 
 		try {
-			DAOResponse< com.mana.innovative.domain.common.Tab > tabDAOResponse =
-					tabDAO.getTabs( requestParams );
-			tabResponseContainer = TabResponseBuilder.build( tabDAOResponse, requestParams.isError( ) );
-			response = Response.ok( tabResponseContainer ).build( );
+			tabDAOResponse = tabDAO.getTabs( requestParams );
+
 		} catch ( Exception exception ) {
-			response = ResponseUtility.internalServerErrorMsg( null );
-			log.error( "Exception occurred while fetching all tabs ", exception );
+
+			if ( exception instanceof HibernateException ) {
+				log.error( "Hibernate Exception occurred while trying fetch data from DB " + location, exception );
+			} else
+				log.error( "Exception occurred in" + location, exception );
+			tabResponseContainer = TabResponseBuilder.buildError( location, requestParams.isError( ), exception );
+			return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( tabResponseContainer ).build( );
+
 		}
-		log.debug( " Finished #getAllTabs for tabsService" );
-		return response;
+
+		try {
+			tabResponseContainer = TabResponseBuilder.build( tabDAOResponse, requestParams.isError( ) );
+			return Response.status( Response.Status.OK ).entity( tabResponseContainer ).build( );
+
+		} catch ( Exception exception ) {
+
+			log.error( "Exception occurred while fetching all tabs ", exception );
+			tabResponseContainer = TabResponseBuilder.buildError( location, requestParams.isError( ), exception );
+			return Response.status( Response.Status.INTERNAL_SERVER_ERROR ).entity( tabResponseContainer ).build( );
+
+		} finally {
+			log.debug( " Finished " + location );
+		}
+
 	}
 
 	/**
@@ -93,10 +121,10 @@ public class TabsServiceImpl implements TabsService {
 		TabResponseContainer< TabsPayload > tabResponseContainer;
 
 		try {
-			ItemSearchOption searchOption = new ItemSearchOption( );
+			SearchOption searchOption = new SearchOption( );
 
-			searchOption.getSearchConditionParams( ).add( searchParams.getFilter( ).getKeyValueMap( ) );
-			searchOption.getSearchOrderWithParams( ).add( searchParams.getSort( ).getKeyValueMap( ) );
+			searchOption.getSearchConditionParams( ).putAll( searchParams.getFilter( ).getKeyValueMap( ) );
+			searchOption.getSearchOrderWithParams( ).putAll( searchParams.getSort( ).getKeyValueMap( ) );
 			DAOResponse< com.mana.innovative.domain.common.Tab > tabDAOResponse =
 					tabDAO.getTabBySearchParams( searchOption, requestParams );
 			tabResponseContainer = TabResponseBuilder.build( tabDAOResponse, requestParams.isError( ) );

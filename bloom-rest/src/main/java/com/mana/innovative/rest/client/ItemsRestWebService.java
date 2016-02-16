@@ -87,7 +87,7 @@ public class ItemsRestWebService {
 			requestParams.setEndLimit( endLimit );
 			requestParams.setPageSize( pageSize );
 
-			logger.info( "items Service " + itemsService );
+//			logger.info( "items Service " + itemsService );
 			return itemsService.getItems( requestParams );
 		} catch ( Exception exception ) {
 			logger.error( " Failed to retrieve Items" + exception );

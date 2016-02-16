@@ -448,7 +448,8 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		try {
 			this.openDBTransaction( );
 
-			Query query = session.createQuery( this.gePageQuery( requestParams ) );
+			String tableName = "Item";
+			Query query = session.createQuery( this.gePageQuery( requestParams, tableName ) );
 			// Note Page size cannot be negative and endlimit must be null for page size to be applied
 			// Note otherwise ignore it
 			if ( requestParams.getPageSize( ) != null && requestParams.getPageSize( ) > 0 && requestParams.getEndLimit( )
@@ -538,29 +539,6 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		logger.debug( "Finishing " + location );
 
 		return itemDAOResponse;
-	}
-
-	private String gePageQuery( final RequestParams requestParams ) {
-
-		String pageQuery = " from Item ";
-
-		Long startLimit = requestParams.getStartLimit( );
-		Long endLimit = requestParams.getEndLimit( );
-		Integer pageSize = requestParams.getPageSize( );
-		// Note Priority, default page order is ascending
-		if ( startLimit != null && endLimit != null ) {
-			if ( startLimit > endLimit && startLimit > 0 && endLimit > 0 ) {
-				long temp = startLimit;
-				startLimit = endLimit;
-				endLimit = temp;
-			}
-			pageQuery += " where itemId>=" + startLimit + " and itemId<=" + endLimit + " order by itemId ASC";
-		} else
-			// Note Second Priority, default page order is ascending
-			if ( startLimit != null && pageSize != null ) {
-				pageQuery += " where itemId>=" + startLimit + " order by itemId ASC ";//limit "+pageSize;
-			}
-		return pageQuery;
 	}
 
 	/**

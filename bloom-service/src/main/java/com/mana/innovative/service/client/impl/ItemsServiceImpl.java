@@ -64,11 +64,12 @@ public class ItemsServiceImpl implements ItemsService {
 		DAOResponse< Item > itemDAOResponse;
 		final String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getItems()";
 		ItemResponseContainer< ItemsPayload > itemResponseContainer;
-		if ( !this.validatePaging( requestParams ) ) {
 
+		if ( !requestParams.validatePaging( ) ) {
 			return ResponseUtility.badRequest( "Invalid page params provided either none or valid params are " +
 					"required" );
 		}
+
 		try {
 			itemDAOResponse = itemDAOImpl.getItems( requestParams );
 		} catch ( Exception exception ) {
@@ -165,30 +166,4 @@ public class ItemsServiceImpl implements ItemsService {
 
 	}
 
-	/**
-	 * Validate paging boolean.
-	 * This simple if else method is to validate all the valid and invalid paging conditions from service method
-	 *
-	 * @param requestParams the request params
-	 *
-	 * @return the boolean
-	 */
-	private boolean validatePaging( final RequestParams requestParams ) {
-		Long startLimit = requestParams.getStartLimit( ),
-				endLimit = requestParams.getEndLimit( );
-		Integer pageSize = requestParams.getPageSize( );
-
-		if ( startLimit == null && endLimit != null ) {
-			return false;
-		} else if ( startLimit == null & pageSize != null ) {
-			return false;
-		} else if ( startLimit != null && endLimit == null && pageSize == null ) {
-			return false;
-		} else if ( ( startLimit != null && startLimit < 0 ) ||
-				( endLimit != null && endLimit < 0 ) ||
-				( pageSize != null && pageSize < 0 ) ) {
-			return false;
-		}
-		return true;
-	}
 }
