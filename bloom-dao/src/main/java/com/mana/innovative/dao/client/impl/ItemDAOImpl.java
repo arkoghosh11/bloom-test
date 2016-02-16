@@ -78,8 +78,8 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 	private ItemDiscountDAO itemDiscountDAO;
 
 
-//    private static final String HASH = DAOConstants.HASH;
-private String listProperty;
+	//    private static final String HASH = DAOConstants.HASH;
+	private String listProperty;
 	private Map< String, List > listMap = new HashMap<>( );
 	private Map< String, Object > valueMap = new HashMap<>( );
 	/* IMP UPDATE Functions */
@@ -447,7 +447,15 @@ private String listProperty;
 
 		try {
 			this.openDBTransaction( );
-			items = ( List< Item > ) session.createQuery( " from Item" ).list( );
+
+			Query query = session.createQuery( this.gePageQuery( requestParams ) );
+			// Note Page size cannot be negative and endlimit must be null for page size to be applied
+			// Note otherwise ignore it
+			if ( requestParams.getPageSize( ) != null && requestParams.getPageSize( ) > 0 && requestParams.getEndLimit( )
+					== null ) {
+				query.setMaxResults( requestParams.getPageSize( ) );
+			}
+			items = ( List< Item > ) query.list( );
 			this.closeDBTransaction( );
 		} catch ( HibernateException exception ) {
 			this.handleExceptions( exception );
@@ -491,16 +499,13 @@ private String listProperty;
 			String filterQuery = this.getFilterQueryByParams( searchOption );
 			String sortQuery = this.getSortQueryByParams( searchOption );
 
-			if ( !StringUtils.isEmpty( sortQuery.trim( ) ) ) {
-				sortQuery = " and " + sortQuery;
-			}
 //          Note Example query for making dynamic parent child joins
 //			@IMP to remember how to use below lines to make dynamic join qeries using Hibernate
 //			Query query = session.createQuery( "Select item from Item item join item.gemstoneList gemstone join item.itemImageList itemImage" +
 //					"  where item.itemType=:item_type1 and gemstone.gemstoneName in(:gemstone_name1) and itemImage.id > 0 " );
 //			logger.debug( "select item from Item item " + filterQuery + sortQuery );
 
-			Query query = session.createQuery( "select item from Item item " + filterQuery );
+			Query query = session.createQuery( "select item from Item item " + filterQuery + sortQuery );
 
 			// + filterQuery +	// sortQuery );
 
@@ -535,10 +540,34 @@ private String listProperty;
 		return itemDAOResponse;
 	}
 
+	private String gePageQuery( final RequestParams requestParams ) {
+
+		String pageQuery = " from Item ";
+
+		Long startLimit = requestParams.getStartLimit( );
+		Long endLimit = requestParams.getEndLimit( );
+		Integer pageSize = requestParams.getPageSize( );
+		// Note Priority, default page order is ascending
+		if ( startLimit != null && endLimit != null ) {
+			if ( startLimit > endLimit && startLimit > 0 && endLimit > 0 ) {
+				long temp = startLimit;
+				startLimit = endLimit;
+				endLimit = temp;
+			}
+			pageQuery += " where itemId>=" + startLimit + " and itemId<=" + endLimit + " order by itemId ASC";
+		} else
+			// Note Second Priority, default page order is ascending
+			if ( startLimit != null && pageSize != null ) {
+				pageQuery += " where itemId>=" + startLimit + " order by itemId ASC ";//limit "+pageSize;
+			}
+		return pageQuery;
+	}
+
 	/**
 	 * Gets filter query by params.
 	 * Complex method for filtering by each property of item even its child table props
-	 * To add more child tables, please add condition param to {@link #addCustomItemChildrenWithRestriction(String, String[])}
+	 * To add more child tables, please add condition param to {@link #addCustomItemChildrenWithRestriction(String,
+	 * String[])}
 	 *
 	 * @param searchOption the search option
 	 *

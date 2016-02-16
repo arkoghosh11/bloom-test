@@ -283,23 +283,132 @@ public class WhenGetItemThenTestItemDAOGetMethods {
 		logger.debug( "Finishing testItemDAOReadWithErrorEnabled" );
 	}
 
-//	@SuppressWarnings( "unchecked" )
-//	@Test
-//  todo remove
-//	public void testGetListOfChildren( ) throws Exception {
-//
-//		logger.debug( "Starting test for GetListOfChildren" );
-//
-//		Class class1 = values.getClass( );
-//		logger.debug( "Component is  **** " + class1 );
-//        List results = itemDAOImpl.setIfKeyIsChildList( key, values, requestParams );
-//		Assert.assertNotNull( TestConstants.nullMessage, results );
-//		List<Gemstone> gemstones = (List<Gemstone>)results;
-//		Assert.assertNotNull( TestConstants.notNullMessage, gemstones );
-//		Assert.assertFalse( TestConstants.trueMessage, gemstones.isEmpty( ) );
-//
-//		logger.debug( "Completing test for GetListOfChildren" );
-//	}
+	@Test
+	@Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+	public void testGetItemsWithPagingEnabledNErrorEnabled( ) throws Exception {
+
+		logger.debug( "Starting test for GetItemsWithPagingEnabledNErrorEnabled" );
+
+		requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+		requestParams.setStartLimit( 0L );
+		requestParams.setEndLimit( 1L );
+
+		DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItems( requestParams );
+
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
+		// test error container
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ).getErrors( ) );
+		Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+		Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ).getCurrentError( ) );
+		// test result object
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ) );
+		Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.getResults( ).isEmpty( ) );
+
+		List< Item > items = itemDAOResponse.getResults( );
+		// item list and its size with DAOResponse<T> class count
+		Assert.assertNotNull( TestConstants.nullMessage, items );
+		Assert.assertFalse( TestConstants.trueMessage, items.isEmpty( ) );
+		Assert.assertEquals( TestConstants.notEqualsMessage, itemDAOResponse.getCount( ), items.size( ) );
+		Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TWO, items.size( ) );
+//        Assert.assertEquals(27, items.size()); /** Just a guarantee check for making sure new changes are working */
+		logger.debug( "Completing test for GetItemsWithPagingEnabledNErrorEnabled" );
+	}
+
+	@Test
+	@Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+	public void testGetItemsWithPagingSize( ) throws Exception {
+
+		logger.debug( "Starting test for GetItemsWithPagingSizeNErrorEnabled" );
+
+		requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+		requestParams.setStartLimit( 0L );
+		requestParams.setPageSize( 3 );
+
+		DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItems( requestParams );
+
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
+		// test error container
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ).getErrors( ) );
+		Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+		Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ).getCurrentError( ) );
+		// test result object
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ) );
+		Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.getResults( ).isEmpty( ) );
+
+		List< Item > items = itemDAOResponse.getResults( );
+		// item list and its size with DAOResponse<T> class count
+		Assert.assertNotNull( TestConstants.nullMessage, items );
+		Assert.assertFalse( TestConstants.trueMessage, items.isEmpty( ) );
+		Assert.assertEquals( TestConstants.notEqualsMessage, itemDAOResponse.getCount( ), items.size( ) );
+		Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.THREE, items.size( ) );
+		logger.debug( "Completing test for GetItemsWithPagingSizeNErrorEnabled" );
+	}
+
+	@Test
+	@Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+	public void testGetItemsWithNoPagingNErrorEnabled( ) throws Exception {
+
+		logger.debug( "Starting test for GetItemsWithNoPagingNErrorEnabled" );
+
+		requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+
+		DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItems( requestParams );
+
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
+		// test error container
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ).getErrors( ) );
+		Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+		Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ).getCurrentError( ) );
+		// test result object
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ) );
+		Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.getResults( ).isEmpty( ) );
+
+		List< Item > items = itemDAOResponse.getResults( );
+		// item list and its size with DAOResponse<T> class count
+		Assert.assertNotNull( TestConstants.nullMessage, items );
+		Assert.assertFalse( TestConstants.trueMessage, items.isEmpty( ) );
+		Assert.assertEquals( TestConstants.notEqualsMessage, itemDAOResponse.getCount( ), items.size( ) );
+
+		logger.debug( "Completing test for GetItemsWithNoPagingNErrorEnabled" );
+	}
+
+	@Test
+	@Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+	public void testGetItemsWithPagingNLimitNErrorEnabled( ) throws Exception {
+
+		logger.debug( "Starting test for GetItemsWithPagingNLimitNErrorEnabled" );
+
+		requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+
+		requestParams.setStartLimit( 0L );
+		requestParams.setPageSize( 3 );
+		requestParams.setEndLimit( 1L );
+
+		DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItems( requestParams );
+
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
+		// test error container
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ).getErrors( ) );
+		Assert.assertTrue( TestConstants.falseMessage, itemDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+		Assert.assertNull( TestConstants.notNullMessage, itemDAOResponse.getErrorContainer( ).getCurrentError( ) );
+		// test result object
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ) );
+		Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.getResults( ).isEmpty( ) );
+
+		List< Item > items = itemDAOResponse.getResults( );
+		// item list and its size with DAOResponse<T> class count
+		Assert.assertNotNull( TestConstants.nullMessage, items );
+		Assert.assertFalse( TestConstants.trueMessage, items.isEmpty( ) );
+		Assert.assertEquals( TestConstants.notEqualsMessage, itemDAOResponse.getCount( ), items.size( ) );
+		Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TWO, items.size( ) );
+
+		logger.debug( "Completing test for GetItemsWithPagingNLimitNErrorEnabled" );
+	}
+
 
 	/**
 	 * Tear down.
