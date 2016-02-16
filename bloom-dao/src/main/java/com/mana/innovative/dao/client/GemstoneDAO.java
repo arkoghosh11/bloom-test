@@ -92,4 +92,6 @@ public interface GemstoneDAO {
 	 * @return the gemstones
 	 */
 	DAOResponse< Gemstone > getGemstones( RequestParams requestParams );
+
+	DAOResponse< Gemstone > getGemstonesByParams( String key, List values, RequestParams requestParams );
 }

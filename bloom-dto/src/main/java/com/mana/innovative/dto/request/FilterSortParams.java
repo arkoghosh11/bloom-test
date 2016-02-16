@@ -13,6 +13,7 @@ import java.util.Objects;
  * @email arkoghosh @hotmail.com, meankur1@gmail.com
  * @Copyright
  */
+//Todo check for invalid criterion and stop execution at service level.
 @XmlRootElement( name = "customFilterSorter", namespace = "https:192.168.0.48:8443/bloom" )
 public class FilterSortParams {
 

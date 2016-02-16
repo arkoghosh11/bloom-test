@@ -17,6 +17,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +47,9 @@ public class WhenGetGemstoneThenTestGemstoneDAOGetMethods {
 	private GemstoneDAO gemstoneDAOImpl;
 	
 	private RequestParams requestParams;
+	private String key;
+
+	private List< String > values;
 	
 	/**
 	 * Sets up.
@@ -60,6 +64,13 @@ public class WhenGetGemstoneThenTestGemstoneDAOGetMethods {
 		
 		requestParams = new RequestParams( );
 		requestParams.setIsError( TestConstants.IS_ERROR );
+
+		values = new ArrayList<>( );
+		values.add( TestConstants.DEFAULT );
+		values.add( TestConstants.TEST );
+
+		key = TestConstants.KEY_GEM_NAME;
+
 	}
 	
 	/**
@@ -218,5 +229,29 @@ public class WhenGetGemstoneThenTestGemstoneDAOGetMethods {
 		Assert.assertNotNull( TestConstants.nullMessage, gemstoneDAOResponse.getResults( ).get( TestConstants.ZERO ) );
 		
 		logger.debug( "Finishing test for GetGemstonesWithErrorDisabled" );
+	}
+
+	@Test
+	@Transactional( readOnly = true )
+	public void testGetGemstonesByParams( ) throws Exception {
+
+		logger.debug( "Starting test for GetGemstonesByParams" );
+
+		DAOResponse< Gemstone > gemstoneDAOResponse = gemstoneDAOImpl.getGemstonesByParams( key, values, requestParams );
+
+		// test errorContainer
+		Assert.assertNotNull( TestConstants.nullMessage, gemstoneDAOResponse );
+		Assert.assertNull( TestConstants.notNullMessage, gemstoneDAOResponse.getErrorContainer( ) );
+		// test DAOResponse
+		Assert.assertNotSame( TestConstants.sameMessage, TestConstants.ZERO, gemstoneDAOResponse.getCount( ) );
+		Assert.assertSame( TestConstants.notSameMessage, TestConstants.ZERO, gemstoneDAOResponse.getOffset( ) );
+		Assert.assertNotNull( TestConstants.nullMessage, gemstoneDAOResponse.getResults( ) );
+		Assert.assertFalse( gemstoneDAOResponse.getResults( ).isEmpty( ) );
+		Assert.assertNotNull( TestConstants.nullMessage, gemstoneDAOResponse.getResults( ).get( TestConstants.ZERO ) );
+		Assert.assertEquals( TestConstants.notEqualsMessage, values.size( ), gemstoneDAOResponse.getResults( ).size( ) );
+
+		logger.info( "******* Data 0 is\n " + gemstoneDAOResponse.getResults( ).get( 0 ).toString( ) );
+		logger.info( "******* Data 1 is\n " + gemstoneDAOResponse.getResults( ).get( 1 ).toString( ) );
+		logger.debug( "Completing test for GetGemstonesByParams" );
 	}
 }

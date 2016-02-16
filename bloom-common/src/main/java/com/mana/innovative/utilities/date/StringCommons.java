@@ -33,12 +33,12 @@ public class StringCommons {
 		for ( int i = 0; i < string.length( ); i++ ) {
 
 			if ( string.charAt( i ) == '_' && i < ( string.length( ) - 1 ) ) {
-				int charValueinInt = ( int ) string.charAt( i + 1 );
+				int charValueInInt = ( int ) string.charAt( i + 1 );
 
-				if ( charValueinInt >= 97 && charValueinInt <= 122 ) {
+				if ( charValueInInt >= 97 && charValueInInt <= 122 ) {
 					stringBuilder.append( ( char ) ( ( int ) string.charAt( i + 1 ) - 32 ) );
 				}
-				if ( charValueinInt < 97 || charValueinInt > 122 ) {
+				if ( charValueInInt < 97 || charValueInInt > 122 ) {
 					stringBuilder.append( string.charAt( i + 1 ) );
 				}
 				i = i + 1;
@@ -62,6 +62,6 @@ public class StringCommons {
 			throw new IllegalArgumentValueException( "Invalid Key provided, cannot convert to Hibernate Table.Column" +
 					"Property Mapping from just column property" );
 		}
-		return key.substring( 0, key.indexOf( ServiceConstants.UNDERSCORE ) ) + ServiceConstants.DOT + key;
+		return key.substring( 0, key.lastIndexOf( ServiceConstants.UNDERSCORE ) ) + ServiceConstants.DOT + key;
 	}
 }

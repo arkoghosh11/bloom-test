@@ -1,6 +1,7 @@
 package com.mana.innovative.dao.client.impl;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.BasicDAO;
 import com.mana.innovative.dao.client.ItemImageDAO;
 import com.mana.innovative.dao.response.DAOResponse;
@@ -348,6 +349,45 @@ public class ItemImageDAOImpl extends BasicDAO implements ItemImageDAO {
         try {
             this.openDBTransaction( );
             itemImages = ( List< ItemImage > ) session.createQuery( " from ItemImage" ).list( );
+            this.closeDBTransaction( );
+        } catch ( HibernateException exception ) {
+            this.handleExceptions( exception );
+            logger.error( "Error occurred while trying to fetch data from itemImages table " + location, exception );
+            if ( requestParams.isError( ) ) {
+                errorContainer = this.fillErrorContainer( location, exception );
+            }
+        }
+        itemImageDAOResponse.setCount( itemImages == null ? DAOConstants.ZERO : itemImages.size( ) );
+        itemImageDAOResponse.setResults( itemImages );
+        itemImageDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+        return itemImageDAOResponse;
+    }
+
+    @SuppressWarnings( "unchecked" )
+    @Override
+    @Transactional( readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
+    public DAOResponse< ItemImage > getItemImagesByParams( final String key, final List values, RequestParams requestParams
+    ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getItemImagesByParams()";
+        logger.debug( "Starting " + location );
+
+        List< ItemImage > itemImages = null;
+        DAOResponse< ItemImage > itemImageDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
+
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.
+                    createQuery( " from ItemImage where " + key.substring(
+                            key.indexOf( ServiceConstants.DOT ) + 1 ) + " in " + "(:value)" );
+            query.setParameterList( "value", values );
+            itemImages = query.list( );
+            itemImageDAOResponse.setRequestSuccess( Boolean.TRUE );
+
             this.closeDBTransaction( );
         } catch ( HibernateException exception ) {
             this.handleExceptions( exception );

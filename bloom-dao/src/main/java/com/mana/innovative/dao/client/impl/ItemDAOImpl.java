@@ -1,8 +1,12 @@
 package com.mana.innovative.dao.client.impl;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.BasicDAO;
+import com.mana.innovative.dao.client.GemstoneDAO;
 import com.mana.innovative.dao.client.ItemDAO;
+import com.mana.innovative.dao.client.ItemDiscountDAO;
+import com.mana.innovative.dao.client.ItemImageDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.domain.common.SearchOption;
@@ -11,19 +15,23 @@ import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
 import com.mana.innovative.logic.QueryUtil;
+import com.mana.innovative.utilities.date.NumberCommons;
 import com.mana.innovative.utilities.date.StringCommons;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.DetachedCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,8 +68,24 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 	 */
 	private static final Logger logger = LoggerFactory.getLogger( ItemDAOImpl.class );
 
+	@Resource
+	private GemstoneDAO gemstoneDAO;
+
+	@Resource
+	private ItemImageDAO itemImageDAO;
+
+	@Resource
+	private ItemDiscountDAO itemDiscountDAO;
+
 
 //    private static final String HASH = DAOConstants.HASH;
+private String listProperty;
+	private Map< String, List > listMap = new HashMap<>( );
+	private Map< String, Object > valueMap = new HashMap<>( );
+	/* IMP UPDATE Functions */
+	private Map< String, String > keysUsed = new HashMap<>( );
+
+    /* IMP CREATE Functions */
 
 	/**
 	 * Delete all items.
@@ -194,7 +218,6 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		logger.debug( "Finishing " + location );
 		return itemDAOResponse;
 	}
-   /* IMP UPDATE Functions */
 
 	/**
 	 * This method is to update the DB with the persistence layer to keep the Item value synced
@@ -259,7 +282,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		return itemDAOResponse;
 	}
 
-    /* IMP CREATE Functions */
+    /* IMP Get Functions 1st one is special Search by Param Function */
 
 	/**
 	 * This method is to create a Item object and save it in the DB
@@ -305,7 +328,6 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		logger.debug( "Finishing " + location );
 		return itemDAOResponse;
 	}
-
 
 	/**
 	 * Gets item by item id.
@@ -355,7 +377,6 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 
 		return itemDAOResponse;
 	}
-
 
 	/**
 	 * Gets item by item name.
@@ -443,8 +464,6 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		return itemDAOResponse;
 	}
 
-    /* IMP Get Functions 1st one is special Search by Param Function */
-
 	/**
 	 * Gets item by search params.
 	 *
@@ -467,9 +486,35 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 			this.openDBTransaction( );
 
 			queryUtil = new QueryUtil( );
-			DetachedCriteria detachedCriteria = this.getDetachedCriteriaBySearchParams( searchOption );
+			logger.info( searchOption.getSearchConditionParams( ).toString( ) );
 
-			itemList = detachedCriteria.getExecutableCriteria( session ).list( );
+			String filterQuery = this.getFilterQueryByParams( searchOption );
+			String sortQuery = this.getSortQueryByParams( searchOption );
+
+			if ( !StringUtils.isEmpty( sortQuery.trim( ) ) ) {
+				sortQuery = " and " + sortQuery;
+			}
+//          Note Example query for making dynamic parent child joins
+//			@IMP to remember how to use below lines to make dynamic join qeries using Hibernate
+//			Query query = session.createQuery( "Select item from Item item join item.gemstoneList gemstone join item.itemImageList itemImage" +
+//					"  where item.itemType=:item_type1 and gemstone.gemstoneName in(:gemstone_name1) and itemImage.id > 0 " );
+//			logger.debug( "select item from Item item " + filterQuery + sortQuery );
+
+			Query query = session.createQuery( "select item from Item item " + filterQuery );
+
+			// + filterQuery +	// sortQuery );
+
+
+			for ( Map.Entry< String, List > stringListEntry : getListMap( ).entrySet( ) ) {
+				query.setParameterList( stringListEntry.getKey( ), stringListEntry.getValue( ) );
+			}
+
+			for ( Map.Entry< String, Object > stringListEntry : getValueMap( ).entrySet( ) ) {
+				query.setParameter( stringListEntry.getKey( ), stringListEntry.getValue( ) );
+			}
+
+			itemList = query.list( );
+
 			this.closeDBTransaction( );
 			itemDAOResponse.setRequestSuccess( Boolean.TRUE );
 
@@ -491,44 +536,18 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 	}
 
 	/**
-	 * This method is to create a detached criteria
+	 * Gets filter query by params.
+	 * Complex method for filtering by each property of item even its child table props
+	 * To add more child tables, please add condition param to {@link #addCustomItemChildrenWithRestriction(String, String[])}
 	 *
-	 * @param searchOption the tab search option
+	 * @param searchOption the search option
 	 *
-	 * @return A detached criteria object
+	 * @return the filter query by params
 	 */
-	private DetachedCriteria getDetachedCriteriaBySearchParams( SearchOption searchOption ) {
+	private String getFilterQueryByParams( final SearchOption searchOption ) {
 
+		String filterQuery, initialQuery = "", laterQuery = "";
 		Map< String, Object > searchConditionParams = searchOption.getSearchConditionParams( );
-		Map< String, String > searchOrderWithParams = searchOption.getSearchOrderWithParams( );
-//
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass( Item.class );
-
-		if ( !searchConditionParams.isEmpty( ) ) {
-			detachedCriteria = this.addConditionParams( detachedCriteria, searchConditionParams );
-		}
-//		if ( !searchOrderWithParams.isEmpty( ) ) {
-//			detachedCriteria = this.addOrderParams( detachedCriteria, searchOrderWithParams );
-//		}
-
-//        if ( !searchMatchType.isEmpty( ) ) {
-//            keys = this.getKeysForSearch( searchMatchType );
-//            detachedCriteria = this.addMatchTypeParams( detachedCriteria, searchMatchTypeParams, searchMatchType,
-//                    searchConditions, keys );
-//        }
-		return detachedCriteria;
-	}
-
-	/**
-	 * Add condition params.
-	 *
-	 * @param detachedCriteria the detached criteria
-	 * @param searchConditionParams the search condition params
-	 *
-	 * @return the detached criteria
-	 */
-	private DetachedCriteria addConditionParams( DetachedCriteria detachedCriteria, Map< String,
-			Object > searchConditionParams ) {
 
 		for ( Map.Entry< String, Object > searchConditionParam : searchConditionParams.entrySet( ) ) {
 
@@ -547,26 +566,145 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 			if ( value.toString( ).split( "," ).length > 1 ) {
 				key = StringCommons.alterKeyAccToHibMapping( key );
 				key = StringCommons.adjustKey( key );
-				detachedCriteria.add( queryUtil.getAddedRestriction( key, value.toString( ).split( "," ), QueryUtil.IN
-				) );
 
+				List values = this.addCustomItemChildrenWithRestriction( key, value.toString( ).split( "," ) );
+				// Note add each property of child table to a map and let hibernate set it in primary method for
+				// filter search param
+				if ( getListProperty( ).equals( "child" ) ) {
+
+					String paramKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 ) + 2;
+					boolean isUsedKey = false;
+					if ( !getKeysUsed( ).containsKey( key.substring( 0, key.indexOf( ServiceConstants.DOT ) ) ) ) {
+						initialQuery += "join item." + key.substring( DAOConstants.ZERO, key.indexOf( ServiceConstants
+								.DOT ) ) +
+								DAOConstants.LIST_STRING + " " + key.substring( key.indexOf( ServiceConstants.DOT ) + 1 )
+								+ 1 + " ";
+						// Add the first part of the key only so we can check later on for already used key
+						getKeysUsed( ).put( key.substring( 0, key.indexOf( ServiceConstants.DOT ) ),
+								key.substring( key.indexOf( ServiceConstants.DOT ) + 1 ) );
+					} else {
+						key = getKeysUsed( ).get( key.substring( 0, key.indexOf( ServiceConstants.DOT )
+						) );
+						isUsedKey = true;
+					}
+
+					// property of the child table with class
+
+					String tempKey;
+
+					if ( isUsedKey ) {
+						tempKey = paramKey.substring( 0, paramKey.lastIndexOf( "2" ) );
+					} else {
+						tempKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 );
+					}
+
+					key = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 )
+							+ 1 + ServiceConstants.DOT
+							+ tempKey;
+
+					// Param Key
+					laterQuery += key + " in(:" + paramKey + ")";
+
+					// add the list for each param for the Query to be created in main parent search param method
+					this.getListMap( ).put( paramKey, values );
+				} else {
+					key = StringCommons.adjustKey( key );
+					String paramKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 );
+					laterQuery += key + " in(:" + paramKey + 1 + ")";
+					this.getListMap( ).put( paramKey + 1, values );
+				}
 			} else {
+
+				//initial key provided to us here , format e.g. item_id changes to item.item_id
+				key = StringCommons.alterKeyAccToHibMapping( key );
+				// changed to item.itemId from previous comment
 				key = StringCommons.adjustKey( key );
-				detachedCriteria.add( queryUtil.getAddedRestriction( key, value, QueryUtil.EQ ) );
+				// create the param key by taking substring of the entire key, format being e.g. item.itemId
+				String paramKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 );
+
+				laterQuery += key + "=:" + paramKey + 1 + " ";
+				this.getValueMap( ).put( paramKey + 1, value );
 			}
+			laterQuery += " and ";
 		}
-		return detachedCriteria;
+		filterQuery = initialQuery + "where " + laterQuery;
+		if ( filterQuery.endsWith( " and " ) ) {
+			filterQuery = filterQuery.substring( 0, filterQuery.lastIndexOf( "and" ) );
+		}
+		return filterQuery;
+	}
+
+	private List addCustomItemChildrenWithRestriction( final String key,
+													   final String[] split ) {
+
+		boolean longFlag = false, doubleFlag = false;
+		try {
+			long test = Long.parseLong( split[ 0 ] );
+			longFlag = true;
+		} catch ( RuntimeException exception ) {
+			logger.debug( "Checking for long value in child property, long value was not found" );
+		}
+		try {
+			double test = Double.parseDouble( split[ 0 ] );
+			doubleFlag = true;
+		} catch ( RuntimeException exception ) {
+			logger.debug( "Checking for double value in child property, double value was not found" );
+		}
+
+		if ( longFlag ) {
+			List< Long > longValues = new ArrayList<>( );
+			Collections.addAll( longValues, NumberCommons.convertToLongArray( split ) );
+			setIfKeyIsChildList( key, longValues );
+			return longValues;
+		} else if ( doubleFlag ) {
+
+			List< Double > doubleValues = new ArrayList<>( );
+			Collections.addAll( doubleValues, NumberCommons.convertToDoubleArray( split ) );
+			this.setIfKeyIsChildList( key, doubleValues );
+			return doubleValues;
+		} else {
+			List< String > stringValues = new ArrayList<>( );
+			Collections.addAll( stringValues, split );
+			this.setIfKeyIsChildList( key, stringValues );
+			return stringValues;
+		}
+
 	}
 
 	/**
-	 * Add order params.
+	 * Sets if key is child list.
+	 * To add more child class filters please add name of the child class in {@link DAOConstants}
+	 * Also all class properties for Domain/Hibernate must have the format classname_propertyname as column name for
+	 * us to use this generic filter.
+	 * Generic level is dependant on Parent class name only for initial query for now as this method needs to know
+	 * all the child class names to decipher if the property will be a child class or only a parent class property.
 	 *
-	 * @param detachedCriteria the detached criteria
-	 * @param searchOrders the search orders
+	 * @param key the key
+	 * @param values the values
 	 *
-	 * @return the detached criteria
+	 * @return the if key is child list
 	 */
-	private DetachedCriteria addOrderParams( DetachedCriteria detachedCriteria, Map< String, String > searchOrders ) {
+	public List setIfKeyIsChildList( String key, List values ) {
+
+		if ( key.toLowerCase( ).contains( DAOConstants.GEMSTONE_CLASS_IN_STRING ) ) {
+			setListProperty( "child" );
+
+		} else if ( key.toLowerCase( ).contains( DAOConstants.ITEM_IMAGE_CLASS_IN_STRING ) ) {
+			setListProperty( "child" );
+
+		} else if ( key.toLowerCase( ).contains( DAOConstants.ITEM_DISCOUNT_CLASS_IN_STRING ) ) {
+			setListProperty( "child" );
+		} else {
+			setListProperty( "item" );
+			return values;
+		}
+		return null;
+	}
+
+	private String getSortQueryByParams( final SearchOption searchOption ) {
+
+		String orderBy = " order by ", sortQuery = orderBy;
+		Map< String, String > searchOrders = searchOption.getSearchOrderWithParams( );
 
 		for ( Map.Entry< String, String > searchOrder : searchOrders.entrySet( ) ) {
 
@@ -575,70 +713,30 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 			if ( key == null ) {
 				continue;
 			}
+			key = StringCommons.alterKeyAccToHibMapping( key );
 			key = StringCommons.adjustKey( key );
+			if ( key.contains( DAOConstants.GEMSTONE_CLASS_IN_STRING ) ||
+					key.contains( DAOConstants.ITEM_DISCOUNT_CLASS_IN_STRING ) ||
+					key.contains( DAOConstants.ITEM_IMAGE_CLASS_IN_STRING )
+					) {
+				logger.warn( "child class property not available for sorting" );
+				continue;
+			}
 			// get value of class property from map to query the DB
 			String value = searchOrder.getValue( );
 			if ( value == null ) {
 				continue;
 			}
-
+			sortQuery += key + " " + value.toUpperCase( ) + ",";
 			// add SQL restrictions
-			detachedCriteria.addOrder( queryUtil.getCreatedOrder( key, value ) );
+//			detachedCriteria.addOrder( queryUtil.getCreatedOrder( key, value ) );
 		}
-		return detachedCriteria;
-	}
+		int lastIndex = sortQuery.lastIndexOf( "," );
 
-	/**
-	 * Add match type params.
-	 *
-	 * @param detachedCriteria the detached criteria
-	 * @param searchParams the search params
-	 * @param searchMatchTypes the search match types
-	 * @param searchConditions the search conditions
-	 * @param keys the keys
-	 *
-	 * @return the detached criteria
-	 */
-	private DetachedCriteria addMatchTypeParams( DetachedCriteria detachedCriteria, List< Map< String,
-			Object > > searchParams, List< Map< String, String > > searchMatchTypes, List< Map< String,
-			String > > searchConditions, List< String > keys ) {
-
-		logger.debug( searchParams + "\n" + searchParams.size( )
-				+ " params " + searchParams.isEmpty( )
-				+ " matchType " + "" + searchMatchTypes.isEmpty( )
-				+ " conditions " + searchConditions.isEmpty( )
-				+ " keys " + keys.isEmpty( ) );
-		if ( searchParams.isEmpty( ) || searchConditions.isEmpty( ) || searchMatchTypes.isEmpty( ) || keys.isEmpty( ) ) {
-			throw new NullPointerException( "One of the Lists in parameters is Empty" );
+		if ( lastIndex > 0 ) {
+			sortQuery = sortQuery.substring( 0, lastIndex );
 		}
-		for ( int i = 0; i < searchMatchTypes.size( ); i++ ) {
-
-			// get condition value from Map with key
-			String operator = searchConditions.get( i ).get( keys.get( i ) );
-			// get value of class property from map to query the DB
-			Object value = searchParams.get( i ).get( keys.get( i ) );
-
-			String matchType = searchMatchTypes.get( i ).get( keys.get( i ) );
-
-			detachedCriteria.add( queryUtil.getAddedRestriction( keys.get( i ), value, operator, matchType ) );
-		}
-		return detachedCriteria;
-	}
-
-	/**
-	 * This method is for getting the keys for searching
-	 *
-	 * @param searchConditions A list of type Map of type
-	 *
-	 * @return A list of type String
-	 */
-	private List< String > getKeysForSearch( final Map< String, String > searchConditions ) {
-
-		List< String > keys = new ArrayList<>( );
-		for ( Map.Entry< String, String > entry : searchConditions.entrySet( ) ) {
-			keys.add( entry.getKey( ) );
-		}
-		return keys;
+		return sortQuery.equalsIgnoreCase( orderBy ) ? "" : sortQuery;
 	}
 
 	/**
@@ -660,4 +758,26 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 
 		this.sessionFactory = sessionFactory;
 	}
+
+	private String getListProperty( ) {
+		return listProperty;
+	}
+
+	private void setListProperty( final String listProperty ) {
+		this.listProperty = listProperty;
+	}
+
+	public Map< String, String > getKeysUsed( ) {
+		return keysUsed;
+	}
+
+	private Map< String, List > getListMap( ) {
+		return listMap;
+	}
+
+	private Map< String, Object > getValueMap( ) {
+		return valueMap;
+	}
+
+
 }

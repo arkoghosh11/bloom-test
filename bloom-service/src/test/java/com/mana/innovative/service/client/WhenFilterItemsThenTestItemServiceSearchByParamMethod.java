@@ -61,14 +61,12 @@ public class WhenFilterItemsThenTestItemServiceSearchByParamMethod {
 		List< String > params = new ArrayList<>( );
 
 		Filter filter = new Filter( );
-		params.add( "item_type=test_type" );
+//		params.add( "item_type=test_type" );
 		filter.setParams( params );
 		Sort sort = new Sort( );
-		params = new ArrayList<>( );
-		params.add( "itemType=asc" );
-		sort.setParams( params );
 
-		gemstoneCriteria = "default,emerald";
+
+		gemstoneCriteria = "gemstone_name=default,emerald";
 
 		filterSortParams.setFilter( filter );
 		filterSortParams.setSort( sort );
@@ -88,8 +86,16 @@ public class WhenFilterItemsThenTestItemServiceSearchByParamMethod {
 
 		logger.debug( "Starting test for #testGetItemsSearchedByParamsWithItemTypeFilter()" );
 
+		List< String > params;
+		params = new ArrayList<>( );
+		params.add( "item_type=test_type" );
 		assertNotNull( TestConstants.nullMessage, itemsService.getItemsSearchedByParams( filterSortParams,
 				requestParams ) );
+		Response itemResponse = itemsService.getItemsSearchedByParams( filterSortParams,
+				requestParams );
+		ItemResponseContainer< ItemsPayload > itemResponseContainer = ( ItemResponseContainer< ItemsPayload > ) itemResponse.getEntity( );
+
+		assertTrue( TestConstants.trueMessage, itemResponseContainer.getPayload( ).getItems( ).isEmpty( ) );
 
 		logger.debug( "Finishing test for #testGetItemsSearchedByParamsWithItemTypeFilter()" );
 
@@ -101,16 +107,15 @@ public class WhenFilterItemsThenTestItemServiceSearchByParamMethod {
 
 		logger.debug( "Starting test for GetItemsSearchedByParamWithOnlyGemstone" );
 
-		List< String > params = filterSortParams.getFilter( ).getParams( );
+		List< String > params;
 
-		params.clear( );
+		params = new ArrayList<>( );
 
 		params.add( gemstoneCriteria );
 
 		filterSortParams.getFilter( ).setParams( params );
 
-		Response itemResponse = itemsService.getItemsSearchedByParams( filterSortParams,
-				requestParams );
+		Response itemResponse = itemsService.getItemsSearchedByParams( filterSortParams, requestParams );
 		assertNotNull( TestConstants.nullMessage, itemResponse );
 		assertNotNull( TestConstants.nullMessage, itemResponse.getEntity( ) );
 
@@ -134,7 +139,39 @@ public class WhenFilterItemsThenTestItemServiceSearchByParamMethod {
 
 		List< String > params = filterSortParams.getFilter( ).getParams( );
 
+		params.add( "item_type=test_type" );
 		params.add( gemstoneCriteria );
+
+		filterSortParams.getFilter( ).setParams( params );
+
+		logger.debug( filterSortParams.toString( ) );
+		Response itemResponse = itemsService.getItemsSearchedByParams( filterSortParams,
+				requestParams );
+		assertNotNull( TestConstants.nullMessage, itemResponse );
+		assertNotNull( TestConstants.nullMessage, itemResponse.getEntity( ) );
+
+		ItemResponseContainer< ItemsPayload > itemResponseContainer = ( ItemResponseContainer< ItemsPayload > ) itemResponse.getEntity( );
+		assertNotNull( TestConstants.nullMessage, itemResponseContainer.getPayload( ) );
+		assertNotNull( TestConstants.nullMessage, itemResponseContainer.getPayload( ).getItems( ) );
+
+		assertTrue( TestConstants.trueMessage, itemResponseContainer.getPayload( ).getItems( ).isEmpty( ) );
+		assertEquals( TestConstants.notEqualsMessage, itemResponseContainer.getPayload( ).getItems( ).size( ),
+				itemResponseContainer.getPayload( ).getTotalCount( ) );
+
+		logger.debug( "Completing test for GetItemsSearchedByParamWithItemTypeNGemstone" );
+	}
+
+	@SuppressWarnings( "unchecked" )
+	@Test
+	public void testGetItemsSearchedByParamWithItemTypeNItemId( ) throws Exception {
+
+		logger.debug( "Starting test for GetItemsSearchedByParamWithItemTypeNItemId" );
+
+		List< String > params;
+		params = new ArrayList<>( );
+
+		params.add( "item_type=test_type" );
+		params.add( "item_id=0,1" );
 
 		filterSortParams.getFilter( ).setParams( params );
 
@@ -152,20 +189,33 @@ public class WhenFilterItemsThenTestItemServiceSearchByParamMethod {
 				itemResponseContainer.getPayload( ).getTotalCount( ) );
 
 
-		logger.debug( "Completing test for GetItemsSearchedByParamWithItemTypeNGemstone" );
+		logger.debug( "Completing test for GetItemsSearchedBYParamWithItemTypeNItemId" );
 	}
 
 	@SuppressWarnings( "unchecked" )
 	@Test
-	public void testGetItemsSearchedByParamWithItemTypeNItemId( ) throws Exception {
+	public void testGetItemsSearchedByParamWithMultipleProperties( ) throws Exception {
 
 		logger.debug( "Starting test for GetItemsSearchedByParamWithItemTypeNItemId" );
 
 		List< String > params = filterSortParams.getFilter( ).getParams( );
 
-		params.add( "item_id=3" );
+		params = new ArrayList<>( );
 
+		params.add( "item_id=3,4,5" );
+		params.add( "item_image_id=3,4,5" );
+		params.add( "item_discount_id=3,4,5" );
+		params.add( "gemstone_id=3,4,5" );
+		params.add( "gemstone_name=test1,test2,test3" );
+		params.add( "item_description=test1,test2,test3" );
+		params.add( "item_type=test1" );
 		filterSortParams.getFilter( ).setParams( params );
+
+		params = new ArrayList<>( );
+		params.add( "item_type=asc" );
+		params.add( "item_price=desc" );
+		filterSortParams.getSort( ).setParams( params );
+
 
 		Response itemResponse = itemsService.getItemsSearchedByParams( filterSortParams,
 				requestParams );

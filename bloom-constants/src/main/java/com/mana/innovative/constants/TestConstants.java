@@ -302,6 +302,9 @@ public class TestConstants {
 
     public static final String TEST_GEM_DESCRIPTION = "test";
     public static final String DEFAULT_GEM_DESCRIPTION = "default";
+    public static final String KEY_GEM_NAME = "gemstone.gemstoneName";
+    public static final String KEY_ITEM_IMAGE_ID = "itemImage.itemImageId";
+    public static final String KEY_ITEM_DISCOUNT_ID = "itemDiscount.itemDiscountId";
 
     /**
      * The constant setUpMethodLoggerMsg.

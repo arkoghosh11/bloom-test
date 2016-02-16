@@ -1,6 +1,7 @@
 package com.mana.innovative.dao.client.impl;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.BasicDAO;
 import com.mana.innovative.dao.client.ItemDiscountDAO;
 import com.mana.innovative.dao.response.DAOResponse;
@@ -331,7 +332,7 @@ public class ItemDiscountDAOImpl extends BasicDAO implements ItemDiscountDAO {
      *
      * @param requestParams the request params
      *
-     * @return List<ItemDiscount>    </> Return a list of
+     * @return List<ItemDiscount>     </> Return a list of
      */
     @SuppressWarnings( "unchecked" )
     @Override
@@ -358,6 +359,45 @@ public class ItemDiscountDAOImpl extends BasicDAO implements ItemDiscountDAO {
         }
         itemDiscountDAOResponse.setCount( itemDiscounts == null ? DAOConstants.ZERO : itemDiscounts.size( ) );
         itemDiscountDAOResponse.setResults( itemDiscounts );
+        itemDiscountDAOResponse.setErrorContainer( errorContainer );
+
+        logger.debug( "Finishing " + location );
+        return itemDiscountDAOResponse;
+    }
+
+    @SuppressWarnings( "unchecked" )
+    @Override
+    @Transactional( readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
+    public DAOResponse< ItemDiscount > getItemDiscountsByParams( final String key, final List values, RequestParams requestParams
+    ) {
+
+        String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getItemDiscountByItemDiscountId()";
+        logger.debug( "Starting " + location );
+
+        List< ItemDiscount > itemDiscountList = null;
+        DAOResponse< ItemDiscount > itemDiscountDAOResponse = new DAOResponse<>( );
+        ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
+
+        try {
+            this.openDBTransaction( );
+
+            Query query = session.
+                    createQuery( " from ItemDiscount where " + key.substring(
+                            key.indexOf( ServiceConstants.DOT ) + 1 ) + " in " + "(:value)" );
+            query.setParameterList( "value", values );
+            itemDiscountList = query.list( );
+            itemDiscountDAOResponse.setRequestSuccess( Boolean.TRUE );
+
+            this.closeDBTransaction( );
+        } catch ( HibernateException exception ) {
+            this.handleExceptions( exception );
+            logger.error( "Error occurred while trying to fetch data from itemDiscounts table " + location, exception );
+            if ( requestParams.isError( ) ) {
+                errorContainer = this.fillErrorContainer( location, exception );
+            }
+        }
+        itemDiscountDAOResponse.setCount( itemDiscountList == null ? DAOConstants.ZERO : itemDiscountList.size( ) );
+        itemDiscountDAOResponse.setResults( itemDiscountList );
         itemDiscountDAOResponse.setErrorContainer( errorContainer );
 
         logger.debug( "Finishing " + location );

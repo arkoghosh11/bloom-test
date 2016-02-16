@@ -89,4 +89,6 @@ public interface ItemImageDAO {
      * @return the itemImages
      */
     DAOResponse< ItemImage > getItemImages( RequestParams requestParams );
+
+    DAOResponse< ItemImage > getItemImagesByParams( String key, List values, final RequestParams requestParams );
 }

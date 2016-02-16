@@ -17,6 +17,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +47,10 @@ public class WhenGetItemImgThenTestItemImgDAOGetMethods {
 
     private RequestParams requestParams;
 
+    private String key;
+
+    private List< Long > values;
+
     /**
      * Sets up.
      *
@@ -59,6 +64,12 @@ public class WhenGetItemImgThenTestItemImgDAOGetMethods {
 
         requestParams = new RequestParams( );
         requestParams.setIsError( TestConstants.IS_ERROR );
+
+        key = TestConstants.KEY_ITEM_IMAGE_ID;
+
+        values = new ArrayList<>( );
+        values.add( ( long ) TestConstants.ZERO );
+        values.add( ( long ) TestConstants.ONE );
     }
 
     /**
@@ -228,5 +239,29 @@ public class WhenGetItemImgThenTestItemImgDAOGetMethods {
         Assert.assertNotNull( TestConstants.nullMessage, itemImageDAOResponse.getResults( ).get( TestConstants.ZERO ) );
 
         logger.debug( "Finishing test for GetItemImagesWithErrorDisabled" );
+    }
+
+    @Test
+    @Transactional( readOnly = true )
+    public void testGetItemImagesByParams( ) throws Exception {
+
+        logger.debug( "Starting test for GetItemImagesByParams" );
+
+        DAOResponse< ItemImage > itemImageDAOResponse = itemImageDAOImpl.getItemImagesByParams( key, values, requestParams );
+
+        // test errorContainer
+        Assert.assertNotNull( TestConstants.nullMessage, itemImageDAOResponse );
+        Assert.assertNull( TestConstants.notNullMessage, itemImageDAOResponse.getErrorContainer( ) );
+        // test DAOResponse
+        Assert.assertNotSame( TestConstants.sameMessage, TestConstants.ZERO, itemImageDAOResponse.getCount( ) );
+        Assert.assertSame( TestConstants.notSameMessage, TestConstants.ZERO, itemImageDAOResponse.getOffset( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemImageDAOResponse.getResults( ) );
+        Assert.assertFalse( itemImageDAOResponse.getResults( ).isEmpty( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemImageDAOResponse.getResults( ).get( TestConstants.ZERO ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, values.size( ), itemImageDAOResponse.getResults( ).size( ) );
+
+        logger.info( "******* Data 0 is\n " + itemImageDAOResponse.getResults( ).get( 0 ).toString( ) );
+        logger.info( "******* Data 1 is\n " + itemImageDAOResponse.getResults( ).get( 1 ).toString( ) );
+        logger.debug( "Completing test for GetItemImagesByParams" );
     }
 }

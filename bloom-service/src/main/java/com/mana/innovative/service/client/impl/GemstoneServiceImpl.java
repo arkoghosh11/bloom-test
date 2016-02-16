@@ -116,7 +116,7 @@ public class GemstoneServiceImpl implements GemstoneService {
 			return Response.status( Status.BAD_REQUEST ).entity( gemstoneResponseContainer ).build( );
 		}
 		try {
-			gemstoneDAOResponse = gemstoneDAOImpl.getGemstoneByGemstoneName( gemstoneName, requestParams );
+			gemstoneDAOResponse = gemstoneDAOImpl.getGemstoneByGemstoneName( gemstoneName.toLowerCase( ), requestParams );
 
 		} catch ( Exception exception ) {
 			if ( exception instanceof HibernateException ) {

@@ -102,6 +102,11 @@ public final class DAOConstants {
      * The constant DEFAULT_GEM_DESCRIPTION.
      */
     public static final String DEFAULT_GEM_DESCRIPTION = "Not Available";
+    public static final String GEMSTONE_CLASS_IN_STRING = "gemstone";
+    public static final String ITEM_IMAGE_CLASS_IN_STRING = "itemimage";
+    public static final String ITEM_DISCOUNT_CLASS_IN_STRING = "itemdiscount";
+    public static final String STRING = "string";
+    public static final String LIST_STRING = "List";
 
 
     /**

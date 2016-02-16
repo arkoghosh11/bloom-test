@@ -23,6 +23,7 @@ import java.util.Map;
  * @Copyright Date : 10/2/12 Time: 3:35 PM
  * @since: jdk 1.7
  */
+// Todo find the correct module and package for this class
 public class SearchOption {
 
 	/**
@@ -60,9 +61,9 @@ public class SearchOption {
 	 */
 	public SearchOption( ) {
 
-		searchConditionParams = new HashMap< String, Object >( );
-		searchOrderWithParams = new HashMap< String, String >( );
-		searchMatchTypeParams = new HashMap< String, Object >( );
+		searchConditionParams = new HashMap< String, Object >( ); // Note being used
+		searchOrderWithParams = new HashMap< String, String >( ); // Note being used
+		searchMatchTypeParams = new HashMap< String, Object >( ); // Todo use
 
 		searchConditions = new HashMap< String, String >( );
 		searchMatchType = new HashMap< String, String >( );

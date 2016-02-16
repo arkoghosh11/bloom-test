@@ -90,4 +90,14 @@ public interface ItemDiscountDAO {
      */
     DAOResponse< ItemDiscount > getItemDiscounts( RequestParams requestParams );
 
+    /**
+     * Gets item discounts by params.
+     *
+     * @param key the key
+     * @param values the values
+     * @param requestParams the request params
+     *
+     * @return the item discounts by params
+     */
+    DAOResponse< ItemDiscount > getItemDiscountsByParams( String key, List values, final RequestParams requestParams );
 }

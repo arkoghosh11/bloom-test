@@ -1,6 +1,7 @@
 package com.mana.innovative.dao.client.impl;
 
 import com.mana.innovative.constants.DAOConstants;
+import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.BasicDAO;
 import com.mana.innovative.dao.client.GemstoneDAO;
 import com.mana.innovative.dao.response.DAOResponse;
@@ -402,6 +403,45 @@ public class GemstoneDAOImpl extends BasicDAO implements GemstoneDAO {
 		gemstoneDAOResponse.setResults( gemstones );
 		gemstoneDAOResponse.setErrorContainer( errorContainer );
 		
+		logger.debug( "Finishing " + location );
+		return gemstoneDAOResponse;
+	}
+
+	@SuppressWarnings( "unchecked" )
+	@Override
+	@Transactional( readOnly = true, propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
+	public DAOResponse< Gemstone > getGemstonesByParams( final String key, final List values, RequestParams requestParams
+	) {
+
+		String location = this.getClass( ).getCanonicalName( ) + DAOConstants.HASH + "getGemstonesByParams()";
+		logger.debug( "Starting " + location );
+
+		List< Gemstone > gemstones = null;
+		DAOResponse< Gemstone > gemstoneDAOResponse = new DAOResponse<>( );
+		ErrorContainer errorContainer = !requestParams.isError( ) ? null : new ErrorContainer( );
+
+		try {
+			this.openDBTransaction( );
+
+			Query query = session.
+					createQuery( " from Gemstone where " + key.substring(
+							key.indexOf( ServiceConstants.DOT ) + 1 ) + " in " + "(:value)" );
+			query.setParameterList( "value", values );
+			gemstones = query.list( );
+			gemstoneDAOResponse.setRequestSuccess( Boolean.TRUE );
+
+			this.closeDBTransaction( );
+		} catch ( HibernateException exception ) {
+			this.handleExceptions( exception );
+			logger.error( "Error occurred while trying to fetch data from gemstones table " + location, exception );
+			if ( requestParams.isError( ) ) {
+				errorContainer = this.fillErrorContainer( location, exception );
+			}
+		}
+		gemstoneDAOResponse.setCount( gemstones == null ? DAOConstants.ZERO : gemstones.size( ) );
+		gemstoneDAOResponse.setResults( gemstones );
+		gemstoneDAOResponse.setErrorContainer( errorContainer );
+
 		logger.debug( "Finishing " + location );
 		return gemstoneDAOResponse;
 	}

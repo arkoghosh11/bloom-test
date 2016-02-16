@@ -17,6 +17,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +47,10 @@ public class WhenGetItemDisThenTestItemDisDAOGetMethods {
 
     private RequestParams requestParams;
 
+    private String key;
+
+    private List< Long > values;
+
     /**
      * Sets up.
      *
@@ -59,6 +64,11 @@ public class WhenGetItemDisThenTestItemDisDAOGetMethods {
 
         requestParams = new RequestParams( );
         requestParams.setIsError( TestConstants.IS_ERROR );
+
+        key = TestConstants.KEY_ITEM_DISCOUNT_ID;
+        values = new ArrayList<>( );
+        values.add( ( long ) TestConstants.ZERO );
+        values.add( ( long ) TestConstants.ONE );
     }
 
     /**
@@ -225,5 +235,30 @@ public class WhenGetItemDisThenTestItemDisDAOGetMethods {
         Assert.assertNotNull( TestConstants.nullMessage, itemDiscountDAOResponse.getResults( ).get( TestConstants.ZERO ) );
 
         logger.debug( "Finishing test for GetItemDiscountsWithErrorDisabled" );
+    }
+
+    @Test
+    @Transactional( readOnly = true )
+    public void testGetItemDiscountByParams( ) throws Exception {
+
+        logger.debug( "Starting test for GetItemDiscountByParams" );
+
+        DAOResponse< ItemDiscount > itemDiscountDAOResponse = itemDiscountDAOImpl.getItemDiscountsByParams( key,
+                values, requestParams );
+
+        // test errorContainer
+        Assert.assertNotNull( TestConstants.nullMessage, itemDiscountDAOResponse );
+        Assert.assertNull( TestConstants.notNullMessage, itemDiscountDAOResponse.getErrorContainer( ) );
+        // test DAOResponse
+        Assert.assertNotSame( TestConstants.sameMessage, TestConstants.ZERO, itemDiscountDAOResponse.getCount( ) );
+        Assert.assertSame( TestConstants.notSameMessage, TestConstants.ZERO, itemDiscountDAOResponse.getOffset( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDiscountDAOResponse.getResults( ) );
+        Assert.assertFalse( itemDiscountDAOResponse.getResults( ).isEmpty( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, itemDiscountDAOResponse.getResults( ).get( TestConstants.ZERO ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, values.size( ), itemDiscountDAOResponse.getResults( ).size( ) );
+
+        logger.info( "******* Data 0 is\n " + itemDiscountDAOResponse.getResults( ).get( 0 ).toString( ) );
+        logger.info( "******* Data 1 is\n " + itemDiscountDAOResponse.getResults( ).get( 1 ).toString( ) );
+        logger.debug( "Completing test for GetItemDiscountByParams" );
     }
 }

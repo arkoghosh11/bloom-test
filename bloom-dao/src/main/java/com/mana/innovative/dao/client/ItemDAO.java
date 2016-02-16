@@ -4,7 +4,9 @@ import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.domain.common.SearchOption;
 import com.mana.innovative.dto.request.RequestParams;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -102,4 +104,5 @@ public interface ItemDAO {
      * @return the item by search params
      */
     DAOResponse< Item > getItemsBySearchParams( SearchOption itemSearchOption, RequestParams requestParams );
+
 }

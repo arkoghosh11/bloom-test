@@ -7,6 +7,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -148,7 +149,7 @@ public class QueryUtil {
 					return Restrictions.ne( property, flag & longValue > -1 ? longValue : flag &
 							longValue < 1 ? doubleValue : value );
 				case IN:
-					return Restrictions.in( property, ( String[] ) value );
+					return Restrictions.in( property, ( ArrayList ) value );
 			}
 		} catch ( ClassCastException exception ) {
 			exception.printStackTrace( );
