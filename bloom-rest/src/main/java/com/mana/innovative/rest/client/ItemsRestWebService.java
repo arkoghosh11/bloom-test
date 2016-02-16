@@ -33,85 +33,92 @@ import javax.ws.rs.core.Response;
 @Path( "/{items : (?i)items}" ) //@Path( "/{tabs : (?i)tabs}" )
 public class ItemsRestWebService {
 
-    /**
-     * The constant logger.
-     */
-    private static final Logger logger = LoggerFactory.getLogger( ItemsRestWebService.class );
-    /* Constructor injection */
+	/**
+	 * The constant logger.
+	 */
+	private static final Logger logger = LoggerFactory.getLogger( ItemsRestWebService.class );
+	/* Constructor injection */
 
-    /**
-     * The Items service impl.
-     */
-    @Resource
-    ItemsService itemsService;
+	/**
+	 * The Items service impl.
+	 */
+	@Resource
+	ItemsService itemsService;
 
-    @POST
-    @Path( "/customFilter" )
-    @Consumes( { MediaType.APPLICATION_JSON } )
-    @Produces( { MediaType.APPLICATION_JSON } )
-    public Response getSearchedTabsByParams( FilterSortParams filterSortParams, @QueryParam( "is_error" ) @DefaultValue( "false" )
-    Boolean isError ) {
+	@POST
+	@Path( "/customFilter" )
+	@Consumes( { MediaType.APPLICATION_JSON } )
+	@Produces( { MediaType.APPLICATION_JSON } )
+	public Response getSearchedTabsByParams( FilterSortParams filterSortParams, @QueryParam( "is_error" ) @DefaultValue( "false" )
+	Boolean isError ) {
 
-        logger.debug( "Starting request for #getSearchedTabsByParams()" );
+		logger.debug( "Starting request for #getSearchedTabsByParams()" );
 
 
-        RequestParams requestParams = new RequestParams( );
-        requestParams.setIsError( isError );
-        Response response = itemsService.getItemsSearchedByParams( filterSortParams, requestParams );
+		RequestParams requestParams = new RequestParams( );
+		requestParams.setIsError( isError );
+		Response response = itemsService.getItemsSearchedByParams( filterSortParams, requestParams );
 
-        logger.debug( "Finishing response for #getSearchedTabsByParams()" );
-        return response;
-    }
+		logger.debug( "Finishing response for #getSearchedTabsByParams()" );
+		return response;
+	}
 
-    /**
-     * Gets items.
-     *
-     * @param isError the is error
-     *
-     * @return the items
-     */
-    @GET
-    @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response getItems( @QueryParam( value = "is_error" ) @DefaultValue( value = ServiceConstants.FALSE ) boolean
-                                      isError ) {
+	/**
+	 * Gets items.
+	 *
+	 * @param isError the is error
+	 *
+	 * @return the items
+	 */
+	@GET
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
+	public Response getItems( @QueryParam( value = "is_error" ) @DefaultValue( value = ServiceConstants.FALSE ) boolean
+									  isError,
+							  @QueryParam( value = "start_limit" ) Long startLimit,
+							  @QueryParam( value = "end_limit" ) Long endLimit,
+							  @QueryParam( value = "page_size" ) Integer pageSize ) {
 
 //        boolean isAuthenticated = loginService.verifyLogin(httpSession);
 //        if (!isAuthenticated) return ResponseUtility.unauthorizedAccess();
-        try {
-            RequestParams requestParams = new RequestParams( );
-            requestParams.setIsError( isError );
-            logger.info( "items Service " + itemsService );
-            return itemsService.getItems( requestParams );
-        } catch ( Exception exception ) {
-            logger.error( " Failed to retrieve Items" + exception );
-            return ResponseUtility.internalServerErrorMsg( null );
-        } finally {
-            logger.debug( "Response for Item Rest Service Completed " );
-        }
-    }
+		try {
+			RequestParams requestParams = new RequestParams( );
+			requestParams.setIsError( isError );
+			requestParams.setStartLimit( startLimit );
+			requestParams.setEndLimit( endLimit );
+			requestParams.setPageSize( pageSize );
 
-    /**
-     * Delete items.
-     *
-     * @param isError     the is error
-     * @param isDeleteAll the is delete all
-     *
-     * @return the response
-     */
-    @DELETE
-    @Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
-    public Response deleteItems( @QueryParam( value = "is_error" ) @DefaultValue( value = DAOConstants.FALSE ) boolean
-                                         isError, @QueryParam( value = "is_delete_all" ) boolean isDeleteAll ) {
-        //return ResponseUtility.forbiddenRequest( null );
-        try {
-            RequestParams requestParams = new RequestParams( );
-            requestParams.setIsError( isError );
-            return itemsService.deleteAllItems( requestParams );
-        } catch ( Exception exception ) {
-            logger.error( " Failed to delete All Items" + exception );
-            return ResponseUtility.internalServerErrorMsg( null );
-        } finally {
-            logger.debug( "Response for Items Rest Service Completed " );
-        }
-    }
+			logger.info( "items Service " + itemsService );
+			return itemsService.getItems( requestParams );
+		} catch ( Exception exception ) {
+			logger.error( " Failed to retrieve Items" + exception );
+			return ResponseUtility.internalServerErrorMsg( null );
+		} finally {
+			logger.debug( "Response for Item Rest Service Completed " );
+		}
+	}
+
+	/**
+	 * Delete items.
+	 *
+	 * @param isError the is error
+	 * @param isDeleteAll the is delete all
+	 *
+	 * @return the response
+	 */
+	@DELETE
+	@Produces( { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML } )
+	public Response deleteItems( @QueryParam( value = "is_error" ) @DefaultValue( value = DAOConstants.FALSE ) boolean
+										 isError, @QueryParam( value = "is_delete_all" ) boolean isDeleteAll ) {
+		//return ResponseUtility.forbiddenRequest( null );
+		try {
+			RequestParams requestParams = new RequestParams( );
+			requestParams.setIsError( isError );
+			return itemsService.deleteAllItems( requestParams );
+		} catch ( Exception exception ) {
+			logger.error( " Failed to delete All Items" + exception );
+			return ResponseUtility.internalServerErrorMsg( null );
+		} finally {
+			logger.debug( "Response for Items Rest Service Completed " );
+		}
+	}
 }
