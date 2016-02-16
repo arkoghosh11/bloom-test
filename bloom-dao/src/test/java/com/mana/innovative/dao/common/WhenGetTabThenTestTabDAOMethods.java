@@ -246,6 +246,162 @@ public class WhenGetTabThenTestTabDAOMethods {
 
         logger.debug( "Finishing test for GetTabBySearchParams" );
     }
+    
+    @Test
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+    public void testGetTabsWithPagingEnabledNErrorEnabled( ) throws Exception {
+        
+        logger.debug( "Starting test for GetTabsWithPagingEnabledNErrorEnabled" );
+        
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        requestParams.setStartLimit( 0L );
+        requestParams.setEndLimit( 1L );
+        
+        DAOResponse< Tab > tabDAOResponse = tabDAO.getTabs( requestParams );
+        
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse );
+        // test error container
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getErrorContainer( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getErrorContainer( ).getErrors( ) );
+        Assert.assertTrue( TestConstants.falseMessage, tabDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+        Assert.assertNull( TestConstants.notNullMessage, tabDAOResponse.getErrorContainer( ).getCurrentError( ) );
+        // test result object
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getResults( ) );
+        Assert.assertFalse( TestConstants.trueMessage, tabDAOResponse.getResults( ).isEmpty( ) );
+        
+        List< Tab > tabs = tabDAOResponse.getResults( );
+        // tab list and its size with DAOResponse<T> class count
+        Assert.assertNotNull( TestConstants.nullMessage, tabs );
+        Assert.assertFalse( TestConstants.trueMessage, tabs.isEmpty( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, tabDAOResponse.getCount( ), tabs.size( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TWO, tabs.size( ) );
+//        Assert.assertEquals(27, tabs.size()); /** Just a guarantee check for making sure new changes are working */
+        logger.debug( "Completing test for GetTabsWithPagingEnabledNErrorEnabled" );
+    }
+    
+    @Test
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+    public void testGetTabsWithPagingSize( ) throws Exception {
+        
+        logger.debug( "Starting test for GetTabsWithPagingSizeNErrorEnabled" );
+        
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        requestParams.setStartLimit( 0L );
+        requestParams.setPageSize( 3 );
+        
+        DAOResponse< Tab > tabDAOResponse = tabDAO.getTabs( requestParams );
 
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse );
+        // test error container
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getErrorContainer( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getErrorContainer( ).getErrors( ) );
+        Assert.assertTrue( TestConstants.falseMessage, tabDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+        Assert.assertNull( TestConstants.notNullMessage, tabDAOResponse.getErrorContainer( ).getCurrentError( ) );
+        // test result object
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getResults( ) );
+        Assert.assertFalse( TestConstants.trueMessage, tabDAOResponse.getResults( ).isEmpty( ) );
+        
+        List< Tab > tabs = tabDAOResponse.getResults( );
+        // tab list and its size with DAOResponse<T> class count
+        Assert.assertNotNull( TestConstants.nullMessage, tabs );
+        Assert.assertFalse( TestConstants.trueMessage, tabs.isEmpty( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, tabDAOResponse.getCount( ), tabs.size( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.THREE, tabs.size( ) );
+        logger.debug( "Completing test for GetTabsWithPagingSizeNErrorEnabled" );
+    }
+    
+    @Test
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+    public void testGetTabsWithNoPagingNErrorEnabled( ) throws Exception {
+        
+        logger.debug( "Starting test for GetTabsWithNoPagingNErrorEnabled" );
+        
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        
+        DAOResponse< Tab > tabDAOResponse = tabDAO.getTabs( requestParams );
 
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse );
+        // test error container
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getErrorContainer( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getErrorContainer( ).getErrors( ) );
+        Assert.assertTrue( TestConstants.falseMessage, tabDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+        Assert.assertNull( TestConstants.notNullMessage, tabDAOResponse.getErrorContainer( ).getCurrentError( ) );
+        // test result object
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getResults( ) );
+        Assert.assertFalse( TestConstants.trueMessage, tabDAOResponse.getResults( ).isEmpty( ) );
+        
+        List< Tab > tabs = tabDAOResponse.getResults( );
+        // tab list and its size with DAOResponse<T> class count
+        Assert.assertNotNull( TestConstants.nullMessage, tabs );
+        Assert.assertFalse( TestConstants.trueMessage, tabs.isEmpty( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, tabDAOResponse.getCount( ), tabs.size( ) );
+        
+        logger.debug( "Completing test for GetTabsWithNoPagingNErrorEnabled" );
+    }
+    
+    @Test
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+    public void testGetTabsWithPagingNLimitNErrorEnabled( ) throws Exception {
+        
+        logger.debug( "Starting test for GetTabsWithPagingNLimitNErrorEnabled" );
+        
+        requestParams.setIsError( TestConstants.IS_ERROR_TRUE );
+        
+        requestParams.setStartLimit( 0L );
+        requestParams.setPageSize( 3 );
+        requestParams.setEndLimit( 1L );
+        
+        DAOResponse< Tab > tabDAOResponse = tabDAO.getTabs( requestParams );
+
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse );
+        // test error container
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getErrorContainer( ) );
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getErrorContainer( ).getErrors( ) );
+        Assert.assertTrue( TestConstants.falseMessage, tabDAOResponse.getErrorContainer( ).getErrors( ).isEmpty( ) );
+        Assert.assertNull( TestConstants.notNullMessage, tabDAOResponse.getErrorContainer( ).getCurrentError( ) );
+        // test result object
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getResults( ) );
+        Assert.assertFalse( TestConstants.trueMessage, tabDAOResponse.getResults( ).isEmpty( ) );
+        
+        List< Tab > tabs = tabDAOResponse.getResults( );
+        // tab list and its size with DAOResponse<T> class count
+        Assert.assertNotNull( TestConstants.nullMessage, tabs );
+        Assert.assertFalse( TestConstants.trueMessage, tabs.isEmpty( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, tabDAOResponse.getCount( ), tabs.size( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TWO, tabs.size( ) );
+        
+        logger.debug( "Completing test for GetTabsWithPagingNLimitNErrorEnabled" );
+    }
+
+    @Test
+    @Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+    public void testGetTabsWithPagingNLimitNErrorDisabled( ) throws Exception {
+
+        logger.debug( "Starting test for GetTabsWithPagingNLimitNErrorDisabled" );
+
+        requestParams.setIsError( TestConstants.IS_ERROR );
+
+        requestParams.setStartLimit( 0L );
+        requestParams.setPageSize( 3 );
+        requestParams.setEndLimit( 1L );
+
+        DAOResponse< Tab > tabDAOResponse = tabDAO.getTabs( requestParams );
+
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse );
+        // test error container
+        Assert.assertNull( TestConstants.nullMessage, tabDAOResponse.getErrorContainer( ) );
+        // test result object
+        Assert.assertNotNull( TestConstants.nullMessage, tabDAOResponse.getResults( ) );
+        Assert.assertFalse( TestConstants.trueMessage, tabDAOResponse.getResults( ).isEmpty( ) );
+
+        List< Tab > tabs = tabDAOResponse.getResults( );
+        // tab list and its size with DAOResponse<T> class count
+        Assert.assertNotNull( TestConstants.nullMessage, tabs );
+        Assert.assertFalse( TestConstants.trueMessage, tabs.isEmpty( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, tabDAOResponse.getCount( ), tabs.size( ) );
+        Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TWO, tabs.size( ) );
+
+        logger.debug( "Completing test for GetTabsWithPagingNLimitNErrorDisabled" );
+    }
+    
 }

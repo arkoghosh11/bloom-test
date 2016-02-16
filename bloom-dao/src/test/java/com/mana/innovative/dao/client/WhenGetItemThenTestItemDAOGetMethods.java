@@ -10,6 +10,7 @@ import com.mana.innovative.domain.client.Gemstone;
 import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.domain.client.ItemDiscount;
 import com.mana.innovative.domain.client.ItemImage;
+import com.mana.innovative.domain.common.Tab;
 import com.mana.innovative.dto.request.RequestParams;
 import junit.framework.Assert;
 import org.hibernate.SessionFactory;
@@ -409,6 +410,36 @@ public class WhenGetItemThenTestItemDAOGetMethods {
 		logger.debug( "Completing test for GetItemsWithPagingNLimitNErrorEnabled" );
 	}
 
+	@Test
+	@Transactional( propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT )
+	public void testGetItemsWithPagingNLimitNErrorDisabled( ) throws Exception {
+
+		logger.debug( "Starting test for GetItemsWithPagingNLimitNErrorDisabled" );
+
+		requestParams.setIsError( TestConstants.IS_ERROR );
+
+		requestParams.setStartLimit( 0L );
+		requestParams.setPageSize( 3 );
+		requestParams.setEndLimit( 1L );
+
+		DAOResponse< Item > itemDAOResponse = itemDAOImpl.getItems( requestParams );
+
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse );
+		// test error container
+		Assert.assertNull( TestConstants.nullMessage, itemDAOResponse.getErrorContainer( ) );
+		// test result object
+		Assert.assertNotNull( TestConstants.nullMessage, itemDAOResponse.getResults( ) );
+		Assert.assertFalse( TestConstants.trueMessage, itemDAOResponse.getResults( ).isEmpty( ) );
+
+		List< Item > itemList = itemDAOResponse.getResults( );
+		// tab list and its size with DAOResponse<T> class count
+		Assert.assertNotNull( TestConstants.nullMessage, itemList );
+		Assert.assertFalse( TestConstants.trueMessage, itemList.isEmpty( ) );
+		Assert.assertEquals( TestConstants.notEqualsMessage, itemDAOResponse.getCount( ), itemList.size( ) );
+		Assert.assertEquals( TestConstants.notEqualsMessage, TestConstants.TWO, itemList.size( ) );
+
+		logger.debug( "Completing test for GetItemsWithPagingNLimitNErrorDisabled" );
+	}
 
 	/**
 	 * Tear down.
