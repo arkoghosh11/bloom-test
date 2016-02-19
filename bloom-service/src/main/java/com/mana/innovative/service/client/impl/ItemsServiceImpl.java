@@ -171,8 +171,4 @@ public class ItemsServiceImpl implements ItemsService {
 
 	}
 
-	public void testMethod( ) {
-		BeanPostProcessor b;
-	}
-
 }

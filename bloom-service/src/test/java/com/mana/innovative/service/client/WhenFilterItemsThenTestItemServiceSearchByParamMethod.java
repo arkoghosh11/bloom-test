@@ -315,4 +315,64 @@ public class WhenFilterItemsThenTestItemServiceSearchByParamMethod {
 
 		logger.debug( "Completing test for GetItemsSearchedByParamWithSpecificVales" );
 	}
+
+	@SuppressWarnings( "unchecked" )
+	@Test
+	public void testGetItemsSearchedByParamWithSpecificValues2( ) throws Exception {
+
+		logger.debug( "Starting test for GetItemsSearchedByParamWithSpecificValues2" );
+
+		List< String > params;
+
+		params = new ArrayList<>( );
+
+		params.add( "gemstone_name=emerald" );
+		params.add( "item_type=belts" );
+		filterSortParams.getFilter( ).setParams( params );
+
+		params = new ArrayList<>( );
+//		params.add( "item_type=asc" );
+		params.add( "item_price=asc" );
+		filterSortParams.getSort( ).setParams( params );
+
+
+		Response itemResponse = itemsService.getItemsSearchedByParams( filterSortParams,
+				requestParams );
+		assertNotNull( TestConstants.nullMessage, itemResponse );
+		assertNotNull( TestConstants.nullMessage, itemResponse.getEntity( ) );
+
+		ItemResponseContainer< ItemsPayload > itemResponseContainer = ( ItemResponseContainer< ItemsPayload > ) itemResponse.getEntity( );
+		assertNotNull( TestConstants.nullMessage, itemResponseContainer.getPayload( ) );
+		assertNotNull( TestConstants.nullMessage, itemResponseContainer.getPayload( ).getItems( ) );
+
+		assertFalse( TestConstants.trueMessage, itemResponseContainer.getPayload( ).getItems( ).isEmpty( ) );
+		assertEquals( TestConstants.notEqualsMessage, itemResponseContainer.getPayload( ).getItems( ).size( ),
+				itemResponseContainer.getPayload( ).getTotalCount( ) );
+
+		assertEquals( TestConstants.notEqualsMessage, 1, itemResponseContainer.getPayload( ).getTotalCount( ) );
+
+		logger.debug( "Completing test for GetItemsSearchedByParamWithSpecificValues2" );
+	}
+
+	@Test
+	public void testFilterClass( ) throws Exception {
+
+		logger.debug( "Starting test for FilterClass" );
+
+		List< String > params;
+
+		params = new ArrayList<>( );
+		params.add( "gemstone_name=emerald" );
+		params.add( "item_type=belts" );
+		filterSortParams.getFilter( ).setParams( params );
+		logger.debug( filterSortParams.toString( ) );
+
+		params = new ArrayList<>( );
+		params.add( "gemstone_name=emerald" );
+		params.add( "item_type=belts" );
+		filterSortParams.getFilter( ).setParams( params );
+		logger.debug( filterSortParams.toString( ) );
+
+		logger.debug( "Completing test for FilterClass" );
+	}
 }

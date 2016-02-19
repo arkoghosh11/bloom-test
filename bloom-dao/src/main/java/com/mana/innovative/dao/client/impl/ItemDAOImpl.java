@@ -3,10 +3,7 @@ package com.mana.innovative.dao.client.impl;
 import com.mana.innovative.constants.DAOConstants;
 import com.mana.innovative.constants.ServiceConstants;
 import com.mana.innovative.dao.BasicDAO;
-import com.mana.innovative.dao.client.GemstoneDAO;
 import com.mana.innovative.dao.client.ItemDAO;
-import com.mana.innovative.dao.client.ItemDiscountDAO;
-import com.mana.innovative.dao.client.ItemImageDAO;
 import com.mana.innovative.dao.response.DAOResponse;
 import com.mana.innovative.domain.client.Item;
 import com.mana.innovative.domain.common.SearchOption;
@@ -14,7 +11,6 @@ import com.mana.innovative.dto.request.RequestParams;
 import com.mana.innovative.exception.IllegalArgumentValueException;
 import com.mana.innovative.exception.IllegalSearchListSizeException;
 import com.mana.innovative.exception.response.ErrorContainer;
-import com.mana.innovative.logic.QueryUtil;
 import com.mana.innovative.utilities.date.NumberCommons;
 import com.mana.innovative.utilities.date.StringCommons;
 import org.hibernate.HibernateException;
@@ -22,24 +18,18 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.ContextStartedEvent;
-import org.springframework.context.event.ContextStoppedEvent;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * The type Item dAO impl.
@@ -77,7 +67,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 
 	//    private static final String HASH = DAOConstants.HASH;
 	private String listProperty;
-	private Map< String, List > listMap = new HashMap<>( );
+	private Map< String, List > valuesListMap = new HashMap<>( );
 	private Map< String, Object > valueMap = new HashMap<>( );
 	/* IMP UPDATE Functions */
 	private Map< String, String > keysUsed = new HashMap<>( );
@@ -506,7 +496,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 
 			// + filterQuery +	// sortQuery );
 
-			for ( Map.Entry< String, List > stringListEntry : getListMap( ).entrySet( ) ) {
+			for ( Map.Entry< String, List > stringListEntry : getValuesListMap( ).entrySet( ) ) {
 				query.setParameterList( stringListEntry.getKey( ), stringListEntry.getValue( ) );
 			}
 
@@ -529,6 +519,12 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 			}
 
 			itemList = query.list( );
+
+			// Note clear the maps for we will get issues with future filter requests
+			// @IMP clear the maps for we will get issues with future filter requests
+			this.getKeysUsed( ).clear( );
+			this.getValueMap( ).clear( );
+			this.getValuesListMap( ).clear( );
 
 			this.closeDBTransaction( );
 			itemDAOResponse.setRequestSuccess( Boolean.TRUE );
@@ -660,7 +656,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 			if ( inCondition != null && inCondition.equals( "in" ) ) {
 				laterQuery += key + " in(:" + paramKey + ")";
 				// add the list for each param for the Query to be created in main parent search param method
-				this.getListMap( ).put( paramKey, values );
+				this.getValuesListMap( ).put( paramKey, values );
 			} else if ( eQCondition != null && eQCondition.equals( "=" ) ) {
 				laterQuery += key + "=:" + paramKey + " ";
 				this.getValueMap( ).put( paramKey, value );
@@ -671,7 +667,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 			String paramKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 );
 			if ( inCondition != null && inCondition.equals( "in" ) ) {
 				laterQuery += key + " in(:" + paramKey + 1 + ")";
-				this.getListMap( ).put( paramKey + 1, values );
+				this.getValuesListMap( ).put( paramKey + 1, values );
 			} else if ( eQCondition != null && eQCondition.equals( "=" ) ) {
 				laterQuery += key + " =:" + paramKey + 1 + " ";
 				this.getValueMap( ).put( paramKey + 1, value );
@@ -698,21 +694,21 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		}
 
 		if ( longFlag ) {
-			List< Long > longValues = new ArrayList<>( );
+			Set< Long > longValues = new HashSet<>( );
 			Collections.addAll( longValues, NumberCommons.convertToLongArray( split ) );
 			setIfKeyIsChildList( key );
-			return longValues;
+			return new ArrayList<>( longValues );
 		} else if ( doubleFlag ) {
 
 			List< Double > doubleValues = new ArrayList<>( );
 			Collections.addAll( doubleValues, NumberCommons.convertToDoubleArray( split ) );
 			this.setIfKeyIsChildList( key );
-			return doubleValues;
+			return new ArrayList<>( doubleValues );
 		} else {
 			List< String > stringValues = new ArrayList<>( );
 			Collections.addAll( stringValues, split );
 			this.setIfKeyIsChildList( key );
-			return stringValues;
+			return new ArrayList<>( stringValues );
 		}
 
 	}
@@ -818,8 +814,8 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		return keysUsed;
 	}
 
-	private Map< String, List > getListMap( ) {
-		return listMap;
+	private Map< String, List > getValuesListMap( ) {
+		return valuesListMap;
 	}
 
 	private Map< String, Object > getValueMap( ) {
