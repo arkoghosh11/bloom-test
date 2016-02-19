@@ -107,6 +107,8 @@ public final class DAOConstants {
     public static final String ITEM_DISCOUNT_CLASS_IN_STRING = "itemdiscount";
     public static final String STRING = "string";
     public static final String LIST_STRING = "List";
+    public static final String LONG = "long";
+    public static final String DOUBLE = "double";
 
 
     /**

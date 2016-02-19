@@ -81,6 +81,7 @@ public class WhenFilterItemsThenTestItemServiceSearchByParamMethod {
 		logger.debug( TestConstants.tearDownMethodLoggerMsg );
 	}
 
+	@SuppressWarnings( "unchecked" )
 	@Test
 	public void testGetItemsSearchedByParamsWithItemTypeFilter( ) throws Exception {
 
@@ -198,7 +199,7 @@ public class WhenFilterItemsThenTestItemServiceSearchByParamMethod {
 
 		logger.debug( "Starting test for GetItemsSearchedByParamWithItemTypeNItemId" );
 
-		List< String > params = filterSortParams.getFilter( ).getParams( );
+		List< String > params;
 
 		params = new ArrayList<>( );
 
@@ -232,5 +233,48 @@ public class WhenFilterItemsThenTestItemServiceSearchByParamMethod {
 
 
 		logger.debug( "Completing test for GetItemsSearchedBYParamWithItemTypeNItemId" );
+	}
+
+	@SuppressWarnings( "unchecked" )
+	@Test
+	public void testGetItemsSearchedByParamWithMultiplePropertiesWithVariableValues( ) throws Exception {
+
+		logger.debug( "Starting test for GetItemsSearchedByParamWithMultiplePropertiesWithVariableValues" );
+
+		List< String > params;
+
+		params = new ArrayList<>( );
+
+		params.add( "item_id=3,4,5" );
+		params.add( "item_image_id=3,4,5" );
+		params.add( "item_discount_id=3" );
+		params.add( "gemstone_id=3,4,5" );
+		params.add( "gemstone_name=test3" );
+		params.add( "item_description=test3,test2" );
+		params.add( "item_type=test1" );
+		params.add( "item_price=5.0" );
+		filterSortParams.getFilter( ).setParams( params );
+
+		params = new ArrayList<>( );
+		params.add( "item_type=asc" );
+		params.add( "item_price=desc" );
+		filterSortParams.getSort( ).setParams( params );
+
+
+		Response itemResponse = itemsService.getItemsSearchedByParams( filterSortParams,
+				requestParams );
+		assertNotNull( TestConstants.nullMessage, itemResponse );
+		assertNotNull( TestConstants.nullMessage, itemResponse.getEntity( ) );
+
+		ItemResponseContainer< ItemsPayload > itemResponseContainer = ( ItemResponseContainer< ItemsPayload > ) itemResponse.getEntity( );
+		assertNotNull( TestConstants.nullMessage, itemResponseContainer.getPayload( ) );
+		assertNotNull( TestConstants.nullMessage, itemResponseContainer.getPayload( ).getItems( ) );
+
+		assertTrue( TestConstants.trueMessage, itemResponseContainer.getPayload( ).getItems( ).isEmpty( ) );
+		assertEquals( TestConstants.notEqualsMessage, itemResponseContainer.getPayload( ).getItems( ).size( ),
+				itemResponseContainer.getPayload( ).getTotalCount( ) );
+
+
+		logger.debug( "Completing test for GetItemsSearchedByParamWithMultiplePropertiesWithVariableValues" );
 	}
 }

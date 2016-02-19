@@ -16,6 +16,7 @@ import com.mana.innovative.utilities.response.ResponseUtility;
 import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -150,6 +151,10 @@ public class ItemsServiceImpl implements ItemsService {
 			searchOption.getSearchConditionParams( ).putAll( searchParams.getFilter( ).getKeyValueMap( ) );
 			searchOption.getSearchMatchType( );
 			searchOption.getSearchOrderWithParams( ).putAll( searchParams.getSort( ).getKeyValueMap( ) );
+
+
+			logger.debug( "**** Filter Search Param " + searchParams.toString( ) );
+
 			DAOResponse< com.mana.innovative.domain.client.Item > itemDAOResponse =
 					itemDAOImpl.getItemsBySearchParams( searchOption, requestParams );
 			logger.debug( "****  Filter results ****  " + itemDAOResponse.getResults( ) );
@@ -164,6 +169,10 @@ public class ItemsServiceImpl implements ItemsService {
 		logger.debug( " Finished #getItemsSearchedByParams() for itemsService" );
 		return response;
 
+	}
+
+	public void testMethod( ) {
+		BeanPostProcessor b;
 	}
 
 }

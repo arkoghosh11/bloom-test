@@ -22,11 +22,17 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.ContextStartedEvent;
+import org.springframework.context.event.ContextStoppedEvent;
+import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -67,15 +73,6 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 	 * The constant logger.
 	 */
 	private static final Logger logger = LoggerFactory.getLogger( ItemDAOImpl.class );
-
-	@Resource
-	private GemstoneDAO gemstoneDAO;
-
-	@Resource
-	private ItemImageDAO itemImageDAO;
-
-	@Resource
-	private ItemDiscountDAO itemDiscountDAO;
 
 
 	//    private static final String HASH = DAOConstants.HASH;
@@ -504,19 +501,32 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 //			@IMP to remember how to use below lines to make dynamic join qeries using Hibernate
 //			Query query = session.createQuery( "Select item from Item item join item.gemstoneList gemstone join item.itemImageList itemImage" +
 //					"  where item.itemType=:item_type1 and gemstone.gemstoneName in(:gemstone_name1) and itemImage.id > 0 " );
-//			logger.debug( "select item from Item item " + filterQuery + sortQuery );
+			logger.debug( "select item from Item item " + filterQuery + sortQuery );
 
 			Query query = session.createQuery( "select item from Item item " + filterQuery + sortQuery );
 
 			// + filterQuery +	// sortQuery );
-
 
 			for ( Map.Entry< String, List > stringListEntry : getListMap( ).entrySet( ) ) {
 				query.setParameterList( stringListEntry.getKey( ), stringListEntry.getValue( ) );
 			}
 
 			for ( Map.Entry< String, Object > stringListEntry : getValueMap( ).entrySet( ) ) {
-				query.setParameter( stringListEntry.getKey( ), stringListEntry.getValue( ) );
+
+				Object value = stringListEntry.getValue( );
+				String type = NumberCommons.validateTypeOfObject( value );
+
+				switch ( type ) {
+					case DAOConstants.LONG:
+						query.setLong( stringListEntry.getKey( ), Long.parseLong( String.valueOf( stringListEntry.getValue( ) ) ) );
+						break;
+					case DAOConstants.DOUBLE:
+						query.setDouble( stringListEntry.getKey( ), Double.parseDouble( String.valueOf( stringListEntry.getValue( ) ) ) );
+						break;
+					default:
+						query.setParameter( stringListEntry.getKey( ), stringListEntry.getValue( ) );
+						break;
+				}
 			}
 
 			itemList = query.list( );
@@ -563,6 +573,7 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 			if ( key == null ) {
 				continue;
 			}
+
 			// get value of class property from map to query the DB
 			Object value = searchConditionParam.getValue( );
 
@@ -575,62 +586,23 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 				key = StringCommons.adjustKey( key );
 
 				List values = this.addCustomItemChildrenWithRestriction( key, value.toString( ).split( "," ) );
+				String temp[] = this.createJoinFilterQueryAndSaveNAdjustKey( key, getListProperty( ).equals( "child" )
+						, values );
+				initialQuery += temp[ 0 ];
+				laterQuery += temp[ 1 ];
 				// Note add each property of child table to a map and let hibernate set it in primary method for
-				// filter search param
-				if ( getListProperty( ).equals( "child" ) ) {
-
-					String paramKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 ) + 2;
-					boolean isUsedKey = false;
-					if ( !getKeysUsed( ).containsKey( key.substring( 0, key.indexOf( ServiceConstants.DOT ) ) ) ) {
-						initialQuery += "join item." + key.substring( DAOConstants.ZERO, key.indexOf( ServiceConstants
-								.DOT ) ) +
-								DAOConstants.LIST_STRING + " " + key.substring( key.indexOf( ServiceConstants.DOT ) + 1 )
-								+ 1 + " ";
-						// Add the first part of the key only so we can check later on for already used key
-						getKeysUsed( ).put( key.substring( 0, key.indexOf( ServiceConstants.DOT ) ),
-								key.substring( key.indexOf( ServiceConstants.DOT ) + 1 ) );
-					} else {
-						key = getKeysUsed( ).get( key.substring( 0, key.indexOf( ServiceConstants.DOT )
-						) );
-						isUsedKey = true;
-					}
-
-					// property of the child table with class
-
-					String tempKey;
-
-					if ( isUsedKey ) {
-						tempKey = paramKey.substring( 0, paramKey.lastIndexOf( "2" ) );
-					} else {
-						tempKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 );
-					}
-
-					key = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 )
-							+ 1 + ServiceConstants.DOT
-							+ tempKey;
-
-					// Param Key
-					laterQuery += key + " in(:" + paramKey + ")";
-
-					// add the list for each param for the Query to be created in main parent search param method
-					this.getListMap( ).put( paramKey, values );
-				} else {
-					key = StringCommons.adjustKey( key );
-					String paramKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 );
-					laterQuery += key + " in(:" + paramKey + 1 + ")";
-					this.getListMap( ).put( paramKey + 1, values );
-				}
 			} else {
 
 				//initial key provided to us here , format e.g. item_id changes to item.item_id
 				key = StringCommons.alterKeyAccToHibMapping( key );
 				// changed to item.itemId from previous comment
 				key = StringCommons.adjustKey( key );
-				// create the param key by taking substring of the entire key, format being e.g. item.itemId
-				String paramKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 );
+				String temp[] = this.createJoinFilterQueryAndSaveNAdjustKey( key, setIfKeyIsChildList( key ).equals(
+						"child" )
+						, value );
+				initialQuery += temp[ 0 ];
+				laterQuery += temp[ 1 ];
 
-				laterQuery += key + "=:" + paramKey + 1 + " ";
-				this.getValueMap( ).put( paramKey + 1, value );
 			}
 			laterQuery += " and ";
 		}
@@ -638,7 +610,75 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		if ( filterQuery.endsWith( " and " ) ) {
 			filterQuery = filterQuery.substring( 0, filterQuery.lastIndexOf( "and" ) );
 		}
+
+		logger.debug( "** " + filterQuery + " **" );
 		return filterQuery;
+	}
+
+	private String[] createJoinFilterQueryAndSaveNAdjustKey( String key, boolean flag, final Object data ) {
+
+		List values = null;
+		String value = null, eQCondition = null, inCondition = null;
+		if ( data instanceof List ) {
+			values = ( List ) data;
+			inCondition = "in";
+		} else if ( data instanceof String ) {
+			eQCondition = "=";
+			value = ( String ) data;
+		}
+		String initialQuery = "", laterQuery = "";
+		if ( flag ) {
+			String paramKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 ) + 2;
+
+			boolean isUsedKey = false;
+			if ( !getKeysUsed( ).containsKey( key.substring( 0, key.indexOf( ServiceConstants.DOT ) ) ) ) {
+				initialQuery += "join item." + key.substring( DAOConstants.ZERO, key.indexOf( ServiceConstants
+						.DOT ) ) + DAOConstants.LIST_STRING + " " + key.substring( key.indexOf( ServiceConstants.DOT ) + 1 ) + 1 + " ";
+				// Add the first part of the key only so we can check later on for already used key
+				getKeysUsed( ).put( key.substring( 0, key.indexOf( ServiceConstants.DOT ) ),
+						key.substring( key.indexOf( ServiceConstants.DOT ) + 1 ) );
+			} else {
+				key = getKeysUsed( ).get( key.substring( 0, key.indexOf( ServiceConstants.DOT )
+				) );
+				isUsedKey = true;
+			}
+
+			// property of the child table with class
+
+			String tempKey;
+
+			if ( isUsedKey ) {
+				tempKey = paramKey.substring( 0, paramKey.lastIndexOf( "2" ) );
+			} else {
+				tempKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 );
+			}
+
+			key = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 )
+					+ 1 + ServiceConstants.DOT
+					+ tempKey;
+
+			// Param Key
+			if ( inCondition != null && inCondition.equals( "in" ) ) {
+				laterQuery += key + " in(:" + paramKey + ")";
+				// add the list for each param for the Query to be created in main parent search param method
+				this.getListMap( ).put( paramKey, values );
+			} else if ( eQCondition != null && eQCondition.equals( "=" ) ) {
+				laterQuery += key + "=:" + paramKey + " ";
+				this.getValueMap( ).put( paramKey, value );
+			}
+
+		} else {
+			key = StringCommons.adjustKey( key );
+			String paramKey = key.substring( key.indexOf( ServiceConstants.DOT ) + 1 );
+			if ( inCondition != null && inCondition.equals( "in" ) ) {
+				laterQuery += key + " in(:" + paramKey + 1 + ")";
+				this.getListMap( ).put( paramKey + 1, values );
+			} else if ( eQCondition != null && eQCondition.equals( "=" ) ) {
+				laterQuery += key + " =:" + paramKey + 1 + " ";
+				this.getValueMap( ).put( paramKey + 1, value );
+			}
+		}
+		return new String[]{ initialQuery, laterQuery };
 	}
 
 	private List addCustomItemChildrenWithRestriction( final String key,
@@ -661,18 +701,18 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		if ( longFlag ) {
 			List< Long > longValues = new ArrayList<>( );
 			Collections.addAll( longValues, NumberCommons.convertToLongArray( split ) );
-			setIfKeyIsChildList( key, longValues );
+			setIfKeyIsChildList( key );
 			return longValues;
 		} else if ( doubleFlag ) {
 
 			List< Double > doubleValues = new ArrayList<>( );
 			Collections.addAll( doubleValues, NumberCommons.convertToDoubleArray( split ) );
-			this.setIfKeyIsChildList( key, doubleValues );
+			this.setIfKeyIsChildList( key );
 			return doubleValues;
 		} else {
 			List< String > stringValues = new ArrayList<>( );
 			Collections.addAll( stringValues, split );
-			this.setIfKeyIsChildList( key, stringValues );
+			this.setIfKeyIsChildList( key );
 			return stringValues;
 		}
 
@@ -687,25 +727,26 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 	 * all the child class names to decipher if the property will be a child class or only a parent class property.
 	 *
 	 * @param key the key
-	 * @param values the values
 	 *
 	 * @return the if key is child list
 	 */
-	public List setIfKeyIsChildList( String key, List values ) {
+	public String setIfKeyIsChildList( String key ) {
 
 		if ( key.toLowerCase( ).contains( DAOConstants.GEMSTONE_CLASS_IN_STRING ) ) {
 			setListProperty( "child" );
+			return getListProperty( );
 
 		} else if ( key.toLowerCase( ).contains( DAOConstants.ITEM_IMAGE_CLASS_IN_STRING ) ) {
 			setListProperty( "child" );
+			return getListProperty( );
 
 		} else if ( key.toLowerCase( ).contains( DAOConstants.ITEM_DISCOUNT_CLASS_IN_STRING ) ) {
 			setListProperty( "child" );
+			return getListProperty( );
 		} else {
 			setListProperty( "item" );
-			return values;
+			return getListProperty( );
 		}
-		return null;
 	}
 
 	private String getSortQueryByParams( final SearchOption searchOption ) {
@@ -785,6 +826,5 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 	private Map< String, Object > getValueMap( ) {
 		return valueMap;
 	}
-
 
 }

@@ -1,5 +1,6 @@
 package com.mana.innovative.utilities.date;
 
+import com.mana.innovative.constants.DAOConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,5 +51,23 @@ public class NumberCommons {
 			}
 		}
 		return doubleArray;
+	}
+
+	public static String validateTypeOfObject( final Object value ) {
+
+		try {
+			Long long1 = Long.parseLong( String.valueOf( value ) );
+			return DAOConstants.LONG;
+		} catch ( RuntimeException ex ) {
+			logger.debug( "Value provided was not of long type" );
+		}
+		try {
+			Double double1 = Double.parseDouble( String.valueOf( value ) );
+			return DAOConstants.DOUBLE;
+		} catch ( RuntimeException ex ) {
+			logger.debug( "Value provided was not of double type" );
+		}
+		logger.debug( "Provided Value was: " + value );
+		return DAOConstants.STRING;
 	}
 }

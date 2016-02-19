@@ -29,7 +29,7 @@ import java.util.Objects;
 @Entity
 @Table( name = "gemstones", uniqueConstraints = { @UniqueConstraint( name = "UK_gemstone_name", columnNames =
 		"gemstone_name" ) } )
-public class Gemstone {
+public final class Gemstone {
 
 	/**
 	 * The Gemstone id.
