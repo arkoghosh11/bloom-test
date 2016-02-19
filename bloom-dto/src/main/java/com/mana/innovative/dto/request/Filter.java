@@ -42,6 +42,7 @@ public class Filter {
 	}
 
 	private void setKeyValueMap( List< String > params ) {
+		this.getKeyValueMap( ).clear( );
 		for ( String param : params ) {
 			if ( param != null ) {
 				String temp[] = param.split( "=" );

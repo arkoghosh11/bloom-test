@@ -277,4 +277,42 @@ public class WhenFilterItemsThenTestItemServiceSearchByParamMethod {
 
 		logger.debug( "Completing test for GetItemsSearchedByParamWithMultiplePropertiesWithVariableValues" );
 	}
+
+	@SuppressWarnings( "unchecked" )
+	@Test
+	public void testGetItemsSearchedByParamWithSpecificVales( ) throws Exception {
+
+		logger.debug( "Starting test for GetItemsSearchedByParamWithSpecificVales" );
+
+		List< String > params;
+
+		params = new ArrayList<>( );
+
+		params.add( "gemstone_name=" );
+		params.add( "item_type=belts" );
+		filterSortParams.getFilter( ).setParams( params );
+
+		params = new ArrayList<>( );
+//		params.add( "item_type=asc" );
+		params.add( "item_price=" );
+		filterSortParams.getSort( ).setParams( params );
+
+
+		Response itemResponse = itemsService.getItemsSearchedByParams( filterSortParams,
+				requestParams );
+		assertNotNull( TestConstants.nullMessage, itemResponse );
+		assertNotNull( TestConstants.nullMessage, itemResponse.getEntity( ) );
+
+		ItemResponseContainer< ItemsPayload > itemResponseContainer = ( ItemResponseContainer< ItemsPayload > ) itemResponse.getEntity( );
+		assertNotNull( TestConstants.nullMessage, itemResponseContainer.getPayload( ) );
+		assertNotNull( TestConstants.nullMessage, itemResponseContainer.getPayload( ).getItems( ) );
+
+		assertFalse( TestConstants.trueMessage, itemResponseContainer.getPayload( ).getItems( ).isEmpty( ) );
+		assertEquals( TestConstants.notEqualsMessage, itemResponseContainer.getPayload( ).getItems( ).size( ),
+				itemResponseContainer.getPayload( ).getTotalCount( ) );
+
+		assertEquals( TestConstants.notEqualsMessage, 2, itemResponseContainer.getPayload( ).getTotalCount( ) );
+
+		logger.debug( "Completing test for GetItemsSearchedByParamWithSpecificVales" );
+	}
 }

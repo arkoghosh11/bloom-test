@@ -491,7 +491,6 @@ public class ItemDAOImpl extends BasicDAO implements ItemDAO {
 		try {
 			this.openDBTransaction( );
 
-			queryUtil = new QueryUtil( );
 			logger.info( searchOption.getSearchConditionParams( ).toString( ) );
 
 			String filterQuery = this.getFilterQueryByParams( searchOption );

@@ -1,5 +1,10 @@
 package com.mana.innovative.dto.request;
 
+import com.mana.innovative.constants.ServiceConstants;
+import com.mana.innovative.exception.IllegalArgumentValueException;
+import com.mana.innovative.exception.response.Error;
+import com.mana.innovative.exception.response.ErrorContainer;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -22,6 +27,7 @@ public class Sort {
 
 	private List< String > params;
 	private Map< String, String > keyValueMap = new HashMap<>( );
+	private ErrorContainer errorContainer;
 
 	@XmlElement( name = "params" )
 	public List< String > getParams( ) {
@@ -29,8 +35,11 @@ public class Sort {
 	}
 
 	public void setParams( List< String > params ) {
+
 		this.params = params;
-		this.setKeyValueMap( params );
+		if ( params != null ) {
+			this.setKeyValueMap( params );
+		}
 	}
 
 	@XmlTransient
@@ -39,10 +48,27 @@ public class Sort {
 	}
 
 	private void setKeyValueMap( List< String > params ) {
+
+		String location = this.getClass( ).getCanonicalName( ) + "#setKeyValueMap()";
+		this.getKeyValueMap( ).clear( );
 		for ( String param : params ) {
 			if ( param != null ) {
 				String temp[] = param.split( "=" );
 				if ( temp.length == 2 ) {
+
+					if ( temp[ 1 ].trim( ).equals( "" ) ||
+							!temp[ 1 ].toLowerCase( ).equals( ServiceConstants.ASC ) ||
+							!temp[ 1 ].toLowerCase( ).equals( ServiceConstants.DESC ) ) {
+
+						this.errorContainer = new ErrorContainer( );
+						Error error = new Error( );
+						error.setErrorType( "Invalid Param" );
+						error.setErrorLocation( location );
+						error.setErrorMessage( "Invalid Sort option provided: " + temp[ 1 ] );
+						error.setErrorData( new IllegalArgumentValueException( "Invalid Sort Param option provided" ) );
+
+						this.errorContainer.setCurrentError( error );
+					}
 					this.getKeyValueMap( ).put( temp[ 0 ], temp[ 1 ] );
 				}
 				//todo give warnng for invalid sort options
@@ -70,4 +96,9 @@ public class Sort {
 				", keyValueMap=" + keyValueMap +
 				'}';
 	}
+
+	public ErrorContainer getErrorContainer( ) {
+		return errorContainer;
+	}
+
 }

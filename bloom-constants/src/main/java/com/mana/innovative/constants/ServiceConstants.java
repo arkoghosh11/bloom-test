@@ -77,4 +77,6 @@ public class ServiceConstants {
 
     public static final String UNDERSCORE = "_";
     public static final String DOT = ".";
+    public static final String ASC = "asc";
+    public static final String DESC = "desc";
 }
