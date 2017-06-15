@@ -5,15 +5,16 @@ For now
 
 It will be a REST Webservice supporting both JSON and XML output
 
-used the following
+Used the following technologies
 
-java              1.7.0_71
-spring            3.2.1
+Java              1.7.0_71
+Jersey            1.19
+Spring            3.2.1
 JDBC
 JPA annotations   2.0
 Hibernate         4.0
-Database backend  mysql 5.1.29
-server            tomcat 7
+Database backend  MySQL 5.1.29
+Server            Tomcat 7
 There is a plan to make a UI side project for the webservices using Secnha Touch 2.4.1 so
 supported browsers will be Chrome, Maxthon and Safari, mainly webkit browsers
 and most mobile systems supported by ST2
